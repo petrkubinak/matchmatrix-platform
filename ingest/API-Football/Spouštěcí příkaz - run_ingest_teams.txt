@@ -1,0 +1,5 @@
+Spouštěcí příkaz - run_ingest_teams_all_targets.ps1
+
+powershell.exe -NoProfile -ExecutionPolicy Bypass `
+  -File "C:\MatchMatrix-platform\ingest\API-Football\run_ingest_teams_all_targets.ps1" `
+  -RunGroup "EU_top_A,EU_top_B,EU_exact_v1_0,EU_exact_v1_1,EU_exact_v1_2,EU_exact_v1_3,EU_major_v4_A,EU_major_v4_B"

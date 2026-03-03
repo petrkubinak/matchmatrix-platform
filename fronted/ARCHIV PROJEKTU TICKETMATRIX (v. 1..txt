@@ -1,0 +1,26 @@
+ARCHIV PROJEKTU: TICKETMATRIX (v. 1.0)
+Datum archivace: 3. března 2026
+Status: Vývoj funkčního jádra (Core Dev)
+
+1. STRUKTURA SYSTÉMU
+Základ: Next.js / React / Tailwind CSS.
+
+Databáze: DB_SEZONY_TYMY (příprava na napojení) [cite: 2026-01-20].
+
+Logika: 27 unikátních kombinací pro 3 zápasy (systém 1-X-2) [cite: 2026-01-20].
+
+2. HISTORIE ZMĚN (LOG)
+Modul Kalkulačka: Vytvořen samostatný komponent MatrixCalculator.tsx pro dynamické výpočty.
+
+Interaktivní Výběr: Implementována funkce toggleTicket pro označování tiketů k sázce.
+
+Matematika Kurzů: Nastaveno automatické násobení kurzů a přepočet výhry dle vkladu (stake).
+
+Vizuální Směr: Dohodnuto minimalistické rozhraní, důraz na čitelnost dat a jemnou kurzívu u doplňkových info.
+
+3. AKTUÁLNÍ KONFIGURACE KÓDU
+Barva pozadí: #0F0A18 (hluboká ametystová).
+
+Typografie: font-light pro částky, font-bold pro kombinace, italic pro kurzy.
+
+Stav souborů: page.tsx (vstupní brána), MatrixCalculator.tsx (výpočetní matice).

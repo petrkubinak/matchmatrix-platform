@@ -1,0 +1,2 @@
+cd C:\MATCHMATRIX-PLATFORM\ingest\API-Football
+powershell -ExecutionPolicy Bypass -File .\run_api_football_pipeline.ps1 -LeagueId 39 -Season 2025 -DoFixtures -DoOdds

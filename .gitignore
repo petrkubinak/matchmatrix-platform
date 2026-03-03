@@ -1,0 +1,38 @@
+# ==========================
+# MATCHMATRIX GIT IGNORE
+# ==========================
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs / reports / outputs
+logs/
+reports/
+*.log
+
+# Backups / dumps / exports (NECOMMITOVAT)
+**/Dump/
+**/*dump*.sql
+**/*dump*.csv
+MatchMatrix_Backups/
+
+# Docs komunikace a velké exporty
+docs/komunikace s chatGPT/
+docs/**/*.csv
+docs/**/*.xlsx
+
+# DBeaver / IDE metadata
+**/.dbeaver/
+**/.project
+**/.settings/
+.vscode/
+
+# Env
+.env
+.env.*

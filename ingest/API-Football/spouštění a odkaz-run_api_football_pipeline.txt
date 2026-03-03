@@ -1,0 +1,9 @@
+cd C:\MatchMatrix-platform\ingest\API-Football
+.\run_api_football_pipeline_v1.ps1 -LeagueId 39 -Season 2024 -DoFixtures -DoOdds -FixturesFrom "2024-08-01" -FixturesTo "2025-06-01" -OddsFrom "2024-08-01" -OddsTo "2025-06-01"
+
+cd C:\MatchMatrix-platform\ingest\API-Football
+.\run_api_football_pipeline_v1.ps1 -LeagueId 39 -Season 2024 -DoFixtures -DoOdds -FixturesFrom "2026-02-26" -FixturesTo "2026-03-05" -OddsFrom "2026-02-26" -OddsTo "2026-03-01"
+
+$Key = $env:APISPORTS_KEY
+$FixtureId = 1234567   # sem dej hodnotu z SQL
+curl.exe -s -H "x-apisports-key: $Key" "https://v3.football.api-sports.io/odds?fixture=$FixtureId"
