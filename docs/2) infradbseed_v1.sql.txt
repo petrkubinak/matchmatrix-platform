@@ -1,0 +1,160 @@
+2) infra/db/seed_v1.sql
+
+BEGIN;
+
+-- ---------------------------------------------------------
+-- Seed: sports
+-- ---------------------------------------------------------
+INSERT INTO sports (code, name)
+VALUES
+  ('FB', 'Football'),
+  ('HK', 'Hockey'),
+  ('BK', 'Basketball'),
+  ('TN', 'Tennis')
+ON CONFLICT (code) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- Seed: content types
+-- ---------------------------------------------------------
+INSERT INTO content_types (code, name)
+VALUES
+  ('comment', 'Comment'),
+  ('prediction', 'Prediction'),
+  ('insight', 'Insight'),
+  ('stat_note', 'Stat Note')
+ON CONFLICT (code) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- Seed: markets
+-- group_code: 1X2, DC, OU, AH, BTTS
+-- ---------------------------------------------------------
+INSERT INTO markets (group_code, name)
+VALUES
+  ('1X2', 'Full Time Result (1X2)'),
+  ('DC',  'Double Chance'),
+  ('OU',  'Over/Under (Totals)'),
+  ('AH',  'Asian Handicap'),
+  ('BTTS','Both Teams To Score')
+ON CONFLICT (group_code) DO NOTHING;
+
+-- Helper CTE to fetch market ids
+WITH m AS (
+  SELECT id, group_code FROM markets
+)
+-- ---------------------------------------------------------
+-- Seed: market_outcomes for 1X2
+-- ---------------------------------------------------------
+INSERT INTO market_outcomes (market_id, outcome_code, params, display_name)
+SELECT m.id, x.outcome_code, x.params::jsonb, x.display_name
+FROM m
+JOIN (VALUES
+  ('1', '{}' , 'Home Win'),
+  ('X', '{}' , 'Draw'),
+  ('2', '{}' , 'Away Win')
+) AS x(outcome_code, params, display_name)
+ON m.group_code = '1X2'
+ON CONFLICT (market_id, outcome_code, params) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- Seed: market_outcomes for DC (Double Chance)
+-- ---------------------------------------------------------
+WITH m AS (SELECT id FROM markets WHERE group_code = 'DC')
+INSERT INTO market_outcomes (market_id, outcome_code, params, display_name)
+SELECT m.id, x.outcome_code, x.params::jsonb, x.display_name
+FROM m
+JOIN (VALUES
+  ('1X', '{}' , 'Home or Draw'),
+  ('12', '{}' , 'Home or Away'),
+  ('X2', '{}' , 'Draw or Away')
+) AS x(outcome_code, params, display_name) ON TRUE
+ON CONFLICT (market_id, outcome_code, params) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- Seed: market_outcomes for OU (Over/Under) - common lines
+-- params: {"line": 2.5}
+-- outcome_code: O2.5 / U2.5
+-- ---------------------------------------------------------
+WITH m AS (SELECT id FROM markets WHERE group_code = 'OU'),
+lines AS (
+  SELECT unnest(ARRAY[0.5, 1.5, 2.5, 3.5, 4.5])::numeric AS line
+)
+INSERT INTO market_outcomes (market_id, outcome_code, params, display_name)
+SELECT
+  m.id,
+  'O' || lines.line::text,
+  jsonb_build_object('line', lines.line),
+  'Over ' || lines.line::text
+FROM m, lines
+ON CONFLICT (market_id, outcome_code, params) DO NOTHING;
+
+WITH m AS (SELECT id FROM markets WHERE group_code = 'OU'),
+lines AS (
+  SELECT unnest(ARRAY[0.5, 1.5, 2.5, 3.5, 4.5])::numeric AS line
+)
+INSERT INTO market_outcomes (market_id, outcome_code, params, display_name)
+SELECT
+  m.id,
+  'U' || lines.line::text,
+  jsonb_build_object('line', lines.line),
+  'Under ' || lines.line::text
+FROM m, lines
+ON CONFLICT (market_id, outcome_code, params) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- Seed: market_outcomes for AH (Asian Handicap) - sample lines
+-- params: {"handicap": -0.5} etc.
+-- outcome_code examples: AH-0.5 / AH+0.5
+-- ---------------------------------------------------------
+WITH m AS (SELECT id FROM markets WHERE group_code = 'AH'),
+h AS (
+  SELECT unnest(ARRAY[-2.0,-1.5,-1.0,-0.5,0.0,0.5,1.0,1.5,2.0])::numeric AS handicap
+)
+INSERT INTO market_outcomes (market_id, outcome_code, params, display_name)
+SELECT
+  m.id,
+  'AH' || CASE WHEN h.handicap >= 0 THEN '+' ELSE '' END || h.handicap::text,
+  jsonb_build_object('handicap', h.handicap),
+  'Asian Handicap ' || CASE WHEN h.handicap >= 0 THEN '+' ELSE '' END || h.handicap::text
+FROM m, h
+ON CONFLICT (market_id, outcome_code, params) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- Seed: market_outcomes for BTTS
+-- ---------------------------------------------------------
+WITH m AS (SELECT id FROM markets WHERE group_code = 'BTTS')
+INSERT INTO market_outcomes (market_id, outcome_code, params, display_name)
+SELECT m.id, x.outcome_code, x.params::jsonb, x.display_name
+FROM m
+JOIN (VALUES
+  ('YES', '{}' , 'BTTS - Yes'),
+  ('NO',  '{}' , 'BTTS - No')
+) AS x(outcome_code, params, display_name) ON TRUE
+ON CONFLICT (market_id, outcome_code, params) DO NOTHING;
+
+-- ---------------------------------------------------------
+-- Seed: bookmakers (basic placeholders)
+-- You'll later map them per country in bookmaker_regions.
+-- ---------------------------------------------------------
+INSERT INTO bookmakers (code, name)
+VALUES
+  ('manual', 'Manual'),
+  ('tipsport', 'Tipsport'),
+  ('fortuna', 'Fortuna')
+ON CONFLICT (code) DO NOTHING;
+
+-- Example bookmaker_regions for CZ (you can extend later)
+WITH b AS (SELECT id, code FROM bookmakers)
+INSERT INTO bookmaker_regions (bookmaker_id, country_code, currency_code, priority, is_active)
+SELECT b.id, 'CZ', 'CZK',
+       CASE b.code
+         WHEN 'tipsport' THEN 10
+         WHEN 'fortuna'  THEN 20
+         WHEN 'manual'   THEN 90
+         ELSE 100
+       END,
+       TRUE
+FROM b
+WHERE b.code IN ('tipsport','fortuna','manual')
+ON CONFLICT (bookmaker_id, country_code) DO NOTHING;
+
+COMMIT;

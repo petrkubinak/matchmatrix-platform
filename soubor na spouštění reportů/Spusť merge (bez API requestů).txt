@@ -1,0 +1,1 @@
+powershell -ExecutionPolicy Bypass -File "C:\MATCHMATRIX-PLATFORM\ops\merge_api_football_run_ids.ps1"

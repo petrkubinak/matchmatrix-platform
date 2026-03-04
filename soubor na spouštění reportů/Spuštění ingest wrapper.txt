@@ -1,0 +1,1 @@
+C:\MatchMatrix-platform\ingest\API-Football\run_ingest_fixtures_all_targets.ps1 -RunGroup "EU_top,EU_exact_v1"

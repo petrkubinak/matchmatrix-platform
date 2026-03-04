@@ -2,37 +2,32 @@
 # MATCHMATRIX GIT IGNORE
 # ==========================
 
-# OS
-Thumbs.db
-.DS_Store
-
 # Python
 __pycache__/
 *.pyc
 *.pyo
 
-# Logs / reports / outputs
-logs/
-reports/
+# Logs
 *.log
 
-# Backups / dumps / exports (NECOMMITOVAT)
-**/Dump/
-**/*dump*.sql
-**/*dump*.csv
-MatchMatrix_Backups/
+# Reports
+reports/*.txt
+reports/*.csv
 
-# Docs komunikace a velké exporty
-docs/komunikace s chatGPT/
-docs/**/*.csv
-docs/**/*.xlsx
+# Docker volumes
+postgres-data/
+redis-data/
 
-# DBeaver / IDE metadata
-**/.dbeaver/
-**/.project
-**/.settings/
-.vscode/
-
-# Env
+# Local env
 .env
 .env.*
+
+# VSCode
+.vscode/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temporary
+_tmp_*

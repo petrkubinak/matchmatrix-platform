@@ -1,0 +1,9 @@
+-- 70_Audity/76_audit_fixtures_orphans.sql
+-- Param: :run_id
+
+select f.*
+from staging.api_football_fixtures f
+left join public.teams th on th.ext_source='api_football' and th.ext_team_id=f.home_team_id
+left join public.teams ta on ta.ext_source='api_football' and ta.ext_team_id=f.away_team_id
+where f.run_id=:run_id
+  and (th.id is null or ta.id is null);

@@ -1,0 +1,8 @@
+create table if not exists staging.api_hockey_teams_raw (
+  run_id     int not null,
+  fetched_at timestamptz not null default now(),
+  payload    jsonb not null
+);
+
+create index if not exists ix_api_hockey_teams_raw_run
+  on staging.api_hockey_teams_raw (run_id);

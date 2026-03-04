@@ -1,0 +1,7 @@
+docker exec -it matchmatrix_postgres psql -U matchmatrix -d matchmatrix -c "
+UPDATE ops.ingest_targets
+SET season = '2023'
+WHERE enabled = true
+  AND provider = 'api_football'
+  AND run_group IN ('EU_top','EU_exact_v1');
+"

@@ -6,11 +6,9 @@ param(
   [string]$RunGroup = ""
 )
 
-# Auto režim: když není RunGroup zadaný, vybereme A/B podle parity dne v roce
+# Auto režim: když není RunGroup zadaný, jedeme jen EU_top + EU_exact_v1
 if ([string]::IsNullOrWhiteSpace($RunGroup)) {
-    $isEven = ((Get-Date).DayOfYear % 2) -eq 0
-    $major = if ($isEven) { "EU_major_v4_A" } else { "EU_major_v4_B" }
-    $RunGroup = "EU_top,EU_exact_v1,$major"
+    $RunGroup = "EU_top,EU_exact_v1"
     Write-Host "Auto RunGroup: $RunGroup"
 }
 

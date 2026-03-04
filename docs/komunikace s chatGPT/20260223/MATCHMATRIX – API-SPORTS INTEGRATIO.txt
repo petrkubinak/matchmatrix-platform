@@ -1,0 +1,189 @@
+MATCHMATRIX – API-SPORTS INTEGRATION CONTEXT
+🎯 Cíl
+
+Integrovat API-SPORTS (API-Football v3) jako nový primární zdroj pro:
+
+ligy
+
+týmy
+
+fixtures
+
+později i další sporty (Basketball, NHL…)
+
+Stávající systém:
+
+PostgreSQL
+
+tabulky: leagues, teams, league_teams, matches, team_aliases
+
+ext_source již existuje
+
+merge logika již existuje (public.merge_team())
+
+🗂 Struktura projektu
+DB scripts:
+C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\
+    00_Schema
+    01_seed
+    02_validation
+    03_generation
+    04_merge
+    70_Audity
+    80_kontrola_ligy_vše
+Python ingest:
+C:\MatchMatrix-platform\ingest\
+    football_data_pull_V5.py
+    theodds_pull.py
+    predict_match...
+    train_...
+
+Nový API import půjde sem:
+
+C:\MatchMatrix-platform\ingest\api_football_pull_v1.py
+🧠 Architektura (neměnit)
+leagues
+
+sport_id
+
+name
+
+country
+
+ext_source
+
+ext_league_id
+
+tier
+
+is_cup
+
+is_international
+
+teams
+
+name
+
+ext_source
+
+ext_team_id
+
+matches
+
+league_id
+
+season
+
+home_team_id
+
+away_team_id
+
+případně ext_match_id (pokud přidáme)
+
+🔑 API
+
+Používám API-Sports dashboard (ne RapidAPI)
+
+Base URL:
+
+https://v3.football.api-sports.io
+
+Header:
+
+x-apisports-key: <SECRET>
+
+Limit: 100 requestů / den
+
+🎯 První liga k importu
+
+MLS (USA)
+
+Postup:
+
+GET /leagues?search=MLS
+
+GET /teams?league=<id>&season=2026
+
+GET /fixtures?league=<id>&season=2026
+
+⚙️ Požadavek na nový chat
+
+Chci:
+
+Finální produkční Python ingest skript
+
+upsert leagues
+
+upsert teams
+
+upsert league_teams
+
+volitelně fixtures
+
+bez duplicit
+
+respektující ext_source
+
+SQL audit skripty
+
+kontrola duplicit
+
+alias coverage
+
+kontrola referenční integrity
+
+Architekturu rozšířitelnou na:
+
+Basketball
+
+Hockey
+
+NFL
+
+Minimalizovat API requesty (100/day limit)
+
+📌 Důležité
+
+Nikdy nepřepisovat canonical tým bez kontroly
+
+Merge řešit přes existující merge_team
+
+Používat ext_source = 'api_football'
+
+🚦 Aktuální stav DB
+
+Evropa hotová:
+
+Premier League
+
+Bundesliga
+
+La Liga
+
+Serie A
+
+Ligue 1
+
+Eredivisie
+
+Primeira Liga
+
+Mimo EU:
+
+Brazil Serie A
+
+Copa Libertadores
+
+FIFA World Cup
+
+WC placeholdery už rozdělené (6 skupin × 3 zápasy).
+
+🔥 Startovní otázka pro nový chat
+
+„Navrhni produkční ingest vrstvu pro API-Football (Python + SQL), která zapadne do této architektury.“
+
+Tímhle se nový chat rozběhne bez ztráty kontextu.
+
+A malá poznámka na závěr:
+Zpomaloval jsem, protože jsme řešili strategii a bezpečnou architekturu.
+V novém vlákně pojedeme už čistě implementačně ⚡

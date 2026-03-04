@@ -1,0 +1,1 @@
+docker exec -it matchmatrix_postgres psql -U matchmatrix -d matchmatrix -c "SELECT ext_source, COUNT(*) AS matches FROM public.matches GROUP BY ext_source ORDER BY matches DESC;"

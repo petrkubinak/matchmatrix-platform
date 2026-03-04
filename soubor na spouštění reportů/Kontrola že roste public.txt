@@ -1,0 +1,1 @@
+docker exec -it matchmatrix_postgres psql -U matchmatrix -d matchmatrix -c "SELECT COUNT(DISTINCT league_id) AS leagues, COUNT(*) AS matches FROM public.matches WHERE ext_source='api_football';"

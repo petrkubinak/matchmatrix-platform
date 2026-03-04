@@ -1,0 +1,22 @@
+﻿[2026-02-24 15:49:56] MatchMatrix / TicketMatrix - DAILY REPORT
+[2026-02-24 15:49:56] Date: 2026-02-24
+[2026-02-24 15:49:56] Run: 20260224_154956
+[2026-02-24 15:49:56] DB: matchmatrix (user=matchmatrix)
+[2026-02-24 15:49:56] Fixtures window: 2026-02-22 -> 2026-03-03
+[2026-02-24 15:49:56] Odds window:     2026-02-24 -> 2026-02-27
+[2026-02-24 15:49:56] Container: matchmatrix_postgres
+[2026-02-24 15:49:56] 
+[2026-02-24 15:49:56] 1) INGEST: start (LeagueId=39, Season=2025)
+[2026-02-24 15:50:04] FAIL: ERROR:  syntax error at or near "on"
+[2026-02-24 15:50:04] Summary:
+[2026-02-24 15:50:06] - Ingest: FAIL/SKIP
+[2026-02-24 15:50:06] - Merge : FAIL
+[2026-02-24 15:50:06] - Audit : FAIL
+[2026-02-24 15:50:06] - Time  : 00:00:08
+[2026-02-24 15:50:06] 
+[2026-02-24 15:50:06] Logs:
+[2026-02-24 15:50:06] C:\MATCHMATRIX-PLATFORM\logs\2026-02-24\0700_ingest_api_football_154956.log
+[2026-02-24 15:50:06] C:\MATCHMATRIX-PLATFORM\logs\2026-02-24\0710_merge_db_154956.log
+[2026-02-24 15:50:06] C:\MATCHMATRIX-PLATFORM\logs\2026-02-24\0720_audit_154956.log
+[2026-02-24 15:50:06] C:\MATCHMATRIX-PLATFORM\logs\2026-02-24\0730_daily_report_154956.txt
+[2026-02-24 15:51:52] MAIL FAIL: Exception calling "Send" with "1" argument(s): "Časový limit operace vypršel."

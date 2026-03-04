@@ -1,0 +1,463 @@
+2026-02-24
+✅Hotovo:
+o	Potvrzené DB přihlašovací údaje z Dockeru: DB=matchmatrix, USER=matchmatrix, PASS=matchmatrix.
+o	Dohodnuté ingest okno pro fixtures: -2 dny zpětně až +7 dní dopředu.
+o	Dohodnuté ingest okno pro odds (kurzy): dnes až +3 dny dopředu.
+🧩 Poznámky / zjištění:
+o	psql v kontejneru nevidí Windows cesty C:\...; pro stabilitu budeme merge spouštět bez \i (stream SQL) nebo sjednotíme mount.
+➜Další krok (odpoledne):
+o	Zprovoznit denní Autopilot 07:00 (ingest → merge → audit → report → email).
+✅Hotovo:
+o	Zprovozněna plně funkční pipeline API-Football (staging → merge → commit bez chyby).
+o	Úspěšně staženo 1219 lig z API-Football do staging tabulek.
+o	Opraveny typové kolize (text = integer) pomocí explicitních castů (::text).
+o	Opraveny ON CONFLICT klauzule podle skutečných UNIQUE / PK constraintů v public tabulkách.
+o	Doplněny / ověřeny unikátní indexy:  - public.teams (ext_source, ext_team_id)
+-	public.matches (ext_source, ext_match_id)
+-	public.league_teams (league_id, team_id)
+-	Opraveno předávání parametru :run_id (bez chybného :'run_id').
+o	Finální běh merge proběhl úspěšně:
+   INSERT   0    1219 (leagues),    ostatní tabulky bez nových insertů (0 0)
+o	COMMIT bez chyby
+
+🧩 Poznámky / zjištění:
+o	Staging ingest funguje stabilně, hlavní problémy byly v merge části (typy + constrainty).
+o	ext_source + ext_id je správný dlouhodobý pattern pro víc providerů.
+o	League ingest může běžet výrazně méně často (1× měsíčně).
+o	Fixtures a odds je potřeba plánovat s ohledem na 100 requestů/den (free plán API-Football).
+o	Architektura je nyní připravena na oddělení režimu Pull a Merge (kvůli úspoře requestů).
+
+❌Problémy (vyřešeno během dne):
+o	\i include v psql uvnitř Docker kontejneru nevidí Windows cesty → řešeno streamováním SQL.
+o	ON CONFLICT bez odpovídajícího UNIQUE constraintu → doplněny indexy.
+o	Chyba „operator does not exist: text = integer“ → sjednoceny datové typy přes ::text.
+o	Chyba „no unique or exclusion constraint matching the ON CONFLICT specification“ → upraveny konfliktní klauzule dle skutečných PK.
+
+
+
+
+
+➜Další krok (zítra):
+o	Oddělit Pull a Merge režim (možnost spustit jen merge bez API requestů).
+o	Přidat jednoduchý post-merge kontrolní report (počty leagues/teams/matches).
+o	Připravit režim „merge-only“ pro případ ladění bez spotřeby API limitu.
+o	Zahájit návrh audit skriptů (duplicitní ext_id, orphan records).
+
+________________________________________
+Datum: 2026-02-24 - odpoledne
+✅ Hotovo:
+o	- Navržena a zahájena implementace ingest_football_teams jobu.
+o	- Definována idempotentní upsert logika (teams / league_teams / league_team_seasons).
+o	- Rozhodnuto o oddělení Pull a Merge režimu.
+o	- Navržen merge-only režim pro ladění bez čerpání API limitu.
+o	- Zahájen návrh post-merge kontrolního reportu.
+
+🧩 Poznámky / zjištění:
+o	- Canonical model je dostatečně stabilní pro rozšíření o teams vrstvu.
+o	- Nutné držet unikátní identitu týmu přes ext_source + ext_team_id.
+o	- Oddělení Pull/Merge výrazně zjednoduší budoucí debugging.
+
+❌ Problémy:
+o	- Nejasnost ohledně standardu ukládání SQL skriptů (vyřešeno návratem ke strukturovanému ukládání).
+
+➜ Další krok (zítra):
+o	- Dokončit implementaci teams ingest včetně merge-only režimu.
+o	- Připravit návrh ingest_football_fixtures.
+o	- Připravit základní audit SQL (duplicitní ext_id, orphan records).
+
+Datum: 2026-02-24 – večer
+✅ Hotovo:
+o	- Opraveno vytváření run_id pro API-Football pipeline (nově vzniká reálné run_id v DB; nové běhy: 92–96).
+o	- Zprovozněn pull TEAMS pro EPL (LeagueId=39) se Season=2024; do staging uloženo 20 týmů a proběhl merge do public (teams + league_teams).
+o	- Ověřeno, že Season=2025 pro EPL vracel prázdnou odpověď; Season=2024 funguje.
+
+🧩 Poznámky / zjištění:
+o	- staging.api_football_leagues se plní opakovaně pro více run_id (např. 1, 92, 93, 94, 95, 96) – staging historizuje běhy, ale je podezřelé, že leagues pull běží 2× v jedné pipeline (zbytečně žere requesty).
+o	- Fixtures/odds stále 0, protože datumová okna v pipeline jsou nastavená na rok 2026 (mimo Season=2024); je nutné sjednotit default okna (dnes−7 až +14; odds dnes až +3) nebo předávat parametry From/To.
+o	- Merge log potvrzuje: leagues OK, teams OK, matches 0 (není co mergeovat bez fixtures staging dat).
+
+❌ Problémy:
+o	- Duplicitní/leaky ingest lig: pipeline spouští leagues pull dvakrát → staging se rychle nafukuje (více run_id pro stejné ligy).
+o	- Hardcoded datumová okna (2026-xx) blokují fixtures/odds ingest pro Season=2024.
+
+➜ Další krok (zítra):
+o	- Opravit run_api_football_pipeline.ps1: odstranit druhé volání pull leagues (jen 1×).
+o	- Upravit Fixtures/Odds okna v pipeline na dynamické (Get-Date) + umožnit parametry FixturesFrom/FixturesTo/OddsFrom/OddsTo.
+o	- Spustit fixtures pull pro LeagueId=39 Season=2024 v okně 2024-08-01 až 2025-06-01 a ověřit, že staging.api_football_fixtures > 0.
+o	- Po naplnění fixtures: spustit merge matches + navázat odds pull/merge.
+
+
+Datum: 2026-02-22
+✅ Hotovo:
+o	Normalizace databáze (leagues, teams, fixtures, odds).
+o	Oddělení staging a public vrstvy.
+o	Základní merge skripty.
+🧩 Poznámky / zjištění:
+o	Zavedena jasná vrstva ingest → staging → public.
+❌ Problémy:
+o	Nejasnosti kolem run_id a duplicit.
+➜ Další krok (zítra):
+o	Ověřit konzistenci fixtures po merge.
+
+
+Datum: 2026-02-23
+✅ Hotovo:
+o	Implementace API-Football ingest pipeline.
+o	Automatické generování run_id.
+o	Test Premier League 2024.
+🧩 Poznámky / zjištění:
+o	API vrací fixtures i metadata ligy korektně.
+❌ Problémy:
+o	Chybně zadané časové okno → 0 fixtures.
+➜ Další krok (zítra):
+o	Validovat min/max kickoff a rozsah sezóny.
+
+
+
+Datum: 2026-02-24
+✅ Hotovo:
+o	Kontrola ext_source v public.matches.
+o	Ověření 380 fixtures (run_id 96/98).
+o	Vyčištění testovacích dat.
+
+🧩 Poznámky / zjištění:
+o	Duplicitní runy obsahovaly shodný rozsah 2024-08 → 2025-05.
+
+❌ Problémy:
+o	     FK vazba blokovala mazání ručních zápasů.
+➜ Další krok (zítra):
+o	Oddělit testovací data od produkčních.
+
+Datum: 2026-02-26
+✅ Hotovo:
+o	Oprava param(...) bloku v run_api_football_pipeline_v1.ps1.
+o	Zavedena verzovaná pipeline _v1.
+o	Úspěšné spuštění s DoFixtures=True (Season 2025).
+o	Ověření správného načtení parametrů PowerShell.
+
+🧩 Poznámky / zjištění:
+o	param musí být první spustitelný blok skriptu.
+o	ExecutionPolicy Bypass používán pro lokální běh.
+
+❌ Problémy:
+o	Param nebyl první → proměnné se nenačítaly.
+
+➜ Další krok (zítra):
+o	Otestovat ingest odds podle fixture_id.
+o	Navrhnout merge logiku odds → public.
+o	Datum: 26.02.2026
+Shrnutí dnešní práce
+o	1) Úspěšně dokončeno multi-provider mapování lig přes league_provider_map.
+o	2) Upraven 034_upsert_matches_api_football.sql tak, aby league_id byl brán z league_provider_map (canonical liga).
+o	3) Vytvořena nová tabulka public.team_provider_map pro multi-provider mapování týmů.
+o	4) Naplněno team_provider_map pro API-Football (20 týmů – Premier League).
+o	5) Upraven 033_upsert_league_teams_api_football.sql – týmy nyní mapovány přes team_provider_map.
+o	6) Upraven 034_upsert_matches_api_football.sql – home/away týmy nyní mapovány přes team_provider_map.
+o	7) Ověřeno, že všechny API-Football zápasy (380) mají nenulové home_team_id a away_team_id.
+o	8) Ověřeno, že všechny zápasy jsou pod jedním canonical league_id (3783).
+Architektonický výsledek
+o	Systém nyní plně podporuje multi-provider architekturu:
+- Canonical liga existuje pouze jednou v public.leagues.
+- league_provider_map propojuje providera s canonical ligou.
+- team_provider_map propojuje providera s canonical týmem.
+- matches ukládají canonical league_id a canonical team_id.
+- ext_source + ext_match_id zachovává auditovatelnost zdroje dat.
+Další plánované kroky
+o	1) Namapovat další ligu z API-Football na existující canonical ligu.
+o	2) Otestovat merge více providerů v jedné lize.
+o	3) Postupně odstranit paralelní 'api_football' ligy z public.leagues (cleanup).
+o	4) Rozšířit ingest na další soutěže/sporty.
+
+
+DATUM: 26.02.2026 (API-Football multi-provider ingest)
+Shrnutí dnešní práce:
+o	1) Zavedení a stabilizace multi-provider architektury (league_provider_map, team_provider_map).
+o	2) Canonical ligy nastaveny na ext_source = 'football_data'.
+o	3) API-Football připojen pouze přes provider mapping (bez duplicitních lig).
+o	4) Ingest týmů a fixtures pro sezonu 2024 pro TOP ligy:
+
+   - Premier League
+   - Championship
+   - La Liga
+   - Serie A
+   - Bundesliga
+   - Ligue 1
+   - Eredivisie
+   - Primeira Liga
+
+o	5) Celkem zpracováno 2562 zápasů (season 2024).
+o	6) Opraven script 034_upsert_matches_api_football.sql – napojení přes league_provider_map a team_provider_map.
+o	7) Přesun zápasů z duplicitních api_football lig na canonical league_id.
+o	8) Smazány duplicitní ligy z ext_source = 'api_football'.
+o	9) Databáze je nyní konzistentní, bez duplicit, připravena pro další rozšíření.
+
+Stav systému:
+o	✔ Multi-provider model funkční
+o	✔ Canonical league architektura stabilní
+o	✔ Sezona 2024 plně ingestována pro TOP ligy
+o	✔ DB bez duplicit
+
+DENNÍ UPDATE – Orchestrace jobů (Docker + OPS)
+Datum: 26.02.2026
+Co jsme dnes dokončili:
+o	1) Ověřeno připojení k PostgreSQL běžícímu v Dockeru (uživatel: matchmatrix, DB: matchmatrix).
+o	2) Vyřešen problém s rolí 'postgres' – správný přístup přes uživatele matchmatrix.
+o	3) Ověřena struktura ops.jobs a ops.job_runs (schema je konzistentní).
+o	4) Opravena SQL logika pro vytvoření job run (odstraněn sloupec id z ops.jobs).
+o	5) Vyřešen quoting problém v psql proměnných (:job_code).
+o	6) Úspěšně vytvořen nový záznam v ops.job_runs (run_id = 12).
+o	7) Úspěšně proveden UPDATE run → status = success (UPDATE 1 potvrzen).
+o	8) Potvrzen plně funkční lifecycle jobu: CREATE → RUNNING → SUCCESS.
+o	9) Ověřeno, že Docker exec + PowerShell pipe fungují pro řízení DB skriptů.
+
+Architektura orchestrace (aktuální stav):
+o	ops.jobs        = definice jobů (konfigurace)
+o	ops.job_runs    = historie běhů + audit
+o	Flow: CREATE RUN → ingest/merge/ML → FINISH RUN
+
+Milestone:
+o	MatchMatrix má funkční DB orchestrace vrstvu řízenou přes Docker a SQL.
+Další kroky (zítřejší plán):
+o	1) Vytvořit PowerShell wrapper (create + python ingest + merge + finish).
+o	2) Přidat ochranu proti paralelnímu běhu stejného job_code.
+o	3) Napojit default_params z ops.jobs místo prázdných {}.
+o	4) Oddělit ingest_* a refresh_* naming koncepčně.
+ 
+DENNÍ UPDATE – Ingest orchestrace + Scheduler + plán rozšíření lig
+Datum: 27.02.2026
+Co jsme dnes udělali:
+o	1) Dokončili jsme plně autonomní ingest fixtures přes API-Football: žádné interaktivní parametry (RunId/LeagueId/From/To) – vše se generuje automaticky.
+o	2) Wrapper run_ingest_fixtures_all_targets.ps1 nyní načítá enabled ligy z ops.ingest_targets, počítá okno From/To z fixtures_days_back/fixtures_days_forward a předává parametry do pull_api_football_fixtures.ps1.
+o	3) Opravili jsme SQL typy v načítání targets (season jako text) – odstraněna chyba COALESCE text vs integer.
+o	4) Zprovoznili jsme Windows Task Scheduler (Plánovač úloh) na denní běh v 06:00. Oprávnění jsme nastavili na režim 'Spustit pouze tehdy, je-li uživatel přihlášen' (kvůli chybě s neplatným účtem/heslem).
+o	5) Zapnuli jsme ochranu proti paralelnímu běhu v plánovači: 'Nespouštět novou instanci, pokud je úloha již spuštěna'.
+o	6) Validovali jsme běhy v ops.job_runs – poslední běhy probíhají úspěšně (success). Staré visící runy jsme ukončili jako failed, aby neblokovaly orchestrace.
+o	7) Potvrdili jsme, že staging ingest fixtures umí vložit data do staging (např. 380 fixtures pro league=39 při širším okně) a následně proběhne merge do finálních tabulek.
+o	8) Ujasnili jsme architekturu škálování: staging.api_football_leagues = katalog tisíců lig; public.leagues + public.league_provider_map = kurátorovaný výběr; ops.ingest_targets = co se má automaticky tahat.
+o	9) Identifikovali jsme problém staging duplikátů: stejné ligy se v staging vyskytují vícekrát kvůli víc run_id (např. 92–103). Doporučení: staging pravidelně čistit/normalizovat (deduplikace podle league_id) a držet pouze poslední snapshot.
+
+Dohodnuté rozhodnutí:
+o	Odds zatím neřešíme (free účet má omezení). Priorita je rozšíření fotbalových lig globálně a udržení stabilního denního ingestu.
+
+Plán – rozšíření lig (fotbal):
+o	1) Vyčistit staging.api_football_leagues (deduplikace) – ideálně vytvořit view nebo work tabulku s posledním run_id na league_id.
+o	2) Vytvořit shortlist lig po regionech (Evropa → Jižní Amerika → Severní Amerika/USA+Kanada → Asie).
+o	3) Import shortlistu do public.leagues + mapování do public.league_provider_map.
+o	4) Automaticky vygenerovat ops.ingest_targets pro všechny nové ligy (enabled=true).
+o	5) Postupně zvyšovat coverage v dávkách (batch), aby se hlídaly limity API a velikost DB.
+
+Další krok (příště):
+o	Navrhnout a nasadit deduplikaci staging lig (league_id) + připravit import batch 1 pro Evropu (TOP ligy + hlavní 2. ligy).
+
+
+Denní zápis – Rozšíření Evropy (EU exact + EU major)
+🎯 Cíl dne
+Dotáhnout evropské ligy do silného základu (1.–4. úroveň podle země), nastavit ingest přes ops.ingest_targets a připravit DB na plnění fixtures.
+________________________________________
+✅ Co bylo hotovo
+1️⃣ Canonical vrstva
+•	public.leagues (ext_source='api_football') obsahuje 1219 lig
+•	Canonical model je stabilní
+•	Duplicitní vytváření lig bylo zastaveno (jedeme přes ext_league_id)
+________________________________________
+2️⃣ EU exact v1
+•	ENG 1–4 divize
+•	Menší státy 1–2 liga (SI, SK, HR, BG, DK, CY, RO, SCO, WAL, NIR, IE, GR, HU, IL)
+•	Celkem: 32 lig
+•	Úspěšně aplikováno do:
+o	league_provider_map
+o	ops.ingest_targets
+________________________________________
+3️⃣ EU major v4
+Rozšíření pro:
+ES, DE, IT, FR, NL, PT, BE, AT, CH, CZ, PL, TR
+•	1., 2., 3. liga
+•	bez women
+•	bez youth
+•	bez group chaosu
+•	bez cupů
+Výsledek:
+•	39 lig v import_planu (EU major v4)
+________________________________________
+4️⃣ Runtime stav
+Aktuálně:
+Vrstva	Počet
+public.leagues	1219
+ops.ingest_targets	38 (před full apply)
+Důvod:
+•	apply skript byl omezen filtrem EU exact v1%
+•	EU major v4 zatím nebyl zahrnut do ingest_targets
+________________________________________
+⚠️ Zjištěné problémy
+1.	Apply skript měl filtr:
+AND notes ILIKE 'EU exact v1%'
+→ ignoroval nové EU major ligy
+2.	Chyba country_code does not exist
+→ opraveno, model jede čistě přes ext_league_id
+3.	Transakce zůstala ve stavu aborted
+→ vyřešeno ROLLBACK
+________________________________________
+🔧 Architektura (potvrzeno)
+Datový tok:
+API → staging.api_football_* 
+     → public.leagues (canonical)
+     → ops.league_import_plan (whitelist)
+     → ops.ingest_targets (runtime config)
+     → fixtures ingest
+Ligu již znovu nestahujeme – pouze ji aktivujeme pro ingest.
+________________________________________
+🧠 Strategické rozhodnutí
+•	Canonical zdroj = API-Football
+•	Ingest běží pouze přes whitelist (ops.ingest_targets)
+•	Free limit 100 requests nevadí pro plnění DB
+•	Evropa se rozšiřuje kontrolovaně
+________________________________________
+📍 Stav projektu po dnešku
+Evropa je:
+•	✔ Strukturálně připravená
+•	✔ Canonical stabilní
+•	✔ Whitelist hotový
+•	✔ Architektura čistá
+•	✔ Připraveno na masivní ingest fixtures
+Další krok:
+1.	Opravit apply skript na všechny enabled ligy
+2.	Navýšit ingest_targets na ~70–80 lig
+3.	Naplnit fixtures
+4.	Připravit VIEW pro web MVP
+________________________________________
+🚀 Poznámka
+Projekt je teď ve fázi, kdy:
+•	Datový model je hotový
+•	Evropa je téměř kompletní
+•	Můžeme přejít z „databázové fáze“ do „produktové fáze
+Datum: 2026-02-28
+DENNÍ UPDATE – API-Hockey RAW vrstva + stabilizace architektury
+________________________________________
+✅ Hotovo
+1️⃣ Identifikován architektonický nesoulad u Hockey ingestu
+•	Data byla původně stahována přímo do staging.api_hockey_leagues (parsed vrstva).
+•	Nebyla využita RAW vrstva jako u API-Football.
+2️⃣ Opraven skript pull_api_hockey_leagues.ps1
+•	Nově ukládá celý JSON payload do staging.api_hockey_leagues_raw.
+•	Struktura tabulky:
+o	run_id
+o	fetched_at
+o	payload (jsonb)
+3️⃣ Úspěšně proveden nový běh ingestu
+•	Endpoint: /leagues (API-Hockey v1)
+•	1 request (free limit zachován)
+•	response_len = 262 (ověřeno)
+•	Payload uložen do RAW tabulky
+4️⃣ Potvrzena struktura odpovědi
+•	response_type = array
+•	response_len = 262
+•	Data obsahují objekty s poli:
+o	id, name, type, logo
+o	country { id, name, code }
+o	seasons[]
+5️⃣ Stabilizována architektura ingestu pro další sporty
+Model nyní sjednocen:
+API → staging.*_raw → staging.*_parsed → public (canonical) → ops.*
+Hockey nyní odpovídá Football pipeline.
+________________________________________
+🧠 Zjištění / Lessons learned
+•	Hokej byl implementován rychlou parsed cestou bez RAW vrstvy.
+•	To způsobilo:
+o	league_id = 0
+o	nemožnost re-parse bez nových requestů
+o	architektonickou nekonzistenci
+•	Správný model je vždy:
+RAW first → parse second → canonical third
+________________________________________
+📊 Stav k dnešnímu dni
+Vrstva	Stav
+staging.api_hockey_leagues_raw	✔ naplněno
+staging.api_hockey_leagues	❌ bude generováno z RAW
+public.leagues (api_hockey)	zatím 0
+league_provider_map	zatím 0
+________________________________________
+🔄 Další krok (zítra)
+1️⃣ Parse RAW → staging.api_hockey_leagues
+2️⃣ Canonical upsert do public.leagues
+3️⃣ Naplnění league_provider_map
+4️⃣ Vytvoření whitelistu top hockey lig
+5️⃣ Příprava ops.ingest_targets pro NHL + top evropské soutěže
+________________________________________
+🚀 Strategický posun
+Tímto krokem:
+•	Máme sjednocený ingest model napříč sporty
+•	Minimalizujeme ztrátu requestů
+•	Získáváme možnost kdykoliv re-parse bez API volání
+•	Připravujeme platformu na multi-sport rozšíření (Basket, Tennis…)
+________________________________________
+Projekt je nyní:
+✔ Datově stabilní
+✔ Architektonicky čistý
+✔ Připravený na další sportovní vertikály
+________________________________________
+DENNÍ DENÍK – 01.03.2026
+API-Hockey – Teams vrstva
+✅ Hotovo
+•	HK Leagues pipeline kompletně dokončena
+o	RAW → staging → public.leagues
+o	Naplněno 262 lig
+o	league_provider_map = 262
+o	Vyřešeny duplicity a unikátní indexy
+•	HK Teams RAW ingest funkční
+o	262 požadavků
+o	255 týmových položek vráceno API
+o	Ověřena JSON struktura
+________________________________________
+⚠ Zjištěné problémy
+•	API free plán neumožňuje season 2025 → přepnuto na 2024
+•	Nejednotná struktura response (někde chybí team.id)
+•	Parse padal na NOT NULL constraint (team_id)
+________________________________________
+🔧 Úpravy
+•	Přidán fallback pro ID:
+coalesce(item->'team'->>'id', item->>'id')
+•	Parser upraven na robustnější variantu
+________________________________________
+📊 Aktuální stav HK
+Vrstva	Stav
+Leagues	✅ HOTOVO
+Teams RAW	✅
+Teams Parse	🔄
+Teams Public	⏳
+________________________________________
+▶ Další krok
+•	Znovu spustit parse pro run_id=3
+•	Upsert do public.teams
+•	Naplnit team_provider_map a league_teams
+2026-02-28 – DOPLNĚNÍ DENNÍHO DENÍKU (upřesnění stavu 2023)
+✅ API-Football – historie fixtures (upřesnění)
+•	Včera byla provedena cílená dávka prosezóna 2023přes buckety:
+o	EU_top (3)
+o	EU_major_v4_A (18)
+o	EU_exact_v1_2 (8)
+•	Strategicky to bylo plánováno jako29 requestů, aleaktuální kontrolaukazuje, že:
+o	Missing Targets Pro Season 2023 = 47(ověřeno querychybějící_cíle_pro_rok_2023)
+o	tedy dojetí season 2023 bude vyžadovat ještě47 requestů.
+📌 Interpretace (proč to nesedí na 42)
+Možné (a realistické) důvody:
+•	změnil se počet enabled targetů (např. přibyly ligy do whitelistu / ingest_targets),
+•	některé ligy nejsou v těch třech run_group nebo mají jiný run_group,
+•	včera se mohlo stáhnout méně unikátních targetů než očekávaných 29 (např. duplicitní nebo skip kvůli validaci, run_group filtrům, sezoně apod.).
+🎯 Stav a plán
+•	Dnes: prioritně staženísezóna 2022pro všech71 světlo(71 requestů).
+•	Zítra: dojetsezóna 2023pro chybějících47 světel(47 requestů)
+o	plus zůstane ještě53 requestůdnešní kapacity na další historii (např. season 2021 pro TOP ligy).
+________________________________________
+✅ Zítřejší příprava – dojetí 47 lig (season 2023)
+Až budeš zítra ready, použijeme přesně tento princip:
+1.	přepnout season=2023 jen pro “missing” ligy
+2.	spustit wrapper jen na jejich run_group
+Abych ti to poslal 100% přesně, zítra si jen vytáhneme rozpad podle run_group:
+SELECT run_group, COUNT(*) AS cnt
+FROM ops.ingest_targets
+WHERE enabled=true
+  AND provider='api_football'
+  AND season='2023'
+GROUP BY run_group
+ORDER BY cnt DESC;
+(a já ti z toho složím přesný-RunGroupstring pro wrapper tak, aby to stáhlo přesně těch 47)

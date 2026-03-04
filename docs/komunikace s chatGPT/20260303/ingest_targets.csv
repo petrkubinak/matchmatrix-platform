@@ -1,0 +1,124 @@
+"id","sport_code","canonical_league_id","provider","provider_league_id","season","enabled","tier","fixtures_days_back","fixtures_days_forward","odds_days_forward","max_requests_per_run","notes","created_at","updated_at","run_group"
+378,football,20971,api_football,"310","2024",true,1,2,7,3,,EU|EU_national_1_2|AL|Superliga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+379,football,20970,api_football,"311","2024",true,1,2,7,3,,EU|EU_national_1_2|AL|1st Division,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+380,football,20912,api_football,"312","2024",true,1,2,7,3,,EU|EU_national_1_2|AD|1a Divisió,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+381,football,20913,api_football,"313","2024",true,1,2,7,3,,EU|EU_national_1_2|AD|2a Divisió,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+382,football,21009,api_football,"342","2024",true,1,2,7,3,,EU|EU_national_1_2|AM|Premier League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+383,football,21008,api_football,"343","2024",true,1,2,7,3,,EU|EU_national_1_2|AM|First League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+386,football,20925,api_football,"418","2024",true,1,2,7,3,,EU|EU_national_1_2|AZ|Birinci Dasta,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+387,football,20926,api_football,"419","2024",true,1,2,7,3,,EU|EU_national_1_2|AZ|Premyer Liqa,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+388,football,21012,api_football,"116","2024",true,1,2,7,3,,EU|EU_national_1_2|BY|Premier League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+389,football,21013,api_football,"117","2024",true,1,2,7,3,,EU|EU_national_1_2|BY|1. Division,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+392,football,21140,api_football,"315","2024",true,1,2,7,3,,EU|EU_national_1_2|BA|Premijer Liga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+34,football,21242,api_football,"172","2024",true,1,2,7,3,100,EU|EU_national_1_2|BG|First League,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+396,football,21839,api_football,"946","2024",true,1,2,7,3,,EU|EU_national_1_2|HR|Second NL,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+36,football,21250,api_football,"318","2024",true,1,2,7,3,100,EU|EU_national_1_2|CY|1. Division,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+37,football,21251,api_football,"319","2024",true,1,2,7,3,100,EU|EU_national_1_2|CY|2. Division,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+399,football,21257,api_football,"345","2024",true,1,2,7,3,,EU|EU_national_1_2|CZ|Czech Liga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+400,football,21258,api_football,"346","2024",true,1,2,7,3,,EU|EU_national_1_2|CZ|FNL,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+17,football,20939,api_football,"119","2024",true,1,2,7,3,100,EU|EU_national_1_2|DK|Superliga,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+18,football,20940,api_football,"120","2024",true,1,2,7,3,100,EU|EU_national_1_2|DK|1. Division,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+403,football,20953,api_football,"328","2024",true,1,2,7,3,,EU|EU_national_1_2|EE|Esiliiga A,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+404,football,20954,api_football,"329","2024",true,1,2,7,3,,EU|EU_national_1_2|EE|Meistriliiga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+405,football,20997,api_football,"244","2024",true,1,2,7,3,,EU|EU_national_1_2|FI|Veikkausliiga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+406,football,20996,api_football,"245","2024",true,1,2,7,3,,EU|EU_national_1_2|FI|Ykkönen,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+409,football,20955,api_football,"326","2024",true,1,2,7,3,,EU|EU_national_1_2|GE|Erovnuli Liga 2,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+410,football,21034,api_football,"327","2024",true,1,2,7,3,,EU|EU_national_1_2|GE|Erovnuli Liga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+39,football,21392,api_football,"494","2024",true,1,2,7,3,100,EU|EU_national_1_2|GR|Super League 2,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+19,football,20948,api_football,"271","2024",true,1,2,7,3,100,EU|EU_national_1_2|HU|NB I,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+417,football,21069,api_football,"164","2024",true,1,2,7,3,,EU|EU_national_1_2|IS|Úrvalsdeild,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+418,football,21097,api_football,"165","2024",true,1,2,7,3,,EU|EU_national_1_2|IS|1. Deild,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+421,football,20937,api_football,"388","2024",true,1,2,7,3,,EU|EU_national_1_2|KZ|1. Division,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+29,football,21172,api_football,"506","2024",true,1,2,7,3,100,EU|EU_national_1_2|SK|2. liga,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+422,football,21022,api_football,"389","2024",true,1,2,7,3,,EU|EU_national_1_2|KZ|Premier League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+423,football,21278,api_football,"664","2024",true,1,2,7,3,,EU|EU_national_1_2|XK|Superliga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+424,football,22041,api_football,"1195","2024",true,1,2,7,3,,EU|EU_national_1_2|XK|Liga E Pare,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+425,football,20974,api_football,"364","2024",true,1,2,7,3,,EU|EU_national_1_2|LV|1. Liga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+426,football,20975,api_football,"365","2024",true,1,2,7,3,,EU|EU_national_1_2|LV|Virsliga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+427,football,20977,api_football,"361","2024",true,1,2,7,3,,EU|EU_national_1_2|LT|1 Lyga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+428,football,20978,api_football,"362","2024",true,1,2,7,3,,EU|EU_national_1_2|LT|A Lyga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+429,football,20868,api_football,"261","2024",true,1,2,7,3,,EU|EU_national_1_2|LU|National Division,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+430,football,21141,api_football,"371","2024",true,1,2,7,3,,EU|EU_national_1_2|MK|First League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+431,football,21189,api_football,"372","2024",true,1,2,7,3,,EU|EU_national_1_2|MK|Second League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+432,football,21145,api_football,"392","2024",true,1,2,7,3,,EU|EU_national_1_2|MT|Challenge League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+433,football,21146,api_football,"393","2024",true,1,2,7,3,,EU|EU_national_1_2|MT|Premier League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+434,football,21147,api_football,"394","2024",true,1,2,7,3,,EU|EU_national_1_2|MD|Super Liga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+435,football,21437,api_football,"395","2024",true,1,2,7,3,,EU|EU_national_1_2|MD|Liga 1,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+436,football,21259,api_football,"355","2024",true,1,2,7,3,,EU|EU_national_1_2|ME|First League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+437,football,21260,api_football,"356","2024",true,1,2,7,3,,EU|EU_national_1_2|ME|Second League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+440,football,21064,api_football,"103","2024",true,1,2,7,3,,EU|EU_national_1_2|NO|Eliteserien,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+441,football,21099,api_football,"104","2024",true,1,2,7,3,,EU|EU_national_1_2|NO|1. Division,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+448,football,21075,api_football,"235","2024",true,1,2,7,3,,EU|EU_national_1_2|RU|Premier League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+449,football,21096,api_football,"236","2024",true,1,2,7,3,,EU|EU_national_1_2|RU|First League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+450,football,21154,api_football,"404","2024",true,1,2,7,3,,EU|EU_national_1_2|SM|Campionato,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+451,football,21112,api_football,"286","2024",true,1,2,7,3,,EU|EU_national_1_2|RS|Super Liga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+452,football,21113,api_football,"287","2024",true,1,2,7,3,,EU|EU_national_1_2|RS|Prva Liga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+32,football,21230,api_football,"373","2024",true,1,2,7,3,100,EU|EU_national_1_2|SI|1. SNL,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+33,football,21231,api_football,"374","2024",true,1,2,7,3,100,EU|EU_national_1_2|SI|2. SNL,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+459,football,21067,api_football,"113","2024",true,1,2,7,3,,EU|EU_national_1_2|SE|Allsvenskan,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+460,football,21100,api_football,"114","2024",true,1,2,7,3,,EU|EU_national_1_2|SE|Superettan,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+461,football,21073,api_football,"207","2024",true,1,2,7,3,,EU|EU_national_1_2|CH|Super League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+463,football,20892,api_football,"203","2024",true,1,2,7,3,,EU|EU_national_1_2|TR|Süper Lig,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+465,football,20886,api_football,"333","2024",true,1,2,7,3,,EU|EU_national_1_2|UA|Premier League,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+466,football,20885,api_football,"334","2024",true,1,2,7,3,,EU|EU_national_1_2|UA|Persha Liga,2026-03-02 21:45:27.474 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+40,football,21426,api_football,"357","2024",true,1,2,7,3,100,EU|UKI_islands_1_2|IE|Premier Division,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,UKI_islands_1_2
+41,football,21427,api_football,"358","2024",true,1,2,7,3,100,EU|UKI_islands_1_2|IE|First Division,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,UKI_islands_1_2
+31,football,21180,api_football,"408","2024",true,1,2,7,3,100,EU|UKI_islands_1_2|GB-NIR|Premiership,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,UKI_islands_1_2
+35,football,21246,api_football,"111","2024",true,1,2,7,3,100,EU|UKI_islands_1_2|GB-WLS|FAW Championship,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,UKI_islands_1_2
+257,football,21086,api_football,"138","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+263,football,21264,api_football,"942","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+264,football,21265,api_football,"943","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+266,football,21309,api_football,"349","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+267,football,21329,api_football,"109","2022",true,2,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+268,football,21430,api_football,"518","2022",true,1,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+277,football,21819,api_football,"1010","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+256,football,21080,api_football,"145","2024",true,1,2,7,3,100,EU|EU_national_1_2|BE|First Division B,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+21,football,20962,api_football,"197","2024",true,1,2,7,3,100,EU|EU_national_1_2|GR|Super League 1,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+20,football,20949,api_football,"272","2024",true,1,2,7,3,100,EU|EU_national_1_2|HU|NB II,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+253,football,21063,api_football,"136","2024",true,1,2,7,3,100,EU|EU_national_1_2|IT|Serie B,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+254,football,21065,api_football,"89","2024",true,1,2,7,3,100,EU|EU_national_1_2|NL|Eerste Divisie,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+262,football,21255,api_football,"107","2024",true,1,2,7,3,100,EU|EU_national_1_2|PL|I Liga,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+252,football,21062,api_football,"141","2024",true,1,2,7,3,100,EU|EU_national_1_2|ES|Segunda División,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+259,football,21101,api_football,"208","2024",true,1,2,7,3,100,EU|EU_national_1_2|CH|Challenge League,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+4,football,20852,api_football,"61","2024",true,1,2,7,3,100,EU|EU_national_1_2|FR|Ligue 1,2026-02-27 14:36:19.397 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+28,football,21143,api_football,"383","2022",true,1,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-27 22:00:06.788 +0100,2026-03-01 22:30:19.117 +0100,EU_exact_v1_1
+5,football,20856,api_football,"78","2024",true,1,2,7,3,100,EU|EU_national_1_2|DE|Bundesliga,2026-02-27 14:36:19.397 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+8,football,20857,api_football,"135","2024",true,1,2,7,3,100,EU|EU_national_1_2|IT|Serie A,2026-02-27 14:36:19.397 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+6,football,20849,api_football,"88","2024",true,1,2,7,3,100,EU|EU_national_1_2|NL|Eredivisie,2026-02-27 14:36:19.397 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+7,football,20858,api_football,"94","2024",true,1,2,7,3,100,EU|EU_national_1_2|PT|Primeira Liga,2026-02-27 14:36:19.397 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+25,football,21110,api_football,"283","2024",true,1,2,7,3,100,EU|EU_national_1_2|RO|Liga I,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+9,football,20859,api_football,"140","2024",true,1,2,7,3,100,EU|EU_national_1_2|ES|La Liga,2026-02-27 14:36:19.397 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+2,football,20855,api_football,"39","2024",true,1,2,7,3,100,EU|UKI_EN_1_4|GB-ENG|Premier League,2026-02-27 14:36:19.397 +0100,2026-03-02 21:45:27.474 +0100,UKI_EN_1_4
+30,football,21179,api_football,"407","2024",true,1,2,7,3,100,EU|UKI_islands_1_2|GB-NIR|Championship,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,UKI_islands_1_2
+24,football,21085,api_football,"211","2022",true,2,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-27 22:00:06.788 +0100,2026-03-01 22:30:19.117 +0100,EU_exact_v1_2
+27,football,21142,api_football,"382","2022",true,2,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-27 22:00:06.788 +0100,2026-03-01 22:30:19.117 +0100,EU_exact_v1_2
+23,football,21081,api_football,"173","2024",true,1,2,7,3,100,EU|EU_national_1_2|BG|Second League,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+22,football,21074,api_football,"210","2024",true,1,2,7,3,100,EU|EU_national_1_2|HR|HNL,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+26,football,21111,api_football,"284","2024",true,1,2,7,3,100,EU|EU_national_1_2|RO|Liga II,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+38,football,21256,api_football,"332","2024",true,1,2,7,3,100,EU|EU_national_1_2|SK|Super Liga,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+3,football,20871,api_football,"40","2024",true,1,2,7,3,100,EU|UKI_EN_1_4|GB-ENG|Championship,2026-02-27 14:36:19.397 +0100,2026-03-02 21:45:27.474 +0100,UKI_EN_1_4
+14,football,20876,api_football,"41","2024",true,1,2,7,3,100,EU|UKI_EN_1_4|GB-ENG|League One,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,UKI_EN_1_4
+15,football,20877,api_football,"42","2024",true,1,2,7,3,100,EU|UKI_EN_1_4|GB-ENG|League Two,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,UKI_EN_1_4
+11,football,20860,api_football,"179","2024",true,1,2,7,3,100,EU|UKI_islands_1_2|GB-SCT|Premiership,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,UKI_islands_1_2
+12,football,20861,api_football,"180","2024",true,1,2,7,3,100,EU|UKI_islands_1_2|GB-SCT|Championship,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,UKI_islands_1_2
+16,football,20930,api_football,"110","2024",true,1,2,7,3,100,EU|UKI_islands_1_2|GB-WLS|Premier League,2026-02-27 22:00:06.788 +0100,2026-03-02 21:45:27.474 +0100,UKI_islands_1_2
+270,football,21697,api_football,"865","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_B
+247,football,20894,api_football,"205","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+251,football,20964,api_football,"80","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+269,football,21534,api_football,"685","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+272,football,21770,api_football,"976","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+274,football,21812,api_football,"1000","2022",true,2,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_B
+258,football,21090,api_football,"82","2022",true,1,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_B
+271,football,21699,api_football,"891","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_B
+273,football,21786,api_football,"975","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_B
+249,football,20924,api_football,"218","2024",true,1,2,7,3,100,EU|EU_national_1_2|AT|Bundesliga,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+248,football,20923,api_football,"219","2024",true,1,2,7,3,100,EU|EU_national_1_2|AT|2. Liga,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+243,football,20853,api_football,"144","2024",true,1,2,7,3,100,EU|EU_national_1_2|BE|First Division A,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+241,football,20851,api_football,"62","2024",true,1,2,7,3,100,EU|EU_national_1_2|FR|Ligue 2,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+250,football,20963,api_football,"79","2024",true,1,2,7,3,100,EU|EU_national_1_2|DE|2. Bundesliga,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+246,football,20893,api_football,"204","2024",true,1,2,7,3,100,EU|EU_national_1_2|TR|1. Lig,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+278,football,21882,api_football,"1034","2022",true,1,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_A
+260,football,21201,api_football,"492","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_B
+265,football,21308,api_football,"348","2022",true,3,2,3,0,100,TOP8 free-mode (2 back / 3 fwd / budget 100),2026-02-28 13:40:19.470 +0100,2026-03-01 22:30:19.117 +0100,EU_major_v4_B
+261,football,21241,api_football,"106","2024",true,1,2,7,3,100,EU|EU_national_1_2|PL|Ekstraklasa,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2
+255,football,21066,api_football,"95","2024",true,1,2,7,3,100,EU|EU_national_1_2|PT|Segunda Liga,2026-02-28 13:40:19.470 +0100,2026-03-02 21:45:27.474 +0100,EU_national_1_2

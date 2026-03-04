@@ -1,0 +1,266 @@
+1) Požadavky na webovou architekturu
+Web TicketMatrix je koncipován jako dvouvrstvá aplikace:
+A) Uživatelské rozhraní podobné Livesportu (MatchMatrix)
+výběr sportu, ligy a zápasů
+filtry dle časového okna, země, soutěže, stavu zápasu
+detail zápasu zahrnující formu, H2H, rating, kurzy a EV
+rychlé přidání tipu do tiketu
+B) Ticket builder (TicketMatrix)
+skládání tiketů
+rozklad na bloky 1–3
+výpočet EV, rizika a variance
+ukládání tiketů
+historie tiketů a statistiky
+Vaše databáze obsahuje následující prvky:
+canonical leagues
+canonical teams
+fixtures
+připravený ingest kurzů
+multi-provider mapování
+whitelist ingest_targets
+job orchestration
+Web může být optimalizován jako tenká vrstva pro čtení hotových dat.
+2) Výběr technologií
+Frontend
+Next.js 14 (App Router): SSR, SSG, API routes, rychlost, SEO, stabilita
+TailwindCSS: rychlý vývoj, konzistentní UI
+ShadCN UI: profesionální komponenty, snadná customizace
+TanStack Query: caching, revalidace, efektivní práce s API
+Backend API
+Možnosti:
+Varianta 1 – Next.js API Routes (doporučeno pro MVP):
+jednoduché řešení
+API běží přímo na Next.js
+napojení na PostgreSQL prostřednictvím Prisma/Drizzle ORM
+Varianta 2 – Samostatné API (FastAPI / Node / NestJS):
+vhodné pro škálování
+oddělené release cykly
+ideální pro budoucí mobilní aplikace
+Pro denní provoz doporučujeme Variantou 1 (z důvodu dostupnosti Dockeru, PostgreSQL a rychlosti MVP).
+3) Datová vrstva
+ORM doporučení: Drizzle ORM
+typová bezpečnost
+generování SQL pro PostgreSQL
+vysoká rychlost
+kompatibilita s Next.js
+API endpoints (minimální sada) jsou připraveny ve vaší databázi.
+4) Struktura UI
+Homepage
+výběr sportu
+rychlé filtry (dnes/zítra/víkend)
+seznam top lig
+Liga
+seznam zápasů
+filtry podle času, týmu, kurzu, EV
+zvýraznění value
+Detail zápasu
+forma týmů
+H2H
+kurzy od providerů
+ratingy
+doporučené tipy (MatchMatrix engine)
+Ticket builder
+seznam vybraných zápasů
+rozklad na bloky
+výpočet EV, variance, rizika
+uložené tikety
+Historie tiketů
+úspěšnost
+ROI
+grafické znázornění
+5) Deployment
+Doporučené možnosti:
+Vercel pro frontend (Next.js)
+Render / Railway / Docker VPS pro backend a PostgreSQL
+Ideální kombinací je frontend na Vercelu a backend s DB v Dockeru na VPS.
+6) Implementační postup
+Krok 1 – založení projektu Next.js
+Krok 2 – integrace Drizzle ORM
+Krok 3 – propojení s DB
+vytvoření schémat
+connection string k Docker PostgreSQL
+Krok 4 – tvorba API endpoints
+leagues
+fixtures
+odds
+tickets
+Krok 5 – vývoj UI komponent
+layout ve stylu Livesportu
+seznam lig
+seznam zápasů
+detail zápasu
+ticket builder
+Krok 6 – deployment
+frontend na Vercel
+backend na Docker VPS
+7) Klíčové aspekty pro projekt
+canonical model zajistí čisté webové prostředí
+ingest_targets garantují rychlou odezvu
+fixtures ingest znamenají připravená data
+multi-provider mapování zajišťuje konzistenci kurzů
+job orchestration umožňuje čerstvá data
+Projektová architektura již nyní odpovídá standardům profesionálních sportovních platforem; web představuje závěrečnou integrační vrstvu.
+Na základě vašich požadavků mohu nabídnout:
+návrh adresářové struktury projektu
+skeleton Next.js s API endpoints
+UI návrh (podobný Figma) pro TicketMatrix
+datová view SQL pro web (fixtures_view, odds_view, league_view)
+Prosím, upřesněte, který krok si přejete zahájit jako první.
+Webová architektura TicketMatrix
+Strukturovaný návrh a implementace sportovní platformy
+1) Požadavky na webovou architekturu
+Web TicketMatrix je navržen jako dvouvrstvá aplikace. První vrstva představuje uživatelské rozhraní inspirované Livesportem (MatchMatrix), které umožňuje:
+Výběr sportu, ligy a zápasů
+Filtrování podle časového okna, země, soutěže a stavu zápasu
+Detail zápasu zahrnující formu týmů, vzájemné zápasy (H2H), ratingy, kurzy a očekávanou hodnotu (EV)
+Rychlé přidání tipu do tiketu
+Druhá vrstva je ticket builder (TicketMatrix), který zajišťuje:
+Skládání tiketů
+Rozklad tiketů na bloky 1–3
+Výpočet EV, rizika a variance
+Ukládání tiketů
+Historii tiketů a statistiky
+Databáze obsahuje následující prvky:
+canonical leagues
+canonical teams
+fixtures
+připravený ingest kurzů
+multi-provider mapování
+whitelist ingest_targets
+job orchestration
+Web lze optimalizovat jako tenkou vrstvu pro čtení hotových dat.
+2) Výběr technologií
+Frontend
+Next.js 14 (App Router): SSR, SSG, API routes, rychlost, SEO, stabilita
+TailwindCSS: rychlý vývoj, konzistentní UI
+ShadCN UI: profesionální komponenty, snadná customizace
+TanStack Query: caching, revalidace, efektivní práce s API
+Backend API
+Možnosti:
+Varianta 1 – Next.js API Routes (doporučeno pro MVP): jednoduché řešení, API běží přímo na Next.js, napojení na PostgreSQL prostřednictvím Prisma/Drizzle ORM
+Varianta 2 – Samostatné API (FastAPI / Node / NestJS): vhodné pro škálování, oddělené release cykly, ideální pro budoucí mobilní aplikace
+Pro denní provoz je doporučována Varianta 1 (z důvodu dostupnosti Dockeru, PostgreSQL a rychlosti MVP).
+3) Datová vrstva
+ORM doporučení: Drizzle ORM
+Typová bezpečnost
+Generování SQL pro PostgreSQL
+Vysoká rychlost
+Kompatibilita s Next.js
+API endpoints (minimální sada) jsou připraveny ve vaší databázi.
+4) Struktura UI
+Homepage
+Výběr sportu
+Rychlé filtry (dnes/zítra/víkend)
+Seznam top lig
+Liga
+Seznam zápasů
+Filtry podle času, týmu, kurzu, EV
+Zvýraznění value
+Detail zápasu
+Forma týmů
+H2H
+Kurzy od providerů
+Ratingy
+Doporučené tipy (MatchMatrix engine)
+Ticket builder
+Seznam vybraných zápasů
+Rozklad na bloky
+Výpočet EV, variance, rizika
+Uložené tikety
+Historie tiketů
+Úspěšnost
+ROI
+Grafické znázornění
+5) Deployment
+Doporučené možnosti:
+Vercel pro frontend (Next.js)
+Render / Railway / Docker VPS pro backend a PostgreSQL
+Ideální kombinací je frontend na Vercelu a backend s databází v Dockeru na VPS.
+6) Implementační postup
+Krok 1 – založení projektu Next.js
+Krok 2 – integrace Drizzle ORM
+Krok 3 – propojení s DB
+vytvoření schémat
+connection string k Docker PostgreSQL
+Krok 4 – tvorba API endpoints
+leagues
+fixtures
+odds
+tickets
+Krok 5 – vývoj UI komponent
+layout ve stylu Livesportu
+seznam lig
+seznam zápasů
+detail zápasu
+ticket builder
+Krok 6 – deployment
+frontend na Vercel
+backend na Docker VPS
+7) Klíčové aspekty pro projekt
+Canonical model zajistí čisté webové prostředí
+Ingest_targets garantují rychlou odezvu
+Fixtures ingest znamenají připravená data
+Multi-provider mapování zajišťuje konzistenci kurzů
+Job orchestration umožňuje čerstvá data
+Projektová architektura již nyní odpovídá standardům profesionálních sportovních platforem; web představuje závěrečnou integrační vrstvu.
+Návrhy pro zahájení projektu
+Na základě vašich požadavků lze nabídnout:
+Návrh adresářové struktury projektu
+Skeleton Next.js s API endpoints
+UI návrh (podobný Figma) pro TicketMatrix
+Datová view SQL pro web (fixtures_view, odds_view, league_view)
+Prosím, upřesněte, který krok si přejete zahájit jako první.
+
+ARCHIVNÍ DENÍK: PROJEKT TICKETMATRIX (v. 1.0)
+Datum: 3. března 2026 Vlastník: Pane (Uživatel) [cite: 2026-01-19] Kontext: Analytický nástroj pro systémové sázky postavený nad DB_SEZONY_TYMY [cite: 2026-01-20].
+________________________________________
+1. PŮVODNÍ ZADÁNÍ A VIZE
+•	Cíl: Vytvořit platformu pro analýzu a generování 27 variant výsledků pro 3 zápasové bloky (systém 1-X-2) [cite: 2026-01-20].
+•	Klíčové požadavky:
+o	Výpočet celkových kurzů a potenciálních výher u každé z 27 variant [cite: 2026-01-20].
+o	Možnost interaktivního výběru konkrétních tiketů k sázce [cite: 2026-01-20].
+o	Ukládání vybraných dat do dedikované databáze [cite: 2026-01-20].
+o	Estetika: Top úroveň, nevtíravý profesionální vzhled, tmavé ametystové pozadí, čistá typografie s využitím kurzívy pro doplňková data.
+________________________________________
+2. ARCHITEKTURA A TECHNOLOGIE
+•	Frontend: Next.js (Framework), React (Klientská interaktivita via use client), Tailwind CSS (Styling).
+•	Struktura složek: Komponenta MatrixCalculator.tsx je umístěna v kořenové složce /components pro maximální stabilitu.
+•	Barevné schéma: Hlavní pozadí #0F0A18, akcenty v ametystové a smaragdově zelené (pro aktivní stavy).
+________________________________________
+3. REALIZOVANÉ MILNÍKY (LOG)
+•	✅ Matematické jádro: Implementován algoritmus getCombination, který přesně generuje sekvence od VAR 01 (1-1-1) až po VAR 27 (2-2-2) [cite: 2026-01-20].
+•	✅ Dynamické vstupy: Propojení komponenty s reálnými kurzy (odds) a vkladem (stake).
+•	✅ Interaktivní Selection: Vývoj funkce toggleTicket, která umožňuje uživateli kliknutím vybírat tikety, přičemž systém okamžitě přepočítává celkový vklad.
+•	✅ UX Ladění: Implementace "Semafor" efektu (jemné zelené podsvícení a černý text pro vybrané položky) a kurzívy pro kurzy.
+________________________________________
+4. AKTUÁLNÍ DATABÁZOVÝ MODEL (SQL)
+Pro ukládání analýz byla definována tabulka vybrane_tikety:
+SQL
+CREATE TABLE vybrane_tikety (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    zapas_id VARCHAR(50) NOT NULL,
+    kombinace VARCHAR(10) NOT NULL,
+    kurz DECIMAL(10, 2) NOT NULL,
+    vklad DECIMAL(10, 2) NOT NULL,
+    potencialni_vyhra DECIMAL(10, 2),
+    datum_vytvoreni TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+________________________________________
+5. DALŠÍ PLÁNOVANÉ KROKY
+1.	API Handler: Vytvoření souboru route.ts, který fyzicky zapíše označené tikety do SQL tabulky.
+2.	Dynamické načítání: Napojení na tabulky DB_SEZONY_TYMY, aby se kurzy nenačítaly ručně, ale přímo ze seznamu aktuálních zápasů [cite: 2026-01-20].
+3.	Vizuální finiš: Poslední leštění designu na "Top úroveň".
+________________________________________
+Tento záznam si uložte, pane. Je to kompletní historie naší práce [cite: 2026-01-14]. Jakmile budete připraven, můžeme se pustit do psaní té API funkce, aby to tlačítko začalo odesílat data do tabulky. Chcete pokračovat?
+
+Spouštění stránek: 
+http://localhost:3000/ 
+
+a v PowerShellu spuštěno:
+
+C:\MatchMatrix-platform\fronted\matchmatrix-web\components> npm run dev
+
+
+
+
+
