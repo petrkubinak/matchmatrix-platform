@@ -38,48 +38,37 @@ export default function MatrixCalculator({ odds, stake }: Props) {
         </div>
       </div>
       
-      {/* ČISTÁ MŘÍŽKA BEZ TĚŽKÝCH ČAR */}
-      <div className="grid grid-cols-3 md:grid-cols-9 gap-2">
-        {varianty.map((i) => {
-          const combo = getCombination(i);
-          const totalOdds = combo.reduce((acc, tip) => acc * oddsMap[tip], 1);
-          const potentialWin = (totalOdds * stake).toFixed(0);
-          const isSelected = selected.includes(i);
+{/* MŘÍŽKA VARIANT - Moderní styl bez tabulkových čar */}
+<div className="grid grid-cols-3 md:grid-cols-9 gap-2">
+  {varianty.map((i) => {
+    const combo = getCombination(i);
+    const totalOdds = combo.reduce((acc, tip) => acc * oddsMap[tip], 1);
+    const potentialWin = (totalOdds * stake).toFixed(0);
+    const isSelected = selected.includes(i);
 
-          return (
-            <div 
-              key={i} 
-              onClick={() => toggleTicket(i)}
-              className={`cursor-pointer group transition-all duration-300 p-4 rounded-lg border text-center ${
-                isSelected 
-                  ? 'bg-green-500/10 border-green-500/40 shadow-sm scale-[1.02]' 
-                  : 'bg-transparent border-white/5 hover:border-purple-500/20'
-              }`}
-            >
-              {/* VÝRAZNÁ KOMBINACE */}
-              <div className={`text-[12px] font-black tracking-widest mb-2 ${
-                isSelected ? 'text-green-400' : 'text-purple-300/40'
-              }`}>
-                {combo.join(' ')}
-              </div>
-              
-              {/* ČÁSTKA - ČISTÁ A JASNÁ */}
-              <div className={`text-xl font-light tracking-tighter ${
-                isSelected ? 'text-white' : 'text-gray-500'
-              }`}>
-                {potentialWin}
-              </div>
-              
-              {/* KURZ - JEMNÁ KURZÍVA (DETAILNÍ POPIS) */}
-              <div className={`text-[9px] mt-1 italic font-light ${
-                isSelected ? 'text-green-500/60' : 'text-gray-700'
-              }`}>
-                kurz {totalOdds.toFixed(2)}
-              </div>
-            </div>
-          );
-        })}
+    return (
+      <div 
+        key={i} 
+        onClick={() => toggleTicket(i)}
+        className={`cursor-pointer p-4 rounded-xl border transition-all text-center ${
+          isSelected 
+            ? 'bg-green-500/20 border-green-500 shadow-[0_0_15px_rgba(34,197,94,0.2)]' 
+            : 'bg-white/5 border-white/5 hover:border-purple-500/30'
+        }`}
+      >
+        <div className={`text-[11px] font-black tracking-widest mb-1 ${isSelected ? 'text-green-400' : 'text-purple-300/40'}`}>
+          {combo.join(' ')}
+        </div>
+        <div className={`text-lg font-light ${isSelected ? 'text-white' : 'text-gray-500'}`}>
+          {potentialWin} <span className="text-[9px] opacity-30 font-normal">Kč</span>
+        </div>
+        <div className={`text-[9px] mt-1 italic font-light ${isSelected ? 'text-green-500/60' : 'text-gray-800'}`}>
+          {totalOdds.toFixed(2)}
+        </div>
       </div>
+    );
+  })}
+</div>
 
       {/* NEVTÍRAVÉ TLAČÍTKO */}
       {selected.length > 0 && (
