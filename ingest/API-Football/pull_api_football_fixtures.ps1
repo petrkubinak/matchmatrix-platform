@@ -21,10 +21,29 @@ foreach ($line in Get-Content $envFile) {
 $API_KEY = $env:APISPORTS_KEY
 if (-not $API_KEY) { throw "Missing APISPORTS_KEY in .env" }
 
+function Invoke-ApiFootballGet {
+  param(
+    [Parameter(Mandatory=$true)][string]$Uri,
+    [Parameter(Mandatory=$true)][string]$ApiKey,
+    [int]$TimeoutSec = 40,
+    [int]$MaxRetry = 3
+  )
+
+  for ($i = 1; $i -le $MaxRetry; $i++) {
+    try {
+      return Invoke-RestMethod -Method Get -Uri $Uri -Headers @{ "x-apisports-key" = $ApiKey } -TimeoutSec $TimeoutSec -ErrorAction Stop
+    }
+    catch {
+      Write-Warning "API call failed (attempt $i/$MaxRetry) uri=$Uri :: $($_.Exception.Message)"
+      if ($i -lt $MaxRetry) { Start-Sleep -Seconds (5 * $i) } else { throw }
+    }
+  }
+}
+
 $uri = "https://v3.football.api-sports.io/fixtures?league=$LeagueId&season=$Season&from=$From&to=$To"
 Write-Host "Pulling FIXTURES... league=$LeagueId season=$Season from=$From to=$To run_id=$RunId"
 
-$response = Invoke-RestMethod -Uri $uri -Headers @{ "x-apisports-key" = $API_KEY }
+$response = Invoke-ApiFootballGet -Uri $uri -ApiKey $API_KEY -TimeoutSec 40 -MaxRetry 3
 if ($response.errors -and ($response.errors | ConvertTo-Json -Compress) -ne "{}") {
   Write-Host ("API errors: {0}" -f ($response.errors | ConvertTo-Json -Depth 10)) -ForegroundColor Red
 }
