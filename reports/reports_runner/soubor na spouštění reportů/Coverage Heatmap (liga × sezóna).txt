@@ -1,0 +1,10 @@
+docker exec -it matchmatrix_postgres psql -U matchmatrix -d matchmatrix -c "
+SELECT
+    l.name AS league,
+    COUNT(*) FILTER (WHERE m.season = 2024) AS s2024,
+    COUNT(*) FILTER (WHERE m.season = 2023) AS s2023,
+    COUNT(*) FILTER (WHERE m.season = 2022) AS s2022
+FROM public.matches m
+JOIN public.leagues l ON l.id = m.league_id
+GROUP BY l.name
+ORDER BY l.name;"

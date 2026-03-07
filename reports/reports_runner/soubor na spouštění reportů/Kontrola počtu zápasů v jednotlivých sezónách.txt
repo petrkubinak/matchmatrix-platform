@@ -1,0 +1,5 @@
+docker exec -it matchmatrix_postgres psql -U matchmatrix -d matchmatrix -c "
+SELECT season, COUNT(*)
+FROM public.matches
+GROUP BY season
+ORDER BY season DESC;"
