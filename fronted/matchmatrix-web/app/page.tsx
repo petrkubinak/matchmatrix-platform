@@ -434,9 +434,13 @@ export default function Page() {
       {/* TOP BAR */}
       <header className={design.topbar}>
         <div className={design.topbarInner}>
-          <div>
-            <div className={design.brandSub}>TicketMatrix</div>
-            <div className={design.brandTitle}>Nabídka</div>
+          <div className="flex flex-col gap-0.5 py-2 px-1">
+            <div className="font-black text-xl tracking-tighter uppercase italic text-white leading-tight">
+              TICKET<span className="text-[#A855F7] opacity-90">MATRIX</span>
+            </div>
+            <div className="text-[9px] text-purple-400/40 font-medium italic tracking-wider uppercase ml-0.5">
+              powered by MatchMatrix
+            </div>
           </div>
 
           <div className="flex items-center gap-2">

@@ -1,0 +1,37 @@
+ERROR: invalid dsn: missing "=" after "set" in connection info string
+
+=== MATCHMATRIX: PREDICT MATCHES ===
+MODEL_CODE: baseline_logreg_v3
+MODEL_PATH: C:\MatchMatrix-platform\ingest\artifacts\baseline_logreg_v3.joblib
+DAYS_AHEAD: 14
+PREDICT_VIEW: public.ml_match_predict_dataset_v1
+C:\MatchMatrix-platform\ingest\predict_matches_V3.py:71: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  return pd.read_sql_query(sql, conn, params=[days_ahead])
+=== MATCHMATRIX: PREDICT MATCHES ===
+MODEL_CODE: baseline_logreg_v3
+MODEL_PATH: C:\MatchMatrix-platform\ingest\artifacts\baseline_logreg_v3.joblib
+DAYS_AHEAD: 14
+PREDICT_VIEW: public.ml_match_predict_dataset_v1
+Future matches loaded: 215
+Inserted 215 predictions into public.ml_predictions.
+Prediction run finished.
+C:\MatchMatrix-platform\ingest\predict_matches_V3.py:71: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  return pd.read_sql_query(sql, conn, params=[days_ahead])
+=== MATCHMATRIX: PREDICT MATCHES ===
+MODEL_CODE: baseline_logreg_v3
+MODEL_PATH: C:\MatchMatrix-platform\ingest\artifacts\baseline_logreg_v3.joblib
+DAYS_AHEAD: 14
+PREDICT_VIEW: public.ml_match_predict_dataset_v1
+Future matches loaded: 215
+Inserted 215 predictions into public.ml_predictions.
+Prediction run finished.
+C:\MatchMatrix-platform\ingest\predict_matches_V3.py:71: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  return pd.read_sql_query(sql, conn, params=[days_ahead])
+=== MATCHMATRIX: PREDICT MATCHES ===
+MODEL_CODE: baseline_logreg_v3
+MODEL_PATH: C:\MatchMatrix-platform\ingest\artifacts\baseline_logreg_v3.joblib
+DAYS_AHEAD: 14
+PREDICT_VIEW: public.ml_match_predict_dataset_v1
+Future matches loaded: 215
+Inserted 215 predictions into public.ml_predictions.
+Prediction run finished.

@@ -1,0 +1,124 @@
+|table_schema|table_name           |ordinal_position|column_name          |data_type                  |is_nullable|column_default                                           |
+|------------|---------------------|----------------|---------------------|---------------------------|-----------|---------------------------------------------------------|
+|public      |league_provider_map  |1               |league_id            |bigint                     |NO         |                                                         |
+|public      |league_provider_map  |2               |provider             |text                       |NO         |                                                         |
+|public      |league_provider_map  |3               |provider_league_id   |text                       |NO         |                                                         |
+|public      |league_provider_map  |4               |created_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |league_provider_map  |5               |updated_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |leagues              |1               |id                   |integer                    |NO         |nextval('leagues_id_seq'::regclass)                      |
+|public      |leagues              |2               |sport_id             |integer                    |NO         |                                                         |
+|public      |leagues              |3               |name                 |text                       |NO         |                                                         |
+|public      |leagues              |4               |country              |text                       |YES        |                                                         |
+|public      |leagues              |5               |ext_source           |text                       |YES        |                                                         |
+|public      |leagues              |6               |ext_league_id        |text                       |YES        |                                                         |
+|public      |leagues              |7               |ext_csv_code         |text                       |YES        |                                                         |
+|public      |leagues              |8               |theodds_key          |text                       |YES        |                                                         |
+|public      |leagues              |9               |enabled_theodds      |boolean                    |YES        |true                                                     |
+|public      |leagues              |10              |country_id           |integer                    |YES        |                                                         |
+|public      |leagues              |11              |tier                 |integer                    |YES        |                                                         |
+|public      |leagues              |12              |is_cup               |boolean                    |YES        |false                                                    |
+|public      |leagues              |13              |is_international     |boolean                    |YES        |false                                                    |
+|public      |leagues              |14              |created_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |leagues              |15              |updated_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |matches              |1               |id                   |integer                    |NO         |nextval('matches_id_seq'::regclass)                      |
+|public      |matches              |2               |league_id            |integer                    |YES        |                                                         |
+|public      |matches              |3               |home_team_id         |integer                    |NO         |                                                         |
+|public      |matches              |4               |away_team_id         |integer                    |NO         |                                                         |
+|public      |matches              |5               |kickoff              |timestamp without time zone|NO         |                                                         |
+|public      |matches              |6               |ext_source           |text                       |YES        |                                                         |
+|public      |matches              |7               |ext_match_id         |text                       |YES        |                                                         |
+|public      |matches              |8               |status               |text                       |NO         |                                                         |
+|public      |matches              |9               |home_score           |integer                    |YES        |                                                         |
+|public      |matches              |10              |away_score           |integer                    |YES        |                                                         |
+|public      |matches              |11              |season               |text                       |YES        |                                                         |
+|public      |matches              |12              |sport_id             |integer                    |NO         |                                                         |
+|public      |matches              |13              |updated_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |player_provider_map  |1               |id                   |bigint                     |NO         |nextval('player_provider_map_id_seq'::regclass)          |
+|public      |player_provider_map  |2               |provider             |text                       |NO         |                                                         |
+|public      |player_provider_map  |3               |provider_player_id   |text                       |NO         |                                                         |
+|public      |player_provider_map  |4               |player_id            |bigint                     |NO         |                                                         |
+|public      |player_provider_map  |5               |provider_team_id     |text                       |YES        |                                                         |
+|public      |player_provider_map  |6               |provider_team_name   |text                       |YES        |                                                         |
+|public      |player_provider_map  |7               |provider_player_name |text                       |YES        |                                                         |
+|public      |player_provider_map  |8               |is_active            |boolean                    |NO         |true                                                     |
+|public      |player_provider_map  |9               |created_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |player_provider_map  |10              |updated_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |players              |1               |id                   |bigint                     |NO         |nextval('players_id_seq'::regclass)                      |
+|public      |players              |2               |team_id              |integer                    |YES        |                                                         |
+|public      |players              |3               |name                 |text                       |NO         |                                                         |
+|public      |players              |4               |first_name           |text                       |YES        |                                                         |
+|public      |players              |5               |last_name            |text                       |YES        |                                                         |
+|public      |players              |6               |short_name           |text                       |YES        |                                                         |
+|public      |players              |7               |birth_date           |date                       |YES        |                                                         |
+|public      |players              |8               |nationality          |text                       |YES        |                                                         |
+|public      |players              |9               |position             |text                       |YES        |                                                         |
+|public      |players              |10              |shirt_number         |integer                    |YES        |                                                         |
+|public      |players              |11              |height_cm            |integer                    |YES        |                                                         |
+|public      |players              |12              |weight_kg            |integer                    |YES        |                                                         |
+|public      |players              |13              |is_active            |boolean                    |NO         |true                                                     |
+|public      |players              |14              |ext_source           |text                       |YES        |                                                         |
+|public      |players              |15              |ext_player_id        |text                       |YES        |                                                         |
+|public      |players              |16              |created_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |players              |17              |updated_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |team_provider_map    |1               |team_id              |bigint                     |NO         |                                                         |
+|public      |team_provider_map    |2               |provider             |text                       |NO         |                                                         |
+|public      |team_provider_map    |3               |provider_team_id     |text                       |NO         |                                                         |
+|public      |team_provider_map    |4               |created_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |team_provider_map    |5               |updated_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |teams                |1               |id                   |integer                    |NO         |nextval('teams_id_seq'::regclass)                        |
+|public      |teams                |2               |name                 |text                       |NO         |                                                         |
+|public      |teams                |3               |ext_source           |text                       |YES        |                                                         |
+|public      |teams                |4               |ext_team_id          |text                       |YES        |                                                         |
+|public      |teams                |5               |created_at           |timestamp with time zone   |NO         |now()                                                    |
+|public      |teams                |6               |updated_at           |timestamp with time zone   |NO         |now()                                                    |
+|staging     |stg_provider_fixtures|1               |id                   |bigint                     |NO         |nextval('staging.stg_provider_fixtures_id_seq'::regclass)|
+|staging     |stg_provider_fixtures|2               |provider             |text                       |NO         |                                                         |
+|staging     |stg_provider_fixtures|3               |sport_code           |text                       |NO         |                                                         |
+|staging     |stg_provider_fixtures|4               |external_fixture_id  |text                       |NO         |                                                         |
+|staging     |stg_provider_fixtures|5               |external_league_id   |text                       |YES        |                                                         |
+|staging     |stg_provider_fixtures|6               |season               |text                       |YES        |                                                         |
+|staging     |stg_provider_fixtures|7               |home_team_external_id|text                       |YES        |                                                         |
+|staging     |stg_provider_fixtures|8               |away_team_external_id|text                       |YES        |                                                         |
+|staging     |stg_provider_fixtures|9               |fixture_date         |timestamp with time zone   |YES        |                                                         |
+|staging     |stg_provider_fixtures|10              |status_text          |text                       |YES        |                                                         |
+|staging     |stg_provider_fixtures|11              |home_score           |text                       |YES        |                                                         |
+|staging     |stg_provider_fixtures|12              |away_score           |text                       |YES        |                                                         |
+|staging     |stg_provider_fixtures|13              |raw_payload_id       |bigint                     |YES        |                                                         |
+|staging     |stg_provider_fixtures|14              |created_at           |timestamp with time zone   |NO         |now()                                                    |
+|staging     |stg_provider_fixtures|15              |updated_at           |timestamp with time zone   |NO         |now()                                                    |
+|staging     |stg_provider_leagues |1               |id                   |bigint                     |NO         |nextval('staging.stg_provider_leagues_id_seq'::regclass) |
+|staging     |stg_provider_leagues |2               |provider             |text                       |NO         |                                                         |
+|staging     |stg_provider_leagues |3               |sport_code           |text                       |NO         |                                                         |
+|staging     |stg_provider_leagues |4               |external_league_id   |text                       |NO         |                                                         |
+|staging     |stg_provider_leagues |5               |league_name          |text                       |NO         |                                                         |
+|staging     |stg_provider_leagues |6               |country_name         |text                       |YES        |                                                         |
+|staging     |stg_provider_leagues |7               |season               |text                       |YES        |                                                         |
+|staging     |stg_provider_leagues |8               |raw_payload_id       |bigint                     |YES        |                                                         |
+|staging     |stg_provider_leagues |9               |is_active            |boolean                    |NO         |true                                                     |
+|staging     |stg_provider_leagues |10              |created_at           |timestamp with time zone   |NO         |now()                                                    |
+|staging     |stg_provider_leagues |11              |updated_at           |timestamp with time zone   |NO         |now()                                                    |
+|staging     |stg_provider_players |1               |id                   |bigint                     |NO         |nextval('staging.stg_provider_players_id_seq'::regclass) |
+|staging     |stg_provider_players |2               |provider             |text                       |NO         |                                                         |
+|staging     |stg_provider_players |3               |sport_code           |text                       |NO         |                                                         |
+|staging     |stg_provider_players |4               |external_player_id   |text                       |NO         |                                                         |
+|staging     |stg_provider_players |5               |player_name          |text                       |NO         |                                                         |
+|staging     |stg_provider_players |6               |birth_date           |date                       |YES        |                                                         |
+|staging     |stg_provider_players |7               |nationality          |text                       |YES        |                                                         |
+|staging     |stg_provider_players |8               |external_team_id     |text                       |YES        |                                                         |
+|staging     |stg_provider_players |9               |season               |text                       |YES        |                                                         |
+|staging     |stg_provider_players |10              |raw_payload_id       |bigint                     |YES        |                                                         |
+|staging     |stg_provider_players |11              |is_active            |boolean                    |NO         |true                                                     |
+|staging     |stg_provider_players |12              |created_at           |timestamp with time zone   |NO         |now()                                                    |
+|staging     |stg_provider_players |13              |updated_at           |timestamp with time zone   |NO         |now()                                                    |
+|staging     |stg_provider_teams   |1               |id                   |bigint                     |NO         |nextval('staging.stg_provider_teams_id_seq'::regclass)   |
+|staging     |stg_provider_teams   |2               |provider             |text                       |NO         |                                                         |
+|staging     |stg_provider_teams   |3               |sport_code           |text                       |NO         |                                                         |
+|staging     |stg_provider_teams   |4               |external_team_id     |text                       |NO         |                                                         |
+|staging     |stg_provider_teams   |5               |team_name            |text                       |NO         |                                                         |
+|staging     |stg_provider_teams   |6               |country_name         |text                       |YES        |                                                         |
+|staging     |stg_provider_teams   |7               |external_league_id   |text                       |YES        |                                                         |
+|staging     |stg_provider_teams   |8               |season               |text                       |YES        |                                                         |
+|staging     |stg_provider_teams   |9               |raw_payload_id       |bigint                     |YES        |                                                         |
+|staging     |stg_provider_teams   |10              |is_active            |boolean                    |NO         |true                                                     |
+|staging     |stg_provider_teams   |11              |created_at           |timestamp with time zone   |NO         |now()                                                    |
+|staging     |stg_provider_teams   |12              |updated_at           |timestamp with time zone   |NO         |now()                                                    |

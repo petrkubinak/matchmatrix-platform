@@ -1,0 +1,103 @@
+|source       |endpoint                                      |count|
+|-------------|----------------------------------------------|-----|
+|football_data|/competitions/2016/matches?season=2022        |1    |
+|football_data|/competitions/2019/matches?season=2019        |1    |
+|football_data|/competitions/2018/matches?season=2020        |1    |
+|football_data|/competitions/2021/matches?season=2021        |1    |
+|football_data|/competitions/2013/matches?season=2022        |1    |
+|football_data|/competitions/2018/matches?season=2023        |1    |
+|football_data|/competitions/2016/matches?season=2019        |1    |
+|football_data|/competitions/2021/matches?season=2020        |1    |
+|theodds      |/sports/soccer_brazil_campeonato/odds         |22   |
+|football_data|/competitions/2001/matches?season=2021        |1    |
+|football_data|/competitions/2019/matches                    |6    |
+|football_data|/competitions/2014/matches                    |6    |
+|theodds      |/sports/soccer_germany_bundesliga/odds        |19   |
+|football_data|/competitions/2013/teams                      |6    |
+|football_data|/competitions/2018/matches?season=2021        |1    |
+|football_data|/competitions/2018/teams                      |4    |
+|football_data|/competitions/2021/matches?season=2022        |1    |
+|football_data|/competitions/2014/teams                      |3    |
+|theodds      |/sports/soccer_netherlands_eredivisie/odds    |19   |
+|football_data|/competitions/2003/matches                    |6    |
+|football_data|/competitions/2013/matches?season=2024        |1    |
+|football_data|/competitions/2017/matches                    |6    |
+|football_data|/competitions/2021/matches?season=2023        |1    |
+|football_data|/competitions/2015/matches?season=2026        |1    |
+|football_data|/competitions/2013/matches?season=2026        |1    |
+|football_data|/competitions/2015/matches?season=2023        |1    |
+|football_data|/competitions/2001/matches?season=2023        |1    |
+|football_data|/competitions/2013/matches                    |19   |
+|football_data|/competitions/2001/teams                      |4    |
+|theodds      |/sports/soccer_uefa_euro/odds                 |19   |
+|football_data|/competitions/2002/matches?season=2026        |1    |
+|football_data|/competitions/2002/matches?season=2022        |1    |
+|football_data|/competitions/2015/matches?season=2019        |1    |
+|api_sport    |leagues                                       |3    |
+|football_data|/competitions/2019/teams                      |3    |
+|football_data|/competitions                                 |21   |
+|football_data|/competitions/2013/matches?season=2019        |1    |
+|football_data|/competitions/2013/matches?season=2020        |1    |
+|football_data|/competitions/2001/matches?season=2019        |1    |
+|football_data|/competitions/2013/matches?season=2023        |1    |
+|football_data|/competitions/2021/matches?season=2024        |1    |
+|theodds      |/sports/soccer_spain_la_liga/odds             |19   |
+|football_data|/competitions/2018/matches?season=2026        |1    |
+|football_data|/competitions/2002/matches?season=2020        |1    |
+|football_data|/competitions/2013/matches?season=2021        |1    |
+|football_data|/competitions/2015/matches?season=2024        |1    |
+|football_data|/competitions/2015/matches                    |6    |
+|theodds      |/sports/soccer_fifa_world_cup/odds            |20   |
+|football_data|/competitions/2017/teams                      |3    |
+|football_data|/competitions/2018/matches?season=2025        |1    |
+|football_data|/competitions/2001/matches?season=2026        |1    |
+|football_data|/competitions/2152/teams                      |1    |
+|football_data|/competitions/2015/matches?season=2025        |1    |
+|theodds      |/sports/soccer_italy_serie_a/odds             |19   |
+|football_data|/competitions/2002/matches?season=2019        |1    |
+|football_data|/competitions/2002/teams                      |3    |
+|football_data|/competitions/2021/matches?season=2026        |1    |
+|football_data|/competitions/2002/matches                    |6    |
+|theodds      |/sports/soccer_france_ligue_one/odds          |20   |
+|theodds      |/sports/soccer_uefa_champs_league/odds        |19   |
+|theodds      |/sports/soccer_epl/odds                       |24   |
+|football_data|/competitions/2002/matches?season=2025        |1    |
+|football_data|/competitions/2000/teams                      |3    |
+|football_data|/competitions/2001/matches?season=2024        |1    |
+|football_data|/competitions/2016/matches?season=2023        |1    |
+|football_data|/competitions/2016/teams                      |4    |
+|football_data|/competitions/2016/matches?season=2025        |1    |
+|football_data|/competitions/2021/teams                      |4    |
+|football_data|/competitions/2001/matches?season=2020        |1    |
+|football_data|/competitions/2016/matches?season=2020        |1    |
+|football_data|/competitions/2001/matches                    |8    |
+|football_data|/competitions/2002/matches?season=2023        |1    |
+|football_data|/competitions/2016/matches?season=2026        |1    |
+|football_data|/competitions/2000/matches                    |6    |
+|football_data|/competitions/2013/matches?season=2025        |1    |
+|football_data|/competitions/2003/teams                      |3    |
+|football_data|/competitions/2015/matches?season=2021        |1    |
+|football_data|/competitions/2001/matches?season=2025        |1    |
+|football_data|/competitions/2152/matches                    |4    |
+|football_data|/competitions/2016/matches                    |8    |
+|football_data|/competitions/2016/matches?season=2024        |1    |
+|football_data|/competitions/2015/teams                      |3    |
+|football_data|/competitions/2001/matches?season=2022        |1    |
+|football_data|/competitions/2015/matches?season=2022        |1    |
+|football_data|/competitions/2018/matches                    |7    |
+|football_data|/competitions/2002/matches?season=2021        |1    |
+|football_data|/competitions/2015/matches?season=2020        |1    |
+|football_data|/competitions/2016/matches?season=2021        |1    |
+|football_data|/competitions/2018/matches?season=2022        |1    |
+|football_data|/competitions/2021/matches?season=2019        |1    |
+|theodds      |/sports/soccer_fa_cup/odds                    |1    |
+|football_data|/competitions/2021/matches?season=2025        |1    |
+|football_data|/competitions/2018/matches?season=2019        |1    |
+|football_data|/competitions/2002/matches?season=2024        |1    |
+|theodds      |/sports/soccer_efl_champ/odds                 |20   |
+|theodds      |/sports/soccer_portugal_primeira_liga/odds    |19   |
+|football_data|/competitions/2018/matches?season=2024        |1    |
+|theodds      |/sports                                       |1    |
+|football_data|/competitions/2021/matches                    |8    |
+|theodds      |/sports/soccer_conmebol_copa_libertadores/odds|22   |
+|api_sport    |fixtures                                      |1    |

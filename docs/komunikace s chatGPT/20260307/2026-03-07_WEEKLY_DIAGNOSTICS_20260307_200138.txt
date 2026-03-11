@@ -1,0 +1,64 @@
+﻿ provider | provider_league_id | cnt 
+----------+--------------------+-----
+(0 rows)
+
+ id | sport_code | canonical_league_id | provider | provider_league_id | season | enabled | tier | fixtures_days_back | fixtures_days_forward | odds_days_forward | max_requests_per_run | notes | created_at | updated_at | run_group 
+----+------------+---------------------+----------+--------------------+--------+---------+------+--------------------+-----------------------+-------------------+----------------------+-------+------------+------------+-----------
+(0 rows)
+
+ id |    job_code     | status  |          started_at           |          finished_at          |                                                                                       message                                                                                       
+----+-----------------+---------+-------------------------------+-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 38 | ingest_fixtures | success | 2026-03-06 14:01:42.579953+00 | 2026-03-06 14:02:54.242847+00 | Fixtures ingest OK
+ 37 | ingest_fixtures | success | 2026-03-06 07:05:40.495997+00 | 2026-03-06 08:35:00.615661+00 | Fixtures ingest OK
+ 36 | ingest_fixtures | failed  | 2026-03-05 20:38:54.276971+00 | 2026-03-06 07:05:40.038445+00 |  | auto-failed (stale running > 6h)
+ 35 | ingest_fixtures | failed  | 2026-03-05 20:37:23.592941+00 | 2026-03-05 20:37:24.248751+00 | FAILED: ????dn?? enabled targets v ops.ingest_targets.
+ 34 | ingest_fixtures | success | 2026-03-04 08:50:37.846173+00 | 2026-03-04 10:57:53.210132+00 | Fixtures ingest OK
+ 33 | ingest_fixtures | failed  | 2026-03-04 05:22:22.048351+00 | 2026-03-04 07:18:19.961321+00 | manually stopped (old ingest config)
+ 32 | ingest_fixtures | success | 2026-03-03 22:00:53.920184+00 | 2026-03-03 23:29:14.310307+00 | Fixtures ingest OK
+ 31 | ingest_fixtures | failed  | 2026-03-03 21:35:52.7503+00   | 2026-03-03 21:58:42.262618+00 |  | manually stopped via CTRL+C (stalled after first league)
+ 30 | ingest_fixtures | failed  | 2026-03-03 21:24:11.557854+00 | 2026-03-03 21:24:12.143094+00 | FAILED: ????dn?? enabled targets v ops.ingest_targets.
+ 29 | ingest_teams    | success | 2026-03-02 12:18:51.166925+00 | 2026-03-02 12:22:54.247376+00 | Teams ingest finished
+ 28 | ingest_fixtures | success | 2026-03-02 10:49:26.731291+00 | 2026-03-02 12:15:46.314385+00 | Fixtures ingest OK
+ 27 | ingest_fixtures | success | 2026-03-02 08:20:53.757507+00 | 2026-03-02 08:38:15.976321+00 | Fixtures ingest OK
+ 26 | ingest_fixtures | failed  | 2026-03-01 21:06:35.438043+00 | 2026-03-02 08:20:53.277188+00 |  | auto-failed (stale running > 6h)
+ 25 | ingest_fixtures | success | 2026-03-01 20:18:20.832956+00 | 2026-03-01 20:36:56.538667+00 | Fixtures ingest OK
+ 24 | ingest_fixtures | success | 2026-02-28 20:39:20.371312+00 | 2026-02-28 21:12:52.622323+00 | Fixtures ingest OK
+ 23 | ingest_fixtures | success | 2026-02-28 18:32:22.318185+00 | 2026-02-28 19:51:30.450651+00 | Fixtures ingest OK
+ 22 | ingest_fixtures | success | 2026-02-28 16:36:13.845719+00 | 2026-02-28 16:36:53.190163+00 | Fixtures ingest OK
+ 21 | ingest_fixtures | partial | 2026-02-28 16:20:16.76833+00  | 2026-02-28 16:20:26.425937+00 | Fixtures ingest done with some failures
+ 20 | ingest_fixtures | success | 2026-02-27 10:31:12.422838+00 | 2026-02-27 10:31:16.839471+00 | Fixtures ingest OK
+ 19 | ingest_fixtures | success | 2026-02-27 10:30:47.533714+00 | 2026-02-27 10:30:51.696516+00 | Fixtures ingest OK
+ 18 | ingest_fixtures | success | 2026-02-27 09:53:46.425823+00 | 2026-02-27 09:53:48.034797+00 | Fixtures ingest OK
+ 17 | ingest_fixtures | success | 2026-02-27 09:42:01.555343+00 | 2026-02-27 09:46:00.989958+00 | Fixtures ingest OK
+ 16 | ingest_fixtures | failed  | 2026-02-27 09:36:09.379489+00 | 2026-02-27 09:36:09.891652+00 | FAILED: ????dn?? enabled targets v ops.ingest_targets.
+ 15 | ingest_fixtures | success | 2026-02-27 09:24:22.545687+00 | 2026-02-27 09:29:11.926529+00 | Ingest fixtures OK (season=2024, target_id=1)
+ 14 | ingest_fixtures | success | 2026-02-27 09:21:19.140015+00 | 2026-02-27 09:21:41.870371+00 | Ingest fixtures OK
+ 13 | ingest_fixtures | failed  | 2026-02-27 09:06:39.94212+00  | 2026-02-27 09:37:03.435854+00 | Aborted test run
+ 12 | ingest_fixtures | success | 2026-02-26 22:09:04.168524+00 | 2026-02-26 22:10:02.351394+00 | Manual test OK
+ 11 | ingest_fixtures | failed  | 2026-02-23 22:01:57.404807+00 | 2026-02-23 22:02:00.449706+00 | psql:<stdin>:8: error: C:/MatchMatrix-platform/MatchMatrix-platform/Scripts/03_generation/32_upsert_teams_api_football.sql: No such file or directory
+ 10 | ingest_fixtures | failed  | 2026-02-23 21:58:53.878941+00 | 2026-02-23 21:58:56.50458+00  | Get-Content : Cannot find path 'C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\90_Run\90_api_football_merge_run.s
+  9 | ingest_fixtures | failed  | 2026-02-23 21:54:30.660698+00 | 2026-02-23 21:54:34.419312+00 | SQL file not found: C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\90_Run\90_api_football_merge_run.sql
+  8 | ingest_fixtures | failed  | 2026-02-23 21:03:42.385487+00 | 2026-02-23 21:03:45.131585+00 | C:\MatchMatrix-platform\ingest\API-Football\run_api_football_pipeline.ps1 : The term 'psql' is not recognized as the na
+  7 | ingest_fixtures | failed  | 2026-02-23 20:45:30.967885+00 | 2026-02-23 20:45:32.926077+00 | Python did not return numeric run_id. Got: [[LEAGUE] id=39 (p?ed?no p??mo p?es --league-id) [TEAMS] league_id=39 season
+  5 | ingest_fixtures | failed  | 2026-02-23 20:36:17.874705+00 | 2026-02-23 20:36:18.972084+00 | Traceback (most recent call last):
+  4 | ingest_fixtures | failed  | 2026-02-23 20:17:20.021247+00 | 2026-02-23 20:17:21.143718+00 | usage: api_football_pull_v1.py [-h] --league-search LEAGUE_SEARCH --season
+  3 | ingest_fixtures | failed  | 2026-02-23 20:14:30.629479+00 | 2026-02-23 20:14:31.516873+00 | param : The term 'param' is not recognized as the name of a cmdlet, function, script file, or operable program. Check t
+  2 | ingest_fixtures | failed  | 2026-02-23 20:11:18.193225+00 | 2026-02-23 20:11:18.992762+00 | C:\Users\U?ivatel\AppData\Local\Programs\Python\Python312\python.exe: can't open file 'C:\\MatchMatrix-platform\\ops\\api_football_pull_v1.py': [Errno 2] No such file or directory
+  1 | ingest_fixtures | failed  | 2026-02-23 19:50:45.216368+00 | 2026-02-27 10:30:46.982625+00 |  | auto-failed (stale running > 6h)
+(37 rows)
+
+   provider   |    run_group    | cnt | enabled_cnt 
+--------------+-----------------+-----+-------------
+ api_football | EU_exact_v1     |  88 |          88
+ api_football | EU_top          |  12 |          12
+ api_football | EU_major_v4_A   |  12 |           0
+ api_football | EU_major_v4_B   |   7 |           0
+ api_football | EU_exact_v1_2   |   2 |           0
+ api_football | EU_exact_v1_1   |   1 |           0
+ api_football | EU_national_1_2 |   1 |           0
+(7 rows)
+
+ provider | season | disabled_cnt 
+----------+--------+--------------
+(0 rows)
+

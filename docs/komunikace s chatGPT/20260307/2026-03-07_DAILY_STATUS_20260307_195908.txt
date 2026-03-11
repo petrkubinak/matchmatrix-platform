@@ -1,0 +1,62 @@
+﻿   provider    
+---------------
+ api_football
+ api_hockey
+ football_data
+(3 rows)
+
+   provider    | league_count 
+---------------+--------------
+ api_hockey    |          262
+ api_football  |          123
+ football_data |           13
+(3 rows)
+
+   provider   |  run_group  | cnt 
+--------------+-------------+-----
+ api_football | EU_exact_v1 |  88
+ api_football | EU_top      |  12
+(2 rows)
+
+ id |    job_code     | status  |          started_at           |          finished_at          |                                                                        message                                                                        
+----+-----------------+---------+-------------------------------+-------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------
+ 38 | ingest_fixtures | success | 2026-03-06 14:01:42.579953+00 | 2026-03-06 14:02:54.242847+00 | Fixtures ingest OK
+ 37 | ingest_fixtures | success | 2026-03-06 07:05:40.495997+00 | 2026-03-06 08:35:00.615661+00 | Fixtures ingest OK
+ 36 | ingest_fixtures | failed  | 2026-03-05 20:38:54.276971+00 | 2026-03-06 07:05:40.038445+00 |  | auto-failed (stale running > 6h)
+ 35 | ingest_fixtures | failed  | 2026-03-05 20:37:23.592941+00 | 2026-03-05 20:37:24.248751+00 | FAILED: ????dn?? enabled targets v ops.ingest_targets.
+ 34 | ingest_fixtures | success | 2026-03-04 08:50:37.846173+00 | 2026-03-04 10:57:53.210132+00 | Fixtures ingest OK
+ 33 | ingest_fixtures | failed  | 2026-03-04 05:22:22.048351+00 | 2026-03-04 07:18:19.961321+00 | manually stopped (old ingest config)
+ 32 | ingest_fixtures | success | 2026-03-03 22:00:53.920184+00 | 2026-03-03 23:29:14.310307+00 | Fixtures ingest OK
+ 31 | ingest_fixtures | failed  | 2026-03-03 21:35:52.7503+00   | 2026-03-03 21:58:42.262618+00 |  | manually stopped via CTRL+C (stalled after first league)
+ 30 | ingest_fixtures | failed  | 2026-03-03 21:24:11.557854+00 | 2026-03-03 21:24:12.143094+00 | FAILED: ????dn?? enabled targets v ops.ingest_targets.
+ 29 | ingest_teams    | success | 2026-03-02 12:18:51.166925+00 | 2026-03-02 12:22:54.247376+00 | Teams ingest finished
+ 28 | ingest_fixtures | success | 2026-03-02 10:49:26.731291+00 | 2026-03-02 12:15:46.314385+00 | Fixtures ingest OK
+ 27 | ingest_fixtures | success | 2026-03-02 08:20:53.757507+00 | 2026-03-02 08:38:15.976321+00 | Fixtures ingest OK
+ 26 | ingest_fixtures | failed  | 2026-03-01 21:06:35.438043+00 | 2026-03-02 08:20:53.277188+00 |  | auto-failed (stale running > 6h)
+ 25 | ingest_fixtures | success | 2026-03-01 20:18:20.832956+00 | 2026-03-01 20:36:56.538667+00 | Fixtures ingest OK
+ 24 | ingest_fixtures | success | 2026-02-28 20:39:20.371312+00 | 2026-02-28 21:12:52.622323+00 | Fixtures ingest OK
+ 23 | ingest_fixtures | success | 2026-02-28 18:32:22.318185+00 | 2026-02-28 19:51:30.450651+00 | Fixtures ingest OK
+ 22 | ingest_fixtures | success | 2026-02-28 16:36:13.845719+00 | 2026-02-28 16:36:53.190163+00 | Fixtures ingest OK
+ 21 | ingest_fixtures | partial | 2026-02-28 16:20:16.76833+00  | 2026-02-28 16:20:26.425937+00 | Fixtures ingest done with some failures
+ 20 | ingest_fixtures | success | 2026-02-27 10:31:12.422838+00 | 2026-02-27 10:31:16.839471+00 | Fixtures ingest OK
+ 19 | ingest_fixtures | success | 2026-02-27 10:30:47.533714+00 | 2026-02-27 10:30:51.696516+00 | Fixtures ingest OK
+ 18 | ingest_fixtures | success | 2026-02-27 09:53:46.425823+00 | 2026-02-27 09:53:48.034797+00 | Fixtures ingest OK
+ 17 | ingest_fixtures | success | 2026-02-27 09:42:01.555343+00 | 2026-02-27 09:46:00.989958+00 | Fixtures ingest OK
+ 16 | ingest_fixtures | failed  | 2026-02-27 09:36:09.379489+00 | 2026-02-27 09:36:09.891652+00 | FAILED: ????dn?? enabled targets v ops.ingest_targets.
+ 15 | ingest_fixtures | success | 2026-02-27 09:24:22.545687+00 | 2026-02-27 09:29:11.926529+00 | Ingest fixtures OK (season=2024, target_id=1)
+ 14 | ingest_fixtures | success | 2026-02-27 09:21:19.140015+00 | 2026-02-27 09:21:41.870371+00 | Ingest fixtures OK
+ 13 | ingest_fixtures | failed  | 2026-02-27 09:06:39.94212+00  | 2026-02-27 09:37:03.435854+00 | Aborted test run
+ 12 | ingest_fixtures | success | 2026-02-26 22:09:04.168524+00 | 2026-02-26 22:10:02.351394+00 | Manual test OK
+ 11 | ingest_fixtures | failed  | 2026-02-23 22:01:57.404807+00 | 2026-02-23 22:02:00.449706+00 | psql:<stdin>:8: error: C:/MatchMatrix-platform/MatchMatrix-platform/Scripts/03_generation/32_upsert_teams_api_football.sql: No such file or directory
+ 10 | ingest_fixtures | failed  | 2026-02-23 21:58:53.878941+00 | 2026-02-23 21:58:56.50458+00  | Get-Content : Cannot find path 'C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\90_Run\90_api_football_merge_run.s
+  9 | ingest_fixtures | failed  | 2026-02-23 21:54:30.660698+00 | 2026-02-23 21:54:34.419312+00 | SQL file not found: C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\90_Run\90_api_football_merge_run.sql
+(30 rows)
+
+   provider   | season | cnt | enabled_cnt 
+--------------+--------+-----+-------------
+ api_football | 2024   | 101 |         101
+ api-football |        |   3 |           3
+ api_football |        |  71 |          71
+(3 rows)
+
+DO

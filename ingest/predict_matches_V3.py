@@ -1,4 +1,4 @@
-# predict_matches_V2.py
+# predict_matches_V3.py
 # Krátké připomenutí:
 # - predict pipeline = vezme hotový model a spočítá pravděpodobnosti pro budoucí zápasy
 # - view = "pohled" v DB (uložený SELECT), tady zdroj dat pro model
@@ -11,23 +11,36 @@ import joblib
 import pandas as pd
 import psycopg2
 
-# Povinné
-DB_DSN = os.environ.get("DB_DSN")
-if not DB_DSN:
-    raise RuntimeError("Chybí proměnná prostředí DB_DSN (připojení k DB).")
+# ----------------------------------------------------------
+# DB CONFIG
+# ----------------------------------------------------------
+# Preferujeme pevný config pro lokální MatchMatrix.
+# Pokud bys někdy chtěl, můžeš to přepnout na env proměnné.
+DB_CONFIG = {
+    "host": "localhost",
+    "port": 5432,
+    "dbname": "matchmatrix",
+    "user": "matchmatrix",
+    "password": "matchmatrix_pass",
+}
 
-# Volitelné (mají defaulty)
+# ----------------------------------------------------------
+# MODEL / PRED SETTINGS
+# ----------------------------------------------------------
 MODEL_PATH = os.getenv(
     "MM_MODEL_PATH",
     os.path.join(os.path.dirname(__file__), "artifacts", "baseline_logreg_v3.joblib"),
 )
 MODEL_CODE = os.getenv("MM_MODEL_CODE", "baseline_logreg_v3")
 
-# kolik dní dopředu predikovat (default 14)
-DAYS_AHEAD = int(os.getenv("MM_PRED_DAYS_AHEAD", os.getenv("MM_PRED_DAYS_AHEAD", "14")))
+# kolik dní dopředu predikovat
+DAYS_AHEAD = int(os.getenv("MM_PRED_DAYS_AHEAD", "14"))
 
 # název view zdroje
 PREDICT_VIEW = os.getenv("MM_PREDICT_VIEW", "public.ml_match_predict_dataset_v1")
+
+# cílová tabulka
+PRED_TABLE = os.getenv("MM_PRED_TABLE", "public.ml_predictions")
 
 
 def load_future_matches(days_ahead: int) -> pd.DataFrame:
@@ -53,7 +66,8 @@ def load_future_matches(days_ahead: int) -> pd.DataFrame:
           AND kickoff < now() + (%s || ' days')::interval
         ORDER BY kickoff
     """
-    with psycopg2.connect(DB_DSN) as conn:
+
+    with psycopg2.connect(**DB_CONFIG) as conn:
         return pd.read_sql_query(sql, conn, params=[days_ahead])
 
 
@@ -72,26 +86,28 @@ def fillna_features(df: pd.DataFrame) -> pd.DataFrame:
         "last5_gd_diff",
         "rest_days_diff",
     ]
+
     for c in feature_cols:
         if c in df.columns:
             df[c] = df[c].fillna(0)
 
     if "league_id" in df.columns:
-        # league_id může být NULL u některých zápasů, tak to necháme jako Int64
         df["league_id"] = df["league_id"].astype("Int64")
 
     return df
 
 
-def insert_predictions(df_pred: pd.DataFrame, run_ts: datetime):
-    # Vkládáme do public.ml_predictions (pokud máš jiný schema, nastav MM_PRED_TABLE)
-    pred_table = os.getenv("MM_PRED_TABLE", "public.ml_predictions")
-
+def insert_predictions(df_pred: pd.DataFrame, run_ts: datetime) -> None:
     sql = f"""
-        INSERT INTO {pred_table} (
-            model_code, run_ts,
-            match_id, league_id, kickoff,
-            p_away, p_draw, p_home
+        INSERT INTO {PRED_TABLE} (
+            model_code,
+            run_ts,
+            match_id,
+            league_id,
+            kickoff,
+            p_away,
+            p_draw,
+            p_home
         )
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
     """
@@ -115,15 +131,15 @@ def insert_predictions(df_pred: pd.DataFrame, run_ts: datetime):
         print("No rows to insert.")
         return
 
-    with psycopg2.connect(DB_DSN) as conn:
+    with psycopg2.connect(**DB_CONFIG) as conn:
         with conn.cursor() as cur:
             cur.executemany(sql, rows)
         conn.commit()
 
-    print(f"Inserted {len(rows)} predictions into {pred_table} (model_code={MODEL_CODE}).")
+    print(f"Inserted {len(rows)} predictions into {PRED_TABLE}.")
 
 
-def main():
+def main() -> None:
     print("=== MATCHMATRIX: PREDICT MATCHES ===")
     print("MODEL_CODE:", MODEL_CODE)
     print("MODEL_PATH:", MODEL_PATH)
@@ -137,6 +153,7 @@ def main():
 
     df = load_future_matches(DAYS_AHEAD)
     print("Future matches loaded:", len(df))
+
     if df.empty:
         print("Neni co predikovat.")
         return
@@ -151,17 +168,16 @@ def main():
 
     proba = model.predict_proba(X)
 
-    # Očekáváme logreg v pipeline s názvem kroku "lr"
+    # Očekáváme pipeline s krokem "lr"
     if not hasattr(model, "named_steps") or "lr" not in model.named_steps:
-        raise RuntimeError("Model pipeline neobsahuje krok 'lr' (pro mapování tříd).")
+        raise RuntimeError("Model pipeline neobsahuje krok 'lr'.")
 
     classes = list(model.named_steps["lr"].classes_)
     class_index = {cls: i for i, cls in enumerate(classes)}
 
-    # Mapujeme na p_away (-1), p_draw (0), p_home (1)
     for cls in (-1, 0, 1):
         if cls not in class_index:
-            raise RuntimeError(f"Model classes neobsahují {cls}. Nalezeno: {classes}")
+            raise RuntimeError(f"Model classes neobsahuji {cls}. Nalezeno: {classes}")
 
     df["p_away"] = proba[:, class_index[-1]]
     df["p_draw"] = proba[:, class_index[0]]

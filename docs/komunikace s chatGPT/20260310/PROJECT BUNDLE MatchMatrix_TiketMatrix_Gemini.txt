@@ -1,0 +1,53 @@
+PROJECT BUNDLE: MatchMatrix / TiketMatrix
+Projekt: Globální SaaS platforma pro pokročilé statistické analýzy a predikce sportovních výsledků.
+Vizuální identita: Tmavě fialová / Ametystová (moderní, datový vzhled).
+Obchodní model: Měsíční paušál (Subscription). Nejsme sázková kancelář, ale informační servis.
+Klíčové moduly: Classic (asistent), Blocks (kombinace), Scenario (ML synchronizované moduly).
+
+1. OBCHODNÍ PODMÍNKY (TERMS OF SERVICE)
+[CZ] ČESKÁ VERZE
+Název: Obchodní podmínky: Platforma MatchMatrix
+
+POVAHA SLUŽBY: MatchMatrix je platforma typu Software jako služba (SaaS). Poskytuje pokročilé analýzy sportovních dat a nástroje pro optimalizaci tiketů. MatchMatrix NENÍ sázková kancelář ani provozovatel hazardních her.
+
+ZPŮSOBILOST: Uživatel musí být starší 18 let (v určitých zemích 21 let).
+
+PLATBY: Služba je poskytována za měsíční paušál. Předplatné se automaticky obnovuje. Vzhledem k digitální povaze obsahu se platby po zpřístupnění dat nevracejí.
+
+ODPOVĚDNOST: Veškeré predikce jsou založeny na statistické pravděpodobnosti. Nezaručujeme finanční zisk. Sázení je rizikové a uživatel nese plnou odpovědnost za své sázky u třetích stran.
+
+[EN] ENGLISH VERSION
+Title: Terms of Service: MatchMatrix Platform
+
+NATURE OF SERVICE: MatchMatrix is a SaaS platform providing sports data analytics. We are NOT a bookmaker. We do not accept bets or wagers.
+
+ELIGIBILITY: Users must be 18+ (or 21+ where required by law).
+
+SUBSCRIPTION: Access is subject to a monthly fee with automatic renewal. No refunds for digital content once accessed.
+
+DISCLAIMER: Predictions are based on historical data. No guarantee of profit. Users assume all risks associated with their betting activities on third-party sites.
+
+2. OCHRANA ÚDAJŮ (GDPR / PRIVACY POLICY)
+[CZ] ČESKÁ VERZE
+Název: Zásady ochrany osobních údajů: Platforma MatchMatrix
+
+SBÍRANÁ DATA: E-mail, platební údaje (přes brány), IP adresa a preference sportů.
+
+ÚČEL: Správa předplatného, doručování denních reportů (Daily Ingest) a trénování ML modelů (anonymizovaně).
+
+SDÍLENÍ: Data neprodáváme. Sdílíme je pouze s nezbytnými partnery (hosting, platební procesory).
+
+VAŠE PRÁVA: Máte právo na přístup, opravu, smazání a odhlášení z marketingu.
+
+[EN] ENGLISH VERSION
+Title: Privacy Policy: MatchMatrix Platform
+
+DATA COLLECTION: Email, billing info (via third parties), IP address, and sports preferences.
+
+PURPOSE: Subscription management, Daily Ingest reports, and AI/ML model improvement.
+
+SHARING: No sale of data. Shared only with essential infrastructure providers.
+
+YOUR RIGHTS: Right to access, update, delete, and opt-out of communications.
+
+Poznámka pro implementaci: Tyto dokumenty by měly být v patičce webu. Při registraci vyžaduj souhlas s oběma dokumenty a potvrzení věku (18+).
