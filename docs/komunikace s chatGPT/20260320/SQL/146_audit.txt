@@ -1,0 +1,52 @@
+|table_schema|table_name           |column_name          |data_type               |
+|------------|---------------------|---------------------|------------------------|
+|ops         |api_request_log      |id                   |bigint                  |
+|ops         |api_request_log      |provider             |text                    |
+|ops         |api_request_log      |account_name         |text                    |
+|ops         |api_request_log      |sport_code           |text                    |
+|ops         |api_request_log      |job_code             |text                    |
+|ops         |api_request_log      |endpoint_code        |text                    |
+|ops         |api_request_log      |request_date         |date                    |
+|ops         |api_request_log      |request_count        |integer                 |
+|ops         |api_request_log      |created_at           |timestamp with time zone|
+|ops         |ingest_runtime_config|id                   |bigint                  |
+|ops         |ingest_runtime_config|provider             |text                    |
+|ops         |ingest_runtime_config|sport_code           |text                    |
+|ops         |ingest_runtime_config|plan_code            |text                    |
+|ops         |ingest_runtime_config|season_min           |text                    |
+|ops         |ingest_runtime_config|season_max           |text                    |
+|ops         |ingest_runtime_config|maintenance_season   |text                    |
+|ops         |ingest_runtime_config|max_daily_requests   |integer                 |
+|ops         |ingest_runtime_config|notes                |text                    |
+|ops         |ingest_runtime_config|is_active            |boolean                 |
+|ops         |ingest_runtime_config|created_at           |timestamp with time zone|
+|ops         |ingest_runtime_config|updated_at           |timestamp with time zone|
+|ops         |provider_accounts    |id                   |bigint                  |
+|ops         |provider_accounts    |provider             |text                    |
+|ops         |provider_accounts    |account_name         |text                    |
+|ops         |provider_accounts    |plan_code            |text                    |
+|ops         |provider_accounts    |is_active            |boolean                 |
+|ops         |provider_accounts    |daily_limit_total    |integer                 |
+|ops         |provider_accounts    |daily_limit_per_sport|integer                 |
+|ops         |provider_accounts    |safety_reserve_pct   |numeric                 |
+|ops         |provider_accounts    |api_base_url         |text                    |
+|ops         |provider_accounts    |notes                |text                    |
+|ops         |provider_accounts    |created_at           |timestamp with time zone|
+|ops         |provider_accounts    |updated_at           |timestamp with time zone|
+|ops         |provider_jobs        |id                   |bigint                  |
+|ops         |provider_jobs        |provider             |text                    |
+|ops         |provider_jobs        |sport_code           |text                    |
+|ops         |provider_jobs        |job_code             |text                    |
+|ops         |provider_jobs        |endpoint_code        |text                    |
+|ops         |provider_jobs        |ingest_mode          |text                    |
+|ops         |provider_jobs        |enabled              |boolean                 |
+|ops         |provider_jobs        |priority             |integer                 |
+|ops         |provider_jobs        |batch_size           |integer                 |
+|ops         |provider_jobs        |max_requests_per_run |integer                 |
+|ops         |provider_jobs        |retry_limit          |integer                 |
+|ops         |provider_jobs        |cooldown_seconds     |integer                 |
+|ops         |provider_jobs        |days_back            |integer                 |
+|ops         |provider_jobs        |days_forward         |integer                 |
+|ops         |provider_jobs        |notes                |text                    |
+|ops         |provider_jobs        |created_at           |timestamp with time zone|
+|ops         |provider_jobs        |updated_at           |timestamp with time zone|

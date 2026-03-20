@@ -1,0 +1,859 @@
+================================================================================
+MATCHMATRIX INGEST CYCLE V3
+================================================================================
+TEAMS EXTRACTOR  : C:\MatchMatrix-platform\workers\extract_teams_from_fixtures_v2.py
+BASE_DIR         : C:\MatchMatrix-platform
+PYTHON_EXE       : C:\Python314\python.exe
+PLANNER          : C:\MatchMatrix-platform\workers\run_ingest_planner_jobs.py
+MERGE            : C:\MatchMatrix-platform\workers\run_unified_staging_to_public_merge_v3.py
+LIMIT            : 20
+TIMEOUT SEC      : 300
+PROVIDER         : api_football
+SPORT            : football
+ENTITY           : players
+RUN GROUP        : None
+MAX ATTEMPTS     : 3
+SKIP MERGE       : False
+LOCK NAME        : ingest_cycle_v3
+LOCK TTL MINUTES : 120
+OWNER ID         : Kubinak-Petr:1836:20260318200551
+================================================================================
+================================================================================
+STEP 1 - PLANNER WORKER
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\run_ingest_planner_jobs.py --limit 20 --timeout-sec 300 --max-attempts 3 --provider api_football --sport football --entity players
+================================================================================
+================================================================================
+MATCHMATRIX INGEST PLANNER WORKER V1
+================================================================================
+BASE_DIR     : C:\MatchMatrix-platform
+PYTHON_EXE   : C:\Python314\python.exe
+RUNNER       : C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py
+LIMIT        : 20
+TIMEOUT SEC  : 300
+LOOP         : False
+POLL SEC     : 30
+PROVIDER     : api_football
+SPORT        : football
+ENTITY       : players
+RUN GROUP    : None
+MAX ATTEMPTS : 3
+================================================================================
+================================================================================
+PLANNER JOB CLAIMED
+================================================================================
+planner_id        : 975
+provider          : api_football
+sport             : football
+entity            : players
+provider_league_id: 205
+season            : 2022
+run_group         : None
+priority          : 5
+attempts          : 2
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py --provider api_football --sport football --entity players --league-id 205 --season 2022
+--------------------------------------------------------------------------------
+======================================================================
+MATCHMATRIX UNIFIED INGEST V1
+======================================================================
+START TIME : 2026-03-18 20:05:52
+RUN ID     : 20260318200552042
+PROVIDER   : api_football
+SPORT      : football
+ENTITY     : players
+SEASON     : 2022
+LEAGUE ID  : 205
+RUN GROUP  : None
+DAYS AHEAD : None
+FORCE      : False
+======================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\pull_api_football_players_v4.py --provider api_football --sport football --league-id 205 --season 2022 --run-id 20260318200552042
+=== MATCHMATRIX: API-FOOTBALL PLAYERS INGEST V4 ===
+API base         : https://v3.football.api-sports.io
+API key fp       : 446eb3...e30d
+Job limit        : 1
+Sleep per request: 1.2s
+
+Nalezeno jobů: 1
+--- JOB 977 | league=205 | season=2024 | run_group=None ---
+Čistím starý players_import pro ligu/sezónu...
+Stahuji /players league=205 season=2024 page=1
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=205&season=2024&page=1
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=13
+Uloženo 20 hráčů.
+Stahuji /players league=205 season=2024 page=2
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=205&season=2024&page=2
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=14
+Uloženo 20 hráčů.
+Stahuji /players league=205 season=2024 page=3
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=205&season=2024&page=3
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=15
+Uloženo 20 hráčů.
+Stahuji /players league=205 season=2024 page=4
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=205&season=2024&page=4
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=16
+API nevrátilo žádné hráče na této stránce.
+JOB HOTOV | planner_id=977 | inserted=60
+
+Celkem vloženo do staging.players_import: 60
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+STATUS       : ok
+MESSAGE      : Command finished.
+RETURNCODE   : 0
+STDOUT LINES : 36
+----------------------------------------------------------------------
+Unified ingest finished OK.
+
+--------------------------------------------------------------------------------
+RESULT: OK
+RETURNCODE: 0
+--------------------------------------------------------------------------------
+================================================================================
+PLANNER JOB CLAIMED
+================================================================================
+planner_id        : 976
+provider          : api_football
+sport             : football
+entity            : players
+provider_league_id: 205
+season            : 2023
+run_group         : None
+priority          : 5
+attempts          : 2
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py --provider api_football --sport football --entity players --league-id 205 --season 2023
+--------------------------------------------------------------------------------
+======================================================================
+MATCHMATRIX UNIFIED INGEST V1
+======================================================================
+START TIME : 2026-03-18 20:05:57
+RUN ID     : 20260318200557821
+PROVIDER   : api_football
+SPORT      : football
+ENTITY     : players
+SEASON     : 2023
+LEAGUE ID  : 205
+RUN GROUP  : None
+DAYS AHEAD : None
+FORCE      : False
+======================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\pull_api_football_players_v4.py --provider api_football --sport football --league-id 205 --season 2023 --run-id 20260318200557821
+=== MATCHMATRIX: API-FOOTBALL PLAYERS INGEST V4 ===
+API base         : https://v3.football.api-sports.io
+API key fp       : 446eb3...e30d
+Job limit        : 1
+Sleep per request: 1.2s
+
+Nalezeno jobů: 1
+--- JOB 980 | league=40 | season=2024 | run_group=None ---
+Čistím starý players_import pro ligu/sezónu...
+Stahuji /players league=40 season=2024 page=1
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=40&season=2024&page=1
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=17
+Uloženo 20 hráčů.
+Stahuji /players league=40 season=2024 page=2
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=40&season=2024&page=2
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=18
+Uloženo 20 hráčů.
+Stahuji /players league=40 season=2024 page=3
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=40&season=2024&page=3
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=19
+Uloženo 20 hráčů.
+Stahuji /players league=40 season=2024 page=4
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=40&season=2024&page=4
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=20
+API nevrátilo žádné hráče na této stránce.
+JOB HOTOV | planner_id=980 | inserted=60
+
+Celkem vloženo do staging.players_import: 60
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+STATUS       : ok
+MESSAGE      : Command finished.
+RETURNCODE   : 0
+STDOUT LINES : 36
+----------------------------------------------------------------------
+Unified ingest finished OK.
+
+--------------------------------------------------------------------------------
+RESULT: OK
+RETURNCODE: 0
+--------------------------------------------------------------------------------
+================================================================================
+PLANNER JOB CLAIMED
+================================================================================
+planner_id        : 978
+provider          : api_football
+sport             : football
+entity            : players
+provider_league_id: 40
+season            : 2022
+run_group         : None
+priority          : 5
+attempts          : 2
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py --provider api_football --sport football --entity players --league-id 40 --season 2022
+--------------------------------------------------------------------------------
+======================================================================
+MATCHMATRIX UNIFIED INGEST V1
+======================================================================
+START TIME : 2026-03-18 20:06:03
+RUN ID     : 20260318200603326
+PROVIDER   : api_football
+SPORT      : football
+ENTITY     : players
+SEASON     : 2022
+LEAGUE ID  : 40
+RUN GROUP  : None
+DAYS AHEAD : None
+FORCE      : False
+======================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\pull_api_football_players_v4.py --provider api_football --sport football --league-id 40 --season 2022 --run-id 20260318200603326
+=== MATCHMATRIX: API-FOOTBALL PLAYERS INGEST V4 ===
+API base         : https://v3.football.api-sports.io
+API key fp       : 446eb3...e30d
+Job limit        : 1
+Sleep per request: 1.2s
+
+Nalezeno jobů: 1
+--- JOB 983 | league=41 | season=2024 | run_group=None ---
+Čistím starý players_import pro ligu/sezónu...
+Stahuji /players league=41 season=2024 page=1
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=41&season=2024&page=1
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=21
+Uloženo 20 hráčů.
+Stahuji /players league=41 season=2024 page=2
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=41&season=2024&page=2
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=22
+Uloženo 20 hráčů.
+Stahuji /players league=41 season=2024 page=3
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=41&season=2024&page=3
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=23
+Uloženo 20 hráčů.
+Stahuji /players league=41 season=2024 page=4
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=41&season=2024&page=4
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=24
+API nevrátilo žádné hráče na této stránce.
+JOB HOTOV | planner_id=983 | inserted=60
+
+Celkem vloženo do staging.players_import: 60
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+STATUS       : ok
+MESSAGE      : Command finished.
+RETURNCODE   : 0
+STDOUT LINES : 36
+----------------------------------------------------------------------
+Unified ingest finished OK.
+
+--------------------------------------------------------------------------------
+RESULT: OK
+RETURNCODE: 0
+--------------------------------------------------------------------------------
+================================================================================
+PLANNER JOB CLAIMED
+================================================================================
+planner_id        : 979
+provider          : api_football
+sport             : football
+entity            : players
+provider_league_id: 40
+season            : 2023
+run_group         : None
+priority          : 5
+attempts          : 2
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py --provider api_football --sport football --entity players --league-id 40 --season 2023
+--------------------------------------------------------------------------------
+======================================================================
+MATCHMATRIX UNIFIED INGEST V1
+======================================================================
+START TIME : 2026-03-18 20:06:08
+RUN ID     : 20260318200608693
+PROVIDER   : api_football
+SPORT      : football
+ENTITY     : players
+SEASON     : 2023
+LEAGUE ID  : 40
+RUN GROUP  : None
+DAYS AHEAD : None
+FORCE      : False
+======================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\pull_api_football_players_v4.py --provider api_football --sport football --league-id 40 --season 2023 --run-id 20260318200608693
+=== MATCHMATRIX: API-FOOTBALL PLAYERS INGEST V4 ===
+API base         : https://v3.football.api-sports.io
+API key fp       : 446eb3...e30d
+Job limit        : 1
+Sleep per request: 1.2s
+
+Nalezeno jobů: 1
+--- JOB 986 | league=42 | season=2024 | run_group=None ---
+Čistím starý players_import pro ligu/sezónu...
+Stahuji /players league=42 season=2024 page=1
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=42&season=2024&page=1
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=25
+Uloženo 20 hráčů.
+Stahuji /players league=42 season=2024 page=2
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=42&season=2024&page=2
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=26
+Uloženo 20 hráčů.
+Stahuji /players league=42 season=2024 page=3
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=42&season=2024&page=3
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=27
+Uloženo 20 hráčů.
+Stahuji /players league=42 season=2024 page=4
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=42&season=2024&page=4
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=28
+API nevrátilo žádné hráče na této stránce.
+JOB HOTOV | planner_id=986 | inserted=60
+
+Celkem vloženo do staging.players_import: 60
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+STATUS       : ok
+MESSAGE      : Command finished.
+RETURNCODE   : 0
+STDOUT LINES : 36
+----------------------------------------------------------------------
+Unified ingest finished OK.
+
+--------------------------------------------------------------------------------
+RESULT: OK
+RETURNCODE: 0
+--------------------------------------------------------------------------------
+================================================================================
+PLANNER JOB CLAIMED
+================================================================================
+planner_id        : 981
+provider          : api_football
+sport             : football
+entity            : players
+provider_league_id: 41
+season            : 2022
+run_group         : None
+priority          : 5
+attempts          : 2
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py --provider api_football --sport football --entity players --league-id 41 --season 2022
+--------------------------------------------------------------------------------
+======================================================================
+MATCHMATRIX UNIFIED INGEST V1
+======================================================================
+START TIME : 2026-03-18 20:06:14
+RUN ID     : 20260318200614033
+PROVIDER   : api_football
+SPORT      : football
+ENTITY     : players
+SEASON     : 2022
+LEAGUE ID  : 41
+RUN GROUP  : None
+DAYS AHEAD : None
+FORCE      : False
+======================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\pull_api_football_players_v4.py --provider api_football --sport football --league-id 41 --season 2022 --run-id 20260318200614033
+=== MATCHMATRIX: API-FOOTBALL PLAYERS INGEST V4 ===
+API base         : https://v3.football.api-sports.io
+API key fp       : 446eb3...e30d
+Job limit        : 1
+Sleep per request: 1.2s
+
+Nalezeno jobů: 1
+--- JOB 992 | league=141 | season=2024 | run_group=None ---
+Čistím starý players_import pro ligu/sezónu...
+Stahuji /players league=141 season=2024 page=1
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=141&season=2024&page=1
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=29
+Uloženo 20 hráčů.
+Stahuji /players league=141 season=2024 page=2
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=141&season=2024&page=2
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=30
+Uloženo 20 hráčů.
+Stahuji /players league=141 season=2024 page=3
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=141&season=2024&page=3
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=31
+API nevrátilo žádné hráče na této stránce.
+JOB HOTOV | planner_id=992 | inserted=40
+
+Celkem vloženo do staging.players_import: 40
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+STATUS       : ok
+MESSAGE      : Command finished.
+RETURNCODE   : 0
+STDOUT LINES : 30
+----------------------------------------------------------------------
+Unified ingest finished OK.
+
+--------------------------------------------------------------------------------
+RESULT: OK
+RETURNCODE: 0
+--------------------------------------------------------------------------------
+================================================================================
+PLANNER JOB CLAIMED
+================================================================================
+planner_id        : 982
+provider          : api_football
+sport             : football
+entity            : players
+provider_league_id: 41
+season            : 2023
+run_group         : None
+priority          : 5
+attempts          : 2
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py --provider api_football --sport football --entity players --league-id 41 --season 2023
+--------------------------------------------------------------------------------
+======================================================================
+MATCHMATRIX UNIFIED INGEST V1
+======================================================================
+START TIME : 2026-03-18 20:06:18
+RUN ID     : 20260318200618072
+PROVIDER   : api_football
+SPORT      : football
+ENTITY     : players
+SEASON     : 2023
+LEAGUE ID  : 41
+RUN GROUP  : None
+DAYS AHEAD : None
+FORCE      : False
+======================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\pull_api_football_players_v4.py --provider api_football --sport football --league-id 41 --season 2023 --run-id 20260318200618072
+=== MATCHMATRIX: API-FOOTBALL PLAYERS INGEST V4 ===
+API base         : https://v3.football.api-sports.io
+API key fp       : 446eb3...e30d
+Job limit        : 1
+Sleep per request: 1.2s
+
+Nalezeno jobů: 1
+--- JOB 995 | league=136 | season=2024 | run_group=None ---
+Čistím starý players_import pro ligu/sezónu...
+Stahuji /players league=136 season=2024 page=1
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=136&season=2024&page=1
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=32
+API nevrátilo žádné hráče na této stránce.
+JOB HOTOV | planner_id=995 | inserted=0
+
+Celkem vloženo do staging.players_import: 0
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+STATUS       : ok
+MESSAGE      : Command finished.
+RETURNCODE   : 0
+STDOUT LINES : 18
+----------------------------------------------------------------------
+Unified ingest finished OK.
+
+--------------------------------------------------------------------------------
+RESULT: OK
+RETURNCODE: 0
+--------------------------------------------------------------------------------
+================================================================================
+PLANNER JOB CLAIMED
+================================================================================
+planner_id        : 984
+provider          : api_football
+sport             : football
+entity            : players
+provider_league_id: 42
+season            : 2022
+run_group         : None
+priority          : 5
+attempts          : 2
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py --provider api_football --sport football --entity players --league-id 42 --season 2022
+--------------------------------------------------------------------------------
+======================================================================
+MATCHMATRIX UNIFIED INGEST V1
+======================================================================
+START TIME : 2026-03-18 20:06:19
+RUN ID     : 20260318200619475
+PROVIDER   : api_football
+SPORT      : football
+ENTITY     : players
+SEASON     : 2022
+LEAGUE ID  : 42
+RUN GROUP  : None
+DAYS AHEAD : None
+FORCE      : False
+======================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\pull_api_football_players_v4.py --provider api_football --sport football --league-id 42 --season 2022 --run-id 20260318200619475
+=== MATCHMATRIX: API-FOOTBALL PLAYERS INGEST V4 ===
+API base         : https://v3.football.api-sports.io
+API key fp       : 446eb3...e30d
+Job limit        : 1
+Sleep per request: 1.2s
+
+Nalezeno jobů: 1
+--- JOB 247 | league=1034 | season=2024 | run_group=FOOTBALL_MAINTENANCE ---
+Čistím starý players_import pro ligu/sezónu...
+Stahuji /players league=1034 season=2024 page=1
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=1034&season=2024&page=1
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=33
+API nevrátilo žádné hráče na této stránce.
+JOB HOTOV | planner_id=247 | inserted=0
+
+Celkem vloženo do staging.players_import: 0
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+STATUS       : ok
+MESSAGE      : Command finished.
+RETURNCODE   : 0
+STDOUT LINES : 18
+----------------------------------------------------------------------
+Unified ingest finished OK.
+
+--------------------------------------------------------------------------------
+RESULT: OK
+RETURNCODE: 0
+--------------------------------------------------------------------------------
+================================================================================
+PLANNER JOB CLAIMED
+================================================================================
+planner_id        : 985
+provider          : api_football
+sport             : football
+entity            : players
+provider_league_id: 42
+season            : 2023
+run_group         : None
+priority          : 5
+attempts          : 2
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py --provider api_football --sport football --entity players --league-id 42 --season 2023
+--------------------------------------------------------------------------------
+======================================================================
+MATCHMATRIX UNIFIED INGEST V1
+======================================================================
+START TIME : 2026-03-18 20:06:20
+RUN ID     : 20260318200620868
+PROVIDER   : api_football
+SPORT      : football
+ENTITY     : players
+SEASON     : 2023
+LEAGUE ID  : 42
+RUN GROUP  : None
+DAYS AHEAD : None
+FORCE      : False
+======================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\pull_api_football_players_v4.py --provider api_football --sport football --league-id 42 --season 2023 --run-id 20260318200620868
+=== MATCHMATRIX: API-FOOTBALL PLAYERS INGEST V4 ===
+API base         : https://v3.football.api-sports.io
+API key fp       : 446eb3...e30d
+Job limit        : 1
+Sleep per request: 1.2s
+
+Nalezeno jobů: 1
+--- JOB 987 | league=111 | season=2022 | run_group=None ---
+Čistím starý players_import pro ligu/sezónu...
+Stahuji /players league=111 season=2022 page=1
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=111&season=2022&page=1
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=34
+API nevrátilo žádné hráče na této stránce.
+JOB HOTOV | planner_id=987 | inserted=0
+
+Celkem vloženo do staging.players_import: 0
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+STATUS       : ok
+MESSAGE      : Command finished.
+RETURNCODE   : 0
+STDOUT LINES : 18
+----------------------------------------------------------------------
+Unified ingest finished OK.
+
+--------------------------------------------------------------------------------
+RESULT: OK
+RETURNCODE: 0
+--------------------------------------------------------------------------------
+================================================================================
+PLANNER JOB CLAIMED
+================================================================================
+planner_id        : 988
+provider          : api_football
+sport             : football
+entity            : players
+provider_league_id: 111
+season            : 2023
+run_group         : None
+priority          : 5
+attempts          : 2
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py --provider api_football --sport football --entity players --league-id 111 --season 2023
+--------------------------------------------------------------------------------
+======================================================================
+MATCHMATRIX UNIFIED INGEST V1
+======================================================================
+START TIME : 2026-03-18 20:06:22
+RUN ID     : 20260318200622212
+PROVIDER   : api_football
+SPORT      : football
+ENTITY     : players
+SEASON     : 2023
+LEAGUE ID  : 111
+RUN GROUP  : None
+DAYS AHEAD : None
+FORCE      : False
+======================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\pull_api_football_players_v4.py --provider api_football --sport football --league-id 111 --season 2023 --run-id 20260318200622212
+=== MATCHMATRIX: API-FOOTBALL PLAYERS INGEST V4 ===
+API base         : https://v3.football.api-sports.io
+API key fp       : 446eb3...e30d
+Job limit        : 1
+Sleep per request: 1.2s
+
+Nalezeno jobů: 1
+--- JOB 990 | league=141 | season=2022 | run_group=None ---
+Čistím starý players_import pro ligu/sezónu...
+Stahuji /players league=141 season=2022 page=1
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=141&season=2022&page=1
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=35
+API nevrátilo žádné hráče na této stránce.
+JOB HOTOV | planner_id=990 | inserted=0
+
+Celkem vloženo do staging.players_import: 0
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+STATUS       : ok
+MESSAGE      : Command finished.
+RETURNCODE   : 0
+STDOUT LINES : 18
+----------------------------------------------------------------------
+Unified ingest finished OK.
+
+--------------------------------------------------------------------------------
+RESULT: OK
+RETURNCODE: 0
+--------------------------------------------------------------------------------
+================================================================================
+PLANNER JOB CLAIMED
+================================================================================
+planner_id        : 991
+provider          : api_football
+sport             : football
+entity            : players
+provider_league_id: 141
+season            : 2023
+run_group         : None
+priority          : 5
+attempts          : 2
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py --provider api_football --sport football --entity players --league-id 141 --season 2023
+--------------------------------------------------------------------------------
+======================================================================
+MATCHMATRIX UNIFIED INGEST V1
+======================================================================
+START TIME : 2026-03-18 20:06:23
+RUN ID     : 20260318200623525
+PROVIDER   : api_football
+SPORT      : football
+ENTITY     : players
+SEASON     : 2023
+LEAGUE ID  : 141
+RUN GROUP  : None
+DAYS AHEAD : None
+FORCE      : False
+======================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\pull_api_football_players_v4.py --provider api_football --sport football --league-id 141 --season 2023 --run-id 20260318200623525
+=== MATCHMATRIX: API-FOOTBALL PLAYERS INGEST V4 ===
+API base         : https://v3.football.api-sports.io
+API key fp       : 446eb3...e30d
+Job limit        : 1
+Sleep per request: 1.2s
+
+Nalezeno jobů: 1
+--- JOB 993 | league=136 | season=2022 | run_group=None ---
+Čistím starý players_import pro ligu/sezónu...
+Stahuji /players league=136 season=2022 page=1
+HTTP STATUS: 200
+URL        : https://v3.football.api-sports.io/players?league=136&season=2022&page=1
+Ukládám raw payload do staging.stg_api_payloads...
+raw_payload_id=36
+API nevrátilo žádné hráče na této stránce.
+JOB HOTOV | planner_id=993 | inserted=0
+
+Celkem vloženo do staging.players_import: 0
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+STATUS       : ok
+MESSAGE      : Command finished.
+RETURNCODE   : 0
+STDOUT LINES : 18
+----------------------------------------------------------------------
+Unified ingest finished OK.
+
+--------------------------------------------------------------------------------
+RESULT: OK
+RETURNCODE: 0
+--------------------------------------------------------------------------------
+================================================================================
+PLANNER JOB CLAIMED
+================================================================================
+planner_id        : 994
+provider          : api_football
+sport             : football
+entity            : players
+provider_league_id: 136
+season            : 2023
+run_group         : None
+priority          : 5
+attempts          : 2
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py --provider api_football --sport football --entity players --league-id 136 --season 2023
+--------------------------------------------------------------------------------
+======================================================================
+MATCHMATRIX UNIFIED INGEST V1
+======================================================================
+START TIME : 2026-03-18 20:06:24
+RUN ID     : 20260318200624845
+PROVIDER   : api_football
+SPORT      : football
+ENTITY     : players
+SEASON     : 2023
+LEAGUE ID  : 136
+RUN GROUP  : None
+DAYS AHEAD : None
+FORCE      : False
+======================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\pull_api_football_players_v4.py --provider api_football --sport football --league-id 136 --season 2023 --run-id 20260318200624845
+=== MATCHMATRIX: API-FOOTBALL PLAYERS INGEST V4 ===
+API base         : https://v3.football.api-sports.io
+API key fp       : 446eb3...e30d
+Job limit        : 1
+Sleep per request: 1.2s
+
+Žádné pending players joby.
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+STATUS       : ok
+MESSAGE      : Command finished.
+RETURNCODE   : 0
+STDOUT LINES : 7
+----------------------------------------------------------------------
+Unified ingest finished OK.
+
+--------------------------------------------------------------------------------
+RESULT: OK
+RETURNCODE: 0
+--------------------------------------------------------------------------------
+Planner queue je prázdná nebo nic neodpovídá filtrům.
+================================================================================
+WORKER SUMMARY
+================================================================================
+Processed jobs: 11
+================================================================================
+
+================================================================================
+STEP 1 - PLANNER WORKER RETURNCODE: 0
+================================================================================
+================================================================================
+STEP 1B - EXTRACT TEAMS FROM FIXTURES RAW
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\extract_teams_from_fixtures_v2.py
+================================================================================
+=== EXTRACT TEAMS FROM FIXTURES RAW ===
+Teams upserted: 2154
+
+================================================================================
+STEP 1B - EXTRACT TEAMS FROM FIXTURES RAW RETURNCODE: 0
+================================================================================
+================================================================================
+STEP 2 - STAGING TO PUBLIC MERGE
+================================================================================
+RUN: C:\Python314\python.exe C:\MatchMatrix-platform\workers\run_unified_staging_to_public_merge_v3.py
+================================================================================
+=== UNIFIED STAGING -> PUBLIC CORE MERGE V3 ===
+Detected sports map: {'fb': 1, 'hk': 2, 'bk': 3, 'tn': 4, 'mma': 9, 'vb': 10, 'hb': 11, 'bsb': 12, 'rgb': 13, 'ck': 14, 'fh': 15, 'afb': 16, 'esp': 17}
+leagues updated: 1481
+leagues inserted: 0
+league_provider_map inserted: 0
+teams updated: 0
+teams inserted: 0
+team_provider_map inserted: 0
+league_teams inserted: 0
+players updated: 533
+players inserted: 0
+player_provider_map inserted: 0
+matches updated: 74583
+matches inserted: 0
+
+=== FINAL COUNTS ===
+public.leagues: 2713
+public.league_provider_map: 1494
+public.teams: 5234
+public.team_provider_map: 2419
+public.players: 559
+public.player_provider_map: 559
+public.matches: 107089
+
+Hotovo.
+
+================================================================================
+STEP 2 - STAGING TO PUBLIC MERGE RETURNCODE: 0
+================================================================================
+================================================================================
+INGEST CYCLE SUMMARY
+================================================================================
+Processed planner jobs: 11
+Teams extractor       : YES
+Merge executed        : YES
+Final status          : OK
+================================================================================

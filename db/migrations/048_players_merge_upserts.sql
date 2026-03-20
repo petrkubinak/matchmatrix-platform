@@ -1,0 +1,141 @@
+-- MatchMatrix - Players DB completion (merge upserts)
+-- Ulozit do: C:\MatchMatrix-platform\db\sql\048_players_merge_upserts.sql
+
+-- 1) Season stats -> public.player_season_statistics
+INSERT INTO public.player_season_statistics (
+    provider,
+    sport_code,
+    season_id,
+    league_id,
+    team_id,
+    player_id,
+    provider_player_id,
+    provider_team_id,
+    provider_league_id,
+    season_code,
+    appearances,
+    lineups,
+    minutes_played,
+    rating,
+    goals,
+    assists,
+    shots_total,
+    shots_on,
+    passes_total,
+    passes_key,
+    passes_accuracy,
+    tackles_total,
+    duels_total,
+    duels_won,
+    dribbles_attempts,
+    dribbles_success,
+    fouls_drawn,
+    fouls_committed,
+    yellow_cards,
+    red_cards,
+    penalty_won,
+    penalty_committed,
+    penalty_scored,
+    penalty_missed,
+    penalty_saved,
+    raw_payload_id,
+    raw_json,
+    source_endpoint,
+    updated_at
+)
+SELECT
+    s.provider,
+    COALESCE(s.sport_code, 'football') AS sport_code,
+    sea.id AS season_id,
+    lpm.league_id,
+    tpm.team_id,
+    ppm.player_id,
+    s.provider_player_id,
+    s.external_team_id,
+    s.external_league_id,
+    s.season::text AS season_code,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'appearances' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'lineups' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'minutes_played' THEN s.stat_value END), 0)::integer,
+    MAX(CASE WHEN s.stat_name = 'rating' THEN s.stat_value END)::numeric(6,2),
+    COALESCE(MAX(CASE WHEN s.stat_name = 'goals' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'assists' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'shots_total' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'shots_on' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'passes_total' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'passes_key' THEN s.stat_value END), 0)::integer,
+    MAX(CASE WHEN s.stat_name = 'passes_accuracy' THEN s.stat_value END)::numeric(6,2),
+    COALESCE(MAX(CASE WHEN s.stat_name = 'tackles_total' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'duels_total' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'duels_won' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'dribbles_attempts' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'dribbles_success' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'fouls_drawn' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'fouls_committed' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'yellow_cards' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'red_cards' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'penalty_won' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'penalty_committed' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'penalty_scored' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'penalty_missed' THEN s.stat_value END), 0)::integer,
+    COALESCE(MAX(CASE WHEN s.stat_name = 'penalty_saved' THEN s.stat_value END), 0)::integer,
+    MAX(s.raw_payload_id),
+    MAX(s.raw_json),
+    MAX(s.source_endpoint),
+    now()
+FROM staging.stg_provider_player_season_stats s
+JOIN public.player_provider_map ppm
+  ON ppm.provider = s.provider
+ AND ppm.provider_player_id = s.provider_player_id
+LEFT JOIN public.team_provider_map tpm
+  ON tpm.provider = s.provider
+ AND tpm.provider_team_id = s.external_team_id
+LEFT JOIN public.league_provider_map lpm
+  ON lpm.provider = s.provider
+ AND lpm.provider_league_id = s.external_league_id
+LEFT JOIN public.seasons sea
+  ON sea.league_id = lpm.league_id
+ AND sea.season_code = s.season::text
+GROUP BY
+    s.provider,
+    COALESCE(s.sport_code, 'football'),
+    sea.id,
+    lpm.league_id,
+    tpm.team_id,
+    ppm.player_id,
+    s.provider_player_id,
+    s.external_team_id,
+    s.external_league_id,
+    s.season::text
+ON CONFLICT (provider, player_id, team_id, league_id, season_code)
+DO UPDATE SET
+    season_id = EXCLUDED.season_id,
+    appearances = EXCLUDED.appearances,
+    lineups = EXCLUDED.lineups,
+    minutes_played = EXCLUDED.minutes_played,
+    rating = EXCLUDED.rating,
+    goals = EXCLUDED.goals,
+    assists = EXCLUDED.assists,
+    shots_total = EXCLUDED.shots_total,
+    shots_on = EXCLUDED.shots_on,
+    passes_total = EXCLUDED.passes_total,
+    passes_key = EXCLUDED.passes_key,
+    passes_accuracy = EXCLUDED.passes_accuracy,
+    tackles_total = EXCLUDED.tackles_total,
+    duels_total = EXCLUDED.duels_total,
+    duels_won = EXCLUDED.duels_won,
+    dribbles_attempts = EXCLUDED.dribbles_attempts,
+    dribbles_success = EXCLUDED.dribbles_success,
+    fouls_drawn = EXCLUDED.fouls_drawn,
+    fouls_committed = EXCLUDED.fouls_committed,
+    yellow_cards = EXCLUDED.yellow_cards,
+    red_cards = EXCLUDED.red_cards,
+    penalty_won = EXCLUDED.penalty_won,
+    penalty_committed = EXCLUDED.penalty_committed,
+    penalty_scored = EXCLUDED.penalty_scored,
+    penalty_missed = EXCLUDED.penalty_missed,
+    penalty_saved = EXCLUDED.penalty_saved,
+    raw_payload_id = EXCLUDED.raw_payload_id,
+    raw_json = EXCLUDED.raw_json,
+    source_endpoint = EXCLUDED.source_endpoint,
+    updated_at = now();

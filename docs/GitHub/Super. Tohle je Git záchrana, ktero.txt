@@ -1,0 +1,64 @@
+Super. Tohle je Git záchrana, kterou používají vývojáři pořád.
+Když něco rozbiješ nebo omylem smažeš, můžeš projekt vrátit během pár sekund.
+
+1️⃣ Vrátit soubor do poslední verze
+Pokud jsi upravil soubor a chceš ho vrátit zpět.
+
+git restore název_souboru
+
+Příklad:
+
+git restore workers/pull_api_football_players_v4.py
+
+Soubor se vrátí do stavu posledního commitu.
+
+2️⃣ Vrátit celý projekt do posledního commitu
+Když jsi změnil hodně věcí a chceš je všechny zahodit.
+
+git restore .
+
+Pozor:
+zahodí všechny neuložené změny.
+
+3️⃣ Vrátit projekt do staršího commitu
+Pokud commit rozbil projekt.
+Nejdřív zobraz historii:
+
+git log --oneline
+
+Například:
+
+a73f2c9 players pipeline update
+7d9213b mmr rating update
+1c88fa0 initial platform
+
+Pak můžeš vrátit projekt:
+
+git checkout 7d9213b
+
+Projekt se vrátí do tohoto stavu.
+
+4️⃣ Tvůj absolutní bezpečnostní reset
+Pokud chceš projekt vrátit přesně na stav GitHubu:
+
+git reset --hard origin/main
+
+To je nejtvrdší reset.
+
+Používá se když:
+
+projekt se rozbil, lokální změny jsou špatné
+chceš začít znovu od čisté verze
+
+Doporučení pro MatchMatrix
+Před větší změnou vždy udělej commit:
+
+git add .
+git commit -m "backup before player stats pipeline"
+
+Pak můžeš experimentovat úplně bez strachu.
+Malý profesionální trik - Když si nejsi jistý:
+
+git status
+
+Git ti vždy řekne: co je změněné, co je připravené na commit, co není uložené

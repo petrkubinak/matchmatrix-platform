@@ -1,0 +1,21 @@
+{
+  "run_started": "2026-03-17 09:48:14",
+  "selected_categories": [
+    "workers",
+    "ingest",
+    "api_football",
+    "scripts",
+    "dump"
+  ],
+  "records_count": 462,
+  "changes_count": 462,
+  "run_dir": "C:\\MatchMatrix-platform\\reports\\audit\\2026-03-17\\09-48-14",
+  "report_md": "C:\\MatchMatrix-platform\\reports\\audit\\2026-03-17\\09-48-14\\MATCHMATRIX_AUDIT_REPORT.md",
+  "files_csv": "C:\\MatchMatrix-platform\\reports\\audit\\2026-03-17\\09-48-14\\files.csv",
+  "changes_csv": "C:\\MatchMatrix-platform\\reports\\audit\\2026-03-17\\09-48-14\\changes.csv",
+  "snapshot_json": "C:\\MatchMatrix-platform\\reports\\audit\\2026-03-17\\09-48-14\\snapshot.json",
+  "latest_report": "C:\\MatchMatrix-platform\\reports\\audit\\latest_report.md",
+  "latest_files": "C:\\MatchMatrix-platform\\reports\\audit\\latest_files.csv",
+  "latest_changes": "C:\\MatchMatrix-platform\\reports\\audit\\latest_changes.csv",
+  "latest_snapshot": "C:\\MatchMatrix-platform\\reports\\audit\\latest_snapshot.json"
+}

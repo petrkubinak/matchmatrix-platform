@@ -1,0 +1,15 @@
+|sport_plan_id|sport_code       |sport_name       |enabled|priority|mode |provider  |daily_request_budget|max_parallel_jobs|request_day|requests_used|requests_limit|requests_remaining|last_updated|
+|-------------|-----------------|-----------------|-------|--------|-----|----------|--------------------|-----------------|-----------|-------------|--------------|------------------|------------|
+|3            |basketball       |Basketball       |true   |10      |daily|api-sports|40                  |1                |           |0            |40            |40                |            |
+|2            |hockey           |Hockey           |true   |20      |daily|api-sports|40                  |1                |           |0            |40            |40                |            |
+|4            |tennis           |Tennis           |true   |40      |daily|api-sports|100                 |1                |           |0            |100           |100               |            |
+|1            |football         |Football         |true   |50      |daily|api-sports|20                  |1                |           |0            |20            |20                |            |
+|5            |mma              |MMA              |true   |50      |daily|api-sports|100                 |1                |           |0            |100           |100               |            |
+|6            |volleyball       |Volleyball       |true   |60      |daily|api-sports|100                 |1                |           |0            |100           |100               |            |
+|7            |handball         |Handball         |true   |70      |daily|api-sports|100                 |1                |           |0            |100           |100               |            |
+|8            |baseball         |Baseball         |true   |80      |daily|api-sports|100                 |1                |           |0            |100           |100               |            |
+|9            |rugby            |Rugby            |true   |90      |daily|api-sports|100                 |1                |           |0            |100           |100               |            |
+|10           |cricket          |Cricket          |true   |100     |daily|api-sports|100                 |1                |           |0            |100           |100               |            |
+|11           |field_hockey     |Field Hockey     |true   |110     |daily|api-sports|100                 |1                |           |0            |100           |100               |            |
+|12           |american_football|American Football|true   |120     |daily|api-sports|100                 |1                |           |0            |100           |100               |            |
+|13           |esports          |Esports          |true   |130     |daily|api-sports|100                 |1                |           |0            |100           |100               |            |

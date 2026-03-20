@@ -1,0 +1,56 @@
+Nejčastější workflow (to budeš používat pořád)
+
+Kdykoliv něco upravíš v projektu:
+
+git add .
+git commit -m "update players pipeline"
+git push
+
+
+Rychlá kontrola stavu:
+git status
+
+Ukáže přesně jaký kód jsi změnil:
+git diff
+
+Ukáže přesněgit log jaký kód jsi změnil:
+git log
+
+
+Kratší přehled:
+git log --oneline
+
+Zjistit aktuální větev
+git branch
+
+Výstup například:
+
+* main
+Hvězdička znamená aktuální větev.
+
+Vytvořit novou větev - Například pro novou players pipeline:
+git checkout -b players-pipeline
+
+Tím:
+vytvoříš větev
+rovnou do ní přepneš
+
+3️⃣ Pracuješ normálně dál
+git add .
+git commit -m "players ingest improvements"
+git push
+
+Teď commit jde jen do té větve.
+
+4️⃣Přepnutí zpět na main
+git checkout main
+
+5️⃣ Sloučení větve do main
+Až je nová funkce hotová:
+
+git merge players-pipeline
+
+6️⃣ Smazání větve
+Pokud už není potřeba:
+
+git branch -d players-pipeline

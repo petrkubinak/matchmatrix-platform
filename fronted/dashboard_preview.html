@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>TicketMatrixPlatform Dashboard</title>
+
+<style>
+
+/* ====== COLOR SYSTEM ====== */
+
+:root{
+--bg:#1c1330;
+--card:#2a1b47;
+--card2:#332055;
+--text:#f6eeff;
+--muted:#c9b8e8;
+--accent:#c77dff;
+--accent2:#ff8bd1;
+--line:#5b3a8a;
+}
+
+body{
+margin:0;
+font-family:Segoe UI,Arial;
+background:var(--bg);
+color:var(--text);
+}
+
+/* ===== HEADER ===== */
+
+.header{
+display:flex;
+align-items:center;
+padding:20px 30px;
+border-bottom:1px solid var(--line);
+}
+
+.logo{
+height:55px;
+margin-right:20px;
+}
+
+.title{
+font-size:28px;
+font-weight:700;
+letter-spacing:1px;
+}
+
+/* ===== LAYOUT ===== */
+
+.container{
+display:grid;
+grid-template-columns:250px 1fr;
+height:calc(100vh - 80px);
+}
+
+.sidebar{
+background:var(--card);
+padding:20px;
+border-right:1px solid var(--line);
+}
+
+.sidebar h3{
+margin-top:0;
+color:var(--accent);
+}
+
+.menu-item{
+padding:10px;
+margin:5px 0;
+background:var(--card2);
+border-left:3px solid var(--accent);
+cursor:pointer;
+}
+
+.main{
+padding:25px;
+}
+
+/* ===== METRIC CARDS ===== */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+margin-bottom:25px;
+}
+
+.card{
+background:var(--card);
+padding:20px;
+position:relative;
+}
+
+/* corner frame */
+
+.card::before{
+content:"";
+position:absolute;
+top:0;
+left:40%;
+width:60%;
+height:2px;
+background:var(--accent);
+}
+
+.card::after{
+content:"";
+position:absolute;
+bottom:0;
+right:40%;
+width:60%;
+height:2px;
+background:var(--accent2);
+}
+
+.card h2{
+margin:0;
+font-size:32px;
+}
+
+.card span{
+color:var(--muted);
+}
+
+/* ===== PANELS ===== */
+
+.panels{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:20px;
+}
+
+.panel{
+background:var(--card);
+padding:20px;
+position:relative;
+}
+
+.panel-title{
+color:var(--accent);
+margin-bottom:10px;
+}
+
+/* ===== LOG WINDOW ===== */
+
+.log{
+background:black;
+color:#00ff8c;
+padding:15px;
+height:250px;
+overflow:auto;
+font-family:monospace;
+font-size:13px;
+}
+
+/* ===== PROGRESS ===== */
+
+.progress{
+background:#120b24;
+height:10px;
+margin-top:10px;
+}
+
+.progress-bar{
+background:linear-gradient(90deg,var(--accent),var(--accent2));
+height:100%;
+width:70%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<img src="TMP_logo.png" class="logo">
+<div class="title">TicketMatrixPlatform Mission Control</div>
+</div>
+
+<div class="container">
+
+<div class="sidebar">
+
+<h3>MENU</h3>
+
+<div class="menu-item">Mission Control</div>
+<div class="menu-item">Matches</div>
+<div class="menu-item">Predictions</div>
+<div class="menu-item">Ticket Builder</div>
+<div class="menu-item">Analytics</div>
+<div class="menu-item">Settings</div>
+
+</div>
+
+<div class="main">
+
+<div class="cards">
+
+<div class="card">
+<span>Sledované soubory</span>
+<h2>754</h2>
+</div>
+
+<div class="card">
+<span>Dnešní změny</span>
+<h2>63</h2>
+</div>
+
+<div class="card">
+<span>Git branch</span>
+<h2>main</h2>
+</div>
+
+<div class="card">
+<span>Databáze</span>
+<h2>107089</h2>
+</div>
+
+</div>
+
+<div class="panels">
+
+<div class="panel">
+
+<div class="panel-title">INGEST PIPELINE</div>
+
+<div>Import → staging → public</div>
+
+<div class="progress">
+<div class="progress-bar"></div>
+</div>
+
+</div>
+
+<div class="panel">
+
+<div class="panel-title">GIT READY</div>
+
+<div>Neuložené změny: 124</div>
+
+<div class="progress">
+<div class="progress-bar" style="width:10%"></div>
+</div>
+
+</div>
+
+</div>
+
+<br>
+
+<div class="panel">
+
+<div class="panel-title">SYSTEM LOG</div>
+
+<div class="log">
+
+[11:10] Starting audit...  
+[11:10] Checking workers  
+[11:10] Checking ingest  
+[11:10] Checking DB  
+[11:11] Generating report  
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

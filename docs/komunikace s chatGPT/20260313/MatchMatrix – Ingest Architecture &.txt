@@ -1,0 +1,348 @@
+MatchMatrix – Ingest Architecture & Progress
+Datum: 13.03.2026
+1. Cíl této fáze
+
+Vytvořit robustní ingest architekturu, která:
+
+podporuje více sportů
+
+zvládne historický backfill
+
+umožní automatické plánování ingestu
+
+respektuje API request limity
+
+umožní manuální override přes panel
+
+Tato vrstva je základ pro:
+
+predikční engine
+
+ticket engine
+
+historickou databázi sportů
+
+2. Architektura systému (OPS schema)
+
+Finální architektura orchestrace ingestu.
+
+ops.ingest_runtime_config
+ops.sports_import_plan
+ops.league_import_plan
+        │
+        ▼
+ops.ingest_targets
+        │
+        ▼
+ops.ingest_planner
+        │
+        ▼
+ops.scheduler_queue / ops.jobs
+        │
+        ▼
+workers / ingest runners
+        │
+        ▼
+ops.job_runs
+        │
+        ▼
+ops.api_budget_status
+ops.api_request_log
+3. Přehled tabulek OPS
+3.1 ops.ingest_targets
+
+Definice co je možné ingestovat.
+
+Obsahuje:
+
+provider
+
+sport
+
+league
+
+season
+
+run_group
+
+enabled
+
+Použití:
+
+definuje rozsah ingestu
+
+Příklad:
+
+api_football | football | league 39 | season 2022 | FOOTBALL_MAINTENANCE
+3.2 ops.ingest_planner (NOVÁ TABULKA)
+
+Konkrétní pracovní fronta ingest úloh.
+
+Obsahuje:
+
+provider
+
+sport
+
+entity
+
+league
+
+season
+
+run_group
+
+priority
+
+status
+
+attempts
+
+Statusy:
+
+pending
+running
+done
+error
+
+Příklad:
+
+football | fixtures | league 39 | 2022 | pending
+
+Tato tabulka řídí co se bude právě stahovat.
+
+3.3 ops.scheduler_queue
+
+Fronta úloh pro scheduler.
+
+Použití:
+
+scheduler orchestrace
+
+Scheduler rozhoduje:
+
+kdy job spustit
+v jakém pořadí
+3.4 ops.jobs
+
+Katalog známých systémových jobů.
+
+Například:
+
+unified_ingest_batch
+compute_mmr_ratings
+build_match_features
+
+Používá se pro:
+
+registry jobů
+3.5 ops.job_runs
+
+Audit běhů jobů.
+
+Ukládá:
+
+start_time
+end_time
+status
+log message
+
+Použití:
+
+monitoring systému
+3.6 ops.ingest_runtime_config
+
+Runtime konfigurace ingestu.
+
+Obsahuje například:
+
+FREE / PRO režim
+season window
+max requests
+
+Použití:
+
+globální konfigurace ingestu
+3.7 ops.sports_import_plan
+
+Strategie ingestu na úrovni sportů.
+
+Například:
+
+football priority 1
+basketball priority 2
+
+Použití:
+
+priority sportů
+3.8 ops.league_import_plan
+
+Strategie ingestu na úrovni lig.
+
+Například:
+
+Premier League priority HIGH
+2. Bundesliga MEDIUM
+
+Použití:
+
+priority lig
+3.9 ops.api_budget_status
+
+Kontrola API budgetu.
+
+Obsahuje:
+
+requests_remaining
+requests_used_today
+
+Použití:
+
+ochrana před překročením API limitů
+3.10 ops.api_request_log
+
+Log všech API requestů.
+
+Použití:
+
+monitoring API usage
+4. Workers (Python)
+4.1 build_ingest_planner_jobs.py
+
+Generuje planner joby z:
+
+ops.ingest_targets
+
+Výsledek zapisuje do:
+
+ops.ingest_planner
+
+Použití:
+
+generování ingest fronty
+4.2 run_ingest_planner_jobs.py
+
+Odbavuje planner joby.
+
+Proces:
+
+load pending jobs
+mark running
+run ingest
+mark done/error
+
+Spouští:
+
+run_unified_ingest_v1.py
+5. Panel
+
+Panel umožňuje manuální spuštění.
+
+Aktuální verze:
+
+matchmatrix_control_panel_V4.py
+
+Panel umožňuje:
+
+výběr sportů
+
+výběr entity
+
+výběr run_group
+
+spuštění batch ingestu
+
+Panel slouží jako:
+
+manual override
+6. Aktuální stav projektu
+Implementováno
+
+✔ unified ingest architektura
+✔ staging tabulky
+✔ public core merge
+✔ ingest_targets
+✔ multisport scheduler
+✔ control panel V4
+✔ ingest_planner tabulka
+✔ planner job generator
+✔ planner job runner
+
+7. Aktuální test
+
+Planner generoval:
+
+240 ingest jobs
+
+Rozpad:
+
+fixtures 2022 → 118
+fixtures 2024 → 2
+teams 2022 → 118
+teams 2024 → 2
+
+Status:
+
+pending
+8. Další plán
+Krátkodobé
+
+napojit planner na scheduler
+
+zapisovat planner běhy do job_runs
+
+přidat retry logiku
+
+Střednědobé
+
+implementovat:
+
+Smart Ingest Planner V2
+
+který bude respektovat:
+
+sports_import_plan
+league_import_plan
+runtime_config
+API budget
+9. Budoucí ingest strategie
+FREE režim
+seasons 2022–2024
+PRO režim
+
+po aktivaci API PRO:
+
+8–10 sezon historie
+10. Cíl ingest vrstvy
+
+Vybudovat databázi obsahující:
+
+15+ sportů
+8–10 sezon historie
+plná data zápasů
+hráče
+kurzy
+statistiky
+
+Tato databáze bude základ pro:
+
+MatchMatrix Prediction Engine
+MatchMatrix Ticket Engine
+
+✅ Ingest orchestrace je nyní připravena na další rozšíření.
+
+Pokud chceš, v dalším kroku ti připravím ještě jednu velmi důležitou věc:
+
+vizuální architektonický diagram MatchMatrix (celý systém)
+
+ingest
+
+staging
+
+analytics
+
+prediction
+
+ticket engine
+
+Ten diagram ti pak bude sloužit jako hlavní mapa celého projektu.

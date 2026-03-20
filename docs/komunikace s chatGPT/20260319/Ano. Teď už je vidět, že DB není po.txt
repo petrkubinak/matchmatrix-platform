@@ -1,0 +1,257 @@
+Ano. Teď už je vidět, že DB není potřeba předělávat celá, ale dotáhnout a vyčistit několik konkrétních vrstev.
+
+Z toho, co máš v projektu, už funguje dobrý základ:
+
+cílová architektura je ops → staging.stg_provider_ → public → analytics → ticket engine*
+
+projekt už má silný základ v ingestu, MMR, predikcích a TicketMatrix vrstvě
+
+největší nedodělek je teď players pipeline + sjednocení legacy tabulek + dotažení public analytických tabulek
+
+Za mě bych DB dokončil v tomto pořadí:
+
+1. Uzamknout cílový směr DB
+
+Hlavní databázový model musí být:
+
+ops.*
+
+staging.stg_provider_*
+
+public.*
+
+A jako legacy brát:
+
+staging.api_football_*
+
+staré jednorázové importní mezikroky
+
+To už vychází i z tvé současné architektury a auditu projektu
+
+2. Dodělat players vrstvu
+
+Tohle je teď nejslabší místo, protože:
+
+players_import už data má
+
+stg_provider_players už se plní
+
+public.players už existuje
+
+ale player_match_statistics / stg_provider_player_stats jsou zatím prázdné nebo nedokončené
+
+Tady je potřeba dokončit celé toto:
+
+staging
+
+staging.stg_provider_players
+
+staging.stg_provider_player_season_stats
+
+staging.stg_provider_player_stats
+
+staging.stg_provider_player_profiles pokud ji chceš držet samostatně
+
+public
+
+public.players
+
+public.player_provider_map
+
+public.player_external_identity nebo obdobnou multisource identitu
+
+public.player_season_statistics
+
+public.player_match_statistics
+
+Tohle je podle mě nejdůležitější DB práce právě teď.
+
+3. Dotažení canonical provider map vrstvy
+
+Aby DB držela pohromadě, musí být pevné mapovací tabulky:
+
+public.league_provider_map
+
+public.team_provider_map
+
+public.player_provider_map
+
+League map a team map už máš rozjeté, ale u hráčů je potřeba domyslet:
+
+unikátní identitu hráče
+
+více providerů na jednoho hráče
+
+historii přestupů / týmů / sezón
+
+Bez toho se ti budou hráči časem duplikovat mezi zdroji. To odpovídá i směru “players multisource foundation”, který už v projektu máš připravený v migracích
+
+4. Sjednotit seasons a vazby na league/team/player
+
+V DB už máš spoustu tabulek, ale chybí mi dotažení konzistentního sezónního modelu.
+
+Doporučuji dokončit:
+
+public.seasons
+
+public.league_team_seasons
+
+public.player_team_history
+
+vazby player ↔ team ↔ league ↔ season
+
+To je důležité, protože:
+
+players season stats musí mít pevný kontext
+
+analytika bez sezónního modelu bude časem nekonzistentní
+
+ticket/prediction layer bude potřebovat přesně vědět, z jaké sezóny data pochází
+
+5. Dokončit match detail vrstvu
+
+Core zápasy máš silné, ale detail zápasu bych dotáhl do finální podoby:
+
+public.match_events
+
+public.lineups
+
+public.player_match_statistics
+
+public.team_match_statistics
+
+public.match_officials
+
+public.match_weather
+
+Tyhle tabulky už v DB podle dumpu a migrací máš navržené nebo vytvořené, takže nejde o novou architekturu, ale o jejich skutečné naplnění a napojení na ingest
+
+6. Odds vrstvu dotáhnout jako samostatný stabilní modul
+
+Odds jsou pro MatchMatrix kritické.
+
+Finálně musí být pevné:
+
+public.bookmakers
+
+public.markets
+
+public.market_outcomes
+
+public.odds
+
+public.closing_odds
+
+A nad tím:
+
+views pro nejlepší kurz
+
+views pro frontend
+
+views pro Ticket Engine
+
+To už přímo souvisí s TicketMatrix runtime enginem a generováním tiketů, které už máš architektonicky dobře připravené
+
+7. Analytics vrstvu oddělit od core
+
+Core DB má ukládat fakta. Analytics má být nad tím.
+
+Tedy dokončit a držet odděleně:
+
+public.mm_team_ratings
+
+public.mm_match_ratings
+
+public.match_features
+
+public.ml_predictions
+
+To je přesně vrstva, na které pak stojí Ticket Intelligence a doporučení tiketů
+
+8. Ticket DB už nepřepisovat, jen doplnit
+
+Ticket engine už máš navržený velmi dobře:
+
+runtime engine tabulky existují
+
+intelligent layer tabulky jsou připravené
+
+Tady bych už DB neměnil koncepčně, jen doplnil:
+
+napojení na odds
+
+napojení na predictions
+
+settlement historii
+
+feature dataset pro ticket varianty
+
+9. Co bych udělal hned teď
+
+Prakticky bych další práci rozdělil do 3 bloků:
+
+Blok A — stabilizace DB modelu
+
+potvrdit, že hlavní cesta je stg_provider_*
+
+označit api_football_* jako legacy
+
+zkontrolovat duplicity a chybějící indexy
+
+Blok B — players completion
+
+vytvořit / upravit finální public.player_season_statistics
+
+vytvořit / upravit finální public.player_match_statistics
+
+dopsat merge skripty staging → public
+
+Blok C — DB bible
+
+sepsat finální seznam tabulek:
+
+core
+
+provider map
+
+staging
+
+ops
+
+analytics
+
+ticket
+
+u každé tabulky určit:
+
+zdroj
+
+primární klíč
+
+vazby
+
+worker, který ji plní
+
+10. Moje doporučení
+
+Nejrozumnější další krok je tento:
+
+Nejdřív dokončit players DB vrstvu, potom public analytické tabulky, a teprve potom čistit legacy football tabulky.
+
+To je nejbezpečnější pořadí, protože:
+
+nezastavíš běžící ingest
+
+dokončíš největší chybějící část
+
+pak bude jasné, co z legacy už je opravdu zbytečné
+
+Jestli chceš, v dalším kroku ti připravím rovnou konkrétní DB plán po tabulkách:
+
+co ponechat,
+
+co doplnit,
+
+co označit jako legacy,
+
+a hned k tomu pošlu první SQL migraci včetně názvu souboru a složky, kam ji uložit

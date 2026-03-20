@@ -1,132 +1,128 @@
-
 param(
-    [string]$Season = "2024"
+  [Parameter(Mandatory=$true)][long]$RunId,
+  [Parameter(Mandatory=$true)][int]$LeagueId,
+  [Parameter(Mandatory=$true)][int]$Season
 )
 
 $ErrorActionPreference = "Stop"
 
-$API_KEY = $env:API_FOOTBALL_KEY
-if ([string]::IsNullOrWhiteSpace($API_KEY)) {
-    $API_KEY = $env:APIFOOTBALL_KEY
+# Load .env stejně jako teams/fixtures
+$envFile = Join-Path $PSScriptRoot ".env"
+if (-not (Test-Path $envFile)) { throw ".env not found" }
+
+foreach ($line in Get-Content $envFile) {
+  if ([string]::IsNullOrWhiteSpace($line)) { continue }
+  if ($line.Trim().StartsWith("#")) { continue }
+  if ($line -match "=") {
+    $parts = $line.Split("=", 2)
+    $name  = $parts[0].Trim()
+    $value = $parts[1].Trim()
+    [Environment]::SetEnvironmentVariable($name, $value)
+  }
 }
 
-if ([string]::IsNullOrWhiteSpace($API_KEY)) {
-    throw "Chybí API key. Nastav API_FOOTBALL_KEY nebo APIFOOTBALL_KEY."
-}
+$API_KEY = $env:APISPORTS_KEY
+if (-not $API_KEY) { throw "Missing APISPORTS_KEY in .env" }
 
 $headers = @{
-    "x-apisports-key" = $API_KEY
+  "x-apisports-key" = $API_KEY
 }
 
-function Escape-SqlText {
-    param([AllowNull()][string]$Value)
+$PG_CONTAINER = "matchmatrix_postgres"
+$PG_USER      = "matchmatrix"
+$PG_DB        = "matchmatrix"
+$PG_PASSWORD  = "matchmatrix"
 
-    if ($null -eq $Value -or $Value -eq "") {
-        return "NULL"
+Write-Host "Pulling PLAYERS... league=$LeagueId season=$Season run_id=$RunId"
+
+$page = 1
+$inserted = 0
+
+while ($true) {
+  $uri = "https://v3.football.api-sports.io/players?league=$LeagueId&season=$Season&page=$page"
+  Write-Host "URL: $uri"
+
+  try {
+    $response = Invoke-RestMethod -Uri $uri -Headers $headers -Method GET -ErrorAction Stop
+  }
+  catch {
+    Write-Host "API error for league=$LeagueId season=$Season page=$page"
+    Write-Host $_.Exception.Message
+    throw
+  }
+
+  if ($response.errors -and ($response.errors | ConvertTo-Json -Compress) -ne "{}") {
+    Write-Host ("API errors: {0}" -f ($response.errors | ConvertTo-Json -Depth 10)) -ForegroundColor Red
+  }
+
+  if (-not $response.response -or $response.response.Count -eq 0) {
+    if ($page -eq 1) {
+      Write-Host "No players returned."
+    } else {
+      Write-Host "No more players returned."
     }
+    break
+  }
 
-    $escaped = $Value.Replace("'", "''")
-    return "'$escaped'"
-}
+  foreach ($item in $response.response) {
+    $player = $item.player
+    if ($null -eq $player -or $null -eq $player.id) { continue }
 
-Write-Host "Načítám seznam lig z league_provider_map..."
+    $json = ($item | ConvertTo-Json -Depth 20).Replace("'", "''")
 
-$query = @"
-SELECT league_id, provider_league_id
-FROM public.league_provider_map
-WHERE provider = 'api_football'
-  AND provider_league_id IN ('39','140','78','135','61','88','94','40');
-"@
+    $playerId    = $player.id
+    $playerName  = (($player.name) -replace "'","''")
+    $firstName   = (($player.firstname) -replace "'","''")
+    $lastName    = (($player.lastname) -replace "'","''")
+    $birthDate   = $player.birth.date
+    $nationality = (($player.nationality) -replace "'","''")
+    $photo       = (($player.photo) -replace "'","''")
 
-$leagues = docker exec matchmatrix_postgres psql -U matchmatrix -d matchmatrix -t -A -F"," -c "$query"
-
-if (-not $leagues) {
-    Write-Host "Nebyla nalezena žádná liga v league_provider_map pro provider=api_football."
-    exit
-}
-
-$leagueCount = 0
-
-foreach ($row in $leagues) {
-
-    if ([string]::IsNullOrWhiteSpace($row)) {
-        continue
-    }
-
-    $cols = $row.Split(",")
-
-    if ($cols.Count -lt 2) {
-        continue
-    }
-
-    $league_id = $cols[0].Trim()
-    $api_league = $cols[1].Trim()
-
-    if ([string]::IsNullOrWhiteSpace($league_id) -or [string]::IsNullOrWhiteSpace($api_league)) {
-        continue
-    }
-
-    $leagueCount++
-    Write-Host "Processing league $league_id (API $api_league)"
-
-    $page = 1
-
-    while ($true) {
-
-        $url = "https://v3.football.api-sports.io/players?league=$api_league&season=$Season&page=$page"
-        Write-Host "URL: $url"
-
-        try {
-            $response = Invoke-RestMethod -Uri $url -Headers $headers -Method GET -ErrorAction Stop
-        }
-        catch {
-            Write-Host "API error for league $api_league page $page"
-            Write-Host $_.Exception.Message
-            break
-        }
-
-        if ($null -eq $response -or $null -eq $response.response -or $response.response.Count -eq 0) {
-            Write-Host "No data for league $api_league page $page"
-            break
-        }
-
-        foreach ($item in $response.response) {
-
-            $player = $item.player
-
-            $sql = @"
-INSERT INTO staging.players_import
+    $sql = @"
+insert into staging.players_import
 (
     provider_code,
     provider_player_id,
     player_name,
+    first_name,
+    last_name,
     birth_date,
-    nationality
+    nationality,
+    photo_url,
+    raw
 )
-VALUES
+values
 (
     'api_football',
-    $(Escape-SqlText "$($player.id)"),
-    $(Escape-SqlText "$($player.name)"),
-    $(Escape-SqlText "$($player.birth.date)"),
-    $(Escape-SqlText "$($player.nationality)")
-);
+    '$playerId',
+    $(if($playerName){ "'$playerName'" } else { "null" }),
+    $(if($firstName){ "'$firstName'" } else { "null" }),
+    $(if($lastName){ "'$lastName'" } else { "null" }),
+    $(if($birthDate){ "'$birthDate'" } else { "null" }),
+    $(if($nationality){ "'$nationality'" } else { "null" }),
+    $(if($photo){ "'$photo'" } else { "null" }),
+    '$json'::jsonb
+)
+on conflict (provider_code, provider_player_id) do update
+set player_name = excluded.player_name,
+    first_name = excluded.first_name,
+    last_name = excluded.last_name,
+    birth_date = excluded.birth_date,
+    nationality = excluded.nationality,
+    photo_url = excluded.photo_url,
+    raw = excluded.raw,
+    fetched_at = now();
 "@
 
-            try {
-                docker exec matchmatrix_postgres psql -U matchmatrix -d matchmatrix -c "$sql" | Out-Null
-            }
-            catch {
-                Write-Host "SQL insert error for player id $($player.id)"
-                Write-Host $_.Exception.Message
-            }
-        }
+    $cmd = "export PGPASSWORD='$PG_PASSWORD'; psql -U $PG_USER -d $PG_DB -v ON_ERROR_STOP=1"
+    $sql | docker exec -i $PG_CONTAINER bash -lc $cmd | Out-Null
+    $inserted++
+  }
 
-        Write-Host "Page $page done"
-        $page++
+  Write-Host "Page $page done"
+  $page++
 
-        Start-Sleep -Seconds 2
-    }
+  Start-Sleep -Seconds 1
 }
 
-Write-Host "Hotovo. Zpracovaných lig: $leagueCount"
+Write-Host ("Players inserted/updated into staging: {0}" -f $inserted)

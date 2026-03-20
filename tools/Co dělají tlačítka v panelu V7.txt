@@ -1,0 +1,291 @@
+Co dělají tlačítka v panelu
+Spustit batch kombinace
+
+Použije:
+
+C:\MatchMatrix-platform\ingest\run_unified_ingest_batch_v1.py
+
+Spustí kombinace podle toho, co máš vybrané:
+
+sporty
+
+entity
+
+run group
+
+provider mode
+
+limit
+
+max workers
+
+timeout
+
+Použití:
+
+vyber sporty vlevo
+
+vyber entity uprostřed
+
+nastav run group vpravo
+
+klikni na Spustit batch kombinace
+
+Spustit multisport scheduler V4
+
+Použije:
+
+C:\MatchMatrix-platform\workers\run_multisport_scheduler_v4.py
+
+Použití:
+
+klikneš na Spustit multisport scheduler V4
+
+To je samostatný scheduler běh.
+
+Spustit players pipeline full
+
+Použije:
+
+C:\MatchMatrix-platform\workers\run_players_pipeline_full_v1.py
+
+Použití:
+
+klikneš na Spustit players pipeline full
+
+To je sjednocený players flow, který jsme řešili.
+
+Refresh sporty + entity + OPS
+
+Znovu načte z DB:
+
+sporty
+
+entity
+
+run groups
+
+OPS / DB dashboard
+
+Použití:
+
+klikneš na Refresh sporty + entity + OPS
+
+Vyčistit log
+
+Smaže log v pravé spodní části.
+
+3. Jak funguje výběr v panelu
+Sporty
+
+V levém sloupci vybereš jeden nebo více sportů.
+
+Například:
+
+football
+
+hockey
+
+basketball
+
+Více výběrů děláš normálně myší.
+
+Tlačítka:
+
+Vybrat vše
+
+Vymazat
+
+Refresh DB
+
+Entity
+
+Ve středním sloupci vybereš, co se má pro zvolené sporty spouštět.
+
+Například:
+
+leagues
+
+teams
+
+fixtures
+
+odds
+
+players
+
+player_profiles
+
+player_season_stats
+
+player_stats
+
+Run group
+
+Vpravo vybereš skupinu běhu.
+
+Například:
+
+FOOTBALL_MAINTENANCE
+
+BACKFILL_FREE_2024
+
+Entity profil
+
+To je rychlý předvýběr entit.
+
+Například:
+
+custom
+
+Nic automaticky nevybere, vybíráš ručně.
+
+core_ingest
+
+Vybere:
+
+leagues
+
+teams
+
+fixtures
+
+odds
+
+full_ingest
+
+Vybere vše důležité.
+
+players_only
+
+Vybere jen players větev.
+
+fixtures_only
+
+Vybere jen fixtures + odds.
+
+Provider mode
+auto
+
+Provider se určí automaticky podle sportu.
+
+Například:
+
+football → api_football
+
+hockey → api_hockey
+
+manual
+
+Provider zadáš ručně do pole Manual provider.
+
+Například:
+api_football
+
+Limit
+
+Kolik jobů / kombinací má batch runner vzít.
+
+Například:
+
+5
+
+10
+
+20
+
+Max workers
+
+Kolik paralelních workerů může běžet.
+
+Například:
+
+3
+
+Timeout sec
+
+Timeout jednoho běhu v sekundách.
+
+Například:
+
+300
+
+4. Jak číst panel po spuštění
+Snapshot před během
+
+Ukazuje stav DB před spuštěním.
+
+Například:
+
+kolik je zápasů
+
+kolik je hráčů
+
+kolik je řádků ve staging stats
+
+kolik je planner pending
+
+Snapshot po běhu
+
+Ukazuje stav po dokončení.
+
+Rozdíl
+
+Ukazuje přesně změnu.
+
+Například:
+
+public.players: 779 -> 812 (+33)
+
+public.matches: 107089 -> 107245 (+156)
+
+To je hlavní kontrola, jestli běh něco opravdu udělal.
+
+Live stav běhu
+
+Ukazuje:
+
+který runner běží
+
+kdy začal
+
+jaký je stav
+
+sport / entity / run group
+
+return code
+
+krok
+
+Log běhu / průběh stahování
+
+Tady vidíš živý výstup skriptu.
+
+Sem se vypisuje:
+
+spuštěný command
+
+průběh
+
+chyby
+
+hotovo
+
+5. Kdy použít co
+Chci běžný ingest podle výběru sportů a entit
+
+Použij:
+
+Spustit batch kombinace
+
+Chci pustit celý scheduler
+
+Použij:
+
+Spustit multisport scheduler V4
+
+Chci řešit players větev
+
+Použij:
+
+Spustit players pipeline full

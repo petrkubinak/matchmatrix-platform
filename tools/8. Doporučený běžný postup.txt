@@ -1,0 +1,99 @@
+8. Doporučený běžný postup
+Varianta A — běžný ingest
+
+otevři panel přes .vbs
+
+klikni na Refresh sporty + entity + OPS
+
+vyber sport
+
+vyber entity
+
+nastav run group
+
+klikni na Spustit batch kombinace
+
+sleduj:
+
+live log
+
+snapshot před
+
+snapshot po
+
+rozdíl
+
+Varianta B — players pipeline
+
+otevři panel
+
+klikni na Spustit players pipeline full
+
+sleduj výstup v logu
+
+po doběhu zkontroluj rozdíl
+
+Varianta C — scheduler
+
+otevři panel
+
+klikni na Spustit multisport scheduler V4
+
+sleduj live stav a log
+
+9. Co dělat když něco neběží
+Panel se neotevře
+
+Zkontroluj:
+
+existuje C:\Python314\python.exe
+
+existuje C:\MatchMatrix-platform\tools\matchmatrix_control_panel_V7.py
+
+Pak zkus ručně:
+
+C:\Python314\python.exe C:\MatchMatrix-platform\tools\matchmatrix_control_panel_V7.py
+Dashboard ukazuje DB nedostupná
+
+Zkontroluj:
+
+běží PostgreSQL
+
+sedí přístup v DB_CONFIG
+
+existují tabulky v ops a public
+
+Tlačítko spustí proces, ale nic se nezmění
+
+Podívej se na:
+
+log běhu
+
+snapshot před / po
+
+rozdíl
+
+To ti hned ukáže, jestli:
+
+proces běžel bez efektu
+
+nebo spadl
+
+nebo nebyly vhodné vstupy
+
+10. Které soubory jsou teď hlavní
+Panel
+
+C:\MatchMatrix-platform\tools\matchmatrix_control_panel_V7.py
+
+Spouštěč panelu
+
+C:\MatchMatrix-platform\tools\run_matchmatrix_control_panel_V7.vbs
+
+Players orchestrátor
+
+C:\MatchMatrix-platform\workers\run_players_pipeline_full_v1.py
+
+Scheduler
+
+C:\MatchMatrix-platform\workers\run_multisport_sched

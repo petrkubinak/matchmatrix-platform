@@ -1,0 +1,298 @@
+# MatchMatrix – pracovní zápis
+
+## Datum: 17.03.2026
+
+---
+
+# 1. Cíl dne
+
+Vyřešit **propagaci log týmů z API-Football do `public.teams.logo_url`** a ověřit, že aliasovací systém mezi různými providery funguje správně.
+
+Současně jsme ověřovali ingest pipeline, protože některé týmy se v databázi objevily **bez loga**, přestože logo existuje v API.
+
+---
+
+# 2. Analýza problému
+
+V tabulce:
+
+```
+public.teams
+```
+
+chyběly loga například pro:
+
+* Wrexham AFC
+* Chelsea FC
+* Sporting Clube de Portugal
+
+Loga jsou dostupná v:
+
+```
+staging.api_football_teams.logo
+```
+
+Ale aktualizace neprobíhala, protože:
+
+1. **aliasy neodpovídaly názvům ve stagingu**
+2. některé týmy **neexistovaly ve staging tabulce**
+3. join používal pouze alias → name match
+
+---
+
+# 3. Kontrola alias systému
+
+Struktura:
+
+```
+public.team_aliases
+```
+
+sloupce:
+
+```
+id
+team_id
+alias
+source
+```
+
+Alias systém je používán pro mapování názvů z různých providerů:
+
+| source        | příklad     |
+| ------------- | ----------- |
+| theodds       | sp lisbon   |
+| football_data | man united  |
+| api_football  | sporting cp |
+
+---
+
+# 4. Test alias → API match
+
+Diagnostický dotaz:
+
+```sql
+select
+    a.team_id,
+    t.name,
+    a.alias,
+    s.team_id,
+    s.name,
+    s.logo
+from public.team_aliases a
+join public.teams t
+  on t.id = a.team_id
+left join staging.api_football_teams s
+  on lower(trim(a.alias)) = lower(trim(s.name))
+where a.team_id in (44,50,87);
+```
+
+Výsledek:
+
+* aliasy existují
+* ale **neodpovídají názvům v API**
+
+Například:
+
+```
+alias: sp lisbon
+api:   Sporting CP
+```
+
+---
+
+# 5. Aktualizace log týmů
+
+Použitý update:
+
+```sql
+update public.teams t
+set logo_url = x.logo
+from (
+    select distinct
+        a.team_id,
+        s.logo
+    from public.team_aliases a
+    join staging.api_football_teams s
+      on lower(btrim(a.alias)) = lower(btrim(s.name))
+) x
+where x.team_id = t.id
+and (t.logo_url is null or t.logo_url = '');
+```
+
+Výsledek:
+
+| Team        | Logo  |
+| ----------- | ----- |
+| Watford     | OK    |
+| Chelsea     | OK    |
+| Man City    | OK    |
+| Real Madrid | OK    |
+| Sporting    | OK    |
+| PSG         | OK    |
+| Wrexham     | chybí |
+
+---
+
+# 6. Zjištěná příčina pro Wrexham
+
+Dotaz:
+
+```sql
+select team_id,name,logo
+from staging.api_football_teams
+where lower(name) like '%wrex%'
+```
+
+Výsledek:
+
+```
+0 rows
+```
+
+Tým **neexistuje ve staging tabulce**.
+
+To znamená:
+
+```
+API data nebyla ingestována
+```
+
+---
+
+# 7. Kontrola ingest pipeline
+
+Použitý worker:
+
+```
+workers/run_ingest_cycle_v3.py
+```
+
+Běh bez parametrů:
+
+```
+PROVIDER : None
+SPORT    : None
+ENTITY   : None
+```
+
+Worker tedy **neběžel na konkrétní entity**.
+
+Správné spuštění pro teams:
+
+```
+python workers/run_ingest_cycle_v3.py
+    --provider api_football
+    --sport football
+    --entity teams
+```
+
+---
+
+# 8. Stav databáze po dnešku
+
+Tabulka `public.teams`:
+
+| id | team                       | logo |
+| -- | -------------------------- | ---- |
+| 38 | Watford FC                 | ✓    |
+| 44 | Wrexham AFC                | NULL |
+| 50 | Chelsea FC                 | ✓    |
+| 54 | Manchester City FC         | ✓    |
+| 81 | Real Madrid CF             | ✓    |
+| 87 | Sporting Clube de Portugal | ✓    |
+| 89 | Paris Saint-Germain FC     | ✓    |
+
+---
+
+# 9. Závěry
+
+✔ alias systém funguje
+✔ update log funguje
+✔ merge staging → public funguje
+
+Chybějící logo je způsobeno tím, že:
+
+```
+tým nebyl ingestován do staging
+```
+
+---
+
+# 10. Plán na zítra
+
+## 1️⃣ dokončit ingest teams
+
+spustit:
+
+```
+run_ingest_cycle_v3.py
+--provider api_football
+--sport football
+--entity teams
+```
+
+ověřit:
+
+```sql
+select * from staging.api_football_teams
+where name like '%wrex%'
+```
+
+---
+
+## 2️⃣ znovu spustit update log
+
+```sql
+update public.teams ...
+```
+
+---
+
+## 3️⃣ automatizovat update log
+
+přidat do pipeline krok:
+
+```
+merge_team_logos
+```
+
+aby se logo doplňovalo automaticky při ingestu.
+
+---
+
+## 4️⃣ optimalizace staging
+
+v `api_football_teams` se ukládají **duplicitní týmy z různých lig a sezón**.
+
+Zítra navrhneme:
+
+```
+latest_teams view
+```
+
+které:
+
+* vrátí pouze poslední verzi týmu
+* výrazně zrychlí joiny
+
+---
+
+# Stav projektu MatchMatrix
+
+✔ unified staging architektura
+✔ ingest planner
+✔ ingest cycle v3
+✔ players pipeline
+✔ team alias mapping
+✔ logo propagation
+
+Další krok:
+
+```
+stabilizace team ingest + optimalizace staging
+```
+
+---
+
+Konec dne.

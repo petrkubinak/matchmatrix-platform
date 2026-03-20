@@ -1,14 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
+/* základní barvy platformy */
 :root {
-  /* Ametystová fialová - hluboká, ale jasně čitelná */
-  --background: #2E2344; 
-  --foreground: #F8FAFC;
+  --background: #140d23;
+  --foreground: #f6eeff;
 }
 
+/* reset */
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
+  margin: 0;
+  padding: 0;
   background: var(--background);
   color: var(--foreground);
+  min-height: 100%;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+/* scroll */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #120b1f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a2d74;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c77dff;
 }

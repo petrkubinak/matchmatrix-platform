@@ -8,11 +8,18 @@ export async function GET(request: NextRequest) {
 
   try {
     let query = `
-      SELECT 
-        match_id, home_team_name, away_team_name, 
-        league_id, league_name, kickoff_at_local,
-        odds_1, odds_x, odds_2, status
-      FROM public.v_fd_matches_tomorrow -- Zde doplňte správné view dle složky
+     SELECT
+        v.match_id,
+        v.home_team_name,
+        v.away_team_name,
+        v.home_team_logo_url,
+        v.away_team_logo_url,
+        v.league_id,
+        v.league_name,
+        v.country_code,
+        v.kickoff_at_local,
+        v.status
+      FROM public.v_fd_matches_tomorrow v
     `;
 
     const values = [];

@@ -1,0 +1,581 @@
+# MatchMatrix – pracovní zápis
+
+## Datum
+2026-03-13
+
+---
+
+# 1. Stav před dnešní V2 úpravou
+
+Po dokončení předchozí části projektu byla ověřena funkční ingest pipeline V1:
+
+```text
+ops.ingest_targets
+→ build_ingest_planner_jobs.py
+→ ops.ingest_planner
+→ run_ingest_planner_jobs.py
+→ ingest/run_unified_ingest_v1.py
+→ staging.stg_provider_*
+→ run_unified_staging_to_public_merge_v1.py
+→ public.*
+
+Bylo potvrzeno, že:
+
+planner builder vytváří planner joby z ops.ingest_targets
+
+planner worker přebírá pending joby a mění je na running
+
+planner worker úspěšně spouští unified ingest runner
+
+data se zapisují do unified staging tabulek
+
+merge worker propisuje data do public.*
+
+vznikl první orchestration wrapper run_ingest_cycle_v1.py
+
+2. Důvod V2
+
+V1 orchestrátor byl funkční, ale chyběly dvě důležité věci:
+
+audit celého cycle běhu do ops.job_runs
+
+ochrana proti souběžnému spuštění více orchestrátorů současně
+
+Bez těchto prvků hrozilo:
+
+duplicitní ingestování
+
+obtížnější audit celého cyklu
+
+nejasný provozní stav při paralelním spuštění
+
+3. Co bylo navrženo ve V2
+3.1 Worker lock vrstva
+
+Byla navržena nová tabulka:
+
+ops.worker_locks
+
+Účel:
+
+bránit souběžnému běhu stejného orchestration workeru
+
+držet informaci o ownerovi locku
+
+mít TTL přes expires_at
+
+umožnit heartbeat během delšího běhu
+
+Navržené klíčové sloupce:
+
+lock_name
+
+owner_id
+
+acquired_at
+
+expires_at
+
+heartbeat_at
+
+note
+
+3.2 Orchestrátor V2
+
+Byl navržen nový skript:
+
+C:\MatchMatrix-platform\workers\run_ingest_cycle_v2.py
+
+Jeho funkce:
+
+získá lock ingest_cycle_v2
+
+zapíše audit běhu do ops.job_runs
+
+spustí planner worker
+
+vyhodnotí počet zpracovaných planner jobů
+
+merge spustí pouze tehdy, když planner opravdu něco zpracoval
+
+po dokončení zapíše finální stav do ops.job_runs
+
+uvolní lock
+
+3.3 Audit do ops.job_runs
+
+V2 cycle zapisuje samostatný auditní řádek do:
+
+ops.job_runs
+
+s novým job_code:
+
+ingest_cycle_v2
+
+Tím vzniká oddělený audit pro:
+
+jednotlivé planner joby
+
+celý orchestration cycle
+
+To je důležité pro budoucí panel, monitoring i troubleshooting.
+
+4. Připravené soubory
+SQL
+
+C:\MatchMatrix-platform\db\036_ops_create_worker_locks.sql
+
+C:\MatchMatrix-platform\db\037_ops_insert_job_ingest_cycle_v2.sql
+
+Python
+
+C:\MatchMatrix-platform\workers\run_ingest_cycle_v2.py
+
+5. Přínos V2
+
+V2 posouvá MatchMatrix z prostého wrapperu na reálnější orchestration vrstvu:
+
+cycle má vlastní audit
+
+cycle má vlastní lock
+
+merge se spouští jen při skutečné práci
+
+běh je bezpečnější proti souběhu
+
+6. Doporučený další krok
+
+Po nasazení V2:
+
+spustit SQL pro ops.worker_locks
+
+zaregistrovat ingest_cycle_v2 do ops.jobs
+
+otestovat:
+
+běžný běh
+
+běh bez práce
+
+běh se --skip-merge
+
+dvojí spuštění pro ověření locku
+
+7. Další směr po V2
+
+Po ověření V2 bude vhodné pokračovat:
+
+panel nad ops.ingest_planner
+
+panel nad ops.job_runs
+
+čištění / retry politika pro error planner joby
+
+samostatný scheduler loop
+
+budoucí napojení na API budget management
+
+
+-# MatchMatrix – pracovní zápis
+
+## Datum
+2026-03-13
+
+---
+
+# 1. Cíl úpravy
+
+Doplnit samostatný audit pro merge worker, aby byl merge krok viditelný v:
+
+- `ops.job_runs`
+- OPS dashboard views
+
+---
+
+# 2. Problém před úpravou
+
+Merge worker:
+
+- `run_unified_staging_to_public_merge_v1.py`
+
+sice běžel správně a propisoval data ze `staging` do `public`,
+ale nevytvářel samostatný záznam v `ops.job_runs`.
+
+Důsledek:
+
+- v dashboardu nebylo možné zobrazit poslední merge běh
+- merge nebyl odděleně auditovatelný
+- troubleshooting mezi staging a public byl horší
+
+---
+
+# 3. Provedená změna
+
+Byl přidán nový job do:
+
+- `ops.jobs`
+
+s kódem:
+
+- `unified_staging_to_public_merge`
+
+A merge worker byl upraven tak, aby:
+
+1. při startu vytvořil řádek v `ops.job_runs`
+2. při úspěchu zapsal:
+   - `status = ok`
+   - `message`
+   - `details`
+   - `rows_affected`
+3. při chybě zapsal:
+   - `status = error`
+   - text chyby
+   - částečné statistiky
+
+---
+
+# 4. Přínos
+
+Po této úpravě bude v OPS vrstvě samostatně viditelné:
+
+- poslední merge běhy
+- status merge
+- délka merge
+- souhrn změněných řádků
+- finální počty v `public.*`
+
+To zlepšuje provozní přehled i budoucí monitoring.
+
+---
+
+# 5. Soubory
+
+## SQL
+- `C:\MatchMatrix-platform\db\039_ops_insert_job_unified_staging_to_public_merge.sql`
+
+## Python
+- `C:\MatchMatrix-platform\workers\run_unified_staging_to_public_merge_v1.py`
+
+---
+
+# 6. Další krok
+
+Po nasazení úpravy:
+
+1. spustit merge worker ručně
+2. ověřit nový řádek v `ops.job_runs`
+3. znovu otevřít dashboard views
+4. zkontrolovat, že se vyplnila i merge část dashboardu--
+
+MatchMatrix – pracovní zápis
+Datum: 13.03.2026
+1. Cíl dne
+
+Dokončit orchestrace ingest pipeline a rozšířit ji z entity:
+
+teams
+fixtures
+
+na kompletní referenční set pro football:
+
+teams
+fixtures
+players
+odds
+
+Současně ověřit funkčnost:
+
+planner
+worker
+cycle
+provider
+PowerShell ingest
+merge
+2. Stav architektury před dneškem
+
+Funkční pipeline:
+
+build_ingest_planner_jobs
+        ↓
+ops.ingest_planner
+        ↓
+run_ingest_planner_jobs.py
+        ↓
+run_unified_ingest_v1.py
+        ↓
+provider (api_football_provider.py)
+        ↓
+PowerShell ingest
+        ↓
+staging
+        ↓
+run_unified_staging_to_public_merge
+
+V provozu byly pouze entity:
+
+teams
+fixtures
+3. Dnes implementované části
+3.1 Planner worker
+
+Byl dokončen worker:
+
+workers/run_ingest_planner_jobs.py
+
+funkce:
+
+claim planner job
+
+vytvoření job_runs
+
+spuštění ingest runneru
+
+aktualizace statusu
+
+Podporuje parametry:
+
+--provider
+--sport
+--entity
+--limit
+--timeout-sec
+--max-attempts
+3.2 Ingest cycle
+
+Dokončen orchestrátor:
+
+workers/run_ingest_cycle_v2.py
+
+pipeline:
+
+planner worker
+        ↓
+optional bridges
+        ↓
+staging → public merge
+
+nové vlastnosti:
+
+worker lock
+heartbeat
+job_runs logging
+cycle summary
+
+lock:
+
+ops.worker_locks
+4. Provider vrstva
+
+Upraven:
+
+ingest/providers/api_football_provider.py
+
+podporované entity:
+
+leagues
+teams
+fixtures
+players
+odds
+
+volání PowerShell skriptů:
+
+pull_api_football_teams.ps1
+pull_api_football_fixtures.ps1
+pull_api_football_players.ps1
+pull_api_football_odds.ps1
+5. Oprava PowerShell ingest skriptů
+
+Původní stav:
+
+players skript nepoužíval stejné parametry
+
+odds skript měl jinou logiku
+
+chyběla jednotná konfigurace API key
+
+Byly vytvořeny sjednocené verze:
+
+pull_api_football_players.ps1
+pull_api_football_odds.ps1
+
+sjednocení:
+
+RunId
+LeagueId
+Season
+.env konfigurace
+APISPORTS_KEY
+docker psql ingest
+
+stejné chování jako:
+
+pull_api_football_teams.ps1
+pull_api_football_fixtures.ps1
+6. Test ingest cycle
+
+Test běhu:
+
+python workers/run_ingest_cycle_v2.py
+
+výsledek:
+
+planner worker OK
+ingest jobs executed
+merge OK
+
+sample výsledek:
+
+Processed jobs: 3
+Final status: OK
+7. Test entity players
+
+Spuštěno:
+
+python run_ingest_cycle_v2.py --entity players
+
+výsledek:
+
+players ingest spuštěn
+PowerShell skript běží
+data ukládána do staging.players_import
+8. Test entity odds
+
+Spuštěno:
+
+python run_ingest_cycle_v2.py --entity odds
+
+výsledek:
+
+PowerShell požadoval:
+
+From
+To
+
+opraven provider pro generování season range.
+
+Po opravě zjištěno:
+
+API-Football free plán odds neposkytuje.
+
+9. Rozhodnutí pro projekt
+
+Football referenční pipeline:
+
+Aktivní entity
+teams
+fixtures
+players
+Dočasně vypnuté
+odds (API-Football free limit)
+
+Odds budou zatím řešeny pouze z jiného zdroje:
+
+TheOdds
+football_data dataset
+10. Aktuální stav databáze
+public.leagues               2713
+public.teams                 5136
+public.players               475
+public.matches              105146
+11. Stav ingest architektury
+
+Architektura je nyní stabilní:
+
+planner
+worker
+cycle
+provider
+PowerShell ingest
+bridge
+merge
+
+football funguje jako referenční sport pro další sporty.
+
+12. Co zbývá dodělat (football)
+1️⃣ players bridge
+run_players_bridge_v1.py
+
+ověřit:
+
+staging.players_import
+→ unified staging
+→ public.players
+2️⃣ teams fallback
+
+pro ligy kde API nevrací teams:
+
+extract_teams_from_fixtures.py
+
+pipeline:
+
+fixtures
+→ extract teams
+→ staging teams
+3️⃣ cycle error propagation
+
+run_ingest_cycle_v2.py
+
+dnes odhaleno:
+
+cycle může hlásit OK i při chybě ingest jobu
+
+zlepšit:
+
+cycle FAIL pokud některý job FAIL
+13. Co budeme dělat zítra
+
+Plán dalšího kroku:
+
+1️⃣ dokončit players pipeline
+
+ověřit:
+
+players_import
+→ bridge
+→ public.players
+2️⃣ fallback teams
+
+implementace:
+
+teams_from_fixtures
+
+pro ligy kde API teams endpoint nefunguje.
+
+3️⃣ stabilizace football ingest
+
+finalizovat:
+
+teams
+fixtures
+players
+
+jako referenční ingest model.
+
+4️⃣ připravit rollout pro další sporty
+
+po stabilizaci football:
+
+hockey
+basketball
+tennis
+mma
+
+budou přidány přes stejný ingest framework.
+
+14. Stav projektu
+
+MatchMatrix ingest engine je nyní:
+
+stabilní
+modulární
+multi-sport ready
+
+football slouží jako referenční implementace.
+
+Pokud chceš, zítra můžeme začít rovnou jednou důležitou věcí:
+
+uděláme malou úpravu planneru, aby ingest běžel 10× rychleji při backfillu lig a sezón.
+
+To je další velký krok, který se bude hodit při stahování všech sportů.
+

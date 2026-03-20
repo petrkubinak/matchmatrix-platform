@@ -1,0 +1,449 @@
+# MatchMatrix – pracovní zápis
+
+## Datum: 15.03.2026
+
+---
+
+# 1. Cíl dne
+
+Cílem dne bylo **dokončit kompletní ingest pipeline pro hráče (Players pipeline)** a připravit architekturu pro **rozšiřování hráčských dat z více zdrojů**.
+
+Do dneška MatchMatrix uměl:
+
+* ingest lig
+* ingest týmů
+* ingest zápasů
+* základní ingest hráčů
+
+Dnes jsme systém posunuli tak, aby:
+
+* uměl **stahovat hráče z API-Football**
+* ukládal **raw payloady**
+* prováděl **staging normalizaci**
+* prováděl **merge do canonical player registry**
+* umožňoval **další enrichment hráčských dat z dalších zdrojů**
+
+Tím jsme připravili základ pro **player intelligence layer**, který bude později využívat Ticket Engine.
+
+---
+
+# 2. Finální architektura Players pipeline
+
+Finální pipeline dnes vypadá takto:
+
+```
+API-Football
+   /players
+        │
+        ▼
+staging.stg_api_payloads
+        │
+        ▼
+staging.players_import
+        │
+        ▼
+staging.stg_provider_players
+        │
+        ▼
+public.players
+        │
+        ▼
+public.player_provider_map
+```
+
+Tato pipeline byla dnes plně zprovozněna.
+
+---
+
+# 3. API-Football Players ingest
+
+Byl vytvořen worker:
+
+```
+pull_api_football_players_v4.py
+```
+
+Umí:
+
+* stahovat endpoint
+
+```
+/players
+```
+
+* paging
+* ukládání raw payload
+* ukládání do `players_import`
+
+Výsledek prvního ingestu:
+
+```
+players_import: 540
+```
+
+z toho:
+
+```
+league=95
+season=2024
+players=60
+```
+
+---
+
+# 4. Players Bridge
+
+Byl vytvořen bridge worker:
+
+```
+run_players_bridge_v4.py
+```
+
+Pipeline:
+
+```
+staging.players_import
+→ staging.stg_provider_players
+```
+
+Funkce:
+
+* deduplikace hráčů
+* normalizace provider dat
+* příprava unified staging vrstvy
+
+Výsledek:
+
+```
+stg_provider_players: 533
+```
+
+---
+
+# 5. Merge do canonical players
+
+Byl vytvořen worker:
+
+```
+run_players_public_merge_v2.py
+```
+
+Pipeline:
+
+```
+stg_provider_players
+→ public.players
+→ public.player_provider_map
+```
+
+Výsledky:
+
+```
+public.players: 533
+public.player_provider_map: 533
+```
+
+Statistika merge:
+
+```
+processed rows: 533
+inserted players: 58
+updated players: 475
+```
+
+Tím vznikl **canonical registry hráčů**.
+
+---
+
+# 6. Player enrichment architektura
+
+Aby bylo možné doplňovat další informace o hráčích, byla vytvořena nová architektura.
+
+## Nové tabulky
+
+### staging
+
+```
+stg_player_source_payloads
+stg_provider_player_profiles
+```
+
+Účel:
+
+```
+raw payload storage
++ normalized provider player profiles
+```
+
+### public
+
+```
+player_external_identity
+```
+
+Účel:
+
+```
+mapování hráče na více externích provider ID
+```
+
+### ops
+
+```
+player_enrichment_plan
+```
+
+Účel:
+
+```
+scheduler pro player enrichment
+```
+
+---
+
+# 7. Team-based squads enrichment
+
+Byl implementován nový zdroj hráčských dat:
+
+```
+API-Football
+/players/squads
+```
+
+Důležité rozhodnutí:
+
+```
+1 job = 1 team
+```
+
+nikoli
+
+```
+1 job = 1 player
+```
+
+To výrazně snižuje počet API requestů.
+
+---
+
+# 8. Enrichment queue
+
+Scheduler používá tabulku:
+
+```
+ops.player_enrichment_plan
+```
+
+Job structure:
+
+```
+provider = api_football_squads
+entity   = team_squad
+team_id
+league_id
+season
+```
+
+Queue stav:
+
+```
+done: 1
+pending: 14
+```
+
+---
+
+# 9. Squads worker
+
+Byl vytvořen worker:
+
+```
+pull_api_football_players_squads_v1.py
+```
+
+Pipeline:
+
+```
+/players/squads?team=X
+      │
+      ▼
+stg_player_source_payloads
+      │
+      ▼
+stg_provider_player_profiles
+```
+
+První test:
+
+```
+team=214
+league=95
+season=2024
+profiles upserted=27
+```
+
+---
+
+# 10. Aktuální stav systému
+
+MatchMatrix dnes umí:
+
+### Core ingest
+
+✔ leagues
+✔ teams
+✔ fixtures
+✔ players
+
+### Player enrichment
+
+✔ team squads
+✔ player profile staging
+✔ enrichment planner
+
+### Datové registry
+
+✔ canonical players
+✔ provider player mapping
+
+---
+
+# 11. Nová architektura hráčských dat
+
+Dnešní práce připravila systém na **multi-source player enrichment**.
+
+Budoucí zdroje:
+
+```
+API-Football
+Sportmonks
+TheSportsDB
+Transfermarkt (scraping)
+```
+
+Všechny zdroje budou ukládány přes:
+
+```
+stg_player_source_payloads
+```
+
+a normalizovány do:
+
+```
+stg_provider_player_profiles
+```
+
+---
+
+# 12. Další krok vývoje
+
+Další krok bude:
+
+## Player profile merge
+
+Vytvořit worker:
+
+```
+run_player_profiles_public_merge_v1.py
+```
+
+Pipeline:
+
+```
+stg_provider_player_profiles
+      │
+      ▼
+public.players
+```
+
+Doplní do canonical player registry:
+
+```
+shirt_number
+position_name
+photo_url
+```
+
+---
+
+# 13. Následující vývoj
+
+Po dokončení player profile merge bude následovat:
+
+### Player statistics ingest
+
+Možné endpointy:
+
+```
+/players/statistics
+```
+
+### Player ratings
+
+```
+match rating
+form
+performance trends
+```
+
+### Player intelligence
+
+Data budou využita pro:
+
+```
+MatchMatrix Ticket Engine
+```
+
+například:
+
+```
+player form
+team lineup strength
+injuries
+```
+
+---
+
+# 14. Shrnutí dne
+
+Dnes byl dokončen **celý základní systém hráčských dat**.
+
+Hotové části:
+
+```
+Players ingest
+Players staging
+Players canonical registry
+Player enrichment architecture
+Squads enrichment
+Scheduler pro player enrichment
+```
+
+MatchMatrix je nyní připraven:
+
+```
+rozšiřovat hráčská data z více providerů
+```
+
+a vytvořit **player intelligence layer**.
+
+---
+
+# 15. Další pracovní blok
+
+Zítra / v dalším kroku:
+
+1️⃣ dokončit **player profile merge**
+
+```
+stg_provider_player_profiles
+→ public.players
+```
+
+2️⃣ doplnit **player photo + position enrichment**
+
+3️⃣ připravit **players statistics ingest**
+
+---
+
+**Konec zápisu**

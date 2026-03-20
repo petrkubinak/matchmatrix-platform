@@ -1,0 +1,230 @@
+1) Pracovní zápis
+
+Ulož jako:
+
+C:\MatchMatrix-platform\docs\2026-03-13_matchmatrix_ingest_planner_pipeline.md
+
+# MatchMatrix – pracovní zápis
+
+## Datum
+2026-03-13
+
+---
+
+# 1. Cíl dne
+
+Dotáhnout planner vrstvu ingestu tak, aby MatchMatrix uměl:
+
+- vytvořit planner joby z `ops.ingest_targets`
+- zapisovat je do `ops.ingest_planner`
+- odbavovat planner frontu přes worker
+- spouštět jednotný ingest runner
+- plnit `staging` tabulky
+- následně propsat data do `public` vrstvy přes merge worker
+
+---
+
+# 2. Co bylo potvrzeno jako hotové
+
+## 2.1 Planner builder
+
+Funguje skript:
+
+- `build_ingest_planner_jobs.py`
+
+Úloha:
+
+- čte `ops.ingest_targets`
+- generuje kombinace provider / sport / entity / league / season / run_group
+- zapisuje řádky do `ops.ingest_planner`
+- zakládá planner joby se stavem `pending`
+
+Bylo potvrzeno, že planner jobs byly úspěšně vytvořeny.
+
+---
+
+## 2.2 Planner worker
+
+Byl vytvořen a otestován worker:
+
+- `C:\MatchMatrix-platform\workers\run_ingest_planner_jobs.py`
+
+Úloha workeru:
+
+- načíst další `pending` job z `ops.ingest_planner`
+- atomicky jej převzít do stavu `running`
+- zvýšit `attempts`
+- zapsat `last_attempt`
+- spustit:
+  - `C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py`
+- vyhodnotit výsledek child procesu
+- při úspěchu přepsat planner job na `done`
+- při warning vrátit do `pending` s odloženým `next_run`
+- při chybě přepsat na `error`
+- zapisovat audit do `ops.job_runs`
+
+---
+
+## 2.3 Oprava FK na ops.job_runs
+
+Během testu se objevila chyba:
+
+- `job_runs.job_code` má foreign key do `ops.jobs`
+
+Bylo zjištěno, že je potřeba mít v `ops.jobs` registrovaný samostatný job code pro planner worker.
+
+Do `ops.jobs` byl doplněn job:
+
+- `ingest_planner_worker`
+
+Tím byl audit planner workeru do `ops.job_runs` zprovozněn správně.
+
+---
+
+## 2.4 Reálný test planner workeru
+
+Byly úspěšně zpracovány planner joby například:
+
+- `teams / league 103 / season 2022`
+- `fixtures / league 103 / season 2022`
+- `teams / league 1034 / season 2024`
+
+Konzolové výsledky:
+
+- Teams inserted into staging: `17`
+- Fixtures inserted into staging: `152`
+- Teams inserted into staging: `14`
+
+To potvrzuje, že planner worker skutečně spouští reálný ingest a ne pouze formální job flow.
+
+---
+
+## 2.5 Kontrola stavů v ops.ingest_planner
+
+Bylo potvrzeno, že zpracované planner joby přešly správně do stavu:
+
+- `done`
+
+A mají korektně vyplněno:
+
+- `attempts = 1`
+- `last_attempt`
+- `updated_at`
+
+Příklad ověřených jobů:
+
+- id `5`
+- id `6`
+- id `7`
+
+Všechny byly ve stavu `done`.
+
+---
+
+## 2.6 Merge staging -> public
+
+Byl úspěšně spuštěn merge worker:
+
+- `C:\MatchMatrix-platform\workers\run_unified_staging_to_public_merge_v1.py`
+
+Výsledek:
+
+- leagues updated: `1481`
+- teams updated: `974`
+- players updated: `475`
+- matches updated: `72640`
+
+Finální počty:
+
+- `public.leagues: 2713`
+- `public.league_provider_map: 1494`
+- `public.teams: 5136`
+- `public.team_provider_map: 2321`
+- `public.players: 475`
+- `public.player_provider_map: 475`
+- `public.matches: 105146`
+
+To potvrzuje, že funguje i druhá polovina pipeline:
+
+- `staging -> public`
+
+---
+
+# 3. Výsledný stav architektury po dnešku
+
+Funkční pipeline V1:
+
+```text
+ops.ingest_targets
+→ build_ingest_planner_jobs.py
+→ ops.ingest_planner
+→ run_ingest_planner_jobs.py
+→ ingest/run_unified_ingest_v1.py
+→ staging.stg_provider_*
+→ run_unified_staging_to_public_merge_v1.py
+→ public.*
+4. Co je teď hotové
+
+Hotové a otestované:
+
+planner builder
+
+planner tabulka
+
+planner worker
+
+unified ingest runner
+
+staging ingest
+
+merge do public
+
+audit do ops.job_runs
+
+5. Co ještě chybí
+
+Další logický krok:
+
+sjednotit planner worker + merge worker do jednoho orchestration skriptu
+
+Navržený nový skript:
+
+C:\MatchMatrix-platform\workers\run_ingest_cycle_v1.py
+
+Jeho role:
+
+spustit planner worker na definovaný počet jobů
+
+pokud proběhne alespoň jeden úspěšný nebo warning ingest, spustit merge worker
+
+vypsat souhrn cyklu
+
+vracet korektní exit code
+
+později může být napojen na scheduler nebo panel
+
+6. Doporučený další postup
+Krátkodobě
+
+Vytvořit:
+
+run_ingest_cycle_v1.py
+
+a používat jej jako hlavní orchestration vstup.
+
+Střednědobě
+
+Doplnit:
+
+ops.worker_locks
+
+scheduler panel
+
+opakovaný loop režim
+
+automatické dávkové běhy podle času / priorit / API budgetu
+
+7. Shrnutí dne
+
+Dneškem byl MatchMatrix posunut ze stavu „máme jednotlivé ingest skripty“
+na stav „máme fungující planner-driven ingest pipeline“.

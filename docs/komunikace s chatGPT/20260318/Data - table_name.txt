@@ -1,0 +1,10 @@
+|table_name                      |cnt   |
+|--------------------------------|------|
+|players_import                  |540   |
+|stg_provider_fixtures           |74,583|
+|stg_provider_leagues            |1,481 |
+|stg_provider_odds               |0     |
+|stg_provider_player_profiles    |27    |
+|stg_provider_player_season_stats|1,692 |
+|stg_provider_player_stats       |0     |
+|stg_provider_teams              |2,419 |

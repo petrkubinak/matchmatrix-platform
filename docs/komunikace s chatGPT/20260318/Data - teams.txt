@@ -1,0 +1,32 @@
+|id    |name                    |logo_url                                           |ext_source  |ext_team_id|updated_at                   |
+|------|------------------------|---------------------------------------------------|------------|-----------|-----------------------------|
+|28,691|Amorebieta              |                                                   |api_football|9380       |2026-03-14 22:28:52.322 +0100|
+|28,690|SJK Akatemia            |                                                   |api_football|9198       |2026-03-14 22:28:52.322 +0100|
+|28,689|SalPa                   |                                                   |api_football|9189       |2026-03-14 22:28:52.322 +0100|
+|28,688|K?Pa                    |                                                   |api_football|9187       |2026-03-14 22:28:52.322 +0100|
+|28,687|MP                      |                                                   |api_football|9175       |2026-03-14 22:28:52.322 +0100|
+|28,686|J?PS                    |                                                   |api_football|9173       |2026-03-14 22:28:52.322 +0100|
+|28,685|Chernomorets 1919 Burgas|                                                   |api_football|8530       |2026-03-14 22:28:52.322 +0100|
+|28,684|Bdin                    |                                                   |api_football|8519       |2026-03-14 22:28:52.322 +0100|
+|28,683|Leoben                  |                                                   |api_football|8326       |2026-03-14 22:28:52.322 +0100|
+|28,682|Falkenbergs FF          |                                                   |api_football|812        |2026-03-14 22:28:52.322 +0100|
+|28,681|AFC Eskilstuna          |                                                   |api_football|765        |2026-03-14 22:28:52.322 +0100|
+|28,680|Jonkopings Sodra        |                                                   |api_football|764        |2026-03-14 22:28:52.322 +0100|
+|28,679|Abertillery Bluebirds   |                                                   |api_football|7580       |2026-03-14 22:28:52.322 +0100|
+|28,678|Alcorcon                |                                                   |api_football|711        |2026-03-14 22:28:52.322 +0100|
+|28,677|Stj?rdals-Blink         |https://media.api-sports.io/football/teams/7033.png|api_football|7033       |2026-03-14 22:28:52.322 +0100|
+|28,676|Grorud                  |https://media.api-sports.io/football/teams/6993.png|api_football|6993       |2026-03-14 22:28:52.322 +0100|
+|28,675|Urozhay                 |                                                   |api_football|6831       |2026-03-14 22:28:52.322 +0100|
+|28,674|Leningradets            |                                                   |api_football|6811       |2026-03-14 22:28:52.322 +0100|
+|28,673|UE Sant Julia           |                                                   |api_football|674        |2026-03-14 22:28:52.322 +0100|
+|28,672|Slavonija Po?ega        |                                                   |api_football|6250       |2026-03-14 22:28:52.322 +0100|
+|28,671|Beli??e                 |                                                   |api_football|6237       |2026-03-14 22:28:52.322 +0100|
+|28,670|Krk                     |                                                   |api_football|5712       |2026-03-14 22:28:52.322 +0100|
+|28,669|Real Succes             |                                                   |api_football|5378       |2026-03-14 22:28:52.322 +0100|
+|28,668|Tilikratis              |                                                   |api_football|5066       |2026-03-14 22:28:52.322 +0100|
+|28,667|Aiolikos                |                                                   |api_football|5027       |2026-03-14 22:28:52.322 +0100|
+|28,666|Dinamo-Auto             |                                                   |api_football|4631       |2026-03-14 22:28:52.322 +0100|
+|28,665|Zejtun Corinthians      |                                                   |api_football|4615       |2026-03-14 22:28:52.322 +0100|
+|28,664|Maqtaaral               |                                                   |api_football|4555       |2026-03-14 22:28:52.322 +0100|
+|28,663|Astana II               |                                                   |api_football|4548       |2026-03-14 22:28:52.322 +0100|
+|28,662|Akademiya Ontustik      |                                                   |api_football|4545       |2026-03-14 22:28:52.322 +0100|

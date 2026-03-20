@@ -1,0 +1,200 @@
+|table_schema|table_name                      |ordinal_position|column_name          |data_type               |
+|------------|--------------------------------|----------------|---------------------|------------------------|
+|public      |player_external_identity        |1               |id                   |bigint                  |
+|public      |player_external_identity        |2               |player_id            |bigint                  |
+|public      |player_external_identity        |3               |provider             |text                    |
+|public      |player_external_identity        |4               |external_player_id   |text                    |
+|public      |player_external_identity        |5               |external_team_id     |text                    |
+|public      |player_external_identity        |6               |external_league_id   |text                    |
+|public      |player_external_identity        |7               |season               |text                    |
+|public      |player_external_identity        |8               |confidence_score     |numeric                 |
+|public      |player_external_identity        |9               |match_method         |text                    |
+|public      |player_external_identity        |10              |is_primary           |boolean                 |
+|public      |player_external_identity        |11              |is_active            |boolean                 |
+|public      |player_external_identity        |12              |created_at           |timestamp with time zone|
+|public      |player_external_identity        |13              |updated_at           |timestamp with time zone|
+|public      |player_match_statistics         |1               |id                   |bigint                  |
+|public      |player_match_statistics         |2               |match_id             |bigint                  |
+|public      |player_match_statistics         |3               |team_id              |integer                 |
+|public      |player_match_statistics         |4               |player_id            |bigint                  |
+|public      |player_match_statistics         |5               |minutes_played       |integer                 |
+|public      |player_match_statistics         |6               |goals                |integer                 |
+|public      |player_match_statistics         |7               |assists              |integer                 |
+|public      |player_match_statistics         |8               |shots_total          |integer                 |
+|public      |player_match_statistics         |9               |shots_on_target      |integer                 |
+|public      |player_match_statistics         |10              |passes_total         |integer                 |
+|public      |player_match_statistics         |11              |passes_accurate      |integer                 |
+|public      |player_match_statistics         |12              |key_passes           |integer                 |
+|public      |player_match_statistics         |13              |dribbles_attempted   |integer                 |
+|public      |player_match_statistics         |14              |dribbles_successful  |integer                 |
+|public      |player_match_statistics         |15              |tackles              |integer                 |
+|public      |player_match_statistics         |16              |interceptions        |integer                 |
+|public      |player_match_statistics         |17              |clearances           |integer                 |
+|public      |player_match_statistics         |18              |blocks               |integer                 |
+|public      |player_match_statistics         |19              |fouls_committed      |integer                 |
+|public      |player_match_statistics         |20              |fouls_drawn          |integer                 |
+|public      |player_match_statistics         |21              |yellow_cards         |integer                 |
+|public      |player_match_statistics         |22              |red_cards            |integer                 |
+|public      |player_match_statistics         |23              |offsides             |integer                 |
+|public      |player_match_statistics         |24              |saves                |integer                 |
+|public      |player_match_statistics         |25              |rating               |numeric                 |
+|public      |player_match_statistics         |26              |xg                   |numeric                 |
+|public      |player_match_statistics         |27              |xa                   |numeric                 |
+|public      |player_match_statistics         |28              |created_at           |timestamp with time zone|
+|public      |player_match_statistics         |29              |updated_at           |timestamp with time zone|
+|public      |player_provider_map             |1               |id                   |bigint                  |
+|public      |player_provider_map             |2               |provider             |text                    |
+|public      |player_provider_map             |3               |provider_player_id   |text                    |
+|public      |player_provider_map             |4               |player_id            |bigint                  |
+|public      |player_provider_map             |5               |provider_team_id     |text                    |
+|public      |player_provider_map             |6               |provider_team_name   |text                    |
+|public      |player_provider_map             |7               |provider_player_name |text                    |
+|public      |player_provider_map             |8               |is_active            |boolean                 |
+|public      |player_provider_map             |9               |created_at           |timestamp with time zone|
+|public      |player_provider_map             |10              |updated_at           |timestamp with time zone|
+|public      |player_season_statistics        |1               |id                   |bigint                  |
+|public      |player_season_statistics        |2               |player_id            |integer                 |
+|public      |player_season_statistics        |3               |team_id              |integer                 |
+|public      |player_season_statistics        |4               |sport_id             |integer                 |
+|public      |player_season_statistics        |5               |league_id            |integer                 |
+|public      |player_season_statistics        |6               |season               |text                    |
+|public      |player_season_statistics        |7               |appearances          |integer                 |
+|public      |player_season_statistics        |8               |lineups              |integer                 |
+|public      |player_season_statistics        |9               |minutes_played       |integer                 |
+|public      |player_season_statistics        |10              |rating               |numeric                 |
+|public      |player_season_statistics        |11              |goals                |integer                 |
+|public      |player_season_statistics        |12              |assists              |integer                 |
+|public      |player_season_statistics        |13              |shots_total          |integer                 |
+|public      |player_season_statistics        |14              |shots_on_target      |integer                 |
+|public      |player_season_statistics        |15              |passes_total         |integer                 |
+|public      |player_season_statistics        |16              |passes_key           |integer                 |
+|public      |player_season_statistics        |17              |passes_accuracy      |numeric                 |
+|public      |player_season_statistics        |18              |tackles_total        |integer                 |
+|public      |player_season_statistics        |19              |tackles_blocks       |integer                 |
+|public      |player_season_statistics        |20              |tackles_interceptions|integer                 |
+|public      |player_season_statistics        |21              |duels_total          |integer                 |
+|public      |player_season_statistics        |22              |duels_won            |integer                 |
+|public      |player_season_statistics        |23              |dribbles_attempts    |integer                 |
+|public      |player_season_statistics        |24              |dribbles_success     |integer                 |
+|public      |player_season_statistics        |25              |fouls_drawn          |integer                 |
+|public      |player_season_statistics        |26              |fouls_committed      |integer                 |
+|public      |player_season_statistics        |27              |yellow_cards         |integer                 |
+|public      |player_season_statistics        |28              |red_cards            |integer                 |
+|public      |player_season_statistics        |29              |penalty_won          |integer                 |
+|public      |player_season_statistics        |30              |penalty_committed    |integer                 |
+|public      |player_season_statistics        |31              |penalty_scored       |integer                 |
+|public      |player_season_statistics        |32              |penalty_missed       |integer                 |
+|public      |player_season_statistics        |33              |penalty_saved        |integer                 |
+|public      |player_season_statistics        |34              |created_at           |timestamp with time zone|
+|public      |player_season_statistics        |35              |updated_at           |timestamp with time zone|
+|public      |player_team_history             |1               |id                   |bigint                  |
+|public      |player_team_history             |2               |player_id            |bigint                  |
+|public      |player_team_history             |3               |team_id              |integer                 |
+|public      |player_team_history             |4               |season_id            |bigint                  |
+|public      |player_team_history             |5               |shirt_number         |integer                 |
+|public      |player_team_history             |6               |position             |text                    |
+|public      |player_team_history             |7               |start_date           |date                    |
+|public      |player_team_history             |8               |end_date             |date                    |
+|public      |player_team_history             |9               |is_current           |boolean                 |
+|public      |player_team_history             |10              |created_at           |timestamp with time zone|
+|public      |player_team_history             |11              |updated_at           |timestamp with time zone|
+|public      |players                         |1               |id                   |bigint                  |
+|public      |players                         |2               |team_id              |integer                 |
+|public      |players                         |3               |name                 |text                    |
+|public      |players                         |4               |first_name           |text                    |
+|public      |players                         |5               |last_name            |text                    |
+|public      |players                         |6               |short_name           |text                    |
+|public      |players                         |7               |birth_date           |date                    |
+|public      |players                         |8               |nationality          |text                    |
+|public      |players                         |9               |position             |text                    |
+|public      |players                         |10              |shirt_number         |integer                 |
+|public      |players                         |11              |height_cm            |integer                 |
+|public      |players                         |12              |weight_kg            |integer                 |
+|public      |players                         |13              |is_active            |boolean                 |
+|public      |players                         |14              |ext_source           |text                    |
+|public      |players                         |15              |ext_player_id        |text                    |
+|public      |players                         |16              |created_at           |timestamp with time zone|
+|public      |players                         |17              |updated_at           |timestamp with time zone|
+|public      |players                         |18              |photo_url            |text                    |
+|staging     |stg_provider_player_profiles    |1               |id                   |bigint                  |
+|staging     |stg_provider_player_profiles    |2               |provider             |text                    |
+|staging     |stg_provider_player_profiles    |3               |sport_code           |text                    |
+|staging     |stg_provider_player_profiles    |4               |external_player_id   |text                    |
+|staging     |stg_provider_player_profiles    |5               |player_name          |text                    |
+|staging     |stg_provider_player_profiles    |6               |first_name           |text                    |
+|staging     |stg_provider_player_profiles    |7               |last_name            |text                    |
+|staging     |stg_provider_player_profiles    |8               |display_name         |text                    |
+|staging     |stg_provider_player_profiles    |9               |short_name           |text                    |
+|staging     |stg_provider_player_profiles    |10              |birth_date           |date                    |
+|staging     |stg_provider_player_profiles    |11              |birth_place          |text                    |
+|staging     |stg_provider_player_profiles    |12              |birth_country        |text                    |
+|staging     |stg_provider_player_profiles    |13              |nationality          |text                    |
+|staging     |stg_provider_player_profiles    |14              |height_cm            |integer                 |
+|staging     |stg_provider_player_profiles    |15              |weight_kg            |integer                 |
+|staging     |stg_provider_player_profiles    |16              |preferred_foot       |text                    |
+|staging     |stg_provider_player_profiles    |17              |shirt_number         |integer                 |
+|staging     |stg_provider_player_profiles    |18              |position_code        |text                    |
+|staging     |stg_provider_player_profiles    |19              |position_name        |text                    |
+|staging     |stg_provider_player_profiles    |20              |photo_url            |text                    |
+|staging     |stg_provider_player_profiles    |21              |is_injured           |boolean                 |
+|staging     |stg_provider_player_profiles    |22              |is_active            |boolean                 |
+|staging     |stg_provider_player_profiles    |23              |external_team_id     |text                    |
+|staging     |stg_provider_player_profiles    |24              |team_name            |text                    |
+|staging     |stg_provider_player_profiles    |25              |external_league_id   |text                    |
+|staging     |stg_provider_player_profiles    |26              |league_name          |text                    |
+|staging     |stg_provider_player_profiles    |27              |season               |text                    |
+|staging     |stg_provider_player_profiles    |28              |source_payload_id    |bigint                  |
+|staging     |stg_provider_player_profiles    |29              |source_endpoint      |text                    |
+|staging     |stg_provider_player_profiles    |30              |created_at           |timestamp with time zone|
+|staging     |stg_provider_player_profiles    |31              |updated_at           |timestamp with time zone|
+|staging     |stg_provider_player_season_stats|1               |id                   |bigint                  |
+|staging     |stg_provider_player_season_stats|2               |provider             |text                    |
+|staging     |stg_provider_player_season_stats|3               |sport_code           |text                    |
+|staging     |stg_provider_player_season_stats|4               |external_league_id   |text                    |
+|staging     |stg_provider_player_season_stats|5               |season               |text                    |
+|staging     |stg_provider_player_season_stats|6               |player_external_id   |text                    |
+|staging     |stg_provider_player_season_stats|7               |team_external_id     |text                    |
+|staging     |stg_provider_player_season_stats|8               |stat_name            |text                    |
+|staging     |stg_provider_player_season_stats|9               |stat_value           |text                    |
+|staging     |stg_provider_player_season_stats|10              |raw_payload_id       |bigint                  |
+|staging     |stg_provider_player_season_stats|11              |source_endpoint      |text                    |
+|staging     |stg_provider_player_season_stats|12              |created_at           |timestamp with time zone|
+|staging     |stg_provider_player_season_stats|13              |updated_at           |timestamp with time zone|
+|staging     |stg_provider_player_stats       |1               |id                   |bigint                  |
+|staging     |stg_provider_player_stats       |2               |provider             |text                    |
+|staging     |stg_provider_player_stats       |3               |sport_code           |text                    |
+|staging     |stg_provider_player_stats       |4               |external_fixture_id  |text                    |
+|staging     |stg_provider_player_stats       |5               |player_external_id   |text                    |
+|staging     |stg_provider_player_stats       |6               |stat_name            |text                    |
+|staging     |stg_provider_player_stats       |7               |stat_value           |text                    |
+|staging     |stg_provider_player_stats       |8               |raw_payload_id       |bigint                  |
+|staging     |stg_provider_player_stats       |9               |created_at           |timestamp with time zone|
+|staging     |stg_provider_player_stats       |10              |team_external_id     |text                    |
+|staging     |stg_provider_player_stats       |11              |external_league_id   |text                    |
+|staging     |stg_provider_player_stats       |12              |season               |text                    |
+|staging     |stg_provider_player_stats       |13              |source_endpoint      |text                    |
+|staging     |stg_provider_player_stats       |14              |updated_at           |timestamp with time zone|
+|staging     |stg_provider_players            |1               |id                   |bigint                  |
+|staging     |stg_provider_players            |2               |provider             |text                    |
+|staging     |stg_provider_players            |3               |sport_code           |text                    |
+|staging     |stg_provider_players            |4               |external_player_id   |text                    |
+|staging     |stg_provider_players            |5               |player_name          |text                    |
+|staging     |stg_provider_players            |6               |birth_date           |date                    |
+|staging     |stg_provider_players            |7               |nationality          |text                    |
+|staging     |stg_provider_players            |8               |external_team_id     |text                    |
+|staging     |stg_provider_players            |9               |season               |text                    |
+|staging     |stg_provider_players            |10              |raw_payload_id       |bigint                  |
+|staging     |stg_provider_players            |11              |is_active            |boolean                 |
+|staging     |stg_provider_players            |12              |created_at           |timestamp with time zone|
+|staging     |stg_provider_players            |13              |updated_at           |timestamp with time zone|
+|staging     |stg_provider_players            |14              |first_name           |text                    |
+|staging     |stg_provider_players            |15              |last_name            |text                    |
+|staging     |stg_provider_players            |16              |short_name           |text                    |
+|staging     |stg_provider_players            |17              |position_code        |text                    |
+|staging     |stg_provider_players            |18              |height_cm            |integer                 |
+|staging     |stg_provider_players            |19              |weight_kg            |integer                 |
+|staging     |stg_provider_players            |20              |preferred_foot       |text                    |
+|staging     |stg_provider_players            |21              |external_league_id   |text                    |
+|staging     |stg_provider_players            |22              |team_name            |text                    |
+|staging     |stg_provider_players            |23              |league_name          |text                    |
+|staging     |stg_provider_players            |24              |source_endpoint      |text                    |

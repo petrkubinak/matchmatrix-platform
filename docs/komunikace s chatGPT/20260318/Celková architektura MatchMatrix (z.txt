@@ -1,0 +1,1326 @@
+Celková architektura MatchMatrix (z tree)
+
+Tvůj projekt je ve skutečnosti docela čistě rozdělený na 5 vrstev.
+
+MatchMatrix-platform
+│
+├── backend
+├── data
+├── db
+├── backups
+└── konfigurační soubory
+
+To je velmi dobré rozdělení.
+
+1️⃣ Konfigurační vrstva
+
+V rootu:
+
+.env
+.gitignore
+run_player_audit_report.bat
+
+Tady je:
+
+API klíče
+
+DB připojení
+
+pomocné skripty
+
+To je standardní.
+
+2️⃣ DATA vrstva
+data/
+   exports
+   news_feeds
+   processed
+   raw
+   rew_API_payloads
+   scraped_html
+   temporary_datasets
+
+To je datový lake.
+
+Používá se pro:
+
+raw
+
+originální data z API
+
+rew_API_payloads
+
+přepsané payloady z API
+
+processed
+
+vyčištěná data
+
+exports
+
+výstupy
+
+scraped_html
+
+scraping
+
+3️⃣ BACKUPS vrstva
+backups/
+   postgres_dumps
+   snapshots
+
+Tady máš:
+
+dump-matchmatrix-202602131248.sql
+
+To je dump databáze.
+
+Správně 👍
+
+4️⃣ DB vrstva
+
+Tady je nejdůležitější část systému.
+
+db/
+   migrations
+   audit
+   checks
+   run_seeds.ps1
+migrations
+
+To je databázový model.
+
+Vidíme:
+
+001_create_table_seasons.sql
+002_create_table_players.sql
+003_create_table_player_provider_map.sql
+004_create_table_lineups.sql
+005_create_table_injuries.sql
+
+To znamená:
+
+DB je řízená migration systémem
+
+struktura je verzovaná
+
+To je profesionální přístup.
+
+audit
+079_audit_player_season_statistics_report_v1.sql
+080_debug_player_stats_merge_mapping_v1.sql
+cleanup_player_season_stats_scope_95_2024_v1.sql
+
+Tady máš:
+
+diagnostiku dat
+
+debugging merge
+
+cleanup skripty
+
+To je velmi dobré pro kontrolu kvality dat.
+
+checks
+001_daily_ingest_healthcheck.sql
+013_check_players_coverage.sql
+MATCHMATRIX_DAILY_STATUS.sql
+MATCHMATRIX_WEEKLY_DIAGNOSTICS.sql
+
+To je monitoring platformy.
+
+Používá se pro:
+
+kontrolu ingestu
+
+coverage dat
+
+weekly audit
+
+5️⃣ Backend
+
+Vidíme složku:
+
+backend
+
+Zatím jsme ji neotevřeli, ale typicky obsahuje:
+
+API
+
+worker orchestraci
+
+kontrolní panel
+
+Jak funguje celý tok systému
+
+Podle struktury je pipeline pravděpodobně:
+
+API provider
+     ↓
+data/raw
+     ↓
+staging tables
+     ↓
+public tables
+     ↓
+analytics
+     ↓
+ticket engine
+
+Přesně to odpovídá architektuře, kterou jsme řešili.
+
+Datový tok MatchMatrix
+1️⃣ ingest
+
+worker stáhne data
+
+API-Football
+
+uloží:
+
+data/raw
+
+a zároveň:
+
+staging.*
+2️⃣ parsing
+
+raw payload se rozparsuje do:
+
+stg_provider_*
+
+např.
+
+stg_provider_fixtures
+stg_provider_teams
+stg_provider_players
+3️⃣ merge
+
+merge worker přesune data do canonical tabulek
+
+public.leagues
+public.teams
+public.matches
+public.players
+4️⃣ analytics
+
+pak běží:
+
+player statistics
+MMR ratings
+match features
+predictions
+5️⃣ ticket engine
+
+nakonec:
+
+ticket generation
+bet strategy
+Co je na projektu velmi dobré
+
+Z tree je vidět několik velmi dobrých věcí.
+
+1️⃣ migration systém
+db/migrations
+
+to znamená:
+
+DB je verzovaná
+
+můžeš ji rebuildovat
+
+2️⃣ audit skripty
+db/audit
+
+to znamená:
+
+máš diagnostiku dat
+
+3️⃣ health check
+db/checks
+
+to znamená:
+
+kontroluješ ingest
+
+4️⃣ data lake
+data/raw
+data/processed
+
+to je dobré pro debugging API.
+
+Co bych ještě potřeboval vidět
+
+Teď už chybí jen 3 věci, aby byl celý systém úplně jasný.
+
+1️⃣ workers
+
+Potřebujeme vidět složku:
+
+workers
+
+To je srdce ingestu.
+
+2️⃣ ops scripts
+
+např.
+
+run_ingest_cycle_v3.py
+run_unified_staging_to_public_merge_v3.py
+run_ingest_planner_jobs.py
+3️⃣ DB schémata
+
+hlavně:
+
+public.*
+staging.*
+ops.*
+Důležitá otázka (teď)
+
+Když se dívám na strukturu, zajímá mě:
+
+používáš staging schéma takto?
+staging.stg_provider_*
+
+nebo:
+
+staging.api_football_*
+
+protože jsem v tvém kódu viděl obě varianty.
+
+To je důležité pro konzistenci ingestu.
+
+Další krok
+
+Teď by bylo ideální, kdybys poslal ještě:
+
+strom složky
+workers
+
+a také
+
+backend
+
+Pak ti dokážu:
+
+nakreslit kompletní architekturu MatchMatrix
+
+říct co je hotové
+
+říct co ještě chybí před PRO ingestem
+
+a hlavně:
+
+ukázat ti kde přesně jsou slabá místa systému.
+
+Z toho, co jsem zatím viděl, je projekt architektonicky velmi dobrý, jen je potřeba dotáhnout pár pipeline.
+
+To, co ukazuješ, potvrzuje, že jsi udělal přechod z fotbalově-specifického modelu na unified multisport model, což je přesně to, co dává pro MatchMatrix smysl. Ve stromu projektu je pořád vidět starší větev staging.api_football_*, ale zároveň už máš zavedenou novou větev staging.stg_provider_* a orchestrace v ops.*.
+
+Jak to dnes funguje jako celek
+
+1. OPS vrstva rozhoduje, co se má stáhnout
+Na OPS diagramu jsou vidět tabulky jako ingest_entity_plan, ingest_targets, ingest_planner, ingest_planner_queue, scheduler_queue, provider_jobs, api_budget_status, worker_locks a dashboard view. To znamená, že systém už má vlastní řídicí vrstvu pro plánování ingestu, throttling a běhy workerů. Ta vrstva už není jen pro football.
+
+2. Ingest cycle spouští planner → extractor → merge
+run_ingest_cycle_v3.py dělá přesně tento tok:
+
+získá lock v ops.worker_locks
+
+zapíše audit do ops.job_runs
+
+spustí run_ingest_planner_jobs.py
+
+spustí extract_teams_from_fixtures_v2.py
+
+spustí run_unified_staging_to_public_merge_v3.py
+
+zapíše výsledek a uvolní lock.
+
+To je důležité: hlavní orchestrace už je postavená nad unified stagingem, ne nad api_football_*.
+
+3. Unified staging je teď skutečné centrum ingestu
+Na staging diagramu je vidět, že dnes používáš hlavně:
+
+stg_api_payloads
+
+stg_provider_leagues
+
+stg_provider_teams
+
+stg_provider_fixtures
+
+stg_provider_players
+
+stg_provider_player_stats
+
+stg_provider_odds
+
+stg_provider_events
+
+Vedle toho tam stále zůstávají starší tabulky jako api_football_leagues, api_football_fixtures, api_football_teams, api_football_odds. To potvrzuje tvou poznámku: začal jsi football-specific modelem, ale pak ses správně přesunul na providerově neutrální staging.
+
+4. Merge do public už bere data z unified stagingu
+run_unified_staging_to_public_merge_v3.py čte přímo z:
+
+staging.stg_provider_leagues
+
+staging.stg_provider_teams
+
+staging.stg_provider_players
+
+staging.stg_provider_fixtures
+
+a promítá je do canonical tabulek:
+
+public.leagues
+
+public.league_provider_map
+
+public.teams
+
+public.team_provider_map
+
+public.league_teams
+
+public.players
+
+public.player_provider_map
+
+public.matches.
+
+To je přesně ten správný směr pro multi-sport platformu.
+
+5. Nad public vrstvou běží analytika a denní pipeline
+run_daily_pipeline.py pak spouští:
+
+compute_mmr_ratings.py
+
+build match features přes SQL task
+
+predict_matches_V3.py
+
+refresh ticket settlements.
+
+Takže architektura dnes vypadá takto:
+
+Provider/API
+→ OPS plánování
+→ unified staging (stg_provider_*)
+→ public canonical model
+→ ratings / features / predictions
+→ ticket logika
+Co z toho plyne k tvé otázce / poznámce
+
+Ano, api_football_* už by dnes měla být spíš legacy / přechodová větev, ne hlavní budoucnost systému.
+
+Dává mi smysl rozdělit to takto:
+
+Ponechat jako hlavní
+
+ops.*
+
+staging.stg_provider_*
+
+public.*
+
+Brát jako legacy nebo dočasné
+
+staging.api_football_*
+
+staré raw football snapshoty
+
+jednorázové repair skripty, které zapisují přímo do football-specific tabulek
+
+To odpovídá i tomu, co vidíme ve stromu projektu: novější SQL a worker logika už se točí kolem unified_staging, ops provider jobs, planneru a multisport seedů.
+
+Kde je teď slabé místo
+
+Slabina není v tom, že bys přešel na stg_provider_*.
+Naopak — to byl správný krok.
+
+Slabé místo je, že systém je teď částečně mezi dvěma světy:
+
+starší football tabulky stále existují
+
+některé workery nebo pomocné skripty na ně ještě sahají
+
+ale hlavní merge už jede přes unified staging
+
+To je přesně důvod, proč ti repair skript na api_football_teams nedával architektonicky smysl.
+
+Můj závěr
+
+Tvoje cílová architektura má být jednoznačně postavená na stg_provider_*, ne na api_football_*.
+Football-specific tabulky bych dnes bral jen jako:
+
+historickou stopu,
+
+pomocný importní mezikrok,
+
+nebo kandidáta na úplné vyčištění obsahu při resetu.
+
+A pokud chceš být připravený na měsíc s API PRO a pak rozšířit ingest na více sportů, tak hlavní osa má být:
+
+OPS planner → provider jobs → stg_provider_* → public.* → analytics
+
+To už v tvém kódu i DB dnes reálně je.
+
+Další logický krok je teď udělat čisté rozhodnutí:
+co ještě ponechat z api_football_* a co už definitivně považovat za legacy.
+Pak ti z toho můžu sestavit přesný plán „co zachovat / co vyprázdnit / co už nepoužívat“
+
+
+Ano — tohle už je velmi čitelné.
+
+Ty dva panely dávají smysl a dohromady tvoří správný provozní model:
+
+Mission Control / Audit panel = dohled, audit, stav projektu, orientace
+
+Control Panel / Batch launcher = operativní řízení ingestu a budoucí automatické stahování
+
+A přesně jak píšeš: cílem není jen „spustit nějaký batch“, ale řídit denní multisport ingest tak, aby se co nejlépe využil limit 7500 requestů na sport za den a aby běželo víc sportů současně.
+
+To je v souladu s tím, co už v projektu máš:
+
+silnou OPS vrstvu s ingest_entity_plan, ingest_targets, ingest_planner, scheduler_queue, provider_jobs, api_budget_status, api_request_log, worker_locks
+
+run_ingest_cycle_v3.py, který už dnes řeší lock, job run audit, planner a merge v jednom cyklu
+
+přechod na unified multisport staging místo football-only modelu
+
+Co z toho plyne
+
+Architektura je správně.
+Teď už nejde o to „co postavit“, ale jak nastavit scheduler logiku, aby:
+
+běželo více sportů paralelně
+
+každý sport měl svůj vlastní budget
+
+systém sám vybíral nejdůležitější entity
+
+denní limit se rozumně rozděloval mezi backfill, maintenance a live data
+
+merge a následné kroky nezablokovaly ingest
+
+Jak bych to rozdělil
+Panel 1 — Audit / Mission Control
+
+Ten bych nechal jako:
+
+přehled DB
+
+přehled OPS
+
+healthcheck
+
+Git / reports
+
+denní a týdenní audit
+
+počty řádků, coverage, chyby
+
+Tady není potřeba moc měnit, jen doplnit pár provozních metrik.
+
+Panel 2 — Scheduler / Ingest Control
+
+Tady bych už nechtěl, aby byl hlavně „ruční launcher“.
+Tady by měl být orchestrátor režimů:
+
+manual run
+
+semi-auto run
+
+full auto scheduler
+
+emergency / maintenance mode
+
+PRO backfill mode
+
+To znamená: panel není jen tlačítko na spuštění skriptu, ale UI nad OPS logikou.
+
+Cílový princip pro 7500 requestů / sport / den
+
+Každý sport musí mít vlastní denní budget, ne jeden společný.
+To už odpovídá i tabulce api_budget_status, která je vedená po sport_code a dni.
+
+Takže správný model je:
+
+1. budget per sport
+
+Například:
+
+football: 7500
+
+hockey: 7500
+
+basketball: 7500
+
+tennis: 7500
+
+nebo podle skutečného API provider modelu, pokud bude jiný.
+
+2. uvnitř sportu rozdělit budget na režimy
+
+Například:
+
+60 % backfill
+
+25 % maintenance
+
+15 % live / near-live
+
+U footballu v PRO měsíci bych to ale přechodně otočil:
+
+80 % backfill
+
+15 % maintenance
+
+5 % live
+
+protože hlavní cíl bude rychle stáhnout historii.
+
+3. uvnitř sportu rozdělit budget podle entity
+
+Např. pro football:
+
+fixtures
+
+teams
+
+leagues
+
+players
+
+player_profiles
+
+player_season_stats
+
+player_stats
+
+odds
+
+Každá entita musí mít:
+
+prioritu
+
+odhad request cost
+
+business hodnotu
+
+jestli je blokující pro další entity
+
+To se už přirozeně opírá o ingest_entity_plan a provider_jobs.
+
+Co má scheduler dělat automaticky
+
+Tvůj budoucí scheduler by měl umět těchto 6 věcí:
+
+1. Vybrat sporty, které se mají dnes zpracovat
+
+Ne „vše vždy stejně“, ale podle:
+
+aktivace
+
+zbývajícího budgetu
+
+priority
+
+backlogu
+
+stavu posledních běhů
+
+2. Vybrat entity uvnitř sportu
+
+Například:
+
+pokud nejsou leagues a teams, nesmí jet fixtures
+
+pokud nejsou players base, nesmí se rozjet player stats
+
+odds jsou až nad match/fixture vrstvou
+
+3. Rozhodnout run_group
+
+Například:
+
+BACKFILL
+
+MAINTENANCE
+
+LIVE
+
+PLAYERS_ENRICHMENT
+
+4. Hlídát paralelismus
+
+Aby se nespustilo:
+
+20 těžkých football jobs
+
+20 těžkých hockey jobs
+
+a mezitím nečekal merge
+
+Tady bude klíčové oddělit:
+
+download workers
+
+parse workers
+
+merge workers
+
+5. Hlídát budget v reálném čase
+
+Po každém jobu:
+
+odečíst requesty
+
+zapsat do api_request_log
+
+přepočítat api_budget_status
+
+6. Dynamicky měnit pořadí
+
+Když:
+
+něco padá
+
+některá entita má vysokou chybovost
+
+budget je téměř vyčerpaný
+
+některý sport už je „hotový pro dnešek“
+
+Jak bych to postavil prakticky
+A. Mission Control zůstane dohledový
+
+Doplnit tam:
+
+budget per sport
+
+requests used today
+
+requests remaining today
+
+processed jobs today
+
+failed jobs today
+
+top error entity
+
+backfill progress %
+
+B. Control Panel bude mít 4 režimy
+
+Do panelu bych dal volbu:
+
+Manual
+
+Daily Auto
+
+PRO Backfill
+
+Maintenance
+
+Manual
+
+To už tam v principu máš.
+
+Daily Auto
+
+Scheduler sám vybírá:
+
+sporty
+
+entity
+
+run_group
+
+limit
+
+max workers
+
+PRO Backfill
+
+Speciální režim na měsíc placeného API:
+
+agresivní využití budgetu
+
+fronta podle priority
+
+více paralelních workerů
+
+menší důraz na UI/live věci
+
+Maintenance
+
+Lehký denní refresh:
+
+nové fixtures
+
+teams/leagues changes
+
+odds
+
+enrichment jen omezeně
+
+Co ti ještě chybí, aby to opravdu jelo samo
+
+Tady je podle mě jádro práce.
+
+1. Chybí jasný budget allocator
+
+OPS tabulky už máš, ale teď potřebuješ explicitní logiku:
+
+pro každý sport a entitu určit:
+
+request cost estimate
+
+daily cap
+
+priority
+
+retry policy
+
+concurrency group
+
+Bez toho panel jen spustí dávku, ale nebude umět optimalizovat 7500 requestů.
+
+2. Chybí dependency pravidla mezi entitami
+
+Například:
+
+leagues → teams → fixtures
+
+players base → player_profiles → player_season_stats → player_stats
+
+fixtures musí existovat dřív než event/stat layers
+
+Tohle musí být v DB nebo scheduler logice, ne jen „vědět v hlavě“.
+
+3. Chybí sport-specific strategie
+
+Ne všechny sporty mají stejný tvar dat.
+To už jsi správně zohlednil tím, že jdeš přes stg_provider_*, ne přes football-only tabulky.
+
+Ale scheduler musí vědět:
+
+football má hodně entit a hodně objemu
+
+tennis může mít jinou granularitu
+
+mma nebude mít stejnou datovou hloubku jako football
+
+4. Chybí oddělení planner vs executor vs merger
+
+run_ingest_cycle_v3.py už má planner + merge v jednom toku, což je dobré pro stabilitu.
+Ale pro silný paralelní multisport režim budeš časem chtít jasně rozdělit:
+
+planner
+
+provider job runner
+
+parser
+
+public merge
+
+post-merge analytics
+
+Jinak bude merge brzdit downloady.
+
+5. Chybí „done for today“ logika
+
+Scheduler musí umět říct:
+
+football fixtures backfill dnes hotov
+
+basketball players není dnes priorita
+
+hockey maintenance ještě zbývá 1200 requestů
+
+tennis dnes pozastavit kvůli chybám
+
+Co bych připravil jako další konkrétní krok
+
+Aby to šlo do provozního režimu, připravil bych 3 věci:
+
+1. Scheduler policy tabulku
+
+Nová OPS tabulka, něco jako:
+
+ops.scheduler_policy
+
+sloupce třeba:
+
+provider
+
+sport_code
+
+entity
+
+mode
+
+priority
+
+daily_budget_share
+
+request_cost_estimate
+
+max_parallel_jobs
+
+enabled
+
+depends_on_entity
+
+backfill_order
+
+maintenance_order
+
+To bude mozek plánování.
+
+2. Daily sport budget tabulku / view
+
+Nad api_budget_status udělat přehled:
+
+limit
+
+used
+
+remaining
+
+allocated_backfill
+
+allocated_maintenance
+
+allocated_live
+
+consumed_backfill
+
+consumed_maintenance
+
+consumed_live
+
+3. Režimový scheduler worker
+
+Například:
+
+run_multisport_scheduler_v5.py
+
+Ten by:
+
+načetl policy
+
+načetl budget
+
+načetl backlog z ingest_targets
+
+vytvořil provider jobs
+
+spustil jen to, co se vejde do budgetu a paralelismu
+
+Jak bych to spouštěl v praxi
+
+Denní režim by byl třeba:
+
+každých 5–10 minut
+
+scheduler:
+
+vyhodnotí stav
+
+doplní frontu
+
+průběžně
+
+provider runners:
+
+berou joby z fronty
+
+po dávce
+
+merge worker:
+
+promítá do public
+
+1x denně / po větší dávce
+
+daily pipeline:
+
+MMR
+
+features
+
+predictions
+
+To už zapadá i do run_daily_pipeline.py, který dnes řeší analytickou část po ingestu.
+
+Co je teď podle mě nejdůležitější
+
+Nejdůležitější už není další UI panel.
+Nejdůležitější je teď ops logika pro automatické denní rozdělení práce.
+
+Tedy:
+
+co se má stáhnout
+
+v jakém pořadí
+
+za kolik requestů
+
+s jakou prioritou
+
+s jakým paralelismem
+
+kdy je daný sport hotový
+
+To je přesně rozdíl mezi „ruční launcher“ a „autopilot“.
+
+Můj stručný závěr
+
+Ano, ten směr máš správně:
+
+jeden panel na audit
+
+druhý na řízení ingestu
+
+multisport
+
+současné běhy
+
+maximální využití 7500 requestů / sport / den
+
+Aby to bylo připravené, potřebuješ teď hlavně:
+
+scheduler policy
+
+dependency pravidla mezi entitami
+
+budget allocation per sport/entity/mode
+
+autopilot worker nad ops.*
+
+Základ systému na to už máš velmi dobrý. OPS vrstva i ingest cycle na to sedí.
+
+V dalším kroku ti připravím přesný návrh:
+jaké OPS tabulky doplnit a jak má vypadat logika run_multisport_scheduler_v5.py, včetně názvu souboru, kam ho uložit a jak ho spouštět.
+
+Tvoje OPS vrstva je už teď velmi dobře navržená pro přesně ten scénář, který chceš – multisport scheduler s limitem requestů.
+
+Ve skutečnosti máš téměř všechny komponenty, které jsem popisoval. Jen je potřeba je správně propojit a využít.
+
+Níže ti vysvětlím co tam už máš, co z toho plyne a co přesně ještě chybí, aby to jelo samo.
+
+1️⃣ Nejdůležitější tabulka pro limit API
+ops.api_budget_status
+CREATE TABLE ops.api_budget_status (
+    id bigint NOT NULL,
+    sport_code text NOT NULL,
+    request_day date DEFAULT CURRENT_DATE NOT NULL,
+    requests_used integer DEFAULT 0 NOT NULL,
+    requests_limit integer DEFAULT 7500 NOT NULL,
+    requests_remaining integer GENERATED ALWAYS AS ((requests_limit - requests_used)) STORED,
+    last_updated timestamp with time zone DEFAULT now() NOT NULL
+);
+
+To je přesně to, co potřebuješ.
+
+Každý sport má:
+
+den
+
+kolik requestů už bylo použito
+
+kolik zbývá
+
+Scheduler tedy může dělat:
+
+if requests_remaining > 0:
+    plánuj další job
+2️⃣ Multisport budget přehled
+ops.v_api_budget_today
+SELECT
+sport_code
+daily_request_budget
+requests_used
+requests_remaining
+max_parallel_jobs
+
+View kombinuje:
+
+sports_import_plan
+
+api_budget_status
+
+To znamená:
+
+👉 scheduler může jednoduše dotazem zjistit:
+
+kolik requestů ještě může použít pro každý sport
+3️⃣ Scheduler fronta
+ops.scheduler_queue
+
+To je globální queue pro worker procesy.
+
+Scheduler do ní vkládá:
+
+provider
+sport
+entity
+league
+season
+run_group
+
+Worker potom:
+
+select * from scheduler_queue
+limit 1
+
+a spustí job.
+
+To je správný model.
+
+4️⃣ Planner (hlavní generátor práce)
+ops.ingest_planner
+
+Planner generuje:
+
+provider
+sport
+entity
+league
+season
+run_group
+priority
+status
+next_run
+
+A nad tím už máš view:
+
+ops.v_ingest_planner_queue
+
+které vrací pouze:
+
+pending
+running
+error
+
+a označuje:
+
+is_ready_now
+
+To je ideální vstup pro scheduler.
+
+5️⃣ Provider jobs (definice API endpointů)
+ops.provider_jobs
+provider
+sport_code
+job_code
+endpoint_code
+priority
+batch_size
+max_requests_per_run
+retry_limit
+cooldown_seconds
+days_back
+days_forward
+
+Tohle je absolutní základ scheduleru.
+
+Tady definuješ:
+
+jaký endpoint se volá
+
+kolik requestů může udělat
+
+jaký má cooldown
+
+prioritu
+
+6️⃣ Worker locking
+ops.worker_locks
+
+Zabraňuje tomu, aby dva ingest cykly běžely zároveň.
+
+To je velmi důležité pro stabilitu.
+
+7️⃣ Target leagues
+ops.ingest_targets
+sport_code
+canonical_league_id
+provider
+provider_league_id
+season
+tier
+run_group
+
+To říká:
+
+👉 co se má vůbec stahovat
+
+například:
+
+football
+league 39
+season 2024
+run_group EU_TOP
+8️⃣ Co z toho plyne
+
+Tvůj systém už má všechny 4 vrstvy scheduleru.
+
+vrstva 1
+
+sport budget
+
+api_budget_status
+sports_import_plan
+vrstva 2
+
+co stahovat
+
+ingest_targets
+vrstva 3
+
+co přesně volat
+
+provider_jobs
+vrstva 4
+
+co se má spustit
+
+ingest_planner
+scheduler_queue
+
+To je přesně enterprise architektura ingest pipeline.
+
+9️⃣ Co ti reálně ještě chybí
+
+Pouze jedna věc:
+
+inteligentní scheduler worker
+
+který:
+
+1️⃣ čte
+
+v_api_budget_today
+
+2️⃣ čte
+
+v_ingest_planner_queue
+
+3️⃣ vybere job podle
+
+priority
+sport budget
+max_parallel_jobs
+
+4️⃣ vloží ho do
+
+scheduler_queue
+🔟 Jak by měl scheduler rozhodovat
+
+Například takto:
+
+for sport in sports_import_plan order by priority:
+
+    budget = remaining_requests(sport)
+
+    if budget <= 0:
+        continue
+
+    jobs = ingest_planner
+           where sport = sport
+           and status = 'pending'
+           order by priority
+
+    for job in jobs:
+
+        if estimated_cost(job) <= budget:
+            push scheduler_queue
+            budget -= estimated_cost
+1️⃣1️⃣ Co je velmi dobrá zpráva
+
+Podle dumpu máš už připravené:
+
+budget management
+
+planner queue
+
+scheduler queue
+
+worker locks
+
+provider job definition
+
+multisport config
+
+To znamená:
+
+👉 architektura je správně
+
+Teď už je to jen o:
+
+scheduler logice
+1️⃣2️⃣ Největší plus v tvém návrhu
+
+Ty už jsi myslel na:
+
+multisport ingest
+parallel workers
+API budget
+priority
+retry
+cooldown
+
+Tohle je přesně architektura, kterou používají velké data ingest systémy.
+
+1️⃣3️⃣ Co bych doporučil teď
+
+Tři konkrétní kroky:
+
+1️⃣ napsat
+workers/run_multisport_scheduler.py
+
+který:
+
+čte budget
+
+čte planner
+
+plní scheduler_queue
+
+2️⃣ spouštět scheduler každých 2–5 minut
+
+například:
+
+mm_autopilot_daily.ps1
+3️⃣ oddělit workers
+scheduler
+provider downloader
+parser
+merge
+1️⃣4️⃣ Můj upřímný názor
+
+Ten projekt už není "experiment".
+
+Je to plnohodnotná data platforma.
+
+Ty už máš:
+
+ingestion architecture
+
+scheduling
+
+API budget management
+
+multisport staging
+
+public canonical model
+
+analytics pipeline
+
+Chybí už jen:
+
+👉 autopilot scheduler

@@ -1,0 +1,18 @@
+|entity             |status |jobs_count|min_priority|max_priority|
+|-------------------|-------|----------|------------|------------|
+|leagues            |pending|1         |10          |10          |
+|leagues            |running|1         |10          |10          |
+|teams              |done   |16        |20          |20          |
+|teams              |pending|103       |20          |20          |
+|teams              |running|1         |20          |20          |
+|fixtures           |done   |11        |30          |30          |
+|fixtures           |pending|109       |30          |30          |
+|odds               |error  |4         |40          |40          |
+|odds               |pending|115       |40          |40          |
+|odds               |running|1         |40          |40          |
+|players            |done   |1         |50          |50          |
+|players            |error  |1         |50          |50          |
+|players            |pending|121       |50          |50          |
+|player_profiles    |pending|123       |60          |60          |
+|player_season_stats|pending|123       |70          |70          |
+|player_stats       |pending|123       |80          |80          |

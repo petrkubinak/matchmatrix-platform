@@ -1,1 +1,0 @@
-Get-Content -Raw C:\MatchMatrix-platform\db\scripts\009_merge_players.sql | docker exec -i matchmatrix_postgres psql -U matchmatrix -d matchmatrix

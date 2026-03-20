@@ -1,0 +1,4 @@
+|table_schema|table_name        |
+|------------|------------------|
+|ops         |api_budget_status |
+|ops         |v_api_budget_today|

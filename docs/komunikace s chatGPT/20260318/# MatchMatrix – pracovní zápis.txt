@@ -1,0 +1,358 @@
+# MatchMatrix – pracovní zápis
+
+## Datum
+
+18.03.2026
+
+---
+
+# 1. Hlavní cíl dne
+
+Dnes jsme dokončili **rozběhnutí ingest pipeline pro hráče (players)** a ověřili, že celý cyklus:
+
+* planner
+* worker
+* staging
+* merge do public
+
+funguje správně.
+
+Zároveň jsme zkontrolovali strukturu databáze a stav analytických tabulek (MMR ratings, match features, predictions).
+
+---
+
+# 2. Players ingest pipeline
+
+Pipeline byla spuštěna přes:
+
+```
+run_ingest_cycle_v3.py
+```
+
+s parametry:
+
+```
+provider = api_football
+sport = football
+entity = players
+limit = 20
+```
+
+Planner postupně zpracoval **11 jobů**.
+
+### Příklad jobu
+
+```
+league=205 season=2024
+inserted=60 players
+```
+
+Data byla uložena do:
+
+```
+staging.players_import
+```
+
+a následně merge do:
+
+```
+public.players
+public.player_provider_map
+```
+
+---
+
+# 3. Stav hráčských dat
+
+Kontrola tabulek:
+
+| tabulka                                  | počet |
+| ---------------------------------------- | ----- |
+| staging.players_import                   | 820   |
+| staging.stg_provider_players             | 533   |
+| staging.stg_provider_player_season_stats | 1692  |
+| staging.stg_provider_player_stats        | 0     |
+
+### Interpretace
+
+**players_import**
+
+* obsahuje surové hráče z API
+* jeden hráč se může objevit vícekrát (různé sezóny)
+
+**stg_provider_players**
+
+* deduplikovaní hráči
+* unikátní identity hráčů
+
+**player_season_stats**
+
+* statistiky hráče za sezónu
+* více řádků na hráče
+
+**player_stats**
+
+* zatím prázdné
+* tato tabulka bude plněna z endpointu:
+
+```
+/fixtures/players
+```
+
+---
+
+# 4. Stav core databáze
+
+Po merge:
+
+| tabulka             | počet  |
+| ------------------- | ------ |
+| leagues             | 2713   |
+| teams               | 5234   |
+| team_provider_map   | 2419   |
+| players             | 559    |
+| player_provider_map | 559    |
+| matches             | 107089 |
+
+To znamená, že **football core databáze je již velmi robustní**.
+
+---
+
+# 5. Datová architektura
+
+Databáze nyní obsahuje několik logických vrstev:
+
+### CORE SPORT DATA
+
+* leagues
+* teams
+* matches
+* players
+* match_events
+* lineups
+* injuries
+
+### PROVIDER LAYER
+
+* league_provider_map
+* team_provider_map
+* player_provider_map
+
+### STAGING
+
+* stg_provider_players
+* stg_provider_player_profiles
+* stg_provider_player_season_stats
+* stg_provider_player_stats
+
+### ANALYTICS
+
+* mm_match_ratings
+* mm_team_ratings
+* match_features
+* ml_predictions
+
+### APPLICATION / TICKET ENGINE
+
+* tickets
+* ticket_blocks
+* ticket_variants
+* ticket_settlements
+
+### USER LAYER
+
+* users
+* user_favorite_players
+* user_favorite_teams
+
+---
+
+# 6. Git a verzování
+
+Bylo nastaveno ukládání projektu do GitHub repozitáře.
+
+Základní workflow:
+
+```
+git add .
+git commit -m "players ingest update"
+git push
+```
+
+Dále bylo vysvětleno:
+
+* git status
+* git diff
+* git log
+* git branches
+
+Doporučené větve:
+
+```
+main
+dev
+feature/*
+```
+
+Například:
+
+```
+feature/player-match-stats
+feature/ticket-engine-v2
+feature/ml-model
+```
+
+---
+
+# 7. Doporučení pro databázi
+
+Pro budoucí vývoj bylo doporučeno zavést **database migrations**.
+
+Struktura:
+
+```
+db/migrations
+```
+
+například:
+
+```
+001_core_schema.sql
+002_leagues.sql
+003_teams.sql
+004_matches.sql
+005_players.sql
+006_ticket_engine.sql
+007_mmr_ratings.sql
+008_ml_predictions.sql
+```
+
+To umožní:
+
+* obnovit databázi od nuly
+* sledovat změny struktury
+* synchronizovat dev/test/production.
+
+---
+
+# 8. Hodnocení stavu projektu
+
+MatchMatrix nyní obsahuje:
+
+* ingest pipeline
+* multi-provider model
+* canonical sport database
+* analytickou vrstvu (MMR ratings)
+* predikční vrstvu
+* ticket engine
+* user layer
+
+To znamená, že projekt už není jen sběr dat, ale **plnohodnotná sportovní analytická platforma**.
+
+---
+
+# 9. Další kroky
+
+Doporučený postup pokračování:
+
+## 1️⃣ Dokončit players pipeline
+
+Implementovat ingest:
+
+```
+/fixtures/players
+```
+
+endpoint poskytne:
+
+* shots
+* passes
+* tackles
+* duels
+* rating
+* minutes
+
+Tabulka:
+
+```
+staging.stg_provider_player_stats
+```
+
+Tento dataset je klíčový pro:
+
+* player form
+* team strength
+* predikční modely.
+
+---
+
+## 2️⃣ Ověřit player season stats
+
+Zkontrolovat merge do:
+
+```
+public.player_season_statistics
+```
+
+a ověřit pokrytí lig.
+
+---
+
+## 3️⃣ Rozšířit coverage hráčů
+
+Spustit players ingest pro:
+
+```
+více lig
+více sezón
+```
+
+aby databáze obsahovala několik tisíc hráčů.
+
+---
+
+## 4️⃣ Integrace odds providerů
+
+Později připojit:
+
+* TheOddsAPI
+* Football-Data
+
+do tabulek odds.
+
+---
+
+## 5️⃣ Analytics vrstva
+
+Postupně rozšířit:
+
+```
+analytics.player_form
+analytics.team_strength
+analytics.match_features
+```
+
+Tyto tabulky budou základ pro:
+
+```
+ML predictions
+TicketMatrix engine
+```
+
+---
+
+# 10. Shrnutí dne
+
+Dnes bylo dosaženo důležitého milníku:
+
+✔ players ingest pipeline funguje
+✔ staging → public merge funguje
+✔ databáze obsahuje stovky hráčů
+✔ GitHub verzování projektu je připravené
+✔ architektura databáze byla zkontrolována
+
+Projekt MatchMatrix je nyní ve fázi:
+
+**rozšiřování dat a budování analytické vrstvy.**
+
+---
