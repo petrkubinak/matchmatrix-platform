@@ -1,7 +1,7 @@
 # TicketMatrixPlatform – denní přehled vývoje
 
 Datum: 20.03.2026  
-Čas kontroly systému: 13:08
+Čas kontroly systému: 21:58
 
 ---
 
@@ -24,10 +24,12 @@ Byly zkontrolovány tyto části projektu:
 
 - Celý projekt
 
-Celkem bylo projito 1064 sledovaných souborů.
+Celkem bylo projito 1082 sledovaných souborů.
 
 Ve srovnání s minulým auditem:
-- bylo přidáno 6 nových souborů
+- bylo přidáno 87 nových souborů
+- u 1 souborů proběhla úprava
+- 67 souborů bylo odstraněno
 
 ---
 
@@ -55,17 +57,17 @@ Git větev:
 - main
 
 Poslední commit:
-- a7e8c33 | 2026-03-20 10:25:36 +0100 | update players pipeline
+- f90ac55 | 2026-03-20 13:15:23 +0100 | Remove large SQL dumps from repo
 
 Aktuální neuložené změny:
-- M MatchMatrix-platform/.dbeaver/.project-metadata.json.bak
--  M MatchMatrix-platform/.dbeaver/project-metadata.json
--  M reports/audit/2026-03-20/MATCHMATRIX_AUDIT_REPORT.md
--  M reports/audit/2026-03-20/MATCHMATRIX_PROGRESS.md
--  M reports/audit/latest_audit_report.md
--  M reports/audit/latest_progress_report.md
--  M reports/audit/latest_snapshot.txt
-- ?? MatchMatrix-platform/Dump/dump-matchmatrix-202603201246.sql
+- M MatchMatrix-platform/.dbeaver/project-metadata.json
+-  D MatchMatrix-platform/Scripts/12_multisport/101_extend_existing_multisport_core.sql
+-  D MatchMatrix-platform/Scripts/12_multisport/102_extend_existing_coach_core.sql
+-  D "MatchMatrix-platform/Scripts/12_multisport/102a_zji\305\241t\304\233n\303\255_sruktury_tren\303\251rsk\303\275ch_tabulek.sql"
+-  D MatchMatrix-platform/Scripts/12_multisport/103_create_coach_provider_map.sql
+-  D MatchMatrix-platform/Scripts/12_multisport/104_extend_stg_provider_coaches.sql
+-  D MatchMatrix-platform/Scripts/12_multisport/105_create_ops_sport_entity_rules.sql
+-  D MatchMatrix-platform/Scripts/12_multisport/106_create_ops_sport_dimension_rules.sql
 
 ---
 
@@ -80,12 +82,14 @@ Na základě dnešního auditu je vidět, že projekt má:
 
 
 Hlavní změněné soubory dnes:
-- db\ops\178_seed_fb_provider_jobs_from_catalog_FINAL.sql
-- db\views\177_create_v_ops_fb_job_catalog.sql
-- docs\komunikace s chatGPT\20260320\MatchMatrix – podrobný zápis.md
-- MatchMatrix-platform\Dump\dump-matchmatrix-202603201246.sql
-- MatchMatrix-platform\Scripts\13_multisport_ingest\177_create_v_ops_fb_job_catalog.sql
-- MatchMatrix-platform\Scripts\13_multisport_ingest\178_seed_fb_provider_jobs_from_catalog_FINAL.sql
+- MatchMatrix-platform\Scripts\12_multisport\101_extend_existing_multisport_core.sql
+- MatchMatrix-platform\Scripts\12_multisport\102_extend_existing_coach_core.sql
+- MatchMatrix-platform\Scripts\12_multisport\102a_zjištění_sruktury_trenérských_tabulek.sql
+- MatchMatrix-platform\Scripts\12_multisport\103_create_coach_provider_map.sql
+- MatchMatrix-platform\Scripts\12_multisport\104_extend_stg_provider_coaches.sql
+- MatchMatrix-platform\Scripts\12_multisport\105_create_ops_sport_entity_rules.sql
+- MatchMatrix-platform\Scripts\12_multisport\106_create_ops_sport_dimension_rules.sql
+- MatchMatrix-platform\Scripts\12_multisport\107_create_ops_provider_sport_matrix.sql
 
 ---
 
