@@ -1,7 +1,7 @@
 # TicketMatrixPlatform – denní přehled vývoje
 
 Datum: 20.03.2026  
-Čas kontroly systému: 10:23
+Čas kontroly systému: 13:08
 
 ---
 
@@ -24,10 +24,10 @@ Byly zkontrolovány tyto části projektu:
 
 - Celý projekt
 
-Celkem bylo projito 1014 sledovaných souborů.
+Celkem bylo projito 1064 sledovaných souborů.
 
 Ve srovnání s minulým auditem:
-- bylo přidáno 96 nových souborů
+- bylo přidáno 6 nových souborů
 
 ---
 
@@ -55,17 +55,17 @@ Git větev:
 - main
 
 Poslední commit:
-- ca41518 | 2026-03-17 10:32:39 +0100 | MatchMatrix ingest + players pipeline updates
+- a7e8c33 | 2026-03-20 10:25:36 +0100 | update players pipeline
 
 Aktuální neuložené změny:
 - M MatchMatrix-platform/.dbeaver/.project-metadata.json.bak
 -  M MatchMatrix-platform/.dbeaver/project-metadata.json
--  D MatchMatrix-platform/Dump/dump-matchmatrix-202602272251_leagues.sql
--  D MatchMatrix-platform/Dump/dump-matchmatrix-202602282349.sql
--  D MatchMatrix-platform/Dump/dump-matchmatrix-202603012240.sql
--  D MatchMatrix-platform/Dump/dump-matchmatrix-202603020927.sql
--  D MatchMatrix-platform/Dump/dump-matchmatrix-202603022246.sql
--  D MatchMatrix-platform/Dump/dump-matchmatrix-202603091608.sql
+-  M reports/audit/2026-03-20/MATCHMATRIX_AUDIT_REPORT.md
+-  M reports/audit/2026-03-20/MATCHMATRIX_PROGRESS.md
+-  M reports/audit/latest_audit_report.md
+-  M reports/audit/latest_progress_report.md
+-  M reports/audit/latest_snapshot.txt
+- ?? MatchMatrix-platform/Dump/dump-matchmatrix-202603201246.sql
 
 ---
 
@@ -80,14 +80,12 @@ Na základě dnešního auditu je vidět, že projekt má:
 
 
 Hlavní změněné soubory dnes:
-- db\checks\111_audit_missing_multisport_coverage.sql
-- db\checks\114_check_multisport_coverage_after_seed.sql
-- db\checks\115_audit_ingest_targets_multisport.sql
-- db\checks\116_audit_ingest_targets_sport_code_mapping.sql
-- db\checks\118_recheck_ingest_targets_multisport.sql
-- db\checks\119_audit_football_ingest_targets_by_run_group.sql
-- db\checks\120_audit_bk_hk_ingest_targets_by_run_group.sql
-- db\checks\121_preview_bk_hk_targets.sql
+- db\ops\178_seed_fb_provider_jobs_from_catalog_FINAL.sql
+- db\views\177_create_v_ops_fb_job_catalog.sql
+- docs\komunikace s chatGPT\20260320\MatchMatrix – podrobný zápis.md
+- MatchMatrix-platform\Dump\dump-matchmatrix-202603201246.sql
+- MatchMatrix-platform\Scripts\13_multisport_ingest\177_create_v_ops_fb_job_catalog.sql
+- MatchMatrix-platform\Scripts\13_multisport_ingest\178_seed_fb_provider_jobs_from_catalog_FINAL.sql
 
 ---
 

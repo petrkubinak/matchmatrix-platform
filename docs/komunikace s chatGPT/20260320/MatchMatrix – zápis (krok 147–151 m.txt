@@ -1,0 +1,193 @@
+MatchMatrix – zápis (krok 147–151: multisport ingest + strategie scope)
+
+📅 Datum: 20.03.2026
+
+🎯 HLAVNÍ POSUN
+
+Dokončeno:
+
+👉 Multisport základ ingestu je plně připravený
+
+sport_entity_rules → všechny sporty
+
+provider_sport_matrix → všechny sporty
+
+ingest_entity_plan → rozšířen na všechny sporty
+
+odstraněn legacy football → sjednoceno na FB
+
+🔍 KLÍČOVÉ ZJIŠTĚNÍ
+
+👉 Planner (v_top_ingest_jobs_*) stále běží jen pro:
+
+FB
+
+BK
+
+HK
+
+❗ důvod:
+
+v_top_ingest_jobs → závisí na v_top_ingest_targets
+
+➡️ a ingest_targets obsahuje pouze tyto 3 sporty
+
+📊 STAV ingest_targets
+sport	počet targetů
+FB	2024
+BK	427
+HK	262
+
+👉 ostatní sporty:
+
+❌ nemají targety
+
+❌ nejsou v planneru
+
+🧠 ARCHITEKTURA (AKTUÁLNÍ STAV)
+✔ Vrstva 1 – konfigurace
+
+sport_entity_rules ✅
+
+provider_sport_matrix ✅
+
+✔ Vrstva 2 – entity plan
+
+ingest_entity_plan (multisport) ✅
+
+❌ Vrstva 3 – targety
+
+ingest_targets → jen FB/BK/HK
+
+❌ Vrstva 4 – planner
+
+omezený přes targety
+
+🔥 KLÍČOVÉ ROZHODNUTÍ
+
+❌ NE:
+
+full multisport bez omezení (příliš drahé)
+
+přepisovat TOP view
+
+✅ ANO:
+👉 řízený ingest podle prioritních vrstev (scope)
+
+🚀 NOVÁ STRATEGIE INGESTU
+
+Pro každý sport:
+
+1️⃣ TOP ligy
+
+nejvyšší priorita
+
+stabilní ingest
+
+nízký počet requestů
+
+2️⃣ EVROPA
+
+střední rozsah
+
+postupné rozšiřování
+
+3️⃣ WORLD
+
+zbytek světa
+
+pouze pokud je budget
+
+🧩 RUN GROUP MODEL (NOVÝ)
+
+Např.:
+
+Football
+
+FB_TOP
+
+FB_EU
+
+FB_WORLD
+
+Basketball
+
+BK_TOP
+
+BK_EU
+
+BK_WORLD
+
+Hockey
+
+HK_TOP
+
+HK_EU
+
+HK_WORLD
+
+Další sporty (postupně)
+
+TN_TOP, MMA_TOP, atd.
+
+⚙️ VÝHODY TOHOTO PŘÍSTUPU
+
+✅ kontrola nad requesty
+✅ možnost škálování
+✅ oddělení priorit
+✅ připraveno na PRO API
+✅ kompatibilní s budget enginem
+
+🧠 DŮLEŽITÉ POCHOPENÍ
+
+👉 ingest NEŘÍDÍ:
+
+planner přímo
+
+👉 ingest ŘÍDÍ:
+
+ingest_targets + run_group
+
+planner je jen:
+➡️ „výběr z targetů“
+
+📌 KDE TEĎ JSME
+
+Máš:
+
+✔ multisport architekturu
+✔ čistá data
+✔ připravený planner základ
+✔ validní TOP ingest (FB/BK/HK)
+
+⏭️ DALŠÍ KROK (151 → 152)
+
+👉 začneme:
+
+rozšířením ingest_targets
+
+nejdřív:
+
+FB_EU
+
+BK_EU
+
+HK_EU
+
+potom:
+
+další sporty (TN, MMA…)
+
+🔚 SHRNUTÍ
+
+👉 dnes jsme neřešili bug
+
+👉 ale udělali zásadní rozhodnutí:
+
+MatchMatrix nebude:
+
+„stáhni všechno“
+
+👉 ale:
+
+🔥 řízený multisport ingest podle priorit a budg

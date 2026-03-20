@@ -1,0 +1,37 @@
+|mode|sport_code|entity             |season|jobs|
+|----|----------|-------------------|------|----|
+|full|BK        |coaches            |      |10  |
+|full|BK        |fixtures           |      |10  |
+|full|BK        |leagues            |      |10  |
+|full|BK        |odds               |      |10  |
+|full|BK        |players            |      |10  |
+|full|BK        |teams              |      |10  |
+|full|FB        |coaches            |2022  |3   |
+|full|FB        |fixtures           |2022  |3   |
+|full|FB        |leagues            |2022  |3   |
+|full|FB        |odds               |2022  |3   |
+|full|FB        |players            |2022  |3   |
+|full|FB        |player_season_stats|2022  |3   |
+|full|FB        |teams              |2022  |3   |
+|full|HK        |coaches            |      |10  |
+|full|HK        |fixtures           |      |10  |
+|full|HK        |leagues            |      |10  |
+|full|HK        |odds               |      |10  |
+|full|HK        |players            |      |10  |
+|full|HK        |teams              |      |10  |
+|test|BK        |coaches            |      |10  |
+|test|BK        |fixtures           |      |10  |
+|test|BK        |leagues            |      |10  |
+|test|BK        |players            |      |10  |
+|test|BK        |teams              |      |10  |
+|test|FB        |coaches            |2022  |3   |
+|test|FB        |fixtures           |2022  |3   |
+|test|FB        |leagues            |2022  |3   |
+|test|FB        |players            |2022  |3   |
+|test|FB        |player_season_stats|2022  |3   |
+|test|FB        |teams              |2022  |3   |
+|test|HK        |coaches            |      |10  |
+|test|HK        |fixtures           |      |10  |
+|test|HK        |leagues            |      |10  |
+|test|HK        |players            |      |10  |
+|test|HK        |teams              |      |10  |

@@ -151,6 +151,15 @@ db\ops\037_ops_insert_job_ingest_cycle_v2.sql | C:\MatchMatrix-platform\db\ops\0
 db\ops\037_ops_insert_new_ingest_entities_players_v1.sql | C:\MatchMatrix-platform\db\ops\037_ops_insert_new_ingest_entities_players_v1.sql | 2995 | 1773696256.314
 db\ops\038_ops_create_dashboard_views.sql | C:\MatchMatrix-platform\db\ops\038_ops_create_dashboard_views.sql | 7400 | 1773431261.654
 db\ops\039_ops_insert_job_unified_staging_to_public_merge.sql | C:\MatchMatrix-platform\db\ops\039_ops_insert_job_unified_staging_to_public_merge.sql | 656 | 1773432943.294
+db\ops\147_expand_ingest_entity_plan_to_all_sports.sql | C:\MatchMatrix-platform\db\ops\147_expand_ingest_entity_plan_to_all_sports.sql | 851 | 1774000542.713
+db\ops\147_rebuild_ingest_planner_multisport.sql | C:\MatchMatrix-platform\db\ops\147_rebuild_ingest_planner_multisport.sql | 788 | 1774000655.201
+db\ops\148_fix_legacy_football_code_SAFE.sql | C:\MatchMatrix-platform\db\ops\148_fix_legacy_football_code_SAFE.sql | 130 | 1774000865.606
+db\ops\152_seed_fb_eu_run_group.sql | C:\MatchMatrix-platform\db\ops\152_seed_fb_eu_run_group.sql | 766 | 1774002087.118
+db\ops\157_seed_football_data_fb_ingest_entity_plan.sql | C:\MatchMatrix-platform\db\ops\157_seed_football_data_fb_ingest_entity_plan.sql | 1196 | 1774002902.995
+db\ops\160_enable_fb_eu_targets.sql | C:\MatchMatrix-platform\db\ops\160_enable_fb_eu_targets.sql | 632 | 1774003260.454
+db\ops\166_rename_fb_eu_to_fb_fd_core.sql | C:\MatchMatrix-platform\db\ops\166_rename_fb_eu_to_fb_fd_core.sql | 534 | 1774004489.584
+db\ops\168_seed_fb_api_expansion_run_group.sql | C:\MatchMatrix-platform\db\ops\168_seed_fb_api_expansion_run_group.sql | 915 | 1774004730.639
+db\ops\178_seed_fb_provider_jobs_from_catalog_FINAL.sql | C:\MatchMatrix-platform\db\ops\178_seed_fb_provider_jobs_from_catalog_FINAL.sql | 1871 | 1774006971.057
 db\ops\ops_jobs_unified_ingest_batch.sql | C:\MatchMatrix-platform\db\ops\ops_jobs_unified_ingest_batch.sql | 366 | 1773351043.689
 db\queries\078_audit_player_season_statistics_v1.sql | C:\MatchMatrix-platform\db\queries\078_audit_player_season_statistics_v1.sql | 9440 | 1773610135.16
 db\queries\079_audit_player_season_statistics_report_v1.sql | C:\MatchMatrix-platform\db\queries\079_audit_player_season_statistics_report_v1.sql | 10051 | 1773665323.586
@@ -253,8 +262,20 @@ db\views\143_create_v_ops_top_ingest_jobs_test_mode.sql | C:\MatchMatrix-platfor
 db\views\144_fix_v_ops_top_ingest_jobs_test_mode_no_odds.sql | C:\MatchMatrix-platform\db\views\144_fix_v_ops_top_ingest_jobs_test_mode_no_odds.sql | 281 | 1773997417.981
 db\views\145_create_v_ops_top_ingest_jobs_full_mode.sql | C:\MatchMatrix-platform\db\views\145_create_v_ops_top_ingest_jobs_full_mode.sql | 178 | 1773997878.213
 db\views\14_vw_ticket_candidates.sql | C:\MatchMatrix-platform\db\views\14_vw_ticket_candidates.sql | 2412 | 1773070763.847
+db\views\154_create_v_ops_fb_eu_ingest_jobs.sql | C:\MatchMatrix-platform\db\views\154_create_v_ops_fb_eu_ingest_jobs.sql | 695 | 1774002292.652
+db\views\158_fix_v_ops_fb_eu_ingest_jobs_multi_provider.sql | C:\MatchMatrix-platform\db\views\158_fix_v_ops_fb_eu_ingest_jobs_multi_provider.sql | 695 | 1774003061.665
 db\views\15_v_best_ticket_candidates_today.sql | C:\MatchMatrix-platform\db\views\15_v_best_ticket_candidates_today.sql | 658 | 1773070836.51
+db\views\162_create_v_ops_fb_eu_test_mode.sql | C:\MatchMatrix-platform\db\views\162_create_v_ops_fb_eu_test_mode.sql | 276 | 1774003406.267
+db\views\167_create_v_ops_fb_fd_core_ingest_jobs.sql | C:\MatchMatrix-platform\db\views\167_create_v_ops_fb_fd_core_ingest_jobs.sql | 705 | 1774004567.128
+db\views\167a_create_v_ops_fb_fd_core_ingest_jobs_test_mode.sql | C:\MatchMatrix-platform\db\views\167a_create_v_ops_fb_fd_core_ingest_jobs_test_mode.sql | 286 | 1774004602.804
 db\views\16_vw_ticket_items.sql | C:\MatchMatrix-platform\db\views\16_vw_ticket_items.sql | 983 | 1773086818.425
+db\views\170_create_v_ops_fb_api_expansion_ingest_jobs.sql | C:\MatchMatrix-platform\db\views\170_create_v_ops_fb_api_expansion_ingest_jobs.sql | 752 | 1774004956.968
+db\views\170a_create_v_ops_fb_api_expansion_ingest_jobs_test_mode.sql | C:\MatchMatrix-platform\db\views\170a_create_v_ops_fb_api_expansion_ingest_jobs_test_mode.sql | 298 | 1774005006.135
+db\views\172_create_v_ops_fb_test_mode_all_layers.sql | C:\MatchMatrix-platform\db\views\172_create_v_ops_fb_test_mode_all_layers.sql | 743 | 1774005253.429
+db\views\173_create_v_ops_fb_test_mode_orchestrator.sql | C:\MatchMatrix-platform\db\views\173_create_v_ops_fb_test_mode_orchestrator.sql | 1133 | 1774005387.802
+db\views\174_create_v_ops_fb_test_execution_order.sql | C:\MatchMatrix-platform\db\views\174_create_v_ops_fb_test_execution_order.sql | 1043 | 1774005509.007
+db\views\176_create_v_ops_fb_test_phase1.sql | C:\MatchMatrix-platform\db\views\176_create_v_ops_fb_test_phase1.sql | 134 | 1774005766.542
+db\views\177_create_v_ops_fb_job_catalog.sql | C:\MatchMatrix-platform\db\views\177_create_v_ops_fb_job_catalog.sql | 1020 | 1774006323.403
 db\views\17_vw_block_outcome_candidates.sql | C:\MatchMatrix-platform\db\views\17_vw_block_outcome_candidates.sql | 7898 | 1773086800.613
 db\views\18_vw_block_sync_signals.sql | C:\MatchMatrix-platform\db\views\18_vw_block_sync_signals.sql | 9329 | 1773088536.447
 db\views\19_vw_block_candidate_groups.sql | C:\MatchMatrix-platform\db\views\19_vw_block_candidate_groups.sql | 2609 | 1773089001.48
@@ -351,10 +372,16 @@ docs\komunikace s chatGPT\20260318\stg_provider_players.txt | C:\MatchMatrix-pla
 docs\komunikace s chatGPT\20260319\Ano. Teď už je vidět, že DB není po.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260319\Ano. Teď už je vidět, že DB není po.txt | 5627 | 1773939491.634
 docs\komunikace s chatGPT\20260319\MatchMatrix_denní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260319\MatchMatrix_denní zápis.md | 2272 | 1773955383.014
 docs\komunikace s chatGPT\20260319\matchmatrix_handover_2026-03-19_players_pipeline.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260319\matchmatrix_handover_2026-03-19_players_pipeline.md | 6776 | 1773942196.534
+docs\komunikace s chatGPT\20260320\MatchMatrix – podrobný zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\MatchMatrix – podrobný zápis.md | 10473 | 1774008451.711
+docs\komunikace s chatGPT\20260320\MatchMatrix – zápis (FB_EU → football_data vrstva + audit historie).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\MatchMatrix – zápis (FB_EU → football_data vrstva + audit historie).md | 3489 | 1774004253.813
+docs\komunikace s chatGPT\20260320\MatchMatrix – zápis (krok 147–151 m.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\MatchMatrix – zápis (krok 147–151 m.txt | 2674 | 1774001880.532
 docs\komunikace s chatGPT\20260320\MatchMatrix_zapis_2026-03-20_multisport_podminka.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\MatchMatrix_zapis_2026-03-20_multisport_podminka.md | 3179 | 1773996751.312
 docs\komunikace s chatGPT\20260320\SQL\146_audit.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\146_audit.txt | 4420 | 1773998263.558
 docs\komunikace s chatGPT\20260320\SQL\146_audit_ops.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\146_audit_ops.txt | 105 | 1773998283.684
 docs\komunikace s chatGPT\20260320\SQL\146_audit_ops_3.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\146_audit_ops_3.txt | 140 | 1773998312.032
+docs\komunikace s chatGPT\20260320\SQL\146_planner.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\146_planner.txt | 1887 | 1773999186.355
+docs\komunikace s chatGPT\20260320\SQL\provider_sport_matrix.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\provider_sport_matrix.txt | 4721 | 1773999988.445
+docs\komunikace s chatGPT\20260320\SQL\sport_entity_rules.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\sport_entity_rules.txt | 9213 | 1773999860.707
 docs\komunikace s chatGPT\spoluprace_s_ai_operacni_rezim.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\spoluprace_s_ai_operacni_rezim.md | 619 | 1772964570.054
 docs\MatchMatrix_MASTER_BLUEPRINT.md | C:\MatchMatrix-platform\docs\MatchMatrix_MASTER_BLUEPRINT.md | 5008 | 1772919947.438
 docs\příkaz PowerShell_ukázat strom souborů.txt | C:\MatchMatrix-platform\docs\příkaz PowerShell_ukázat strom souborů.txt | 31 | 1771925454.638
@@ -441,7 +468,7 @@ logs\control_panel\log_3_2026-03-11.txt | C:\MatchMatrix-platform\logs\control_p
 logs\control_panel\panel_state.json | C:\MatchMatrix-platform\logs\control_panel\panel_state.json | 4749 | 1773238940.059
 logs\reports\mm_report_2026-03-04_12-34-26.txt | C:\MatchMatrix-platform\logs\reports\mm_report_2026-03-04_12-34-26.txt | 0 | 1772624068.044
 MatchMatrix-platform.txt | C:\MatchMatrix-platform\MatchMatrix-platform.txt | 19022 | 1772919178.25
-MatchMatrix-platform\.dbeaver\project-metadata.json | C:\MatchMatrix-platform\MatchMatrix-platform\.dbeaver\project-metadata.json | 4856 | 1773940499.46
+MatchMatrix-platform\.dbeaver\project-metadata.json | C:\MatchMatrix-platform\MatchMatrix-platform\.dbeaver\project-metadata.json | 5190 | 1774004740.322
 MatchMatrix-platform\.dbeaver\project-settings.json | C:\MatchMatrix-platform\MatchMatrix-platform\.dbeaver\project-settings.json | 31 | 1772740162.442
 MatchMatrix-platform\Dump\dump-matchmatrix-202602271537_leagues.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202602271537_leagues.sql | 158955 | 1772203056.91
 MatchMatrix-platform\Dump\dump-matchmatrix-202603052038.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202603052038.sql | 193065 | 1772739522.963
@@ -458,6 +485,7 @@ MatchMatrix-platform\Dump\dump-matchmatrix-202603160648.sql | C:\MatchMatrix-pla
 MatchMatrix-platform\Dump\dump-matchmatrix-202603162300.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202603162300.sql | 509787 | 1773698443.876
 MatchMatrix-platform\Dump\dump-matchmatrix-202603172219.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202603172219.sql | 513471 | 1773782397.453
 MatchMatrix-platform\Dump\dump-matchmatrix-202603190810.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202603190810.sql | 513482 | 1773904258.103
+MatchMatrix-platform\Dump\dump-matchmatrix-202603201246.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202603201246.sql | 550258 | 1774007211.976
 MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603181139.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603181139.sql | 82970 | 1773830341.588
 MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603181140.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603181140.sql | 899588 | 1773830423.379
 MatchMatrix-platform\Dump\dump.public-matchmatrix-202603172216.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.public-matchmatrix-202603172216.sql | 19661226 | 1773782199.691
@@ -843,6 +871,27 @@ MatchMatrix-platform\Scripts\13_multisport_ingest\143_create_v_ops_top_ingest_jo
 MatchMatrix-platform\Scripts\13_multisport_ingest\144_fix_v_ops_top_ingest_jobs_test_mode_no_odds.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\144_fix_v_ops_top_ingest_jobs_test_mode_no_odds.sql | 0 | 1773997368.969
 MatchMatrix-platform\Scripts\13_multisport_ingest\145_create_v_ops_top_ingest_jobs_full_mode.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\145_create_v_ops_top_ingest_jobs_full_mode.sql | 0 | 1773997850.778
 MatchMatrix-platform\Scripts\13_multisport_ingest\146_audit_ops_budget_runtime_objects.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\146_audit_ops_budget_runtime_objects.sql | 0 | 1773998009.986
+MatchMatrix-platform\Scripts\13_multisport_ingest\147_expand_ingest_entity_plan_to_all_sports.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\147_expand_ingest_entity_plan_to_all_sports.sql | 0 | 1773998553.881
+MatchMatrix-platform\Scripts\13_multisport_ingest\147_rebuild_ingest_planner_multisport.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\147_rebuild_ingest_planner_multisport.sql | 0 | 1774000598.305
+MatchMatrix-platform\Scripts\13_multisport_ingest\148_fix_legacy_football_code_SAFE.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\148_fix_legacy_football_code_SAFE.sql | 0 | 1774000790.481
+MatchMatrix-platform\Scripts\13_multisport_ingest\152_seed_fb_eu_run_group.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\152_seed_fb_eu_run_group.sql | 0 | 1774000719.754
+MatchMatrix-platform\Scripts\13_multisport_ingest\154_create_v_ops_fb_eu_ingest_jobs.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\154_create_v_ops_fb_eu_ingest_jobs.sql | 144 | 1774002198.541
+MatchMatrix-platform\Scripts\13_multisport_ingest\157_seed_football_data_fb_ingest_entity_plan.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\157_seed_football_data_fb_ingest_entity_plan.sql | 0 | 1774002303.858
+MatchMatrix-platform\Scripts\13_multisport_ingest\158_fix_v_ops_fb_eu_ingest_jobs_multi_provider.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\158_fix_v_ops_fb_eu_ingest_jobs_multi_provider.sql | 0 | 1774002909.201
+MatchMatrix-platform\Scripts\13_multisport_ingest\160_enable_fb_eu_targets.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\160_enable_fb_eu_targets.sql | 0 | 1774003074.022
+MatchMatrix-platform\Scripts\13_multisport_ingest\162_create_v_ops_fb_eu_test_mode.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\162_create_v_ops_fb_eu_test_mode.sql | 220 | 1774003329.622
+MatchMatrix-platform\Scripts\13_multisport_ingest\166_rename_fb_eu_to_fb_fd_core.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\166_rename_fb_eu_to_fb_fd_core.sql | 0 | 1774004391.401
+MatchMatrix-platform\Scripts\13_multisport_ingest\167_create_v_ops_fb_fd_core_ingest_jobs.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\167_create_v_ops_fb_fd_core_ingest_jobs.sql | 151 | 1774003449.29
+MatchMatrix-platform\Scripts\13_multisport_ingest\167a_create_v_ops_fb_fd_core_ingest_jobs_test_mode.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\167a_create_v_ops_fb_fd_core_ingest_jobs_test_mode.sql | 0 | 1774004580.407
+MatchMatrix-platform\Scripts\13_multisport_ingest\168_seed_fb_api_expansion_run_group.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\168_seed_fb_api_expansion_run_group.sql | 0 | 1774004614.913
+MatchMatrix-platform\Scripts\13_multisport_ingest\170_create_v_ops_fb_api_expansion_ingest_jobs.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\170_create_v_ops_fb_api_expansion_ingest_jobs.sql | 0 | 1774004928.848
+MatchMatrix-platform\Scripts\13_multisport_ingest\170a_create_v_ops_fb_api_expansion_ingest_jobs_test_mode.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\170a_create_v_ops_fb_api_expansion_ingest_jobs_test_mode.sql | 0 | 1774004975.019
+MatchMatrix-platform\Scripts\13_multisport_ingest\172_create_v_ops_fb_test_mode_all_layers.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\172_create_v_ops_fb_test_mode_all_layers.sql | 0 | 1774005227.705
+MatchMatrix-platform\Scripts\13_multisport_ingest\173_create_v_ops_fb_test_mode_orchestrator.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\173_create_v_ops_fb_test_mode_orchestrator.sql | 0 | 1774005359.928
+MatchMatrix-platform\Scripts\13_multisport_ingest\174_create_v_ops_fb_test_execution_order.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\174_create_v_ops_fb_test_execution_order.sql | 0 | 1774005483.543
+MatchMatrix-platform\Scripts\13_multisport_ingest\176_create_v_ops_fb_test_phase1.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\176_create_v_ops_fb_test_phase1.sql | 0 | 1774005732.388
+MatchMatrix-platform\Scripts\13_multisport_ingest\177_create_v_ops_fb_job_catalog.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\177_create_v_ops_fb_job_catalog.sql | 0 | 1774005779.232
+MatchMatrix-platform\Scripts\13_multisport_ingest\178_seed_fb_provider_jobs_from_catalog_FINAL.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_multisport_ingest\178_seed_fb_provider_jobs_from_catalog_FINAL.sql | 0 | 1774006447.099
 MatchMatrix-platform\Scripts\99_playground\001_počty_future_matches.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\001_počty_future_matches.sql | 517 | 1772985524.249
 MatchMatrix-platform\Scripts\99_playground\001_run_tests.sql\preview_run_probability.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\001_run_tests.sql\preview_run_probability.sql | 0 | 1770815950.527
 MatchMatrix-platform\Scripts\99_playground\002_přestavba_matches.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\002_přestavba_matches.sql | 5511 | 1772965782.266
@@ -880,6 +929,7 @@ MatchMatrix-platform\Scripts\99_playground\volane_funkce\soubor_dotazu_V5.sql | 
 MatchMatrix-platform\Scripts\99_playground\volane_funkce\test_bookmaker_odds.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\volane_funkce\test_bookmaker_odds.sql | 165 | 1770928881.783
 MatchMatrix-platform\Scripts\99_playground\volane_funkce\vyvolani_kodu_procedury.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\volane_funkce\vyvolani_kodu_procedury.sql | 77 | 1770928603.763
 MatchMatrix-platform\Scripts\99_playground\volane_funkce\výkon.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\volane_funkce\výkon.sql | 45 | 1770809932.64
+MatchMatrix-platform\Scripts\99_reports\100_rozsah_stažených_lig_FB_football_Data.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_reports\100_rozsah_stažených_lig_FB_football_Data.sql | 467 | 1774004394.05
 MatchMatrix-platform\Scripts\99_reports\99_block_outcome_candidate.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_reports\99_block_outcome_candidate.sql | 297 | 1773088294.396
 MatchMatrix-platform\Scripts\99_reports\99_ingest_behy_pocet_ zapasu_v_DB.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_reports\99_ingest_behy_pocet_ zapasu_v_DB.sql | 600 | 1772612861.846
 MatchMatrix-platform\Scripts\99_reports\99_kolik mapování máš pro api_football.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_reports\99_kolik mapování máš pro api_football.sql | 769 | 1772575992.711
