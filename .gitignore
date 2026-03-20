@@ -10,6 +10,17 @@ __pycache__/
 # Logs
 *.log
 
+# PostgreSQL dumpy
+*.sql.dump
+*.dump
+*.backup
+
+# Lokální velké DB exporty
+Dump/
+MatchMatrix-platform/Dump/
+backups/postgres_dumps/*.sql
+backups/postgres_dumps/*.dump
+
 # Reports
 reports/*.txt
 reports/*.csv
