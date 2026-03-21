@@ -1,0 +1,464 @@
+MatchMatrix – navazovací zápis
+1. Kde teď jsme
+
+Projekt MatchMatrix je sportovní datová a analytická platforma se 4 hlavními vrstvami:
+
+ingest vrstva = stahování dat z providerů
+staging/public DB vrstva = ukládání a sjednocení dat
+OPS/orchestrace = planner, joby, scheduler, runtime config
+Ticket / Match intelligence = práce s tikety, kandidáty, ML, odds, summary vrstva
+
+To odpovídá i hlavní architektuře projektu v blueprintu:
+providers → ingest → raw/staging → PostgreSQL → rating/ML/predictions → odds → ticket engine → frontend.
+
+2. Co už je v databázi hotové
+
+V public už existuje silná základna:
+
+ligy, týmy, zápasy, hráči
+odds vrstva
+ticket runtime tabulky
+ticket intelligence tabulky
+velká sada analytických view
+
+Z dumpu i screenshotů je potvrzeno, že už existují například:
+
+generated_runs
+generated_tickets
+generated_ticket_blocks
+generated_ticket_fixed
+generated_ticket_risk
+ticket_generation_runs
+ticket_pattern_stats
+ticket_league_pattern_stats
+ticket_variant_features
+ticket_recommendation_feedback
+ticket_settlements
+ticket_run_settlements
+
+a také view jako:
+
+vw_generated_ticket_matches
+vw_ticket_candidates
+vw_ticket_summary
+vw_ticket_items
+vw_ticket_match_results
+vw_ticket_settlement_detail
+
+To znamená, že ticket vrstva už není prázdný návrh, ale reálně existující systém.
+
+3. Co jsme zkontrolovali u ticket vrstvy
+
+Byly zkontrolovány definice:
+
+public.vw_generated_ticket_matches
+sjednocuje variable picks z generated_ticket_blocks
+sjednocuje fixed picks z generated_ticket_fixed
+vrací jednotný rozpad tiketu na položky
+public.vw_ticket_candidates
+stojí nad mm_value_bets
+počítá:
+model_probability
+bookmaker_probability
+selected_odd
+selected_edge
+selected_ev
+candidate_score
+public.vw_ticket_summary
+stojí nad vw_ticket_settlement_detail
+počítá:
+matches_count
+hits_count
+miss_count
+void_count
+pending_count
+total_odd
+ticket_result_status
+
+Závěr: základní ticket runtime + settlement analytika je už postavená dobře.
+
+4. OPS / planner / orchestrator – co platí teď
+Důležité rozlišení
+
+Byl odhalen zásadní rozdíl mezi dvěma cestami:
+
+A. Batch runner
+
+Panel původně spouštěl:
+
+run_unified_ingest_batch_v1.py
+
+To je batch přes ops.ingest_targets. Ten je vhodný pro dávkové testy targetů.
+
+B. Planner worker
+
+Správná architektura pro orchestraci je:
+
+panel
+→ run_ingest_planner_jobs.py
+→ run_unified_ingest_v1.py
+
+Planner worker bere joby z ops.ingest_planner, claimuje pending, a mění je na done / warning / error.
+
+Závěr
+
+Panel musí pro plánované běhy používat planner worker, ne batch runner.
+
+5. Co jsme udělali pro HK a BK v OPS vrstvě
+Hokej (HK)
+
+Byly dotaženy dvě vrstvy:
+
+HK_TOP = 20
+HK_CORE = 242
+
+Pro obě vrstvy byly připraveny entity:
+
+leagues
+teams
+fixtures
+odds
+players
+coaches
+
+Bylo vytvořeno / ověřeno:
+
+full job catalog
+seed do ops.provider_jobs
+runnable jobs
+Basket (BK)
+
+Byly sjednoceny názvy run groups do stejného modelu jako u HK:
+
+BK_TOP = 10
+BK_CORE = 417
+
+Původní historické názvy byly přejmenovány, aby naming ladil napříč sporty.
+
+Také pro BK byly připraveny:
+
+full job catalog
+seed do ops.provider_jobs
+runnable jobs
+Význam
+
+Teď už máš pro HK i BK stejný a čistý model jako základ pro bezobslužnou orchestraci:
+
+TOP = malá prioritní vrstva
+CORE = širší vrstva pro masové stahování
+
+To je správný základ pro budoucí PRO provoz s limitem 7500 requestů / sport / den.
+
+6. Football jako referenční vzor
+
+Football zůstává referenční šablona, ale je trochu odlišný, protože má:
+
+2 providery:
+api_football
+football_data
+
+a navíc speciální entity jako:
+
+player_season_stats
+
+Ve ops.provider_jobs byly zkontrolovány vrstvy:
+
+FB_TOP
+FB_API_EXPANSION
+FB_FD_CORE
+
+Závěr:
+
+football je architektonický vzor
+HK/BK jsou čistší 1-provider sporty
+orchestrátor musí být schopen pracovat podle sportu a provideru, ne tlačit vše do 1:1 stejného modelu
+7. Co se rozbilo při prvním HK planner běhu
+
+První planner run pro:
+
+provider = api_hockey
+sport = HK
+entity = leagues
+run_group = HK_TOP
+
+spadl do error.
+
+V ops.ingest_planner bylo vidět:
+
+leagues error 1
+leagues pending 19
+ostatní entity celé pending
+
+To je správný signál, že planner už funguje, claimuje joby a zapisuje stav.
+
+Hlavní příčina chyby
+
+V ops.job_runs.details bylo vidět, že planner skládal command:
+
+run_unified_ingest_v1.py --provider api_hockey --sport HK --entity leagues ...
+
+Jenže run_unified_ingest_v1.py očekává sport ve tvaru:
+
+football
+hockey
+basketball
+
+ne ve zkratkách FB / HK / BK. To je vidět přímo v runneru.
+
+Aktuální nutná oprava
+
+V souboru:
+
+C:\MatchMatrix-platform\workers\run_ingest_planner_jobs.py
+
+je potřeba upravit funkci build_command(...), aby mapovala:
+
+FB -> football
+HK -> hockey
+BK -> basketball
+atd.
+
+Toto je teď nejbližší konkrétní technický krok.
+
+8. Jak teď funguje planner worker
+
+run_ingest_planner_jobs.py dělá toto:
+
+vezme z ops.ingest_planner 1 pending job
+přepne ho na running
+spustí child:
+run_unified_ingest_v1.py
+analyzuje výsledek
+uloží audit do ops.job_runs
+planner job dá do:
+done
+pending znovu při warning
+error při chybě
+
+Důležité:
+
+když planner už nic nenajde, skončí OK
+to není chyba, jen prázdná queue
+
+To vysvětluje předchozí situaci, kdy panel ukázal:
+
+Return code 0
+Stav OK
+
+ale reálně nic nestáhl — protože nebyl k dispozici odpovídající pending job.
+
+9. Co je potřeba pro plně bezobslužný provoz
+
+V aktuálním stavu planner sám o sobě nepřeskakuje automaticky na další vrstvu, když dojdou pending.
+
+Tzn. samotný planner worker:
+
+nevybírá další sport
+nevybírá další run_group
+neplní novou queue sám od sebe
+Co je potřeba nad tím
+
+Je potřeba orchestrátor, který bude dělat:
+
+kontrolu, že aktuální sada doběhla
+seed další sady do ops.ingest_planner
+přesun na další entity / run_group / sport
+reakci na error
+hlídání budgetu
+
+Tedy:
+
+planner = vykonávač
+orchestrátor = koordinátor
+
+A to je přesně cíl, který uživatel chce:
+
+aby u toho nikdo nemusel sedět a placená verze se využila naplno
+
+10. Alerting / upozornění mailem
+
+Bylo rozhodnuto, že do budoucna je vhodné přidat:
+
+e-mail alert při error
+ideálně s:
+sportem
+providerem
+entity
+run_group
+poslední message
+doporučeným dalším krokem
+
+To zatím není hotové, ale je to plánovaný logický další krok po rozchození planner/orchestrator řetězce.
+
+11. Kolik sportů teď systém má
+
+V budget/runtime přehledech je potvrzeno, že teď je připraveno cca 13 sportů:
+
+football
+hockey
+basketball
+tennis
+mma
+volleyball
+handball
+baseball
+rugby
+cricket
+field_hockey
+american_football
+esports
+
+To už dává smysl vzhledem k cíli 7500 requests / sport / den.
+
+12. Panel – co je teď za problém
+Cesty a umístění
+
+Bylo upřesněno:
+
+hlavní spouštěcí panel je ve složce tools
+audit panel V7 je v ops_admin
+workers jsou pro pracovní skripty
+
+Správná cesta pro hlavní panel:
+C:\MatchMatrix-platform\tools\matchmatrix_control_panel_V9.py
+
+Co je teď špatně na panelu
+
+Aktuální problém panelu není jen logika běhu, ale i UX:
+
+panel se nespouštěl správně kvůli chybě ve .vbs
+po opravě .vbs se spustila verze V8 místo V9
+layout není skutečně flexibilní
+při zmenšení okna nejsou vidět všechny části
+chybí svislé scrollování celé aplikace
+log dole není vidět
+snapshot část je nepřehledná
+panel nejde rozumně používat na 1/4 obrazovky
+Co už bylo zlepšeno
+
+Ve V8/V9:
+
+sporty jsou čitelně jako FB - Football, HK - Hockey, BK - Basketball
+run_group se načítají dynamicky podle sportu/provideru
+panel už neukazuje jen fallback football run groups
+snapshot byl částečně převeden na tabulku
+Co stále chybí
+
+Panel V9 potřebuje:
+
+maximálně flexibilní layout
+scroll celé aplikace
+menší a kompaktnější karty
+plně viditelný log
+funkční resize i na menší okno
+jasně oddělené sekce
+ideálně:
+scrollable canvas jako hlavní kontejner
+váhy grid řádků/sloupců správně nastavené
+log jako samostatný velký blok
+snapshot jako kompaktní tabulka
+
+Tohle je další velká samostatná větev práce.
+
+13. Co obsahují důležité kódy pro panel / orchestraci
+matchmatrix_control_panel_V8/V9.py
+
+Obsahuje:
+
+GUI panel
+načítání sportů, run_group a entit z DB
+mapování sport → provider
+volání runnerů
+mini DB/OPS dashboard
+snapshot před/po
+live stav běhu
+Důležité konstanty v panelu
+
+Původně:
+
+BATCH_RUNNER = run_unified_ingest_batch_v1.py
+
+To bylo špatně pro planner architekturu.
+
+Správně má být panel navázaný na:
+
+run_ingest_planner_jobs.py
+run_ingest_planner_jobs.py
+
+Obsahuje:
+
+claim pending jobu
+stavový přechod pending -> running -> done/error/pending again
+zápis do ops.job_runs
+stavovou logiku planner queue
+volání run_unified_ingest_v1.py
+run_unified_ingest_v1.py
+
+Obsahuje:
+
+provider registry
+dispatch na konkrétní provider/sport
+volání provider class
+společnou logiku provider + sport + entity + season + league_id + run_group
+run_unified_ingest_batch_v1.py
+
+Obsahuje:
+
+batch běhy nad ops.ingest_targets
+nepracuje jako planner
+je vhodný pro dávkové target testy, ne jako hlavní orchestrátor panelu
+run_ingest_cycle_v3.py
+
+Obsahuje:
+
+lock
+planner worker
+teams extractor
+merge worker
+audit do ops.job_runs
+
+To je nadstavbový běh cyklu, ne čistý panelový planner test.
+
+14. Co je nejbližší další krok po přechodu do nového chatu
+Bezprostředně
+
+Upravit:
+
+C:\MatchMatrix-platform\workers\run_ingest_planner_jobs.py
+
+konkrétně funkci build_command(...), aby mapovala sport_code na ingest názvy.
+
+Po té úpravě
+
+Znovu pustit z panelu:
+
+sport = HK
+run_group = HK_TOP
+entity = leagues
+limit = 1
+
+a zkontrolovat, zda už první hockey leagues planner job proběhne OK.
+
+Potom
+teams
+fixtures
+první HK_TOP sekvence
+teprve potom:
+alerting
+bezobslužná orchestrace
+panel UX/refactor V9
+15. Shrnutí pro nový chat – krátká verze
+
+V novém chatu navázat takto:
+
+MatchMatrix má hotovou základní architekturu ingest + OPS + ticket vrstvu
+HK a BK jsou dotažené do modelu TOP + CORE
+football je referenční vzor, ale má 2 providery a trochu jinou sadu entit
+panel už umí načítat sporty/run_group z DB, ale UX V9 je ještě potřeba zásadně zlepšit
+hlavní technický blocker teď není DB, ale:
+panel layout / flexibilita
+planner posílá HK/BK/FB místo hockey/basketball/football
+teď se má upravit run_ingest_planner_jobs.py ve funkci build_command(...)
+potom znovu pustit HK_TOP + leagues + limit 1
+cílem je plně bezobslužná orchestrace a maximální využití placeného API
+

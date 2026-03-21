@@ -410,11 +410,30 @@ def mark_planner_pending_again(
 # CHILD PROCESS
 # ----------------------------------------------------------
 def build_command(planner_row: Dict[str, Any]) -> list[str]:
+    sport_map = {
+        "FB": "football",
+        "HK": "hockey",
+        "BK": "basketball",
+        "TN": "tennis",
+        "MMA": "mma",
+        "VB": "volleyball",
+        "HB": "handball",
+        "BSB": "baseball",
+        "RGB": "rugby",
+        "CK": "cricket",
+        "FH": "field_hockey",
+        "AFB": "american_football",
+        "ESP": "esports",
+    }
+
+    planner_sport = str(planner_row["sport_code"])
+    ingest_sport = sport_map.get(planner_sport, planner_sport.lower())
+
     command = [
         PYTHON_EXE,
         UNIFIED_RUNNER,
         "--provider", str(planner_row["provider"]),
-        "--sport", str(planner_row["sport_code"]),
+        "--sport", ingest_sport,
         "--entity", str(planner_row["entity"]),
     ]
 

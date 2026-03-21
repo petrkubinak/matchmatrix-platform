@@ -23,7 +23,7 @@ import psycopg2
 PROJECT_ROOT = Path(r"C:\MatchMatrix-platform")
 PYTHON_EXE = r"C:\Python314\python.exe"
 
-BATCH_RUNNER = str(PROJECT_ROOT / "ingest" / "run_unified_ingest_batch_v1.py")
+BATCH_RUNNER = str(PROJECT_ROOT / "workers" / "run_ingest_planner_jobs.py")
 SCHEDULER_RUNNER = str(PROJECT_ROOT / "workers" / "run_multisport_scheduler_v4.py")
 PLAYERS_PIPELINE_RUNNER = str(PROJECT_ROOT / "workers" / "run_players_pipeline_full_v1.py")
 
@@ -47,20 +47,22 @@ DB_CONFIG = {
 }
 
 FALLBACK_RUN_GROUP_OPTIONS = [
-    "FOOTBALL_MAINTENANCE",
-    "FOOTBALL_MAINTENANCE_TOP",
-    "MAINTENANCE_FREE",
-    "BACKFILL_FREE_2022",
-    "BACKFILL_FREE_2023",
-    "BACKFILL_FREE_2024",
-    "MAINTENANCE_PRO",
-    "BACKFILL_PRO_RECENT",
+    "FB_TOP",
+    "FB_API_EXPANSION",
+    "FB_FD_CORE",
+    "HK_TOP",
+    "HK_CORE",
+    "BK_TOP",
+    "BK_CORE",
 ]
 
 DEFAULT_PROVIDER_BY_SPORT = {
+    "FB": "api_football",
+    "HK": "api_hockey",
+    "BK": "api_sport",
     "football": "api_football",
     "hockey": "api_hockey",
-    "basketball": "api_basketball",
+    "basketball": "api_sport",
     "tennis": "api_tennis",
     "mma": "api_mma",
     "volleyball": "api_volleyball",
@@ -71,6 +73,22 @@ DEFAULT_PROVIDER_BY_SPORT = {
     "field_hockey": "api_field_hockey",
     "american_football": "api_american_football",
     "esports": "api_esports",
+}
+
+SPORT_LABELS = {
+    "FB": "FB - Football",
+    "HK": "HK - Hockey",
+    "BK": "BK - Basketball",
+    "TN": "TN - Tennis",
+    "MMA": "MMA - MMA",
+    "VB": "VB - Volleyball",
+    "HB": "HB - Handball",
+    "BSB": "BSB - Baseball",
+    "RGB": "RGB - Rugby",
+    "CK": "CK - Cricket",
+    "FH": "FH - Field Hockey",
+    "AFB": "AFB - American Football",
+    "ESP": "ESP - Esports",
 }
 
 ENTITY_PROFILE_MAP = {
@@ -290,40 +308,50 @@ class MatchMatrixPanelV7:
         finally:
             conn.close()
 
-    def load_run_groups_from_db(self, provider: str, sport: str) -> list[str]:
+    def load_run_groups_from_db(self, provider: str | None = None, sport: str | None = None) -> list[str]:
         sql = """
             SELECT DISTINCT run_group
             FROM ops.ingest_targets
             WHERE enabled = TRUE
-            AND provider = %s
-            AND sport_code = %s
-            AND COALESCE(BTRIM(run_group), '') <> ''
-            ORDER BY run_group
+              AND COALESCE(BTRIM(run_group), '') <> ''
         """
+        params = []
+        if provider:
+            sql += "\n  AND provider = %s"
+            params.append(provider)
+        if sport:
+            sql += "\n  AND sport_code = %s"
+            params.append(sport)
+        sql += "\n ORDER BY run_group"
         conn = self.get_connection()
         try:
             with conn.cursor() as cur:
-                cur.execute(sql, (provider, sport))
+                cur.execute(sql, tuple(params))
                 return [row[0] for row in cur.fetchall()]
         finally:
             conn.close()
-
-    def load_entities_from_db(self) -> list[str]:
+    def load_entities_from_db(self, provider: str | None = None, sport: str | None = None) -> list[str]:
         sql = """
             SELECT DISTINCT entity
             FROM ops.ingest_entity_plan
             WHERE enabled = TRUE
               AND COALESCE(BTRIM(entity), '') <> ''
-            ORDER BY priority, entity
         """
+        params = []
+        if provider:
+            sql += "\n  AND provider = %s"
+            params.append(provider)
+        if sport:
+            sql += "\n  AND sport_code = %s"
+            params.append(sport)
+        sql += "\n ORDER BY entity"
         conn = self.get_connection()
         try:
             with conn.cursor() as cur:
-                cur.execute(sql)
+                cur.execute(sql, tuple(params))
                 return [row[0] for row in cur.fetchall()]
         finally:
             conn.close()
-
     def collect_db_snapshot(self) -> dict[str, int]:
         snapshot = {}
         queries = {
@@ -355,49 +383,41 @@ class MatchMatrixPanelV7:
     def refresh_dynamic_options(self, initial: bool = False) -> None:
         try:
             sports = self.load_sports_from_db()
-            entities = self.load_entities_from_db()
-
             if not sports:
                 sports = ["FB", "HK", "BK"]
 
             self.db_sport_options = sports
-            self.db_entity_options = entities if entities else [
-                "leagues",
-                "teams",
-                "fixtures",
-                "odds",
-                "players",
-                "player_profiles",
-                "player_season_stats",
-                "player_stats",
-            ]
-
             self.reload_sports_listbox()
-            self.reload_entities_listbox()
 
-            # run_group načti až podle aktuálně vybraného sportu
-            selected_sports = self.get_selected_sports()
-            if selected_sports:
-                sport = selected_sports[0]
-                provider_map = {
-                    "FB": "api_football",
-                    "HK": "api_hockey",
-                    "BK": "api_sport",
-                }
-                provider = provider_map.get(sport, f"api_{sport.lower()}")
-                run_groups = self.load_run_groups_from_db(provider, sport)
-            else:
-                run_groups = []
+            selected_sports = self.get_selected_sports() if hasattr(self, "sports_listbox") else []
+            sport = selected_sports[0] if selected_sports else (sports[0] if sports else None)
+            provider = self.resolve_provider_for_sport(sport) if sport else None
+
+            run_groups = self.load_run_groups_from_db(provider, sport) if sport else []
+            entities = self.load_entities_from_db(provider, sport) if sport else []
 
             if not run_groups:
                 run_groups = FALLBACK_RUN_GROUP_OPTIONS[:]
 
+            if not entities:
+                entities = [
+                    "leagues",
+                    "teams",
+                    "fixtures",
+                    "odds",
+                    "players",
+                    "coaches",
+                ]
+
             self.db_run_group_options = run_groups
+            self.db_entity_options = entities
+
             self.reload_run_group_combobox()
+            self.reload_entities_listbox()
             self.update_selection_dashboard()
 
             if not initial:
-                self.log_write("Dynamické volby načteny z DB.")
+                self.log_write(f"Dynamické volby načteny z DB pro sport: {sport or '-'}")
 
         except Exception as e:
             self.db_sport_options = ["FB", "HK", "BK"]
@@ -408,9 +428,7 @@ class MatchMatrixPanelV7:
                 "fixtures",
                 "odds",
                 "players",
-                "player_profiles",
-                "player_season_stats",
-                "player_stats",
+                "coaches",
             ]
 
             self.reload_sports_listbox()
@@ -584,7 +602,7 @@ class MatchMatrixPanelV7:
             relief="flat",
         )
         self.sports_listbox.grid(row=1, column=0, sticky="nsew")
-        self.sports_listbox.bind("<<ListboxSelect>>", lambda e: self.update_selection_dashboard())
+        self.sports_listbox.bind("<<ListboxSelect>>", self.on_sport_selection_changed)
 
         sports_btns = tk.Frame(sports_frame, bg=BG)
         sports_btns.grid(row=2, column=0, sticky="ew", pady=6)
@@ -1015,11 +1033,12 @@ class MatchMatrixPanelV7:
     # UI helpers
     # --------------------------------------------------------
     def reload_sports_listbox(self) -> None:
-        current_selection = [self.sports_listbox.get(i) for i in self.sports_listbox.curselection()]
+        current_selection = self.get_selected_sports() if hasattr(self, "sports_listbox") else []
         self.sports_listbox.delete(0, tk.END)
 
-        for sport in self.db_sport_options:
-            self.sports_listbox.insert(tk.END, sport)
+        display_values = [SPORT_LABELS.get(sport, sport) for sport in self.db_sport_options]
+        for value in display_values:
+            self.sports_listbox.insert(tk.END, value)
 
         for idx, sport in enumerate(self.db_sport_options):
             if sport in current_selection:
@@ -1182,7 +1201,12 @@ class MatchMatrixPanelV7:
     # Commands
     # --------------------------------------------------------
     def get_selected_sports(self) -> list[str]:
-        return [self.sports_listbox.get(i) for i in self.sports_listbox.curselection()]
+        selected = [self.sports_listbox.get(i) for i in self.sports_listbox.curselection()]
+        reverse_labels = {v: k for k, v in SPORT_LABELS.items()}
+        return [reverse_labels.get(item, item) for item in selected]
+
+    def on_sport_selection_changed(self, event=None) -> None:
+        self.refresh_dynamic_options(initial=True)
 
     def get_selected_entities(self) -> list[str]:
         return [self.entities_listbox.get(i) for i in self.entities_listbox.curselection()]
@@ -1190,8 +1214,8 @@ class MatchMatrixPanelV7:
     def resolve_provider_for_sport(self, sport: str) -> str:
         if self.provider_mode_var.get() == "manual":
             provider = self.manual_provider_var.get().strip()
-            return provider if provider else DEFAULT_PROVIDER_BY_SPORT.get(sport, f"api_{sport}")
-        return DEFAULT_PROVIDER_BY_SPORT.get(sport, f"api_{sport}")
+            return provider if provider else DEFAULT_PROVIDER_BY_SPORT.get(sport, f"api_{sport.lower()}")
+        return DEFAULT_PROVIDER_BY_SPORT.get(sport, f"api_{sport.lower()}")
 
     def run_batch_combinations_thread(self) -> None:
         thread = threading.Thread(target=self.run_batch_combinations, daemon=True)
@@ -1261,9 +1285,10 @@ class MatchMatrixPanelV7:
                     "--sport", sport,
                     "--entity", entity,
                     "--limit", limit,
-                    "--max-workers", max_workers,
                     "--timeout-sec", timeout_sec,
+                    "--max-attempts", "3",
                 ]
+
                 if run_group:
                     cmd.extend(["--run-group", run_group])
                 combos.append((sport, entity, provider, cmd))
