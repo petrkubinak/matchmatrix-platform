@@ -1,0 +1,132 @@
+MatchMatrix – navazovací zápis (Ingest stabilizace + Players refactor)
+
+📅 Datum: 22.03.2026 (poledne)
+
+🎯 Cíl této fáze
+stabilizovat hlavní ingest pipeline
+vyčistit planner data
+odstranit legacy větve
+připravit players na správné napojení do architektury
+✅ Co je hotové
+1. 🧱 Stabilní ingest cycle V3
+
+Hlavní orchestrátor plně funkční:
+
+run_ingest_cycle_v3.py
+
+Flow:
+
+planner
+→ unified ingest
+→ teams extractor
+→ merge
+
+✔ plně funkční end-to-end
+✔ audit do ops.job_runs
+✔ worker lock
+✔ heartbeat
+✔ error handling
+
+2. 🔄 Planner opraven + vyčištěn
+odstraněny nevalidní joby bez provider_league_id
+builder (build_ingest_planner_jobs.py) potvrzen jako správný
+football planner znovu naplněn validními daty
+
+✔ teams / fixtures / odds / players mají vždy league_id
+✔ žádné chybové kombinace
+
+3. ⚙️ Sport mapping (FB / football)
+OPS používá FB
+ingest runner používá football
+
+✔ normalizace funguje
+✔ planner → runner předává správný sport
+
+4. 🧠 Unified ingest stabilní
+teams ingest OK
+fixtures ingest OK
+players ingest běží jako planner job (v4 worker)
+
+✔ žádné chyby typu --league-id missing
+✔ pipeline běží reálně na datech
+
+5. 🏒 Teams extractor
+extract_teams_from_fixtures_v2.py
+
+✔ funkční
+✔ doplňuje týmy ze fixtures
+✔ bez chyb
+
+6. 🔁 Merge V3
+run_unified_staging_to_public_merge_v3.py
+
+✔ data se propisují do public
+✔ players / matches / leagues OK
+✔ bez chyb
+
+7. 🧹 Cleanup kódu
+odstraněny reference na players_rc
+opraveny details bloky
+odstraněny rozbité části po refaktoru
+
+✔ cycle běží čistě
+✔ žádné runtime chyby
+
+8. 🧱 Players – refactor (rozpracováno)
+
+Vytvořeno:
+
+run_players_fetch_only_v1.py
+run_players_parse_only_v1.py
+run_players_pipeline_transitional_v1.py
+
+✔ pipeline rozdělená na části
+✔ připraveno na integraci
+
+❗ zatím:
+
+není napojené do hlavního cycle
+fetch wrapper původně neměl parametry (opraveno směr řešení)
+📊 Aktuální stav
+Oblast	Stav
+DB architektura	✅
+staging	✅
+planner	✅
+ingest (football)	✅
+ingest (hockey)	✅
+scheduler	⚠️ další krok
+players pipeline	⚠️ refactor připraven
+panel V9	✅
+⚠️ Důležité rozhodnutí
+
+Players byly dočasně odpojeny z cycle, aby:
+
+nezpůsobovaly chyby (RunId / DB env / parametry)
+zůstal stabilní production ingest
+mohly být napojeny správně (ne hackem)
+🚀 Další krok (navazovací bod)
+
+👉 Pokračujeme správným planner-native napojením players fetch a players parse do ingest cycle.
+
+🧠 Co to znamená
+players už nebude separátní pipeline
+bude fungovat stejně jako:
+teams
+fixtures
+
+👉 přes planner job:
+
+entity = players
+s parametry:
+league_id
+season
+run_id
+🔥 Výsledek dne
+odstraněny kritické bugy
+ingest běží end-to-end
+architektura vyčištěná
+připraveno na sjednocení players
+
+Až otevřeš nový chat, stačí napsat:
+
+👉 „pokračujeme planner-native players“

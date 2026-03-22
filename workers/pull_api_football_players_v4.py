@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 # C:\MatchMatrix-platform\.env
 # ==========================================================
 
-ENV_PATH = Path(__file__).resolve().parents[2] / ".env"
+ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
 load_dotenv(dotenv_path=ENV_PATH)
 
 

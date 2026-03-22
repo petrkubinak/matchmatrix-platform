@@ -1,80 +1,85 @@
 # TicketMatrixPlatform – technický audit
 
-Datum a čas: 2026-03-22 00:06:31
+Datum a čas: 2026-03-22 13:08:04
 Project root: C:\MatchMatrix-platform
 
 ## Vybrané části projektu
 - Celý projekt
 
 ## Souhrn souborů
-- Celkem souborů: 1119
-- NEW: 37
-- MODIFIED: 2
-- DELETED: 0
+- Celkem souborů: 1123
+- NEW: 24
+- MODIFIED: 4
+- DELETED: 22
 
 ## Nejvýznamnější změny
-- MODIFIED: tools\matchmatrix_control_panel_V7.py
-- MODIFIED: workers\run_ingest_planner_jobs.py
-- NEW: db\ops\190_seed_hk_full_provider_jobs.sql
-- NEW: db\ops\194_seed_hk_core_provider_jobs.sql
-- NEW: db\ops\197_seed_bk_top_provider_jobs.sql
-- NEW: db\ops\200_seed_bk_core_provider_jobs.sql
-- NEW: db\ops\203_seed_hk_top_ingest_planner.sql
-- NEW: db\views\188_create_v_ops_hk_top_full_execution_order.sql
-- NEW: db\views\189_create_v_ops_hk_full_job_catalog.sql
-- NEW: db\views\191_create_v_ops_hk_full_runnable_jobs.sql
-- NEW: db\views\193_create_v_ops_hk_core_full_job_catalog.sql
-- NEW: db\views\195_create_v_ops_hk_core_runnable_jobs.sql
-- NEW: db\views\196_create_v_ops_bk_top_full_job_catalog.sql
-- NEW: db\views\198_create_v_ops_bk_top_runnable_jobs.sql
-- NEW: db\views\199_create_v_ops_bk_core_full_job_catalog.sql
-- NEW: db\views\201_create_v_ops_bk_core_runnable_jobs.sql
-- NEW: db\views\202_create_v_ops_hk_top_full_runnable_jobs.sql
-- NEW: docs\komunikace s chatGPT\20260320\MatchMatrix – pracovní zápis.md
-- NEW: docs\komunikace s chatGPT\20260321\MatchMatrix – navazovací zápis.txt
-- NEW: MatchMatrix-platform\Dump\dump-matchmatrix-202603220005.sql
+- DELETED: ingest\football_data_pull_V5.py
+- DELETED: ingest\football_data_uk_history_pull.py
+- DELETED: ingest\parse_api_sport_fixtures.py
+- DELETED: ingest\parse_api_sport_leagues.py
+- DELETED: ingest\predict_matches.py
+- DELETED: ingest\run_football_data_pull_V5.bat
+- DELETED: ingest\run_football_data_uk_history.bat
+- DELETED: ingest\run_theodds.bat
+- DELETED: ingest\run_theodds_parse_multi_V1.bat
+- DELETED: ingest\theodds_parse_multi_V1.py
+- DELETED: ingest\theodds_pull.py
+- DELETED: ops\run_daily_ingest.py
+- DELETED: ops\run_provider_job.py
+- DELETED: workers\extract_missing_teams_from_fixtures_v1.py
+- DELETED: workers\extract_teams_from_fixtures.py
+- DELETED: workers\legacy_to_staging_bridge_report.txt
+- DELETED: workers\repair_missing_teams_from_fixtures_v2.py
+- DELETED: workers\run_full_ingest_pipeline.py
+- DELETED: workers\run_legacy_to_staging_bridge_v2.py
+- DELETED: workers\run_legacy_to_staging_odds_bridge.py
 
 ## Git
 - Branch: main
-- Last commit: f2cefba | 2026-03-20 22:00:43 +0100 | update players pipeline
+- Last commit: 0ba44ab | 2026-03-22 00:08:31 +0100 | update players pipeline
 ```
-M reports/audit/latest_snapshot.txt
- M tools/matchmatrix_control_panel_V7.py
- M workers/run_ingest_planner_jobs.py
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_basket/
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/188_create_v_ops_hk_top_full_execution_order.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/189_create_v_ops_hk_full_job_catalog.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/190_seed_hk_full_provider_jobs.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/191_create_v_ops_hk_full_runnable_jobs.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/193_create_v_ops_hk_core_full_job_catalog.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/194_seed_hk_core_provider_jobs.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/195_create_v_ops_hk_core_runnable_jobs.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/202_create_v_ops_hk_top_full_runnable_jobs.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/203_seed_hk_top_ingest_planner.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/Script.sql
-?? db/ops/190_seed_hk_full_provider_jobs.sql
-?? db/ops/194_seed_hk_core_provider_jobs.sql
-?? db/ops/197_seed_bk_top_provider_jobs.sql
-?? db/ops/200_seed_bk_core_provider_jobs.sql
-?? db/ops/203_seed_hk_top_ingest_planner.sql
-?? db/views/188_create_v_ops_hk_top_full_execution_order.sql
-?? db/views/189_create_v_ops_hk_full_job_catalog.sql
-?? db/views/191_create_v_ops_hk_full_runnable_jobs.sql
-?? db/views/193_create_v_ops_hk_core_full_job_catalog.sql
-?? db/views/195_create_v_ops_hk_core_runnable_jobs.sql
-?? db/views/196_create_v_ops_bk_top_full_job_catalog.sql
-?? db/views/198_create_v_ops_bk_top_runnable_jobs.sql
-?? db/views/199_create_v_ops_bk_core_full_job_catalog.sql
-?? db/views/201_create_v_ops_bk_core_runnable_jobs.sql
-?? db/views/202_create_v_ops_hk_top_full_runnable_jobs.sql
-?? "docs/komunikace s chatGPT/20260320/MatchMatrix \342\200\223 pracovn\303\255 z\303\241pis.md"
-?? "docs/komunikace s chatGPT/20260321/"
-?? tools/matchmatrix_control_panel_V7_fixed.py
-?? tools/matchmatrix_control_panel_V8.py
-?? tools/matchmatrix_control_panel_V9.py
-?? tools/run_matchmatrix_panel_v7.vbs
-?? tools/run_matchmatrix_panel_v8.vbs
-?? tools/run_matchmatrix_panel_v9.vbs
+M ingest/API-Football/pull_api_football_players.ps1
+ M ingest/API-Hockey/pull_api_hockey_leagues.ps1
+ M ingest/API-Hockey/pull_api_hockey_teams.ps1
+ D ingest/football_data_pull_V5.py
+ D ingest/football_data_uk_history_pull.py
+ D ingest/parse_api_sport_fixtures.py
+ D ingest/parse_api_sport_leagues.py
+ D ingest/predict_matches.py
+ D ingest/run_football_data_pull_V5.bat
+ D ingest/run_football_data_uk_history.bat
+ D ingest/run_theodds.bat
+ D ingest/run_theodds_parse_multi_V1.bat
+ M ingest/run_unified_ingest_batch_v1.py
+ D ingest/theodds_parse_multi_V1.py
+ D ingest/theodds_pull.py
+ D ops/run_daily_ingest.py
+ D ops/run_provider_job.py
+ M reports/audit/2026-03-22/MATCHMATRIX_AUDIT_REPORT.md
+ M reports/audit/2026-03-22/MATCHMATRIX_PROGRESS.md
+ M reports/audit/latest_audit_report.md
+ M reports/audit/latest_progress_report.md
+ M reports/audit/latest_snapshot.txt
+ M tools/matchmatrix_control_panel_V9.py
+ D workers/extract_missing_teams_from_fixtures_v1.py
+ D workers/extract_teams_from_fixtures.py
+ D workers/legacy_to_staging_bridge_report.txt
+ M workers/pull_api_football_players_v4.py
+ D workers/repair_missing_teams_from_fixtures_v2.py
+ D workers/run_full_ingest_pipeline.py
+ M workers/run_ingest_cycle_v3.py
+ D workers/run_legacy_to_staging_bridge_v2.py
+ D workers/run_legacy_to_staging_odds_bridge.py
+ D workers/run_payload_parser.py
+ D workers/run_players_pipeline_full_v1.py
+?? "docs/komunikace s chatGPT/20260321/matchmatrix - matchmatrix - ops.png"
+?? "docs/komunikace s chatGPT/20260321/matchmatrix - matchmatrix - public.png"
+?? "docs/komunikace s chatGPT/20260321/matchmatrix - matchmatrix - staging.png"
+?? "docs/komunikace s chatGPT/20260322/"
+?? legacy/
+?? workers/run_players_fetch_only_v1.py
+?? workers/run_players_parse_only_v1.py
+?? workers/run_players_pipeline_transitional_v1.py
 ```
 
 ## Databáze
@@ -85,8 +90,8 @@ M reports/audit/latest_snapshot.txt
   - players: 779
   - teams: 5238
 - OPS counts:
-  - ingest_planner: 215
-  - job_runs: 181
+  - ingest_planner: 628
+  - job_runs: 218
   - provider_jobs: 78
   - scheduler_queue: 6
 - Player pipeline:

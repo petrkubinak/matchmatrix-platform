@@ -139,7 +139,7 @@ def run_powershell_file(title: str, ps1_file: Path, extra_args: list[str] | None
 
 def main() -> int:
     try:
-        print_header("MATCHMATRIX PLAYERS PIPELINE FULL V1")
+        print_header("MATCHMATRIX PLAYERS PIPELINE FULL V1 - TRANSITIONAL")
         print(f"BASE_DIR   : {BASE_DIR}")
         print(f"PYTHON_EXE : {PYTHON_EXE}")
         print()
@@ -184,12 +184,12 @@ def main() -> int:
         for offset, (title, sql_path) in enumerate(SQL_STEPS[5:], start=8):
             run_sql_file(f"STEP {offset} - {title}", sql_path)
 
-        print_header("PLAYERS PIPELINE FULL V1 - FINISHED SUCCESSFULLY")
+        print_header("PLAYERS PIPELINE FULL V1 - TRANSITIONAL - FINISHED SUCCESSFULLY")
         return 0
 
     except Exception as exc:
         print()
-        print_header("PLAYERS PIPELINE FULL V1 - FAILED")
+        print_header("PLAYERS PIPELINE FULL V1 - TRANSITIONAL - FAILED")
         print(f"CHYBA: {exc}")
         return 1
 

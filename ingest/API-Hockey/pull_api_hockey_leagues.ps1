@@ -1,5 +1,5 @@
 param(
-  [Parameter(Mandatory=$true)][int]$RunId
+  [Parameter(Mandatory=$true)][string]$RunId
 )
 
 $ErrorActionPreference = "Stop"

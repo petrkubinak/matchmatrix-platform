@@ -1,6 +1,6 @@
 param(
-  [Parameter(Mandatory=$true)][int]$RunId,
-  [Parameter(Mandatory=$true)][int]$Season,
+  [Parameter(Mandatory=$true)][string]$RunId,
+  [Parameter(Mandatory=$false)][int]$Season,
   [Parameter(Mandatory=$false)][int]$LeagueId
 )
 

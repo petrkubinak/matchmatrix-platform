@@ -89,7 +89,11 @@ insert into staging.players_import
     birth_date,
     nationality,
     photo_url,
-    raw
+    raw,
+    run_id,
+    provider_league_id,
+    season
+    source_endpoint
 )
 values
 (
@@ -101,8 +105,13 @@ values
     $(if($birthDate){ "'$birthDate'" } else { "null" }),
     $(if($nationality){ "'$nationality'" } else { "null" }),
     $(if($photo){ "'$photo'" } else { "null" }),
-    '$json'::jsonb
-)
+    '$json'::jsonb,
+    $RunId,
+    '$LeagueId',
+    '$Season',
+    '/players'
+    )
+
 on conflict (provider_code, provider_player_id) do update
 set player_name = excluded.player_name,
     first_name = excluded.first_name,

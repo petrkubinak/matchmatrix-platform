@@ -1,7 +1,7 @@
 # TicketMatrixPlatform – denní přehled vývoje
 
 Datum: 22.03.2026  
-Čas kontroly systému: 00:06
+Čas kontroly systému: 13:08
 
 ---
 
@@ -24,11 +24,12 @@ Byly zkontrolovány tyto části projektu:
 
 - Celý projekt
 
-Celkem bylo projito 1119 sledovaných souborů.
+Celkem bylo projito 1123 sledovaných souborů.
 
 Ve srovnání s minulým auditem:
-- bylo přidáno 37 nových souborů
-- u 2 souborů proběhla úprava
+- bylo přidáno 24 nových souborů
+- u 4 souborů proběhla úprava
+- 22 souborů bylo odstraněno
 
 ---
 
@@ -56,17 +57,17 @@ Git větev:
 - main
 
 Poslední commit:
-- f2cefba | 2026-03-20 22:00:43 +0100 | update players pipeline
+- 0ba44ab | 2026-03-22 00:08:31 +0100 | update players pipeline
 
 Aktuální neuložené změny:
-- M reports/audit/latest_snapshot.txt
--  M tools/matchmatrix_control_panel_V7.py
--  M workers/run_ingest_planner_jobs.py
-- ?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_basket/
-- ?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/188_create_v_ops_hk_top_full_execution_order.sql
-- ?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/189_create_v_ops_hk_full_job_catalog.sql
-- ?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/190_seed_hk_full_provider_jobs.sql
-- ?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/191_create_v_ops_hk_full_runnable_jobs.sql
+- M ingest/API-Football/pull_api_football_players.ps1
+-  M ingest/API-Hockey/pull_api_hockey_leagues.ps1
+-  M ingest/API-Hockey/pull_api_hockey_teams.ps1
+-  D ingest/football_data_pull_V5.py
+-  D ingest/football_data_uk_history_pull.py
+-  D ingest/parse_api_sport_fixtures.py
+-  D ingest/parse_api_sport_leagues.py
+-  D ingest/predict_matches.py
 
 ---
 
@@ -81,14 +82,14 @@ Na základě dnešního auditu je vidět, že projekt má:
 
 
 Hlavní změněné soubory dnes:
-- tools\matchmatrix_control_panel_V7.py
-- workers\run_ingest_planner_jobs.py
-- db\ops\190_seed_hk_full_provider_jobs.sql
-- db\ops\194_seed_hk_core_provider_jobs.sql
-- db\ops\197_seed_bk_top_provider_jobs.sql
-- db\ops\200_seed_bk_core_provider_jobs.sql
-- db\ops\203_seed_hk_top_ingest_planner.sql
-- db\views\188_create_v_ops_hk_top_full_execution_order.sql
+- ingest\football_data_pull_V5.py
+- ingest\football_data_uk_history_pull.py
+- ingest\parse_api_sport_fixtures.py
+- ingest\parse_api_sport_leagues.py
+- ingest\predict_matches.py
+- ingest\run_football_data_pull_V5.bat
+- ingest\run_football_data_uk_history.bat
+- ingest\run_theodds.bat
 
 ---
 

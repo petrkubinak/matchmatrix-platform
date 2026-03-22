@@ -9,6 +9,29 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import psycopg2
 
+def normalize_sport_code_for_ingest(sport_code: str) -> str:
+    if not sport_code:
+        return sport_code
+
+    code = str(sport_code).strip().upper()
+
+    mapping = {
+        "FB": "football",
+        "HK": "hockey",
+        "BK": "basketball",
+        "TN": "tennis",
+        "MMA": "mma",
+        "VB": "volleyball",
+        "HB": "handball",
+        "BSB": "baseball",
+        "RGB": "rugby",
+        "CK": "cricket",
+        "FH": "field_hockey",
+        "AFB": "american_football",
+        "ESP": "esports",
+    }
+
+    return mapping.get(code, str(sport_code).strip().lower())
 
 BASE_DIR = r"C:\MatchMatrix-platform"
 PYTHON_EXE = r"C:\Python314\python.exe"
@@ -174,13 +197,22 @@ def detect_result(output_text: str, process_returncode: int) -> str:
     if "API errors" in output_text:
         return "ERROR"
 
+    if "FATAL ERROR" in output_text:
+        return "ERROR"
+
     if "No fixtures returned." in output_text:
         return "WARNING"
 
     if "No teams returned." in output_text:
         return "WARNING"
-
+                                                                                                    
     if "inserted into staging" in output_text:
+        return "OK"
+
+    if "Unified ingest finished OK." in output_text:
+        return "OK"
+
+    if "STATUS       : ok" in output_text and process_returncode == 0:
         return "OK"
 
     if process_returncode != 0:
@@ -190,11 +222,13 @@ def detect_result(output_text: str, process_returncode: int) -> str:
 
 
 def run_single(provider, sport, entity, league_id, season, timeout_sec):
+    normalized_sport = normalize_sport_code_for_ingest(sport)
+    
     command = [
         PYTHON_EXE,
         UNIFIED_RUNNER,
         "--provider", provider,
-        "--sport", sport,
+        "--sport", normalized_sport,
         "--entity", entity,
         "--league-id", str(league_id),
         "--season", str(season),

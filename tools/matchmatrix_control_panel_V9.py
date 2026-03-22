@@ -6,25 +6,25 @@ import threading
 import tkinter as tk
 from datetime import datetime
 from pathlib import Path
-from tkinter import messagebox, scrolledtext, ttk
+from tkinter import messagebox, ttk
 
 import psycopg2
 
 
 # ============================================================
-# MATCHMATRIX CONTROL PANEL V8
-# Mission Control style
-# + responsive layout
-# + before/after/diff snapshot
-# + live run status
-# + last run info
+# MATCHMATRIX CONTROL PANEL V9
+# - compact / responsive layout
+# - global scroll for whole window
+# - adaptive bottom split
+# - snapshot before/after/diff
+# - live run status
 # ============================================================
 
 PROJECT_ROOT = Path(r"C:\MatchMatrix-platform")
 PYTHON_EXE = r"C:\Python314\python.exe"
 
 BATCH_RUNNER = str(PROJECT_ROOT / "ingest" / "run_unified_ingest_batch_v1.py")
-SCHEDULER_RUNNER = str(PROJECT_ROOT / "workers" / "run_multisport_scheduler_v4.py")
+SCHEDULER_RUNNER = str(PROJECT_ROOT / "workers" / "run_ingest_cycle_v3.py")
 PLAYERS_PIPELINE_RUNNER = str(PROJECT_ROOT / "workers" / "run_players_pipeline_full_v1.py")
 
 NAV_PATHS = {
@@ -114,7 +114,7 @@ ENTITY_PROFILE_MAP = {
 }
 
 # ------------------------------------------------------------
-# Styl
+# Styl / compact V9
 # ------------------------------------------------------------
 BG = "#1C1330"
 CARD = "#2A1B47"
@@ -130,6 +130,24 @@ BAD = "#FF6B8A"
 LINE = "#5B3A8A"
 TEXTBOX_BG = "#130C23"
 
+FONT_FAMILY = "Segoe UI"
+FONT_TITLE = (FONT_FAMILY, 15, "bold")
+FONT_SUBTITLE = (FONT_FAMILY, 10)
+FONT_LABEL = (FONT_FAMILY, 10, "bold")
+FONT_TEXT = (FONT_FAMILY, 10)
+FONT_VALUE = (FONT_FAMILY, 13, "bold")
+FONT_SMALL = (FONT_FAMILY, 10)
+FONT_MONO = ("Consolas", 10)
+
+PAD_OUTER = 3
+PAD_CARD_X = 2
+PAD_CARD_Y = 2
+CARD_INNER_PAD_X = 5
+CARD_INNER_PAD_Y = 3
+
+TOP_STACK_BREAKPOINT = 920
+BOTTOM_STACK_BREAKPOINT = 1000
+
 
 def open_path(path: Path) -> None:
     try:
@@ -144,16 +162,16 @@ def open_path(path: Path) -> None:
 class MetricCard(tk.Frame):
     def __init__(self, parent, title: str, value: str = "0", subtitle: str = "", color: str = ACCENT):
         super().__init__(parent, bg=CARD, highlightthickness=1, highlightbackground=LINE)
-        self.configure(padx=14, pady=12)
+        self.configure(padx=CARD_INNER_PAD_X, pady=CARD_INNER_PAD_Y)
 
-        self.title_lbl = tk.Label(self, text=title, bg=CARD, fg=MUTED, font=("Segoe UI", 10, "bold"))
+        self.title_lbl = tk.Label(self, text=title, bg=CARD, fg=MUTED, font=FONT_LABEL)
         self.title_lbl.pack(anchor="w")
 
-        self.value_lbl = tk.Label(self, text=value, bg=CARD, fg=FG, font=("Segoe UI", 20, "bold"))
-        self.value_lbl.pack(anchor="w", pady=(4, 0))
+        self.value_lbl = tk.Label(self, text=value, bg=CARD, fg=FG, font=FONT_VALUE)
+        self.value_lbl.pack(anchor="w", pady=(1, 0))
 
-        self.sub_lbl = tk.Label(self, text=subtitle, bg=CARD, fg=color, font=("Segoe UI", 9))
-        self.sub_lbl.pack(anchor="w", pady=(6, 0))
+        self.sub_lbl = tk.Label(self, text=subtitle, bg=CARD, fg=color, font=FONT_SMALL)
+        self.sub_lbl.pack(anchor="w", pady=(4, 0))
 
     def update_card(self, value, subtitle: str = "", color: str = ACCENT) -> None:
         self.value_lbl.config(text=str(value))
@@ -164,19 +182,19 @@ class ProgressBarCard(tk.Frame):
     def __init__(self, parent, title: str, color: str = ACCENT):
         super().__init__(parent, bg=CARD, highlightthickness=1, highlightbackground=LINE)
         self.color = color
-        self.configure(padx=14, pady=12)
+        self.configure(padx=CARD_INNER_PAD_X, pady=CARD_INNER_PAD_Y)
 
-        self.title_lbl = tk.Label(self, text=title, bg=CARD, fg=MUTED, font=("Segoe UI", 10, "bold"))
+        self.title_lbl = tk.Label(self, text=title, bg=CARD, fg=MUTED, font=FONT_LABEL)
         self.title_lbl.pack(anchor="w")
 
-        self.value_lbl = tk.Label(self, text="0 %", bg=CARD, fg=FG, font=("Segoe UI", 16, "bold"))
-        self.value_lbl.pack(anchor="w", pady=(4, 2))
+        self.value_lbl = tk.Label(self, text="0 %", bg=CARD, fg=FG, font=(FONT_FAMILY, 14, "bold"))
+        self.value_lbl.pack(anchor="w", pady=(1, 0))
 
-        self.canvas = tk.Canvas(self, height=18, bg=CARD, highlightthickness=0, bd=0)
-        self.canvas.pack(fill="x", pady=(4, 2))
+        self.canvas = tk.Canvas(self, height=10, bg=CARD, highlightthickness=0, bd=0)
+        self.canvas.pack(fill="x", pady=(2, 1))
 
-        self.sub_lbl = tk.Label(self, text="", bg=CARD, fg=MUTED, font=("Segoe UI", 9))
-        self.sub_lbl.pack(anchor="w", pady=(6, 0))
+        self.sub_lbl = tk.Label(self, text="", bg=CARD, fg=MUTED, font=FONT_SMALL)
+        self.sub_lbl.pack(anchor="w", pady=(2, 0))
 
         self._value = 0
         self.bind("<Configure>", lambda e: self.redraw(self._value))
@@ -185,9 +203,9 @@ class ProgressBarCard(tk.Frame):
         self._value = max(0, min(100, int(value)))
         self.canvas.delete("all")
         w = max(40, self.canvas.winfo_width())
-        self.canvas.create_rectangle(0, 2, w, 16, fill="#24173C", outline=LINE)
+        self.canvas.create_rectangle(0, 1, w, 9, fill="#24173C", outline=LINE)
         fill_w = int((w - 2) * (self._value / 100))
-        self.canvas.create_rectangle(1, 3, max(2, fill_w), 15, fill=self.color, outline=self.color)
+        self.canvas.create_rectangle(1, 2, max(2, fill_w), 8, fill=self.color, outline=self.color)
 
     def update_bar(self, value: int, subtitle: str = "") -> None:
         self.value_lbl.config(text=f"{int(value)} %")
@@ -195,12 +213,13 @@ class ProgressBarCard(tk.Frame):
         self.redraw(value)
 
 
-class MatchMatrixPanelV7:
+class MatchMatrixPanelV9:
     def __init__(self, root: tk.Tk):
         self.root = root
-        self.root.title("TicketMatrixPlatform Mission Control V8")
-        self.root.geometry("1380x860")
-        self.root.minsize(900, 620)
+        self.root.title("TicketMatrixPlatform Mission Control V9")
+        self.root.geometry("1366x768")
+        self.root.minsize(760, 480)
+        self.root.tk.call("tk", "scaling", 0.9)
         self.root.configure(bg=BG)
 
         self.is_running = False
@@ -215,6 +234,9 @@ class MatchMatrixPanelV7:
         self.current_step = 0
         self.total_steps = 0
 
+        self.current_top_layout = None
+        self.current_bottom_layout = None
+
         self._setup_style()
         self._build_ui()
         self.refresh_dynamic_options(initial=True)
@@ -224,7 +246,7 @@ class MatchMatrixPanelV7:
         self.render_snapshot_diff({}, {})
 
         self.log_write("Panel připraven.")
-        self.log_write("V8 načten: dynamický layout + tabulkový snapshot + větší live log + lepší čitelnost.")
+        self.log_write("V9 načten: compact + responsive + global scroll + adaptive layout.")
 
     # --------------------------------------------------------
     # Styling
@@ -237,15 +259,15 @@ class MatchMatrixPanelV7:
             pass
 
         style.configure("MM.TLabelframe", background=BG, foreground=FG, bordercolor=LINE)
-        style.configure("MM.TLabelframe.Label", background=BG, foreground=ACCENT_2, font=("Segoe UI", 10, "bold"))
+        style.configure("MM.TLabelframe.Label", background=BG, foreground=ACCENT_2, font=FONT_LABEL)
 
         style.configure(
             "Accent.TButton",
             background=ACCENT_3,
             foreground=FG,
             borderwidth=0,
-            padding=8,
-            font=("Segoe UI", 10, "bold"),
+            padding=2,
+            font=(FONT_FAMILY, 8, "bold"),
         )
         style.map(
             "Accent.TButton",
@@ -258,13 +280,44 @@ class MatchMatrixPanelV7:
             background=CARD_2,
             foreground=FG,
             borderwidth=0,
-            padding=8,
-            font=("Segoe UI", 9),
+            padding=2,
+            font=(FONT_FAMILY, 8),
         )
         style.map(
             "Ghost.TButton",
             background=[("active", ACCENT_3), ("pressed", ACCENT)],
             foreground=[("active", FG), ("pressed", BG)],
+        )
+
+        style.configure(
+            "Treeview",
+            background=TEXTBOX_BG,
+            fieldbackground=TEXTBOX_BG,
+            foreground=FG,
+            rowheight=16,
+            borderwidth=0,
+            font=FONT_SMALL,
+        )
+        style.configure(
+            "Treeview.Heading",
+            background=CARD_2,
+            foreground=FG,
+            relief="flat",
+            font=FONT_LABEL,
+        )
+        style.map(
+            "Treeview.Heading",
+            background=[("active", ACCENT_3)],
+            foreground=[("active", FG)],
+        )
+
+        style.configure(
+            "TCombobox",
+            fieldbackground="#F1EEF7",
+            background="#F1EEF7",
+            foreground="#111111",
+            arrowsize=12,
+            padding=2,
         )
 
     # --------------------------------------------------------
@@ -323,6 +376,7 @@ class MatchMatrixPanelV7:
             sql += "\n  AND sport_code = %s"
             params.append(sport)
         sql += "\n ORDER BY run_group"
+
         conn = self.get_connection()
         try:
             with conn.cursor() as cur:
@@ -330,6 +384,7 @@ class MatchMatrixPanelV7:
                 return [row[0] for row in cur.fetchall()]
         finally:
             conn.close()
+
     def load_entities_from_db(self, provider: str | None = None, sport: str | None = None) -> list[str]:
         sql = """
             SELECT DISTINCT entity
@@ -345,6 +400,7 @@ class MatchMatrixPanelV7:
             sql += "\n  AND sport_code = %s"
             params.append(sport)
         sql += "\n ORDER BY entity"
+
         conn = self.get_connection()
         try:
             with conn.cursor() as cur:
@@ -352,6 +408,7 @@ class MatchMatrixPanelV7:
                 return [row[0] for row in cur.fetchall()]
         finally:
             conn.close()
+
     def collect_db_snapshot(self) -> dict[str, int]:
         snapshot = {}
         queries = {
@@ -524,140 +581,308 @@ class MatchMatrixPanelV7:
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_columnconfigure(0, weight=1)
 
-        main = tk.Frame(self.root, bg=BG)
-        main.grid(row=0, column=0, sticky="nsew", padx=14, pady=14)
+        # hlavní canvas pro scroll celé aplikace
+        self.outer_canvas = tk.Canvas(
+            self.root,
+            bg=BG,
+            highlightthickness=0,
+            bd=0,
+        )
+        self.outer_canvas.grid(row=0, column=0, sticky="nsew")
 
-        main.grid_columnconfigure(0, weight=1)
-        main.grid_rowconfigure(5, weight=1)
+        self.outer_vscroll = ttk.Scrollbar(self.root, orient="vertical", command=self.outer_canvas.yview)
+        self.outer_vscroll.grid(row=0, column=1, sticky="ns")
 
-        self.build_header(main)
-        self.build_top_controls(main)
-        self.build_selection_dashboard(main)
-        self.build_ops_dashboard(main)
-        self.build_bottom_area(main)
+        self.outer_hscroll = ttk.Scrollbar(self.root, orient="horizontal", command=self.outer_canvas.xview)
+        self.outer_hscroll.grid(row=1, column=0, sticky="ew")
+
+        self.outer_canvas.configure(
+            yscrollcommand=self.outer_vscroll.set,
+            xscrollcommand=self.outer_hscroll.set,
+        )
+
+        self.scroll_frame = tk.Frame(self.outer_canvas, bg=BG)
+        self.canvas_window = self.outer_canvas.create_window((0, 0), window=self.scroll_frame, anchor="nw")
+
+        self.scroll_frame.bind("<Configure>", self._update_scroll_region)
+        self.outer_canvas.bind("<Configure>", self._on_canvas_configure)
+
+        self._bind_mousewheel_recursive(self.root)
+
+        self.main = tk.Frame(self.scroll_frame, bg=BG)
+        self.main.grid(row=0, column=0, sticky="nsew", padx=PAD_OUTER, pady=PAD_OUTER)
+        self.main.grid_columnconfigure(0, weight=1)
+
+        self.build_header(self.main)
+        self.build_top_controls(self.main)
+        self.build_selection_dashboard(self.main)
+        self.build_ops_dashboard(self.main)
+        self.build_bottom_area(self.main)
+
+        self.root.bind("<Configure>", self.on_root_resize)
+
+    def _update_scroll_region(self, event=None) -> None:
+        try:
+            self.outer_canvas.configure(scrollregion=self.outer_canvas.bbox("all"))
+        except Exception:
+            pass
+
+    def _on_canvas_configure(self, event) -> None:
+        # drží minimálně šířku okna, ale dovolí i horizontální scroll při extrémně úzkém zobrazení
+        try:
+            canvas_width = event.width
+            desired_width = max(canvas_width, 1080)
+            self.outer_canvas.itemconfigure(self.canvas_window, width=event.width)
+        except Exception:
+            pass
+
+    def _bind_mousewheel_recursive(self, widget) -> None:
+        widget.bind_all("<MouseWheel>", self._on_mousewheel_windows)
+        widget.bind_all("<Button-4>", self._on_mousewheel_linux_up)
+        widget.bind_all("<Button-5>", self._on_mousewheel_linux_down)
+        widget.bind_all("<Shift-MouseWheel>", self._on_shift_mousewheel)
+
+    def _on_mousewheel_windows(self, event) -> None:
+        try:
+            self.outer_canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+        except Exception:
+            pass
+
+    def _on_shift_mousewheel(self, event) -> None:
+        try:
+            self.outer_canvas.xview_scroll(int(-1 * (event.delta / 120)), "units")
+        except Exception:
+            pass
+
+    def _on_mousewheel_linux_up(self, event) -> None:
+        try:
+            self.outer_canvas.yview_scroll(-1, "units")
+        except Exception:
+            pass
+
+    def _on_mousewheel_linux_down(self, event) -> None:
+        try:
+            self.outer_canvas.yview_scroll(1, "units")
+        except Exception:
+            pass
 
     def build_header(self, parent) -> None:
-        header = tk.Frame(parent, bg=BG)
-        header.grid(row=0, column=0, sticky="ew", pady=(0, 10))
-        header.grid_columnconfigure(0, weight=1)
+        self.header_frame = tk.Frame(parent, bg=BG)
+        self.header_frame.grid(row=0, column=0, sticky="ew", pady=(0, 8))
+        self.header_frame.grid_columnconfigure(0, weight=1)
 
         tk.Label(
-            header,
-            text="TICKETMATRIXPLATFORM MISSION CONTROL V8",
+            self.header_frame,
+            text="TICKETMATRIXPLATFORM MISSION CONTROL V9",
             bg=BG,
             fg=FG,
-            font=("Segoe UI", 18, "bold"),
+            font=FONT_TITLE,
         ).grid(row=0, column=0, sticky="w")
 
         tk.Label(
-            header,
-            text="Multi-sport + Multi-entity batch launcher | snapshot před/po | live průběh | OPS / DB mini dashboard",
+            self.header_frame,
+            text="Multi-sport + Multi-entity batch launcher | compact responsive layout | global scroll | OPS / DB mini dashboard",
             bg=BG,
             fg=MUTED,
-            font=("Segoe UI", 9),
-        ).grid(row=1, column=0, sticky="w", pady=(4, 4))
+            font=FONT_SUBTITLE,
+        ).grid(row=1, column=0, sticky="w", pady=(2, 3))
 
-        tk.Label(header, text=f"Project root: {PROJECT_ROOT}", bg=BG, fg=MUTED, font=("Segoe UI", 9)).grid(row=2, column=0, sticky="w")
-        tk.Label(header, text=f"Python exe: {PYTHON_EXE}", bg=BG, fg=MUTED, font=("Segoe UI", 9)).grid(row=3, column=0, sticky="w")
+        tk.Label(
+            self.header_frame,
+            text=f"Project root: {PROJECT_ROOT}",
+            bg=BG,
+            fg=MUTED,
+            font=FONT_SUBTITLE,
+        ).grid(row=2, column=0, sticky="w")
+
+        tk.Label(
+            self.header_frame,
+            text=f"Python exe: {PYTHON_EXE}",
+            bg=BG,
+            fg=MUTED,
+            font=FONT_SUBTITLE,
+        ).grid(row=3, column=0, sticky="w")
 
     def build_top_controls(self, parent) -> None:
-        top = tk.Frame(parent, bg=BG)
-        top.grid(row=1, column=0, sticky="nsew", pady=(0, 10))
-        top.grid_columnconfigure(0, weight=4)
-        top.grid_columnconfigure(1, weight=1)
+        self.top = tk.Frame(parent, bg=BG)
+        self.top.grid(row=1, column=0, sticky="nsew", pady=(0, 8))
 
-        settings = ttk.LabelFrame(top, text="Batch Control", style="MM.TLabelframe", padding=10)
-        settings.grid(row=0, column=0, sticky="nsew", padx=(0, 8))
+        self.settings_frame_outer = ttk.LabelFrame(self.top, text="Batch Control", style="MM.TLabelframe", padding=4)
+        self.navigator_frame_outer = ttk.LabelFrame(self.top, text="Project Navigator", style="MM.TLabelframe", padding=4)
 
-        navigator = ttk.LabelFrame(top, text="Project Navigator", style="MM.TLabelframe", padding=10)
-        navigator.grid(row=0, column=1, sticky="nsew")
+        self.settings_frame_outer.grid(row=0, column=0, sticky="nsew", padx=(0, 6))
+        self.navigator_frame_outer.grid(row=0, column=1, sticky="nsew")
 
-        self.build_selection_area(settings)
-        self.build_action_area(settings)
-        self.build_navigator(navigator)
+        self.build_selection_area(self.settings_frame_outer)
+        self.build_action_area(self.settings_frame_outer)
+        self.build_navigator(self.navigator_frame_outer)
+
+        self.apply_top_layout(self.root.winfo_width())
+
+    def apply_top_layout(self, width: int) -> None:
+        target = "stack" if width < TOP_STACK_BREAKPOINT else "side"
+        if self.current_top_layout == target:
+            return
+
+        self.current_top_layout = target
+
+        for i in range(3):
+            self.top.grid_columnconfigure(i, weight=0)
+
+        if target == "side":
+            self.settings_frame_outer.grid_forget()
+            self.navigator_frame_outer.grid_forget()
+
+            self.top.grid_columnconfigure(0, weight=4)
+            self.top.grid_columnconfigure(1, weight=1)
+
+            self.settings_frame_outer.grid(row=0, column=0, sticky="nsew", padx=(0, 6), pady=0)
+            self.navigator_frame_outer.grid(row=0, column=1, sticky="nsew", padx=0, pady=0)
+        else:
+            self.settings_frame_outer.grid_forget()
+            self.navigator_frame_outer.grid_forget()
+
+            self.top.grid_columnconfigure(0, weight=1)
+
+            self.settings_frame_outer.grid(row=0, column=0, sticky="nsew", padx=0, pady=(0, 6))
+            self.navigator_frame_outer.grid(row=1, column=0, sticky="nsew", padx=0, pady=0)
 
     def build_selection_area(self, parent) -> None:
-        wrapper = tk.Frame(parent, bg=BG)
-        wrapper.pack(fill="x", pady=(0, 8))
+        self.selection_wrapper = tk.Frame(parent, bg=BG)
+        self.selection_wrapper.pack(fill="x", pady=(0, 6))
 
-        wrapper.grid_columnconfigure(0, weight=1)
-        wrapper.grid_columnconfigure(1, weight=1)
-        wrapper.grid_columnconfigure(2, weight=2)
+        self.sports_frame = tk.Frame(self.selection_wrapper, bg=BG)
+        self.entities_frame = tk.Frame(self.selection_wrapper, bg=BG)
+        self.settings_frame = tk.Frame(self.selection_wrapper, bg=BG)
 
-        sports_frame = tk.Frame(wrapper, bg=BG)
-        sports_frame.grid(row=0, column=0, padx=8, pady=4, sticky="nsew")
+        self.build_sports_frame(self.sports_frame)
+        self.build_entities_frame(self.entities_frame)
+        self.build_settings_frame(self.settings_frame)
+
+        self.apply_selection_layout(self.root.winfo_width())
+
+    def apply_selection_layout(self, width: int) -> None:
+        compact_stack = width < TOP_STACK_BREAKPOINT
+
+        for child in (self.sports_frame, self.entities_frame, self.settings_frame):
+            child.grid_forget()
+
+        for i in range(3):
+            self.selection_wrapper.grid_columnconfigure(i, weight=0)
+
+        if compact_stack:
+            self.selection_wrapper.grid_columnconfigure(0, weight=1)
+            self.sports_frame.grid(row=0, column=0, padx=4, pady=3, sticky="nsew")
+            self.entities_frame.grid(row=1, column=0, padx=4, pady=3, sticky="nsew")
+            self.settings_frame.grid(row=2, column=0, padx=4, pady=3, sticky="nsew")
+        else:
+            self.selection_wrapper.grid_columnconfigure(0, weight=1)
+            self.selection_wrapper.grid_columnconfigure(1, weight=1)
+            self.selection_wrapper.grid_columnconfigure(2, weight=2)
+            self.sports_frame.grid(row=0, column=0, padx=4, pady=3, sticky="nsew")
+            self.entities_frame.grid(row=0, column=1, padx=4, pady=3, sticky="nsew")
+            self.settings_frame.grid(row=0, column=2, padx=4, pady=3, sticky="nsew")
+
+    def build_sports_frame(self, sports_frame) -> None:
         sports_frame.grid_rowconfigure(1, weight=1)
         sports_frame.grid_columnconfigure(0, weight=1)
 
-        tk.Label(sports_frame, text="Sporty", bg=BG, fg=FG, font=("Segoe UI", 10, "bold")).grid(row=0, column=0, sticky="w")
+        tk.Label(sports_frame, text="Sporty", bg=BG, fg=FG, font=FONT_LABEL).grid(row=0, column=0, sticky="w")
+
         self.sports_listbox = tk.Listbox(
             sports_frame,
             selectmode=tk.MULTIPLE,
             exportselection=False,
-            height=7,
+            height=6,
             bg=TEXTBOX_BG,
             fg=FG,
             selectbackground=ACCENT_3,
             selectforeground=FG,
             relief="flat",
+            font=FONT_SMALL,
+            activestyle="none",
         )
         self.sports_listbox.grid(row=1, column=0, sticky="nsew")
         self.sports_listbox.bind("<<ListboxSelect>>", self.on_sport_selection_changed)
 
         sports_btns = tk.Frame(sports_frame, bg=BG)
-        sports_btns.grid(row=2, column=0, sticky="ew", pady=6)
+        sports_btns.grid(row=2, column=0, sticky="ew", pady=5)
         sports_btns.grid_columnconfigure((0, 1, 2), weight=1)
 
-        ttk.Button(sports_btns, text="Vybrat vše", style="Ghost.TButton",
-                   command=lambda: self.select_all(self.sports_listbox)).grid(row=0, column=0, sticky="ew", padx=(0, 4))
-        ttk.Button(sports_btns, text="Vymazat", style="Ghost.TButton",
-                   command=lambda: self.clear_selection(self.sports_listbox)).grid(row=0, column=1, sticky="ew", padx=4)
-        ttk.Button(sports_btns, text="Refresh DB", style="Ghost.TButton",
-                   command=self.refresh_all).grid(row=0, column=2, sticky="ew", padx=(4, 0))
+        ttk.Button(
+            sports_btns,
+            text="Vybrat vše",
+            style="Ghost.TButton",
+            command=lambda: self.select_all(self.sports_listbox),
+        ).grid(row=0, column=0, sticky="ew", padx=(0, 3))
 
-        entities_frame = tk.Frame(wrapper, bg=BG)
-        entities_frame.grid(row=0, column=1, padx=8, pady=4, sticky="nsew")
+        ttk.Button(
+            sports_btns,
+            text="Vymazat",
+            style="Ghost.TButton",
+            command=lambda: self.clear_selection(self.sports_listbox),
+        ).grid(row=0, column=1, sticky="ew", padx=3)
+
+        ttk.Button(
+            sports_btns,
+            text="Refresh DB",
+            style="Ghost.TButton",
+            command=self.refresh_all,
+        ).grid(row=0, column=2, sticky="ew", padx=(3, 0))
+
+    def build_entities_frame(self, entities_frame) -> None:
         entities_frame.grid_rowconfigure(1, weight=1)
         entities_frame.grid_columnconfigure(0, weight=1)
 
-        tk.Label(entities_frame, text="Entity", bg=BG, fg=FG, font=("Segoe UI", 10, "bold")).grid(row=0, column=0, sticky="w")
+        tk.Label(entities_frame, text="Entity", bg=BG, fg=FG, font=FONT_LABEL).grid(row=0, column=0, sticky="w")
+
         self.entities_listbox = tk.Listbox(
             entities_frame,
             selectmode=tk.MULTIPLE,
             exportselection=False,
-            height=7,
+            height=6,
             bg=TEXTBOX_BG,
             fg=FG,
             selectbackground=ACCENT_3,
             selectforeground=FG,
             relief="flat",
+            font=FONT_SMALL,
+            activestyle="none",
         )
         self.entities_listbox.grid(row=1, column=0, sticky="nsew")
         self.entities_listbox.bind("<<ListboxSelect>>", lambda e: self.update_selection_dashboard())
 
         entities_btns = tk.Frame(entities_frame, bg=BG)
-        entities_btns.grid(row=2, column=0, sticky="ew", pady=6)
+        entities_btns.grid(row=2, column=0, sticky="ew", pady=5)
         entities_btns.grid_columnconfigure((0, 1), weight=1)
 
-        ttk.Button(entities_btns, text="Vybrat vše", style="Ghost.TButton",
-                   command=lambda: self.select_all(self.entities_listbox)).grid(row=0, column=0, sticky="ew", padx=(0, 4))
-        ttk.Button(entities_btns, text="Vymazat", style="Ghost.TButton",
-                   command=lambda: self.clear_selection(self.entities_listbox)).grid(row=0, column=1, sticky="ew", padx=(4, 0))
+        ttk.Button(
+            entities_btns,
+            text="Vybrat vše",
+            style="Ghost.TButton",
+            command=lambda: self.select_all(self.entities_listbox),
+        ).grid(row=0, column=0, sticky="ew", padx=(0, 3))
 
-        settings_frame = tk.Frame(wrapper, bg=BG)
-        settings_frame.grid(row=0, column=2, padx=8, pady=4, sticky="nsew")
+        ttk.Button(
+            entities_btns,
+            text="Vymazat",
+            style="Ghost.TButton",
+            command=lambda: self.clear_selection(self.entities_listbox),
+        ).grid(row=0, column=1, sticky="ew", padx=(3, 0))
+
+    def build_settings_frame(self, settings_frame) -> None:
         settings_frame.grid_columnconfigure(1, weight=1)
 
-        tk.Label(settings_frame, text="Nastavení batch běhu", bg=BG, fg=FG, font=("Segoe UI", 10, "bold")).grid(
-            row=0, column=0, columnspan=2, sticky="w", pady=(0, 6)
+        tk.Label(settings_frame, text="Nastavení batch běhu", bg=BG, fg=FG, font=FONT_LABEL).grid(
+            row=0, column=0, columnspan=2, sticky="w", pady=(0, 5)
         )
 
-        tk.Label(settings_frame, text="Run group", bg=BG, fg=FG).grid(row=1, column=0, sticky="w", pady=3)
+        tk.Label(settings_frame, text="Run group", bg=BG, fg=FG, font=FONT_TEXT).grid(row=1, column=0, sticky="w", pady=2)
         self.run_group_var = tk.StringVar()
         self.run_group_combo = ttk.Combobox(settings_frame, textvariable=self.run_group_var, state="readonly")
-        self.run_group_combo.grid(row=1, column=1, sticky="ew", pady=3)
+        self.run_group_combo.grid(row=1, column=1, sticky="ew", pady=2)
 
-        tk.Label(settings_frame, text="Entity profil", bg=BG, fg=FG).grid(row=2, column=0, sticky="w", pady=3)
+        tk.Label(settings_frame, text="Entity profil", bg=BG, fg=FG, font=FONT_TEXT).grid(row=2, column=0, sticky="w", pady=2)
         self.profile_var = tk.StringVar(value="custom")
         self.profile_combo = ttk.Combobox(
             settings_frame,
@@ -665,10 +890,10 @@ class MatchMatrixPanelV7:
             state="readonly",
             values=list(ENTITY_PROFILE_MAP.keys()),
         )
-        self.profile_combo.grid(row=2, column=1, sticky="ew", pady=3)
+        self.profile_combo.grid(row=2, column=1, sticky="ew", pady=2)
         self.profile_combo.bind("<<ComboboxSelected>>", self.on_profile_changed)
 
-        tk.Label(settings_frame, text="Provider mode", bg=BG, fg=FG).grid(row=3, column=0, sticky="w", pady=3)
+        tk.Label(settings_frame, text="Provider mode", bg=BG, fg=FG, font=FONT_TEXT).grid(row=3, column=0, sticky="w", pady=2)
         self.provider_mode_var = tk.StringVar(value="auto")
         provider_mode_combo = ttk.Combobox(
             settings_frame,
@@ -676,66 +901,66 @@ class MatchMatrixPanelV7:
             state="readonly",
             values=["auto", "manual"],
         )
-        provider_mode_combo.grid(row=3, column=1, sticky="ew", pady=3)
+        provider_mode_combo.grid(row=3, column=1, sticky="ew", pady=2)
         provider_mode_combo.bind("<<ComboboxSelected>>", self.on_provider_mode_changed)
 
-        tk.Label(settings_frame, text="Manual provider", bg=BG, fg=FG).grid(row=4, column=0, sticky="w", pady=3)
+        tk.Label(settings_frame, text="Manual provider", bg=BG, fg=FG, font=FONT_TEXT).grid(row=4, column=0, sticky="w", pady=2)
         self.manual_provider_var = tk.StringVar()
         self.manual_provider_entry = ttk.Entry(settings_frame, textvariable=self.manual_provider_var)
-        self.manual_provider_entry.grid(row=4, column=1, sticky="ew", pady=3)
+        self.manual_provider_entry.grid(row=4, column=1, sticky="ew", pady=2)
 
-        tk.Label(settings_frame, text="Limit", bg=BG, fg=FG).grid(row=5, column=0, sticky="w", pady=3)
+        tk.Label(settings_frame, text="Limit", bg=BG, fg=FG, font=FONT_TEXT).grid(row=5, column=0, sticky="w", pady=2)
         self.limit_var = tk.StringVar(value="5")
-        ttk.Entry(settings_frame, textvariable=self.limit_var).grid(row=5, column=1, sticky="ew", pady=3)
+        ttk.Entry(settings_frame, textvariable=self.limit_var).grid(row=5, column=1, sticky="ew", pady=2)
 
-        tk.Label(settings_frame, text="Max workers", bg=BG, fg=FG).grid(row=6, column=0, sticky="w", pady=3)
+        tk.Label(settings_frame, text="Max workers", bg=BG, fg=FG, font=FONT_TEXT).grid(row=6, column=0, sticky="w", pady=2)
         self.max_workers_var = tk.StringVar(value="3")
-        ttk.Entry(settings_frame, textvariable=self.max_workers_var).grid(row=6, column=1, sticky="ew", pady=3)
+        ttk.Entry(settings_frame, textvariable=self.max_workers_var).grid(row=6, column=1, sticky="ew", pady=2)
 
-        tk.Label(settings_frame, text="Timeout sec", bg=BG, fg=FG).grid(row=7, column=0, sticky="w", pady=3)
+        tk.Label(settings_frame, text="Timeout sec", bg=BG, fg=FG, font=FONT_TEXT).grid(row=7, column=0, sticky="w", pady=2)
         self.timeout_sec_var = tk.StringVar(value="300")
-        ttk.Entry(settings_frame, textvariable=self.timeout_sec_var).grid(row=7, column=1, sticky="ew", pady=3)
+        ttk.Entry(settings_frame, textvariable=self.timeout_sec_var).grid(row=7, column=1, sticky="ew", pady=2)
 
         self.on_provider_mode_changed()
 
     def build_action_area(self, parent) -> None:
         action_frame = tk.Frame(parent, bg=BG)
-        action_frame.pack(fill="x", pady=(4, 0))
+        action_frame.pack(fill="x", pady=(2, 0))
 
         ttk.Button(
             action_frame,
             text="Spustit batch kombinace",
             style="Accent.TButton",
             command=self.run_batch_combinations_thread,
-        ).pack(side="left", padx=5, pady=8)
+        ).pack(side="left", padx=4, pady=4)
 
         ttk.Button(
             action_frame,
-            text="Spustit multisport scheduler V4",
+            text="Spustit ingest cycle (planner)",
             style="Ghost.TButton",
             command=self.run_scheduler_thread,
-        ).pack(side="left", padx=5, pady=8)
+        ).pack(side="left", padx=4, pady=4)
 
         ttk.Button(
             action_frame,
-            text="Spustit players pipeline full",
+            text="Spustit players pipeline (legacy parallel)",
             style="Ghost.TButton",
             command=self.run_players_pipeline_thread,
-        ).pack(side="left", padx=5, pady=8)
+        ).pack(side="left", padx=4, pady=4)
 
         ttk.Button(
             action_frame,
             text="Refresh sporty + entity + OPS",
             style="Ghost.TButton",
             command=self.refresh_all,
-        ).pack(side="left", padx=5, pady=8)
+        ).pack(side="left", padx=4, pady=4)
 
         ttk.Button(
             action_frame,
             text="Vyčistit log",
             style="Ghost.TButton",
             command=self.clear_logs,
-        ).pack(side="left", padx=5, pady=8)
+        ).pack(side="left", padx=4, pady=4)
 
     def build_navigator(self, parent) -> None:
         for i in range(2):
@@ -749,7 +974,7 @@ class MatchMatrixPanelV7:
                 text=name,
                 style="Ghost.TButton",
                 command=lambda p=path: open_path(p),
-            ).grid(row=nav_row, column=nav_col, padx=4, pady=4, sticky="ew")
+            ).grid(row=nav_row, column=nav_col, padx=3, pady=3, sticky="ew")
 
             nav_col += 1
             if nav_col >= 2:
@@ -758,84 +983,115 @@ class MatchMatrixPanelV7:
 
     def build_selection_dashboard(self, parent) -> None:
         dashboard = tk.Frame(parent, bg=BG)
-        dashboard.grid(row=2, column=0, sticky="ew", pady=(0, 8))
+        dashboard.grid(row=2, column=0, sticky="ew", pady=(0, 6))
         for i in range(4):
             dashboard.grid_columnconfigure(i, weight=1)
 
         self.card_sports = MetricCard(dashboard, "Sporty", "0", "načteno z DB", ACCENT)
-        self.card_sports.grid(row=0, column=0, sticky="nsew", padx=4)
+        self.card_sports.grid(row=0, column=0, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.card_entities = MetricCard(dashboard, "Entity", "0", "načteno z DB", ACCENT_2)
-        self.card_entities.grid(row=0, column=1, sticky="nsew", padx=4)
+        self.card_entities.grid(row=0, column=1, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.card_run_groups = MetricCard(dashboard, "Run groups", "0", "načteno z DB", ACCENT)
-        self.card_run_groups.grid(row=0, column=2, sticky="nsew", padx=4)
+        self.card_run_groups.grid(row=0, column=2, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.card_status = MetricCard(dashboard, "Stav panelu", "READY", "čeká na akci", GOOD)
-        self.card_status.grid(row=0, column=3, sticky="nsew", padx=4)
+        self.card_status.grid(row=0, column=3, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         progress_row = tk.Frame(parent, bg=BG)
-        progress_row.grid(row=3, column=0, sticky="ew", pady=(0, 8))
+        progress_row.grid(row=3, column=0, sticky="ew", pady=(0, 6))
         for i in range(3):
             progress_row.grid_columnconfigure(i, weight=1)
 
         self.bar_sports = ProgressBarCard(progress_row, "SPORT COVERAGE", ACCENT)
-        self.bar_sports.grid(row=0, column=0, sticky="nsew", padx=4)
+        self.bar_sports.grid(row=0, column=0, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.bar_entities = ProgressBarCard(progress_row, "ENTITY COVERAGE", ACCENT_3)
-        self.bar_entities.grid(row=0, column=1, sticky="nsew", padx=4)
+        self.bar_entities.grid(row=0, column=1, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.bar_selection = ProgressBarCard(progress_row, "CURRENT SELECTION", ACCENT_2)
-        self.bar_selection.grid(row=0, column=2, sticky="nsew", padx=4)
+        self.bar_selection.grid(row=0, column=2, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
     def build_ops_dashboard(self, parent) -> None:
         ops_wrap = tk.Frame(parent, bg=BG)
-        ops_wrap.grid(row=4, column=0, sticky="nsew", pady=(0, 10))
-        ops_wrap.grid_columnconfigure((0, 1, 2, 3), weight=1)
+        ops_wrap.grid(row=4, column=0, sticky="ew", pady=(0, 6))
+
+        for i in range(4):
+            ops_wrap.grid_columnconfigure(i, weight=1)
 
         self.card_matches = MetricCard(ops_wrap, "Zápasy", "-", "public.matches", ACCENT)
-        self.card_matches.grid(row=0, column=0, sticky="nsew", padx=4, pady=(0, 8))
+        self.card_matches.grid(row=0, column=0, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.card_leagues = MetricCard(ops_wrap, "Ligy", "-", "public.leagues", ACCENT_2)
-        self.card_leagues.grid(row=0, column=1, sticky="nsew", padx=4, pady=(0, 8))
+        self.card_leagues.grid(row=0, column=1, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.card_teams = MetricCard(ops_wrap, "Týmy", "-", "public.teams", ACCENT)
-        self.card_teams.grid(row=0, column=2, sticky="nsew", padx=4, pady=(0, 8))
+        self.card_teams.grid(row=0, column=2, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.card_players = MetricCard(ops_wrap, "Hráči", "-", "public.players", ACCENT_2)
-        self.card_players.grid(row=0, column=3, sticky="nsew", padx=4, pady=(0, 8))
+        self.card_players.grid(row=0, column=3, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.card_planner_pending = MetricCard(ops_wrap, "Planner pending", "-", "ops.ingest_planner", WARN)
-        self.card_planner_pending.grid(row=1, column=0, sticky="nsew", padx=4, pady=(0, 8))
+        self.card_planner_pending.grid(row=1, column=0, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.card_planner_running = MetricCard(ops_wrap, "Planner running", "-", "ops.ingest_planner", WARN)
-        self.card_planner_running.grid(row=1, column=1, sticky="nsew", padx=4, pady=(0, 8))
+        self.card_planner_running.grid(row=1, column=1, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.card_last_job = MetricCard(ops_wrap, "Poslední job", "-", "ops.job_runs", GOOD)
-        self.card_last_job.grid(row=1, column=2, sticky="nsew", padx=4, pady=(0, 8))
+        self.card_last_job.grid(row=1, column=2, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.card_live_status = MetricCard(ops_wrap, "Live stav", "IDLE", "čeká na spuštění", GOOD)
-        self.card_live_status.grid(row=1, column=3, sticky="nsew", padx=4, pady=(0, 8))
+        self.card_live_status.grid(row=1, column=3, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.bar_db_health = ProgressBarCard(ops_wrap, "DB HEALTH", GOOD)
-        self.bar_db_health.grid(row=2, column=0, columnspan=2, sticky="nsew", padx=4)
+        self.bar_db_health.grid(row=2, column=0, columnspan=2, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
         self.bar_ops_health = ProgressBarCard(ops_wrap, "OPS HEALTH", WARN)
-        self.bar_ops_health.grid(row=2, column=2, columnspan=2, sticky="nsew", padx=4)
+        self.bar_ops_health.grid(row=2, column=2, columnspan=2, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
     def build_bottom_area(self, parent) -> None:
-        bottom = tk.PanedWindow(parent, orient="horizontal", bg=BG, sashwidth=8, sashrelief="flat")
-        bottom.grid(row=5, column=0, sticky="nsew")
+        self.bottom_container = tk.Frame(parent, bg=BG)
+        self.bottom_container.grid(row=5, column=0, sticky="nsew", pady=(0, 4))
         parent.grid_rowconfigure(5, weight=1)
 
-        left = tk.Frame(bottom, bg=BG)
-        right = tk.Frame(bottom, bg=BG)
+        self.bottom_left = tk.Frame(self.bottom_container, bg=BG)
+        self.bottom_right = tk.Frame(self.bottom_container, bg=BG)
 
-        bottom.add(left, minsize=320)
-        bottom.add(right, minsize=420)
+        self.build_snapshot_area(self.bottom_left)
+        self.build_log_area(self.bottom_right)
 
-        self.build_snapshot_area(left)
-        self.build_log_area(right)
+        self.apply_bottom_layout(self.root.winfo_width())
+
+    def apply_bottom_layout(self, width: int) -> None:
+        target = "stack" if width < BOTTOM_STACK_BREAKPOINT else "side"
+        if self.current_bottom_layout == target:
+            return
+
+        self.current_bottom_layout = target
+
+        self.bottom_left.grid_forget()
+        self.bottom_right.grid_forget()
+
+        for i in range(2):
+            self.bottom_container.grid_columnconfigure(i, weight=0)
+
+        if target == "side":
+            self.bottom_container.grid_columnconfigure(0, weight=1)
+            self.bottom_container.grid_columnconfigure(1, weight=2)
+            self.bottom_left.grid(row=0, column=0, sticky="nsew", padx=(0, 4), pady=0)
+            self.bottom_right.grid(row=0, column=1, sticky="nsew", padx=(4, 0), pady=0)
+        else:
+            self.bottom_container.grid_columnconfigure(0, weight=1)
+            self.bottom_left.grid(row=0, column=0, sticky="nsew", padx=0, pady=(0, 6))
+            self.bottom_right.grid(row=1, column=0, sticky="nsew", padx=0, pady=0)
+
+    def on_root_resize(self, event=None) -> None:
+        width = self.root.winfo_width()
+        self.apply_top_layout(width)
+        self.apply_selection_layout(width)
+        self.apply_bottom_layout(width)
+        self._update_scroll_region()
 
     def _snapshot_order(self) -> list[tuple[str, str]]:
         return [
@@ -855,7 +1111,7 @@ class MatchMatrixPanelV7:
         parent.grid_columnconfigure(0, weight=1)
 
         title = tk.Frame(parent, bg=BG)
-        title.grid(row=0, column=0, sticky="ew", pady=(0, 8))
+        title.grid(row=0, column=0, sticky="ew", pady=(0, 6))
         title.grid_columnconfigure(0, weight=1)
 
         tk.Label(
@@ -863,16 +1119,16 @@ class MatchMatrixPanelV7:
             text="Porovnání běhu",
             bg=BG,
             fg=ACCENT_2,
-            font=("Segoe UI", 11, "bold"),
+            font=FONT_LABEL,
         ).grid(row=0, column=0, sticky="w")
 
-        table_wrap = ttk.LabelFrame(parent, text="Snapshot před / po / rozdíl", style="MM.TLabelframe", padding=8)
+        table_wrap = ttk.LabelFrame(parent, text="Snapshot před / po / rozdíl", style="MM.TLabelframe", padding=4)
         table_wrap.grid(row=1, column=0, sticky="nsew")
         table_wrap.grid_rowconfigure(0, weight=1)
         table_wrap.grid_columnconfigure(0, weight=1)
 
         columns = ("metric", "before", "after", "diff")
-        self.snapshot_table = ttk.Treeview(table_wrap, columns=columns, show="headings", height=8)
+        self.snapshot_table = ttk.Treeview(table_wrap, columns=columns, show="headings", height=10)
         self.snapshot_table.grid(row=0, column=0, sticky="nsew")
 
         self.snapshot_table.heading("metric", text="Metrika")
@@ -880,7 +1136,7 @@ class MatchMatrixPanelV7:
         self.snapshot_table.heading("after", text="Po běhu")
         self.snapshot_table.heading("diff", text="Rozdíl")
 
-        self.snapshot_table.column("metric", width=220, anchor="w")
+        self.snapshot_table.column("metric", width=240, anchor="w")
         self.snapshot_table.column("before", width=90, anchor="center")
         self.snapshot_table.column("after", width=90, anchor="center")
         self.snapshot_table.column("diff", width=90, anchor="center")
@@ -898,25 +1154,25 @@ class MatchMatrixPanelV7:
         parent.grid_rowconfigure(1, weight=1)
         parent.grid_columnconfigure(0, weight=1)
 
-        live_wrap = ttk.LabelFrame(parent, text="Live stav běhu", style="MM.TLabelframe", padding=6)
-        live_wrap.grid(row=0, column=0, sticky="ew", pady=(0, 6))
+        live_wrap = ttk.LabelFrame(parent, text="Live stav běhu", style="MM.TLabelframe", padding=3)
+        live_wrap.grid(row=0, column=0, sticky="ew", pady=(0, 5))
         live_wrap.grid_columnconfigure(0, weight=1)
 
         self.run_info_text = tk.Text(
             live_wrap,
             height=5,
             wrap="word",
-            font=("Consolas", 9),
+            font=FONT_MONO,
             bg=TEXTBOX_BG,
             fg=FG,
             insertbackground=FG,
             relief="flat",
-            padx=8,
-            pady=8,
+            padx=6,
+            pady=6,
         )
         self.run_info_text.grid(row=0, column=0, sticky="ew")
 
-        log_wrap = ttk.LabelFrame(parent, text="Log běhu / průběh stahování", style="MM.TLabelframe", padding=6)
+        log_wrap = ttk.LabelFrame(parent, text="Log běhu / průběh stahování", style="MM.TLabelframe", padding=5)
         log_wrap.grid(row=1, column=0, sticky="nsew")
         log_wrap.grid_rowconfigure(0, weight=1)
         log_wrap.grid_columnconfigure(0, weight=1)
@@ -924,20 +1180,22 @@ class MatchMatrixPanelV7:
         self.log_text = tk.Text(
             log_wrap,
             wrap="none",
-            font=("Consolas", 9),
+            font=FONT_MONO,
             bg=TEXTBOX_BG,
             fg=FG,
             insertbackground=FG,
             relief="flat",
-            padx=8,
-            pady=8,
+            padx=6,
+            pady=6,
         )
         self.log_text.grid(row=0, column=0, sticky="nsew")
 
         yscroll = ttk.Scrollbar(log_wrap, orient="vertical", command=self.log_text.yview)
         yscroll.grid(row=0, column=1, sticky="ns")
+
         xscroll = ttk.Scrollbar(log_wrap, orient="horizontal", command=self.log_text.xview)
         xscroll.grid(row=1, column=0, sticky="ew")
+
         self.log_text.configure(yscrollcommand=yscroll.set, xscrollcommand=xscroll.set)
 
     # --------------------------------------------------------
@@ -953,11 +1211,13 @@ class MatchMatrixPanelV7:
             a = int(after.get(key, 0) or 0)
             d = a - b
             diff_text = f"{d:+d}"
+
             tag = "same"
             if d > 0:
                 tag = "changed"
             elif d < 0:
                 tag = "negative"
+
             self.snapshot_table.insert("", "end", values=(label, b, a, diff_text), tags=(tag,))
 
     def render_snapshot_before(self, snapshot: dict[str, int]) -> None:
@@ -1342,6 +1602,7 @@ class MatchMatrixPanelV7:
         run_group: str,
     ) -> None:
         start_ts = datetime.now()
+        return_code = 1
 
         self.before_snapshot = self.collect_db_snapshot()
         self.render_snapshot_before(self.before_snapshot)
@@ -1377,7 +1638,7 @@ class MatchMatrixPanelV7:
 
 def main() -> None:
     root = tk.Tk()
-    app = MatchMatrixPanelV7(root)
+    app = MatchMatrixPanelV9(root)
     app.run()
 
 

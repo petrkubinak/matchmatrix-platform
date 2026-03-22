@@ -44,6 +44,8 @@ PYTHON_EXE = r"C:\Python314\python.exe"
 PLANNER_WORKER = os.path.join(BASE_DIR, "workers", "run_ingest_planner_jobs.py")
 MERGE_WORKER = os.path.join(BASE_DIR, "workers", "run_unified_staging_to_public_merge_v3.py")
 TEAMS_EXTRACTOR = os.path.join(BASE_DIR, "workers", "extract_teams_from_fixtures_v2.py")
+PLAYERS_PIPELINE = os.path.join(BASE_DIR, "workers", "run_players_fetch_only_v1.py")
+PLAYERS_PARSE = os.path.join(BASE_DIR, "workers", "run_players_parse_only_v1.py")
 LOCK_NAME = "ingest_cycle_v3"
 
 DB_CONFIG = {
@@ -184,19 +186,29 @@ def build_planner_command(args: argparse.Namespace) -> list[str]:
     return command
 
 
-def build_merge_command() -> list[str]:
-    return [
-        PYTHON_EXE,
-        MERGE_WORKER,
-    ]
-
-
 def build_teams_extractor_command() -> list[str]:
     return [
         PYTHON_EXE,
         TEAMS_EXTRACTOR,
     ]
 
+def build_players_pipeline_command() -> list[str]:
+    return [
+        PYTHON_EXE,
+        PLAYERS_PIPELINE,
+    ]
+
+def build_players_parse_command() -> list[str]:
+    return [
+        PYTHON_EXE,
+        PLAYERS_PARSE,
+    ]  
+
+def build_merge_command() -> list[str]:
+    return [
+        PYTHON_EXE,
+        MERGE_WORKER,
+    ]
 
 def parse_processed_jobs(output_text: str) -> int:
     marker = "Processed jobs:"
@@ -464,6 +476,14 @@ def main() -> int:
     if not os.path.exists(TEAMS_EXTRACTOR):
         print(f"ERROR: Teams extractor nebyl nalezen: {TEAMS_EXTRACTOR}")
         return 1
+
+    if not os.path.exists(PLAYERS_PIPELINE):
+        print(f"ERROR: Players pipeline nebyl nalezen: {PLAYERS_PIPELINE}")
+        return 1
+
+    if not os.path.exists(PLAYERS_PARSE):
+        print(f"ERROR: Players parse nebyl nalezen: {PLAYERS_PARSE}")
+        return 1
     
     conn = get_connection()
     try:
@@ -618,6 +638,100 @@ def main() -> int:
 
             print("ERROR: Teams extractor skončil s chybou.")
             return 1
+
+        #players_command = build_players_pipeline_command()
+        #players_rc, players_output = run_command(
+        #    players_command,
+        #    "STEP 1C - PLAYERS FETCH ONLY"
+        #)
+
+        #conn = get_connection()
+        #try:
+        #    heartbeat_lock(conn, LOCK_NAME, owner_id, args.lock_ttl_minutes)
+        #finally:
+        #    conn.close()
+
+        #if players_rc != 0:
+        #    details = {
+        #        "planner_returncode": planner_rc,
+        #        "planner_output": planner_output,
+        #        "processed_jobs": processed_jobs,
+        #        "teams_extractor_executed": True,
+        #        "teams_extractor_returncode": teams_rc,
+        #        "teams_extractor_output": teams_output,
+        #        "players_pipeline_executed": True,
+        #        "players_pipeline_returncode": players_rc,
+        #        "players_pipeline_output": players_output,
+        #        "players_parse_executed": True,
+        #        "players_parse_returncode": players_parse_rc,
+        #        "players_parse_output": players_parse_output,
+        #        "merge_executed": False,
+        #        "owner_id": owner_id,
+        #        "lock_name": LOCK_NAME,
+        #    }
+
+        #   conn = get_connection()
+        #    try:
+        #        finish_job_run(
+        #            conn=conn,
+        #            job_run_id=job_run_id,
+        #            status="error",
+        #            message="Players pipeline failed.",
+        #            details=details,
+        #            rows_affected=processed_jobs,
+        #        )
+        #    finally:
+        #        conn.close()
+
+        #    print("ERROR: Players pipeline skončila s chybou.")
+        #    return 1    
+
+        #players_parse_command = build_players_parse_command()
+        #players_parse_rc, players_parse_output = run_command(
+        #    players_parse_command,
+        #    "STEP 1D - PLAYERS PARSE ONLY"
+        #)
+
+        #conn = get_connection()
+        #try:
+        #    heartbeat_lock(conn, LOCK_NAME, owner_id, args.lock_ttl_minutes)
+        #finally:
+        #    conn.close()
+
+        #if players_parse_rc != 0:
+        #    details = {
+        #        "planner_returncode": planner_rc,
+        #        "planner_output": planner_output,
+        #        "processed_jobs": processed_jobs,
+        #        "teams_extractor_executed": True,
+        #        "teams_extractor_returncode": teams_rc,
+        #        "teams_extractor_output": teams_output,
+        #        "players_pipeline_executed": True,
+        #        "players_pipeline_returncode": players_rc,
+        #        "players_pipeline_output": players_output,
+        #        "players_parse_executed": True,
+        #        "players_parse_returncode": players_parse_rc,
+        #        "players_parse_output": players_parse_output,
+        #        "merge_executed": False,
+        #        "owner_id": owner_id,
+        #        "lock_name": LOCK_NAME,
+        #    }
+
+        #    conn = get_connection()
+        #    try:
+        #        finish_job_run(
+        #            conn=conn,
+        #            job_run_id=job_run_id,
+        #            status="error",
+        #            message="Players parse failed.",
+        #            details=details,
+        #            rows_affected=processed_jobs,
+        #        )
+        #    finally:
+        #        conn.close()
+
+        #    print("ERROR: Players parse skončil s chybou.")
+        #    return 1
 
         merge_command = build_merge_command()
         merge_rc, merge_output = run_command(
