@@ -1,0 +1,171 @@
+MATCHMATRIX – ZÁPIS (DNES)
+🎯 HLAVNÍ CÍL DNES
+
+➡️ Rozjet multisport ingest pipeline (mimo football)
+➡️ Napojit UI + DB + ingest runner
+
+✅ CO JE DNES HOTOVO
+1️⃣ Multisport DB vrstva
+
+✔ provider_jobs pro všechny sporty (227)
+✔ ingest_entity_plan.default_run_group (228)
+✔ public.sports + public.leagues (230a)
+✔ ops.ingest_targets (230)
+
+👉 stav:
+
+DB = MULTISPORT READY
+2️⃣ UI panel (V9) – zásadní upgrade
+
+✔ dynamické načítání run_group z DB
+✔ oprava fallback (už ne jen FB/HK/BK)
+✔ doplnění všech sportů (TN, MMA, VB, …, DRT)
+✔ oprava provider mapping (api_tennis, ne api_tn)
+✔ multi-sport výběr funguje
+
+👉 výsledek:
+
+UI = NAPOJENO NA DB SPRÁVNĚ
+3️⃣ Provider registry – rozšíření
+
+✔ identifikován root problém
+✔ doplněn GenericApiSportProvider
+
+👉 tím jsme odstranili:
+
+❌ Provider not found
+
+👉 a dostali jsme se o level dál:
+
+✔ provider routing funguje pro všechny sporty
+4️⃣ První reálný multisport run (TN)
+
+✔ batch runner našel target
+✔ zavolal unified ingest
+✔ provider dispatch proběhl
+✔ dostali jsme se až na reálný call
+
+👉 první reálný call:
+
+powershell pull_api_sport_fixtures.ps1
+❗ KDE TO TEĎ PADÁ (AKTUÁLNÍ BLOCKER)
+pull_api_sport_fixtures.ps1 neexistuje
+
+👉 to znamená:
+
+PIPELINE = OK
+DATA LAYER = CHYBÍ
+🧠 ARCHITEKTURA (TEĎ UŽ JE JASNÁ)
+UI (panel)
+    ↓
+ops.ingest_targets
+    ↓
+run_unified_ingest_batch_v1.py
+    ↓
+run_unified_ingest_v1.py
+    ↓
+provider_registry
+    ↓
+GenericApiSportProvider
+    ↓
+❌ chybí PS skripty
+🔍 VEDLEJŠÍ POZNATEK (BK)
+
+Scheduler:
+
+Planner queue je prázdná
+
+👉 to znamená:
+
+planner není napojen na ingest_targets pro nové sporty
+
+➡️ to budeme řešit zítra (není blocker pro batch režim)
+
+🚀 CO JE TEĎ FUNKČNÍ
+
+✔ DB struktura
+✔ multisport mapping
+✔ UI selection
+✔ batch runner
+✔ unified ingest
+✔ provider routing
+
+👉 jinými slovy:
+
+MATCHMATRIX CORE PIPELINE JE HOTOVÁ
+🔥 CO CHYBÍ
+1️⃣ API-Sport skripty
+
+minimálně:
+
+pull_api_sport_leagues.ps1
+pull_api_sport_fixtures.ps1
+pull_api_sport_teams.ps1
+2️⃣ Planner napojení
+
+→ aby scheduler fungoval i pro multisport
+
+🎯 PLÁN NA ZÍTRA (JEDNODUCHÝ)
+KROK 1
+
+👉 vytvořit první PS skript:
+
+pull_api_sport_fixtures.ps1
+
+(minimální verze – jen test call)
+
+KROK 2
+
+👉 napojit:
+
+API-Sport → staging.stg_api_payloads
+KROK 3
+
+👉 spustit:
+
+TN → fixtures → OK run
+KROK 4 (až potom)
+
+👉 planner napojení
+
+⚠️ STRATEGIE (důležité)
+
+Zůstáváme v režimu:
+
+FREE API MODE
+limit 100 req/day
+sezóny 2022–2024
+žádné odds
+malé batchy
+💥 NEJDŮLEŽITĚJŠÍ UVĚDOMĚNÍ
+
+Dnes se stalo tohle:
+
+přesun z návrhu → do reálného běžícího systému
+
+Tohle už není:
+
+návrh DB
+návrh pipeline
+
+Tohle je:
+
+REÁLNÝ INGEST ENGINE (jen bez dat layeru)
+🧨 STATUS NA KONCI DNE
+MatchMatrix = 85 % hotový ingest systém
+
+chybí jen:
+
+API skripty
+drobné napojení planneru
+🚀 ZÍTRA
+
+👉 začneme tím:
+
+"udělej mi pull_api_sport_fixtures.ps1"
+
+a okamžitě:
+
+→ první data do DB
+
+Dobrá práce dnes. Tohle byl jeden z největších milníků

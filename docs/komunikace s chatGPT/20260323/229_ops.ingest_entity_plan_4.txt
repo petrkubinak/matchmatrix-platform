@@ -1,0 +1,13 @@
+|sport_code|target_rows|
+|----------|-----------|
+|AFB       |0          |
+|BSB       |0          |
+|CK        |0          |
+|DRT       |0          |
+|ESP       |0          |
+|FH        |0          |
+|HB        |0          |
+|MMA       |0          |
+|RGB       |0          |
+|TN        |0          |
+|VB        |0          |

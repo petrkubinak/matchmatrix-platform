@@ -89,10 +89,10 @@ insert into staging.players_import
     birth_date,
     nationality,
     photo_url,
-    raw,
+    raw_json,
     run_id,
     provider_league_id,
-    season
+    season,
     source_endpoint
 )
 values
@@ -119,7 +119,7 @@ set player_name = excluded.player_name,
     birth_date = excluded.birth_date,
     nationality = excluded.nationality,
     photo_url = excluded.photo_url,
-    raw = excluded.raw,
+    raw_json = excluded.raw,
     fetched_at = now();
 "@
 

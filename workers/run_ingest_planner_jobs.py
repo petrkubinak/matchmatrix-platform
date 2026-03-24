@@ -38,6 +38,12 @@ UNIFIED_RUNNER = os.path.join(
     "run_unified_ingest_v1.py"
 )
 
+PLAYERS_FETCH_RUNNER = os.path.join(
+    BASE_DIR,
+    "workers",
+    "run_players_fetch_only_v1.py"
+)
+
 DB_CONFIG = {
     "host": "localhost",
     "port": 5432,
@@ -134,30 +140,64 @@ def detect_result(output_text: str, process_returncode: int) -> str:
 
     text = output_text or ""
 
-    if "FATAL ERROR:" in text:
-        return "ERROR"
+    # ------------------------------------------------------
+    # 1) NEJDŘÍV explicitní OK stavy
+    # ------------------------------------------------------
+    if "Players fetch finished OK." in text and process_returncode == 0:
+        return "OK"
 
-    if "NOT IMPLEMENTED:" in text:
-        return "ERROR"
+    if "Players parse finished OK." in text and process_returncode == 0:
+        return "OK"
 
-    if "API errors" in text:
-        return "ERROR"
+    if "Unified ingest finished OK." in text:
+        return "OK"
 
-    if "Unified ingest finished with ERROR." in text:
-        return "ERROR"
+    if "Processed jobs" in text and process_returncode == 0:
+        return "OK"
 
+    # ------------------------------------------------------
+    # 2) WARNING stavy
+    # ------------------------------------------------------
     if "No fixtures returned." in text:
         return "WARNING"
 
     if "No teams returned." in text:
         return "WARNING"
 
+    if "No players returned." in text:
+        return "WARNING"
+
+    if "No data returned." in text:
+        return "WARNING"
+
     if "Unified ingest finished with WARNING." in text:
         return "WARNING"
 
-    if "Unified ingest finished OK." in text:
-        return "OK"
+    # ------------------------------------------------------
+    # 3) ERROR stavy
+    # ------------------------------------------------------
+    if "FATAL ERROR:" in text:
+        return "ERROR"
 
+    if "NOT IMPLEMENTED:" in text:
+        return "ERROR"
+
+    if "Unified ingest finished with ERROR." in text:
+        return "ERROR"
+
+    if "Traceback (most recent call last):" in text:
+        return "ERROR"
+
+    # POZOR:
+    # samotné "API errors" nesmí být pro players fetch automaticky ERROR,
+    # protože free plán vrací page limit message, ale wrapper přesto může
+    # korektně doběhnout a ukončit se jako OK.
+    if "API errors" in text and process_returncode != 0:
+        return "ERROR"
+
+    # ------------------------------------------------------
+    # 4) fallback podle return code
+    # ------------------------------------------------------
     if process_returncode == 0:
         return "OK"
 
@@ -409,7 +449,7 @@ def mark_planner_pending_again(
 # ----------------------------------------------------------
 # CHILD PROCESS
 # ----------------------------------------------------------
-def build_command(planner_row: Dict[str, Any]) -> list[str]:
+def map_planner_sport_to_ingest_sport(planner_sport_code: str) -> str:
     sport_map = {
         "FB": "football",
         "HK": "hockey",
@@ -425,28 +465,78 @@ def build_command(planner_row: Dict[str, Any]) -> list[str]:
         "AFB": "american_football",
         "ESP": "esports",
     }
+    return sport_map.get(planner_sport_code, str(planner_sport_code).lower())
 
+
+def build_command(planner_row: Dict[str, Any], job_run_id: int) -> list[str]:
     planner_sport = str(planner_row["sport_code"])
-    ingest_sport = sport_map.get(planner_sport, planner_sport.lower())
+    ingest_sport = map_planner_sport_to_ingest_sport(planner_sport)
 
+    provider = str(planner_row["provider"])
+    entity = str(planner_row["entity"])
+    planner_id = planner_row["id"]
+    provider_league_id = planner_row.get("provider_league_id")
+    season = planner_row.get("season")
+    run_group = planner_row.get("run_group")
+
+    # ------------------------------------------------------
+    # SPECIAL CASE:
+    # planner-native players fetch
+    # ------------------------------------------------------
+    if provider == "api_football" and entity == "players":
+        command = [
+            PYTHON_EXE,
+            PLAYERS_FETCH_RUNNER,
+            "--provider", provider,
+            "--sport", ingest_sport,
+            "--league-id", str(provider_league_id),
+            "--season", str(season),
+            "--run-id", str(job_run_id),
+            "--job-id", str(planner_id),
+        ]
+        return command
+
+    # ------------------------------------------------------
+    # DEFAULT:
+    # unified ingest runner
+    # ------------------------------------------------------
     command = [
         PYTHON_EXE,
         UNIFIED_RUNNER,
-        "--provider", str(planner_row["provider"]),
+        "--provider", provider,
         "--sport", ingest_sport,
-        "--entity", str(planner_row["entity"]),
+        "--entity", entity,
     ]
 
-    if planner_row.get("provider_league_id") not in (None, ""):
-        command.extend(["--league-id", str(planner_row["provider_league_id"])])
+    if provider_league_id not in (None, ""):
+        command.extend(["--league-id", str(provider_league_id)])
 
-    if planner_row.get("season") not in (None, ""):
-        command.extend(["--season", str(planner_row["season"])])
+    if season not in (None, ""):
+        command.extend(["--season", str(season)])
 
-    if planner_row.get("run_group") not in (None, ""):
-        command.extend(["--run-group", str(planner_row["run_group"])])
+    if run_group not in (None, ""):
+        command.extend(["--run-group", str(run_group)])
 
     return command
+
+
+def validate_runner_exists(planner_row: Dict[str, Any]) -> Optional[str]:
+    """
+    Vrací None pokud je runner OK.
+    Jinak vrací chybovou zprávu.
+    """
+    provider = str(planner_row["provider"])
+    entity = str(planner_row["entity"])
+
+    if provider == "api_football" and entity == "players":
+        if not os.path.exists(PLAYERS_FETCH_RUNNER):
+            return f"Players fetch runner nebyl nalezen: {PLAYERS_FETCH_RUNNER}"
+        return None
+
+    if not os.path.exists(UNIFIED_RUNNER):
+        return f"Unified runner nebyl nalezen: {UNIFIED_RUNNER}"
+
+    return None
 
 
 def run_child_process(command: list[str], timeout_sec: int) -> Dict[str, Any]:
@@ -527,7 +617,44 @@ def process_single_job(args: argparse.Namespace) -> bool:
     finally:
         conn.close()
 
-    command = build_command(planner_row)
+    runner_error = validate_runner_exists(planner_row)
+    if runner_error:
+        print("ERROR:", runner_error)
+
+        details = {
+            "planner_id": planner_id,
+            "provider": planner_row["provider"],
+            "sport": planner_row["sport_code"],
+            "entity": planner_row["entity"],
+            "provider_league_id": planner_row["provider_league_id"],
+            "season": planner_row["season"],
+            "run_group": planner_row["run_group"],
+            "priority": planner_row["priority"],
+            "attempts_after_claim": planner_row["attempts"],
+            "command": [],
+            "returncode": -1,
+            "result": "ERROR",
+            "timed_out": False,
+            "output_text": runner_error,
+        }
+
+        conn = get_connection()
+        try:
+            mark_planner_error(conn, planner_id)
+            finish_job_run(
+                conn=conn,
+                job_run_id=job_run_id,
+                status="error",
+                message="Planner job finished with ERROR. Runner missing.",
+                details=details,
+                rows_affected=1,
+            )
+        finally:
+            conn.close()
+
+        return True
+
+    command = build_command(planner_row, job_run_id)
 
     print("RUN:", " ".join(command))
     child = run_child_process(command, args.timeout_sec)
@@ -562,6 +689,32 @@ def process_single_job(args: argparse.Namespace) -> bool:
     if child["result"] == "OK":
         conn = get_connection()
         try:
+            # ------------------------------------------------------
+            # PLAYERS PARSE (inline po fetch)
+            # ------------------------------------------------------
+            if planner_row["provider"] == "api_football" and planner_row["entity"] == "players":
+                parse_cmd = [
+                    PYTHON_EXE,
+                    str(BASE_DIR + "\\workers\\run_players_parse_only_v1.py"),
+                    "--provider", planner_row["provider"],
+                    "--sport", map_planner_sport_to_ingest_sport(planner_row["sport_code"]),
+                    "--league-id", str(planner_row["provider_league_id"]),
+                    "--season", str(planner_row["season"]),
+                    "--run-id", str(job_run_id),
+                    "--job-id", str(planner_id),
+                ]
+
+                print("=" * 80)
+                print("RUN PLAYERS PARSE:", " ".join(parse_cmd))
+                print("=" * 80)
+
+                parse_child = run_child_process(parse_cmd, args.timeout_sec)
+
+                print(parse_child["output_text"])
+                print("PARSE RESULT:", parse_child["result"])
+
+                if parse_child["result"] != "OK":
+                    print("WARNING: Players parse nedoběhl OK")
             mark_planner_done(conn, planner_id)
             finish_job_run(
                 conn=conn,
@@ -616,28 +769,25 @@ def print_header(args: argparse.Namespace) -> None:
     print("=" * 80)
     print("MATCHMATRIX INGEST PLANNER WORKER V1")
     print("=" * 80)
-    print("BASE_DIR     :", BASE_DIR)
-    print("PYTHON_EXE   :", PYTHON_EXE)
-    print("RUNNER       :", UNIFIED_RUNNER)
-    print("LIMIT        :", args.limit)
-    print("TIMEOUT SEC  :", args.timeout_sec)
-    print("LOOP         :", args.loop)
-    print("POLL SEC     :", args.poll_sec)
-    print("PROVIDER     :", args.provider)
-    print("SPORT        :", args.sport)
-    print("ENTITY       :", args.entity)
-    print("RUN GROUP    :", args.run_group)
-    print("MAX ATTEMPTS :", args.max_attempts)
+    print("BASE_DIR            :", BASE_DIR)
+    print("PYTHON_EXE          :", PYTHON_EXE)
+    print("RUNNER              :", UNIFIED_RUNNER)
+    print("PLAYERS_FETCH_RUNNER:", PLAYERS_FETCH_RUNNER)
+    print("LIMIT               :", args.limit)
+    print("TIMEOUT SEC         :", args.timeout_sec)
+    print("LOOP                :", args.loop)
+    print("POLL SEC            :", args.poll_sec)
+    print("PROVIDER            :", args.provider)
+    print("SPORT               :", args.sport)
+    print("ENTITY              :", args.entity)
+    print("RUN GROUP           :", args.run_group)
+    print("MAX ATTEMPTS        :", args.max_attempts)
     print("=" * 80)
 
 
 def main() -> int:
     args = parse_args()
     print_header(args)
-
-    if not os.path.exists(UNIFIED_RUNNER):
-        print(f"ERROR: Unified runner nebyl nalezen: {UNIFIED_RUNNER}")
-        return 1
 
     processed_count = 0
 

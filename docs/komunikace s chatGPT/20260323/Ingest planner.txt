@@ -1,0 +1,22 @@
+|id   |provider    |sport_code|entity  |provider_league_id|season|run_group      |status |attempts|last_attempt|updated_at                   |
+|-----|------------|----------|--------|------------------|------|---------------|-------|--------|------------|-----------------------------|
+|1,704|api_football|FB        |fixtures|431               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,705|api_football|FB        |fixtures|120               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,706|api_football|FB        |fixtures|796               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,707|api_football|FB        |fixtures|490               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,708|api_football|FB        |fixtures|143               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,709|api_football|FB        |fixtures|897               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,710|api_football|FB        |fixtures|673               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,711|api_football|FB        |fixtures|21                |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,712|api_football|FB        |fixtures|1105              |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,713|api_football|FB        |fixtures|455               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,714|api_football|FB        |fixtures|420               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,715|api_football|FB        |fixtures|184               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,716|api_football|FB        |fixtures|1075              |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,717|api_football|FB        |fixtures|800               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,718|api_football|FB        |fixtures|1176              |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,719|api_football|FB        |fixtures|602               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,720|api_football|FB        |fixtures|859               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,721|api_football|FB        |fixtures|1015              |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,722|api_football|FB        |fixtures|1027              |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|
+|1,703|api_football|FB        |fixtures|401               |2024  |FB_BOOTSTRAP_V1|pending|0       |            |2026-03-23 13:42:23.337 +0100|

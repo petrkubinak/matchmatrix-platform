@@ -1,0 +1,15 @@
+|provider     |sport_code|run_group               |cnt  |
+|-------------|----------|------------------------|-----|
+|api_sport    |BK        |BK_CORE                 |417  |
+|api_sport    |BK        |BK_TOP                  |10   |
+|api_football |FB        |FB_API_EXPANSION        |20   |
+|api_football |FB        |FB_BOOTSTRAP_V1         |1,217|
+|api_football |FB        |FOOTBALL_MAINTENANCE    |1,196|
+|api_football |FB        |FOOTBALL_MAINTENANCE_TOP|3    |
+|api_sport    |FB        |FOOTBALL_MAINTENANCE    |792  |
+|football_data|FB        |FB_BOOTSTRAP_V1         |13   |
+|football_data|FB        |FB_FD_CORE              |10   |
+|football_data|FB        |FOOTBALL_MAINTENANCE    |3    |
+|api_hockey   |HK        |HK_BOOTSTRAP_V1         |262  |
+|api_hockey   |HK        |HK_CORE                 |242  |
+|api_hockey   |HK        |HK_TOP                  |20   |

@@ -1,0 +1,14 @@
+|sport_code|provider             |run_group|canonical_league_id|provider_league_id|season|enabled|tier|
+|----------|---------------------|---------|-------------------|------------------|------|-------|----|
+|AFB       |api_american_football|AFB_CORE |18,001             |NFL               |2024  |true   |1   |
+|BSB       |api_baseball         |BSB_CORE |14,001             |MLB               |2024  |true   |1   |
+|CK        |api_cricket          |CK_CORE  |16,001             |IPL               |2024  |true   |1   |
+|DRT       |api_darts            |DRT_CORE |20,001             |PDC               |2024  |true   |1   |
+|ESP       |api_esports          |ESP_CORE |19,001             |CSGO              |2024  |true   |1   |
+|FH        |api_field_hockey     |FH_CORE  |17,001             |FIH               |2024  |true   |1   |
+|HB        |api_handball         |HB_CORE  |13,001             |EHF               |2024  |true   |1   |
+|MMA       |api_mma              |MMA_CORE |11,001             |UFC               |2024  |true   |1   |
+|RGB       |api_rugby            |RGB_CORE |15,001             |SixNations        |2024  |true   |1   |
+|TN        |api_tennis           |TN_CORE  |10,001             |ATP               |2024  |true   |1   |
+|TN        |api_tennis           |TN_CORE  |10,002             |WTA               |2024  |true   |1   |
+|VB        |api_volleyball       |VB_CORE  |12,001             |FIVB              |2024  |true   |1   |

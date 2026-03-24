@@ -47,6 +47,7 @@ DB_CONFIG = {
 }
 
 FALLBACK_RUN_GROUP_OPTIONS = [
+    "FB_BOOTSTRAP_V1",
     "FB_TOP",
     "FB_API_EXPANSION",
     "FB_FD_CORE",
@@ -54,6 +55,17 @@ FALLBACK_RUN_GROUP_OPTIONS = [
     "HK_CORE",
     "BK_TOP",
     "BK_CORE",
+    "TN_CORE",
+    "MMA_CORE",
+    "VB_CORE",
+    "HB_CORE",
+    "BSB_CORE",
+    "RGB_CORE",
+    "CK_CORE",
+    "FH_CORE",
+    "AFB_CORE",
+    "ESP_CORE",
+    "DRT_CORE",
 ]
 
 DEFAULT_PROVIDER_BY_SPORT = {
@@ -63,16 +75,28 @@ DEFAULT_PROVIDER_BY_SPORT = {
     "football": "api_football",
     "hockey": "api_hockey",
     "basketball": "api_sport",
+    "TN": "api_tennis",
     "tennis": "api_tennis",
+    "MMA": "api_mma",
     "mma": "api_mma",
+    "VB": "api_volleyball",
     "volleyball": "api_volleyball",
+    "HB": "api_handball",
     "handball": "api_handball",
+    "BSB": "api_baseball",
     "baseball": "api_baseball",
+    "RGB": "api_rugby",
     "rugby": "api_rugby",
+    "CK": "api_cricket",
     "cricket": "api_cricket",
+    "FH": "api_field_hockey",
     "field_hockey": "api_field_hockey",
+    "AFB": "api_american_football",
     "american_football": "api_american_football",
+    "ESP": "api_esports",
     "esports": "api_esports",
+    "DRT": "api_darts",
+    "darts": "api_darts",
 }
 
 SPORT_LABELS = {
@@ -89,6 +113,7 @@ SPORT_LABELS = {
     "FH": "FH - Field Hockey",
     "AFB": "AFB - American Football",
     "ESP": "ESP - Esports",
+    "DRT": "DRT - Darts",
 }
 
 ENTITY_PROFILE_MAP = {
@@ -345,13 +370,28 @@ class MatchMatrixPanelV9:
         finally:
             conn.close()
 
-    def load_sports_from_db(self) -> list[str]:
+    def load_enabled_target_sports_from_db(self) -> set[str]:
         sql = """
             SELECT DISTINCT sport_code
             FROM ops.ingest_targets
             WHERE enabled = TRUE
-              AND COALESCE(BTRIM(sport_code), '') <> ''
-            ORDER BY sport_code
+            AND COALESCE(BTRIM(sport_code), '') <> ''
+        """
+        conn = self.get_connection()
+        try:
+            with conn.cursor() as cur:
+                cur.execute(sql)
+                return {row[0] for row in cur.fetchall()}
+        finally:
+            conn.close()
+
+    def load_sports_from_db(self) -> list[str]:
+        sql = """
+            SELECT code
+            FROM public.sports
+            WHERE is_active = TRUE
+            AND COALESCE(BTRIM(code), '') <> ''
+            ORDER BY sort_order, code
         """
         conn = self.get_connection()
         try:
@@ -381,6 +421,28 @@ class MatchMatrixPanelV9:
         try:
             with conn.cursor() as cur:
                 cur.execute(sql, tuple(params))
+                return [row[0] for row in cur.fetchall()]
+        finally:
+            conn.close()
+
+    def load_run_groups_for_selected_sports(self, sports: list[str]) -> list[str]:
+        if not sports:
+            return []
+
+        conn = self.get_connection()
+        try:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT DISTINCT run_group
+                    FROM ops.ingest_targets
+                    WHERE enabled = TRUE
+                      AND COALESCE(BTRIM(run_group), '') <> ''
+                      AND sport_code = ANY(%s)
+                    ORDER BY run_group
+                    """,
+                    (sports,),
+                )
                 return [row[0] for row in cur.fetchall()]
         finally:
             conn.close()
@@ -418,6 +480,8 @@ class MatchMatrixPanelV9:
             "players": "SELECT COUNT(*) FROM public.players",
             "player_season_statistics": "SELECT COUNT(*) FROM public.player_season_statistics",
             "stg_player_season_stats": "SELECT COUNT(*) FROM staging.stg_provider_player_season_stats",
+            "stg_provider_fixtures": "SELECT COUNT(*) FROM staging.stg_provider_fixtures",
+            "stg_provider_teams": "SELECT COUNT(*) FROM staging.stg_provider_teams",
             "planner_pending_ready": """
                 SELECT COUNT(*) FROM ops.ingest_planner
                 WHERE status IN ('pending', 'ready')
@@ -440,6 +504,9 @@ class MatchMatrixPanelV9:
     def refresh_dynamic_options(self, initial: bool = False) -> None:
         try:
             sports = self.load_sports_from_db()
+            enabled_target_sports = self.load_enabled_target_sports_from_db()
+            self.enabled_target_sports = enabled_target_sports
+
             if not sports:
                 sports = ["FB", "HK", "BK"]
 
@@ -447,10 +514,15 @@ class MatchMatrixPanelV9:
             self.reload_sports_listbox()
 
             selected_sports = self.get_selected_sports() if hasattr(self, "sports_listbox") else []
+
             sport = selected_sports[0] if selected_sports else (sports[0] if sports else None)
             provider = self.resolve_provider_for_sport(sport) if sport else None
 
-            run_groups = self.load_run_groups_from_db(provider, sport) if sport else []
+            if len(selected_sports) > 1:
+                run_groups = self.load_run_groups_for_selected_sports(selected_sports)
+            else:
+                run_groups = self.load_run_groups_from_db(provider, sport) if sport else []
+
             entities = self.load_entities_from_db(provider, sport) if sport else []
 
             if not run_groups:
@@ -789,11 +861,16 @@ class MatchMatrixPanelV9:
 
         tk.Label(sports_frame, text="Sporty", bg=BG, fg=FG, font=FONT_LABEL).grid(row=0, column=0, sticky="w")
 
+        list_wrap = tk.Frame(sports_frame, bg=BG)
+        list_wrap.grid(row=1, column=0, sticky="nsew")
+        list_wrap.grid_rowconfigure(0, weight=1)
+        list_wrap.grid_columnconfigure(0, weight=1)
+
         self.sports_listbox = tk.Listbox(
-            sports_frame,
+            list_wrap,
             selectmode=tk.MULTIPLE,
             exportselection=False,
-            height=6,
+            height=10,
             bg=TEXTBOX_BG,
             fg=FG,
             selectbackground=ACCENT_3,
@@ -802,8 +879,12 @@ class MatchMatrixPanelV9:
             font=FONT_SMALL,
             activestyle="none",
         )
-        self.sports_listbox.grid(row=1, column=0, sticky="nsew")
+        self.sports_listbox.grid(row=0, column=0, sticky="nsew")
         self.sports_listbox.bind("<<ListboxSelect>>", self.on_sport_selection_changed)
+
+        sports_scroll = ttk.Scrollbar(list_wrap, orient="vertical", command=self.sports_listbox.yview)
+        sports_scroll.grid(row=0, column=1, sticky="ns")
+        self.sports_listbox.configure(yscrollcommand=sports_scroll.set)
 
         sports_btns = tk.Frame(sports_frame, bg=BG)
         sports_btns.grid(row=2, column=0, sticky="ew", pady=5)
@@ -836,11 +917,16 @@ class MatchMatrixPanelV9:
 
         tk.Label(entities_frame, text="Entity", bg=BG, fg=FG, font=FONT_LABEL).grid(row=0, column=0, sticky="w")
 
+        list_wrap = tk.Frame(entities_frame, bg=BG)
+        list_wrap.grid(row=1, column=0, sticky="nsew")
+        list_wrap.grid_rowconfigure(0, weight=1)
+        list_wrap.grid_columnconfigure(0, weight=1)
+
         self.entities_listbox = tk.Listbox(
-            entities_frame,
+            list_wrap,
             selectmode=tk.MULTIPLE,
             exportselection=False,
-            height=6,
+            height=10,
             bg=TEXTBOX_BG,
             fg=FG,
             selectbackground=ACCENT_3,
@@ -849,8 +935,12 @@ class MatchMatrixPanelV9:
             font=FONT_SMALL,
             activestyle="none",
         )
-        self.entities_listbox.grid(row=1, column=0, sticky="nsew")
+        self.entities_listbox.grid(row=0, column=0, sticky="nsew")
         self.entities_listbox.bind("<<ListboxSelect>>", lambda e: self.update_selection_dashboard())
+
+        entities_scroll = ttk.Scrollbar(list_wrap, orient="vertical", command=self.entities_listbox.yview)
+        entities_scroll.grid(row=0, column=1, sticky="ns")
+        self.entities_listbox.configure(yscrollcommand=entities_scroll.set)
 
         entities_btns = tk.Frame(entities_frame, bg=BG)
         entities_btns.grid(row=2, column=0, sticky="ew", pady=5)
@@ -1101,6 +1191,8 @@ class MatchMatrixPanelV9:
             ("players", "public.players"),
             ("player_season_statistics", "public.player_season_statistics"),
             ("stg_player_season_stats", "staging.stg_provider_player_season_stats"),
+            ("stg_provider_fixtures", "staging.stg_provider_fixtures"),
+            ("stg_provider_teams", "staging.stg_provider_teams"),
             ("planner_pending_ready", "ops.ingest_planner pending/ready"),
             ("planner_running", "ops.ingest_planner running"),
             ("job_runs", "ops.job_runs"),
@@ -1257,7 +1349,15 @@ class MatchMatrixPanelV9:
         current_selection = self.get_selected_sports() if hasattr(self, "sports_listbox") else []
         self.sports_listbox.delete(0, tk.END)
 
-        display_values = [SPORT_LABELS.get(sport, sport) for sport in self.db_sport_options]
+        enabled_target_sports = getattr(self, "enabled_target_sports", set())
+
+        display_values = []
+        for sport in self.db_sport_options:
+            base_label = SPORT_LABELS.get(sport, sport)
+            if sport not in enabled_target_sports:
+                base_label = f"{base_label} [NO TARGETS]"
+            display_values.append(base_label)
+
         for value in display_values:
             self.sports_listbox.insert(tk.END, value)
 
@@ -1423,8 +1523,9 @@ class MatchMatrixPanelV9:
     # --------------------------------------------------------
     def get_selected_sports(self) -> list[str]:
         selected = [self.sports_listbox.get(i) for i in self.sports_listbox.curselection()]
+        cleaned = [item.replace(" [NO TARGETS]", "") for item in selected]
         reverse_labels = {v: k for k, v in SPORT_LABELS.items()}
-        return [reverse_labels.get(item, item) for item in selected]
+        return [reverse_labels.get(item, item) for item in cleaned]
 
     def on_sport_selection_changed(self, event=None) -> None:
         self.refresh_dynamic_options(initial=True)
@@ -1451,17 +1552,47 @@ class MatchMatrixPanelV9:
         thread.start()
 
     def run_scheduler(self) -> None:
-        cmd = [PYTHON_EXE, SCHEDULER_RUNNER]
+        selected_sports = self.get_selected_sports()
+        selected_entities = self.get_selected_entities()
+        run_group = self.run_group_var.get().strip()
+        limit = self.limit_var.get().strip() or "10"
+        timeout_sec = self.timeout_sec_var.get().strip() or "300"
+
+        cmd = [
+            PYTHON_EXE,
+            SCHEDULER_RUNNER,
+            "--limit", limit,
+            "--timeout-sec", timeout_sec,
+        ]
+
+        # Provider (jen pokud 1 sport)
+        if len(selected_sports) == 1:
+            provider = self.resolve_provider_for_sport(selected_sports[0])
+            cmd += ["--provider", provider]
+
+        # Sport (jen pokud 1)
+        if len(selected_sports) == 1:
+            cmd += ["--sport", selected_sports[0]]
+
+        # Entity (jen pokud 1)
+        if len(selected_entities) == 1:
+            cmd += ["--entity", selected_entities[0]]
+
+        # Run group
+        if run_group:
+            cmd += ["--run-group", run_group]
+
         self.log_write("Spouštím scheduler:")
         self.log_write(" ".join(cmd))
+
         self.run_command_stream(
             cmd=cmd,
-            runner_name="multisport scheduler V4",
+            runner_name="ingest cycle V3",
             total_steps=1,
             step_label="scheduler run",
-            sports="-",
-            entities="-",
-            run_group="-",
+            sports=", ".join(selected_sports) or "-",
+            entities=", ".join(selected_entities) or "-",
+            run_group=run_group or "-",
         )
 
     def run_players_pipeline(self) -> None:

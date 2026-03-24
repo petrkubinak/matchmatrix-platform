@@ -1,7 +1,7 @@
 # TicketMatrixPlatform – denní přehled vývoje
 
 Datum: 22.03.2026  
-Čas kontroly systému: 13:08
+Čas kontroly systému: 20:08
 
 ---
 
@@ -24,12 +24,11 @@ Byly zkontrolovány tyto části projektu:
 
 - Celý projekt
 
-Celkem bylo projito 1123 sledovaných souborů.
+Celkem bylo projito 1127 sledovaných souborů.
 
 Ve srovnání s minulým auditem:
-- bylo přidáno 24 nových souborů
-- u 4 souborů proběhla úprava
-- 22 souborů bylo odstraněno
+- bylo přidáno 4 nových souborů
+- u 5 souborů proběhla úprava
 
 ---
 
@@ -43,7 +42,7 @@ Databáze je dostupná a základní stav je následující:
 - hráči: 779
 
 Player pipeline přehled:
-- import hráčů: 820
+- import hráčů: 1360
 - staging hráčů: 533
 - public hráči: 779
 - statistiky hráčů na zápas: 0
@@ -57,17 +56,17 @@ Git větev:
 - main
 
 Poslední commit:
-- 0ba44ab | 2026-03-22 00:08:31 +0100 | update players pipeline
+- 589e7bd | 2026-03-22 13:10:31 +0100 | update players pipeline
 
 Aktuální neuložené změny:
 - M ingest/API-Football/pull_api_football_players.ps1
--  M ingest/API-Hockey/pull_api_hockey_leagues.ps1
--  M ingest/API-Hockey/pull_api_hockey_teams.ps1
--  D ingest/football_data_pull_V5.py
--  D ingest/football_data_uk_history_pull.py
--  D ingest/parse_api_sport_fixtures.py
--  D ingest/parse_api_sport_leagues.py
--  D ingest/predict_matches.py
+-  M ingest/parse_api_football_player_profiles_v1.py
+-  M reports/audit/latest_snapshot.txt
+-  M workers/run_ingest_planner_jobs.py
+-  M workers/run_players_fetch_only_v1.py
+-  M workers/run_players_parse_only_v1.py
+- ?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/204_add_photo_url_to_staging_players_import.sql
+- ?? db/migrations/204_add_photo_url_to_staging_players_import.sql
 
 ---
 
@@ -82,14 +81,14 @@ Na základě dnešního auditu je vidět, že projekt má:
 
 
 Hlavní změněné soubory dnes:
-- ingest\football_data_pull_V5.py
-- ingest\football_data_uk_history_pull.py
-- ingest\parse_api_sport_fixtures.py
-- ingest\parse_api_sport_leagues.py
-- ingest\predict_matches.py
-- ingest\run_football_data_pull_V5.bat
-- ingest\run_football_data_uk_history.bat
-- ingest\run_theodds.bat
+- ingest\API-Football\pull_api_football_players.ps1
+- ingest\parse_api_football_player_profiles_v1.py
+- workers\run_ingest_planner_jobs.py
+- workers\run_players_fetch_only_v1.py
+- workers\run_players_parse_only_v1.py
+- db\migrations\204_add_photo_url_to_staging_players_import.sql
+- docs\komunikace s chatGPT\20260322\MATCHMATRIX – NAVAZOVACÍ ZÁPIS .md
+- ingest\API-Football\pull_api_football_players_v5.py
 
 ---
 

@@ -1,0 +1,64 @@
+|provider             |sport_code|job_code                                 |endpoint_code|ingest_mode|enabled|priority|
+|---------------------|----------|-----------------------------------------|-------------|-----------|-------|--------|
+|api_american_football|AFB       |api_american_football__AFB_CORE__leagues |leagues      |fast       |true   |12,010  |
+|api_american_football|AFB       |api_american_football__AFB_CORE__teams   |teams        |fast       |true   |12,020  |
+|api_american_football|AFB       |api_american_football__AFB_CORE__fixtures|fixtures     |fast       |true   |12,030  |
+|api_american_football|AFB       |api_american_football__AFB_CORE__players |players      |medium     |true   |12,040  |
+|api_american_football|AFB       |api_american_football__AFB_CORE__coaches |coaches      |medium     |true   |12,050  |
+|api_american_football|AFB       |api_american_football__AFB_CORE__odds    |odds         |fast       |false  |12,060  |
+|api_baseball         |BSB       |api_baseball__BSB_CORE__leagues          |leagues      |fast       |true   |8,010   |
+|api_baseball         |BSB       |api_baseball__BSB_CORE__teams            |teams        |fast       |true   |8,020   |
+|api_baseball         |BSB       |api_baseball__BSB_CORE__fixtures         |fixtures     |fast       |true   |8,030   |
+|api_baseball         |BSB       |api_baseball__BSB_CORE__players          |players      |medium     |true   |8,040   |
+|api_baseball         |BSB       |api_baseball__BSB_CORE__coaches          |coaches      |medium     |true   |8,050   |
+|api_baseball         |BSB       |api_baseball__BSB_CORE__odds             |odds         |fast       |false  |8,060   |
+|api_cricket          |CK        |api_cricket__CK_CORE__leagues            |leagues      |fast       |true   |10,010  |
+|api_cricket          |CK        |api_cricket__CK_CORE__teams              |teams        |fast       |true   |10,020  |
+|api_cricket          |CK        |api_cricket__CK_CORE__fixtures           |fixtures     |fast       |true   |10,030  |
+|api_cricket          |CK        |api_cricket__CK_CORE__players            |players      |medium     |true   |10,040  |
+|api_cricket          |CK        |api_cricket__CK_CORE__coaches            |coaches      |medium     |true   |10,050  |
+|api_cricket          |CK        |api_cricket__CK_CORE__odds               |odds         |fast       |false  |10,060  |
+|api_darts            |DRT       |api_darts__DRT_CORE__leagues             |leagues      |fast       |true   |14,010  |
+|api_darts            |DRT       |api_darts__DRT_CORE__fixtures            |fixtures     |fast       |true   |14,020  |
+|api_darts            |DRT       |api_darts__DRT_CORE__players             |players      |medium     |true   |14,030  |
+|api_darts            |DRT       |api_darts__DRT_CORE__rankings            |rankings     |medium     |true   |14,040  |
+|api_darts            |DRT       |api_darts__DRT_CORE__odds                |odds         |fast       |false  |14,050  |
+|api_esports          |ESP       |api_esports__ESP_CORE__leagues           |leagues      |fast       |true   |13,010  |
+|api_esports          |ESP       |api_esports__ESP_CORE__fixtures          |fixtures     |fast       |true   |13,020  |
+|api_esports          |ESP       |api_esports__ESP_CORE__players           |players      |medium     |true   |13,030  |
+|api_esports          |ESP       |api_esports__ESP_CORE__coaches           |coaches      |medium     |true   |13,040  |
+|api_esports          |ESP       |api_esports__ESP_CORE__odds              |odds         |fast       |false  |13,050  |
+|api_field_hockey     |FH        |api_field_hockey__FH_CORE__leagues       |leagues      |fast       |true   |11,010  |
+|api_field_hockey     |FH        |api_field_hockey__FH_CORE__teams         |teams        |fast       |true   |11,020  |
+|api_field_hockey     |FH        |api_field_hockey__FH_CORE__fixtures      |fixtures     |fast       |true   |11,030  |
+|api_field_hockey     |FH        |api_field_hockey__FH_CORE__players       |players      |medium     |true   |11,040  |
+|api_field_hockey     |FH        |api_field_hockey__FH_CORE__coaches       |coaches      |medium     |true   |11,050  |
+|api_field_hockey     |FH        |api_field_hockey__FH_CORE__odds          |odds         |fast       |false  |11,060  |
+|api_handball         |HB        |api_handball__HB_CORE__leagues           |leagues      |fast       |true   |7,010   |
+|api_handball         |HB        |api_handball__HB_CORE__teams             |teams        |fast       |true   |7,020   |
+|api_handball         |HB        |api_handball__HB_CORE__fixtures          |fixtures     |fast       |true   |7,030   |
+|api_handball         |HB        |api_handball__HB_CORE__players           |players      |medium     |true   |7,040   |
+|api_handball         |HB        |api_handball__HB_CORE__coaches           |coaches      |medium     |true   |7,050   |
+|api_handball         |HB        |api_handball__HB_CORE__odds              |odds         |fast       |false  |7,060   |
+|api_mma              |MMA       |api_mma__MMA_CORE__leagues               |leagues      |fast       |true   |5,010   |
+|api_mma              |MMA       |api_mma__MMA_CORE__fixtures              |fixtures     |fast       |true   |5,020   |
+|api_mma              |MMA       |api_mma__MMA_CORE__players               |players      |fast       |true   |5,030   |
+|api_mma              |MMA       |api_mma__MMA_CORE__rankings              |rankings     |medium     |true   |5,040   |
+|api_mma              |MMA       |api_mma__MMA_CORE__odds                  |odds         |fast       |false  |5,050   |
+|api_rugby            |RGB       |api_rugby__RGB_CORE__leagues             |leagues      |fast       |true   |9,010   |
+|api_rugby            |RGB       |api_rugby__RGB_CORE__teams               |teams        |fast       |true   |9,020   |
+|api_rugby            |RGB       |api_rugby__RGB_CORE__fixtures            |fixtures     |fast       |true   |9,030   |
+|api_rugby            |RGB       |api_rugby__RGB_CORE__players             |players      |medium     |true   |9,040   |
+|api_rugby            |RGB       |api_rugby__RGB_CORE__coaches             |coaches      |medium     |true   |9,050   |
+|api_rugby            |RGB       |api_rugby__RGB_CORE__odds                |odds         |fast       |false  |9,060   |
+|api_tennis           |TN        |api_tennis__TN_CORE__leagues             |leagues      |fast       |true   |4,010   |
+|api_tennis           |TN        |api_tennis__TN_CORE__fixtures            |fixtures     |fast       |true   |4,020   |
+|api_tennis           |TN        |api_tennis__TN_CORE__players             |players      |fast       |true   |4,030   |
+|api_tennis           |TN        |api_tennis__TN_CORE__rankings            |rankings     |medium     |true   |4,040   |
+|api_tennis           |TN        |api_tennis__TN_CORE__odds                |odds         |fast       |false  |4,050   |
+|api_volleyball       |VB        |api_volleyball__VB_CORE__leagues         |leagues      |fast       |true   |6,010   |
+|api_volleyball       |VB        |api_volleyball__VB_CORE__teams           |teams        |fast       |true   |6,020   |
+|api_volleyball       |VB        |api_volleyball__VB_CORE__fixtures        |fixtures     |fast       |true   |6,030   |
+|api_volleyball       |VB        |api_volleyball__VB_CORE__players         |players      |medium     |true   |6,040   |
+|api_volleyball       |VB        |api_volleyball__VB_CORE__coaches         |coaches      |medium     |true   |6,050   |
+|api_volleyball       |VB        |api_volleyball__VB_CORE__odds            |odds         |fast       |false  |6,060   |

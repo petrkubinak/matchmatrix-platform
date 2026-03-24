@@ -7,6 +7,8 @@ from tkinter import ttk, scrolledtext, messagebox
 
 PROJECT_ROOT = Path(r"C:\MatchMatrix-platform")
 REPORT_ROOT = PROJECT_ROOT / "reports" / "audit"
+SYSTEM_TREE_EXPORTER = PROJECT_ROOT / "tools" / "export_system_tree_v1.py"
+LATEST_SYSTEM_TREE = REPORT_ROOT / "latest_system_tree.txt"
 
 DB_CONFIG = {
     "host": "localhost",
@@ -216,6 +218,24 @@ def get_git_status():
         "short_status": short_status if short_status else "Čisté, bez neuložených změn.",
     }
 
+def run_system_tree_export():
+    if not SYSTEM_TREE_EXPORTER.exists():
+        return False, f"Chybí exporter: {SYSTEM_TREE_EXPORTER}"
+
+    try:
+        result = subprocess.run(
+            [r"C:\Python314\python.exe", str(SYSTEM_TREE_EXPORTER)],
+            cwd=str(PROJECT_ROOT),
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        return True, result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        output = (e.stdout or "") + "\n" + (e.stderr or "")
+        return False, output.strip()
+    except Exception as e:
+        return False, str(e)
 
 def try_db_query(sql: str):
     try:
@@ -699,8 +719,9 @@ class MissionControlV7:
 
         ttk.Button(settings, text="Spustit FULL audit", style="Accent.TButton", command=self.run_full_audit).grid(row=1, column=0, padx=6, pady=8, sticky="w")
         ttk.Button(settings, text="Otevřít poslední report", style="Ghost.TButton", command=self.open_last_report).grid(row=1, column=1, padx=6, pady=8, sticky="w")
-        ttk.Button(settings, text="Otevřít audit složku", style="Ghost.TButton", command=lambda: open_path(REPORT_ROOT)).grid(row=1, column=2, padx=6, pady=8, sticky="w")
-        ttk.Button(settings, text="Vyčistit log", style="Ghost.TButton", command=self.clear_all).grid(row=1, column=3, padx=6, pady=8, sticky="w")
+        ttk.Button(settings, text="Otevřít system tree", style="Ghost.TButton", command=lambda: open_path(LATEST_SYSTEM_TREE)).grid(row=1, column=2, padx=6, pady=8, sticky="w")
+        ttk.Button(settings, text="Otevřít audit složku", style="Ghost.TButton", command=lambda: open_path(REPORT_ROOT)).grid(row=1, column=3, padx=6, pady=8, sticky="w")
+        ttk.Button(settings, text="Vyčistit log", style="Ghost.TButton", command=self.clear_all).grid(row=1, column=4, padx=6, pady=8, sticky="w")
 
         nav_row = 0
         nav_col = 0
@@ -853,6 +874,18 @@ class MissionControlV7:
     def run_full_audit(self):
         self.clear_all()
         self.log("Spouštím FULL audit...")
+        self.log("Generuji SYSTEM TREE export...")
+        ok_tree, tree_msg = run_system_tree_export()
+
+        if ok_tree:
+            self.log("SYSTEM TREE export OK.")
+            self.stats(f"SYSTEM TREE: OK -> {LATEST_SYSTEM_TREE}")
+            self.stats("")
+        else:
+            self.log(f"SYSTEM TREE export ERROR: {tree_msg}")
+            self.stats("SYSTEM TREE: ERROR")
+            self.stats(tree_msg)
+            self.stats("")
         self.stats("=== TICKETMATRIXPLATFORM MISSION CONTROL V7 ===")
         self.stats(f"Čas spuštění: {dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         self.stats("")
@@ -972,12 +1005,14 @@ class MissionControlV7:
 
         self.log(f"Audit report: {audit_path}")
         self.log(f"Progress report: {progress_path}")
-        self.log("Výstup zredukován jen na 2 reporty.")
+        self.log(f"System tree: {LATEST_SYSTEM_TREE}")
+        self.log("Výstup zredukován jen na 2 reporty + system tree.")
         self.log("Audit dokončen.")
 
         self.stats("=== HOTOVO ===")
         self.stats(f"Audit report: {audit_path}")
         self.stats(f"Progress report: {progress_path}")
+        self.stats(f"System tree: {LATEST_SYSTEM_TREE}")
 
 
 def main():

@@ -1,0 +1,69 @@
+|sport_code|provider             |run_group|entity  |default_run_group|entity_enabled|priority|
+|----------|---------------------|---------|--------|-----------------|--------------|--------|
+|AFB       |api_american_football|AFB_CORE |leagues |AFB_CORE         |true          |10      |
+|AFB       |api_american_football|AFB_CORE |teams   |AFB_CORE         |true          |20      |
+|AFB       |api_american_football|AFB_CORE |fixtures|AFB_CORE         |true          |30      |
+|AFB       |api_american_football|AFB_CORE |odds    |AFB_CORE         |true          |40      |
+|AFB       |api_american_football|AFB_CORE |players |AFB_CORE         |true          |50      |
+|AFB       |api_american_football|AFB_CORE |coaches |AFB_CORE         |true          |70      |
+|BSB       |api_baseball         |BSB_CORE |leagues |BSB_CORE         |true          |10      |
+|BSB       |api_baseball         |BSB_CORE |teams   |BSB_CORE         |true          |20      |
+|BSB       |api_baseball         |BSB_CORE |fixtures|BSB_CORE         |true          |30      |
+|BSB       |api_baseball         |BSB_CORE |odds    |BSB_CORE         |true          |40      |
+|BSB       |api_baseball         |BSB_CORE |players |BSB_CORE         |true          |50      |
+|BSB       |api_baseball         |BSB_CORE |coaches |BSB_CORE         |true          |70      |
+|CK        |api_cricket          |CK_CORE  |leagues |CK_CORE          |true          |10      |
+|CK        |api_cricket          |CK_CORE  |teams   |CK_CORE          |true          |20      |
+|CK        |api_cricket          |CK_CORE  |fixtures|CK_CORE          |true          |30      |
+|CK        |api_cricket          |CK_CORE  |odds    |CK_CORE          |true          |40      |
+|CK        |api_cricket          |CK_CORE  |players |CK_CORE          |true          |50      |
+|CK        |api_cricket          |CK_CORE  |coaches |CK_CORE          |true          |70      |
+|DRT       |api_darts            |DRT_CORE |leagues |DRT_CORE         |true          |10      |
+|DRT       |api_darts            |DRT_CORE |fixtures|DRT_CORE         |true          |20      |
+|DRT       |api_darts            |DRT_CORE |players |DRT_CORE         |true          |30      |
+|DRT       |api_darts            |DRT_CORE |rankings|DRT_CORE         |true          |40      |
+|DRT       |api_darts            |DRT_CORE |odds    |DRT_CORE         |true          |50      |
+|ESP       |api_esports          |ESP_CORE |leagues |ESP_CORE         |true          |10      |
+|ESP       |api_esports          |ESP_CORE |fixtures|ESP_CORE         |true          |20      |
+|ESP       |api_esports          |ESP_CORE |players |ESP_CORE         |true          |30      |
+|ESP       |api_esports          |ESP_CORE |coaches |ESP_CORE         |true          |40      |
+|ESP       |api_esports          |ESP_CORE |odds    |ESP_CORE         |true          |50      |
+|FH        |api_field_hockey     |FH_CORE  |leagues |FH_CORE          |true          |10      |
+|FH        |api_field_hockey     |FH_CORE  |teams   |FH_CORE          |true          |20      |
+|FH        |api_field_hockey     |FH_CORE  |fixtures|FH_CORE          |true          |30      |
+|FH        |api_field_hockey     |FH_CORE  |odds    |FH_CORE          |true          |40      |
+|FH        |api_field_hockey     |FH_CORE  |players |FH_CORE          |true          |50      |
+|FH        |api_field_hockey     |FH_CORE  |coaches |FH_CORE          |true          |70      |
+|HB        |api_handball         |HB_CORE  |leagues |HB_CORE          |true          |10      |
+|HB        |api_handball         |HB_CORE  |teams   |HB_CORE          |true          |20      |
+|HB        |api_handball         |HB_CORE  |fixtures|HB_CORE          |true          |30      |
+|HB        |api_handball         |HB_CORE  |odds    |HB_CORE          |true          |40      |
+|HB        |api_handball         |HB_CORE  |players |HB_CORE          |true          |50      |
+|HB        |api_handball         |HB_CORE  |coaches |HB_CORE          |true          |70      |
+|MMA       |api_mma              |MMA_CORE |leagues |MMA_CORE         |true          |10      |
+|MMA       |api_mma              |MMA_CORE |fixtures|MMA_CORE         |true          |20      |
+|MMA       |api_mma              |MMA_CORE |players |MMA_CORE         |true          |30      |
+|MMA       |api_mma              |MMA_CORE |rankings|MMA_CORE         |true          |40      |
+|MMA       |api_mma              |MMA_CORE |odds    |MMA_CORE         |true          |50      |
+|RGB       |api_rugby            |RGB_CORE |leagues |RGB_CORE         |true          |10      |
+|RGB       |api_rugby            |RGB_CORE |teams   |RGB_CORE         |true          |20      |
+|RGB       |api_rugby            |RGB_CORE |fixtures|RGB_CORE         |true          |30      |
+|RGB       |api_rugby            |RGB_CORE |odds    |RGB_CORE         |true          |40      |
+|RGB       |api_rugby            |RGB_CORE |players |RGB_CORE         |true          |50      |
+|RGB       |api_rugby            |RGB_CORE |coaches |RGB_CORE         |true          |70      |
+|TN        |api_tennis           |TN_CORE  |leagues |TN_CORE          |true          |10      |
+|TN        |api_tennis           |TN_CORE  |leagues |TN_CORE          |true          |10      |
+|TN        |api_tennis           |TN_CORE  |fixtures|TN_CORE          |true          |20      |
+|TN        |api_tennis           |TN_CORE  |fixtures|TN_CORE          |true          |20      |
+|TN        |api_tennis           |TN_CORE  |players |TN_CORE          |true          |30      |
+|TN        |api_tennis           |TN_CORE  |players |TN_CORE          |true          |30      |
+|TN        |api_tennis           |TN_CORE  |rankings|TN_CORE          |true          |40      |
+|TN        |api_tennis           |TN_CORE  |rankings|TN_CORE          |true          |40      |
+|TN        |api_tennis           |TN_CORE  |odds    |TN_CORE          |true          |50      |
+|TN        |api_tennis           |TN_CORE  |odds    |TN_CORE          |true          |50      |
+|VB        |api_volleyball       |VB_CORE  |leagues |VB_CORE          |true          |10      |
+|VB        |api_volleyball       |VB_CORE  |teams   |VB_CORE          |true          |20      |
+|VB        |api_volleyball       |VB_CORE  |fixtures|VB_CORE          |true          |30      |
+|VB        |api_volleyball       |VB_CORE  |odds    |VB_CORE          |true          |40      |
+|VB        |api_volleyball       |VB_CORE  |players |VB_CORE          |true          |50      |
+|VB        |api_volleyball       |VB_CORE  |coaches |VB_CORE          |true          |70      |

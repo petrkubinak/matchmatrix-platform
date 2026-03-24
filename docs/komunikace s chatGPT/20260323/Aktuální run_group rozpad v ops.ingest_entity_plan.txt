@@ -1,0 +1,94 @@
+|provider             |sport_code|entity             |default_run_group|enabled|priority|
+|---------------------|----------|-------------------|-----------------|-------|--------|
+|api_american_football|AFB       |leagues            |                 |true   |10      |
+|api_american_football|AFB       |teams              |                 |true   |20      |
+|api_american_football|AFB       |fixtures           |                 |true   |30      |
+|api_american_football|AFB       |odds               |                 |true   |40      |
+|api_american_football|AFB       |players            |                 |true   |50      |
+|api_american_football|AFB       |coaches            |                 |true   |70      |
+|api_basketball       |BK        |leagues            |                 |true   |10      |
+|api_basketball       |BK        |teams              |                 |true   |20      |
+|api_basketball       |BK        |fixtures           |                 |true   |30      |
+|api_basketball       |BK        |odds               |                 |true   |40      |
+|api_basketball       |BK        |players            |                 |true   |50      |
+|api_basketball       |BK        |coaches            |                 |true   |70      |
+|api_sport            |BK        |leagues            |                 |true   |10      |
+|api_sport            |BK        |teams              |                 |true   |20      |
+|api_sport            |BK        |fixtures           |                 |true   |30      |
+|api_sport            |BK        |odds               |                 |true   |40      |
+|api_sport            |BK        |players            |                 |true   |50      |
+|api_sport            |BK        |coaches            |                 |true   |70      |
+|api_baseball         |BSB       |leagues            |                 |true   |10      |
+|api_baseball         |BSB       |teams              |                 |true   |20      |
+|api_baseball         |BSB       |fixtures           |                 |true   |30      |
+|api_baseball         |BSB       |odds               |                 |true   |40      |
+|api_baseball         |BSB       |players            |                 |true   |50      |
+|api_baseball         |BSB       |coaches            |                 |true   |70      |
+|api_cricket          |CK        |leagues            |                 |true   |10      |
+|api_cricket          |CK        |teams              |                 |true   |20      |
+|api_cricket          |CK        |fixtures           |                 |true   |30      |
+|api_cricket          |CK        |odds               |                 |true   |40      |
+|api_cricket          |CK        |players            |                 |true   |50      |
+|api_cricket          |CK        |coaches            |                 |true   |70      |
+|api_darts            |DRT       |leagues            |                 |true   |10      |
+|api_darts            |DRT       |fixtures           |                 |true   |20      |
+|api_darts            |DRT       |players            |                 |true   |30      |
+|api_darts            |DRT       |rankings           |                 |true   |40      |
+|api_darts            |DRT       |odds               |                 |true   |50      |
+|api_esports          |ESP       |leagues            |                 |true   |10      |
+|api_esports          |ESP       |fixtures           |                 |true   |20      |
+|api_esports          |ESP       |players            |                 |true   |30      |
+|api_esports          |ESP       |coaches            |                 |true   |40      |
+|api_esports          |ESP       |odds               |                 |true   |50      |
+|api_football         |FB        |leagues            |                 |true   |10      |
+|api_football         |FB        |teams              |                 |true   |20      |
+|api_football         |FB        |fixtures           |                 |true   |30      |
+|api_football         |FB        |odds               |                 |true   |40      |
+|api_football         |FB        |players            |                 |true   |50      |
+|api_football         |FB        |player_season_stats|                 |true   |60      |
+|api_football         |FB        |player_stats       |                 |true   |65      |
+|api_football         |FB        |coaches            |                 |true   |70      |
+|football_data        |FB        |leagues            |                 |true   |10      |
+|football_data        |FB        |teams              |                 |true   |20      |
+|football_data        |FB        |fixtures           |                 |true   |30      |
+|football_data        |FB        |odds               |                 |true   |40      |
+|api_field_hockey     |FH        |leagues            |                 |true   |10      |
+|api_field_hockey     |FH        |teams              |                 |true   |20      |
+|api_field_hockey     |FH        |fixtures           |                 |true   |30      |
+|api_field_hockey     |FH        |odds               |                 |true   |40      |
+|api_field_hockey     |FH        |players            |                 |true   |50      |
+|api_field_hockey     |FH        |coaches            |                 |true   |70      |
+|api_handball         |HB        |leagues            |                 |true   |10      |
+|api_handball         |HB        |teams              |                 |true   |20      |
+|api_handball         |HB        |fixtures           |                 |true   |30      |
+|api_handball         |HB        |odds               |                 |true   |40      |
+|api_handball         |HB        |players            |                 |true   |50      |
+|api_handball         |HB        |coaches            |                 |true   |70      |
+|api_hockey           |HK        |leagues            |                 |true   |10      |
+|api_hockey           |HK        |teams              |                 |true   |20      |
+|api_hockey           |HK        |fixtures           |                 |true   |30      |
+|api_hockey           |HK        |odds               |                 |true   |40      |
+|api_hockey           |HK        |players            |                 |true   |40      |
+|api_hockey           |HK        |coaches            |                 |true   |50      |
+|api_mma              |MMA       |leagues            |                 |true   |10      |
+|api_mma              |MMA       |fixtures           |                 |true   |20      |
+|api_mma              |MMA       |players            |                 |true   |30      |
+|api_mma              |MMA       |rankings           |                 |true   |40      |
+|api_mma              |MMA       |odds               |                 |true   |50      |
+|api_rugby            |RGB       |leagues            |                 |true   |10      |
+|api_rugby            |RGB       |teams              |                 |true   |20      |
+|api_rugby            |RGB       |fixtures           |                 |true   |30      |
+|api_rugby            |RGB       |odds               |                 |true   |40      |
+|api_rugby            |RGB       |players            |                 |true   |50      |
+|api_rugby            |RGB       |coaches            |                 |true   |70      |
+|api_tennis           |TN        |leagues            |                 |true   |10      |
+|api_tennis           |TN        |fixtures           |                 |true   |20      |
+|api_tennis           |TN        |players            |                 |true   |30      |
+|api_tennis           |TN        |rankings           |                 |true   |40      |
+|api_tennis           |TN        |odds               |                 |true   |50      |
+|api_volleyball       |VB        |leagues            |                 |true   |10      |
+|api_volleyball       |VB        |teams              |                 |true   |20      |
+|api_volleyball       |VB        |fixtures           |                 |true   |30      |
+|api_volleyball       |VB        |odds               |                 |true   |40      |
+|api_volleyball       |VB        |players            |                 |true   |50      |
+|api_volleyball       |VB        |coaches            |                 |true   |70      |
