@@ -10,7 +10,6 @@ from datetime import datetime
 from typing import Optional, Tuple
 
 import psycopg2
-from psycopg2.extras import RealDictCursor
 
 
 # ==========================================================
@@ -24,17 +23,13 @@ from psycopg2.extras import RealDictCursor
 # 1) získá worker lock
 # 2) vytvoří audit do ops.job_runs
 # 3) spustí planner worker
-# 4) pokud planner něco zpracoval, spustí merge worker
+# 4) pokud planner něco zpracoval:
+#    - extract teams from fixtures raw
+#    - parse teams payloads
+#    - parse fixtures payloads
+#    - merge staging -> public
 # 5) zapíše výsledek cyklu do ops.job_runs
 # 6) uvolní worker lock
-#
-# Spuštění:
-# python C:\MatchMatrix-platform\workers\run_ingest_cycle_v3.py
-#
-# Příklad:
-# python C:\MatchMatrix-platform\workers\run_ingest_cycle_v3.py --limit 10
-# python C:\MatchMatrix-platform\workers\run_ingest_cycle_v3.py --provider api_football --sport football --limit 5
-# python C:\MatchMatrix-platform\workers\run_ingest_cycle_v3.py --skip-merge
 # ==========================================================
 
 
@@ -44,6 +39,8 @@ PYTHON_EXE = r"C:\Python314\python.exe"
 PLANNER_WORKER = os.path.join(BASE_DIR, "workers", "run_ingest_planner_jobs.py")
 MERGE_WORKER = os.path.join(BASE_DIR, "workers", "run_unified_staging_to_public_merge_v3.py")
 TEAMS_EXTRACTOR = os.path.join(BASE_DIR, "workers", "extract_teams_from_fixtures_v2.py")
+PARSE_TEAMS = os.path.join(BASE_DIR, "workers", "run_parse_api_sport_teams_v1.py")
+PARSE_FIXTURES = os.path.join(BASE_DIR, "workers", "run_parse_api_sport_fixtures_v1.py")
 PLAYERS_PIPELINE = os.path.join(BASE_DIR, "workers", "run_players_fetch_only_v1.py")
 PLAYERS_PARSE = os.path.join(BASE_DIR, "workers", "run_players_parse_only_v1.py")
 LOCK_NAME = "ingest_cycle_v3"
@@ -55,8 +52,6 @@ DB_CONFIG = {
     "user": "matchmatrix",
     "password": "matchmatrix_pass",
 }
-
-LOCK_NAME = "ingest_cycle_v3"
 
 
 def parse_args() -> argparse.Namespace:
@@ -192,23 +187,41 @@ def build_teams_extractor_command() -> list[str]:
         TEAMS_EXTRACTOR,
     ]
 
+
+def build_parse_teams_command() -> list[str]:
+    return [
+        PYTHON_EXE,
+        PARSE_TEAMS,
+    ]
+
+
+def build_parse_fixtures_command() -> list[str]:
+    return [
+        PYTHON_EXE,
+        PARSE_FIXTURES,
+    ]
+
+
 def build_players_pipeline_command() -> list[str]:
     return [
         PYTHON_EXE,
         PLAYERS_PIPELINE,
     ]
 
+
 def build_players_parse_command() -> list[str]:
     return [
         PYTHON_EXE,
         PLAYERS_PARSE,
-    ]  
+    ]
+
 
 def build_merge_command() -> list[str]:
     return [
         PYTHON_EXE,
         MERGE_WORKER,
     ]
+
 
 def parse_processed_jobs(output_text: str) -> int:
     marker = "Processed jobs:"
@@ -222,12 +235,6 @@ def parse_processed_jobs(output_text: str) -> int:
 
 
 def acquire_lock(conn, lock_name: str, owner_id: str, ttl_minutes: int) -> bool:
-    """
-    Získá lock, pokud:
-    - neexistuje
-    - nebo je expirovaný
-    - nebo už patří stejnému ownerovi
-    """
     sql = """
         INSERT INTO ops.worker_locks
         (
@@ -442,6 +449,8 @@ def print_header(args: argparse.Namespace, owner_id: str) -> None:
     print("MATCHMATRIX INGEST CYCLE V3")
     print("=" * 80)
     print("TEAMS EXTRACTOR  :", TEAMS_EXTRACTOR)
+    print("PARSE TEAMS      :", PARSE_TEAMS)
+    print("PARSE FIXTURES   :", PARSE_FIXTURES)
     print("BASE_DIR         :", BASE_DIR)
     print("PYTHON_EXE       :", PYTHON_EXE)
     print("PLANNER          :", PLANNER_WORKER)
@@ -477,6 +486,14 @@ def main() -> int:
         print(f"ERROR: Teams extractor nebyl nalezen: {TEAMS_EXTRACTOR}")
         return 1
 
+    if not os.path.exists(PARSE_TEAMS):
+        print(f"ERROR: Teams parser nebyl nalezen: {PARSE_TEAMS}")
+        return 1
+
+    if not os.path.exists(PARSE_FIXTURES):
+        print(f"ERROR: Fixtures parser nebyl nalezen: {PARSE_FIXTURES}")
+        return 1
+
     if not os.path.exists(PLAYERS_PIPELINE):
         print(f"ERROR: Players pipeline nebyl nalezen: {PLAYERS_PIPELINE}")
         return 1
@@ -484,7 +501,7 @@ def main() -> int:
     if not os.path.exists(PLAYERS_PARSE):
         print(f"ERROR: Players parse nebyl nalezen: {PLAYERS_PARSE}")
         return 1
-    
+
     conn = get_connection()
     try:
         lock_ok = acquire_lock(conn, LOCK_NAME, owner_id, args.lock_ttl_minutes)
@@ -576,6 +593,8 @@ def main() -> int:
                 "planner_output": planner_output,
                 "processed_jobs": processed_jobs,
                 "teams_extractor_executed": False,
+                "parse_teams_executed": False,
+                "parse_fixtures_executed": False,
                 "merge_executed": False,
                 "merge_skipped": True,
                 "owner_id": owner_id,
@@ -639,99 +658,96 @@ def main() -> int:
             print("ERROR: Teams extractor skončil s chybou.")
             return 1
 
-        #players_command = build_players_pipeline_command()
-        #players_rc, players_output = run_command(
-        #    players_command,
-        #    "STEP 1C - PLAYERS FETCH ONLY"
-        #)
+        parse_teams_command = build_parse_teams_command()
+        parse_teams_rc, parse_teams_output = run_command(
+            parse_teams_command,
+            "STEP 1C - PARSE API SPORT TEAMS"
+        )
 
-        #conn = get_connection()
-        #try:
-        #    heartbeat_lock(conn, LOCK_NAME, owner_id, args.lock_ttl_minutes)
-        #finally:
-        #    conn.close()
+        conn = get_connection()
+        try:
+            heartbeat_lock(conn, LOCK_NAME, owner_id, args.lock_ttl_minutes)
+        finally:
+            conn.close()
 
-        #if players_rc != 0:
-        #    details = {
-        #        "planner_returncode": planner_rc,
-        #        "planner_output": planner_output,
-        #        "processed_jobs": processed_jobs,
-        #        "teams_extractor_executed": True,
-        #        "teams_extractor_returncode": teams_rc,
-        #        "teams_extractor_output": teams_output,
-        #        "players_pipeline_executed": True,
-        #        "players_pipeline_returncode": players_rc,
-        #        "players_pipeline_output": players_output,
-        #        "players_parse_executed": True,
-        #        "players_parse_returncode": players_parse_rc,
-        #        "players_parse_output": players_parse_output,
-        #        "merge_executed": False,
-        #        "owner_id": owner_id,
-        #        "lock_name": LOCK_NAME,
-        #    }
+        if parse_teams_rc != 0:
+            details = {
+                "planner_returncode": planner_rc,
+                "planner_output": planner_output,
+                "processed_jobs": processed_jobs,
+                "teams_extractor_executed": True,
+                "teams_extractor_returncode": teams_rc,
+                "teams_extractor_output": teams_output,
+                "parse_teams_executed": True,
+                "parse_teams_returncode": parse_teams_rc,
+                "parse_teams_output": parse_teams_output,
+                "merge_executed": False,
+                "owner_id": owner_id,
+                "lock_name": LOCK_NAME,
+            }
 
-        #   conn = get_connection()
-        #    try:
-        #        finish_job_run(
-        #            conn=conn,
-        #            job_run_id=job_run_id,
-        #            status="error",
-        #            message="Players pipeline failed.",
-        #            details=details,
-        #            rows_affected=processed_jobs,
-        #        )
-        #    finally:
-        #        conn.close()
+            conn = get_connection()
+            try:
+                finish_job_run(
+                    conn=conn,
+                    job_run_id=job_run_id,
+                    status="error",
+                    message="Teams parser failed.",
+                    details=details,
+                    rows_affected=processed_jobs,
+                )
+            finally:
+                conn.close()
 
-        #    print("ERROR: Players pipeline skončila s chybou.")
-        #    return 1    
+            print("ERROR: Teams parser skončil s chybou.")
+            return 1
 
-        #players_parse_command = build_players_parse_command()
-        #players_parse_rc, players_parse_output = run_command(
-        #    players_parse_command,
-        #    "STEP 1D - PLAYERS PARSE ONLY"
-        #)
+        parse_fixtures_command = build_parse_fixtures_command()
+        parse_fixtures_rc, parse_fixtures_output = run_command(
+            parse_fixtures_command,
+            "STEP 1D - PARSE API SPORT FIXTURES"
+        )
 
-        #conn = get_connection()
-        #try:
-        #    heartbeat_lock(conn, LOCK_NAME, owner_id, args.lock_ttl_minutes)
-        #finally:
-        #    conn.close()
+        conn = get_connection()
+        try:
+            heartbeat_lock(conn, LOCK_NAME, owner_id, args.lock_ttl_minutes)
+        finally:
+            conn.close()
 
-        #if players_parse_rc != 0:
-        #    details = {
-        #        "planner_returncode": planner_rc,
-        #        "planner_output": planner_output,
-        #        "processed_jobs": processed_jobs,
-        #        "teams_extractor_executed": True,
-        #        "teams_extractor_returncode": teams_rc,
-        #        "teams_extractor_output": teams_output,
-        #        "players_pipeline_executed": True,
-        #        "players_pipeline_returncode": players_rc,
-        #        "players_pipeline_output": players_output,
-        #        "players_parse_executed": True,
-        #        "players_parse_returncode": players_parse_rc,
-        #        "players_parse_output": players_parse_output,
-        #        "merge_executed": False,
-        #        "owner_id": owner_id,
-        #        "lock_name": LOCK_NAME,
-        #    }
+        if parse_fixtures_rc != 0:
+            details = {
+                "planner_returncode": planner_rc,
+                "planner_output": planner_output,
+                "processed_jobs": processed_jobs,
+                "teams_extractor_executed": True,
+                "teams_extractor_returncode": teams_rc,
+                "teams_extractor_output": teams_output,
+                "parse_teams_executed": True,
+                "parse_teams_returncode": parse_teams_rc,
+                "parse_teams_output": parse_teams_output,
+                "parse_fixtures_executed": True,
+                "parse_fixtures_returncode": parse_fixtures_rc,
+                "parse_fixtures_output": parse_fixtures_output,
+                "merge_executed": False,
+                "owner_id": owner_id,
+                "lock_name": LOCK_NAME,
+            }
 
-        #    conn = get_connection()
-        #    try:
-        #        finish_job_run(
-        #            conn=conn,
-        #            job_run_id=job_run_id,
-        #            status="error",
-        #            message="Players parse failed.",
-        #            details=details,
-        #            rows_affected=processed_jobs,
-        #        )
-        #    finally:
-        #        conn.close()
+            conn = get_connection()
+            try:
+                finish_job_run(
+                    conn=conn,
+                    job_run_id=job_run_id,
+                    status="error",
+                    message="Fixtures parser failed.",
+                    details=details,
+                    rows_affected=processed_jobs,
+                )
+            finally:
+                conn.close()
 
-        #    print("ERROR: Players parse skončil s chybou.")
-        #    return 1
+            print("ERROR: Fixtures parser skončil s chybou.")
+            return 1
 
         merge_command = build_merge_command()
         merge_rc, merge_output = run_command(
@@ -753,6 +769,12 @@ def main() -> int:
                 "teams_extractor_executed": True,
                 "teams_extractor_returncode": teams_rc,
                 "teams_extractor_output": teams_output,
+                "parse_teams_executed": True,
+                "parse_teams_returncode": parse_teams_rc,
+                "parse_teams_output": parse_teams_output,
+                "parse_fixtures_executed": True,
+                "parse_fixtures_returncode": parse_fixtures_rc,
+                "parse_fixtures_output": parse_fixtures_output,
                 "merge_executed": True,
                 "merge_returncode": merge_rc,
                 "merge_output": merge_output,
@@ -783,6 +805,12 @@ def main() -> int:
             "teams_extractor_executed": True,
             "teams_extractor_returncode": teams_rc,
             "teams_extractor_output": teams_output,
+            "parse_teams_executed": True,
+            "parse_teams_returncode": parse_teams_rc,
+            "parse_teams_output": parse_teams_output,
+            "parse_fixtures_executed": True,
+            "parse_fixtures_returncode": parse_fixtures_rc,
+            "parse_fixtures_output": parse_fixtures_output,
             "merge_executed": True,
             "merge_returncode": merge_rc,
             "merge_output": merge_output,
@@ -808,6 +836,8 @@ def main() -> int:
         print("=" * 80)
         print("Processed planner jobs:", processed_jobs)
         print("Teams extractor       : YES")
+        print("Teams parser          : YES")
+        print("Fixtures parser       : YES")
         print("Merge executed        : YES")
         print("Final status          : OK")
         print("=" * 80)

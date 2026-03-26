@@ -1,7 +1,7 @@
 # TicketMatrixPlatform – denní přehled vývoje
 
-Datum: 24.03.2026  
-Čas kontroly systému: 07:18
+Datum: 26.03.2026  
+Čas kontroly systému: 09:12
 
 ---
 
@@ -24,11 +24,11 @@ Byly zkontrolovány tyto části projektu:
 
 - Celý projekt
 
-Celkem bylo projito 1206 sledovaných souborů.
+Celkem bylo projito 1311 sledovaných souborů.
 
 Ve srovnání s minulým auditem:
-- bylo přidáno 32 nových souborů
-- u 2 souborů proběhla úprava
+- bylo přidáno 11 nových souborů
+- u 5 souborů proběhla úprava
 
 ---
 
@@ -36,15 +36,15 @@ Ve srovnání s minulým auditem:
 
 Databáze je dostupná a základní stav je následující:
 
-- ligy: 2725
-- týmy: 5369
-- zápasy: 107089
-- hráči: 839
+- ligy: 2986
+- týmy: 5410
+- zápasy: 108419
+- hráči: 1488
 
 Player pipeline přehled:
-- import hráčů: 1360
-- staging hráčů: 533
-- public hráči: 839
+- import hráčů: 1546
+- staging hráčů: 1465
+- public hráči: 1488
 - statistiky hráčů na zápas: 0
 
 
@@ -56,17 +56,17 @@ Git větev:
 - main
 
 Poslední commit:
-- 589e7bd | 2026-03-22 13:10:31 +0100 | update players pipeline
+- 0715e1e | 2026-03-24 07:21:06 +0100 | %1
 
 Aktuální neuložené změny:
 - M MatchMatrix-platform/.dbeaver/.project-metadata.json.bak
 -  M MatchMatrix-platform/.dbeaver/project-metadata.json
--  M ingest/API-Football/pull_api_football_players.ps1
--  M ingest/parse_api_football_player_profiles_v1.py
--  M ingest/providers/provider_registry.py
--  M ops_admin/panel_matchmatrix_audit_v7.py
--  M reports/audit/2026-03-22/MATCHMATRIX_AUDIT_REPORT.md
--  M reports/audit/2026-03-22/MATCHMATRIX_PROGRESS.md
+-  M ingest/API-Hockey/pull_api_hockey_leagues.ps1
+-  M ingest/API-Hockey/pull_api_hockey_teams.ps1
+-  M ingest/providers/api_hockey_provider.py
+-  M ingest/providers/generic_api_sport_provider.py
+-  M ingest/run_unified_ingest_batch_v1.py
+-  M ingest/run_unified_ingest_v1.py
 
 ---
 
@@ -81,14 +81,14 @@ Na základě dnešního auditu je vidět, že projekt má:
 
 
 Hlavní změněné soubory dnes:
-- ingest\providers\provider_registry.py
 - tools\matchmatrix_control_panel_V9.py
-- db\ops\227_seed_multisport_provider_jobs.sql
-- db\ops\228_fill_default_run_groups_multisport.sql
-- db\ops\229_multisport_planner_test.sql
-- db\ops\230_seed_multisport_ingest_targets.sql
-- db\ops\230a_seed_multisport_leagues.sql
-- db\ops\231_multisport_planner_preview.sql
+- workers\run_player_season_statistics_stage_parser_v1.py
+- workers\run_players_fetch_only_v1.py
+- workers\run_players_parse_only_v1.py
+- workers\run_players_pipeline_transitional_v1.py
+- docs\komunikace s chatGPT\20260325\MATCHMATRIX – ZÁPIS NA ZÍTRA.md
+- docs\komunikace s chatGPT\20260326\MatchMatrix – podrobný zápis.md
+- ingest\API-Hockey\pull_api_hockey_coaches.ps1
 
 ---
 

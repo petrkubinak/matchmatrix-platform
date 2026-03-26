@@ -1,7 +1,7 @@
 # TicketMatrixPlatform – denní přehled vývoje
 
 Datum: 24.03.2026  
-Čas kontroly systému: 07:18
+Čas kontroly systému: 23:26
 
 ---
 
@@ -24,11 +24,11 @@ Byly zkontrolovány tyto části projektu:
 
 - Celý projekt
 
-Celkem bylo projito 1206 sledovaných souborů.
+Celkem bylo projito 1237 sledovaných souborů.
 
 Ve srovnání s minulým auditem:
-- bylo přidáno 32 nových souborů
-- u 2 souborů proběhla úprava
+- bylo přidáno 20 nových souborů
+- u 1 souborů proběhla úprava
 
 ---
 
@@ -36,9 +36,9 @@ Ve srovnání s minulým auditem:
 
 Databáze je dostupná a základní stav je následující:
 
-- ligy: 2725
+- ligy: 2986
 - týmy: 5369
-- zápasy: 107089
+- zápasy: 107095
 - hráči: 839
 
 Player pipeline přehled:
@@ -56,17 +56,17 @@ Git větev:
 - main
 
 Poslední commit:
-- 589e7bd | 2026-03-22 13:10:31 +0100 | update players pipeline
+- 0715e1e | 2026-03-24 07:21:06 +0100 | %1
 
 Aktuální neuložené změny:
 - M MatchMatrix-platform/.dbeaver/.project-metadata.json.bak
 -  M MatchMatrix-platform/.dbeaver/project-metadata.json
--  M ingest/API-Football/pull_api_football_players.ps1
--  M ingest/parse_api_football_player_profiles_v1.py
--  M ingest/providers/provider_registry.py
--  M ops_admin/panel_matchmatrix_audit_v7.py
--  M reports/audit/2026-03-22/MATCHMATRIX_AUDIT_REPORT.md
--  M reports/audit/2026-03-22/MATCHMATRIX_PROGRESS.md
+-  M ingest/API-Hockey/pull_api_hockey_leagues.ps1
+-  M ingest/providers/api_hockey_provider.py
+-  M ingest/providers/generic_api_sport_provider.py
+-  M ingest/run_unified_ingest_batch_v1.py
+-  M reports/audit/2026-03-24/MATCHMATRIX_AUDIT_REPORT.md
+-  M reports/audit/2026-03-24/MATCHMATRIX_PROGRESS.md
 
 ---
 
@@ -81,14 +81,14 @@ Na základě dnešního auditu je vidět, že projekt má:
 
 
 Hlavní změněné soubory dnes:
-- ingest\providers\provider_registry.py
-- tools\matchmatrix_control_panel_V9.py
-- db\ops\227_seed_multisport_provider_jobs.sql
-- db\ops\228_fill_default_run_groups_multisport.sql
-- db\ops\229_multisport_planner_test.sql
-- db\ops\230_seed_multisport_ingest_targets.sql
-- db\ops\230a_seed_multisport_leagues.sql
-- db\ops\231_multisport_planner_preview.sql
+- workers\run_unified_staging_to_public_merge_v3.py
+- db\checks\243_check_volleyball_by_sport_and_league.sql
+- db\checks\244_check_vb_provider_maps.sql
+- db\checks\245_check_vb_staging_teams.sql
+- db\migrations\239_reset_vb_fixtures_planner_job_4137.sql
+- db\migrations\240_check_volleyball_merge_result.sql
+- db\ops\237_seed_ingest_planner_volleyball_fixtures.sql
+- db\ops\241_seed_data_provider_api_volleyball.sql
 
 ---
 

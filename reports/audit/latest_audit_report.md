@@ -1,148 +1,149 @@
 # TicketMatrixPlatform – technický audit
 
-Datum a čas: 2026-03-24 07:18:50
+Datum a čas: 2026-03-26 09:12:39
 Project root: C:\MatchMatrix-platform
 
 ## Vybrané části projektu
 - Celý projekt
 
 ## Souhrn souborů
-- Celkem souborů: 1206
-- NEW: 32
-- MODIFIED: 2
+- Celkem souborů: 1311
+- NEW: 11
+- MODIFIED: 5
 - DELETED: 0
 
 ## Nejvýznamnější změny
-- MODIFIED: ingest\providers\provider_registry.py
 - MODIFIED: tools\matchmatrix_control_panel_V9.py
-- NEW: db\ops\227_seed_multisport_provider_jobs.sql
-- NEW: db\ops\228_fill_default_run_groups_multisport.sql
-- NEW: db\ops\229_multisport_planner_test.sql
-- NEW: db\ops\230_seed_multisport_ingest_targets.sql
-- NEW: db\ops\230a_seed_multisport_leagues.sql
-- NEW: db\ops\231_multisport_planner_preview.sql
-- NEW: docs\komunikace s chatGPT\20260323\229_ops.ingest_entity_plan.txt
-- NEW: docs\komunikace s chatGPT\20260323\229_ops.ingest_entity_plan_4.txt
-- NEW: docs\komunikace s chatGPT\20260323\229_ops.ingest_targets.txt
-- NEW: docs\komunikace s chatGPT\20260323\229_ops.provider_jobs.txt
-- NEW: docs\komunikace s chatGPT\20260323\Aktuální run_group rozpad v ops.ingest_entity_plan.txt
-- NEW: docs\komunikace s chatGPT\20260323\Aktuální run_group rozpad v ops.ingest_targets.txt
-- NEW: docs\komunikace s chatGPT\20260323\bod 1.txt
-- NEW: docs\komunikace s chatGPT\20260323\bod 2.txt
-- NEW: docs\komunikace s chatGPT\20260323\bod 3.txt
-- NEW: docs\komunikace s chatGPT\20260323\bod 4.txt
-- NEW: docs\komunikace s chatGPT\20260323\ingest_entity_plan.txt
-- NEW: docs\komunikace s chatGPT\20260323\Jak teď vypadá football rozpad.txt
+- MODIFIED: workers\run_player_season_statistics_stage_parser_v1.py
+- MODIFIED: workers\run_players_fetch_only_v1.py
+- MODIFIED: workers\run_players_parse_only_v1.py
+- MODIFIED: workers\run_players_pipeline_transitional_v1.py
+- NEW: docs\komunikace s chatGPT\20260325\MATCHMATRIX – ZÁPIS NA ZÍTRA.md
+- NEW: docs\komunikace s chatGPT\20260326\MatchMatrix – podrobný zápis.md
+- NEW: ingest\API-Hockey\pull_api_hockey_coaches.ps1
+- NEW: logs\temp_api_hockey_coaches_payload.json
+- NEW: MatchMatrix-platform\Dump\dump-matchmatrix-202603260908.sql
+- NEW: MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603260908.sql
+- NEW: MatchMatrix-platform\Dump\dump.public-matchmatrix-202603260909.sql
+- NEW: MatchMatrix-platform\Dump\dump.staging-matchmatrix-202603260909.sql
+- NEW: MatchMatrix-platform\Dump\dump.work-matchmatrix-202603260910.sql
+- NEW: MatchMatrix-platform\Scripts\00_Schema\014_coaches\248_create_team_coach_history.sql
+- NEW: workers\run_team_coach_history_public_merge_v1.py
 
 ## Git
 - Branch: main
-- Last commit: 589e7bd | 2026-03-22 13:10:31 +0100 | update players pipeline
+- Last commit: 0715e1e | 2026-03-24 07:21:06 +0100 | %1
 ```
 M MatchMatrix-platform/.dbeaver/.project-metadata.json.bak
  M MatchMatrix-platform/.dbeaver/project-metadata.json
- M ingest/API-Football/pull_api_football_players.ps1
- M ingest/parse_api_football_player_profiles_v1.py
- M ingest/providers/provider_registry.py
- M ops_admin/panel_matchmatrix_audit_v7.py
- M reports/audit/2026-03-22/MATCHMATRIX_AUDIT_REPORT.md
- M reports/audit/2026-03-22/MATCHMATRIX_PROGRESS.md
+ M ingest/API-Hockey/pull_api_hockey_leagues.ps1
+ M ingest/API-Hockey/pull_api_hockey_teams.ps1
+ M ingest/providers/api_hockey_provider.py
+ M ingest/providers/generic_api_sport_provider.py
+ M ingest/run_unified_ingest_batch_v1.py
+ M ingest/run_unified_ingest_v1.py
+ M reports/audit/2026-03-24/MATCHMATRIX_AUDIT_REPORT.md
+ M reports/audit/2026-03-24/MATCHMATRIX_PROGRESS.md
  M reports/audit/latest_audit_report.md
- D reports/audit/latest_changes.csv
- D reports/audit/latest_files.csv
- D reports/audit/latest_progress.md
  M reports/audit/latest_progress_report.md
- D reports/audit/latest_report.md
- D reports/audit/latest_snapshot.json
  M reports/audit/latest_snapshot.txt
+ M reports/audit/latest_system_tree.txt
+ D "spu\305\241t\304\233n\303\255 controln\303\255ho panelu.txt"
  M tools/matchmatrix_control_panel_V9.py
- M workers/run_ingest_planner_jobs.py
+ D tree_matchmatrix.txt
+ D unmatched_theodds_108.csv
+ D unmatched_theodds_108.sql
+ D unmatched_theodds_110.csv
+ D unmatched_theodds_110.sql
+ M workers/run_ingest_cycle_v3.py
+ M workers/run_player_season_statistics_stage_parser_v1.py
  M workers/run_players_fetch_only_v1.py
  M workers/run_players_parse_only_v1.py
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/206_fix_player_season_statistics_unique.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/207_dedupe_player_season_statistics.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/209_fix_player_season_statistics_key.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/210_add_api_football_player_stats_entity.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/211_bootstrap_ingest_targets_from_existing_leagues_all_sports.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/212_enable_fb_api_football_bootstrap_v1.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/213_build_planner_from_fb_bootstrap_v1.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/215_disable_unsupported_providers.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/216_disable_fb_odds_in_free_mode.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/217_cleanup_fb_odds_errors_free_mode.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/218_build_planner_fb_teams_bootstrap.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/219_build_planner_fb_teams_bootstrap_v2.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/220_check_fb_bootstrap_targets_api_football.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/221_enable_fb_bootstrap_api_football.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/222_build_planner_fb_teams_bootstrap_v3.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/224_check_fb_bootstrap_teams_effect.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/225_check_bootstrap_warning_jobs.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/227_seed_multisport_provider_jobs.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/228_fill_default_run_groups_multisport.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/229_multisport_planner_test.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/230_seed_multisport_ingest_targets.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/230a_seed_multisport_leagues.sql
-?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/231_multisport_planner_preview.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest-footbal/212_enable_fb_api_football_bootstrap_v1.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest-footbal/214_check_fb_bootstrap_after_first_run.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest-footbal/226_check_fb_bootstrap_teams_progress.sql
-?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/204_add_photo_url_to_staging_players_import.sql
-?? db/checks/214_check_fb_bootstrap_after_first_run.sql
-?? db/checks/220_check_fb_bootstrap_targets_api_football.sql
-?? db/checks/224_check_fb_bootstrap_teams_effect.sql
-?? db/checks/225_check_bootstrap_warning_jobs.sql
-?? db/checks/226_check_fb_bootstrap_teams_progress.sql
-?? db/migrations/204_add_photo_url_to_staging_players_import.sql
-?? db/migrations/206_fix_player_season_statistics_unique.sql
-?? db/migrations/207_dedupe_player_season_statistics.sql
-?? db/migrations/209_fix_player_season_statistics_key.sql
-?? db/migrations/210_add_api_football_player_stats_entity.sql
-?? db/migrations/211_disable_unsupported_providers.sql
-?? db/migrations/216_disable_fb_odds_in_free_mode.sql
-?? db/migrations/217_cleanup_fb_odds_errors_free_mode.sql
-?? db/migrations/221_enable_fb_bootstrap_api_football.sql
-?? db/ops/211_bootstrap_ingest_targets_from_existing_leagues_all_sports.sql
-?? db/ops/212_enable_fb_api_football_bootstrap_v1.sql
-?? db/ops/213_build_planner_from_fb_bootstrap_v1.sql
-?? db/ops/218_build_planner_fb_teams_bootstrap.sql
-?? db/ops/219_build_planner_fb_teams_bootstrap_v2.sql
-?? db/ops/222_build_planner_fb_teams_bootstrap_v3.sql
-?? db/ops/227_seed_multisport_provider_jobs.sql
-?? db/ops/228_fill_default_run_groups_multisport.sql
-?? db/ops/229_multisport_planner_test.sql
-?? db/ops/230_seed_multisport_ingest_targets.sql
-?? db/ops/230a_seed_multisport_leagues.sql
-?? db/ops/231_multisport_planner_preview.sql
-?? "docs/komunikace s chatGPT/# MATCHMATRIX \342\200\223 Z\303\201PIS (2026-03-23).md"
-?? "docs/komunikace s chatGPT/20260322/MATCHMATRIX \342\200\223 NAVAZOVAC\303\215 Z\303\201PIS .md"
-?? "docs/komunikace s chatGPT/20260322/MATCHMATRIX \342\200\223 Z\303\201PIS (DNES).md"
-?? "docs/komunikace s chatGPT/20260323/"
-?? ingest/API-Football/pull_api_football_player_stats.ps1
-?? ingest/API-Football/pull_api_football_players_v5.py
-?? ingest/providers/generic_api_sport_provider.py
-?? reports/audit/2026-03-23/
-?? reports/audit/latest_system_tree.txt
-?? reports/audit/system_tree_2026-03-23_110914.txt
-?? reports/audit/system_tree_2026-03-23_203905.txt
-?? reports/audit/system_tree_2026-03-24_071848.txt
-?? tools/export_system_tree_v1.py
+ M workers/run_players_pipeline_transitional_v1.py
+ M workers/run_unified_staging_to_public_merge_v3.py
+?? MatchMatrix-platform/Scripts/00_Schema/014_coaches/
+?? MatchMatrix-platform/Scripts/11_ops/020_reset_vb_teams_pending.sql
+?? MatchMatrix-platform/Scripts/11_ops/023_check_bk_planner_teams.sql
+?? MatchMatrix-platform/Scripts/11_ops/026_check_bk_raw_payload.sql
+?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/010_check_vb_staging_teams_after_fix.sql
+?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/025_check_bk_stg_provider_teams.sql
+?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/039_audit_multisport_planner_unification.sql
+?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/040_unify_multisport_planner_teams_fixtures.sql
+?? MatchMatrix-platform/Scripts/12_multisport/12_multisport/232_parse_api_sport_bk_fixtures.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_basket/034_check_bk_fixtures_planner.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_basket/035_seed_bk_fixtures_planner_from_targets.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_basket/036_check_last_bk_fixtures_payload.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_basket/037_promote_bk_fixtures_target_117.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_basket/041_promote_bk_teams_target_12_deprioritize_40.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_basket/042_deduplicate_bk_teams_target_12.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_basket/250_insert_bk_test_planner_job.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/027_check_hk_team_targets.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/028_promote_hk_team_target_league_6.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/029_check_hk_after_teams_fix.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/030_promote_hk_fixtures_target_league_6.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/031_find_working_hk_fixtures_targets.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/032_promote_hk_fixtures_target_league_59.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/033_deprioritize_empty_hk_fixtures_targets.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/233_parse_api_hockey_leagues.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_hokej/234_parse_api_hockey_fixtures.sql
+?? MatchMatrix-platform/Scripts/12_multisport/13_multisport_ingest_volleyball/
+?? db/checks/243_check_volleyball_by_sport_and_league.sql
+?? db/checks/244_check_vb_provider_maps.sql
+?? db/checks/245_check_vb_staging_teams.sql
+?? db/debug/
+?? db/migrations/232_parse_api_sport_bk_fixtures.sql
+?? db/migrations/233_parse_api_hockey_leagues.sql
+?? db/migrations/234_parse_api_hockey_fixtures.sql
+?? db/migrations/236_parse_api_volleyball_fixtures.sql
+?? db/migrations/239_reset_vb_fixtures_planner_job_4137.sql
+?? db/migrations/240_check_volleyball_merge_result.sql
+?? db/migrations/246_fix_vb_entity_plan_teams.sql
+?? "db/migrations/246a_nastaven\303\255 entit.sql"
+?? db/migrations/247_safe_backfill_entity_plan_base_sports.sql
+?? db/migrations/250_insert_bk_test_planner_job.sql
+?? db/migrations/Script-9.sql
+?? db/ops/237_seed_ingest_planner_volleyball_fixtures.sql
+?? db/ops/241_seed_data_provider_api_volleyball.sql
+?? "docs/komunikace s chatGPT/20260323/MATCHMATRIX \342\200\223 Z\303\201PIS (API-SPORT + AP.md"
+?? "docs/komunikace s chatGPT/20260324/"
+?? "docs/komunikace s chatGPT/20260325/"
+?? "docs/komunikace s chatGPT/20260326/"
+?? docs/visual/prilohy_267546.zip
+?? ingest/API-Hockey/pull_api_hockey_coaches.ps1
+?? ingest/API-Hockey/pull_api_hockey_fixtures.ps1
+?? ingest/API-Sport/
+?? legacy/workers/run_ingest_cycle_v3_1.py
+?? legacy/workers/run_unified_staging_to_public_merge_v3.py
+?? logs/temp_api_hockey_coaches_payload.json
+?? reports/audit/2026-03-25/
+?? reports/audit/system_tree_2026-03-24_204041.txt
+?? reports/audit/system_tree_2026-03-24_232620.txt
+?? reports/audit/system_tree_2026-03-25_123722.txt
+?? reports/audit/system_tree_2026-03-25_201624.txt
+?? reports/audit/system_tree_2026-03-26_091238.txt
+?? tools/run_check_psql.bat
+?? workers/run_parse_api_sport_fixtures_v1.py
+?? workers/run_parse_api_sport_teams_v1.py
+?? workers/run_team_coach_history_public_merge_v1.py
 ```
 
 ## Databáze
 - Připojení: OK
 - Core counts:
-  - leagues: 2725
-  - matches: 107089
-  - players: 839
-  - teams: 5369
+  - leagues: 2986
+  - matches: 108419
+  - players: 1488
+  - teams: 5410
 - OPS counts:
-  - ingest_planner: 3062
-  - job_runs: 300
+  - ingest_planner: 3084
+  - job_runs: 443
   - provider_jobs: 140
   - scheduler_queue: 6
 - Player pipeline:
   - player_match_statistics: 0
-  - players_import: 1360
-  - public_players: 839
-  - stg_provider_players: 533
+  - players_import: 1546
+  - public_players: 1488
+  - stg_provider_players: 1465
 - API budget:
   - 2026-03-10 | american_football | used=0 | limit=100 | remaining=100
   - 2026-03-10 | baseball | used=0 | limit=100 | remaining=100

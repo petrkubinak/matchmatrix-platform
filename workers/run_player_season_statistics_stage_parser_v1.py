@@ -233,7 +233,6 @@ def delete_existing_rows_for_payload(cur, payload_id):
         (payload_id,),
     )
 
-
 def bulk_insert_rows(cur, rows):
     if not rows:
         return 0
@@ -254,11 +253,23 @@ def bulk_insert_rows(cur, rows):
             source_endpoint
         )
         VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        ON CONFLICT (
+            provider,
+            sport_code,
+            COALESCE(external_league_id, ''),
+            COALESCE(season, ''),
+            player_external_id,
+            COALESCE(team_external_id, ''),
+            stat_name,
+            COALESCE(source_endpoint, '')
+        )
+        DO UPDATE SET
+            stat_value = EXCLUDED.stat_value,
+            raw_payload_id = EXCLUDED.raw_payload_id
         """,
         rows,
     )
     return len(rows)
-
 
 def main():
     print("=== MATCHMATRIX: PLAYER SEASON STATISTICS STAGE PARSER V1 ===")

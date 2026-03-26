@@ -1,0 +1,30 @@
+INSERT INTO ops.ingest_planner
+(
+    provider,
+    sport_code,
+    entity,
+    provider_league_id,
+    season,
+    run_group,
+    priority,
+    status,
+    attempts,
+    next_run,
+    created_at,
+    updated_at
+)
+VALUES
+(
+    'api_sport',
+    'BK',
+    'teams',
+    '12',
+    '2024',
+    'BK_TOP',
+    20,
+    'pending',
+    0,
+    NOW(),
+    NOW(),
+    NOW()
+);

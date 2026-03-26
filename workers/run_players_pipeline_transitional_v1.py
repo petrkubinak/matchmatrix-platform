@@ -1,65 +1,34 @@
 from __future__ import annotations
 
-import os
 import subprocess
 import sys
 from pathlib import Path
 
 
 # ============================================================
-# MATCHMATRIX - PLAYERS PIPELINE FULL V1
+# MATCHMATRIX - PLAYERS PIPELINE TRANSITIONAL V1
 # ------------------------------------------------------------
-# Jednotný orchestrátor pro players flow:
-# 1) fetch players payloads
-# 2) parse do stg_provider_player_season_stats
-# 3) deduplikace + index
-# 4) připravit missing profile IDs + batche
-# 5) fetch missing profiles z DB batchů
-# 6) parse player profiles
-# 7) doplnit public.players + provider map
-# 8) doplnit missing teams + team provider map
-# 9) finální merge do public.player_season_statistics
+# Stabilní neinteraktivní players pipeline pro panel V9.
+#
+# Co dělá:
+#   1) fetch players payloads
+#   2) bridge players_import -> stg_provider_players
+#   3) merge stg_provider_players -> public.players + player_provider_map
+#   4) parse player season stats -> stg_provider_player_season_stats
+#   5) merge player season stats -> public.player_season_statistics
+#
+# Kam uložit:
+#   C:\MatchMatrix-platform\workers\run_players_pipeline_transitional_v1.py
 # ============================================================
 
 BASE_DIR = Path(r"C:\MatchMatrix-platform")
 PYTHON_EXE = Path(r"C:\Python314\python.exe")
 
-PULL_PLAYERS_PS1 = BASE_DIR / "ingest" / "API-Football" / "pull_api_football_players.ps1"
-FETCH_PROFILES_BATCH = BASE_DIR / "workers" / "fetch_player_profiles_batch_from_db_v1.py"
-PARSE_PROFILES_PY = BASE_DIR / "ingest" / "parse_api_football_player_profiles_v1.py"
-
-# SQL soubory držíme v db/migrations, protože tam je máš rozjeté
-SQL_STEPS: list[tuple[str, Path]] = [
-    ("Parse players payloads -> stg_provider_player_season_stats",
-     BASE_DIR / "db" / "migrations" / "055_parse_api_football_players_to_stg_player_season_stats.sql"),
-
-    ("Deduplicate stg_provider_player_season_stats",
-     BASE_DIR / "db" / "migrations" / "057_deduplicate_stg_provider_player_season_stats.sql"),
-
-    ("Add unique index stg_provider_player_season_stats",
-     BASE_DIR / "db" / "migrations" / "057_add_unique_index_stg_provider_player_season_stats.sql"),
-
-    ("Create work.missing_player_profile_ids",
-     BASE_DIR / "db" / "sql" / "071_create_work_missing_player_profile_ids.sql"),
-
-    ("Create missing player profile batches",
-     BASE_DIR / "db" / "sql" / "073_create_missing_player_profile_batches.sql"),
-
-    ("Insert missing players from profiles",
-     BASE_DIR / "db" / "migrations" / "076_insert_missing_players_from_profiles.sql"),
-
-    ("Insert missing player provider map",
-     BASE_DIR / "db" / "migrations" / "082_insert_missing_player_provider_map.sql"),
-
-    ("Insert missing teams from players payloads",
-     BASE_DIR / "db" / "migrations" / "088_insert_missing_teams_from_players_payloads.sql"),
-
-    ("Insert missing team provider map",
-     BASE_DIR / "db" / "migrations" / "089_insert_missing_team_provider_map.sql"),
-
-    ("Final merge player season statistics",
-     BASE_DIR / "db" / "migrations" / "097_merge_player_season_stats_final_business_dedup.sql"),
-]
+FETCH_WORKER = BASE_DIR / "workers" / "run_players_fetch_only_v1.py"
+BRIDGE_WORKER = BASE_DIR / "workers" / "run_players_bridge_v4.py"
+PUBLIC_PLAYERS_MERGE_WORKER = BASE_DIR / "workers" / "run_players_public_merge_v2.py"
+PARSE_WORKER = BASE_DIR / "workers" / "run_players_parse_only_v1.py"
+SEASON_STATS_PUBLIC_MERGE_WORKER = BASE_DIR / "workers" / "run_player_season_statistics_public_merge_v1.py"
 
 
 def print_header(title: str) -> None:
@@ -75,7 +44,7 @@ def ensure_exists(path: Path, label: str) -> None:
 
 def run_cmd(cmd: list[str], title: str) -> None:
     print_header(title)
-    print("CMD:", " ".join(cmd))
+    print("CMD:", " ".join(str(x) for x in cmd))
     print("-" * 80)
 
     process = subprocess.Popen(
@@ -85,6 +54,7 @@ def run_cmd(cmd: list[str], title: str) -> None:
         text=True,
         universal_newlines=True,
         bufsize=1,
+        cwd=str(BASE_DIR),
     )
 
     assert process.stdout is not None
@@ -101,95 +71,61 @@ def run_cmd(cmd: list[str], title: str) -> None:
     print()
 
 
-def build_psql_cmd(sql_file: Path) -> list[str]:
-    # Používá systémové psql z PATH.
-    # Připojení bere z env: PGHOST, PGPORT, PGDATABASE, PGUSER, PGPASSWORD.
-    return [
-        "psql",
-        "-v", "ON_ERROR_STOP=1",
-        "-f", str(sql_file),
-    ]
-
-
-def run_sql_file(title: str, sql_file: Path) -> None:
-    ensure_exists(sql_file, "SQL soubor")
-    cmd = build_psql_cmd(sql_file)
-    run_cmd(cmd, title)
-
-
 def run_python_file(title: str, py_file: Path, extra_args: list[str] | None = None) -> None:
     ensure_exists(py_file, "Python soubor")
+
     cmd = [str(PYTHON_EXE), str(py_file)]
     if extra_args:
         cmd.extend(extra_args)
-    run_cmd(cmd, title)
 
-
-def run_powershell_file(title: str, ps1_file: Path, extra_args: list[str] | None = None) -> None:
-    ensure_exists(ps1_file, "PowerShell soubor")
-    cmd = [
-        "powershell",
-        "-ExecutionPolicy", "Bypass",
-        "-File", str(ps1_file),
-    ]
-    if extra_args:
-        cmd.extend(extra_args)
     run_cmd(cmd, title)
 
 
 def main() -> int:
     try:
-        print_header("MATCHMATRIX PLAYERS PIPELINE FULL V1 - TRANSITIONAL")
-        print(f"BASE_DIR   : {BASE_DIR}")
-        print(f"PYTHON_EXE : {PYTHON_EXE}")
+        print_header("MATCHMATRIX PLAYERS PIPELINE TRANSITIONAL V1")
+        print(f"BASE_DIR                         : {BASE_DIR}")
+        print(f"PYTHON_EXE                       : {PYTHON_EXE}")
+        print(f"FETCH_WORKER                     : {FETCH_WORKER}")
+        print(f"BRIDGE_WORKER                    : {BRIDGE_WORKER}")
+        print(f"PUBLIC_PLAYERS_MERGE_WORKER      : {PUBLIC_PLAYERS_MERGE_WORKER}")
+        print(f"PARSE_WORKER                     : {PARSE_WORKER}")
+        print(f"SEASON_STATS_PUBLIC_MERGE_WORKER : {SEASON_STATS_PUBLIC_MERGE_WORKER}")
         print()
 
         ensure_exists(PYTHON_EXE, "Python interpreter")
 
-        # ------------------------------------------------------------
-        # STEP 1 - Fetch players payloads
-        # ------------------------------------------------------------
-        # Tohle volá existující PS1 pull skript.
-        # Kdyby ses rozhodl později přejít na jiný worker, změníš jen tuto cestu.
-        run_powershell_file(
+        run_python_file(
             "STEP 1 - FETCH API-FOOTBALL PLAYERS PAYLOADS",
-            PULL_PLAYERS_PS1,
+            FETCH_WORKER,
         )
 
-        # ------------------------------------------------------------
-        # STEP 2-5 - SQL season stats flow
-        # ------------------------------------------------------------
-        for idx, (title, sql_path) in enumerate(SQL_STEPS[:5], start=2):
-            run_sql_file(f"STEP {idx} - {title}", sql_path)
-
-        # ------------------------------------------------------------
-        # STEP 6 - Fetch missing profiles by prepared DB batches
-        # ------------------------------------------------------------
         run_python_file(
-            "STEP 6 - FETCH MISSING PLAYER PROFILES FROM DB BATCHES",
-            FETCH_PROFILES_BATCH,
+            "STEP 2 - BRIDGE PLAYERS IMPORT TO STAGING",
+            BRIDGE_WORKER,
         )
 
-        # ------------------------------------------------------------
-        # STEP 7 - Parse fetched player profiles
-        # ------------------------------------------------------------
         run_python_file(
-            "STEP 7 - PARSE PLAYER PROFILES",
-            PARSE_PROFILES_PY,
+            "STEP 3 - MERGE PLAYERS TO PUBLIC",
+            PUBLIC_PLAYERS_MERGE_WORKER,
         )
 
-        # ------------------------------------------------------------
-        # STEP 8-12 - Public completion + final merge
-        # ------------------------------------------------------------
-        for offset, (title, sql_path) in enumerate(SQL_STEPS[5:], start=8):
-            run_sql_file(f"STEP {offset} - {title}", sql_path)
+        run_python_file(
+            "STEP 4 - PARSE PLAYER SEASON STATS TO STAGING",
+            PARSE_WORKER,
+        )
 
-        print_header("PLAYERS PIPELINE FULL V1 - TRANSITIONAL - FINISHED SUCCESSFULLY")
+        run_python_file(
+            "STEP 5 - MERGE PLAYER SEASON STATS TO PUBLIC",
+            SEASON_STATS_PUBLIC_MERGE_WORKER,
+        )
+
+        print_header("PLAYERS PIPELINE TRANSITIONAL V1 - FINISHED SUCCESSFULLY")
         return 0
 
     except Exception as exc:
         print()
-        print_header("PLAYERS PIPELINE FULL V1 - TRANSITIONAL - FAILED")
+        print_header("PLAYERS PIPELINE TRANSITIONAL V1 - FAILED")
         print(f"CHYBA: {exc}")
         return 1
 

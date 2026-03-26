@@ -4,7 +4,7 @@ import argparse
 import os
 import sys
 from datetime import datetime
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROVIDERS_DIR = os.path.join(CURRENT_DIR, "providers")
@@ -13,6 +13,25 @@ if PROVIDERS_DIR not in sys.path:
     sys.path.insert(0, PROVIDERS_DIR)
 
 from provider_registry import get_provider_class  # noqa: E402
+
+
+# ==========================================================
+# MATCHMATRIX
+# UNIFIED INGEST V1
+#
+# Kam uložit:
+# C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py
+#
+# Co dělá:
+# - vezme provider / sport / entity / season / league_id
+# - předá je do provider.dispatch(...)
+# - provider teprve rozhodne, jaký konkrétní script spustit
+#
+# DŮLEŽITÉ:
+# - tento runner league_id a season opravdu předává dál
+# - pokud se v child scriptu neobjeví -LeagueId / -Season,
+#   problém je v provider implementaci, ne zde
+# ==========================================================
 
 
 def parse_args() -> argparse.Namespace:
@@ -31,6 +50,21 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def normalize_optional(value: Optional[str]) -> Optional[str]:
+    """
+    Prázdný string -> None.
+    Hodí se pro argparse hodnoty z panelu / scheduleru.
+    """
+    if value is None:
+        return None
+
+    value = str(value).strip()
+    if value == "":
+        return None
+
+    return value
+
+
 def generate_run_id() -> int:
     """
     Run ID ve formátu YYYYMMDDHHMMSSmmm
@@ -42,20 +76,30 @@ def generate_run_id() -> int:
     return int(now.strftime("%Y%m%d%H%M%S") + f"{now.microsecond // 1000:03d}")
 
 
-def print_header(args: argparse.Namespace, run_id: int) -> None:
+def print_header(
+    provider: str,
+    sport: str,
+    entity: str,
+    season: Optional[str],
+    league_id: Optional[str],
+    run_group: Optional[str],
+    days_ahead: Optional[int],
+    force: bool,
+    run_id: int,
+) -> None:
     print("=" * 70)
     print("MATCHMATRIX UNIFIED INGEST V1")
     print("=" * 70)
     print(f"START TIME : {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"RUN ID     : {run_id}")
-    print(f"PROVIDER   : {args.provider}")
-    print(f"SPORT      : {args.sport}")
-    print(f"ENTITY     : {args.entity}")
-    print(f"SEASON     : {args.season}")
-    print(f"LEAGUE ID  : {args.league_id}")
-    print(f"RUN GROUP  : {args.run_group}")
-    print(f"DAYS AHEAD : {args.days_ahead}")
-    print(f"FORCE      : {args.force}")
+    print(f"PROVIDER   : {provider}")
+    print(f"SPORT      : {sport}")
+    print(f"ENTITY     : {entity}")
+    print(f"SEASON     : {season}")
+    print(f"LEAGUE ID  : {league_id}")
+    print(f"RUN GROUP  : {run_group}")
+    print(f"DAYS AHEAD : {days_ahead}")
+    print(f"FORCE      : {force}")
     print("=" * 70)
 
 
@@ -74,20 +118,57 @@ def main() -> int:
     args = parse_args()
     run_id = generate_run_id()
 
-    print_header(args, run_id)
+    provider_name = normalize_optional(args.provider)
+    sport_name = normalize_optional(args.sport)
+    entity_name = normalize_optional(args.entity)
+    season_value = normalize_optional(args.season)
+    league_id_value = normalize_optional(args.league_id)
+    run_group_value = normalize_optional(args.run_group)
+
+    if not provider_name:
+        print("FATAL ERROR: provider is empty")
+        return 2
+
+    if not sport_name:
+        print("FATAL ERROR: sport is empty")
+        return 2
+
+    if not entity_name:
+        print("FATAL ERROR: entity is empty")
+        return 2
+
+    print_header(
+        provider=provider_name,
+        sport=sport_name,
+        entity=entity_name,
+        season=season_value,
+        league_id=league_id_value,
+        run_group=run_group_value,
+        days_ahead=args.days_ahead,
+        force=args.force,
+        run_id=run_id,
+    )
 
     try:
-        provider_cls = get_provider_class(args.provider, args.sport)
-        provider = provider_cls(args.provider, args.sport)
+        provider_cls = get_provider_class(provider_name, sport_name)
+        provider = provider_cls(provider_name, sport_name)
+
+        print("DISPATCH PARAMS")
+        print(
+            f"entity={entity_name} | run_id={run_id} | season={season_value} | "
+            f"league_id={league_id_value} | run_group={run_group_value} | "
+            f"days_ahead={args.days_ahead} | force={args.force}"
+        )
+        print("-" * 70)
 
         result = provider.dispatch(
-            entity=args.entity,
+            entity=entity_name,
             run_id=run_id,
-            season=args.season,
-            league_id=args.league_id,
-            run_group=args.run_group,
+            season=season_value,
+            league_id=league_id_value,
+            run_group=run_group_value,
             days_ahead=args.days_ahead,
-            force=args.force
+            force=args.force,
         )
 
         print_summary(result)

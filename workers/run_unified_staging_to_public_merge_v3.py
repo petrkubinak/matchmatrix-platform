@@ -140,6 +140,30 @@ def score_if_finished_sql(score_expr: str, status_expr: str) -> str:
     END
     """
 
+def safe_match_status_sql(status_expr: str, home_score_expr: str, away_score_expr: str) -> str:
+    """
+    Bezpečný canonical status pro public.matches.
+
+    Pokud provider hlásí FINISHED, ale chybí alespoň jedno skóre,
+    nesmíme vrátit FINISHED kvůli constraintu matches_score_status_chk.
+    V takovém případě vracíme SCHEDULED jako bezpečný fallback.
+    """
+    normalized = normalize_status_sql(status_expr)
+    home_int = to_int_sql(home_score_expr)
+    away_int = to_int_sql(away_score_expr)
+
+    return f"""
+    CASE
+        WHEN ({normalized}) = 'FINISHED'
+             AND ({home_int}) IS NOT NULL
+             AND ({away_int}) IS NOT NULL
+        THEN 'FINISHED'
+        WHEN ({normalized}) = 'FINISHED'
+             AND (({home_int}) IS NULL OR ({away_int}) IS NULL)
+        THEN 'SCHEDULED'
+        ELSE ({normalized})
+    END
+    """
 
 def main() -> None:
     conn = psycopg2.connect(**DB_CONFIG)
@@ -179,6 +203,35 @@ def main() -> None:
         sports = {code: sport_id for code, sport_id in cur.fetchall()}
         football_id = sports.get("fb") or sports.get("football")
         hockey_id = sports.get("hk") or sports.get("hockey")
+
+        sport_name_to_id = {
+            "football": sports.get("fb") or sports.get("football"),
+            "hockey": sports.get("hk") or sports.get("hockey"),
+            "basketball": sports.get("bk") or sports.get("basketball"),
+            "tennis": sports.get("tn") or sports.get("tennis"),
+            "mma": sports.get("mma"),
+            "darts": sports.get("drt") or sports.get("darts"),
+            "volleyball": sports.get("vb") or sports.get("volleyball"),
+            "handball": sports.get("hb") or sports.get("handball"),
+            "baseball": sports.get("bsb") or sports.get("baseball"),
+            "rugby": sports.get("rgb") or sports.get("rugby"),
+            "cricket": sports.get("ck") or sports.get("cricket"),
+            "field_hockey": sports.get("fh") or sports.get("field_hockey"),
+            "american_football": sports.get("afb") or sports.get("american_football"),
+            "esports": sports.get("esp") or sports.get("esports"),
+        }
+
+        def build_sport_id_case(expr: str) -> str:
+            lines = ["CASE"]
+            for sport_name, sport_id in sport_name_to_id.items():
+                if sport_id is not None:
+                    lines.append(f"    WHEN lower({expr}) = '{sport_name}' THEN {sport_id}")
+            lines.append("    ELSE NULL")
+            lines.append("END")
+            return "\n".join(lines)
+
+        fixture_sport_id_sql = build_sport_id_case("sf.sport_code")
+        league_sport_id_sql = build_sport_id_case("src.sport_code")
 
         print("Detected sports map:", sports)
 
@@ -220,11 +273,7 @@ def main() -> None:
                 ext_league_id
             )
             SELECT
-                CASE
-                    WHEN lower(src.sport_code) = 'football' THEN {football_id if football_id is not None else 'NULL'}
-                    WHEN lower(src.sport_code) = 'hockey'   THEN {hockey_id if hockey_id is not None else 'NULL'}
-                    ELSE NULL
-                END AS sport_id,
+                {league_sport_id_sql} AS sport_id,
                 src.league_name,
                 src.country_name,
                 src.provider,
@@ -240,11 +289,7 @@ def main() -> None:
                 WHERE external_league_id IS NOT NULL
             ) src
             WHERE
-                CASE
-                    WHEN lower(src.sport_code) = 'football' THEN {football_id if football_id is not None else 'NULL'}
-                    WHEN lower(src.sport_code) = 'hockey'   THEN {hockey_id if hockey_id is not None else 'NULL'}
-                    ELSE NULL
-                END IS NOT NULL
+                {league_sport_id_sql} IS NOT NULL
               AND NOT EXISTS (
                   SELECT 1
                   FROM public.leagues l
@@ -569,15 +614,11 @@ def main() -> None:
                     htp.team_id AS home_team_id,
                     atp.team_id AS away_team_id,
                     sf.fixture_date::timestamp without time zone AS kickoff_ts,
-                    {normalize_status_sql('sf.status_text')} AS status_text_norm,
+                    {safe_match_status_sql('sf.status_text', 'sf.home_score', 'sf.away_score')} AS status_text_norm,
                     {score_if_finished_sql('sf.home_score', 'sf.status_text')} AS home_score_int,
                     {score_if_finished_sql('sf.away_score', 'sf.status_text')} AS away_score_int,
                     sf.season,
-                    CASE
-                        WHEN lower(sf.sport_code) = 'football' THEN {football_id if football_id is not None else 'NULL'}
-                        WHEN lower(sf.sport_code) = 'hockey'   THEN {hockey_id if hockey_id is not None else 'NULL'}
-                        ELSE NULL
-                    END AS sport_id
+                    {fixture_sport_id_sql} AS sport_id
                 FROM staging.stg_provider_fixtures sf
                 LEFT JOIN public.league_provider_map lpm
                   ON lpm.provider = sf.provider
@@ -634,15 +675,11 @@ def main() -> None:
                     htp.team_id AS home_team_id,
                     atp.team_id AS away_team_id,
                     sf.fixture_date::timestamp without time zone AS kickoff_ts,
-                    {normalize_status_sql('sf.status_text')} AS status_text_norm,
+                    {safe_match_status_sql('sf.status_text', 'sf.home_score', 'sf.away_score')} AS status_text_norm,
                     {score_if_finished_sql('sf.home_score', 'sf.status_text')} AS home_score_int,
                     {score_if_finished_sql('sf.away_score', 'sf.status_text')} AS away_score_int,
                     sf.season,
-                    CASE
-                        WHEN lower(sf.sport_code) = 'football' THEN {football_id if football_id is not None else 'NULL'}
-                        WHEN lower(sf.sport_code) = 'hockey'   THEN {hockey_id if hockey_id is not None else 'NULL'}
-                        ELSE NULL
-                    END AS sport_id
+                    {fixture_sport_id_sql} AS sport_id
                 FROM staging.stg_provider_fixtures sf
                 LEFT JOIN public.league_provider_map lpm
                   ON lpm.provider = sf.provider

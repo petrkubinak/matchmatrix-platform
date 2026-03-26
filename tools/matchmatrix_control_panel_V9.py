@@ -25,7 +25,7 @@ PYTHON_EXE = r"C:\Python314\python.exe"
 
 BATCH_RUNNER = str(PROJECT_ROOT / "ingest" / "run_unified_ingest_batch_v1.py")
 SCHEDULER_RUNNER = str(PROJECT_ROOT / "workers" / "run_ingest_cycle_v3.py")
-PLAYERS_PIPELINE_RUNNER = str(PROJECT_ROOT / "workers" / "run_players_pipeline_full_v1.py")
+PLAYERS_PIPELINE_RUNNER = str(PROJECT_ROOT / "workers" / "run_players_pipeline_transitional_v1.py")
 
 NAV_PATHS = {
     "Projekt root": PROJECT_ROOT,
@@ -1033,7 +1033,7 @@ class MatchMatrixPanelV9:
 
         ttk.Button(
             action_frame,
-            text="Spustit players pipeline (legacy parallel)",
+            text="Spustit players pipeline",
             style="Ghost.TButton",
             command=self.run_players_pipeline_thread,
         ).pack(side="left", padx=4, pady=4)
@@ -1565,18 +1565,21 @@ class MatchMatrixPanelV9:
             "--timeout-sec", timeout_sec,
         ]
 
-        # Provider (jen pokud 1 sport)
-        if len(selected_sports) == 1:
+        # vždy nastav provider podle sportu
+        if selected_sports:
             provider = self.resolve_provider_for_sport(selected_sports[0])
             cmd += ["--provider", provider]
 
-        # Sport (jen pokud 1)
-        if len(selected_sports) == 1:
+        # sport
+        if selected_sports:
             cmd += ["--sport", selected_sports[0]]
 
-        # Entity (jen pokud 1)
-        if len(selected_entities) == 1:
+        # entity – POVINNĚ
+        if selected_entities:
             cmd += ["--entity", selected_entities[0]]
+        else:
+            self.log_write("CHYBA: není vybraná entity")
+            return
 
         # Run group
         if run_group:

@@ -55,30 +55,71 @@ class ApiHockeyProvider(BaseProvider):
             "-RunId", str(run_id),
         ]
 
+    # ==========================================================
+    # LEAGUES
+    # ==========================================================
     def pull_leagues(self, **kwargs: Any) -> Dict[str, Any]:
         ps1 = os.path.join(self.ps_dir, "pull_api_hockey_leagues.ps1")
         run_id = kwargs.get("run_id")
+
         command = self._ps_base_command(ps1, run_id)
+
         return self._run_command(command, cwd=self.ps_dir)
 
+    # ==========================================================
+    # TEAMS  ✅ FIX
+    # ==========================================================
     def pull_teams(self, **kwargs: Any) -> Dict[str, Any]:
         ps1 = os.path.join(self.ps_dir, "pull_api_hockey_teams.ps1")
+
         run_id = kwargs.get("run_id")
+        league_id = kwargs.get("league_id")
+        season = kwargs.get("season")
+
         command = self._ps_base_command(ps1, run_id)
+
+        # 🔥 HLAVNÍ FIX
+        if league_id:
+            command.extend(["-LeagueId", str(league_id)])
+
+        if season:
+            command.extend(["-Season", str(season)])
+
         return self._run_command(command, cwd=self.ps_dir)
 
+    # ==========================================================
+    # FIXTURES (už OK)
+    # ==========================================================
     def pull_fixtures(self, **kwargs: Any) -> Dict[str, Any]:
-        raise NotImplementedError(
-            "API-Hockey fixtures zatím ve V1 nejsou napojené. "
-            "Nejdřív připravíme source wrapper / pull script."
-        )
+        ps1 = os.path.join(self.ps_dir, "pull_api_hockey_fixtures.ps1")
 
+        run_id = kwargs.get("run_id")
+        league_id = kwargs.get("league_id")
+        season = kwargs.get("season")
+
+        command = self._ps_base_command(ps1, run_id)
+
+        if league_id:
+            command.extend(["-LeagueId", str(league_id)])
+
+        if season:
+            command.extend(["-Season", str(season)])
+
+        command.extend(["-SportCode", "hockey"])
+
+        return self._run_command(command, cwd=self.ps_dir)
+
+    # ==========================================================
+    # ODDS
+    # ==========================================================
     def pull_odds(self, **kwargs: Any) -> Dict[str, Any]:
         raise NotImplementedError(
-            "API-Hockey odds zatím ve V1 nejsou napojené. "
-            "Nejdřív připravíme source wrapper / pull script."
+            "API-Hockey odds zatím ve V1 nejsou napojené."
         )
 
+    # ==========================================================
+    # PLAYERS
+    # ==========================================================
     def pull_players(self, **kwargs: Any) -> Dict[str, Any]:
         raise NotImplementedError(
             "API-Hockey players zatím ve V1 nejsou napojené."

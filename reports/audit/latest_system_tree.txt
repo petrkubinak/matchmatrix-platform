@@ -1,5 +1,5 @@
 MATCHMATRIX / TICKETMATRIXPLATFORM - SYSTEM TREE EXPORT
-Generated at: 2026-03-24 07:18:48
+Generated at: 2026-03-26 09:12:38
 Project root: C:\MatchMatrix-platform
 
 ============================================================
@@ -142,6 +142,7 @@ DATABASE TREE
     - subscription_plans
     - subscriptions
     - team_aliases
+    - team_coach_history
     - team_coaches
     - team_match_statistics
     - team_provider_map
@@ -226,6 +227,7 @@ DATABASE TREE
     - check_max_variable_blocks
     - create_block_from_selection
     - fn_refresh_ticket_run_settlements
+    - fn_set_updated_at_team_coach_history
     - generate_run
     - gin_extract_query_trgm
     - gin_extract_value_trgm
@@ -486,8 +488,34 @@ C:\MatchMatrix-platform
 │   │   ├── 224_check_fb_bootstrap_teams_effect.sql
 │   │   ├── 225_check_bootstrap_warning_jobs.sql
 │   │   ├── 226_check_fb_bootstrap_teams_progress.sql
+│   │   ├── 243_check_volleyball_by_sport_and_league.sql
+│   │   ├── 244_check_vb_provider_maps.sql
+│   │   ├── 245_check_vb_staging_teams.sql
 │   │   ├── MATCHMATRIX_DAILY_STATUS.sql
 │   │   └── MATCHMATRIX_WEEKLY_DIAGNOSTICS.sql
+│   ├── debug\
+│   │   ├── 010_check_vb_staging_teams_after_fix.sql
+│   │   ├── 011_find_psql_path.ps1
+│   │   ├── 020_reset_vb_teams_pending.sql
+│   │   ├── 022_reset_hk_bk_teams_pending.sql
+│   │   ├── 023_check_bk_planner_teams.sql
+│   │   ├── 025_check_bk_stg_provider_teams.sql
+│   │   ├── 026_check_bk_raw_payload.sql
+│   │   ├── 027_check_hk_team_targets.sql
+│   │   ├── 028_promote_hk_team_target_league_6.sql
+│   │   ├── 029_check_hk_after_teams_fix.sql
+│   │   ├── 030_promote_hk_fixtures_target_league_6.sql
+│   │   ├── 031_find_working_hk_fixtures_targets.sql
+│   │   ├── 032_promote_hk_fixtures_target_league_59.sql
+│   │   ├── 033_deprioritize_empty_hk_fixtures_targets.sql
+│   │   ├── 034_check_bk_fixtures_planner.sql
+│   │   ├── 035_seed_bk_fixtures_planner_from_targets.sql
+│   │   ├── 036_check_last_bk_fixtures_payload.sql
+│   │   ├── 037_promote_bk_fixtures_target_117.sql
+│   │   ├── 039_audit_multisport_planner_unification.sql
+│   │   ├── 040_unify_multisport_planner_teams_fixtures.sql
+│   │   ├── 041_promote_bk_teams_target_12_deprioritize_40.sql
+│   │   └── 042_deduplicate_bk_teams_target_12.sql
 │   ├── migrations\
 │   │   ├── 000_create_schema_migrations.sql
 │   │   ├── 001_create_table_seasons.sql
@@ -609,7 +637,18 @@ C:\MatchMatrix-platform
 │   │   ├── 211_disable_unsupported_providers.sql
 │   │   ├── 216_disable_fb_odds_in_free_mode.sql
 │   │   ├── 217_cleanup_fb_odds_errors_free_mode.sql
-│   │   └── 221_enable_fb_bootstrap_api_football.sql
+│   │   ├── 221_enable_fb_bootstrap_api_football.sql
+│   │   ├── 232_parse_api_sport_bk_fixtures.sql
+│   │   ├── 233_parse_api_hockey_leagues.sql
+│   │   ├── 234_parse_api_hockey_fixtures.sql
+│   │   ├── 236_parse_api_volleyball_fixtures.sql
+│   │   ├── 239_reset_vb_fixtures_planner_job_4137.sql
+│   │   ├── 240_check_volleyball_merge_result.sql
+│   │   ├── 246_fix_vb_entity_plan_teams.sql
+│   │   ├── 246a_nastavení entit.sql
+│   │   ├── 247_safe_backfill_entity_plan_base_sports.sql
+│   │   ├── 250_insert_bk_test_planner_job.sql
+│   │   └── Script-9.sql
 │   ├── ops\
 │   │   ├── 022_create_ingest_runtime_config.sql
 │   │   ├── 023_seed_ingest_runtime_config_free.sql
@@ -649,6 +688,8 @@ C:\MatchMatrix-platform
 │   │   ├── 230_seed_multisport_ingest_targets.sql
 │   │   ├── 230a_seed_multisport_leagues.sql
 │   │   ├── 231_multisport_planner_preview.sql
+│   │   ├── 237_seed_ingest_planner_volleyball_fixtures.sql
+│   │   ├── 241_seed_data_provider_api_volleyball.sql
 │   │   └── ops_jobs_unified_ingest_batch.sql
 │   ├── queries\
 │   │   ├── 078_audit_player_season_statistics_v1.sql
@@ -962,10 +1003,24 @@ C:\MatchMatrix-platform
 │   │   │   ├── Jak teď vypadá football rozpad.txt
 │   │   │   ├── Jak vypadají hotové HK_BK cíle.txt
 │   │   │   ├── MATCHMATRIX – ZÁPIS (2026-03-23).md
+│   │   │   ├── MATCHMATRIX – ZÁPIS (API-SPORT + AP.md
 │   │   │   ├── MATCHMATRIX – ZÁPIS (DNES).txt
 │   │   │   ├── ops.ingest_entity_plan-1774298504122.txt
 │   │   │   ├── ops.ingest_entity_plan.txt
 │   │   │   └── ops.provider_jobs.txt
+│   │   ├── 20260324\
+│   │   │   ├── Denní Zápis - Aktuální stav (klíč).md
+│   │   │   ├── MATCHMATRIX – ZÁPIS (Volleyball + s.md
+│   │   │   └── MATCHMATRIX – ZÁPIS (Volleyball).md
+│   │   ├── 20260325\
+│   │   │   ├── ingest_planer_1.txt
+│   │   │   ├── ingest_planer_2.txt
+│   │   │   ├── MATCHMATRIX – DENNÍ ZÁPIS-večer.md
+│   │   │   ├── MATCHMATRIX – DENNÍ ZÁPIS.md
+│   │   │   ├── MatchMatrix – zápis dnešního postup.md
+│   │   │   └── MATCHMATRIX – ZÁPIS NA ZÍTRA.md
+│   │   ├── 20260326\
+│   │   │   └── MatchMatrix – podrobný zápis.md
 │   │   ├── # MATCHMATRIX – ZÁPIS (2026-03-23).md
 │   │   └── spoluprace_s_ai_operacni_rezim.md
 │   ├── visual\
@@ -1038,8 +1093,14 @@ C:\MatchMatrix-platform
 │   │   ├── run_ingest_teams_all_targets.ps1
 │   │   └── test_api_football_players_access.py
 │   ├── API-Hockey\
+│   │   ├── pull_api_hockey_coaches.ps1
+│   │   ├── pull_api_hockey_fixtures.ps1
 │   │   ├── pull_api_hockey_leagues.ps1
 │   │   └── pull_api_hockey_teams.ps1
+│   ├── API-Sport\
+│   │   ├── pull_api_sport_fixtures.ps1
+│   │   ├── pull_api_sport_leagues.ps1
+│   │   └── pull_api_sport_teams.ps1
 │   ├── artifacts\
 │   │   ├── baseline_logreg_meta.json
 │   │   ├── baseline_logreg_v2_meta.json
@@ -1083,9 +1144,11 @@ C:\MatchMatrix-platform
 │       ├── extract_missing_teams_from_fixtures_v1.py
 │       ├── repair_missing_teams_from_fixtures_v2.py
 │       ├── run_full_ingest_pipeline.py
+│       ├── run_ingest_cycle_v3_1.py
 │       ├── run_legacy_to_staging_bridge_v2.py
 │       ├── run_legacy_to_staging_odds_bridge.py
-│       └── run_payload_parser.py
+│       ├── run_payload_parser.py
+│       └── run_unified_staging_to_public_merge_v3.py
 ├── logs\
 │   ├── 2026-02-23\
 │   ├── 2026-02-24\
@@ -1098,7 +1161,8 @@ C:\MatchMatrix-platform
 │   │   ├── panel_state.json
 │   ├── reports\
 │   │   └── mm_report_2026-03-04_12-34-26.txt
-│   └── api_football_backfill_status_2026-03-04_112228.txt
+│   ├── api_football_backfill_status_2026-03-04_112228.txt
+│   └── temp_api_hockey_coaches_payload.json
 ├── MatchMatrix-platform\
 │   ├── .dbeaver\
 │   │   ├── project-metadata.json
@@ -1127,10 +1191,19 @@ C:\MatchMatrix-platform
 │   │   ├── dump-matchmatrix-202603221307.sql
 │   │   ├── dump-matchmatrix-202603222045.sql
 │   │   ├── dump-matchmatrix-202603232041.sql
+│   │   ├── dump-matchmatrix-202603242325.sql
+│   │   ├── dump-matchmatrix-202603251237.sql
+│   │   ├── dump-matchmatrix-202603252015.sql
+│   │   ├── dump-matchmatrix-202603260908.sql
 │   │   ├── dump.ops-matchmatrix-202603181139.sql
 │   │   ├── dump.ops-matchmatrix-202603181140.sql
 │   │   ├── dump.ops-matchmatrix-202603232120.sql
+│   │   ├── dump.ops-matchmatrix-202603242043.sql
+│   │   ├── dump.ops-matchmatrix-202603260908.sql
 │   │   ├── dump.public-matchmatrix-202603172216.sql
+│   │   ├── dump.public-matchmatrix-202603260909.sql
+│   │   ├── dump.staging-matchmatrix-202603260909.sql
+│   │   ├── dump.work-matchmatrix-202603260910.sql
 │   │   ├── dump_ops-matchmatrix-202603112252.sql
 │   │   └── dump_ops-matchmatrix-202603131533.sql
 │   ├── Scripts\
@@ -1291,6 +1364,8 @@ C:\MatchMatrix-platform
 │   │   │   │   ├── 098_check_duplicate_business_keys_in_src_raw.sql
 │   │   │   │   ├── 099_merge_player_season_stats_final_target_key_fix.sql
 │   │   │   │   └── 100_rebuild_player_season_statistics.sql
+│   │   │   ├── 014_coaches\
+│   │   │   │   └── 248_create_team_coach_history.sql
 │   │   │   ├── 020_generated_runs_add_bookmaker_id.sql\
 │   │   │   │   ├── 020_generated_runs_add_bookmaker_id.sql
 │   │   │   │   ├── 023_matches_updated_at.sql
@@ -1497,16 +1572,23 @@ C:\MatchMatrix-platform
 │   │   │   └── sql_players_pipeline_audit_queries.sql
 │   │   ├── 11_ops\
 │   │   │   ├── 001_ops_ingest_entity_plan.sql
+│   │   │   ├── 020_reset_vb_teams_pending.sql
 │   │   │   ├── 022_create_ingest_runtime_config.sql
+│   │   │   ├── 023_check_bk_planner_teams.sql
 │   │   │   ├── 023_seed_ingest_runtime_config_free.sql
 │   │   │   ├── 024_ops_create_ingest_entity_plan.sql
 │   │   │   ├── 025_fix_football_maintenance_null_season_to_2024.sql
+│   │   │   ├── 026_check_bk_raw_payload.sql
 │   │   │   ├── 036_ops_extend_stg_provider_players.sql
 │   │   │   ├── 037_ops_insert_new_ingest_entities_players_v1.sql
 │   │   │   ├── 111_nastavení_ops_jobs.sql
 │   │   │   └── ops_jobs_unified_ingest_batch.sql
 │   │   ├── 12_multisport\
 │   │   │   ├── 12_multisport\
+│   │   │   │   ├── 010_check_vb_staging_teams_after_fix.sql
+│   │   │   │   ├── 025_check_bk_stg_provider_teams.sql
+│   │   │   │   ├── 039_audit_multisport_planner_unification.sql
+│   │   │   │   ├── 040_unify_multisport_planner_teams_fixtures.sql
 │   │   │   │   ├── 101_extend_existing_multisport_core.sql
 │   │   │   │   ├── 102_extend_existing_coach_core.sql
 │   │   │   │   ├── 102a_zjištění_sruktury_trenérských_tabulek.sql
@@ -1543,7 +1625,8 @@ C:\MatchMatrix-platform
 │   │   │   │   ├── 229_multisport_planner_test.sql
 │   │   │   │   ├── 230_seed_multisport_ingest_targets.sql
 │   │   │   │   ├── 230a_seed_multisport_leagues.sql
-│   │   │   │   └── 231_multisport_planner_preview.sql
+│   │   │   │   ├── 231_multisport_planner_preview.sql
+│   │   │   │   └── 232_parse_api_sport_bk_fixtures.sql
 │   │   │   ├── 13_multisport_ingest-footbal\
 │   │   │   │   ├── 115_audit_ingest_targets_multisport.sql
 │   │   │   │   ├── 116_audit_ingest_targets_sport_code_mapping.sql
@@ -1602,32 +1685,65 @@ C:\MatchMatrix-platform
 │   │   │   │   ├── 214_check_fb_bootstrap_after_first_run.sql
 │   │   │   │   └── 226_check_fb_bootstrap_teams_progress.sql
 │   │   │   ├── 13_multisport_ingest_basket\
+│   │   │   │   ├── 034_check_bk_fixtures_planner.sql
+│   │   │   │   ├── 035_seed_bk_fixtures_planner_from_targets.sql
+│   │   │   │   ├── 036_check_last_bk_fixtures_payload.sql
+│   │   │   │   ├── 037_promote_bk_fixtures_target_117.sql
+│   │   │   │   ├── 041_promote_bk_teams_target_12_deprioritize_40.sql
+│   │   │   │   ├── 042_deduplicate_bk_teams_target_12.sql
 │   │   │   │   ├── 196_create_v_ops_bk_top_full_job_catalog.sql
 │   │   │   │   ├── 197_seed_bk_top_provider_jobs.sql
 │   │   │   │   ├── 198_create_v_ops_bk_top_runnable_jobs.sql
 │   │   │   │   ├── 199_create_v_ops_bk_core_full_job_catalog.sql
 │   │   │   │   ├── 200_seed_bk_core_provider_jobs.sql
-│   │   │   │   └── 201_create_v_ops_bk_core_runnable_jobs.sql
-│   │   │   └── 13_multisport_ingest_hokej\
-│   │   │       ├── 179_ops_hk_run_groups.sql
-│   │   │       ├── 180_seed_api_hockey_hk_ingest_entity_plan.sql
-│   │   │       ├── 181_create_v_ops_hk_top_ingest_jobs.sql
-│   │   │       ├── 182_create_v_ops_hk_top_ingest_jobs_test_mode.sql
-│   │   │       ├── 183_create_v_ops_hk_top_test_execution_order.sql
-│   │   │       ├── 184_create_v_ops_hk_job_catalog.sql
-│   │   │       ├── 185_seed_hk_provider_jobs.sql
-│   │   │       ├── 186_create_v_ops_hk_top_runnable_jobs.sql
-│   │   │       ├── 187_preview_hk_top_runnable_jobs.sql
-│   │   │       ├── 188_create_v_ops_hk_top_full_execution_order.sql
-│   │   │       ├── 189_create_v_ops_hk_full_job_catalog.sql
-│   │   │       ├── 190_seed_hk_full_provider_jobs.sql
-│   │   │       ├── 191_create_v_ops_hk_full_runnable_jobs.sql
-│   │   │       ├── 193_create_v_ops_hk_core_full_job_catalog.sql
-│   │   │       ├── 194_seed_hk_core_provider_jobs.sql
-│   │   │       ├── 195_create_v_ops_hk_core_runnable_jobs.sql
-│   │   │       ├── 202_create_v_ops_hk_top_full_runnable_jobs.sql
-│   │   │       ├── 203_seed_hk_top_ingest_planner.sql
-│   │   │       ├── 204_add_photo_url_to_staging_players_import.sql
+│   │   │   │   ├── 201_create_v_ops_bk_core_runnable_jobs.sql
+│   │   │   │   └── 250_insert_bk_test_planner_job.sql
+│   │   │   ├── 13_multisport_ingest_hokej\
+│   │   │   │   ├── 027_check_hk_team_targets.sql
+│   │   │   │   ├── 028_promote_hk_team_target_league_6.sql
+│   │   │   │   ├── 029_check_hk_after_teams_fix.sql
+│   │   │   │   ├── 030_promote_hk_fixtures_target_league_6.sql
+│   │   │   │   ├── 031_find_working_hk_fixtures_targets.sql
+│   │   │   │   ├── 032_promote_hk_fixtures_target_league_59.sql
+│   │   │   │   ├── 033_deprioritize_empty_hk_fixtures_targets.sql
+│   │   │   │   ├── 179_ops_hk_run_groups.sql
+│   │   │   │   ├── 180_seed_api_hockey_hk_ingest_entity_plan.sql
+│   │   │   │   ├── 181_create_v_ops_hk_top_ingest_jobs.sql
+│   │   │   │   ├── 182_create_v_ops_hk_top_ingest_jobs_test_mode.sql
+│   │   │   │   ├── 183_create_v_ops_hk_top_test_execution_order.sql
+│   │   │   │   ├── 184_create_v_ops_hk_job_catalog.sql
+│   │   │   │   ├── 185_seed_hk_provider_jobs.sql
+│   │   │   │   ├── 186_create_v_ops_hk_top_runnable_jobs.sql
+│   │   │   │   ├── 187_preview_hk_top_runnable_jobs.sql
+│   │   │   │   ├── 188_create_v_ops_hk_top_full_execution_order.sql
+│   │   │   │   ├── 189_create_v_ops_hk_full_job_catalog.sql
+│   │   │   │   ├── 190_seed_hk_full_provider_jobs.sql
+│   │   │   │   ├── 191_create_v_ops_hk_full_runnable_jobs.sql
+│   │   │   │   ├── 193_create_v_ops_hk_core_full_job_catalog.sql
+│   │   │   │   ├── 194_seed_hk_core_provider_jobs.sql
+│   │   │   │   ├── 195_create_v_ops_hk_core_runnable_jobs.sql
+│   │   │   │   ├── 202_create_v_ops_hk_top_full_runnable_jobs.sql
+│   │   │   │   ├── 203_seed_hk_top_ingest_planner.sql
+│   │   │   │   ├── 204_add_photo_url_to_staging_players_import.sql
+│   │   │   │   ├── 233_parse_api_hockey_leagues.sql
+│   │   │   │   ├── 234_parse_api_hockey_fixtures.sql
+│   │   │   │   └── Script.sql
+│   │   │   └── 13_multisport_ingest_volleyball\
+│   │   │       ├── 001_volleyball.sql
+│   │   │       ├── 235_parse_api_volleyball_leagues.sql
+│   │   │       ├── 236_parse_api_volleyball_fixtures.sql
+│   │   │       ├── 237_seed_ingest_planner_volleyball_fixtures.sql
+│   │   │       ├── 238_seed_data_provider_api_sport.sql
+│   │   │       ├── 239_reset_vb_fixtures_planner_job_4137.sql
+│   │   │       ├── 240_check_volleyball_merge_result.sql
+│   │   │       ├── 241_seed_data_provider_api_volleyball.sql
+│   │   │       ├── 243_check_volleyball_by_sport_and_league.sql
+│   │   │       ├── 244_check_vb_provider_maps.sql
+│   │   │       ├── 245_check_vb_staging_teams.sql
+│   │   │       ├── 246_fix_vb_entity_plan_teams.sql
+│   │   │       ├── 246a_nastavení entit.sql
+│   │   │       ├── 247_safe_backfill_entity_plan_base_sports.sql
+│   │   │       ├── _volleyball_příkazy.sql
 │   │   │       └── Script.sql
 │   │   ├── 99_playground\
 │   │   │   ├── 001_run_tests.sql\
@@ -1781,12 +1897,23 @@ C:\MatchMatrix-platform
 │   │   ├── 2026-03-23\
 │   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
 │   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── 2026-03-24\
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── 2026-03-25\
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
 │   │   ├── latest_audit_report.md
 │   │   ├── latest_progress_report.md
 │   │   ├── latest_snapshot.txt
 │   │   ├── latest_system_tree.txt
 │   │   ├── system_tree_2026-03-23_110914.txt
-│   │   └── system_tree_2026-03-23_203905.txt
+│   │   ├── system_tree_2026-03-23_203905.txt
+│   │   ├── system_tree_2026-03-24_071848.txt
+│   │   ├── system_tree_2026-03-24_204041.txt
+│   │   ├── system_tree_2026-03-24_232620.txt
+│   │   ├── system_tree_2026-03-25_123722.txt
+│   │   └── system_tree_2026-03-25_201624.txt
 │   ├── file_audit\
 │   │   ├── csv\
 │   │   │   ├── changes_20260317_085252.csv
@@ -1849,6 +1976,7 @@ C:\MatchMatrix-platform
 │   ├── matchmatrix_control_panel_V7_fixed.py
 │   ├── matchmatrix_control_panel_V8.py
 │   ├── matchmatrix_control_panel_V9.py
+│   ├── run_check_psql.bat
 │   ├── run_matchmatrix_control_panel_V3.bat
 │   ├── run_matchmatrix_panel_V4.bat
 ├── workers\
@@ -1863,6 +1991,8 @@ C:\MatchMatrix-platform
 │   ├── run_ingest_cycle_v3.py
 │   ├── run_ingest_planner_jobs.py
 │   ├── run_multisport_scheduler_v4.py
+│   ├── run_parse_api_sport_fixtures_v1.py
+│   ├── run_parse_api_sport_teams_v1.py
 │   ├── run_player_match_statistics_public_merge_v1.py
 │   ├── run_player_profiles_public_merge_v1.py
 │   ├── run_player_season_statistics_public_merge_v1.py
@@ -1874,16 +2004,11 @@ C:\MatchMatrix-platform
 │   ├── run_players_public_merge_v2.py
 │   ├── run_players_season_stats_bridge_v3.py
 │   ├── run_scheduler_queue_executor_v2.py
+│   ├── run_team_coach_history_public_merge_v1.py
 │   ├── run_unified_staging_to_public_merge_v3.py
 │   └── test_db_connection.py
 ├── gitHub povel.txt
 ├── MatchMatrix-platform.txt
 ├── MatchMatrix_Struktura.txt
 ├── run_player_audit_report.bat
-├── seznam.txt
-├── spuštění controlního panelu.txt
-├── tree_matchmatrix.txt
-├── unmatched_theodds_108.csv
-├── unmatched_theodds_108.sql
-├── unmatched_theodds_110.csv
-└── unmatched_theodds_110.sql
+└── seznam.txt

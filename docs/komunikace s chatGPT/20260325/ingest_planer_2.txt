@@ -1,0 +1,147 @@
+|id   |provider      |sport_code|entity  |provider_league_id|season   |status |attempts|priority|run_group|updated_at                   |
+|-----|--------------|----------|--------|------------------|---------|-------|--------|--------|---------|-----------------------------|
+|1,096|api_hockey    |HK        |coaches |146               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,102|api_hockey    |HK        |coaches |224               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,108|api_hockey    |HK        |coaches |214               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,114|api_hockey    |HK        |coaches |236               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,120|api_hockey    |HK        |coaches |110               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,126|api_hockey    |HK        |coaches |142               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,132|api_hockey    |HK        |coaches |265               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,138|api_hockey    |HK        |coaches |173               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,144|api_hockey    |HK        |coaches |59                |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,150|api_hockey    |HK        |coaches |63                |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,156|api_hockey    |HK        |coaches |230               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,162|api_hockey    |HK        |coaches |101               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,168|api_hockey    |HK        |coaches |37                |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,174|api_hockey    |HK        |coaches |242               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,180|api_hockey    |HK        |coaches |141               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,186|api_hockey    |HK        |coaches |257               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,192|api_hockey    |HK        |coaches |207               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,198|api_hockey    |HK        |coaches |6                 |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,204|api_hockey    |HK        |coaches |14                |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,210|api_hockey    |HK        |coaches |149               |         |pending|0       |2,060   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,141|api_hockey    |HK        |fixtures|59                |         |pending|0       |1,010   |HK_TOP   |2026-03-25 15:34:27.660 +0100|
+|1,105|api_hockey    |HK        |fixtures|214               |         |done   |1       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,123|api_hockey    |HK        |fixtures|142               |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,129|api_hockey    |HK        |fixtures|265               |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,135|api_hockey    |HK        |fixtures|173               |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,147|api_hockey    |HK        |fixtures|63                |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,153|api_hockey    |HK        |fixtures|230               |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,165|api_hockey    |HK        |fixtures|37                |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,171|api_hockey    |HK        |fixtures|242               |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,177|api_hockey    |HK        |fixtures|141               |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,183|api_hockey    |HK        |fixtures|257               |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,189|api_hockey    |HK        |fixtures|207               |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,201|api_hockey    |HK        |fixtures|14                |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,207|api_hockey    |HK        |fixtures|149               |         |pending|0       |2,030   |HK_TOP   |2026-03-25 19:18:32.786 +0100|
+|1,093|api_hockey    |HK        |fixtures|146               |         |done   |1       |5,000   |HK_TOP   |2026-03-25 15:34:27.650 +0100|
+|1,099|api_hockey    |HK        |fixtures|224               |         |done   |1       |5,000   |HK_TOP   |2026-03-25 15:34:27.650 +0100|
+|1,111|api_hockey    |HK        |fixtures|236               |         |done   |1       |5,000   |HK_TOP   |2026-03-25 15:34:27.650 +0100|
+|1,117|api_hockey    |HK        |fixtures|110               |         |pending|0       |5,000   |HK_TOP   |2026-03-25 15:34:27.650 +0100|
+|1,159|api_hockey    |HK        |fixtures|101               |         |pending|0       |5,000   |HK_TOP   |2026-03-25 15:34:27.650 +0100|
+|1,195|api_hockey    |HK        |fixtures|6                 |         |done   |1       |5,000   |HK_TOP   |2026-03-25 15:34:27.650 +0100|
+|1,011|api_hockey    |HK        |leagues |                  |         |done   |1       |10      |         |2026-03-22 09:35:41.065 +0100|
+|1,091|api_hockey    |HK        |leagues |146               |         |error  |1       |2,010   |HK_TOP   |2026-03-21 15:18:30.204 +0100|
+|1,097|api_hockey    |HK        |leagues |224               |         |error  |1       |2,010   |HK_TOP   |2026-03-22 00:10:24.586 +0100|
+|1,103|api_hockey    |HK        |leagues |214               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,109|api_hockey    |HK        |leagues |236               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,115|api_hockey    |HK        |leagues |110               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,121|api_hockey    |HK        |leagues |142               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,127|api_hockey    |HK        |leagues |265               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,133|api_hockey    |HK        |leagues |173               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,139|api_hockey    |HK        |leagues |59                |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,145|api_hockey    |HK        |leagues |63                |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,151|api_hockey    |HK        |leagues |230               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,157|api_hockey    |HK        |leagues |101               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,163|api_hockey    |HK        |leagues |37                |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,169|api_hockey    |HK        |leagues |242               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,175|api_hockey    |HK        |leagues |141               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,181|api_hockey    |HK        |leagues |257               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,187|api_hockey    |HK        |leagues |207               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,193|api_hockey    |HK        |leagues |6                 |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,199|api_hockey    |HK        |leagues |14                |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,205|api_hockey    |HK        |leagues |149               |         |pending|0       |2,010   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,094|api_hockey    |HK        |odds    |146               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,100|api_hockey    |HK        |odds    |224               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,106|api_hockey    |HK        |odds    |214               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,112|api_hockey    |HK        |odds    |236               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,118|api_hockey    |HK        |odds    |110               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,124|api_hockey    |HK        |odds    |142               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,130|api_hockey    |HK        |odds    |265               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,136|api_hockey    |HK        |odds    |173               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,142|api_hockey    |HK        |odds    |59                |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,148|api_hockey    |HK        |odds    |63                |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,154|api_hockey    |HK        |odds    |230               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,160|api_hockey    |HK        |odds    |101               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,166|api_hockey    |HK        |odds    |37                |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,172|api_hockey    |HK        |odds    |242               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,178|api_hockey    |HK        |odds    |141               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,184|api_hockey    |HK        |odds    |257               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,190|api_hockey    |HK        |odds    |207               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,196|api_hockey    |HK        |odds    |6                 |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,202|api_hockey    |HK        |odds    |14                |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,208|api_hockey    |HK        |odds    |149               |         |pending|0       |2,040   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,095|api_hockey    |HK        |players |146               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,101|api_hockey    |HK        |players |224               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,107|api_hockey    |HK        |players |214               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,113|api_hockey    |HK        |players |236               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,119|api_hockey    |HK        |players |110               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,125|api_hockey    |HK        |players |142               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,131|api_hockey    |HK        |players |265               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,137|api_hockey    |HK        |players |173               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,143|api_hockey    |HK        |players |59                |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,149|api_hockey    |HK        |players |63                |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,155|api_hockey    |HK        |players |230               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,161|api_hockey    |HK        |players |101               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,167|api_hockey    |HK        |players |37                |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,173|api_hockey    |HK        |players |242               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,179|api_hockey    |HK        |players |141               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,185|api_hockey    |HK        |players |257               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,191|api_hockey    |HK        |players |207               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,197|api_hockey    |HK        |players |6                 |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,203|api_hockey    |HK        |players |14                |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,209|api_hockey    |HK        |players |149               |         |pending|0       |2,050   |HK_TOP   |2026-03-21 15:17:24.251 +0100|
+|1,194|api_hockey    |HK        |teams   |6                 |         |done   |1       |1,000   |HK_TOP   |2026-03-25 14:03:24.067 +0100|
+|1,092|api_hockey    |HK        |teams   |146               |         |done   |1       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,098|api_hockey    |HK        |teams   |224               |         |done   |1       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,104|api_hockey    |HK        |teams   |214               |         |done   |1       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,110|api_hockey    |HK        |teams   |236               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,116|api_hockey    |HK        |teams   |110               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,122|api_hockey    |HK        |teams   |142               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,128|api_hockey    |HK        |teams   |265               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,134|api_hockey    |HK        |teams   |173               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,140|api_hockey    |HK        |teams   |59                |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,146|api_hockey    |HK        |teams   |63                |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,152|api_hockey    |HK        |teams   |230               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,158|api_hockey    |HK        |teams   |101               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,164|api_hockey    |HK        |teams   |37                |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,170|api_hockey    |HK        |teams   |242               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,176|api_hockey    |HK        |teams   |141               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,182|api_hockey    |HK        |teams   |257               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,188|api_hockey    |HK        |teams   |207               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,200|api_hockey    |HK        |teams   |14                |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|1,206|api_hockey    |HK        |teams   |149               |         |pending|0       |2,020   |HK_TOP   |2026-03-25 19:18:32.778 +0100|
+|4,149|api_sport     |BK        |fixtures|117               |2023-2024|done   |1       |1,010   |BK_TOP   |2026-03-25 15:55:54.246 +0100|
+|4,142|api_sport     |BK        |fixtures|31                |         |pending|0       |2,030   |BK_TOP   |2026-03-25 19:18:32.797 +0100|
+|4,143|api_sport     |BK        |fixtures|12                |         |pending|0       |2,030   |BK_TOP   |2026-03-25 19:18:32.797 +0100|
+|4,144|api_sport     |BK        |fixtures|202               |         |pending|0       |2,030   |BK_TOP   |2026-03-25 19:18:32.797 +0100|
+|4,145|api_sport     |BK        |fixtures|52                |         |pending|0       |2,030   |BK_TOP   |2026-03-25 19:18:32.797 +0100|
+|4,146|api_sport     |BK        |fixtures|60                |         |pending|0       |2,030   |BK_TOP   |2026-03-25 19:18:32.797 +0100|
+|4,147|api_sport     |BK        |fixtures|198               |         |pending|0       |2,030   |BK_TOP   |2026-03-25 19:18:32.797 +0100|
+|4,148|api_sport     |BK        |fixtures|120               |         |pending|0       |2,030   |BK_TOP   |2026-03-25 19:18:32.797 +0100|
+|4,141|api_sport     |BK        |fixtures|40                |         |done   |1       |5,000   |BK_TOP   |2026-03-25 15:54:35.900 +0100|
+|1,085|api_sport     |BK        |leagues |                  |         |error  |1       |10      |         |2026-03-23 15:09:58.707 +0100|
+|4,139|api_sport     |BK        |teams   |12                |2024     |error  |1       |2,020   |BK_TOP   |2026-03-25 19:18:32.791 +0100|
+|4,140|api_sport     |BK        |teams   |12                |2024     |done   |1       |2,020   |BK_TOP   |2026-03-25 19:18:32.791 +0100|
+|4,150|api_sport     |BK        |teams   |40                |         |pending|0       |2,020   |BK_TOP   |2026-03-25 19:18:32.741 +0100|
+|4,151|api_sport     |BK        |teams   |31                |         |pending|0       |2,020   |BK_TOP   |2026-03-25 19:18:32.741 +0100|
+|4,152|api_sport     |BK        |teams   |12                |         |pending|0       |2,020   |BK_TOP   |2026-03-25 19:18:32.741 +0100|
+|4,153|api_sport     |BK        |teams   |202               |         |pending|0       |2,020   |BK_TOP   |2026-03-25 19:18:32.741 +0100|
+|4,154|api_sport     |BK        |teams   |52                |         |pending|0       |2,020   |BK_TOP   |2026-03-25 19:18:32.741 +0100|
+|4,155|api_sport     |BK        |teams   |60                |         |pending|0       |2,020   |BK_TOP   |2026-03-25 19:18:32.741 +0100|
+|4,156|api_sport     |BK        |teams   |198               |         |pending|0       |2,020   |BK_TOP   |2026-03-25 19:18:32.741 +0100|
+|4,157|api_sport     |BK        |teams   |120               |         |pending|0       |2,020   |BK_TOP   |2026-03-25 19:18:32.741 +0100|
+|4,158|api_sport     |BK        |teams   |117               |2023-2024|pending|0       |2,020   |BK_TOP   |2026-03-25 19:18:32.741 +0100|
+|4,137|api_volleyball|VB        |fixtures|97                |2024     |done   |1       |30      |VB_CORE  |2026-03-24 22:47:47.800 +0100|
+|1,038|api_volleyball|VB        |leagues |                  |         |error  |1       |10      |         |2026-03-22 09:35:42.216 +0100|
+|4,138|api_volleyball|VB        |teams   |97                |2024     |pending|0       |20      |VB_CORE  |2026-03-25 13:54:57.977 +0100|

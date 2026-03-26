@@ -98,14 +98,15 @@ def load_db_connection():
 def load_targets(conn, provider, sport, run_group):
     sql = """
         SELECT
+            id,
             provider_league_id,
-            season
+            NULLIF(BTRIM(season), '') AS season
         FROM ops.ingest_targets
         WHERE provider = %s
           AND sport_code = %s
           AND run_group = %s
           AND enabled = true
-        ORDER BY provider_league_id
+        ORDER BY provider_league_id, id
     """
 
     with conn.cursor() as cur:
@@ -221,7 +222,7 @@ def detect_result(output_text: str, process_returncode: int) -> str:
     return "UNKNOWN"
 
 
-def run_single(provider, sport, entity, league_id, season, timeout_sec):
+def run_single(target_id, provider, sport, entity, league_id, season, timeout_sec):
     normalized_sport = normalize_sport_code_for_ingest(sport)
     
     command = [
@@ -231,8 +232,11 @@ def run_single(provider, sport, entity, league_id, season, timeout_sec):
         "--sport", normalized_sport,
         "--entity", entity,
         "--league-id", str(league_id),
-        "--season", str(season),
     ]
+
+    # season přidat jen pokud existuje
+    if season is not None and str(season).strip() != "":
+        command += ["--season", str(season)]
 
     process = subprocess.Popen(
         command,
@@ -256,6 +260,7 @@ def run_single(provider, sport, entity, league_id, season, timeout_sec):
     return {
         "league_id": league_id,
         "season": season,
+        "target_id": target_id,
         "result": result,
         "returncode": process.returncode,
         "command": command,
@@ -265,6 +270,7 @@ def run_single(provider, sport, entity, league_id, season, timeout_sec):
 
 def print_job_result(job_result):
     print("-" * 70)
+    print(f"TARGET ID: {job_result['target_id']} | LEAGUE ID: {job_result['league_id']} | SEASON: {job_result['season']}")
     print(f"LEAGUE ID: {job_result['league_id']} | SEASON: {job_result['season']}")
     print("RUN:", " ".join(job_result["command"]))
     print(job_result["output_text"])
@@ -329,8 +335,9 @@ def main():
 
     # Sekvenční režim
     if args.max_workers <= 1:
-        for league_id, season in targets:
+        for target_id, league_id, season in targets:
             job_result = run_single(
+                target_id,
                 args.provider,
                 args.sport,
                 args.entity,
@@ -354,6 +361,7 @@ def main():
             futures = [
             executor.submit(
                 run_single,
+                target_id,
                 args.provider,
                 args.sport,
                 args.entity,
@@ -361,7 +369,7 @@ def main():
                 season,
                 args.timeout_sec
             )
-                for league_id, season in targets
+                for target_id, league_id, season in targets
             ]
 
             for future in as_completed(futures):

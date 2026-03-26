@@ -1,0 +1,21 @@
+|provider      |sport_code|entity  |run_group|status |cnt|
+|--------------|----------|--------|---------|-------|---|
+|api_hockey    |HK        |coaches |HK_TOP   |pending|20 |
+|api_hockey    |HK        |fixtures|HK_TOP   |done   |5  |
+|api_hockey    |HK        |fixtures|HK_TOP   |pending|15 |
+|api_hockey    |HK        |leagues |HK_TOP   |error  |2  |
+|api_hockey    |HK        |leagues |HK_TOP   |pending|18 |
+|api_hockey    |HK        |leagues |         |done   |1  |
+|api_hockey    |HK        |odds    |HK_TOP   |pending|20 |
+|api_hockey    |HK        |players |HK_TOP   |pending|20 |
+|api_hockey    |HK        |teams   |HK_TOP   |done   |4  |
+|api_hockey    |HK        |teams   |HK_TOP   |pending|16 |
+|api_sport     |BK        |fixtures|BK_TOP   |done   |2  |
+|api_sport     |BK        |fixtures|BK_TOP   |pending|7  |
+|api_sport     |BK        |leagues |         |error  |1  |
+|api_sport     |BK        |teams   |BK_TOP   |done   |1  |
+|api_sport     |BK        |teams   |BK_TOP   |error  |1  |
+|api_sport     |BK        |teams   |BK_TOP   |pending|9  |
+|api_volleyball|VB        |fixtures|VB_CORE  |done   |1  |
+|api_volleyball|VB        |leagues |         |error  |1  |
+|api_volleyball|VB        |teams   |VB_CORE  |pending|1  |
