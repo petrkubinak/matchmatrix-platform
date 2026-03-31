@@ -1,0 +1,202 @@
+|team_id|team_name              |provider    |provider_team_id|
+|-------|-----------------------|------------|----------------|
+|14,636 |1461 Trabzon FK        |api_football|6340            |
+|12,070 |1899 Hoffenheim        |api_football|167             |
+|14,773 |1899 Hoffenheim W      |api_football|1858            |
+|14,424 |1? Dezembro            |api_football|4718            |
+|12,077 |1. FC Heidenheim       |api_football|180             |
+|12,567 |1. FC Kaiserslautern   |api_football|745             |
+|12,735 |1. FC K?ln             |api_football|192             |
+|12,249 |1. FC Magdeburg        |api_football|179             |
+|13,523 |1. FC N?rnberg         |api_football|171             |
+|14,118 |24 Erzincanspor        |api_football|7392            |
+|14,197 |68 Aksaray Belediyespor|api_football|6507            |
+|13,049 |Aalborg                |api_football|402             |
+|13,181 |Aalesund               |api_football|757             |
+|13,156 |Aarhus                 |api_football|406             |
+|12,967 |Aberdeen               |api_football|252             |
+|15,013 |Abergavenny Town       |api_football|7579            |
+|28,679 |Abertillery Bluebirds  |api_football|7580            |
+|13,391 |Aberystwyth Town       |api_football|351             |
+|13,418 |ABFF U17               |api_football|23271           |
+|14,589 |Academica              |api_football|239             |
+|13,861 |Academico Viseu        |api_football|238             |
+|12,667 |Accrington ST          |api_football|1360            |
+|12,236 |AC Horsens             |api_football|404             |
+|12,122 |AC Milan               |api_football|489             |
+|12,787 |AC Oulu                |api_football|2077            |
+|13,046 |ACS Sirineasa          |api_football|2600            |
+|13,907 |ACV                    |api_football|3911            |
+|14,455 |Adana 1954 FK          |api_football|22009           |
+|13,667 |Adana Demirspor        |api_football|3563            |
+|12,622 |Adanaspor              |api_football|3564            |
+|28,745 |AD Ceuta FC            |api_football|10139           |
+|14,007 |Admira Praha           |api_football|7268            |
+|12,497 |Admira Wacker          |api_football|1023            |
+|14,830 |ADO '20                |api_football|3886            |
+|12,164 |ADO Den Haag           |api_football|198             |
+|15,336 |Ad?yaman 1954          |api_football|11095           |
+|12,687 |AEK Athens FC          |api_football|575             |
+|13,176 |AEK Athens II          |api_football|18016           |
+|13,109 |AEK Larnaca            |api_football|614             |
+|13,018 |AEL                    |api_football|3396            |
+|12,302 |AE Zakakiou            |api_football|3404            |
+|12,274 |Afan Lido              |api_football|2200            |
+|13,933 |AFC Amsterdam          |api_football|1252            |
+|28,681 |AFC Eskilstuna         |api_football|765             |
+|28,692 |AFC Fylde              |api_football|1839            |
+|13,186 |AFC Hermannstadt       |api_football|2579            |
+|13,535 |AFC Wimbledon          |api_football|1333            |
+|12,213 |AF Elbasani            |api_football|20406           |
+|13,911 |Afjet Afyonspor        |api_football|3565            |
+|13,624 |Afturelding            |api_football|3514            |
+|15,338 |Agudat Sport Ashdod    |api_football|6129            |
+|13,402 |Ahironas / Onisilos    |api_football|20024           |
+|12,933 |Ahrobiznes Volochysk   |api_football|3620            |
+|13,267 |AIK Stockholm          |api_football|377             |
+|28,667 |Aiolikos               |api_football|5027            |
+|13,157 |Airbus UK              |api_football|4909            |
+|13,303 |Airdrie United         |api_football|4668            |
+|13,579 |Ajaccio                |api_football|98              |
+|12,161 |Ajax                   |api_football|194             |
+|13,238 |Ajka                   |api_football|4714            |
+|12,591 |Akademija Pandev       |api_football|4194            |
+|28,662 |Akademiya Ontustik     |api_football|4545            |
+|13,409 |Akhmat                 |api_football|1085            |
+|13,475 |Akritas                |api_football|3406            |
+|13,582 |Akron                  |api_football|6786            |
+|12,222 |Aktobe                 |api_football|4563            |
+|13,524 |Aktobe Jas             |api_football|4546            |
+|12,580 |Akzhayik               |api_football|4547            |
+|12,637 |Alaniya Vladikavkaz    |api_football|6787            |
+|13,492 |Alanyaspor             |api_football|996             |
+|12,655 |Alashkert              |api_football|582             |
+|28,653 |Alashkert II           |api_football|3687            |
+|12,093 |Alaves                 |api_football|542             |
+|12,343 |Albacete               |api_football|722             |
+|13,738 |Albinoleffe            |api_football|879             |
+|14,027 |Alcione                |api_football|17824           |
+|28,678 |Alcorcon               |api_football|711             |
+|14,683 |Alemannia Aachen       |api_football|4259            |
+|15,306 |Alessandria            |api_football|878             |
+|15,890 |Alexandria             |api_football|6842            |
+|28,825 |Alfaro                 |api_football|9860            |
+|28,657 |?algiris II            |api_football|3871            |
+|15,407 |Alki Oroklini          |api_football|3397            |
+|14,862 |Alloa Athletic         |api_football|1391            |
+|12,179 |Almere City FC         |api_football|419             |
+|14,461 |Almere City II         |api_football|9130            |
+|12,871 |Almeria                |api_football|723             |
+|15,485 |Almopos                |api_football|12368           |
+|13,202 |Altay                  |api_football|4544            |
+|14,578 |Altay                  |api_football|3566            |
+|13,937 |Alt?nordu              |api_football|3567            |
+|28,694 |Altrincham             |api_football|4700            |
+|12,574 |Aluminij               |api_football|4358            |
+|13,904 |Alverca                |api_football|4724            |
+|14,245 |Amarante               |api_football|4725            |
+|13,645 |Amed                   |api_football|3579            |
+|28,698 |Amical Saint-Prex      |api_football|16316           |
+|12,879 |Amiens                 |api_football|87              |
+|13,442 |Ammanford AFC          |api_football|2188            |
+|16,936 |Amora                  |api_football|4726            |
+|28,691 |Amorebieta             |api_football|9380            |
+|12,380 |?amor?n                |api_football|10545           |
+|28,746 |Am?rica W              |api_football|14868           |
+|14,502 |Anadia                 |api_football|4727            |
+|12,608 |Anagennisi Deryneia    |api_football|3407            |
+|15,110 |Anagennisi Karditsas   |api_football|2094            |
+|15,275 |Ancona                 |api_football|897             |
+|12,940 |Anderlecht             |api_football|554             |
+|13,948 |Andernach W            |api_football|20495           |
+|12,930 |Andranik               |api_football|21877           |
+|12,102 |Angers                 |api_football|77              |
+|14,438 |Ankara Demirspor       |api_football|3581            |
+|12,999 |Ankarag?c?             |api_football|1010            |
+|14,793 |Ankaraspor             |api_football|780             |
+|13,020 |?anl?urfaspor          |api_football|3613            |
+|13,251 |Annagh United          |api_football|11109           |
+|12,416 |Annecy                 |api_football|3012            |
+|12,998 |Anorthosis             |api_football|2269            |
+|12,631 |Antalyaspor            |api_football|1005            |
+|13,747 |Antoniano              |api_football|7522            |
+|13,172 |Antwerp                |api_football|740             |
+|12,860 |Apoel Nicosia          |api_football|2247            |
+|14,918 |Apollon Larissa FC     |api_football|2101            |
+|12,898 |Apollon Limassol       |api_football|602             |
+|15,503 |Apollon Pontou         |api_football|2102            |
+|15,051 |Apollon Smirnis        |api_football|951             |
+|13,558 |Apolonia Fier          |api_football|3321            |
+|13,547 |Aragvi Dusheti         |api_football|10015           |
+|13,071 |Ararat                 |api_football|3682            |
+|13,565 |Ararat-Armenia         |api_football|3683            |
+|12,789 |Ararat-Armenia II      |api_football|3689            |
+|13,069 |Ararat II              |api_football|3688            |
+|13,132 |Araz                   |api_football|11238           |
+|28,635 |Araz Saatl?            |api_football|22279           |
+|15,158 |Arbroath               |api_football|4249            |
+|12,714 |Arda Kardzhali         |api_football|1430            |
+|13,058 |Ards                   |api_football|5338            |
+|28,632 |Arendal                |api_football|2155            |
+|28,717 |Arenel Movers          |api_football|23065           |
+|12,369 |Aresimi                |api_football|19753           |
+|14,061 |Arezzo                 |api_football|876             |
+|12,347 |Arges Pitesti          |api_football|2592            |
+|12,561 |Aris                   |api_football|3408            |
+|13,420 |Aris Thessalonikis     |api_football|1123            |
+|13,208 |Arka Gdynia            |api_football|344             |
+|12,586 |Armagh City            |api_football|11110           |
+|13,700 |Arminia Bielefeld      |api_football|188             |
+|14,158 |Arnavutk?y Belediyespor|api_football|15101           |
+|12,153 |Arouca                 |api_football|240             |
+|11,910 |Arsenal                |api_football|42              |
+|13,102 |Arsenal                |api_football|9419            |
+|14,437 |Arsenal ?esk? L?pa     |api_football|7270            |
+|12,869 |Arsenal Tivat          |api_football|3742            |
+|12,336 |Arsenal Tula           |api_football|1077            |
+|12,932 |Artis                  |api_football|4257            |
+|12,340 |Arys                   |api_football|10414           |
+|14,068 |Arzignano Valchiampo   |api_football|6378            |
+|13,462 |Asane                  |api_football|2148            |
+|14,581 |Ascoli                 |api_football|507             |
+|13,516 |AS Eupen               |api_football|739             |
+|15,641 |AS Eupen U21           |api_football|14015           |
+|14,655 |Ashdod                 |api_football|4507            |
+|13,477 |ASIL Lysi              |api_football|3405            |
+|13,452 |AS Jeunesse Esch       |api_football|2034            |
+|12,128 |AS Roma                |api_football|497             |
+|28,663 |Astana II              |api_football|4548            |
+|13,448 |Asteras Tripolis       |api_football|955             |
+|12,875 |Asteras Tripolis II    |api_football|25017           |
+|11,922 |Aston Villa            |api_football|66              |
+|12,538 |AS Trencin             |api_football|655             |
+|28,770 |Astur                  |api_football|25030           |
+|12,129 |Atalanta               |api_football|499             |
+|13,901 |Atalanta II            |api_football|22104           |
+|12,965 |Atert Bissen           |api_football|15847           |
+|14,558 |Athletic Carpi         |api_football|17825           |
+|12,084 |Athletic Club          |api_football|531             |
+|13,182 |Athlone Town           |api_football|3846            |
+|13,641 |Atlantis               |api_football|10667           |
+|28,751 |Atlas W                |api_football|14873           |
+|28,713 |Atletico Ascoli        |api_football|22302           |
+|12,083 |Atletico Madrid        |api_football|530             |
+|13,507 |Atl?tic Am?rica        |api_football|3876            |
+|13,350 |Atl?tic Club d'Escaldes|api_football|3345            |
+|12,926 |Atl?tic Club II        |api_football|17735           |
+|14,375 |Atl?tico Baleares      |api_football|9381            |
+|14,648 |Atl?tico CP            |api_football|4872            |
+|16,786 |Atl?tico Madrid II     |api_football|9570            |
+|28,819 |Atl?tico Paso          |api_football|9791            |
+|28,752 |Atl?tico San Luis W    |api_football|14874           |
+|12,510 |Atmosfera              |api_football|3856            |
+|12,568 |Atromitos              |api_football|12260           |
+|28,620 |Attard                 |api_football|19912           |
+|13,595 |Atyrau                 |api_football|4564            |
+|12,910 |Auda                   |api_football|4135            |
+|13,835 |Audace Cerignola       |api_football|9539            |
+|28,767 |Aurrer? Vitoria        |api_football|20259           |
+|13,150 |Austria Klagenfurt     |api_football|1405            |
+|12,445 |Austria Lustenau       |api_football|1399            |
+|12,793 |Austria Vienna         |api_football|601             |
+|16,732 |Austria Vienna (Am)    |api_football|2860            |

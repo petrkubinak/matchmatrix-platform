@@ -1,0 +1,198 @@
+MATCHMATRIX – STAV PROJEKTU (Ticket Engine + Historie)
+🔷 1. Aktuální stav systému
+✅ Datová vrstva – INGEST (HOTOVO)
+Multisport ingest pipeline:
+⚽ fotbal → plně funkční (fixtures, odds, leagues, teams)
+🏀 basket → připraven (bez odds)
+🏒 hokej → připraven (bez players endpointu)
+🏐 volejbal → připraven (bez odds)
+Data zdroje:
+api_football
+football_data
+theodds (kurzy)
+
+👉 Reálně použitelný pro ticket engine: zatím jen fotbal
+
+✅ Databáze – struktura (VELMI DOBRÁ)
+🟣 Výpočetní vrstva
+generated_runs
+generated_tickets
+generated_ticket_blocks
+generated_ticket_fixed
+
+👉 slouží jako:
+dočasná runtime vrstva pro generování tiketů
+
+🟢 Produktová vrstva (už existuje!)
+tickets ✅
+ticket_blocks ✅
+ticket_block_matches ✅
+ticket_variants ✅
+ticket_variant_matches ✅
+ticket_constants ✅
+
+👉 to je:
+finální model pro uložení tiketů (uživatelská vrstva)
+
+🟡 Historická / analytická vrstva (rozpracováno)
+ticket_history_base ✅
+v_ticket_history_summary_enriched ✅
+predikční dotazy (325) ✅
+
+ALE:
+❗ zatím nemá kvalitní data
+
+chybí bloky
+chybí match vazby
+chybí outcome signatury
+🔷 2. UI – Ticket Studio V3 (rozjeté velmi dobře)
+✅ Funkční:
+výběr zápasů
+FIX + bloky A/B/C
+generování tiketů
+přehled kombinací
+detail zápasu (forma, tabulka, H2H)
+odds + double chance
+🔧 Rozpracované:
+historická predikce tiketu
+ukládání tiketů do DB
+stabilita UI (refresh, scroll, flicker)
+🔷 3. Klíčový problém teď
+
+👉 Chybí historie tiketů
+
+Konkrétně:
+
+generated_ticket_blocks je prázdná ❗
+ticket_history_base nemá reálná data
+predikce běží, ale nad špatnými vstupy
+🎯 4. Co chceme vybudovat (cílový stav)
+🧠 Inteligentní ticket engine
+
+Každý tiket bude mít:
+
+pravděpodobnost (model)
+historickou úspěšnost podobných tiketů
+EV (expected value)
+ROI
+doporučení
+📊 Historická vrstva
+
+Chceme ukládat:
+
+1. Strukturu tiketu
+počet zápasů
+poměr 1 / X / 2
+kombinace bloků
+kurzy
+2. Kontext
+ligy
+sporty (později)
+typy sázek
+3. Výsledek
+hit / miss
+profit
+ROI
+🤖 Predikce
+
+Na základě historie:
+
+“tento typ tiketu má 42% úspěšnost”
+“kombinace 5 zápasů + 2 remízy je slabá”
+“multi-league tikety mají horší ROI”
+🔥 5. Správná architektura (klíčové)
+❌ CO NEDĚLAT
+nevytvářet další tabulky (saved_tickets apod.)
+nemíchat generated a tickets
+✅ SPRÁVNĚ
+FLOW:
+UI (Ticket Studio)
+   ↓
+generated_* (výpočet)
+   ↓
+tickets + ticket_* (uložení)
+   ↓
+ticket_history_base (historie)
+   ↓
+v_ticket_history_summary_enriched (agregace)
+   ↓
+predikce
+🚀 6. Co je teď nejdůležitější
+PRIORITA #1
+
+👉 opravit generátor, aby plnil:
+
+generated_ticket_blocks
+
+Bez toho:
+
+nejde historie
+nejde predikce
+nejde uložit ticket strukturu
+PRIORITA #2
+
+👉 napojit ukládání:
+
+generated_* → tickets → ticket_blocks → ticket_block_matches
+PRIORITA #3
+
+👉 začít sbírat historii
+
+po každém runu ukládat ticket do history
+i když zatím bez vyhodnocení
+🧠 7. Strategické rozhodnutí (velmi důležité)
+
+👉 Teď:
+
+jede jen fotbal
+to je OK
+
+👉 Architektura:
+
+musí být připravená na multisport
+
+✔️ řešení:
+
+sport_count, sport_signature ponechat
+zatím se bude používat jen FB
+🔮 8. Kam to směřuje
+Fáze 1 (TEĎ)
+funkční ticket engine
+ukládání tiketů
+základ historie
+Fáze 2
+vyhodnocování tiketů
+ROI
+základní predikce
+Fáze 3
+pokročilá inteligence:
+patterny
+doporučení
+auto-ticket builder
+Fáze 4
+web
+user účty
+tracking sázek
+🧩 9. Shrnutí
+
+👉 Máš:
+
+skvěle navrženou DB
+hotový ticket engine základ
+funkční UI
+
+👉 Chybí:
+
+naplnění bloků (generated_ticket_blocks)
+reálná historie
+propojení do tickets
+▶️ Další krok (v novém chatu)
+
+Začneme přesně tady:
+
+👉 kontrola a oprava generování generated_ticket_blocks
+
+To je teď absolutní klíč.
+
+Napiš v novém chatu:
+„navazujeme – jdeme řešit generated_ticket_blocks“

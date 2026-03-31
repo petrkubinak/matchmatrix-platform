@@ -1,0 +1,360 @@
+Detail zápasu, na tom musíme zapracovat, hlavně více grafiky a barev.
+Přehled tiketů: - po řádcích
+Kombinace 1 - fix "kurz", Blok A "1" "kurz", Blok B "1" "kurz"   Celkový kurz  Možná výhra,  predikce,  další statistika, zaškrtávací políčko
+Kombinace 2 - fix "kurz", Blok A "1" "kurz", Blok B "X" "kurz"   Celkový kurz  Možná výhra,  predikce,  další statistika, zaškrtávací políčko
+atd.
+Celková statistika podobných tiketů (dle množství zápasů, složení lig, sportů atd.)
+Celková pravděpodobnost
+Možné doporučení
+
+Tlačítko na uložení do různých formátů, tlačítko na přechod k oblíbenému bookmakerovi, pole s výběrem bookmakerů
+
+popř. navrhni, co by se ještě hodilo.
+
+
+
+Jo, tohle už je správný produktový směr. Souhlasím s tebou u obou částí.
+
+Detail zápasu
+
+Teď je tam moc textu a málo vizuální orientace. Udělal bych ho takto:
+
+Horní řádek
+
+zápas
+soutěž
+datum / čas
+bookmaker
+model
+
+Rychlý vizuální panel
+
+semafor zápasu
+3 barevné probability bary pro 1 / X / 2
+mini forma bar domácí: 🟢 🟢 🟡 🔴 🟢
+mini forma bar hosté: 🔴 🟡 🔴 🟢 🔴
+volatilita jako 1–5 ikon
+momentum jako šipky ▲ ▲, ▼, ▬
+
+Střed
+
+síla týmů:
+domácí rating
+hosté rating
+domácí/home rating
+hosté/away rating
+H2H jako krátký barevný seznam
+tabulka / umístění
+případně zranění, neutral venue, série bez prohry
+
+Spodní část
+
+rychké shrnutí jednou větou:
+„Vyrovnaný zápas, vyšší volatilita, lehká výhoda hostů.“
+doporučení typu:
+konzervativní
+střední riziko
+value pick
+
+Tohle by působilo mnohem víc jako reálný analytický panel.
+
+Přehled tiketů
+
+Ano, tady je potřeba řádkový přehled, ne dlouhé textové bloky.
+
+Ideální struktura jednoho řádku:
+
+Kombinace 1
+
+FIX: SC Freiburg 2 @ 1.44
+Blok A: FC Metz 1 @ 3.05
+Blok B: Oxford United X @ 3.40
+Celkový kurz
+Možná výhra
+Predikce
+Pravděpodobnost
+checkbox
+
+Takže vizuálně něco jako:
+
+☑ Kombinace 1 | FIX: Freiburg 2 @1.44 | A: Metz 1 @3.05 | B: Oxford X @3.40 | Kurz 319.87 | Výhra 3198.73 Kč | Pred. 12.4 % | Statistika
+
+Tohle je mnohem čitelnější než současný dlouhý text přes půl obrazovky.
+
+Co tam doplnit
+
+Tohle bych tam určitě dal:
+
+Nad tabulku kombinací
+
+Vybrat vše / Zrušit vše
+filtr podle:
+minimální pravděpodobnosti
+maximálního kurzu
+počtu sportů
+počtu lig
+řazení:
+nejvyšší pravděpodobnost
+nejvyšší výhra
+nejlepší poměr risk / reward
+
+Pod tabulku
+
+počet vybraných tiketů
+celkový vklad
+agregovaná možná výhra
+agregovaná pravděpodobnost zásahu
+průměrný kurz
+Celková statistika podobných tiketů
+
+Tohle je velmi dobrý nápad. Udělal bych samostatný souhrnný box:
+
+podobné tikety v historii: počet
+úspěšnost podobných tiketů
+průměrný kurz
+průměrný počet zápasů
+nejčastější ligy / sporty
+úspěšnost podle sportu
+úspěšnost podle kombinace fix + bloky
+
+A pod tím:
+
+Celková pravděpodobnost
+Doporučení
+vhodné
+opatrně
+vysoké riziko
+překombinované
+Export a přechod k bookmakerovi
+
+Ano, to tam patří.
+
+Tlačítka:
+
+Uložit do DB
+Export CSV
+Export XLSX
+Export PDF
+Kopírovat souhrn
+Otevřít u bookmakeru
+
+A vedle:
+
+výběr bookmakeru
+oblíbený bookmaker jako default
+Co bych ještě doplnil já
+
+Tohle by bylo hodně užitečné:
+
+1. Tagy na tiket
+
+bezpečný
+value
+rizikový
+experiment
+
+2. Poznámka k tiketu
+
+vlastní text uživatele
+
+3. Duplicitní kontrola
+
+upozornění, že podobný tiket už existuje
+
+4. Risk skóre
+
+0–100
+podle volatility, počtu zápasů, mixu lig a kurzů
+
+5. Scénářové doporučení
+
+nejlepší 3 kombinace
+nejbezpečnější 3 kombinace
+nejlepší poměr výhra / pravděpodobnost
+Doporučený další krok
+
+Nejlepší bude teď udělat jednu konkrétní věc:
+
+V2.23 = nový řádkový Přehled tiketů
+
+Tedy:
+
+kombinace po řádcích
+checkboxy
+kurz
+výhra
+predikce
+pravděpodobnost
+souhrn dole
+
+A až potom:
+V2.24 = redesign Detailu zápasu do grafického dashboardu
+
+Napiš jen:
+pošli V2_23 – přehled tiketů po řádcích
+
+ještě doplněk, v tom přehledu na řádku opravdu jen napsáno:
+Kombinace 1 - fix "2,77", Blok A "1" "6,34", Blok B "1" "5,75"    100,98  1009,80 Kč   predikce, další statistika, zaškrtávací políčko Kombinace 2 - fix "kurz", Blok A "1" "kurz", Blok B "X" "kurz" Celkový kurz Možná výhra, predikce, další statistika, zaškrtávací políčko
+
+Jo, přesně takhle je to správně.
+V přehledu tiketů to má být opravdu jednoduchý řádkový zápis, ne dlouhý textový blok.
+
+Tedy styl:
+
+Kombinace 1 — FIX "2,77", Blok A "1" "6,34", Blok B "1" "5,75" — 100,98 — 1009,80 Kč — predikce — další statistika — ☑
+
+a další řádky stejně:
+Kombinace 2 — FIX "kurz", Blok A "1" "kurz", Blok B "X" "kurz" — Celkový kurz — Možná výhra — predikce — další statistika — ☑
+
+Takže do další verze udělám přehled takto:
+
+1 kombinace = 1 řádek
+na řádku bude jen:
+název kombinace
+FIX kurz
+blok A volba + kurz
+blok B volba + kurz
+blok C volba + kurz, pokud existuje
+celkový kurz
+možná výhra
+predikce
+další statistika
+checkbox
+
+Bez dlouhých vět, bez roztažených textů.
+
+Další správný krok je:
+V2_23 = Přehled tiketů po řádcích přesně v tomto formátu.
+
+ideální možná hlavička a jen po tím ve sloupcích vypsané ty kurzy a věci
+
+Perfektní 👍 tohle je ještě lepší než „řádky s textem“.
+
+👉 Uděláme to jako tabulku (grid) – to je přesně to, co chceš.
+
+🎯 Finální návrh (V2_23)
+🔹 HLAVIČKA
+Kombinace | FIX | A | kurz A | B | kurz B | C | kurz C | Celk. kurz | Výhra | Predikce | Stat | ✔
+FIX = jen kurz (např. 2.77)
+A/B/C = vybraný tip (1 / X / 2)
+kurz A/B/C = kurz pro ten blok
+✔ = checkbox
+🔹 ŘÁDKY
+1 | 2.77 | 1 | 6.34 | 1 | 5.75 | - | - | 100.98 | 1009.80 Kč | 12.4% | OK | ☑
+2 | 2.77 | 1 | 6.34 | X | 3.40 | - | - | 75.22 | 752.20 Kč | 18.1% | OK | ☑
+3 | 2.77 | 2 | 2.95 | 1 | 5.75 | - | - | 48.11 | 481.10 Kč | 22.8% | OK | ☑
+🔹 VLASTNOSTI
+
+✔ všechno v jednom pohledu
+✔ rychlé porovnání
+✔ žádný balast
+✔ připravené na:
+
+řazení
+filtrování
+výběr
+🔥 BONUS (doporučuju přidat hned)
+nahoře nad tabulkou:
+[Vybrat vše]
+[Zrušit vše]
+filtr:
+min. predikce
+max. kurz
+dole pod tabulkou:
+Vybráno: 12 tiketů
+Celkem vsazeno: 1200 Kč
+Možná výhra: 18 450 Kč
+Agregovaná pravděpodobnost: 21.3 %
+⚠️ DŮLEŽITÉ
+
+Tohle je:
+👉 UI jádro Ticket Engine
+
+Tady se rozhoduje, co user skutečně vsadí.
+
+🚀 Další krok
+
+Udělám:
+V2_23 = tabulkový přehled tiketů (grid)
+
+žádné texty
+čisté sloupce
+checkboxy
+souhrn dole
+
+Napiš jen:
+👉 „pošli V2_23“
+
+a jdeme na to 🚀
+
+přesně a dá se rozšiřovat, ale v tisknutelné verzi nebo v uložení již budou zápasy vypsány u jednotlivých kombinací.
+
+Přesně 👍 tohle je ideální architektura.
+
+👉 Oddělíme 2 režimy:
+
+🧠 1) UI režim (rychlá práce)
+
+👉 to, co teď navrhujeme
+
+tabulka (grid)
+zkratky:
+FIX = kurz
+A/B/C = tip + kurz
+rychlé rozhodování
+minimum textu
+
+✔ rychlé
+✔ přehledné
+✔ porovnatelné
+
+🧾 2) Export / tisk (detailní režim)
+
+👉 tady už to bude „lidské čtení“
+
+jedna kombinace = blok:
+Kombinace 1
+
+SC Freiburg – Bayern Mnichov   2   @1.44
+TSG Hoffenheim – Mainz         1   @1.78
+Paris SG – Toulouse            1   @1.56
+FC Metz – Nantes               X   @3.40
+
+Blok A: 1
+Blok B: X
+
+Celkový kurz: 100.98
+Vklad: 100 Kč
+Možná výhra: 1009.80 Kč
+Predikce: 12.4 %
+🔄 Propojení obou světů
+Režim	Účel
+UI tabulka	výběr tiketů
+Export / PDF	čtení / sdílení / vsazení
+🔥 Co z toho plyne pro vývoj
+V2_23 (teď)
+tabulkový přehled (grid)
+checkboxy
+souhrn
+V2_24 (potom)
+export:
+CSV ✔
+TXT ✔
+PDF (později)
+V2_25+
+napojení na bookmaker
+generování tiketů „ready to bet“
+💡 Doporučení (důležité)
+
+Do exportu bych rovnou přidal:
+
+ID tiketu
+timestamp
+bookmaker
+risk score
+poznámku
+🚀 Další krok
+
+Teď dává smysl:
+
+👉 V2_23 = tabulkový přehled kombinací + checkboxy + souhrn

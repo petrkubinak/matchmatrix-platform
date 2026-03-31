@@ -1,0 +1,2127 @@
+MATCHMATRIX / TICKETMATRIXPLATFORM - SYSTEM TREE EXPORT
+Generated at: 2026-03-29 09:04:23
+Project root: C:\MatchMatrix-platform
+
+============================================================
+DATABASE TREE
+============================================================
+
+[SCHEMA] ops
+  [TABLES]
+    - api_budget_status
+    - api_request_log
+    - eu_batch_1
+    - eu_batch_100
+    - eu_keep_ids
+    - ingest_entity_plan
+    - ingest_planner
+    - ingest_runtime_config
+    - ingest_targets
+    - job_runs
+    - jobs
+    - league_import_plan
+    - player_enrichment_plan
+    - provider_accounts
+    - provider_jobs
+    - provider_sport_matrix
+    - scheduler_queue
+    - schema_migrations
+    - sport_dimension_rules
+    - sport_entity_rules
+    - sports_import_plan
+    - worker_locks
+  [VIEWS]
+    - api_football_coverage
+    - v_api_budget_today
+    - v_fb_api_expansion_ingest_jobs
+    - v_fb_api_expansion_ingest_jobs_test_mode
+    - v_fb_eu_ingest_jobs
+    - v_fb_eu_ingest_jobs_test_mode
+    - v_fb_fd_core_ingest_jobs
+    - v_fb_fd_core_ingest_jobs_test_mode
+    - v_fb_job_catalog
+    - v_fb_test_execution_order
+    - v_fb_test_mode_all_layers
+    - v_fb_test_mode_orchestrator
+    - v_fb_test_phase1
+    - v_ingest_overview
+    - v_ingest_planner_queue
+    - v_ingest_planner_status
+    - v_job_runs_recent
+    - v_ops_bk_core_full_job_catalog
+    - v_ops_bk_core_runnable_jobs
+    - v_ops_bk_top_full_job_catalog
+    - v_ops_bk_top_runnable_jobs
+    - v_ops_dashboard_summary
+    - v_ops_hk_core_full_job_catalog
+    - v_ops_hk_core_runnable_jobs
+    - v_ops_hk_full_job_catalog
+    - v_ops_hk_full_runnable_jobs
+    - v_ops_hk_job_catalog
+    - v_ops_hk_top_full_execution_order
+    - v_ops_hk_top_full_runnable_jobs
+    - v_ops_hk_top_ingest_jobs
+    - v_ops_hk_top_ingest_jobs_test_mode
+    - v_ops_hk_top_runnable_jobs
+    - v_ops_hk_top_test_execution_order
+    - v_player_enrichment_queue
+    - v_top_ingest_jobs
+    - v_top_ingest_jobs_full_mode
+    - v_top_ingest_jobs_ordered
+    - v_top_ingest_jobs_runnable
+    - v_top_ingest_jobs_test_mode
+    - v_top_ingest_targets
+    - v_worker_locks_active
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] public
+  [TABLES]
+    - api_import_runs
+    - api_raw_payloads
+    - article_league_map
+    - article_match_map
+    - article_team_map
+    - article_translations
+    - articles
+    - bookmakers
+    - closing_odds
+    - coach_provider_map
+    - coaches
+    - competition_rounds
+    - content_sources
+    - countries
+    - data_providers
+    - generated_runs
+    - generated_ticket_blocks
+    - generated_ticket_fixed
+    - generated_ticket_risk
+    - generated_tickets
+    - injuries
+    - languages
+    - league_provider_map
+    - league_team_seasons
+    - league_teams
+    - league_translations
+    - leagues
+    - lineups
+    - market_outcomes
+    - markets
+    - match_events
+    - match_features
+    - match_officials
+    - match_weather
+    - matches
+    - ml_predictions
+    - mm_match_ratings
+    - mm_settings
+    - mm_team_ratings
+    - mm_ticket_scenario_block_matches
+    - mm_ticket_scenario_blocks
+    - mm_ticket_scenario_variants
+    - mm_ticket_scenarios
+    - mm_value_bets
+    - notification_queue
+    - odds
+    - player_external_identity
+    - player_match_statistics
+    - player_provider_map
+    - player_season_statistics
+    - player_social_links
+    - player_team_history
+    - player_translations
+    - players
+    - provider_request_log
+    - seasons
+    - selection_items
+    - sports
+    - stadiums
+    - storage_metrics
+    - subscription_plans
+    - subscriptions
+    - team_aliases
+    - team_coach_history
+    - team_coaches
+    - team_match_statistics
+    - team_provider_map
+    - team_social_links
+    - team_stadiums
+    - team_transfers
+    - team_translations
+    - teams
+    - template_block_matches
+    - template_blocks
+    - template_fixed_picks
+    - templates
+    - ticket_block_matches
+    - ticket_blocks
+    - ticket_constants
+    - ticket_generation_runs
+    - ticket_league_pattern_stats
+    - ticket_pattern_stats
+    - ticket_recommendation_feedback
+    - ticket_run_settlements
+    - ticket_settlements
+    - ticket_variant_block_choices
+    - ticket_variant_features
+    - ticket_variant_matches
+    - ticket_variants
+    - tickets
+    - translation_job_logs
+    - translation_jobs
+    - user_favorite_leagues
+    - user_favorite_players
+    - user_favorite_teams
+    - user_notifications
+    - user_selections
+    - users
+    - work_pl_aliases
+  [VIEWS]
+    - best_match_odds
+    - ml_block_candidates_latest_v1
+    - ml_fair_odds_latest_v1
+    - ml_feed_value_picks_latest_v1
+    - ml_market_odds_latest_v1
+    - ml_match_dataset
+    - ml_match_dataset_v2
+    - ml_match_predict_dataset_v1
+    - ml_value_ev_latest_v1
+    - ml_value_latest_v1
+    - v_best_ticket_candidates_today
+    - v_fd_leagues_active_week
+    - v_fd_matches_base
+    - v_fd_matches_today
+    - v_fd_matches_tomorrow
+    - v_fd_matches_week
+    - v_fd_matches_week_ui
+    - v_fd_matches_week_with_odds
+    - v_leagues_active_week
+    - v_match_odds_1x2
+    - v_matches_base
+    - v_matches_today
+    - v_matches_tomorrow
+    - v_matches_week
+    - v_matches_with_odds_week
+    - v_mm_anchor_day
+    - v_web_active_leagues
+    - vw_block_candidate_groups
+    - vw_block_outcome_candidates
+    - vw_block_sync_signals
+    - vw_data_coverage
+    - vw_generated_ticket_matches
+    - vw_match_feed_for_user
+    - vw_offer_matches
+    - vw_offer_matches_value
+    - vw_ticket_candidate_matches
+    - vw_ticket_candidates
+    - vw_ticket_items
+    - vw_ticket_match_results
+    - vw_ticket_settlement_detail
+    - vw_ticket_summary
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - check_max_3_matches_per_block
+    - check_max_variable_blocks
+    - create_block_from_selection
+    - fn_refresh_ticket_run_settlements
+    - fn_set_updated_at_team_coach_history
+    - generate_run
+    - gin_extract_query_trgm
+    - gin_extract_value_trgm
+    - gin_trgm_consistent
+    - gin_trgm_triconsistent
+    - gtrgm_compress
+    - gtrgm_consistent
+    - gtrgm_decompress
+    - gtrgm_distance
+    - gtrgm_in
+    - gtrgm_options
+    - gtrgm_out
+    - gtrgm_penalty
+    - gtrgm_picksplit
+    - gtrgm_same
+    - gtrgm_union
+    - merge_team
+    - mm_apply_risk_team_max
+    - mm_generate_run_engine
+    - mm_generate_tickets_engine
+    - mm_get_max_tickets
+    - mm_get_odds_compare
+    - mm_market_h2h_id
+    - mm_preview_run
+    - mm_preview_run
+    - mm_ui_run_summary
+    - mm_ui_run_tickets
+    - mm_ui_run_tickets_with_stake
+    - mm_update_run_probability
+    - mm_validate_template
+    - set_limit
+    - set_updated_at
+    - set_updated_at_generic
+    - show_limit
+    - show_trgm
+    - similarity
+    - similarity_dist
+    - similarity_op
+    - strict_word_similarity
+    - strict_word_similarity_commutator_op
+    - strict_word_similarity_dist_commutator_op
+    - strict_word_similarity_dist_op
+    - strict_word_similarity_op
+    - trg_check_max_variable_blocks
+    - trg_template_block_matches_guard
+    - trg_template_block_matches_not_empty
+    - trg_template_blocks_guard
+    - unaccent
+    - unaccent
+    - unaccent_init
+    - unaccent_lexize
+    - word_similarity
+    - word_similarity_commutator_op
+    - word_similarity_dist_commutator_op
+    - word_similarity_dist_op
+    - word_similarity_op
+
+[SCHEMA] staging
+  [TABLES]
+    - api_football_fixtures
+    - api_football_leagues
+    - api_football_odds
+    - api_football_teams
+    - api_hockey_leagues
+    - api_hockey_leagues_raw
+    - api_hockey_teams
+    - api_hockey_teams_raw
+    - player_provider_map_import
+    - players_import
+    - stg_api_payloads
+    - stg_player_source_payloads
+    - stg_provider_coaches
+    - stg_provider_events
+    - stg_provider_fixtures
+    - stg_provider_leagues
+    - stg_provider_odds
+    - stg_provider_player_profiles
+    - stg_provider_player_season_stats
+    - stg_provider_player_stats
+    - stg_provider_players
+    - stg_provider_team_stats
+    - stg_provider_teams
+  [VIEWS]
+    - v_api_football_leagues_latest
+    - v_api_football_leagues_latest_enriched
+    - v_api_football_leagues_run103
+    - v_api_hockey_leagues_latest
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] work
+  [TABLES]
+    - leagues_to_add
+    - missing_player_profile_batches
+    - missing_player_profile_ids
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] pg_temp_10
+  [TABLES]
+    - (none)
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] pg_temp_6
+  [TABLES]
+    - (none)
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] pg_temp_7
+  [TABLES]
+    - (none)
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] pg_temp_8
+  [TABLES]
+    - (none)
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] pg_temp_9
+  [TABLES]
+    - (none)
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] pg_toast
+  [TABLES]
+    - (none)
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] pg_toast_temp_10
+  [TABLES]
+    - (none)
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] pg_toast_temp_6
+  [TABLES]
+    - (none)
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] pg_toast_temp_7
+  [TABLES]
+    - (none)
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] pg_toast_temp_8
+  [TABLES]
+    - (none)
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+[SCHEMA] pg_toast_temp_9
+  [TABLES]
+    - (none)
+  [VIEWS]
+    - (none)
+  [MATERIALIZED VIEWS]
+    - (none)
+  [FUNCTIONS]
+    - (none)
+
+============================================================
+PROJECT FOLDER TREE
+============================================================
+
+C:\MatchMatrix-platform
+├── backups\
+│   └── postgres_dumps\
+│       └── dump-matchmatrix-202602131248.sql
+├── CSV výstup\
+│   ├── 1.csv
+│   └── 2.csv
+├── db\
+│   ├── audit\
+│   │   ├── 079_audit_player_season_statistics_report_v1.sql
+│   │   ├── 080_debug_player_stats_merge_mapping_v1.sql
+│   │   ├── 2026-03-26_audit_bad_theodds_aliases.sql
+│   │   ├── 2026-03-26_audit_dc_missing_for_matches.sql
+│   │   ├── 2026-03-26_audit_market_codes_double_chance.sql
+│   │   ├── 2026-03-26_check_dc_payload_real.sql
+│   │   ├── 2026-03-26_football_duplicate_team_branches.sql
+│   │   ├── 2026-03-26_no_match_detail_check.sql
+│   │   ├── 2026-03-26_odds_coverage_audit.sql
+│   │   ├── 2026-03-26_odds_coverage_check.sql
+│   │   ├── 2026-03-26_serie_a_no_match_audit.sql
+│   │   ├── cleanup_player_season_stats_scope_95_2024_v1.sql
+│   │   └── Script.sql
+│   ├── checks\
+│   │   ├── 001_daily_ingest_healthcheck.sql
+│   │   ├── 011_check_new_core_tables.sql
+│   │   ├── 013_check_players_coverage.sql
+│   │   ├── 111_audit_missing_multisport_coverage.sql
+│   │   ├── 114_check_multisport_coverage_after_seed.sql
+│   │   ├── 115_audit_ingest_targets_multisport.sql
+│   │   ├── 116_audit_ingest_targets_sport_code_mapping.sql
+│   │   ├── 118_recheck_ingest_targets_multisport.sql
+│   │   ├── 119_audit_football_ingest_targets_by_run_group.sql
+│   │   ├── 120_audit_bk_hk_ingest_targets_by_run_group.sql
+│   │   ├── 121_preview_bk_hk_targets.sql
+│   │   ├── 122_preview_hk_targets.sql
+│   │   ├── 123_shortlist_bk_hk_senior_primary_targets.sql
+│   │   ├── 124_preview_bk_maintenance_top_candidates.sql
+│   │   ├── 125_preview_bk_nbl_candidates.sql
+│   │   ├── 126_resolve_bk_nbl_league_names.sql
+│   │   ├── 127_preview_bk_china_candidates.sql
+│   │   ├── 129_preview_hk_maintenance_top_candidates.sql
+│   │   ├── 130_resolve_hk_extraliga_candidates.sql
+│   │   ├── 132_audit_top_run_groups_fb_bk_hk.sql
+│   │   ├── 133_preview_top_run_groups_fb_bk_hk.sql
+│   │   ├── 135_audit_v_top_ingest_targets_by_provider.sql
+│   │   ├── 137_audit_missing_bk_top_jobs.sql
+│   │   ├── 139_recheck_top_ingest_jobs.sql
+│   │   ├── 140_count_top_ingest_jobs.sql
+│   │   ├── 146_audit_ops_budget_runtime_objects.sql
+│   │   ├── 187_preview_hk_top_runnable_jobs.sql
+│   │   ├── 214_check_fb_bootstrap_after_first_run.sql
+│   │   ├── 220_check_fb_bootstrap_targets_api_football.sql
+│   │   ├── 224_check_fb_bootstrap_teams_effect.sql
+│   │   ├── 225_check_bootstrap_warning_jobs.sql
+│   │   ├── 226_check_fb_bootstrap_teams_progress.sql
+│   │   ├── 243_check_volleyball_by_sport_and_league.sql
+│   │   ├── 244_check_vb_provider_maps.sql
+│   │   ├── 245_check_vb_staging_teams.sql
+│   │   ├── MATCHMATRIX_DAILY_STATUS.sql
+│   │   └── MATCHMATRIX_WEEKLY_DIAGNOSTICS.sql
+│   ├── debug\
+│   │   ├── 010_check_vb_staging_teams_after_fix.sql
+│   │   ├── 011_find_psql_path.ps1
+│   │   ├── 020_reset_vb_teams_pending.sql
+│   │   ├── 022_reset_hk_bk_teams_pending.sql
+│   │   ├── 023_check_bk_planner_teams.sql
+│   │   ├── 025_check_bk_stg_provider_teams.sql
+│   │   ├── 026_check_bk_raw_payload.sql
+│   │   ├── 027_check_hk_team_targets.sql
+│   │   ├── 028_promote_hk_team_target_league_6.sql
+│   │   ├── 029_check_hk_after_teams_fix.sql
+│   │   ├── 030_promote_hk_fixtures_target_league_6.sql
+│   │   ├── 031_find_working_hk_fixtures_targets.sql
+│   │   ├── 032_promote_hk_fixtures_target_league_59.sql
+│   │   ├── 033_deprioritize_empty_hk_fixtures_targets.sql
+│   │   ├── 034_check_bk_fixtures_planner.sql
+│   │   ├── 035_seed_bk_fixtures_planner_from_targets.sql
+│   │   ├── 036_check_last_bk_fixtures_payload.sql
+│   │   ├── 037_promote_bk_fixtures_target_117.sql
+│   │   ├── 039_audit_multisport_planner_unification.sql
+│   │   ├── 040_unify_multisport_planner_teams_fixtures.sql
+│   │   ├── 041_promote_bk_teams_target_12_deprioritize_40.sql
+│   │   └── 042_deduplicate_bk_teams_target_12.sql
+│   ├── fix\
+│   │   └── 2026-03-26_cleanup_zero_usage_teams.sql
+│   ├── migrations\
+│   │   ├── 000_create_schema_migrations.sql
+│   │   ├── 001_create_table_seasons.sql
+│   │   ├── 002_create_table_players.sql
+│   │   ├── 003_create_table_player_provider_map.sql
+│   │   ├── 004_create_table_lineups.sql
+│   │   ├── 005_create_table_injuries.sql
+│   │   ├── 006_create_table_content_sources.sql
+│   │   ├── 007_create_table_articles.sql
+│   │   ├── 008_create_table_article_team_map.sql
+│   │   ├── 009_create_table_article_league_map.sql
+│   │   ├── 010_create_table_article_match_map.sql
+│   │   ├── 012_alter_staging_players_import_add_context.sql
+│   │   ├── 012_create_table_languages.sql
+│   │   ├── 013_create_table_article_translations.sql
+│   │   ├── 014_create_table_league_translations.sql
+│   │   ├── 015_create_table_team_translations.sql
+│   │   ├── 016_create_table_player_translations.sql
+│   │   ├── 017_create_table_translation_jobs.sql
+│   │   ├── 018_create_table_translation_job_logs.sql
+│   │   ├── 019_create_table_team_social_links.sql
+│   │   ├── 01_create_mm_ticket_scenarios.sql
+│   │   ├── 020_create_table_stadiums.sql
+│   │   ├── 021_create_table_team_stadiums.sql
+│   │   ├── 022_create_table_match_events.sql
+│   │   ├── 023_create_table_player_match_statistics.sql
+│   │   ├── 024_create_table_team_match_statistics.sql
+│   │   ├── 024_ops_create_ingest_entity_plan.sql
+│   │   ├── 025_create_table_coaches.sql
+│   │   ├── 026_create_table_team_coaches.sql
+│   │   ├── 027_create_table_player_team_history.sql
+│   │   ├── 028_create_table_match_officials.sq.sql
+│   │   ├── 029_create_table_team_transfers.sql
+│   │   ├── 02_create_mm_ticket_scenario_variants.sql
+│   │   ├── 030_create_table_player_social_links.sql
+│   │   ├── 031_create_table_competition_rounds.sql
+│   │   ├── 032_create_table_match_weather.sql
+│   │   ├── 033_create_table_users.sql
+│   │   ├── 034_create_table_user_favorite_teams.sql
+│   │   ├── 035_create_table_user_favorite_leagues.sql
+│   │   ├── 036_create_table_user_favorite_players.sql
+│   │   ├── 036_ops_extend_stg_provider_players.sql
+│   │   ├── 037_create_table_subscription_plans.sql
+│   │   ├── 037_players_multisource_foundation.sql
+│   │   ├── 038_create_table_subscriptions.sql
+│   │   ├── 038_players_enrichment_reseed_squads_team_based.sql
+│   │   ├── 039_create_table_user_notifications.sql
+│   │   ├── 03_create_mm_ticket_scenario_blocks.sql
+│   │   ├── 040_create_table_notification_queue.sql
+│   │   ├── 041_create_table_tickets.sql
+│   │   ├── 042_create_table_ticket_constants.sql
+│   │   ├── 043_create_table_ticket_blocks.sql
+│   │   ├── 044_create_table_ticket_block_matches.sql
+│   │   ├── 045_create_table_ticket_variants.sql
+│   │   ├── 046_create_table_ticket_variant_block_choices.sql
+│   │   ├── 046_players_core_completion.sql
+│   │   ├── 046_players_db_finish.sql
+│   │   ├── 047_create_table_ticket_variant_matches.sql
+│   │   ├── 047_merge_player_season_statistics.sql
+│   │   ├── 047_players_staging_completion.sql
+│   │   ├── 048_create_table_ticket_settlements.sql
+│   │   ├── 048_players_merge_upserts.sql
+│   │   ├── 049_add_unique_index_stg_provider_player_stats.sql
+│   │   ├── 049_create_table_ticket_pattern_stats.sql
+│   │   ├── 04_create_mm_ticket_scenario_block_matches.sql
+│   │   ├── 050_create_table_ticket_league_pattern_stats.sql
+│   │   ├── 050_merge_player_match_statistics.sql
+│   │   ├── 051_create_table_ticket_generation_runs.sql
+│   │   ├── 052_create_table_ticket_variant_features.sql
+│   │   ├── 053_create_table_ticket_recommendation_feedback.sql
+│   │   ├── 054_create_mm_value_bets.sql
+│   │   ├── 055_parse_api_football_players_to_stg_player_season_stats.sql
+│   │   ├── 056_alter_mm_value_bets_add_unique_match.sql
+│   │   ├── 057_add_unique_index_stg_provider_player_season_stats.sql
+│   │   ├── 057_deduplicate_stg_provider_player_season_stats.sql
+│   │   ├── 059_create_ops_provider_jobs.sql
+│   │   ├── 059_merge_player_season_statistics.sql
+│   │   ├── 060_trigger_ops_provider_jobs_updated_at.sql
+│   │   ├── 061_create_ops_provider_accounts.sql
+│   │   ├── 062_trigger_ops_provider_accounts_updated_at.sql
+│   │   ├── 063_create_ops_api_request_log.sql
+│   │   ├── 064_insert_missing_players_from_staging.sql
+│   │   ├── 065_insert_missing_player_provider_map.sql
+│   │   ├── 066_insert_player_provider_map_from_stats.sql
+│   │   ├── 076_insert_missing_players_from_profiles.sql
+│   │   ├── 081_alter_public_teams_add_logo_url.sql
+│   │   ├── 081_insert_missing_players_from_existing_players_payloads.sql
+│   │   ├── 082_insert_missing_player_provider_map.sql
+│   │   ├── 082_refresh_frontend_match_views_with_team_logos.sql
+│   │   ├── 083_merge_player_season_statistics_final.sql
+│   │   ├── 083_public_v_fd_matches_week_with_odds.sql
+│   │   ├── 088_insert_missing_teams_from_players_payloads.sql
+│   │   ├── 089_insert_missing_team_provider_map.sql
+│   │   ├── 090_merge_player_season_statistics_after_team_fix.sql
+│   │   ├── 092_backfill_public_teams_logo_url_from_api_football.sql
+│   │   ├── 095_merge_player_season_statistics_dedup_maps.sql
+│   │   ├── 096_merge_player_season_stats_final_clean.sql
+│   │   ├── 097_merge_player_season_stats_final_business_dedup.sql
+│   │   ├── 100_rebuild_player_season_statistics.sql
+│   │   ├── 101_extend_existing_multisport_core.sql
+│   │   ├── 102_extend_existing_coach_core.sql
+│   │   ├── 103_create_coach_provider_map.sql
+│   │   ├── 104_extend_stg_provider_coaches.sql
+│   │   ├── 105_create_ops_sport_entity_rules.sql
+│   │   ├── 106_create_ops_sport_dimension_rules.sql
+│   │   ├── 107_create_ops_provider_sport_matrix.sql
+│   │   ├── 108_seed_ops_ingest_entity_plan_multisport.sql
+│   │   ├── 112_seed_missing_sport_entity_rules.sql
+│   │   ├── 113_seed_missing_ingest_entity_plan_from_rules.sql
+│   │   ├── 117_fix_ingest_targets_sport_codes.sql
+│   │   ├── 128_seed_bk_maintenance_top.sql
+│   │   ├── 131_seed_hk_maintenance_top.sql
+│   │   ├── 138_seed_api_sport_bk_ingest_entity_plan.sql
+│   │   ├── 2026-03-26_insert_theodds_aliases_auto.sql
+│   │   ├── 20260326_02_bournemouth_only_safe_merge.sql
+│   │   ├── 20260326_03_bournemouth_only_safe_merge_fix_aliases.sql
+│   │   ├── 20260326_05_arsenal_belarus_merge_26871_into_13102.sql
+│   │   ├── 20260326_08_check_team_1_references.sql
+│   │   ├── 20260326_09_cleanup_team_1_into_11910.sql
+│   │   ├── 204_add_photo_url_to_staging_players_import.sql
+│   │   ├── 206_fix_player_season_statistics_unique.sql
+│   │   ├── 207_dedupe_player_season_statistics.sql
+│   │   ├── 209_fix_player_season_statistics_key.sql
+│   │   ├── 210_add_api_football_player_stats_entity.sql
+│   │   ├── 211_disable_unsupported_providers.sql
+│   │   ├── 216_disable_fb_odds_in_free_mode.sql
+│   │   ├── 217_cleanup_fb_odds_errors_free_mode.sql
+│   │   ├── 221_enable_fb_bootstrap_api_football.sql
+│   │   ├── 232_parse_api_sport_bk_fixtures.sql
+│   │   ├── 233_parse_api_hockey_leagues.sql
+│   │   ├── 234_parse_api_hockey_fixtures.sql
+│   │   ├── 236_parse_api_volleyball_fixtures.sql
+│   │   ├── 239_reset_vb_fixtures_planner_job_4137.sql
+│   │   ├── 240_check_volleyball_merge_result.sql
+│   │   ├── 246_fix_vb_entity_plan_teams.sql
+│   │   ├── 246a_nastavení entit.sql
+│   │   ├── 247_safe_backfill_entity_plan_base_sports.sql
+│   │   ├── 250_insert_bk_test_planner_job.sql
+│   │   └── Script-9.sql
+│   ├── ops\
+│   │   ├── 022_create_ingest_runtime_config.sql
+│   │   ├── 023_seed_ingest_runtime_config_free.sql
+│   │   ├── 025_fix_football_maintenance_null_season_to_2024.sql
+│   │   ├── 035_ops_create_ingest_planner.sql
+│   │   ├── 036_ops_create_worker_locks.sql
+│   │   ├── 037_ops_insert_job_ingest_cycle_v2.sql
+│   │   ├── 037_ops_insert_new_ingest_entities_players_v1.sql
+│   │   ├── 038_ops_create_dashboard_views.sql
+│   │   ├── 039_ops_insert_job_unified_staging_to_public_merge.sql
+│   │   ├── 147_expand_ingest_entity_plan_to_all_sports.sql
+│   │   ├── 147_rebuild_ingest_planner_multisport.sql
+│   │   ├── 148_fix_legacy_football_code_SAFE.sql
+│   │   ├── 152_seed_fb_eu_run_group.sql
+│   │   ├── 157_seed_football_data_fb_ingest_entity_plan.sql
+│   │   ├── 160_enable_fb_eu_targets.sql
+│   │   ├── 166_rename_fb_eu_to_fb_fd_core.sql
+│   │   ├── 168_seed_fb_api_expansion_run_group.sql
+│   │   ├── 178_seed_fb_provider_jobs_from_catalog_FINAL.sql
+│   │   ├── 179_ops_hk_run_groups.sql
+│   │   ├── 180_seed_api_hockey_hk_ingest_entity_plan.sql
+│   │   ├── 185_seed_hk_provider_jobs.sql
+│   │   ├── 190_seed_hk_full_provider_jobs.sql
+│   │   ├── 194_seed_hk_core_provider_jobs.sql
+│   │   ├── 197_seed_bk_top_provider_jobs.sql
+│   │   ├── 200_seed_bk_core_provider_jobs.sql
+│   │   ├── 203_seed_hk_top_ingest_planner.sql
+│   │   ├── 211_bootstrap_ingest_targets_from_existing_leagues_all_sports.sql
+│   │   ├── 212_enable_fb_api_football_bootstrap_v1.sql
+│   │   ├── 213_build_planner_from_fb_bootstrap_v1.sql
+│   │   ├── 218_build_planner_fb_teams_bootstrap.sql
+│   │   ├── 219_build_planner_fb_teams_bootstrap_v2.sql
+│   │   ├── 222_build_planner_fb_teams_bootstrap_v3.sql
+│   │   ├── 227_seed_multisport_provider_jobs.sql
+│   │   ├── 228_fill_default_run_groups_multisport.sql
+│   │   ├── 229_multisport_planner_test.sql
+│   │   ├── 230_seed_multisport_ingest_targets.sql
+│   │   ├── 230a_seed_multisport_leagues.sql
+│   │   ├── 231_multisport_planner_preview.sql
+│   │   ├── 237_seed_ingest_planner_volleyball_fixtures.sql
+│   │   ├── 241_seed_data_provider_api_volleyball.sql
+│   │   └── ops_jobs_unified_ingest_batch.sql
+│   ├── queries\
+│   │   ├── 078_audit_player_season_statistics_v1.sql
+│   │   ├── 079_audit_player_season_statistics_report_v1.sql
+│   │   └── 081_fix_player_season_statistics_merge_v1.sql
+│   ├── scripts\
+│   │   ├── 006_create_table_staging_players_import.sql
+│   │   ├── 007_create_table_staging_player_provider_map_import.sql
+│   │   ├── 008_check_player_tables.sql
+│   │   ├── 009_merge_players.sql
+│   │   ├── 010_merge_player_provider_map.sql
+│   │   ├── merge_player_provider_map.sql
+│   │   ├── merge_players.sql
+│   │   ├── merge_seasons.sql
+│   │   └── run_api_football_backfill_report.ps1
+│   ├── seeds\
+│   │   ├── seed_languages_files\
+│   │   │   ├── ansi-1f6vhsjh.css
+│   │   │   ├── code-block-editor-pane-fzo1sbww.css
+│   │   │   ├── code-block-m2vhenll.css
+│   │   │   ├── conversation-small-f579e8wg.css
+│   │   │   ├── cot-message-lq73ofyy.css
+│   │   │   ├── fullscreen-lxd7vmcm.css
+│   │   │   ├── index-ivzj8m6u.css
+│   │   │   ├── map-with-entities-flte3k5i.css
+│   │   │   ├── mapbox-gl-cw20al50.css
+│   │   │   ├── product-variants-ga945uk2.css
+│   │   │   ├── root-owzuldco.css
+│   │   │   ├── saved_resource.html
+│   │   │   ├── silk-hq-lutwos9z.css
+│   │   │   ├── table-components-ca43bz4f.css
+│   │   │   └── writing-block-editor-isk65msv.css
+│   │   ├── 001_seed_languages .sql
+│   │   ├── 002_seed_data_providers.sql
+│   │   ├── 003_seed_content_sources.sql
+│   │   ├── 004_seed_countries.sql
+│   │   ├── 005_seed_seasons_from_leagues_smart.sql
+│   │   ├── 059_seed_ops_provider_jobs_multi_sport.sql
+│   │   ├── 061_seed_ops_provider_accounts.sql
+│   │   ├── 092_storage_metrics.sql
+│   │   ├── 093_sports_import_plan.sql
+│   │   ├── 094_api_budget_status.sql
+│   │   ├── 095_v_api_budget_today.sql
+│   │   ├── 096_seed_ingest_targets_from_league_import_plan.sql
+│   │   ├── 100_seed_ingest_targets_from_leagues.sql
+│   │   ├── 101_prioritize_ingest_targets.sql
+│   │   ├── 102_scheduler_queue.sql
+│   │   └── README.md
+│   ├── sql\
+│   │   ├── views\
+│   │   │   └── 120_v_ticketmatrix_week_best_odds.sql
+│   │   ├── 046_merge_player_season_statistics_live.sql
+│   │   ├── 046a_check_player_season_duplicates.sql
+│   │   ├── 046b_deduplicate_player_season_statistics.sql
+│   │   ├── 046e_fix_unique_correct.sql
+│   │   ├── 048_check_players.sql
+│   │   ├── 050_merge_player_external_identity.sql
+│   │   ├── 051_check_player_external_identity.sql
+│   │   ├── 051_check_player_stats_pipeline.sql
+│   │   ├── 052_check_player_source_payloads.sql
+│   │   ├── 053_preview_player_payload.sql
+│   │   ├── 054_preview_last_success_player_payload.sql
+│   │   ├── 056_check_player_season_stats_loaded.sql
+│   │   ├── 059a_check_player_season_statistics_columns.sql
+│   │   ├── 05_create_ticket_run_settlements.sql
+│   │   ├── 060_check_player_season_mapping_gaps.sql
+│   │   ├── 061_list_unmapped_players_for_provider_map.sql
+│   │   ├── 062_match_unmapped_players_to_existing.sql
+│   │   ├── 063_check_unmapped_players_presence.sql
+│   │   ├── 067_check_players_vs_stats_overlap.sql
+│   │   ├── 068_check_missing_stats_players_in_profiles.sql
+│   │   ├── 069_list_missing_player_profiles_for_ingest.sql
+│   │   ├── 06_fn_refresh_ticket_run_settlements.sql
+│   │   ├── 070_distinct_missing_player_profile_ids.sql
+│   │   ├── 071_create_work_missing_player_profile_ids.sql
+│   │   ├── 072_export_missing_player_profile_ids.sql
+│   │   ├── 073_create_missing_player_profile_batches.sql
+│   │   ├── 075_check_player_profiles_loaded.sql
+│   │   ├── 077_check_loaded_profiles_overlap.sql
+│   │   ├── 07_seed_ops_jobs.sql
+│   │   ├── 080_check_player_profile_payload_quality.sql
+│   │   ├── 085_check_final_merge_gaps_after_player_fix.sql
+│   │   ├── 086_list_unmapped_teams_for_player_stats.sql
+│   │   ├── 090_provider_request_log.sql
+│   │   ├── 091_check_player_season_statistics_count.sql
+│   │   ├── 092_check_merge_src_count.sql
+│   │   ├── 093_check_sports_mapping.sql
+│   │   ├── 098_check_duplicate_business_keys_in_src_raw.sql
+│   │   ├── 099_merge_player_season_stats_final_target_key_fix.sql
+│   │   ├── 102a_zjisštění_sruktury_trenérských_tabulek.sql
+│   │   ├── 104_set_free_mode_budget.sql
+│   │   ├── 105_prepare_free_test_targets.sql
+│   │   ├── 106_reduce_football_for_free_mode.sql
+│   │   ├── 107_mark_football_maintenance_targets.sql
+│   │   ├── 108_reset_today_scheduler_queue.sql
+│   │   ├── 109_enable_hockey_basketball_free_targets.sql
+│   │   ├── 110_unified_staging_base.sql
+│   │   ├── 111_unified_staging_odds_stats.sql
+│   │   ├── 113_staging_indexes.sql
+│   │   ├── 114_sql_players_pipeline_audit_queries.sql
+│   │   ├── 13_compute_value_bets.sql
+│   │   └── Script-14.sql
+│   ├── views\
+│   │   ├── 01_vw_generated_ticket_matches.sql
+│   │   ├── 02_vw_ticket_match_results.sql
+│   │   ├── 03_vw_ticket_settlement_detail.sql
+│   │   ├── 04_vw_ticket_summary.sql
+│   │   ├── 055_create_view_best_match_odds.sql
+│   │   ├── 056_view_ticket_candidate_matches.sql
+│   │   ├── 057_view_ticket_candidate_matches.sql
+│   │   ├── 058_view_match_feed_for_user.sql
+│   │   ├── 090_v_fd_matches_week_ui.sql
+│   │   ├── 109_create_v_ops_ingest_overview.sql
+│   │   ├── 10_vw_data_coverage.sql
+│   │   ├── 11_vw_offer_matches.sql
+│   │   ├── 134_create_v_ops_top_ingest_targets.sql
+│   │   ├── 136_create_v_ops_top_ingest_jobs.sql
+│   │   ├── 141_create_v_ops_top_ingest_jobs_ordered.sql
+│   │   ├── 142_create_v_ops_top_ingest_jobs_runnable.sql
+│   │   ├── 143_create_v_ops_top_ingest_jobs_test_mode.sql
+│   │   ├── 144_fix_v_ops_top_ingest_jobs_test_mode_no_odds.sql
+│   │   ├── 145_create_v_ops_top_ingest_jobs_full_mode.sql
+│   │   ├── 14_vw_ticket_candidates.sql
+│   │   ├── 154_create_v_ops_fb_eu_ingest_jobs.sql
+│   │   ├── 158_fix_v_ops_fb_eu_ingest_jobs_multi_provider.sql
+│   │   ├── 15_v_best_ticket_candidates_today.sql
+│   │   ├── 162_create_v_ops_fb_eu_test_mode.sql
+│   │   ├── 167_create_v_ops_fb_fd_core_ingest_jobs.sql
+│   │   ├── 167a_create_v_ops_fb_fd_core_ingest_jobs_test_mode.sql
+│   │   ├── 16_vw_ticket_items.sql
+│   │   ├── 170_create_v_ops_fb_api_expansion_ingest_jobs.sql
+│   │   ├── 170a_create_v_ops_fb_api_expansion_ingest_jobs_test_mode.sql
+│   │   ├── 172_create_v_ops_fb_test_mode_all_layers.sql
+│   │   ├── 173_create_v_ops_fb_test_mode_orchestrator.sql
+│   │   ├── 174_create_v_ops_fb_test_execution_order.sql
+│   │   ├── 176_create_v_ops_fb_test_phase1.sql
+│   │   ├── 177_create_v_ops_fb_job_catalog.sql
+│   │   ├── 17_vw_block_outcome_candidates.sql
+│   │   ├── 181_create_v_ops_hk_top_ingest_jobs.sql
+│   │   ├── 182_create_v_ops_hk_top_ingest_jobs_test_mode.sql
+│   │   ├── 183_create_v_ops_hk_top_test_execution_order.sql
+│   │   ├── 186_create_v_ops_hk_top_runnable_jobs.sql
+│   │   ├── 188_create_v_ops_hk_top_full_execution_order.sql
+│   │   ├── 189_create_v_ops_hk_full_job_catalog.sql
+│   │   ├── 18_vw_block_sync_signals.sql
+│   │   ├── 191_create_v_ops_hk_full_runnable_jobs.sql
+│   │   ├── 193_create_v_ops_hk_core_full_job_catalog.sql
+│   │   ├── 195_create_v_ops_hk_core_runnable_jobs.sql
+│   │   ├── 196_create_v_ops_bk_top_full_job_catalog.sql
+│   │   ├── 198_create_v_ops_bk_top_runnable_jobs.sql
+│   │   ├── 199_create_v_ops_bk_core_full_job_catalog.sql
+│   │   ├── 19_vw_block_candidate_groups.sql
+│   │   ├── 201_create_v_ops_bk_core_runnable_jobs.sql
+│   │   ├── 202_create_v_ops_hk_top_full_runnable_jobs.sql
+│   │   └── Script.sql
+│   └── run_seeds.ps1
+├── docs\
+│   ├── GitHub\
+│   │   ├── Nejčastější workflow (to budeš použ.txt
+│   │   └── Super. Tohle je Git záchrana, ktero.txt
+│   ├── komunikace s chatGPT\
+│   │   ├── 20260216\
+│   │   ├── 20260219\
+│   │   ├── 20260221\
+│   │   ├── 20260223\
+│   │   │   ├── MATCHMATRIX – API-SPORTS INTEGRATIO.txt
+│   │   ├── 20260224\
+│   │   ├── 20260227\
+│   │   │   ├── leagues_202602272234.csv
+│   │   │   └── světové ligy.txt
+│   │   ├── 20260228\
+│   │   ├── 20260301\
+│   │   │   └── denní záznamy z deníku.txt
+│   │   ├── 20260302\
+│   │   │   ├── 2026-03-02_eu_leagues_api_football_apply.sql
+│   │   │   ├── 2026-03-02_eu_leagues_api_football_apply_FIXED.sql
+│   │   │   ├── 2026-03-02_eu_leagues_api_football_apply_FIXED2.sql
+│   │   │   ├── 2026-03-02_eu_leagues_api_football_apply_FIXED4.sql
+│   │   │   ├── EU_leagues.csv
+│   │   │   ├── Evropa do MatchMatrix.csv
+│   │   ├── 20260303\
+│   │   │   ├── 22 lig TOP8.txt
+│   │   │   ├── EU_tymy.txt
+│   │   │   ├── ingest_targets.csv
+│   │   │   └── Ticket Matrix _ Match Matrix – webovky  Copilot.txt
+│   │   ├── 20260304\
+│   │   │   ├── 2026-03-04_api_football_backfill.md
+│   │   │   └── pipeline_overview.md
+│   │   ├── 20260305\
+│   │   │   ├── MatchMatrix – aktuální stav projekt.md
+│   │   │   ├── TicketMatrix_Backend_Setup_2026-03-05.md
+│   │   ├── 20260306 - cílová architektura V2\
+│   │   │   ├── league_provider_map.txt
+│   │   │   ├── MatchMatrix – mapa databáze.md
+│   │   │   ├── MatchMatrix_2_0_cilova_architektura.md
+│   │   │   ├── matchmatrix_daily_summary_2026-03-06.md
+│   │   │   ├── matchmatrix_database_map_and_fill_plan.md
+│   │   │   ├── matchmatrix_platform_plan.md
+│   │   │   ├── matchmatrix_project_structure_popis.md
+│   │   │   └── public.leagues.txt
+│   │   ├── 20260307\
+│   │   │   ├── 2026-03-07_DAILY_STATUS_20260307_195908.txt
+│   │   │   ├── 2026-03-07_WEEKLY_DIAGNOSTICS_20260307_195908.txt
+│   │   │   ├── 2026-03-07_WEEKLY_DIAGNOSTICS_20260307_200138.txt
+│   │   │   ├── Datum 2026-03-07.md
+│   │   │   ├── MATCHMATRIX-PLATFORM system check.md
+│   │   │   ├── MatchMatrix_MASTER_BLUEPRINT.md
+│   │   │   ├── matchmatrix_next_steps_ticket_engine_zaverecny_zapis.md
+│   │   │   ├── matchmatrix_system_overview (1).md
+│   │   │   └── matchmatrix_system_overview.md
+│   │   ├── 20260308\
+│   │   │   ├── 2026-03-08_pipeline_predictions_update.md
+│   │   │   └── api_raw_payloads.txt
+│   │   ├── 20260309\
+│   │   │   ├── # MatchMatrix – režimy tvorby tiket.md
+│   │   │   ├── 20260309_MatchMatrix_Vývojový_zápis.md
+│   │   ├── 20260310\
+│   │   │   ├── MATCHMATRIX – CELKOVÁ ARCHITEKTURA.md
+│   │   │   ├── MatchMatrix_log_2026-03-10_unified_staging_bridge.md
+│   │   │   ├── PROJECT BUNDLE MatchMatrix_TiketMatrix_Gemini.txt
+│   │   ├── 20260311\
+│   │   │   ├── # MatchMatrix – Pipeline Stabilization.md
+│   │   │   ├── 741_public_merge_schema_check.sql.txt
+│   │   │   └── MatchMatrix – pracovní zápis.md
+│   │   ├── 20260312\
+│   │   │   ├── Dotazy 1-6.txt
+│   │   │   └── MatchMatrix – pracovní zápis.md
+│   │   ├── 20260313\
+│   │   │   ├── 035_ingest_planner_checklist.md
+│   │   │   ├── Data - ingest_targets.txt
+│   │   │   ├── Data - job_runs.txt
+│   │   │   ├── MatchMatrix – Ingest Architecture &.txt
+│   │   │   ├── MatchMatrix – pracovní zápis.txt
+│   │   │   └── MatchMatrix – pracovní zápis_2.txt
+│   │   ├── 20260314\
+│   │   │   ├── # MatchMatrix – pracovní zápis.md
+│   │   │   ├── MATCHMATRIX_DATA_PIPELINE_MAP.md
+│   │   │   ├── MATCHMATRIX_DATABASE_BIBLE.md
+│   │   │   ├── MATCHMATRIX_DEVELOPER_DOCUMENTATION.md
+│   │   │   ├── MATCHMATRIX_FULL_TECHNICAL_DESCRIPTION.md
+│   │   │   └── MATCHMATRIX_SYSTEM_ARCHITECTURE.md
+│   │   ├── 20260315\
+│   │   │   ├── # MatchMatrix – pracovní zápis.txt
+│   │   │   ├── MatchMatrix – pracovní zápis.md
+│   │   │   └── players_pipeline_rozsireni_runbook.md
+│   │   ├── 20260316\
+│   │   │   └── MatchMatrix – vývojový zápis.md
+│   │   ├── 20260317\
+│   │   │   ├── # MatchMatrix – pracovní zápis.txt
+│   │   │   └── zhodnocení.md
+│   │   ├── 20260318\
+│   │   │   ├── # MatchMatrix – pracovní zápis.txt
+│   │   │   ├── 072_export_missing_player_profile_ids.sql.csv
+│   │   │   ├── Celková architektura MatchMatrix (z.txt
+│   │   │   ├── Data - api_budget_today.txt
+│   │   │   ├── Data - ingest_entity_plan.txt
+│   │   │   ├── Data - ingest_planner.txt
+│   │   │   ├── Data - ingest_planner_queue.txt
+│   │   │   ├── Data - player_external_identt.txt
+│   │   │   ├── Data - player_season_stat.txt
+│   │   │   ├── Data - players.txt
+│   │   │   ├── Data - posledni_hraci.txt
+│   │   │   ├── Data - provider_jobs.txt
+│   │   │   ├── Data - sports_import_plan.txt
+│   │   │   ├── Data - table_name.txt
+│   │   │   ├── Data - team_provider_map.txt
+│   │   │   ├── Data - teams.txt
+│   │   │   ├── Data - v_job_runs_recent.txt
+│   │   │   ├── MATCHMATRIX INGEST CYCLE V3.txt
+│   │   │   ├── schema.txt
+│   │   │   ├── stg_provider_fixtures.txt
+│   │   │   └── stg_provider_players.txt
+│   │   ├── 20260319\
+│   │   │   ├── Ano. Teď už je vidět, že DB není po.txt
+│   │   │   ├── MatchMatrix_denní zápis.md
+│   │   │   └── matchmatrix_handover_2026-03-19_players_pipeline.md
+│   │   ├── 20260320\
+│   │   │   ├── Diagramy\
+│   │   │   ├── SQL\
+│   │   │   │   ├── 146_audit.txt
+│   │   │   │   ├── 146_audit_ops.txt
+│   │   │   │   ├── 146_audit_ops_3.txt
+│   │   │   │   ├── 146_planner.txt
+│   │   │   │   ├── provider_sport_matrix.txt
+│   │   │   │   └── sport_entity_rules.txt
+│   │   │   ├── MatchMatrix – podrobný zápis.md
+│   │   │   ├── MatchMatrix – pracovní zápis.md
+│   │   │   ├── MatchMatrix – zápis (FB_EU → football_data vrstva + audit historie).md
+│   │   │   ├── MatchMatrix – zápis (krok 147–151 m.txt
+│   │   │   └── MatchMatrix_zapis_2026-03-20_multisport_podminka.md
+│   │   ├── 20260321\
+│   │   │   └── MatchMatrix – navazovací zápis.txt
+│   │   ├── 20260322\
+│   │   │   ├── MatchMatrix – navazovací zápis (Ing.txt
+│   │   │   ├── MATCHMATRIX – NAVAZOVACÍ ZÁPIS .md
+│   │   │   └── MATCHMATRIX – ZÁPIS (DNES).md
+│   │   ├── 20260323\
+│   │   │   ├── # MATCHMATRIX – ZÁPIS (2026-03-23).md
+│   │   │   ├── 229_ops.ingest_entity_plan.txt
+│   │   │   ├── 229_ops.ingest_entity_plan_4.txt
+│   │   │   ├── 229_ops.ingest_targets.txt
+│   │   │   ├── 229_ops.provider_jobs.txt
+│   │   │   ├── Aktuální run_group rozpad v ops.ingest_entity_plan.txt
+│   │   │   ├── Aktuální run_group rozpad v ops.ingest_targets.txt
+│   │   │   ├── bod 1.txt
+│   │   │   ├── bod 2.txt
+│   │   │   ├── bod 3.txt
+│   │   │   ├── bod 4.txt
+│   │   │   ├── Ingest planner.txt
+│   │   │   ├── ingest_entity_plan.txt
+│   │   │   ├── Jak teď vypadá football rozpad.txt
+│   │   │   ├── Jak vypadají hotové HK_BK cíle.txt
+│   │   │   ├── MATCHMATRIX – ZÁPIS (2026-03-23).md
+│   │   │   ├── MATCHMATRIX – ZÁPIS (API-SPORT + AP.md
+│   │   │   ├── MATCHMATRIX – ZÁPIS (DNES).txt
+│   │   │   ├── ops.ingest_entity_plan-1774298504122.txt
+│   │   │   ├── ops.ingest_entity_plan.txt
+│   │   │   └── ops.provider_jobs.txt
+│   │   ├── 20260324\
+│   │   │   ├── Denní Zápis - Aktuální stav (klíč).md
+│   │   │   ├── MATCHMATRIX – ZÁPIS (Volleyball + s.md
+│   │   │   └── MATCHMATRIX – ZÁPIS (Volleyball).md
+│   │   ├── 20260325\
+│   │   │   ├── ingest_planer_1.txt
+│   │   │   ├── ingest_planer_2.txt
+│   │   │   ├── MATCHMATRIX – DENNÍ ZÁPIS-večer.md
+│   │   │   ├── MATCHMATRIX – DENNÍ ZÁPIS.md
+│   │   │   ├── MatchMatrix – zápis dnešního postup.md
+│   │   │   └── MATCHMATRIX – ZÁPIS NA ZÍTRA.md
+│   │   ├── 20260326\
+│   │   │   ├── audit_teams.txt
+│   │   │   ├── matches.txt
+│   │   │   ├── MATCHMATRIX – DENNÍ ZÁPIS.md
+│   │   │   ├── MatchMatrix – podrobný zápis.md
+│   │   │   ├── MatchMatrix – zápis dneška.md
+│   │   │   ├── Run_ID_148.txt
+│   │   │   ├── Teable_name.txt
+│   │   │   ├── team_aliases.txt
+│   │   │   └── team_provider_map.txt
+│   │   ├── 20260327\
+│   │   │   └── Klíčové oblasti hodnocení počítače.txt
+│   │   ├── 20260328\
+│   │   │   └── úprava Ticket_studio_V2_23.txt
+│   │   ├── # MATCHMATRIX – ZÁPIS (2026-03-23).md
+│   │   └── spoluprace_s_ai_operacni_rezim.md
+│   ├── visual\
+│   │   ├── prilohy_267546\
+│   ├── 1) infradocker-compose.yml.txt
+│   ├── 2) infradbseed_v1.sql.txt
+│   ├── MatchMatrix_MASTER_BLUEPRINT.md
+│   └── příkaz PowerShell_ukázat strom souborů.txt
+├── fronted\
+│   ├── matchmatrix-web\
+│   │   ├── app\
+│   │   │   ├── api\
+│   │   │   │   ├── health\
+│   │   │   │   │   ├── db\
+│   │   │   │   │   │   └── route.ts
+│   │   │   │   │   └── env\
+│   │   │   │   │       └── route.ts
+│   │   │   │   ├── leagues\
+│   │   │   │   │   └── active-week\
+│   │   │   │   │       └── route.ts
+│   │   │   │   └── matches\
+│   │   │   │       ├── today\
+│   │   │   │       │   └── route.ts
+│   │   │   │       ├── tomorrow\
+│   │   │   │       │   └── route.ts
+│   │   │   │       └── week\
+│   │   │   │           └── route.ts
+│   │   │   ├── lib\
+│   │   │   │   └── db.ts
+│   │   │   ├── globals.css
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   ├── components\
+│   │   │   └── MatrixCalculator.tsx
+│   │   ├── public\
+│   │   ├── next-env.d.ts
+│   │   ├── next.config.ts
+│   │   ├── package-lock.json
+│   │   ├── package.json
+│   │   ├── README.md
+│   │   ├── tailwind.config.js
+│   │   └── tsconfig.json
+│   ├── ARCHIV PROJEKTU TICKETMATRIX (v. 1..txt
+│   ├── dashboard_preview.html
+│   ├── README.md
+│   ├── tailwind.config.js
+│   ├── vzor.html
+├── infra\
+│   └── docker-compose.yml
+├── ingest\
+│   ├── API-Football\
+│   │   ├── api_football_pull_leagues_csv.py
+│   │   ├── api_football_pull_v2.py
+│   │   ├── fix_teammap_from_fixtures.ps1
+│   │   ├── merge_only.ps1
+│   │   ├── pull_api_football_fixtures.ps1
+│   │   ├── pull_api_football_leagues.ps1
+│   │   ├── pull_api_football_odds.ps1
+│   │   ├── pull_api_football_odds_V1.ps1
+│   │   ├── pull_api_football_player_stats.ps1
+│   │   ├── pull_api_football_players.ps1
+│   │   ├── pull_api_football_players_squads_v1.py
+│   │   ├── pull_api_football_players_v4.py
+│   │   ├── pull_api_football_players_v5.py
+│   │   ├── pull_api_football_teams.ps1
+│   │   ├── run_api_football_pipeline_v2.ps1
+│   │   ├── run_api_football_pull_v1.bat
+│   │   ├── run_ingest_fixtures.ps1
+│   │   ├── run_ingest_fixtures_all_targets.old.ps1
+│   │   ├── run_ingest_fixtures_all_targets.ps1
+│   │   ├── run_ingest_teams_all_targets.ps1
+│   │   └── test_api_football_players_access.py
+│   ├── API-Hockey\
+│   │   ├── pull_api_hockey_coaches.ps1
+│   │   ├── pull_api_hockey_fixtures.ps1
+│   │   ├── pull_api_hockey_leagues.ps1
+│   │   ├── pull_api_hockey_players.ps1
+│   │   └── pull_api_hockey_teams.ps1
+│   ├── API-Sport\
+│   │   ├── pull_api_basketball_players.ps1
+│   │   ├── pull_api_sport_fixtures.ps1
+│   │   ├── pull_api_sport_leagues.ps1
+│   │   └── pull_api_sport_teams.ps1
+│   ├── API-Volleyball\
+│   │   └── pull_api_volleyball_players.ps1
+│   ├── artifacts\
+│   │   ├── baseline_logreg_meta.json
+│   │   ├── baseline_logreg_v2_meta.json
+│   │   ├── baseline_logreg_v3_meta.json
+│   ├── providers\
+│   │   ├── api_football_provider.py
+│   │   ├── api_hockey_provider.py
+│   │   ├── base_provider.py
+│   │   ├── generic_api_sport_provider.py
+│   │   └── provider_registry.py
+│   ├── compute_mmr_ratings.py
+│   ├── parse_api_football_player_profiles_v1.py
+│   ├── predict_matches_V3.py
+│   ├── run_compute_mmr_ratings.bat
+│   ├── run_predict_matches_V3.bat
+│   ├── run_theodds_parse_multi_FINAL.bat
+│   ├── run_train_baseline_logreg.bat
+│   ├── run_train_gbm_v3.bat
+│   ├── run_unified_ingest_batch_v1.py
+│   ├── run_unified_ingest_v1.py
+│   ├── theodds_parse_multi_FINAL.py
+│   ├── train_baseline_logreg.py
+│   ├── train_gbm_v3.py
+│   ├── unmatched_theodds_149.csv
+│   └── unmatched_theodds_149.sql
+├── launchers\
+│   ├── run_check_psql.bat
+│   ├── run_matchmatrix_control_panel_V3.bat
+│   ├── run_matchmatrix_panel_V4.bat
+├── legacy\
+│   ├── ingest\
+│   │   ├── football_data_pull_V5.py
+│   │   ├── football_data_uk_history_pull.py
+│   │   ├── parse_api_sport_fixtures.py
+│   │   ├── parse_api_sport_leagues.py
+│   │   ├── predict_matches.py
+│   │   ├── run_football_data_pull_V5.bat
+│   │   ├── run_football_data_uk_history.bat
+│   │   ├── run_theodds.bat
+│   │   ├── run_theodds_parse_multi_V1.bat
+│   │   ├── theodds_parse_multi_V1.py
+│   │   └── theodds_pull.py
+│   ├── ops\
+│   │   ├── run_daily_ingest.py
+│   │   └── run_provider_job.py
+│   └── workers\
+│       ├── extract_missing_teams_from_fixtures_v1.py
+│       ├── repair_missing_teams_from_fixtures_v2.py
+│       ├── run_full_ingest_pipeline.py
+│       ├── run_ingest_cycle_v3_1.py
+│       ├── run_legacy_to_staging_bridge_v2.py
+│       ├── run_legacy_to_staging_odds_bridge.py
+│       ├── run_payload_parser.py
+│       └── run_unified_staging_to_public_merge_v3.py
+├── logs\
+│   ├── 2026-02-23\
+│   ├── 2026-02-24\
+│   │   └── 0730_daily_report_154956.txt
+│   ├── bk_players_raw\
+│   │   └── bk_players_target_1966_league_117_season_2023-2024.json
+│   ├── control_panel\
+│   │   ├── log_0_2026-03-11.txt
+│   │   ├── log_1_2026-03-11.txt
+│   │   ├── log_2_2026-03-11.txt
+│   │   ├── log_3_2026-03-11.txt
+│   │   ├── panel_state.json
+│   ├── reports\
+│   │   └── mm_report_2026-03-04_12-34-26.txt
+│   ├── api_football_backfill_status_2026-03-04_112228.txt
+│   ├── temp_api_hockey_coaches_payload.json
+│   └── temp_api_hockey_players_players_global_na.json
+├── MatchMatrix-platform\
+│   ├── .dbeaver\
+│   │   ├── project-metadata.json
+│   │   └── project-settings.json
+│   ├── .settings\
+│   ├── Dump\
+│   │   ├── dump-matchmatrix-202602271537_leagues.sql
+│   │   ├── dump-matchmatrix-202603052038.sql
+│   │   ├── dump-matchmatrix-202603072347.sql
+│   │   ├── dump-matchmatrix-202603092253.sql
+│   │   ├── dump-matchmatrix-202603102254.sql
+│   │   ├── dump-matchmatrix-202603122251.sql
+│   │   ├── dump-matchmatrix-202603132305.sql
+│   │   ├── dump-matchmatrix-202603150829.sql
+│   │   ├── dump-matchmatrix-202603151432.sql
+│   │   ├── dump-matchmatrix-202603160648.sql
+│   │   ├── dump-matchmatrix-202603162300.sql
+│   │   ├── dump-matchmatrix-202603172219.sql
+│   │   ├── dump-matchmatrix-202603190810.sql
+│   │   ├── dump-matchmatrix-202603201246.sql
+│   │   ├── dump-matchmatrix-202603202156.sql
+│   │   ├── dump-matchmatrix-202603202157.sql
+│   │   ├── dump-matchmatrix-202603220005.sql
+│   │   ├── dump-matchmatrix-202603220153.sql
+│   │   ├── dump-matchmatrix-202603220154.sql
+│   │   ├── dump-matchmatrix-202603221307.sql
+│   │   ├── dump-matchmatrix-202603222045.sql
+│   │   ├── dump-matchmatrix-202603232041.sql
+│   │   ├── dump-matchmatrix-202603242325.sql
+│   │   ├── dump-matchmatrix-202603251237.sql
+│   │   ├── dump-matchmatrix-202603252015.sql
+│   │   ├── dump-matchmatrix-202603260908.sql
+│   │   ├── dump-matchmatrix-202603261219.sql
+│   │   ├── dump.ops-matchmatrix-202603181139.sql
+│   │   ├── dump.ops-matchmatrix-202603181140.sql
+│   │   ├── dump.ops-matchmatrix-202603232120.sql
+│   │   ├── dump.ops-matchmatrix-202603242043.sql
+│   │   ├── dump.ops-matchmatrix-202603260908.sql
+│   │   ├── dump.public-matchmatrix-202603172216.sql
+│   │   ├── dump.public-matchmatrix-202603260909.sql
+│   │   ├── dump.staging-matchmatrix-202603260909.sql
+│   │   ├── dump.work-matchmatrix-202603260910.sql
+│   │   ├── dump_ops-matchmatrix-202603112252.sql
+│   │   ├── dump_ops-matchmatrix-202603131533.sql
+│   │   ├── template_table.sql
+│   │   └── template_table_markets.sql
+│   ├── Scripts\
+│   │   ├── 00_Schema\
+│   │   │   ├── 001_core_tebles.sql\
+│   │   │   │   ├── 002_team_aliases.sql
+│   │   │   │   ├── 004_template_block_matches.sql
+│   │   │   │   ├── 006_template_fixed_picks.sql
+│   │   │   │   ├── 009_theodds_teams.sql
+│   │   │   │   ├── 03_trigger_variable_block_1x2.sql
+│   │   │   │   ├── pomocná_funkce_na_čtení_limitu.sql
+│   │   │   │   └── tabulka_nastaveni_limit_5000_tickets.sql
+│   │   │   ├── 001_create_tables\
+│   │   │   │   ├── 001_create_table_seasons.sql
+│   │   │   │   ├── 002_create_table_players.sql
+│   │   │   │   ├── 003_create_table_player_provider_map.sql
+│   │   │   │   ├── 004_create_table_lineups.sql
+│   │   │   │   ├── 005_create_table_injuries.sql
+│   │   │   │   ├── 006_create_table_content_sources.sql
+│   │   │   │   ├── 007_create_table_articles.sql
+│   │   │   │   ├── 008_create_table_article_team_map.sql
+│   │   │   │   ├── 009_create_table_article_league_map.sql
+│   │   │   │   ├── 010_create_table_article_match_map.sql
+│   │   │   │   ├── 011_check_new_core_tables.sql
+│   │   │   │   ├── 012_create_table_languages.sql
+│   │   │   │   ├── 013_create_table_article_translations.sql
+│   │   │   │   ├── 014_create_table_league_translations.sql
+│   │   │   │   ├── 015_create_table_team_translations.sql
+│   │   │   │   ├── 016_create_table_player_translations.sql
+│   │   │   │   ├── 017_create_table_translation_jobs.sql
+│   │   │   │   ├── 018_create_table_translation_job_logs.sql
+│   │   │   │   ├── 019_create_table_team_social_links.sql
+│   │   │   │   ├── 020_create_table_stadiums.sql
+│   │   │   │   ├── 021_create_table_team_stadiums.sql
+│   │   │   │   ├── 022_create_table_match_events.sql
+│   │   │   │   ├── 023_create_table_player_match_statistics.sql
+│   │   │   │   ├── 024_create_table_team_match_statistics.sql
+│   │   │   │   ├── 025_create_table_coaches.sql
+│   │   │   │   ├── 026_create_table_team_coaches.sql
+│   │   │   │   ├── 027_create_table_player_team_history.sql
+│   │   │   │   ├── 029_create_table_team_transfers.sql
+│   │   │   │   ├── 030_create_table_player_social_links.sql
+│   │   │   │   ├── 031_create_table_competition_rounds.sql
+│   │   │   │   ├── 032_create_table_match_weather.sql
+│   │   │   │   ├── 033_create_table_users.sql
+│   │   │   │   ├── 034_create_table_user_favorite_teams.sql
+│   │   │   │   ├── 035_create_table_user_favorite_leagues.sql
+│   │   │   │   ├── 036_create_table_user_favorite_players.sql
+│   │   │   │   ├── 037_create_table_subscription_plans.sql
+│   │   │   │   ├── 038_create_table_subscriptions.sql
+│   │   │   │   ├── 039_create_table_user_notifications.sql
+│   │   │   │   └── 040_create_table_notification_queue.sql
+│   │   │   ├── 001_create_tables_tickets\
+│   │   │   │   ├── 041_create_table_tickets.sql
+│   │   │   │   ├── 042_create_table_ticket_constants.sql
+│   │   │   │   ├── 043_create_table_ticket_blocks.sql
+│   │   │   │   ├── 044_create_table_ticket_block_matches.sql
+│   │   │   │   ├── 045_create_table_ticket_variants.sql
+│   │   │   │   ├── 046_create_table_ticket_variant_block_choices.sql
+│   │   │   │   ├── 047_create_table_ticket_variant_matches.sql
+│   │   │   │   ├── 048_create_table_ticket_settlements.sql
+│   │   │   │   ├── 049_create_table_ticket_pattern_stats.sql
+│   │   │   │   ├── 050_create_table_ticket_league_pattern_stats.sql
+│   │   │   │   ├── 051_create_table_ticket_generation_runs.sql
+│   │   │   │   ├── 052_create_table_ticket_variant_features.sql
+│   │   │   │   ├── 053_create_table_ticket_recommendation_feedback.sql
+│   │   │   │   ├── 054_create_mm_value_bets.sql
+│   │   │   │   ├── 055_create_view_best_match_odds.sql
+│   │   │   │   ├── 056_alter_mm_value_bets_add_unique_match.sql
+│   │   │   │   ├── 057_view_ticket_candidate_matches.sql
+│   │   │   │   ├── 058_view_match_feed_for_user.sql
+│   │   │   │   ├── 059_create_ops_provider_jobs.sql
+│   │   │   │   ├── 061_create_ops_provider_accounts.sql
+│   │   │   │   ├── 063_create_ops_api_request_log.sql
+│   │   │   │   ├── 082_refresh_frontend_match_views_with_team_logos.sql
+│   │   │   │   ├── 083_public_v_fd_matches_week_with_odds.sql
+│   │   │   │   ├── 090_v_fd_matches_week_ui.sql
+│   │   │   │   └── 092_backfill_public_teams_logo_url_from_api_football.sql
+│   │   │   ├── 010_generated_tickets_is_blocked.sql\
+│   │   │   │   ├── 010_indexes_performance.sql
+│   │   │   │   ├── 011_generated_tickets_is_blocked.sql
+│   │   │   │   ├── 012_generated_runs_params.sql
+│   │   │   │   ├── 013_fill_theodds_keys_missing.sql
+│   │   │   │   ├── 013_generated_ticket_items.sql
+│   │   │   │   ├── 014_generated_ticket_risk.sql
+│   │   │   │   ├── 015_mm_apply_risk_team_max.sql
+│   │   │   │   ├── 016_matches_external_ids_and_result.sql
+│   │   │   │   ├── 017_leagues_external_ids.sql
+│   │   │   │   ├── 018_teams_external_ids.sql
+│   │   │   │   ├── 019_odds_indexes_for_compare.sql
+│   │   │   │   ├── 01_create_mm_ticket_scenarios.sql
+│   │   │   │   ├── 02_create_mm_ticket_scenario_variants.sql
+│   │   │   │   ├── 03_create_mm_ticket_scenario_blocks.sql
+│   │   │   │   ├── 04_create_mm_ticket_scenario_block_matches.sql
+│   │   │   │   └── 05_drop_unused_mm_ticket_tables.sql
+│   │   │   ├── 011_staging_api_football\
+│   │   │   │   ├── 038_alter_stg_provider_player_stats_for_match_merge.sql
+│   │   │   │   ├── 039_create_player_season_statistics.sql
+│   │   │   │   ├── 046_merge_player_season_statistics_live.sql
+│   │   │   │   ├── 046a_check_player_season_duplicates.sql
+│   │   │   │   ├── 046b_players_schema_check.sql
+│   │   │   │   ├── 046c_add_unique_player_season_statistics.sql
+│   │   │   │   ├── 046d_fix_unique_wrong.sql
+│   │   │   │   ├── 046e_fix_unique_correct.sql
+│   │   │   │   ├── 047_merge_player_season_statistics.sql
+│   │   │   │   ├── 048_check_players.sql
+│   │   │   │   ├── 049_add_unique_index_stg_provider_player_stats.sql
+│   │   │   │   ├── 049_debug_player_season_mapping.sql
+│   │   │   │   ├── 050_merge_player_external_identity.sql
+│   │   │   │   ├── 050_merge_player_match_statistics.sql
+│   │   │   │   ├── 051_check_player_external_identity.sql
+│   │   │   │   ├── 051_check_player_stats_pipeline.sql
+│   │   │   │   ├── 052_check_player_source_payloads.sql
+│   │   │   │   ├── 053_preview_player_payload.sql
+│   │   │   │   ├── 054_preview_last_success_player_payload.sql
+│   │   │   │   ├── 055_parse_api_football_players_to_stg_player_season_stats.sql
+│   │   │   │   ├── 056_check_player_season_stats_loaded.sql
+│   │   │   │   ├── 057_deduplicate_stg_provider_player_season_stats.sql
+│   │   │   │   ├── 058_add_unique_index_stg_provider_player_season_stats.sql
+│   │   │   │   ├── 059_merge_player_season_statistics.sql
+│   │   │   │   ├── 059a_check_player_season_statistics_columns.sql
+│   │   │   │   ├── 060_check_player_season_mapping_gaps.sql
+│   │   │   │   ├── 061_list_unmapped_players_for_provider_map.sql
+│   │   │   │   ├── 062_match_unmapped_players_to_existing.sql
+│   │   │   │   ├── 063_check_unmapped_players_presence.sql
+│   │   │   │   ├── 064_insert_missing_players_from_staging.sql
+│   │   │   │   ├── 065_insert_missing_player_provider_map.sql
+│   │   │   │   ├── 066_insert_player_provider_map_from_stats.sql
+│   │   │   │   ├── 067_check_players_vs_stats_overlap.sql
+│   │   │   │   ├── 068_check_missing_stats_players_in_profiles.sql
+│   │   │   │   ├── 069_list_missing_player_profiles_for_ingest.sql
+│   │   │   │   ├── 070_distinct_missing_player_profile_ids.sql
+│   │   │   │   ├── 071_create_work_missing_player_profile_ids.sql
+│   │   │   │   ├── 072_export_missing_player_profile_ids.sql
+│   │   │   │   ├── 073_create_missing_player_profile_batches.sql
+│   │   │   │   ├── 074_export_missing_player_profile_batch.sql
+│   │   │   │   ├── 075_check_player_profiles_loaded.sql
+│   │   │   │   ├── 076_insert_missing_players_from_profiles.sql
+│   │   │   │   ├── 077_check_loaded_profiles_overlap.sql
+│   │   │   │   ├── 080_check_player_profile_payload_quality.sql
+│   │   │   │   └── 10_staging_api_football.sql
+│   │   │   ├── 012_staging_api_hockey\
+│   │   │   ├── 013_player_staging\
+│   │   │   │   ├── 081_insert_missing_players_from_existing_players_payloads.sql
+│   │   │   │   ├── 082_insert_missing_player_provider_map.sql
+│   │   │   │   ├── 083_merge_player_season_statistics_final.sql
+│   │   │   │   ├── 085_check_final_merge_gaps_after_player_fix.sql
+│   │   │   │   ├── 086_list_unmapped_teams_for_player_stats.sql
+│   │   │   │   ├── 088_insert_missing_teams_from_players_payloads.sql
+│   │   │   │   ├── 089_insert_missing_team_provider_map.sql
+│   │   │   │   ├── 090_merge_player_season_statistics_after_team_fix.sql
+│   │   │   │   ├── 091_check_player_season_statistics_count.sql
+│   │   │   │   ├── 092_check_merge_src_count.sql
+│   │   │   │   ├── 093_check_sports_mapping.sql
+│   │   │   │   ├── 095_merge_player_season_statistics_dedup_maps.sql
+│   │   │   │   ├── 096_merge_player_season_stats_final_clean.sql
+│   │   │   │   ├── 097_merge_player_season_stats_final_business_dedup.sql
+│   │   │   │   ├── 098_check_duplicate_business_keys_in_src_raw.sql
+│   │   │   │   ├── 099_merge_player_season_stats_final_target_key_fix.sql
+│   │   │   │   └── 100_rebuild_player_season_statistics.sql
+│   │   │   ├── 014_coaches\
+│   │   │   │   └── 248_create_team_coach_history.sql
+│   │   │   ├── 020_generated_runs_add_bookmaker_id.sql\
+│   │   │   │   ├── 020_generated_runs_add_bookmaker_id.sql
+│   │   │   │   ├── 023_matches_updated_at.sql
+│   │   │   │   ├── 024_matches_normalize_status.sql
+│   │   │   │   ├── 027_matches_score_status_rules.sql
+│   │   │   │   └── 029_leagues_set_csv_codes.sql
+│   │   │   ├── 020_provider_maps.sql\
+│   │   │   │   ├── 020_provider_maps.sql
+│   │   │   │   ├── 021_migrate_leagues_to_provider_map.sql
+│   │   │   │   ├── 037_players_multisource_foundation.sql
+│   │   │   │   └── 038_players_enrichment_reseed_squads_team_based.sql
+│   │   │   ├── 030_ingest_schema.sql\
+│   │   │   │   ├── 030_ingest_schema.sql
+│   │   │   │   ├── 031_external_ids.sql
+│   │   │   │   ├── 032_bookmakers_ext_key.sql
+│   │   │   │   ├── 033_team_aliases.sql
+│   │   │   │   ├── 034_team_aliases_seed_football_data_uk_epl.sql
+│   │   │   │   ├── 035_ops_create_ingest_planner.sql
+│   │   │   │   ├── 036_ops_create_worker_locks.sql
+│   │   │   │   ├── 037_ops_insert_job_ingest_cycle_v2.sql
+│   │   │   │   ├── 038_ops_create_dashboard_views.sql
+│   │   │   │   └── 039_ops_insert_job_unified_staging_to_public_merge.sql
+│   │   │   ├── 040_match_features\
+│   │   │   │   └── 040_match_features.sql
+│   │   │   ├── 050_ml_dataset_view.sql\
+│   │   │   │   ├── 050_ml_dataset_view.sql
+│   │   │   │   ├── 051_ml_dataset_view_V2.sql
+│   │   │   │   ├── 052_ml_predictions.sql
+│   │   │   │   ├── 053_ml_predict_dataset_view.sql
+│   │   │   │   ├── 054_ml_fair_odds_view.sql
+│   │   │   │   ├── 055_ml_market_odds_view.sql
+│   │   │   │   ├── 056_ml_value_view.sql
+│   │   │   │   ├── 057_ml_value_ev_view.sql
+│   │   │   │   ├── 058_ml_block_candidates_view.sql
+│   │   │   │   └── 059_ml_feed_value_picks_view.sql
+│   │   │   ├── 060_mmr_ratings.sql\
+│   │   │   │   └── 060_mmr_ratings.sql
+│   │   │   ├── 070_ml_predictions.sql\
+│   │   │   │   └── 070_ml_predictions.sql
+│   │   │   └── 210_create_staging_api_hockey.sql
+│   │   ├── 01_seed\
+│   │   │   ├── api_football\
+│   │   │   │   ├── 00_seed_api_football_leagues.sql
+│   │   │   │   └── 01_audit_api_football_import.sql
+│   │   │   ├── 001_seed_languages_asia.sql
+│   │   │   ├── 002_seed_Global_language .sql
+│   │   │   ├── 003_seed_data_providers.sql
+│   │   │   ├── 004_seed_countries.sql
+│   │   │   ├── 005_seed_seasons_from_leagues_smart.sql
+│   │   │   ├── 011_seed_jobs_core_pipeline.sql
+│   │   │   ├── 012_seed_ingest_targets_top8_api_football.sql
+│   │   │   ├── 013_seed_import_plan_eu_exact_v1.sql
+│   │   │   ├── 014_apply_import_plan_eu_api_football.sql
+│   │   │   ├── 015_seed_import_plan_eu_major_v4.sql
+│   │   │   ├── 059_seed_ops_provider_jobs_multi_sport.sql
+│   │   │   ├── 061_seed_ops_provider_accounts.sql
+│   │   │   ├── 062_trigger_ops_provider_accounts_updated_at.sql
+│   │   │   ├── 093_seed_sports_import_plan.sql
+│   │   │   ├── 094_api_budget_status.sql
+│   │   │   ├── 095_v_api_budget_today.sql
+│   │   │   ├── 096_seed_ingest_targets_from_league_import_plan.sql
+│   │   │   ├── 100_seed_ingest_targets_from_leagues.sql
+│   │   │   ├── 101_prioritize_ingest_targets.sql
+│   │   │   ├── 102_scheduler_queue.sql
+│   │   │   ├── 104_set_free_mode_budget.sql
+│   │   │   ├── 105_prepare_free_test_targets.sql
+│   │   │   ├── 106_reduce_football_for_free_mode.sql
+│   │   │   ├── 107_mark_football_maintenance_targets.sql
+│   │   │   ├── 108_reset_today_scheduler_queue.sql
+│   │   │   └── 109_enable_hockey_basketball_free_targets.sql
+│   │   ├── 02_validation\
+│   │   │   ├── 020_hockey\
+│   │   │   │   ├── 021_parse_api_hockey_leagues.sql
+│   │   │   │   ├── 021_parse_api_hockey_leagues_raw.sql
+│   │   │   │   ├── 022_parse_api_hockey_teams_raw.sql
+│   │   │   │   ├── 022_parse_api_hockey_teams_raw_V1.sql
+│   │   │   │   └── 022_view_api_hockey_leagues_latest.sql
+│   │   │   ├── check_empty_blocks.sql\
+│   │   │   │   ├── 010_trg_template_blocks_guard.sql
+│   │   │   │   └── 011_trg_template_block_matches_not_empty.sql
+│   │   │   ├── check_template_validity.sql\
+│   │   │   │   └── 001_mm_validate_template.sql
+│   │   │   ├── 021_check_missing_ingest_targets.sql
+│   │   │   ├── 022_check_predict_ml_predictions.sql
+│   │   │   ├── 024_show_ml_view_definitions.sql
+│   │   │   ├── 025_check_value_ev_latest.sql
+│   │   │   └── 026_check_block_candidates_latest.sql
+│   │   ├── 03_generation\
+│   │   │   ├── 002_mm_update_run_probability.sql\
+│   │   │   │   ├── 002_mm_update_run_probability.sql
+│   │   │   │   ├── 005_mm_template_state.sql
+│   │   │   │   ├── 006_mm_actions_blocks.sql
+│   │   │   │   ├── 007_mm_actions_fixed.sql
+│   │   │   │   └── 008_mm_ui_preview_and_generate.sql
+│   │   │   ├── 011_mm_preview_run.sql\
+│   │   │   │   ├── 011_mm_preview_run.sql
+│   │   │   │   ├── 012_mm_generate_run_engine.sql
+│   │   │   │   ├── 013_mm_generate_tickets_engine.sql
+│   │   │   │   ├── 014_mm_get_odds_compare.sql
+│   │   │   │   ├── 015_mm_preview_run_bookmaker.sql
+│   │   │   │   ├── 016_mm_ui_ticket_detail.sql
+│   │   │   │   ├── 017_mm_generate_run_engine_bookmaker.sql
+│   │   │   │   ├── 018_mm_ui_run_tickets.sql
+│   │   │   │   ├── 019_mm_ui_run_summary.sql
+│   │   │   │   ├── mazání mm_generate_run_engine.sql
+│   │   │   │   ├── mm_generate_run_engine.sql
+│   │   │   │   └── mm_preview_run.sql
+│   │   │   ├── 020_mm_ui_run_tickets_with_stake.sql\
+│   │   │   │   ├── 020_mm_ui_run_tickets_with_stake.sql
+│   │   │   │   ├── 021_matches_add_sport_id.sql
+│   │   │   │   ├── 022_matches_indexes_for_history_and_features.sql
+│   │   │   │   └── 023_mm_build_match_features.sql
+│   │   │   ├── 030_upsert_api_football.sql\
+│   │   │   │   ├── 030_ops_admin.sql
+│   │   │   │   ├── 031_eu_leagues_api_football_apply_FIXED2.sql
+│   │   │   │   ├── 031_upsert_leagues_api_football.sql
+│   │   │   │   ├── 032_upsert_teams_api_football.sql
+│   │   │   │   ├── 033_upsert_league_teams_api_football.sql
+│   │   │   │   ├── 034_upsert_matches_api_football.sql
+│   │   │   │   ├── 035_generate_ingest_targets_football_api_football.sql
+│   │   │   │   ├── 035_merge_teams_api_football.sql
+│   │   │   │   ├── 036_create_staging_league_views.sql
+│   │   │   │   ├── 037_cleanup_staging_api_football_leagues.sql
+│   │   │   │   ├── 038_create_ops_league_import_plan.sql
+│   │   │   │   └── 039_import_leagues_from_plan_api_football.sql
+│   │   │   ├── 031_upsert_api_hockey.sql\
+│   │   │   │   ├── 031_upsert_leagues_api_hockey.sql
+│   │   │   │   └── 033_upsert_league_teams_api_hockey.sql
+│   │   │   ├── 040_staging\
+│   │   │   │   ├── 006_create_table_staging_players_import.sql
+│   │   │   │   ├── 007_create_table_staging_player_provider_map_import.sql
+│   │   │   │   ├── 008_check_player_tables.sql
+│   │   │   │   └── 012_alter_staging_players_import_add_context.sql
+│   │   │   ├── 036_upsert_league_provider_map.sql
+│   │   │   ├── 038_update_ops_ingest_targets.sql
+│   │   │   ├── 060_trigger_ops_provider_jobs_updated_at.sql
+│   │   │   ├── api_import_runs.sql
+│   │   │   └── Script.sql
+│   │   ├── 04_merge\
+│   │   │   ├── 009_merge_players.sql
+│   │   │   ├── 010_merge_player_provider_map.sql
+│   │   │   ├── england_missing_canonical_apply.sql
+│   │   │   ├── merge_team_engine.sql
+│   │   │   └── team_provider_map.sql
+│   │   ├── 05_app\
+│   │   │   ├── 050_views_matches_windows.sql
+│   │   │   ├── 051_view_leagues_active_week.sql
+│   │   │   ├── 052_views_matches_windows_football_data.sql
+│   │   │   └── 053_view_fd_leagues_active_week.sql
+│   │   ├── 06_views\
+│   │   │   ├── 01_vw_generated_ticket_matches.sql
+│   │   │   ├── 02_vw_ticket_match_results.sql
+│   │   │   ├── 03_vw_ticket_settlement_detail.sql
+│   │   │   ├── 04_vw_ticket_summary.sql
+│   │   │   ├── 05_create_ticket_run_settlements.sql
+│   │   │   ├── 061_v_fd_matches_week.sql
+│   │   │   ├── 06_fn_refresh_ticket_run_settlements.sql
+│   │   │   ├── 07_seed_ops_jobs.sql
+│   │   │   ├── 092_storage_metrics.sql
+│   │   │   ├── 093_sports_import_plan.sql
+│   │   │   ├── 10_vw_data_coverage.sql
+│   │   │   ├── 11_vw_offer_matches.sql
+│   │   │   ├── 12_vw_offer_matches.sql
+│   │   │   ├── 13_compute_value_bets.sql
+│   │   │   ├── 14_vw_ticket_candidates.sql
+│   │   │   ├── 15_v_best_ticket_candidates_today.sql
+│   │   │   ├── 16_vw_ticket_items.sql
+│   │   │   ├── 17_vw_block_outcome_candidates.sql
+│   │   │   ├── 18_vw_block_sync_signals.sql
+│   │   │   └── 19_vw_block_candidate_groups.sql
+│   │   ├── 07_audity\
+│   │   │   ├── 013_check_players_coverage.sql
+│   │   │   ├── 071_Globální audit.sql
+│   │   │   ├── 072_enforce_integrity_constraints.sql
+│   │   │   ├── 073_global_integrity_audit.sql
+│   │   │   ├── 074_audit_api_football_duplicates.sql
+│   │   │   ├── 075_audit_alias_coverage.sql
+│   │   │   ├── 077_audit_basic.sql
+│   │   │   ├── 078_audit_player_season_statistics_v1.sql
+│   │   │   ├── 079_audit_player_season_statistics_report_v1.sql
+│   │   │   ├── 080_debug_player_stats_merge_mapping_v1.sql
+│   │   │   └── 081_fix_player_season_statistics_merge_v1.sql
+│   │   ├── 08_kontrola_ligy_vše\
+│   │   │   ├── 080_Kontrola_duplicit.sql
+│   │   │   ├── 081_postup_prohlidka_smazani_overeni_zajisteni.sql
+│   │   │   ├── Kontrola_holandsko_1.liga_Eredivisie.sql
+│   │   │   ├── kontrola_nemecko_1.liga_bundesliga.sql
+│   │   │   ├── kontrola_portugalsko_1.liga_Premier League.sql
+│   │   │   └── kontrola_spanelsko_1.liga_La liga.sql
+│   │   ├── 09_run\
+│   │   │   ├── 096_Hockey\
+│   │   │   │   ├── 096_hockey_V1.sql
+│   │   │   │   └── 096_tvorba_hockey_staging_tabulek.sql
+│   │   │   ├── 090_api_football_merge_run.sql
+│   │   │   ├── 091_api_football_merge_run_mode.sql
+│   │   │   ├── 092_post_merge_report.sql
+│   │   │   ├── 093_run_job_create.sql
+│   │   │   ├── 094_run_job_finish.sql
+│   │   │   └── 096_hockey.sql
+│   │   ├── 10_sql\
+│   │   │   ├── 110_unified_staging_base.sql
+│   │   │   ├── 111_unified_staging_odds_stats.sql
+│   │   │   ├── 113_staging_indexes.sql
+│   │   │   └── sql_players_pipeline_audit_queries.sql
+│   │   ├── 11_ops\
+│   │   │   ├── 001_ops_ingest_entity_plan.sql
+│   │   │   ├── 020_reset_vb_teams_pending.sql
+│   │   │   ├── 022_create_ingest_runtime_config.sql
+│   │   │   ├── 023_check_bk_planner_teams.sql
+│   │   │   ├── 023_seed_ingest_runtime_config_free.sql
+│   │   │   ├── 024_ops_create_ingest_entity_plan.sql
+│   │   │   ├── 025_fix_football_maintenance_null_season_to_2024.sql
+│   │   │   ├── 026_check_bk_raw_payload.sql
+│   │   │   ├── 036_ops_extend_stg_provider_players.sql
+│   │   │   ├── 037_ops_insert_new_ingest_entities_players_v1.sql
+│   │   │   ├── 111_nastavení_ops_jobs.sql
+│   │   │   └── ops_jobs_unified_ingest_batch.sql
+│   │   ├── 12_multisport\
+│   │   │   ├── 12_multisport\
+│   │   │   │   ├── 010_check_vb_staging_teams_after_fix.sql
+│   │   │   │   ├── 025_check_bk_stg_provider_teams.sql
+│   │   │   │   ├── 039_audit_multisport_planner_unification.sql
+│   │   │   │   ├── 040_unify_multisport_planner_teams_fixtures.sql
+│   │   │   │   ├── 101_extend_existing_multisport_core.sql
+│   │   │   │   ├── 102_extend_existing_coach_core.sql
+│   │   │   │   ├── 102a_zjištění_sruktury_trenérských_tabulek.sql
+│   │   │   │   ├── 103_create_coach_provider_map.sql
+│   │   │   │   ├── 104_extend_stg_provider_coaches.sql
+│   │   │   │   ├── 105_create_ops_sport_entity_rules.sql
+│   │   │   │   ├── 106_create_ops_sport_dimension_rules.sql
+│   │   │   │   ├── 107_create_ops_provider_sport_matrix.sql
+│   │   │   │   ├── 108_seed_ops_ingest_entity_plan_multisport.sql
+│   │   │   │   ├── 109_create_v_ops_ingest_overview.sql
+│   │   │   │   ├── 111_audit_missing_multisport_coverage.sql
+│   │   │   │   ├── 112_seed_missing_sport_entity_rules.sql
+│   │   │   │   ├── 113_seed_missing_ingest_entity_plan_from_rules.sql
+│   │   │   │   ├── 114_check_multisport_coverage_after_seed.sql
+│   │   │   │   ├── 206_fix_player_season_statistics_unique.sql
+│   │   │   │   ├── 207_dedupe_player_season_statistics.sql
+│   │   │   │   ├── 209_fix_player_season_statistics_key.sql
+│   │   │   │   ├── 210_add_api_football_player_stats_entity.sql
+│   │   │   │   ├── 211_bootstrap_ingest_targets_from_existing_leagues_all_sports.sql
+│   │   │   │   ├── 212_enable_fb_api_football_bootstrap_v1.sql
+│   │   │   │   ├── 213_build_planner_from_fb_bootstrap_v1.sql
+│   │   │   │   ├── 215_disable_unsupported_providers.sql
+│   │   │   │   ├── 216_disable_fb_odds_in_free_mode.sql
+│   │   │   │   ├── 217_cleanup_fb_odds_errors_free_mode.sql
+│   │   │   │   ├── 218_build_planner_fb_teams_bootstrap.sql
+│   │   │   │   ├── 219_build_planner_fb_teams_bootstrap_v2.sql
+│   │   │   │   ├── 220_check_fb_bootstrap_targets_api_football.sql
+│   │   │   │   ├── 221_enable_fb_bootstrap_api_football.sql
+│   │   │   │   ├── 222_build_planner_fb_teams_bootstrap_v3.sql
+│   │   │   │   ├── 224_check_fb_bootstrap_teams_effect.sql
+│   │   │   │   ├── 225_check_bootstrap_warning_jobs.sql
+│   │   │   │   ├── 227_seed_multisport_provider_jobs.sql
+│   │   │   │   ├── 228_fill_default_run_groups_multisport.sql
+│   │   │   │   ├── 229_multisport_planner_test.sql
+│   │   │   │   ├── 230_seed_multisport_ingest_targets.sql
+│   │   │   │   ├── 230a_seed_multisport_leagues.sql
+│   │   │   │   ├── 231_multisport_planner_preview.sql
+│   │   │   │   └── 232_parse_api_sport_bk_fixtures.sql
+│   │   │   ├── 13_multisport_ingest-footbal\
+│   │   │   │   ├── 115_audit_ingest_targets_multisport.sql
+│   │   │   │   ├── 116_audit_ingest_targets_sport_code_mapping.sql
+│   │   │   │   ├── 117_fix_ingest_targets_sport_codes.sql
+│   │   │   │   ├── 118_recheck_ingest_targets_multisport.sql
+│   │   │   │   ├── 119_audit_football_ingest_targets_by_run_group.sql
+│   │   │   │   ├── 120_audit_bk_hk_ingest_targets_by_run_group.sql
+│   │   │   │   ├── 121_preview_bk_hk_targets.sql
+│   │   │   │   ├── 122_preview_hk_targets.sql
+│   │   │   │   ├── 123_shortlist_bk_hk_senior_primary_targets.sql
+│   │   │   │   ├── 124_preview_bk_maintenance_top_candidates.sql
+│   │   │   │   ├── 125_preview_bk_nbl_candidates.sql
+│   │   │   │   ├── 126_resolve_bk_nbl_league_names.sql
+│   │   │   │   ├── 127_preview_bk_china_candidates.sql
+│   │   │   │   ├── 128_seed_bk_maintenance_top.sql
+│   │   │   │   ├── 129_preview_hk_maintenance_top_candidates.sql
+│   │   │   │   ├── 130_resolve_hk_extraliga_candidates.sql
+│   │   │   │   ├── 131_seed_hk_maintenance_top.sql
+│   │   │   │   ├── 132_audit_top_run_groups_fb_bk_hk.sql
+│   │   │   │   ├── 133_preview_top_run_groups_fb_bk_hk.sql
+│   │   │   │   ├── 134_create_v_ops_top_ingest_targets.sql
+│   │   │   │   ├── 135_audit_v_top_ingest_targets_by_provider.sql
+│   │   │   │   ├── 136_create_v_ops_top_ingest_jobs.sql
+│   │   │   │   ├── 137_audit_missing_bk_top_jobs.sql
+│   │   │   │   ├── 138_seed_api_sport_bk_ingest_entity_plan.sql
+│   │   │   │   ├── 139_recheck_top_ingest_jobs.sql
+│   │   │   │   ├── 140_count_top_ingest_jobs.sql
+│   │   │   │   ├── 141_create_v_ops_top_ingest_jobs_ordered.sql
+│   │   │   │   ├── 142_create_v_ops_top_ingest_jobs_runnable.sql
+│   │   │   │   ├── 143_create_v_ops_top_ingest_jobs_test_mode.sql
+│   │   │   │   ├── 144_fix_v_ops_top_ingest_jobs_test_mode_no_odds.sql
+│   │   │   │   ├── 145_create_v_ops_top_ingest_jobs_full_mode.sql
+│   │   │   │   ├── 146_audit_ops_budget_runtime_objects.sql
+│   │   │   │   ├── 147_expand_ingest_entity_plan_to_all_sports.sql
+│   │   │   │   ├── 147_rebuild_ingest_planner_multisport.sql
+│   │   │   │   ├── 148_fix_legacy_football_code_SAFE.sql
+│   │   │   │   ├── 152_seed_fb_eu_run_group.sql
+│   │   │   │   ├── 154_create_v_ops_fb_eu_ingest_jobs.sql
+│   │   │   │   ├── 157_seed_football_data_fb_ingest_entity_plan.sql
+│   │   │   │   ├── 158_fix_v_ops_fb_eu_ingest_jobs_multi_provider.sql
+│   │   │   │   ├── 160_enable_fb_eu_targets.sql
+│   │   │   │   ├── 162_create_v_ops_fb_eu_test_mode.sql
+│   │   │   │   ├── 166_rename_fb_eu_to_fb_fd_core.sql
+│   │   │   │   ├── 167_create_v_ops_fb_fd_core_ingest_jobs.sql
+│   │   │   │   ├── 167a_create_v_ops_fb_fd_core_ingest_jobs_test_mode.sql
+│   │   │   │   ├── 168_seed_fb_api_expansion_run_group.sql
+│   │   │   │   ├── 170_create_v_ops_fb_api_expansion_ingest_jobs.sql
+│   │   │   │   ├── 170a_create_v_ops_fb_api_expansion_ingest_jobs_test_mode.sql
+│   │   │   │   ├── 172_create_v_ops_fb_test_mode_all_layers.sql
+│   │   │   │   ├── 173_create_v_ops_fb_test_mode_orchestrator.sql
+│   │   │   │   ├── 174_create_v_ops_fb_test_execution_order.sql
+│   │   │   │   ├── 176_create_v_ops_fb_test_phase1.sql
+│   │   │   │   ├── 177_create_v_ops_fb_job_catalog.sql
+│   │   │   │   ├── 178_seed_fb_provider_jobs_from_catalog_FINAL.sql
+│   │   │   │   ├── 212_enable_fb_api_football_bootstrap_v1.sql
+│   │   │   │   ├── 214_check_fb_bootstrap_after_first_run.sql
+│   │   │   │   └── 226_check_fb_bootstrap_teams_progress.sql
+│   │   │   ├── 13_multisport_ingest_basket\
+│   │   │   │   ├── 034_check_bk_fixtures_planner.sql
+│   │   │   │   ├── 035_seed_bk_fixtures_planner_from_targets.sql
+│   │   │   │   ├── 036_check_last_bk_fixtures_payload.sql
+│   │   │   │   ├── 037_promote_bk_fixtures_target_117.sql
+│   │   │   │   ├── 041_promote_bk_teams_target_12_deprioritize_40.sql
+│   │   │   │   ├── 042_deduplicate_bk_teams_target_12.sql
+│   │   │   │   ├── 196_create_v_ops_bk_top_full_job_catalog.sql
+│   │   │   │   ├── 197_seed_bk_top_provider_jobs.sql
+│   │   │   │   ├── 198_create_v_ops_bk_top_runnable_jobs.sql
+│   │   │   │   ├── 199_create_v_ops_bk_core_full_job_catalog.sql
+│   │   │   │   ├── 200_seed_bk_core_provider_jobs.sql
+│   │   │   │   ├── 201_create_v_ops_bk_core_runnable_jobs.sql
+│   │   │   │   └── 250_insert_bk_test_planner_job.sql
+│   │   │   ├── 13_multisport_ingest_hokej\
+│   │   │   │   ├── 027_check_hk_team_targets.sql
+│   │   │   │   ├── 028_promote_hk_team_target_league_6.sql
+│   │   │   │   ├── 029_check_hk_after_teams_fix.sql
+│   │   │   │   ├── 030_promote_hk_fixtures_target_league_6.sql
+│   │   │   │   ├── 031_find_working_hk_fixtures_targets.sql
+│   │   │   │   ├── 032_promote_hk_fixtures_target_league_59.sql
+│   │   │   │   ├── 033_deprioritize_empty_hk_fixtures_targets.sql
+│   │   │   │   ├── 179_ops_hk_run_groups.sql
+│   │   │   │   ├── 180_seed_api_hockey_hk_ingest_entity_plan.sql
+│   │   │   │   ├── 181_create_v_ops_hk_top_ingest_jobs.sql
+│   │   │   │   ├── 182_create_v_ops_hk_top_ingest_jobs_test_mode.sql
+│   │   │   │   ├── 183_create_v_ops_hk_top_test_execution_order.sql
+│   │   │   │   ├── 184_create_v_ops_hk_job_catalog.sql
+│   │   │   │   ├── 185_seed_hk_provider_jobs.sql
+│   │   │   │   ├── 186_create_v_ops_hk_top_runnable_jobs.sql
+│   │   │   │   ├── 187_preview_hk_top_runnable_jobs.sql
+│   │   │   │   ├── 188_create_v_ops_hk_top_full_execution_order.sql
+│   │   │   │   ├── 189_create_v_ops_hk_full_job_catalog.sql
+│   │   │   │   ├── 190_seed_hk_full_provider_jobs.sql
+│   │   │   │   ├── 191_create_v_ops_hk_full_runnable_jobs.sql
+│   │   │   │   ├── 193_create_v_ops_hk_core_full_job_catalog.sql
+│   │   │   │   ├── 194_seed_hk_core_provider_jobs.sql
+│   │   │   │   ├── 195_create_v_ops_hk_core_runnable_jobs.sql
+│   │   │   │   ├── 202_create_v_ops_hk_top_full_runnable_jobs.sql
+│   │   │   │   ├── 203_seed_hk_top_ingest_planner.sql
+│   │   │   │   ├── 204_add_photo_url_to_staging_players_import.sql
+│   │   │   │   ├── 233_parse_api_hockey_leagues.sql
+│   │   │   │   ├── 234_parse_api_hockey_fixtures.sql
+│   │   │   │   └── Script.sql
+│   │   │   └── 13_multisport_ingest_volleyball\
+│   │   │       ├── 001_volleyball.sql
+│   │   │       ├── 235_parse_api_volleyball_leagues.sql
+│   │   │       ├── 236_parse_api_volleyball_fixtures.sql
+│   │   │       ├── 237_seed_ingest_planner_volleyball_fixtures.sql
+│   │   │       ├── 238_seed_data_provider_api_sport.sql
+│   │   │       ├── 239_reset_vb_fixtures_planner_job_4137.sql
+│   │   │       ├── 240_check_volleyball_merge_result.sql
+│   │   │       ├── 241_seed_data_provider_api_volleyball.sql
+│   │   │       ├── 243_check_volleyball_by_sport_and_league.sql
+│   │   │       ├── 244_check_vb_provider_maps.sql
+│   │   │       ├── 245_check_vb_staging_teams.sql
+│   │   │       ├── 246_fix_vb_entity_plan_teams.sql
+│   │   │       ├── 246a_nastavení entit.sql
+│   │   │       ├── 247_safe_backfill_entity_plan_base_sports.sql
+│   │   │       ├── _volleyball_příkazy.sql
+│   │   │       └── Script.sql
+│   │   ├── 13_odds\
+│   │   │   ├── 2026-03-26_audit_bad_theodds_aliases.sql
+│   │   │   ├── 2026-03-26_audit_dc_missing_for_matches.sql
+│   │   │   ├── 2026-03-26_audit_market_codes_double_chance.sql
+│   │   │   ├── 2026-03-26_check_dc_payload_real.sql
+│   │   │   ├── 2026-03-26_cleanup_zero_usage_teams.sql
+│   │   │   ├── 2026-03-26_db_inventory.sql
+│   │   │   ├── 2026-03-26_football_duplicate_team_branches.sql
+│   │   │   ├── 2026-03-26_insert_theodds_aliases_auto.sql
+│   │   │   ├── 2026-03-26_no_match_detail_check.sql
+│   │   │   ├── 2026-03-26_odds_coverage_audit.sql
+│   │   │   ├── 2026-03-26_odds_coverage_check.sql
+│   │   │   ├── 2026-03-26_serie_a_no_match_audit.sql
+│   │   │   ├── 20260326_02_bournemouth_only_safe_merge.sql
+│   │   │   ├── 20260326_03_bournemouth_only_safe_merge_fix_aliases.sql
+│   │   │   ├── 20260326_04_arsenal_audit_only.sql
+│   │   │   ├── 20260326_05_arsenal_belarus_merge_26871_into_13102.sql
+│   │   │   ├── 20260326_08_check_team_1_references.sql
+│   │   │   └── 20260326_09_cleanup_team_1_into_11910.sql
+│   │   ├── 99_playground\
+│   │   │   ├── 001_run_tests.sql\
+│   │   │   │   └── preview_run_probability.sql
+│   │   │   ├── blocks_experiments.sql\
+│   │   │   │   ├── migrate_fixed.sql
+│   │   │   │   ├── migrate_Variable.sql
+│   │   │   │   └── template_block_matches.sql
+│   │   │   ├── funkce_uprava\
+│   │   │   │   └── upravena_prava_k_tabulkam.sql
+│   │   │   ├── test_queries.sql\
+│   │   │   │   └── inventar_funkci_mm.sql
+│   │   │   ├── volane_funkce\
+│   │   │   │   ├── Predikce\
+│   │   │   │   │   ├── AWAY value.sql
+│   │   │   │   │   ├── DRAW value.sql
+│   │   │   │   │   ├── EDGE_value.sql
+│   │   │   │   │   ├── HOME value.sql
+│   │   │   │   │   ├── Kelly_value.sql
+│   │   │   │   │   ├── Market_odds.sql
+│   │   │   │   │   └── run_predictions.sql
+│   │   │   │   ├── celkova_pocet_zapasu_historie.sql
+│   │   │   │   ├── Kolik_tymu_mam_v_teams_pro_jednotliv_ligy.sql
+│   │   │   │   ├── league_provider_map.sql
+│   │   │   │   ├── pocet_zapasu_v_jednotlivych_ligach_historie.sql
+│   │   │   │   ├── run_Block_kandidat_V1.sql
+│   │   │   │   ├── run_FAIR_odds_latest.sql
+│   │   │   │   ├── soubor_dotazu_V5.sql
+│   │   │   │   ├── test_bookmaker_odds.sql
+│   │   │   │   ├── vyvolani_kodu_procedury.sql
+│   │   │   │   └── výkon.sql
+│   │   │   ├── 001_počty_future_matches.sql
+│   │   │   ├── 002_přestavba_matches.sql
+│   │   │   ├── 003_kontrola_test.sql
+│   │   │   ├── 004_kontrola_data_coverage.sql
+│   │   │   ├── 091_přehled_targetů.sql
+│   │   │   ├── 092_přehled_71_lig.sql
+│   │   │   ├── 093_prehled_poctu_fotbalovych _lig _v_jednotlivych_statech.sql
+│   │   │   ├── 094_Teď jen přepnout season na 2023 pro těch 16 lig.sql
+│   │   │   ├── 099_kontrola_ingest_planneru.sql
+│   │   │   ├── 099_kontrola_running_planneru_a_zruseni.sql
+│   │   │   ├── 099_spouštěcí_běhy_různé_druhy.sql
+│   │   │   ├── 099_vrácení_konkrétní_jobu_zpět.sql
+│   │   │   ├── cleanup_player_season_stats_scope_95_2024_v1.sql
+│   │   │   └── Přepočítá a upsertne match_features pro zápasy v tabulce matches.sql
+│   │   ├── 99_reports\
+│   │   │   ├── 100_rozsah_stažených_lig_FB_football_Data.sql
+│   │   │   ├── 99_block_outcome_candidate.sql
+│   │   │   ├── 99_ingest_behy_pocet_ zapasu_v_DB.sql
+│   │   │   ├── 99_kolik mapování máš pro api_football.sql
+│   │   │   ├── 99_MATCHMATRIX DAILY STATUS.sql
+│   │   │   ├── 99_vw_match_feed_for_user.sql
+│   │   │   ├── mm_api_football_backfill_status.sql
+│   │   │   ├── Script-3.sql
+│   │   │   └── Script-4.sql
+│   │   ├── ingest\
+│   │   │   ├── 001_daily_ingest_healthcheck.sql
+│   │   │   ├── football_data_pull.py
+│   │   │   └── run_football_data.bat
+│   │   └── MatchMatrix.sql
+├── Obchodní podmínky\
+├── ops\
+│   ├── lib\
+│   │   ├── import json.txt
+│   │   └── job_logger.py
+│   ├── snapshots\
+│   │   ├── EU_keep_ids.txt
+│   │   └── EU_tymy.txt
+│   ├── mm_autopilot_daily.ps1
+│   ├── mm_env.ps1
+│   ├── mm_mail_config.ps1
+│   ├── mm_master.ps1
+│   ├── run_daily_pipeline.py
+│   ├── run_sql.ps1
+│   ├── run_sql_task.py
+│   └── run_ticket_generation.py
+├── ops_admin\
+│   ├── app.py
+│   ├── matchmatrix_file_audit.py
+│   ├── MatchMatrix_OPS_Audit_Panel.bat
+│   ├── panel_audit_matchmatrix_v1.py
+│   ├── panel_matchmatrix_audit_v2.py
+│   ├── panel_matchmatrix_audit_v3.py
+│   ├── panel_matchmatrix_audit_v4.py
+│   ├── panel_matchmatrix_audit_v5.py
+│   ├── panel_matchmatrix_audit_v6.py
+│   ├── panel_matchmatrix_audit_v7.py
+│   ├── README_CZ.md
+│   ├── README_V4.txt
+│   ├── README_V5.txt
+│   ├── run_matchmatrix_file_audit.ps1
+│   ├── run_panel_matchmatrix_audit_v2.ps1
+│   ├── spustit_panel_audit_matchmatrix_v1.ps1
+│   └── TicketMatrix Platform.bat
+├── programs\
+├── reports\
+│   ├── audit\
+│   │   ├── 2026-03-17\
+│   │   │   ├── 09-48-14\
+│   │   │   │   ├── changes.csv
+│   │   │   │   ├── files.csv
+│   │   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   │   ├── run_meta.json
+│   │   │   │   └── snapshot.json
+│   │   │   ├── 09-56-27\
+│   │   │   │   ├── changes.csv
+│   │   │   │   ├── files.csv
+│   │   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   │   ├── run_meta.json
+│   │   │   │   └── snapshot.json
+│   │   │   ├── 10-11-43\
+│   │   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   │   ├── 10-28-12\
+│   │   │   │   ├── changes.csv
+│   │   │   │   ├── files.csv
+│   │   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   │   ├── MATCHMATRIX_PROGRESS.md
+│   │   │   │   └── snapshot.json
+│   │   │   ├── 11-10-19\
+│   │   │   │   ├── changes.csv
+│   │   │   │   ├── files.csv
+│   │   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   │   ├── MATCHMATRIX_PROGRESS.md
+│   │   │   │   └── snapshot.json
+│   │   │   ├── 12-44-22\
+│   │   │   │   ├── changes.csv
+│   │   │   │   ├── files.csv
+│   │   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   │   ├── MATCHMATRIX_PROGRESS.md
+│   │   │   │   └── snapshot.json
+│   │   │   ├── 12-44-41\
+│   │   │   │   ├── changes.csv
+│   │   │   │   ├── files.csv
+│   │   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   │   ├── MATCHMATRIX_PROGRESS.md
+│   │   │   │   └── snapshot.json
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── 2026-03-18\
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── 2026-03-19\
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── 2026-03-20\
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── 2026-03-22\
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── 2026-03-23\
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── 2026-03-24\
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── 2026-03-25\
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── 2026-03-26\
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── 2026-03-27\
+│   │   │   ├── MATCHMATRIX_AUDIT_REPORT.md
+│   │   │   └── MATCHMATRIX_PROGRESS.md
+│   │   ├── latest_audit_report.md
+│   │   ├── latest_progress_report.md
+│   │   ├── latest_snapshot.txt
+│   │   ├── latest_system_tree.txt
+│   │   ├── system_tree_2026-03-23_110914.txt
+│   │   ├── system_tree_2026-03-23_203905.txt
+│   │   ├── system_tree_2026-03-24_071848.txt
+│   │   ├── system_tree_2026-03-24_204041.txt
+│   │   ├── system_tree_2026-03-24_232620.txt
+│   │   ├── system_tree_2026-03-25_123722.txt
+│   │   ├── system_tree_2026-03-25_201624.txt
+│   │   ├── system_tree_2026-03-26_091238.txt
+│   │   └── system_tree_2026-03-27_160114.txt
+│   ├── file_audit\
+│   │   ├── csv\
+│   │   │   ├── changes_20260317_085252.csv
+│   │   │   ├── changes_20260317_091237.csv
+│   │   │   ├── files_20260317_085252.csv
+│   │   │   └── files_20260317_091237.csv
+│   │   ├── md\
+│   │   │   ├── report_20260317_085252.md
+│   │   │   └── report_20260317_091237.md
+│   │   └── snapshots\
+│   │       ├── snapshot_20260317_085252.json
+│   │       └── snapshot_20260317_091237.json
+│   ├── player_audit\
+│   │   ├── player_season_statistics_audit_20260316_141136.txt
+│   │   ├── player_season_statistics_audit_20260316_161755.txt
+│   │   └── player_season_statistics_audit_20260326_091551.txt
+│   └── reports_runner\
+│       ├── soubor na spouštění reportů\
+│       │   ├── Coverage Heatmap (liga × sezóna).txt
+│       │   ├── Coverage podle lig – ukáže ligy a jejich počet.txt
+│       │   ├── Kolik lig je aktivních v ingest_targets-u API-Football.txt
+│       │   ├── Kolik zápasů je podle zdroje (ext_source).txt
+│       │   ├── Kontrola počtu zápasů v jednotlivých sezónách.txt
+│       │   ├── Kontrola že roste public.txt
+│       │   ├── Které ligy přišly z API-Football.txt
+│       │   ├── Ligy kde chybí data.txt
+│       │   ├── MERGE pro velké runy (staging → public).txt
+│       │   ├── Ověření že je to 100 lig v season 2023.txt
+│       │   ├── Porovnání staging vs public.txt
+│       │   ├── Přepnutí season na 2023 pro enabled EU_top + EU_exact_v1.txt
+│       │   ├── Spusť merge (bez API requestů).txt
+│       │   ├── Spusť merge jen pro nový run.txt
+│       │   ├── Spusť report mm_api_football_backfill_status.sql.txt
+│       │   ├── Spusť skript run_api_football_backfill_report.ps1.txt
+│       │   └── Spuštění ingest wrapper - stahování zápasů z API football.txt
+│       └── spouštěcí soubory na reporty\
+│           ├── INIT_GIT_REPO.bat
+│           ├── RUN_ALL_REPORTS.bat
+│           ├── RUN_DAILY_REPORT.bat
+│           ├── RUN_MIGRATIONS.bat
+│           ├── RUN_SYSTEM_STATUS.bat
+│           ├── RUN_WEEKLY_REPORT.bat
+│           └── SHOW_DOCKER_CONTAINERS.bat
+├── system\
+│   ├── INIT_GIT_REPO.bat
+│   ├── NEW_CHAT_STARTER.md
+│   ├── PROJECT_STATE.md
+│   ├── RUN_MIGRATIONS.bat
+│   └── run_reports.ps1
+├── tools\
+│   ├── 8. Doporučený běžný postup.txt
+│   ├── check_db_connection.py
+│   ├── Co dělají tlačítka v panelu V7.txt
+│   ├── export_system_tree_v1.py
+│   ├── matchmatrix_control_panel.py
+│   ├── matchmatrix_control_panel_V2.py
+│   ├── matchmatrix_control_panel_V3.py
+│   ├── matchmatrix_control_panel_V4.py
+│   ├── matchmatrix_control_panel_V5.py
+│   ├── matchmatrix_control_panel_V6.py
+│   ├── matchmatrix_control_panel_V7.py
+│   ├── matchmatrix_control_panel_V7_fixed.py
+│   ├── matchmatrix_control_panel_V8.py
+│   ├── matchmatrix_control_panel_V9.py
+│   ├── matchmatrix_ticket_studio_V2_10.py
+│   ├── matchmatrix_ticket_studio_V2_10_4.py
+│   ├── matchmatrix_ticket_studio_V2_10_5.py
+│   ├── matchmatrix_ticket_studio_V2_11.py
+│   ├── matchmatrix_ticket_studio_V2_12.py
+│   ├── matchmatrix_ticket_studio_V2_13.py
+│   ├── matchmatrix_ticket_studio_V2_14.py
+│   ├── matchmatrix_ticket_studio_V2_15_fix.py
+│   ├── matchmatrix_ticket_studio_V2_16.py
+│   ├── matchmatrix_ticket_studio_V2_17.py
+│   ├── matchmatrix_ticket_studio_V2_18.py
+│   ├── matchmatrix_ticket_studio_V2_19.py
+│   ├── matchmatrix_ticket_studio_V2_19_fix.py
+│   ├── matchmatrix_ticket_studio_V2_2.py
+│   ├── matchmatrix_ticket_studio_V2_20.py
+│   ├── matchmatrix_ticket_studio_V2_21.py
+│   ├── matchmatrix_ticket_studio_V2_22.py
+│   ├── matchmatrix_ticket_studio_V2_22_fix.py
+│   ├── matchmatrix_ticket_studio_V2_22_fix2.py
+│   ├── matchmatrix_ticket_studio_V2_22_fix3.py
+│   ├── matchmatrix_ticket_studio_V2_3.py
+│   ├── matchmatrix_ticket_studio_V2_4.py
+│   ├── matchmatrix_ticket_studio_V2_5.py
+│   ├── matchmatrix_ticket_studio_V2_6.py
+│   ├── matchmatrix_ticket_studio_V2_7.py
+│   ├── matchmatrix_ticket_studio_V2_9.py
+│   ├── matchmatrix_ticket_studio_V3.py
+│   ├── matchmatrix_ticket_studio_V3_fix1.py
+│   ├── matchmatrix_ticket_studio_V3_fix3.py
+│   ├── matchmatrix_ticket_studio_V3_fix4.py
+│   ├── matchmatrix_ticket_studio_V3_fix5.py
+│   ├── matchmatrix_ticket_studio_V3_fix6.py
+│   ├── matchmatrix_ticket_studio_V3_fix7.py
+│   └── matchmatrix_ticket_studio_V3_fix8.py
+├── workers\
+│   ├── build_ingest_planner_jobs.py
+│   ├── build_player_enrichment_jobs.py
+│   ├── extract_teams_from_fixtures_v2.py
+│   ├── fetch_player_profiles_batch_from_db_v1.py
+│   ├── fetch_player_profiles_by_ids_v1.py
+│   ├── pull_api_football_players_v4.py
+│   ├── run_audit_player_season_statistics_report_docker_v1.ps1
+│   ├── run_audit_player_season_statistics_report_v1.ps1
+│   ├── run_ingest_cycle_v3.py
+│   ├── run_ingest_planner_jobs.py
+│   ├── run_multisport_scheduler_v4.py
+│   ├── run_parse_api_sport_fixtures_v1.py
+│   ├── run_parse_api_sport_teams_v1.py
+│   ├── run_player_match_statistics_public_merge_v1.py
+│   ├── run_player_profiles_public_merge_v1.py
+│   ├── run_player_season_statistics_public_merge_v1.py
+│   ├── run_player_season_statistics_stage_parser_v1.py
+│   ├── run_players_bridge_v4.py
+│   ├── run_players_fetch_bk_only_v1.py
+│   ├── run_players_fetch_hk_only_v1.py
+│   ├── run_players_fetch_only_v1.py
+│   ├── run_players_parse_hk_only_v1.py
+│   ├── run_players_parse_only_v1.py
+│   ├── run_players_pipeline_hk_v1.py
+│   ├── run_players_pipeline_transitional_v1.py
+│   ├── run_players_public_merge_v2.py
+│   ├── run_players_season_stats_bridge_v3.py
+│   ├── run_scheduler_queue_executor_v2.py
+│   ├── run_team_coach_history_public_merge_v1.py
+│   ├── run_unified_staging_to_public_merge_v3.py
+│   └── test_db_connection.py
+├── zazipované_soubory\
+├── gitHub povel.txt
+├── run_player_audit_report.bat
+└── seznam.txt

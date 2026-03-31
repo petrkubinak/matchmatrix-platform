@@ -1,7 +1,21 @@
 backups\postgres_dumps\dump-matchmatrix-202602131248.sql | C:\MatchMatrix-platform\backups\postgres_dumps\dump-matchmatrix-202602131248.sql | 114242 | 1770983332.972
+CSV výstup\1.csv | C:\MatchMatrix-platform\CSV výstup\1.csv | 506 | 1774727884.3
+CSV výstup\2.csv | C:\MatchMatrix-platform\CSV výstup\2.csv | 539 | 1774730020.422
+CSV výstup\3.csv | C:\MatchMatrix-platform\CSV výstup\3.csv | 1562 | 1774772077.198
+CSV výstup\4.csv | C:\MatchMatrix-platform\CSV výstup\4.csv | 1013 | 1774871507.653
 db\audit\079_audit_player_season_statistics_report_v1.sql | C:\MatchMatrix-platform\db\audit\079_audit_player_season_statistics_report_v1.sql | 10082 | 1773666673.185
 db\audit\080_debug_player_stats_merge_mapping_v1.sql | C:\MatchMatrix-platform\db\audit\080_debug_player_stats_merge_mapping_v1.sql | 8166 | 1773673572.167
+db\audit\2026-03-26_audit_bad_theodds_aliases.sql | C:\MatchMatrix-platform\db\audit\2026-03-26_audit_bad_theodds_aliases.sql | 629 | 1774550482.289
+db\audit\2026-03-26_audit_dc_missing_for_matches.sql | C:\MatchMatrix-platform\db\audit\2026-03-26_audit_dc_missing_for_matches.sql | 1149 | 1774532155.679
+db\audit\2026-03-26_audit_market_codes_double_chance.sql | C:\MatchMatrix-platform\db\audit\2026-03-26_audit_market_codes_double_chance.sql | 1342 | 1774531917.038
+db\audit\2026-03-26_check_dc_payload_real.sql | C:\MatchMatrix-platform\db\audit\2026-03-26_check_dc_payload_real.sql | 168 | 1774532306.01
+db\audit\2026-03-26_football_duplicate_team_branches.sql | C:\MatchMatrix-platform\db\audit\2026-03-26_football_duplicate_team_branches.sql | 1743 | 1774550448.966
+db\audit\2026-03-26_no_match_detail_check.sql | C:\MatchMatrix-platform\db\audit\2026-03-26_no_match_detail_check.sql | 802 | 1774539241.212
+db\audit\2026-03-26_odds_coverage_audit.sql | C:\MatchMatrix-platform\db\audit\2026-03-26_odds_coverage_audit.sql | 5302 | 1774531846.443
+db\audit\2026-03-26_odds_coverage_check.sql | C:\MatchMatrix-platform\db\audit\2026-03-26_odds_coverage_check.sql | 658 | 1774538196.888
+db\audit\2026-03-26_serie_a_no_match_audit.sql | C:\MatchMatrix-platform\db\audit\2026-03-26_serie_a_no_match_audit.sql | 1792 | 1774538771.645
 db\audit\cleanup_player_season_stats_scope_95_2024_v1.sql | C:\MatchMatrix-platform\db\audit\cleanup_player_season_stats_scope_95_2024_v1.sql | 370 | 1773693956.65
+db\audit\Script.sql | C:\MatchMatrix-platform\db\audit\Script.sql | 5302 | 1774531765.471
 db\checks\001_daily_ingest_healthcheck.sql | C:\MatchMatrix-platform\db\checks\001_daily_ingest_healthcheck.sql | 718 | 1773067555.852
 db\checks\011_check_new_core_tables.sql | C:\MatchMatrix-platform\db\checks\011_check_new_core_tables.sql | 4409 | 1772792274.665
 db\checks\013_check_players_coverage.sql | C:\MatchMatrix-platform\db\checks\013_check_players_coverage.sql | 1242 | 1772913152.916
@@ -39,6 +53,7 @@ db\checks\244_check_vb_provider_maps.sql | C:\MatchMatrix-platform\db\checks\244
 db\checks\245_check_vb_staging_teams.sql | C:\MatchMatrix-platform\db\checks\245_check_vb_staging_teams.sql | 658 | 1774389660.512
 db\checks\MATCHMATRIX_DAILY_STATUS.sql | C:\MatchMatrix-platform\db\checks\MATCHMATRIX_DAILY_STATUS.sql | 1544 | 1772532548.267
 db\checks\MATCHMATRIX_WEEKLY_DIAGNOSTICS.sql | C:\MatchMatrix-platform\db\checks\MATCHMATRIX_WEEKLY_DIAGNOSTICS.sql | 1271 | 1772532185.126
+db\cleanup\2026-03-29_14_delete_duplicate_matches_football_data_uk.sql | C:\MatchMatrix-platform\db\cleanup\2026-03-29_14_delete_duplicate_matches_football_data_uk.sql | 1063 | 1774808926.705
 db\debug\010_check_vb_staging_teams_after_fix.sql | C:\MatchMatrix-platform\db\debug\010_check_vb_staging_teams_after_fix.sql | 165 | 1774425288.644
 db\debug\011_find_psql_path.ps1 | C:\MatchMatrix-platform\db\debug\011_find_psql_path.ps1 | 444 | 1774425485.416
 db\debug\020_reset_vb_teams_pending.sql | C:\MatchMatrix-platform\db\debug\020_reset_vb_teams_pending.sql | 261 | 1774434217.438
@@ -61,6 +76,9 @@ db\debug\039_audit_multisport_planner_unification.sql | C:\MatchMatrix-platform\
 db\debug\040_unify_multisport_planner_teams_fixtures.sql | C:\MatchMatrix-platform\db\debug\040_unify_multisport_planner_teams_fixtures.sql | 4487 | 1774462806.263
 db\debug\041_promote_bk_teams_target_12_deprioritize_40.sql | C:\MatchMatrix-platform\db\debug\041_promote_bk_teams_target_12_deprioritize_40.sql | 968 | 1774463717.984
 db\debug\042_deduplicate_bk_teams_target_12.sql | C:\MatchMatrix-platform\db\debug\042_deduplicate_bk_teams_target_12.sql | 563 | 1774463904.925
+db\debug\debug_ticket_block_A_source.sql | C:\MatchMatrix-platform\db\debug\debug_ticket_block_A_source.sql | 5722 | 1774770562.054
+db\debug\fix_mm_ui_run_tickets_dedup_odds.sql | C:\MatchMatrix-platform\db\debug\fix_mm_ui_run_tickets_dedup_odds.sql | 3740 | 1774770516.946
+db\fix\2026-03-26_cleanup_zero_usage_teams.sql | C:\MatchMatrix-platform\db\fix\2026-03-26_cleanup_zero_usage_teams.sql | 245 | 1774550401.822
 db\migrations\000_create_schema_migrations.sql | C:\MatchMatrix-platform\db\migrations\000_create_schema_migrations.sql | 469 | 1772541253.463
 db\migrations\001_create_table_seasons.sql | C:\MatchMatrix-platform\db\migrations\001_create_table_seasons.sql | 1271 | 1772790622.001
 db\migrations\002_create_table_players.sql | C:\MatchMatrix-platform\db\migrations\002_create_table_players.sql | 1741 | 1772790652.033
@@ -173,6 +191,19 @@ db\migrations\117_fix_ingest_targets_sport_codes.sql | C:\MatchMatrix-platform\d
 db\migrations\128_seed_bk_maintenance_top.sql | C:\MatchMatrix-platform\db\migrations\128_seed_bk_maintenance_top.sql | 563 | 1773994164.393
 db\migrations\131_seed_hk_maintenance_top.sql | C:\MatchMatrix-platform\db\migrations\131_seed_hk_maintenance_top.sql | 595 | 1773994516.025
 db\migrations\138_seed_api_sport_bk_ingest_entity_plan.sql | C:\MatchMatrix-platform\db\migrations\138_seed_api_sport_bk_ingest_entity_plan.sql | 900 | 1773995318.376
+db\migrations\2026-03-26_insert_theodds_aliases_auto.sql | C:\MatchMatrix-platform\db\migrations\2026-03-26_insert_theodds_aliases_auto.sql | 2274 | 1774539012.802
+db\migrations\2026-03-29_01_create_table_standings_rules.sql | C:\MatchMatrix-platform\db\migrations\2026-03-29_01_create_table_standings_rules.sql | 1975 | 1774783495.77
+db\migrations\2026-03-29_02_create_table_league_standings.sql | C:\MatchMatrix-platform\db\migrations\2026-03-29_02_create_table_league_standings.sql | 3891 | 1774784282.997
+db\migrations\2026-03-29_02_seed_standings_rules.sql | C:\MatchMatrix-platform\db\migrations\2026-03-29_02_seed_standings_rules.sql | 4004 | 1774783576.404
+db\migrations\2026-03-29_03_create_function_refresh_league_standings.sql | C:\MatchMatrix-platform\db\migrations\2026-03-29_03_create_function_refresh_league_standings.sql | 41 | 1774784395.127
+db\migrations\2026-03-29_06_create_table_product_active_leagues.sql | C:\MatchMatrix-platform\db\migrations\2026-03-29_06_create_table_product_active_leagues.sql | 1414 | 1774785404.054
+db\migrations\2026-03-29_11_create_function_refresh_product_league_standings.sql | C:\MatchMatrix-platform\db\migrations\2026-03-29_11_create_function_refresh_product_league_standings.sql | 7334 | 1774805951.578
+db\migrations\2026-03-29_12_fix_product_standings_season_filter.sql | C:\MatchMatrix-platform\db\migrations\2026-03-29_12_fix_product_standings_season_filter.sql | 9920 | 1774806578.696
+db\migrations\20260326_02_bournemouth_only_safe_merge.sql | C:\MatchMatrix-platform\db\migrations\20260326_02_bournemouth_only_safe_merge.sql | 5235 | 1774553361.298
+db\migrations\20260326_03_bournemouth_only_safe_merge_fix_aliases.sql | C:\MatchMatrix-platform\db\migrations\20260326_03_bournemouth_only_safe_merge_fix_aliases.sql | 4259 | 1774553552.954
+db\migrations\20260326_05_arsenal_belarus_merge_26871_into_13102.sql | C:\MatchMatrix-platform\db\migrations\20260326_05_arsenal_belarus_merge_26871_into_13102.sql | 5070 | 1774554774.829
+db\migrations\20260326_08_check_team_1_references.sql | C:\MatchMatrix-platform\db\migrations\20260326_08_check_team_1_references.sql | 1511 | 1774554714.237
+db\migrations\20260326_09_cleanup_team_1_into_11910.sql | C:\MatchMatrix-platform\db\migrations\20260326_09_cleanup_team_1_into_11910.sql | 4994 | 1774554857.701
 db\migrations\204_add_photo_url_to_staging_players_import.sql | C:\MatchMatrix-platform\db\migrations\204_add_photo_url_to_staging_players_import.sql | 76 | 1774183682.416
 db\migrations\206_fix_player_season_statistics_unique.sql | C:\MatchMatrix-platform\db\migrations\206_fix_player_season_statistics_unique.sql | 528 | 1774211137.954
 db\migrations\207_dedupe_player_season_statistics.sql | C:\MatchMatrix-platform\db\migrations\207_dedupe_player_season_statistics.sql | 1361 | 1774210956.969
@@ -192,6 +223,7 @@ db\migrations\246_fix_vb_entity_plan_teams.sql | C:\MatchMatrix-platform\db\migr
 db\migrations\246a_nastavení entit.sql | C:\MatchMatrix-platform\db\migrations\246a_nastavení entit.sql | 293 | 1774424963.612
 db\migrations\247_safe_backfill_entity_plan_base_sports.sql | C:\MatchMatrix-platform\db\migrations\247_safe_backfill_entity_plan_base_sports.sql | 836 | 1774425014.294
 db\migrations\250_insert_bk_test_planner_job.sql | C:\MatchMatrix-platform\db\migrations\250_insert_bk_test_planner_job.sql | 391 | 1774434312.159
+db\migrations\401_create_provider_entity_coverage.sql | C:\MatchMatrix-platform\db\migrations\401_create_provider_entity_coverage.sql | 6056 | 1774945841.854
 db\migrations\Script-9.sql | C:\MatchMatrix-platform\db\migrations\Script-9.sql | 2137 | 1774377914.004
 db\ops\022_create_ingest_runtime_config.sql | C:\MatchMatrix-platform\db\ops\022_create_ingest_runtime_config.sql | 560 | 1773389818.717
 db\ops\023_seed_ingest_runtime_config_free.sql | C:\MatchMatrix-platform\db\ops\023_seed_ingest_runtime_config_free.sql | 750 | 1773389874.841
@@ -262,6 +294,7 @@ db\seeds\096_seed_ingest_targets_from_league_import_plan.sql | C:\MatchMatrix-pl
 db\seeds\100_seed_ingest_targets_from_leagues.sql | C:\MatchMatrix-platform\db\seeds\100_seed_ingest_targets_from_leagues.sql | 1244 | 1773167666.728
 db\seeds\101_prioritize_ingest_targets.sql | C:\MatchMatrix-platform\db\seeds\101_prioritize_ingest_targets.sql | 1115 | 1773169176.343
 db\seeds\102_scheduler_queue.sql | C:\MatchMatrix-platform\db\seeds\102_scheduler_queue.sql | 1087 | 1773169944.474
+db\seeds\402_seed_provider_entity_coverage_initial_B.sql | C:\MatchMatrix-platform\db\seeds\402_seed_provider_entity_coverage_initial_B.sql | 17373 | 1774946902.759
 db\seeds\README.md | C:\MatchMatrix-platform\db\seeds\README.md | 194 | 1772804357.466
 db\sql\046_merge_player_season_statistics_live.sql | C:\MatchMatrix-platform\db\sql\046_merge_player_season_statistics_live.sql | 6677 | 1773870145.162
 db\sql\046a_check_player_season_duplicates.sql | C:\MatchMatrix-platform\db\sql\046a_check_player_season_duplicates.sql | 315 | 1773870507.296
@@ -313,7 +346,27 @@ db\sql\111_unified_staging_odds_stats.sql | C:\MatchMatrix-platform\db\sql\111_u
 db\sql\113_staging_indexes.sql | C:\MatchMatrix-platform\db\sql\113_staging_indexes.sql | 383 | 1773176294.62
 db\sql\114_sql_players_pipeline_audit_queries.sql | C:\MatchMatrix-platform\db\sql\114_sql_players_pipeline_audit_queries.sql | 2186 | 1773560749.341
 db\sql\13_compute_value_bets.sql | C:\MatchMatrix-platform\db\sql\13_compute_value_bets.sql | 2935 | 1772987012.938
+db\sql\315_create_ticket_history_base.sql | C:\MatchMatrix-platform\db\sql\315_create_ticket_history_base.sql | 1388 | 1774877474.801
+db\sql\316_insert_ticket_history_from_generated.sql | C:\MatchMatrix-platform\db\sql\316_insert_ticket_history_from_generated.sql | 1780 | 1774877763.33
+db\sql\317_view_ticket_history_summary.sql | C:\MatchMatrix-platform\db\sql\317_view_ticket_history_summary.sql | 781 | 1774877973.089
+db\sql\318_select_ticket_history_prediction.sql | C:\MatchMatrix-platform\db\sql\318_select_ticket_history_prediction.sql | 1683 | 1774878125.292
+db\sql\319_ticket_history_sport_features.sql | C:\MatchMatrix-platform\db\sql\319_ticket_history_sport_features.sql | 937 | 1774878838.112
+db\sql\321_mm_ticket_scenario_sport_features.sql | C:\MatchMatrix-platform\db\sql\321_mm_ticket_scenario_sport_features.sql | 959 | 1774880972.153
+db\sql\322_mm_ticket_scenario_rating_view.sql | C:\MatchMatrix-platform\db\sql\322_mm_ticket_scenario_rating_view.sql | 2162 | 1774881150.237
+db\sql\323_ticket_history_enrich_full.sql | C:\MatchMatrix-platform\db\sql\323_ticket_history_enrich_full.sql | 1246 | 1774881780.653
+db\sql\324_v_ticket_history_summary_enriched.sql | C:\MatchMatrix-platform\db\sql\324_v_ticket_history_summary_enriched.sql | 1020 | 1774882201.557
+db\sql\326_create_saved_tickets.sql | C:\MatchMatrix-platform\db\sql\326_create_saved_tickets.sql | 1490 | 1774883042.359
+db\sql\327_insert_generated_into_tickets.sql | C:\MatchMatrix-platform\db\sql\327_insert_generated_into_tickets.sql | 1002 | 1774883489.336
+db\sql\328_insert_generated_blocks_into_ticket_blocks.sql | C:\MatchMatrix-platform\db\sql\328_insert_generated_blocks_into_ticket_blocks.sql | 970 | 1774884415.231
+db\sql\329_ulozeni_run_tiketu.sql | C:\MatchMatrix-platform\db\sql\329_ulozeni_run_tiketu.sql | 719 | 1774896965.799
+db\sql\330_naplnění_ticket_blocks.sql | C:\MatchMatrix-platform\db\sql\330_naplnění_ticket_blocks.sql | 709 | 1774896974.587
+db\sql\331_naplnění_tiket_block_matches.sql | C:\MatchMatrix-platform\db\sql\331_naplnění_tiket_block_matches.sql | 1170 | 1774897341.004
+db\sql\332_save_generated_run_into_tickets.sql | C:\MatchMatrix-platform\db\sql\332_save_generated_run_into_tickets.sql | 6031 | 1774897452.158
+db\sql\333_insert_ticket_history_from_generated_run.sql | C:\MatchMatrix-platform\db\sql\333_insert_ticket_history_from_generated_run.sql | 6803 | 1774898311.776
+db\sql\334_update_ticket_history_from_generated_run.sql | C:\MatchMatrix-platform\db\sql\334_update_ticket_history_from_generated_run.sql | 1665 | 1774898670.543
+db\sql\335_create_function_mm_save_generated_run_full.sql | C:\MatchMatrix-platform\db\sql\335_create_function_mm_save_generated_run_full.sql | 14330 | 1774899211.528
 db\sql\Script-14.sql | C:\MatchMatrix-platform\db\sql\Script-14.sql | 6677 | 1773871370.116
+db\sql\Script.sql | C:\MatchMatrix-platform\db\sql\Script.sql | 2251 | 1774882440.266
 db\sql\views\120_v_ticketmatrix_week_best_odds.sql | C:\MatchMatrix-platform\db\sql\views\120_v_ticketmatrix_week_best_odds.sql | 1204 | 1772740436.439
 db\views\01_vw_generated_ticket_matches.sql | C:\MatchMatrix-platform\db\views\01_vw_generated_ticket_matches.sql | 1363 | 1772959198.207
 db\views\02_vw_ticket_match_results.sql | C:\MatchMatrix-platform\db\views\02_vw_ticket_match_results.sql | 846 | 1772959231.489
@@ -365,149 +418,183 @@ db\views\198_create_v_ops_bk_top_runnable_jobs.sql | C:\MatchMatrix-platform\db\
 db\views\199_create_v_ops_bk_core_full_job_catalog.sql | C:\MatchMatrix-platform\db\views\199_create_v_ops_bk_core_full_job_catalog.sql | 715 | 1774085235.699
 db\views\19_vw_block_candidate_groups.sql | C:\MatchMatrix-platform\db\views\19_vw_block_candidate_groups.sql | 2609 | 1773089001.48
 db\views\201_create_v_ops_bk_core_runnable_jobs.sql | C:\MatchMatrix-platform\db\views\201_create_v_ops_bk_core_runnable_jobs.sql | 652 | 1774085411.716
+db\views\2026-03-29_04_create_view_v_league_standings_enriched.sql | C:\MatchMatrix-platform\db\views\2026-03-29_04_create_view_v_league_standings_enriched.sql | 1746 | 1774784640.123
+db\views\2026-03-29_08_create_view_v_current_product_standings.sql | C:\MatchMatrix-platform\db\views\2026-03-29_08_create_view_v_current_product_standings.sql | 2044 | 1774786141.375
+db\views\2026-03-29_16_recreate_view_v_current_product_standings.sql | C:\MatchMatrix-platform\db\views\2026-03-29_16_recreate_view_v_current_product_standings.sql | 856 | 1774809293.968
 db\views\202_create_v_ops_hk_top_full_runnable_jobs.sql | C:\MatchMatrix-platform\db\views\202_create_v_ops_hk_top_full_runnable_jobs.sql | 651 | 1774085740.541
+db\views\336_fix_view_vw_ticket_summary_latest_odds.sql | C:\MatchMatrix-platform\db\views\336_fix_view_vw_ticket_summary_latest_odds.sql | 2976 | 1774902196.054
+db\views\337_fix_vw_ticket_summary_with_dc_fallback.sql | C:\MatchMatrix-platform\db\views\337_fix_vw_ticket_summary_with_dc_fallback.sql | 5406 | 1774902851.956
+db\views\403_view_provider_entity_status.sql | C:\MatchMatrix-platform\db\views\403_view_provider_entity_status.sql | 2634 | 1774948167.271
+db\views\404_celkový_přehled_Databáze.sql | C:\MatchMatrix-platform\db\views\404_celkový_přehled_Databáze.sql | 39 | 1774951139.243
+db\views\404_view_dashboard_summary.sql | C:\MatchMatrix-platform\db\views\404_view_dashboard_summary.sql | 1263 | 1774950707.855
+db\views\405_přehled_co_je_spustitelné_.sql | C:\MatchMatrix-platform\db\views\405_přehled_co_je_spustitelné_.sql | 442 | 1774951287.9
+db\views\405_view_run_ready_queue.sql | C:\MatchMatrix-platform\db\views\405_view_run_ready_queue.sql | 3179 | 1774951117.339
+db\views\406_view_panel_run_control.sql | C:\MatchMatrix-platform\db\views\406_view_panel_run_control.sql | 3548 | 1774953884.571
 db\views\Script.sql | C:\MatchMatrix-platform\db\views\Script.sql | 1175 | 1774039710.469
 docs\1) infradocker-compose.yml.txt | C:\MatchMatrix-platform\docs\1) infradocker-compose.yml.txt | 1076 | 1770740522.493
 docs\2) infradbseed_v1.sql.txt | C:\MatchMatrix-platform\docs\2) infradbseed_v1.sql.txt | 5691 | 1770740602.435
 docs\GitHub\Nejčastější workflow (to budeš použ.txt | C:\MatchMatrix-platform\docs\GitHub\Nejčastější workflow (to budeš použ.txt | 1012 | 1773865486.461
 docs\GitHub\Super. Tohle je Git záchrana, ktero.txt | C:\MatchMatrix-platform\docs\GitHub\Super. Tohle je Git záchrana, ktero.txt | 1556 | 1773865305.359
-docs\komunikace s chatGPT\# MATCHMATRIX – ZÁPIS (2026-03-23).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\# MATCHMATRIX – ZÁPIS (2026-03-23).md | 2593 | 1774278895.04
-docs\komunikace s chatGPT\20260223\MATCHMATRIX – API-SPORTS INTEGRATIO.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260223\MATCHMATRIX – API-SPORTS INTEGRATIO.txt | 2717 | 1771845576.741
-docs\komunikace s chatGPT\20260227\leagues_202602272234.csv | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260227\leagues_202602272234.csv | 168321 | 1772228083.717
-docs\komunikace s chatGPT\20260227\světové ligy.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260227\světové ligy.txt | 155834 | 1772203420.681
-docs\komunikace s chatGPT\20260301\denní záznamy z deníku.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260301\denní záznamy z deníku.txt | 22350 | 1772401014.307
-docs\komunikace s chatGPT\20260302\2026-03-02_eu_leagues_api_football_apply.sql | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260302\2026-03-02_eu_leagues_api_football_apply.sql | 10340 | 1772480543.15
-docs\komunikace s chatGPT\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED.sql | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED.sql | 10557 | 1772480935.336
-docs\komunikace s chatGPT\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED2.sql | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED2.sql | 10585 | 1772481760.567
-docs\komunikace s chatGPT\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED4.sql | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED4.sql | 10556 | 1772483899.823
-docs\komunikace s chatGPT\20260302\EU_leagues.csv | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260302\EU_leagues.csv | 22738 | 1772465872.345
-docs\komunikace s chatGPT\20260302\Evropa do MatchMatrix.csv | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260302\Evropa do MatchMatrix.csv | 22594 | 1772569437.738
-docs\komunikace s chatGPT\20260303\22 lig TOP8.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260303\22 lig TOP8.txt | 2222 | 1772572419.123
-docs\komunikace s chatGPT\20260303\EU_tymy.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260303\EU_tymy.txt | 7326 | 1772569601.456
-docs\komunikace s chatGPT\20260303\ingest_targets.csv | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260303\ingest_targets.csv | 21475 | 1772523600.85
-docs\komunikace s chatGPT\20260303\Ticket Matrix _ Match Matrix – webovky  Copilot.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260303\Ticket Matrix _ Match Matrix – webovky  Copilot.txt | 10742 | 1772538147.765
-docs\komunikace s chatGPT\20260304\2026-03-04_api_football_backfill.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260304\2026-03-04_api_football_backfill.md | 3545 | 1772618554.611
-docs\komunikace s chatGPT\20260304\pipeline_overview.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260304\pipeline_overview.md | 3032 | 1772620427.66
-docs\komunikace s chatGPT\20260305\MatchMatrix – aktuální stav projekt.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260305\MatchMatrix – aktuální stav projekt.md | 4096 | 1772741812.858
-docs\komunikace s chatGPT\20260305\TicketMatrix_Backend_Setup_2026-03-05.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260305\TicketMatrix_Backend_Setup_2026-03-05.md | 3865 | 1772704340.778
-docs\komunikace s chatGPT\20260306 - cílová architektura V2\league_provider_map.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260306 - cílová architektura V2\league_provider_map.txt | 42400 | 1772833798.512
-docs\komunikace s chatGPT\20260306 - cílová architektura V2\MatchMatrix – mapa databáze.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260306 - cílová architektura V2\MatchMatrix – mapa databáze.md | 5362 | 1772797382.988
-docs\komunikace s chatGPT\20260306 - cílová architektura V2\MatchMatrix_2_0_cilova_architektura.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260306 - cílová architektura V2\MatchMatrix_2_0_cilova_architektura.md | 11009 | 1772783187.719
-docs\komunikace s chatGPT\20260306 - cílová architektura V2\matchmatrix_daily_summary_2026-03-06.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260306 - cílová architektura V2\matchmatrix_daily_summary_2026-03-06.md | 4397 | 1772836483.979
-docs\komunikace s chatGPT\20260306 - cílová architektura V2\matchmatrix_database_map_and_fill_plan.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260306 - cílová architektura V2\matchmatrix_database_map_and_fill_plan.md | 11176 | 1772797586.953
-docs\komunikace s chatGPT\20260306 - cílová architektura V2\matchmatrix_platform_plan.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260306 - cílová architektura V2\matchmatrix_platform_plan.md | 3997 | 1772782342.186
-docs\komunikace s chatGPT\20260306 - cílová architektura V2\matchmatrix_project_structure_popis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260306 - cílová architektura V2\matchmatrix_project_structure_popis.md | 3604 | 1772788525.148
-docs\komunikace s chatGPT\20260306 - cílová architektura V2\public.leagues.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260306 - cílová architektura V2\public.leagues.txt | 424865 | 1772806078.037
-docs\komunikace s chatGPT\20260307\2026-03-07_DAILY_STATUS_20260307_195908.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260307\2026-03-07_DAILY_STATUS_20260307_195908.txt | 5276 | 1772909949.062
-docs\komunikace s chatGPT\20260307\2026-03-07_WEEKLY_DIAGNOSTICS_20260307_195908.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260307\2026-03-07_WEEKLY_DIAGNOSTICS_20260307_195908.txt | 7207 | 1772909949.326
-docs\komunikace s chatGPT\20260307\2026-03-07_WEEKLY_DIAGNOSTICS_20260307_200138.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260307\2026-03-07_WEEKLY_DIAGNOSTICS_20260307_200138.txt | 7207 | 1772910098.658
-docs\komunikace s chatGPT\20260307\Datum 2026-03-07.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260307\Datum 2026-03-07.md | 6231 | 1772910708.681
-docs\komunikace s chatGPT\20260307\MATCHMATRIX-PLATFORM system check.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260307\MATCHMATRIX-PLATFORM system check.md | 3131 | 1772910080.459
-docs\komunikace s chatGPT\20260307\MatchMatrix_MASTER_BLUEPRINT.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260307\MatchMatrix_MASTER_BLUEPRINT.md | 5008 | 1772919947.438
-docs\komunikace s chatGPT\20260307\matchmatrix_next_steps_ticket_engine_zaverecny_zapis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260307\matchmatrix_next_steps_ticket_engine_zaverecny_zapis.md | 4552 | 1772923726.467
-docs\komunikace s chatGPT\20260307\matchmatrix_system_overview (1).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260307\matchmatrix_system_overview (1).md | 5363 | 1772919848.306
-docs\komunikace s chatGPT\20260307\matchmatrix_system_overview.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260307\matchmatrix_system_overview.md | 5363 | 1772918551.403
-docs\komunikace s chatGPT\20260308\2026-03-08_pipeline_predictions_update.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260308\2026-03-08_pipeline_predictions_update.md | 3741 | 1772972570.07
-docs\komunikace s chatGPT\20260308\api_raw_payloads.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260308\api_raw_payloads.txt | 7210 | 1772999912.89
-docs\komunikace s chatGPT\20260309\# MatchMatrix – režimy tvorby tiket.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260309\# MatchMatrix – režimy tvorby tiket.md | 4278 | 1773090149.433
-docs\komunikace s chatGPT\20260309\20260309_MatchMatrix_Vývojový_zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260309\20260309_MatchMatrix_Vývojový_zápis.md | 3998 | 1773068733.959
-docs\komunikace s chatGPT\20260310\MATCHMATRIX – CELKOVÁ ARCHITEKTURA.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260310\MATCHMATRIX – CELKOVÁ ARCHITEKTURA.md | 4616 | 1773143471.422
-docs\komunikace s chatGPT\20260310\MatchMatrix_log_2026-03-10_unified_staging_bridge.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260310\MatchMatrix_log_2026-03-10_unified_staging_bridge.md | 4868 | 1773181929.162
-docs\komunikace s chatGPT\20260310\PROJECT BUNDLE MatchMatrix_TiketMatrix_Gemini.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260310\PROJECT BUNDLE MatchMatrix_TiketMatrix_Gemini.txt | 2958 | 1773136746.517
-docs\komunikace s chatGPT\20260311\# MatchMatrix – Pipeline Stabilization.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260311\# MatchMatrix – Pipeline Stabilization.md | 4481 | 1773238835.39
-docs\komunikace s chatGPT\20260311\741_public_merge_schema_check.sql.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260311\741_public_merge_schema_check.sql.txt | 21700 | 1773219047.758
-docs\komunikace s chatGPT\20260311\MatchMatrix – pracovní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260311\MatchMatrix – pracovní zápis.md | 12282 | 1773266552.183
-docs\komunikace s chatGPT\20260312\Dotazy 1-6.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260312\Dotazy 1-6.txt | 888 | 1773388604.626
-docs\komunikace s chatGPT\20260312\MatchMatrix – pracovní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260312\MatchMatrix – pracovní zápis.md | 4044 | 1773352509.573
-docs\komunikace s chatGPT\20260313\035_ingest_planner_checklist.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260313\035_ingest_planner_checklist.md | 1281 | 1773423745.551
-docs\komunikace s chatGPT\20260313\Data - ingest_targets.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260313\Data - ingest_targets.txt | 827034 | 1773411048.357
-docs\komunikace s chatGPT\20260313\Data - job_runs.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260313\Data - job_runs.txt | 301342 | 1773431607.09
-docs\komunikace s chatGPT\20260313\MatchMatrix – Ingest Architecture &.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260313\MatchMatrix – Ingest Architecture &.txt | 4913 | 1773422672.633
-docs\komunikace s chatGPT\20260313\MatchMatrix – pracovní zápis.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260313\MatchMatrix – pracovní zápis.txt | 4790 | 1773429826.976
-docs\komunikace s chatGPT\20260313\MatchMatrix – pracovní zápis_2.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260313\MatchMatrix – pracovní zápis_2.txt | 9922 | 1773439659.202
-docs\komunikace s chatGPT\20260314\# MatchMatrix – pracovní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260314\# MatchMatrix – pracovní zápis.md | 5779 | 1773559709.445
-docs\komunikace s chatGPT\20260314\MATCHMATRIX_DATA_PIPELINE_MAP.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260314\MATCHMATRIX_DATA_PIPELINE_MAP.md | 5625 | 1773517403.717
-docs\komunikace s chatGPT\20260314\MATCHMATRIX_DATABASE_BIBLE.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260314\MATCHMATRIX_DATABASE_BIBLE.md | 5267 | 1773517859.428
-docs\komunikace s chatGPT\20260314\MATCHMATRIX_DEVELOPER_DOCUMENTATION.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260314\MATCHMATRIX_DEVELOPER_DOCUMENTATION.md | 7203 | 1773517525.702
-docs\komunikace s chatGPT\20260314\MATCHMATRIX_FULL_TECHNICAL_DESCRIPTION.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260314\MATCHMATRIX_FULL_TECHNICAL_DESCRIPTION.md | 7552 | 1773517573.35
-docs\komunikace s chatGPT\20260314\MATCHMATRIX_SYSTEM_ARCHITECTURE.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260314\MATCHMATRIX_SYSTEM_ARCHITECTURE.md | 6168 | 1773517463.534
-docs\komunikace s chatGPT\20260315\# MatchMatrix – pracovní zápis.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260315\# MatchMatrix – pracovní zápis.txt | 5989 | 1773581471.783
-docs\komunikace s chatGPT\20260315\MatchMatrix – pracovní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260315\MatchMatrix – pracovní zápis.md | 4888 | 1773611027.7
-docs\komunikace s chatGPT\20260315\players_pipeline_rozsireni_runbook.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260315\players_pipeline_rozsireni_runbook.md | 4273 | 1773560721.497
-docs\komunikace s chatGPT\20260316\MatchMatrix – vývojový zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260316\MatchMatrix – vývojový zápis.md | 5682 | 1773698719.443
-docs\komunikace s chatGPT\20260317\# MatchMatrix – pracovní zápis.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260317\# MatchMatrix – pracovní zápis.txt | 4795 | 1773785674.251
-docs\komunikace s chatGPT\20260317\zhodnocení.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260317\zhodnocení.md | 4305 | 1773731788.846
-docs\komunikace s chatGPT\20260318\# MatchMatrix – pracovní zápis.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\# MatchMatrix – pracovní zápis.txt | 5511 | 1773866528.934
-docs\komunikace s chatGPT\20260318\072_export_missing_player_profile_ids.sql.csv | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\072_export_missing_player_profile_ids.sql.csv | 2125 | 1773930233.844
-docs\komunikace s chatGPT\20260318\Celková architektura MatchMatrix (z.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Celková architektura MatchMatrix (z.txt | 23470 | 1773860916.612
-docs\komunikace s chatGPT\20260318\Data - api_budget_today.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - api_budget_today.txt | 2985 | 1773831831.615
-docs\komunikace s chatGPT\20260318\Data - ingest_entity_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - ingest_entity_plan.txt | 3706 | 1773831731.607
-docs\komunikace s chatGPT\20260318\Data - ingest_planner.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - ingest_planner.txt | 1224 | 1773833664.808
-docs\komunikace s chatGPT\20260318\Data - ingest_planner_queue.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - ingest_planner_queue.txt | 7968 | 1773831808.5
-docs\komunikace s chatGPT\20260318\Data - player_external_identt.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - player_external_identt.txt | 3731 | 1773838153.061
-docs\komunikace s chatGPT\20260318\Data - player_season_stat.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - player_season_stat.txt | 3731 | 1773838126.437
-docs\komunikace s chatGPT\20260318\Data - players.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - players.txt | 2663 | 1773837755.507
-docs\komunikace s chatGPT\20260318\Data - posledni_hraci.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - posledni_hraci.txt | 3731 | 1773838225.57
-docs\komunikace s chatGPT\20260318\Data - provider_jobs.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - provider_jobs.txt | 11193 | 1773831678.227
-docs\komunikace s chatGPT\20260318\Data - sports_import_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - sports_import_plan.txt | 4752 | 1773831598.855
-docs\komunikace s chatGPT\20260318\Data - table_name.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - table_name.txt | 430 | 1773833728.303
-docs\komunikace s chatGPT\20260318\Data - team_provider_map.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - team_provider_map.txt | 2272 | 1773835018.347
-docs\komunikace s chatGPT\20260318\Data - teams.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - teams.txt | 4544 | 1773834938.736
-docs\komunikace s chatGPT\20260318\Data - v_job_runs_recent.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\Data - v_job_runs_recent.txt | 9410 | 1773833689.902
-docs\komunikace s chatGPT\20260318\MATCHMATRIX INGEST CYCLE V3.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\MATCHMATRIX INGEST CYCLE V3.txt | 37207 | 1773860987.69
-docs\komunikace s chatGPT\20260318\schema.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\schema.txt | 22600 | 1773869416.556
-docs\komunikace s chatGPT\20260318\stg_provider_fixtures.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\stg_provider_fixtures.txt | 1344 | 1773839697.829
-docs\komunikace s chatGPT\20260318\stg_provider_players.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260318\stg_provider_players.txt | 216103 | 1773838342.429
-docs\komunikace s chatGPT\20260319\Ano. Teď už je vidět, že DB není po.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260319\Ano. Teď už je vidět, že DB není po.txt | 5627 | 1773939491.634
-docs\komunikace s chatGPT\20260319\MatchMatrix_denní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260319\MatchMatrix_denní zápis.md | 2272 | 1773955383.014
-docs\komunikace s chatGPT\20260319\matchmatrix_handover_2026-03-19_players_pipeline.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260319\matchmatrix_handover_2026-03-19_players_pipeline.md | 6776 | 1773942196.534
-docs\komunikace s chatGPT\20260320\MatchMatrix – podrobný zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\MatchMatrix – podrobný zápis.md | 10473 | 1774008451.711
-docs\komunikace s chatGPT\20260320\MatchMatrix – pracovní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\MatchMatrix – pracovní zápis.md | 10311 | 1774040498.801
-docs\komunikace s chatGPT\20260320\MatchMatrix – zápis (FB_EU → football_data vrstva + audit historie).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\MatchMatrix – zápis (FB_EU → football_data vrstva + audit historie).md | 3489 | 1774004253.813
-docs\komunikace s chatGPT\20260320\MatchMatrix – zápis (krok 147–151 m.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\MatchMatrix – zápis (krok 147–151 m.txt | 2674 | 1774001880.532
-docs\komunikace s chatGPT\20260320\MatchMatrix_zapis_2026-03-20_multisport_podminka.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\MatchMatrix_zapis_2026-03-20_multisport_podminka.md | 3179 | 1773996751.312
-docs\komunikace s chatGPT\20260320\SQL\146_audit.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\146_audit.txt | 4420 | 1773998263.558
-docs\komunikace s chatGPT\20260320\SQL\146_audit_ops.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\146_audit_ops.txt | 105 | 1773998283.684
-docs\komunikace s chatGPT\20260320\SQL\146_audit_ops_3.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\146_audit_ops_3.txt | 140 | 1773998312.032
-docs\komunikace s chatGPT\20260320\SQL\146_planner.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\146_planner.txt | 1887 | 1773999186.355
-docs\komunikace s chatGPT\20260320\SQL\provider_sport_matrix.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\provider_sport_matrix.txt | 4721 | 1773999988.445
-docs\komunikace s chatGPT\20260320\SQL\sport_entity_rules.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260320\SQL\sport_entity_rules.txt | 9213 | 1773999860.707
-docs\komunikace s chatGPT\20260321\MatchMatrix – navazovací zápis.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260321\MatchMatrix – navazovací zápis.txt | 11123 | 1774134301.905
-docs\komunikace s chatGPT\20260322\MatchMatrix – navazovací zápis (Ing.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260322\MatchMatrix – navazovací zápis (Ing.txt | 3101 | 1774181241.17
-docs\komunikace s chatGPT\20260322\MATCHMATRIX – NAVAZOVACÍ ZÁPIS .md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260322\MATCHMATRIX – NAVAZOVACÍ ZÁPIS .md | 3131 | 1774206489.363
-docs\komunikace s chatGPT\20260322\MATCHMATRIX – ZÁPIS (DNES).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260322\MATCHMATRIX – ZÁPIS (DNES).md | 3904 | 1774215953.717
-docs\komunikace s chatGPT\20260323\# MATCHMATRIX – ZÁPIS (2026-03-23).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\# MATCHMATRIX – ZÁPIS (2026-03-23).md | 2593 | 1774294732.687
-docs\komunikace s chatGPT\20260323\229_ops.ingest_entity_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\229_ops.ingest_entity_plan.txt | 5120 | 1774298724.244
-docs\komunikace s chatGPT\20260323\229_ops.ingest_entity_plan_4.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\229_ops.ingest_entity_plan_4.txt | 338 | 1774298813.218
-docs\komunikace s chatGPT\20260323\229_ops.ingest_targets.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\229_ops.ingest_targets.txt | 120 | 1774298777.95
-docs\komunikace s chatGPT\20260323\229_ops.provider_jobs.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\229_ops.provider_jobs.txt | 7744 | 1774298750.231
-docs\komunikace s chatGPT\20260323\Aktuální run_group rozpad v ops.ingest_entity_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\Aktuální run_group rozpad v ops.ingest_entity_plan.txt | 8554 | 1774296476.06
-docs\komunikace s chatGPT\20260323\Aktuální run_group rozpad v ops.ingest_targets.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\Aktuální run_group rozpad v ops.ingest_targets.txt | 885 | 1774296456.321
-docs\komunikace s chatGPT\20260323\bod 1.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\bod 1.txt | 1470 | 1774300363.121
-docs\komunikace s chatGPT\20260323\bod 2.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\bod 2.txt | 6693 | 1774300377.181
-docs\komunikace s chatGPT\20260323\bod 3.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\bod 3.txt | 9315 | 1774300275.872
-docs\komunikace s chatGPT\20260323\bod 4.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\bod 4.txt | 650 | 1774300292.729
-docs\komunikace s chatGPT\20260323\Ingest planner.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\Ingest planner.txt | 3168 | 1774270374.516
-docs\komunikace s chatGPT\20260323\ingest_entity_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\ingest_entity_plan.txt | 30926 | 1774297063.642
-docs\komunikace s chatGPT\20260323\Jak teď vypadá football rozpad.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\Jak teď vypadá football rozpad.txt | 122990 | 1774296530.503
-docs\komunikace s chatGPT\20260323\Jak vypadají hotové HK_BK cíle.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\Jak vypadají hotové HK_BK cíle.txt | 28086 | 1774296708.337
-docs\komunikace s chatGPT\20260323\MATCHMATRIX – ZÁPIS (2026-03-23).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\MATCHMATRIX – ZÁPIS (2026-03-23).md | 3124 | 1774294673.121
-docs\komunikace s chatGPT\20260323\MATCHMATRIX – ZÁPIS (API-SPORT + AP.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\MATCHMATRIX – ZÁPIS (API-SPORT + AP.md | 3477 | 1774364534.648
-docs\komunikace s chatGPT\20260323\MATCHMATRIX – ZÁPIS (DNES).txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\MATCHMATRIX – ZÁPIS (DNES).txt | 3331 | 1774303889.893
-docs\komunikace s chatGPT\20260323\ops.ingest_entity_plan-1774298504122.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\ops.ingest_entity_plan-1774298504122.txt | 30926 | 1774298504.131
-docs\komunikace s chatGPT\20260323\ops.ingest_entity_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\ops.ingest_entity_plan.txt | 6956 | 1774298292.096
-docs\komunikace s chatGPT\20260323\ops.provider_jobs.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260323\ops.provider_jobs.txt | 50836 | 1774298063.954
-docs\komunikace s chatGPT\20260324\Denní Zápis - Aktuální stav (klíč).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260324\Denní Zápis - Aktuální stav (klíč).md | 3008 | 1774391108.162
-docs\komunikace s chatGPT\20260324\MATCHMATRIX – ZÁPIS (Volleyball + s.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260324\MATCHMATRIX – ZÁPIS (Volleyball + s.md | 2425 | 1774381009.701
-docs\komunikace s chatGPT\20260324\MATCHMATRIX – ZÁPIS (Volleyball).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260324\MATCHMATRIX – ZÁPIS (Volleyball).md | 2593 | 1774381157.076
-docs\komunikace s chatGPT\20260325\ingest_planer_1.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260325\ingest_planer_1.txt | 1260 | 1774462913.014
-docs\komunikace s chatGPT\20260325\ingest_planer_2.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260325\ingest_planer_2.txt | 20433 | 1774462931.323
-docs\komunikace s chatGPT\20260325\MATCHMATRIX – DENNÍ ZÁPIS-večer.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260325\MATCHMATRIX – DENNÍ ZÁPIS-večer.md | 3235 | 1774466039.036
-docs\komunikace s chatGPT\20260325\MATCHMATRIX – DENNÍ ZÁPIS.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260325\MATCHMATRIX – DENNÍ ZÁPIS.md | 2992 | 1774449584.864
-docs\komunikace s chatGPT\20260325\MatchMatrix – zápis dnešního postup.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260325\MatchMatrix – zápis dnešního postup.md | 6669 | 1774438946.866
-docs\komunikace s chatGPT\20260325\MATCHMATRIX – ZÁPIS NA ZÍTRA.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260325\MATCHMATRIX – ZÁPIS NA ZÍTRA.md | 2234 | 1774472610.652
-docs\komunikace s chatGPT\20260326\MatchMatrix – podrobný zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\20260326\MatchMatrix – podrobný zápis.md | 7059 | 1774512705.924
-docs\komunikace s chatGPT\spoluprace_s_ai_operacni_rezim.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\spoluprace_s_ai_operacni_rezim.md | 619 | 1772964570.054
+docs\komunikace s chatGPT\02_2026\20260223\MATCHMATRIX – API-SPORTS INTEGRATIO.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\02_2026\20260223\MATCHMATRIX – API-SPORTS INTEGRATIO.txt | 2717 | 1771845576.741
+docs\komunikace s chatGPT\02_2026\20260227\leagues_202602272234.csv | C:\MatchMatrix-platform\docs\komunikace s chatGPT\02_2026\20260227\leagues_202602272234.csv | 168321 | 1772228083.717
+docs\komunikace s chatGPT\02_2026\20260227\světové ligy.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\02_2026\20260227\světové ligy.txt | 155834 | 1772203420.681
+docs\komunikace s chatGPT\03_2026\# MATCHMATRIX – ZÁPIS (2026-03-23).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\# MATCHMATRIX – ZÁPIS (2026-03-23).md | 2593 | 1774278895.04
+docs\komunikace s chatGPT\03_2026\20260301\denní záznamy z deníku.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260301\denní záznamy z deníku.txt | 22350 | 1772401014.307
+docs\komunikace s chatGPT\03_2026\20260302\2026-03-02_eu_leagues_api_football_apply.sql | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260302\2026-03-02_eu_leagues_api_football_apply.sql | 10340 | 1772480543.15
+docs\komunikace s chatGPT\03_2026\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED.sql | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED.sql | 10557 | 1772480935.336
+docs\komunikace s chatGPT\03_2026\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED2.sql | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED2.sql | 10585 | 1772481760.567
+docs\komunikace s chatGPT\03_2026\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED4.sql | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260302\2026-03-02_eu_leagues_api_football_apply_FIXED4.sql | 10556 | 1772483899.823
+docs\komunikace s chatGPT\03_2026\20260302\EU_leagues.csv | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260302\EU_leagues.csv | 22738 | 1772465872.345
+docs\komunikace s chatGPT\03_2026\20260302\Evropa do MatchMatrix.csv | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260302\Evropa do MatchMatrix.csv | 22594 | 1772569437.738
+docs\komunikace s chatGPT\03_2026\20260303\22 lig TOP8.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260303\22 lig TOP8.txt | 2222 | 1772572419.123
+docs\komunikace s chatGPT\03_2026\20260303\EU_tymy.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260303\EU_tymy.txt | 7326 | 1772569601.456
+docs\komunikace s chatGPT\03_2026\20260303\ingest_targets.csv | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260303\ingest_targets.csv | 21475 | 1772523600.85
+docs\komunikace s chatGPT\03_2026\20260303\Ticket Matrix _ Match Matrix – webovky  Copilot.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260303\Ticket Matrix _ Match Matrix – webovky  Copilot.txt | 10742 | 1772538147.765
+docs\komunikace s chatGPT\03_2026\20260304\2026-03-04_api_football_backfill.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260304\2026-03-04_api_football_backfill.md | 3545 | 1772618554.611
+docs\komunikace s chatGPT\03_2026\20260304\pipeline_overview.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260304\pipeline_overview.md | 3032 | 1772620427.66
+docs\komunikace s chatGPT\03_2026\20260305\MatchMatrix – aktuální stav projekt.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260305\MatchMatrix – aktuální stav projekt.md | 4096 | 1772741812.858
+docs\komunikace s chatGPT\03_2026\20260305\TicketMatrix_Backend_Setup_2026-03-05.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260305\TicketMatrix_Backend_Setup_2026-03-05.md | 3865 | 1772704340.778
+docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\league_provider_map.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\league_provider_map.txt | 42400 | 1772833798.512
+docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\MatchMatrix – mapa databáze.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\MatchMatrix – mapa databáze.md | 5362 | 1772797382.988
+docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\MatchMatrix_2_0_cilova_architektura.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\MatchMatrix_2_0_cilova_architektura.md | 11009 | 1772783187.719
+docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\matchmatrix_daily_summary_2026-03-06.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\matchmatrix_daily_summary_2026-03-06.md | 4397 | 1772836483.979
+docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\matchmatrix_database_map_and_fill_plan.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\matchmatrix_database_map_and_fill_plan.md | 11176 | 1772797586.953
+docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\matchmatrix_platform_plan.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\matchmatrix_platform_plan.md | 3997 | 1772782342.186
+docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\matchmatrix_project_structure_popis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\matchmatrix_project_structure_popis.md | 3604 | 1772788525.148
+docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\public.leagues.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260306 - cílová architektura V2\public.leagues.txt | 424865 | 1772806078.037
+docs\komunikace s chatGPT\03_2026\20260307\2026-03-07_DAILY_STATUS_20260307_195908.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260307\2026-03-07_DAILY_STATUS_20260307_195908.txt | 5276 | 1772909949.062
+docs\komunikace s chatGPT\03_2026\20260307\2026-03-07_WEEKLY_DIAGNOSTICS_20260307_195908.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260307\2026-03-07_WEEKLY_DIAGNOSTICS_20260307_195908.txt | 7207 | 1772909949.326
+docs\komunikace s chatGPT\03_2026\20260307\2026-03-07_WEEKLY_DIAGNOSTICS_20260307_200138.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260307\2026-03-07_WEEKLY_DIAGNOSTICS_20260307_200138.txt | 7207 | 1772910098.658
+docs\komunikace s chatGPT\03_2026\20260307\Datum 2026-03-07.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260307\Datum 2026-03-07.md | 6231 | 1772910708.681
+docs\komunikace s chatGPT\03_2026\20260307\MATCHMATRIX-PLATFORM system check.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260307\MATCHMATRIX-PLATFORM system check.md | 3131 | 1772910080.459
+docs\komunikace s chatGPT\03_2026\20260307\MatchMatrix_MASTER_BLUEPRINT.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260307\MatchMatrix_MASTER_BLUEPRINT.md | 5008 | 1772919947.438
+docs\komunikace s chatGPT\03_2026\20260307\matchmatrix_next_steps_ticket_engine_zaverecny_zapis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260307\matchmatrix_next_steps_ticket_engine_zaverecny_zapis.md | 4552 | 1772923726.467
+docs\komunikace s chatGPT\03_2026\20260307\matchmatrix_system_overview (1).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260307\matchmatrix_system_overview (1).md | 5363 | 1772919848.306
+docs\komunikace s chatGPT\03_2026\20260307\matchmatrix_system_overview.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260307\matchmatrix_system_overview.md | 5363 | 1772918551.403
+docs\komunikace s chatGPT\03_2026\20260308\2026-03-08_pipeline_predictions_update.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260308\2026-03-08_pipeline_predictions_update.md | 3741 | 1772972570.07
+docs\komunikace s chatGPT\03_2026\20260308\api_raw_payloads.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260308\api_raw_payloads.txt | 7210 | 1772999912.89
+docs\komunikace s chatGPT\03_2026\20260309\# MatchMatrix – režimy tvorby tiket.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260309\# MatchMatrix – režimy tvorby tiket.md | 4278 | 1773090149.433
+docs\komunikace s chatGPT\03_2026\20260309\20260309_MatchMatrix_Vývojový_zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260309\20260309_MatchMatrix_Vývojový_zápis.md | 3998 | 1773068733.959
+docs\komunikace s chatGPT\03_2026\20260310\MATCHMATRIX – CELKOVÁ ARCHITEKTURA.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260310\MATCHMATRIX – CELKOVÁ ARCHITEKTURA.md | 4616 | 1773143471.422
+docs\komunikace s chatGPT\03_2026\20260310\MatchMatrix_log_2026-03-10_unified_staging_bridge.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260310\MatchMatrix_log_2026-03-10_unified_staging_bridge.md | 4868 | 1773181929.162
+docs\komunikace s chatGPT\03_2026\20260310\PROJECT BUNDLE MatchMatrix_TiketMatrix_Gemini.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260310\PROJECT BUNDLE MatchMatrix_TiketMatrix_Gemini.txt | 2958 | 1773136746.517
+docs\komunikace s chatGPT\03_2026\20260311\# MatchMatrix – Pipeline Stabilization.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260311\# MatchMatrix – Pipeline Stabilization.md | 4481 | 1773238835.39
+docs\komunikace s chatGPT\03_2026\20260311\741_public_merge_schema_check.sql.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260311\741_public_merge_schema_check.sql.txt | 21700 | 1773219047.758
+docs\komunikace s chatGPT\03_2026\20260311\MatchMatrix – pracovní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260311\MatchMatrix – pracovní zápis.md | 12282 | 1773266552.183
+docs\komunikace s chatGPT\03_2026\20260312\Dotazy 1-6.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260312\Dotazy 1-6.txt | 888 | 1773388604.626
+docs\komunikace s chatGPT\03_2026\20260312\MatchMatrix – pracovní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260312\MatchMatrix – pracovní zápis.md | 4044 | 1773352509.573
+docs\komunikace s chatGPT\03_2026\20260313\035_ingest_planner_checklist.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260313\035_ingest_planner_checklist.md | 1281 | 1773423745.551
+docs\komunikace s chatGPT\03_2026\20260313\Data - ingest_targets.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260313\Data - ingest_targets.txt | 827034 | 1773411048.357
+docs\komunikace s chatGPT\03_2026\20260313\Data - job_runs.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260313\Data - job_runs.txt | 301342 | 1773431607.09
+docs\komunikace s chatGPT\03_2026\20260313\MatchMatrix – Ingest Architecture &.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260313\MatchMatrix – Ingest Architecture &.txt | 4913 | 1773422672.633
+docs\komunikace s chatGPT\03_2026\20260313\MatchMatrix – pracovní zápis.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260313\MatchMatrix – pracovní zápis.txt | 4790 | 1773429826.976
+docs\komunikace s chatGPT\03_2026\20260313\MatchMatrix – pracovní zápis_2.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260313\MatchMatrix – pracovní zápis_2.txt | 9922 | 1773439659.202
+docs\komunikace s chatGPT\03_2026\20260314\# MatchMatrix – pracovní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260314\# MatchMatrix – pracovní zápis.md | 5779 | 1773559709.445
+docs\komunikace s chatGPT\03_2026\20260314\MATCHMATRIX_DATA_PIPELINE_MAP.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260314\MATCHMATRIX_DATA_PIPELINE_MAP.md | 5625 | 1773517403.717
+docs\komunikace s chatGPT\03_2026\20260314\MATCHMATRIX_DATABASE_BIBLE.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260314\MATCHMATRIX_DATABASE_BIBLE.md | 5267 | 1773517859.428
+docs\komunikace s chatGPT\03_2026\20260314\MATCHMATRIX_DEVELOPER_DOCUMENTATION.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260314\MATCHMATRIX_DEVELOPER_DOCUMENTATION.md | 7203 | 1773517525.702
+docs\komunikace s chatGPT\03_2026\20260314\MATCHMATRIX_FULL_TECHNICAL_DESCRIPTION.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260314\MATCHMATRIX_FULL_TECHNICAL_DESCRIPTION.md | 7552 | 1773517573.35
+docs\komunikace s chatGPT\03_2026\20260314\MATCHMATRIX_SYSTEM_ARCHITECTURE.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260314\MATCHMATRIX_SYSTEM_ARCHITECTURE.md | 6168 | 1773517463.534
+docs\komunikace s chatGPT\03_2026\20260315\# MatchMatrix – pracovní zápis.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260315\# MatchMatrix – pracovní zápis.txt | 5989 | 1773581471.783
+docs\komunikace s chatGPT\03_2026\20260315\MatchMatrix – pracovní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260315\MatchMatrix – pracovní zápis.md | 4888 | 1773611027.7
+docs\komunikace s chatGPT\03_2026\20260315\players_pipeline_rozsireni_runbook.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260315\players_pipeline_rozsireni_runbook.md | 4273 | 1773560721.497
+docs\komunikace s chatGPT\03_2026\20260316\MatchMatrix – vývojový zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260316\MatchMatrix – vývojový zápis.md | 5682 | 1773698719.443
+docs\komunikace s chatGPT\03_2026\20260317\# MatchMatrix – pracovní zápis.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260317\# MatchMatrix – pracovní zápis.txt | 4795 | 1773785674.251
+docs\komunikace s chatGPT\03_2026\20260317\zhodnocení.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260317\zhodnocení.md | 4305 | 1773731788.846
+docs\komunikace s chatGPT\03_2026\20260318\# MatchMatrix – pracovní zápis.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\# MatchMatrix – pracovní zápis.txt | 5511 | 1773866528.934
+docs\komunikace s chatGPT\03_2026\20260318\072_export_missing_player_profile_ids.sql.csv | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\072_export_missing_player_profile_ids.sql.csv | 2125 | 1773930233.844
+docs\komunikace s chatGPT\03_2026\20260318\Celková architektura MatchMatrix (z.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Celková architektura MatchMatrix (z.txt | 23470 | 1773860916.612
+docs\komunikace s chatGPT\03_2026\20260318\Data - api_budget_today.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - api_budget_today.txt | 2985 | 1773831831.615
+docs\komunikace s chatGPT\03_2026\20260318\Data - ingest_entity_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - ingest_entity_plan.txt | 3706 | 1773831731.607
+docs\komunikace s chatGPT\03_2026\20260318\Data - ingest_planner.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - ingest_planner.txt | 1224 | 1773833664.808
+docs\komunikace s chatGPT\03_2026\20260318\Data - ingest_planner_queue.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - ingest_planner_queue.txt | 7968 | 1773831808.5
+docs\komunikace s chatGPT\03_2026\20260318\Data - player_external_identt.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - player_external_identt.txt | 3731 | 1773838153.061
+docs\komunikace s chatGPT\03_2026\20260318\Data - player_season_stat.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - player_season_stat.txt | 3731 | 1773838126.437
+docs\komunikace s chatGPT\03_2026\20260318\Data - players.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - players.txt | 2663 | 1773837755.507
+docs\komunikace s chatGPT\03_2026\20260318\Data - posledni_hraci.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - posledni_hraci.txt | 3731 | 1773838225.57
+docs\komunikace s chatGPT\03_2026\20260318\Data - provider_jobs.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - provider_jobs.txt | 11193 | 1773831678.227
+docs\komunikace s chatGPT\03_2026\20260318\Data - sports_import_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - sports_import_plan.txt | 4752 | 1773831598.855
+docs\komunikace s chatGPT\03_2026\20260318\Data - table_name.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - table_name.txt | 430 | 1773833728.303
+docs\komunikace s chatGPT\03_2026\20260318\Data - team_provider_map.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - team_provider_map.txt | 2272 | 1773835018.347
+docs\komunikace s chatGPT\03_2026\20260318\Data - teams.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - teams.txt | 4544 | 1773834938.736
+docs\komunikace s chatGPT\03_2026\20260318\Data - v_job_runs_recent.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\Data - v_job_runs_recent.txt | 9410 | 1773833689.902
+docs\komunikace s chatGPT\03_2026\20260318\MATCHMATRIX INGEST CYCLE V3.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\MATCHMATRIX INGEST CYCLE V3.txt | 37207 | 1773860987.69
+docs\komunikace s chatGPT\03_2026\20260318\schema.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\schema.txt | 22600 | 1773869416.556
+docs\komunikace s chatGPT\03_2026\20260318\stg_provider_fixtures.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\stg_provider_fixtures.txt | 1344 | 1773839697.829
+docs\komunikace s chatGPT\03_2026\20260318\stg_provider_players.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260318\stg_provider_players.txt | 216103 | 1773838342.429
+docs\komunikace s chatGPT\03_2026\20260319\Ano. Teď už je vidět, že DB není po.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260319\Ano. Teď už je vidět, že DB není po.txt | 5627 | 1773939491.634
+docs\komunikace s chatGPT\03_2026\20260319\MatchMatrix_denní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260319\MatchMatrix_denní zápis.md | 2272 | 1773955383.014
+docs\komunikace s chatGPT\03_2026\20260319\matchmatrix_handover_2026-03-19_players_pipeline.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260319\matchmatrix_handover_2026-03-19_players_pipeline.md | 6776 | 1773942196.534
+docs\komunikace s chatGPT\03_2026\20260320\MatchMatrix – podrobný zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260320\MatchMatrix – podrobný zápis.md | 10473 | 1774008451.711
+docs\komunikace s chatGPT\03_2026\20260320\MatchMatrix – pracovní zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260320\MatchMatrix – pracovní zápis.md | 10311 | 1774040498.801
+docs\komunikace s chatGPT\03_2026\20260320\MatchMatrix – zápis (FB_EU → football_data vrstva + audit historie).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260320\MatchMatrix – zápis (FB_EU → football_data vrstva + audit historie).md | 3489 | 1774004253.813
+docs\komunikace s chatGPT\03_2026\20260320\MatchMatrix – zápis (krok 147–151 m.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260320\MatchMatrix – zápis (krok 147–151 m.txt | 2674 | 1774001880.532
+docs\komunikace s chatGPT\03_2026\20260320\MatchMatrix_zapis_2026-03-20_multisport_podminka.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260320\MatchMatrix_zapis_2026-03-20_multisport_podminka.md | 3179 | 1773996751.312
+docs\komunikace s chatGPT\03_2026\20260320\SQL\146_audit.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260320\SQL\146_audit.txt | 4420 | 1773998263.558
+docs\komunikace s chatGPT\03_2026\20260320\SQL\146_audit_ops.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260320\SQL\146_audit_ops.txt | 105 | 1773998283.684
+docs\komunikace s chatGPT\03_2026\20260320\SQL\146_audit_ops_3.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260320\SQL\146_audit_ops_3.txt | 140 | 1773998312.032
+docs\komunikace s chatGPT\03_2026\20260320\SQL\146_planner.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260320\SQL\146_planner.txt | 1887 | 1773999186.355
+docs\komunikace s chatGPT\03_2026\20260320\SQL\provider_sport_matrix.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260320\SQL\provider_sport_matrix.txt | 4721 | 1773999988.445
+docs\komunikace s chatGPT\03_2026\20260320\SQL\sport_entity_rules.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260320\SQL\sport_entity_rules.txt | 9213 | 1773999860.707
+docs\komunikace s chatGPT\03_2026\20260321\MatchMatrix – navazovací zápis.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260321\MatchMatrix – navazovací zápis.txt | 11123 | 1774134301.905
+docs\komunikace s chatGPT\03_2026\20260322\MatchMatrix – navazovací zápis (Ing.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260322\MatchMatrix – navazovací zápis (Ing.txt | 3101 | 1774181241.17
+docs\komunikace s chatGPT\03_2026\20260322\MATCHMATRIX – NAVAZOVACÍ ZÁPIS .md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260322\MATCHMATRIX – NAVAZOVACÍ ZÁPIS .md | 3131 | 1774206489.363
+docs\komunikace s chatGPT\03_2026\20260322\MATCHMATRIX – ZÁPIS (DNES).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260322\MATCHMATRIX – ZÁPIS (DNES).md | 3904 | 1774215953.717
+docs\komunikace s chatGPT\03_2026\20260323\# MATCHMATRIX – ZÁPIS (2026-03-23).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\# MATCHMATRIX – ZÁPIS (2026-03-23).md | 2593 | 1774294732.687
+docs\komunikace s chatGPT\03_2026\20260323\229_ops.ingest_entity_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\229_ops.ingest_entity_plan.txt | 5120 | 1774298724.244
+docs\komunikace s chatGPT\03_2026\20260323\229_ops.ingest_entity_plan_4.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\229_ops.ingest_entity_plan_4.txt | 338 | 1774298813.218
+docs\komunikace s chatGPT\03_2026\20260323\229_ops.ingest_targets.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\229_ops.ingest_targets.txt | 120 | 1774298777.95
+docs\komunikace s chatGPT\03_2026\20260323\229_ops.provider_jobs.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\229_ops.provider_jobs.txt | 7744 | 1774298750.231
+docs\komunikace s chatGPT\03_2026\20260323\Aktuální run_group rozpad v ops.ingest_entity_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\Aktuální run_group rozpad v ops.ingest_entity_plan.txt | 8554 | 1774296476.06
+docs\komunikace s chatGPT\03_2026\20260323\Aktuální run_group rozpad v ops.ingest_targets.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\Aktuální run_group rozpad v ops.ingest_targets.txt | 885 | 1774296456.321
+docs\komunikace s chatGPT\03_2026\20260323\bod 1.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\bod 1.txt | 1470 | 1774300363.121
+docs\komunikace s chatGPT\03_2026\20260323\bod 2.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\bod 2.txt | 6693 | 1774300377.181
+docs\komunikace s chatGPT\03_2026\20260323\bod 3.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\bod 3.txt | 9315 | 1774300275.872
+docs\komunikace s chatGPT\03_2026\20260323\bod 4.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\bod 4.txt | 650 | 1774300292.729
+docs\komunikace s chatGPT\03_2026\20260323\Ingest planner.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\Ingest planner.txt | 3168 | 1774270374.516
+docs\komunikace s chatGPT\03_2026\20260323\ingest_entity_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\ingest_entity_plan.txt | 30926 | 1774297063.642
+docs\komunikace s chatGPT\03_2026\20260323\Jak teď vypadá football rozpad.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\Jak teď vypadá football rozpad.txt | 122990 | 1774296530.503
+docs\komunikace s chatGPT\03_2026\20260323\Jak vypadají hotové HK_BK cíle.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\Jak vypadají hotové HK_BK cíle.txt | 28086 | 1774296708.337
+docs\komunikace s chatGPT\03_2026\20260323\MATCHMATRIX – ZÁPIS (2026-03-23).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\MATCHMATRIX – ZÁPIS (2026-03-23).md | 3124 | 1774294673.121
+docs\komunikace s chatGPT\03_2026\20260323\MATCHMATRIX – ZÁPIS (API-SPORT + AP.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\MATCHMATRIX – ZÁPIS (API-SPORT + AP.md | 3477 | 1774364534.648
+docs\komunikace s chatGPT\03_2026\20260323\MATCHMATRIX – ZÁPIS (DNES).txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\MATCHMATRIX – ZÁPIS (DNES).txt | 3331 | 1774303889.893
+docs\komunikace s chatGPT\03_2026\20260323\ops.ingest_entity_plan-1774298504122.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\ops.ingest_entity_plan-1774298504122.txt | 30926 | 1774298504.131
+docs\komunikace s chatGPT\03_2026\20260323\ops.ingest_entity_plan.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\ops.ingest_entity_plan.txt | 6956 | 1774298292.096
+docs\komunikace s chatGPT\03_2026\20260323\ops.provider_jobs.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260323\ops.provider_jobs.txt | 50836 | 1774298063.954
+docs\komunikace s chatGPT\03_2026\20260324\Denní Zápis - Aktuální stav (klíč).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260324\Denní Zápis - Aktuální stav (klíč).md | 3008 | 1774391108.162
+docs\komunikace s chatGPT\03_2026\20260324\MATCHMATRIX – ZÁPIS (Volleyball + s.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260324\MATCHMATRIX – ZÁPIS (Volleyball + s.md | 2425 | 1774381009.701
+docs\komunikace s chatGPT\03_2026\20260324\MATCHMATRIX – ZÁPIS (Volleyball).md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260324\MATCHMATRIX – ZÁPIS (Volleyball).md | 2593 | 1774381157.076
+docs\komunikace s chatGPT\03_2026\20260325\ingest_planer_1.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260325\ingest_planer_1.txt | 1260 | 1774462913.014
+docs\komunikace s chatGPT\03_2026\20260325\ingest_planer_2.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260325\ingest_planer_2.txt | 20433 | 1774462931.323
+docs\komunikace s chatGPT\03_2026\20260325\MATCHMATRIX – DENNÍ ZÁPIS-večer.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260325\MATCHMATRIX – DENNÍ ZÁPIS-večer.md | 3235 | 1774466039.036
+docs\komunikace s chatGPT\03_2026\20260325\MATCHMATRIX – DENNÍ ZÁPIS.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260325\MATCHMATRIX – DENNÍ ZÁPIS.md | 2992 | 1774449584.864
+docs\komunikace s chatGPT\03_2026\20260325\MatchMatrix – zápis dnešního postup.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260325\MatchMatrix – zápis dnešního postup.md | 6669 | 1774438946.866
+docs\komunikace s chatGPT\03_2026\20260325\MATCHMATRIX – ZÁPIS NA ZÍTRA.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260325\MATCHMATRIX – ZÁPIS NA ZÍTRA.md | 2234 | 1774472610.652
+docs\komunikace s chatGPT\03_2026\20260326\audit_teams.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260326\audit_teams.txt | 187071 | 1774550038.157
+docs\komunikace s chatGPT\03_2026\20260326\matches.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260326\matches.txt | 52339 | 1774532107.894
+docs\komunikace s chatGPT\03_2026\20260326\MATCHMATRIX – DENNÍ ZÁPIS.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260326\MATCHMATRIX – DENNÍ ZÁPIS.md | 3389 | 1774562389.9
+docs\komunikace s chatGPT\03_2026\20260326\MatchMatrix – podrobný zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260326\MatchMatrix – podrobný zápis.md | 7059 | 1774512705.924
+docs\komunikace s chatGPT\03_2026\20260326\MatchMatrix – zápis dneška.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260326\MatchMatrix – zápis dneška.md | 5845 | 1774551826.771
+docs\komunikace s chatGPT\03_2026\20260326\Run_ID_148.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260326\Run_ID_148.txt | 11281 | 1774552755.701
+docs\komunikace s chatGPT\03_2026\20260326\Teable_name.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260326\Teable_name.txt | 84 | 1774534349.442
+docs\komunikace s chatGPT\03_2026\20260326\team_aliases.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260326\team_aliases.txt | 15762 | 1774534040.125
+docs\komunikace s chatGPT\03_2026\20260326\team_provider_map.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260326\team_provider_map.txt | 13130 | 1774534082.202
+docs\komunikace s chatGPT\03_2026\20260327\Klíčové oblasti hodnocení počítače.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260327\Klíčové oblasti hodnocení počítače.txt | 3074 | 1774649256.538
+docs\komunikace s chatGPT\03_2026\20260328\úprava Ticket_studio_V2_23.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260328\úprava Ticket_studio_V2_23.txt | 8422 | 1774713947.154
+docs\komunikace s chatGPT\03_2026\20260329\audit_teams_duplicita.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260329\audit_teams_duplicita.txt | 359406 | 1774805541.005
+docs\komunikace s chatGPT\03_2026\20260329\MATCHMATRIX – DENNÍ ZÁPIS.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260329\MATCHMATRIX – DENNÍ ZÁPIS.md | 3375 | 1774816558.075
+docs\komunikace s chatGPT\03_2026\20260329\MatchMatrix — zápis.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260329\MatchMatrix — zápis.md | 5459 | 1774809618.671
+docs\komunikace s chatGPT\03_2026\20260330\MATCHMATRIX – STAV PROJEKTU (Ticket.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260330\MATCHMATRIX – STAV PROJEKTU (Ticket.txt | 4187 | 1774895239.808
+docs\komunikace s chatGPT\03_2026\20260330\MATCHMATRIX – ZÁPIS večer.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260330\MATCHMATRIX – ZÁPIS večer.md | 3370 | 1774904330.578
+docs\komunikace s chatGPT\03_2026\20260331\404_celkový_přehled_Databáze.sql | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260331\404_celkový_přehled_Databáze.sql | 39 | 1774951156.883
+docs\komunikace s chatGPT\03_2026\20260331\405_přehled_co_je_spustitelné_.sql | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260331\405_přehled_co_je_spustitelné_.sql | 442 | 1774951308.517
+docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX – DEFINICE PROJEKTU.txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX – DEFINICE PROJEKTU.txt | 5557 | 1774939333.576
+docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX – ZÁPIS (31.03.2026).txt | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX – ZÁPIS (31.03.2026).txt | 3478 | 1774954136.41
+docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX_AUDIT_MASTER.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX_AUDIT_MASTER.md | 7997 | 1774944213.435
+docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX_AUDIT_MASTER_V2.1.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX_AUDIT_MASTER_V2.1.md | 14042 | 1774948346.611
+docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX_AUDIT_MASTER_V2.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX_AUDIT_MASTER_V2.md | 14042 | 1774947334.021
+docs\komunikace s chatGPT\03_2026\spoluprace_s_ai_operacni_rezim.md | C:\MatchMatrix-platform\docs\komunikace s chatGPT\03_2026\spoluprace_s_ai_operacni_rezim.md | 619 | 1772964570.054
+docs\MatchMatrix – aktuální smysl projek.txt | C:\MatchMatrix-platform\docs\MatchMatrix – aktuální smysl projek.txt | 2329 | 1774940669.141
 docs\MatchMatrix_MASTER_BLUEPRINT.md | C:\MatchMatrix-platform\docs\MatchMatrix_MASTER_BLUEPRINT.md | 5008 | 1772919947.438
 docs\příkaz PowerShell_ukázat strom souborů.txt | C:\MatchMatrix-platform\docs\příkaz PowerShell_ukázat strom souborů.txt | 31 | 1771925454.638
 fronted\ARCHIV PROJEKTU TICKETMATRIX (v. 1..txt | C:\MatchMatrix-platform\fronted\ARCHIV PROJEKTU TICKETMATRIX (v. 1..txt | 1054 | 1772531672.295
@@ -556,13 +643,16 @@ ingest\API-Football\test_api_football_players_access.py | C:\MatchMatrix-platfor
 ingest\API-Hockey\pull_api_hockey_coaches.ps1 | C:\MatchMatrix-platform\ingest\API-Hockey\pull_api_hockey_coaches.ps1 | 4257 | 1774512050.272
 ingest\API-Hockey\pull_api_hockey_fixtures.ps1 | C:\MatchMatrix-platform\ingest\API-Hockey\pull_api_hockey_fixtures.ps1 | 6544 | 1774444583.539
 ingest\API-Hockey\pull_api_hockey_leagues.ps1 | C:\MatchMatrix-platform\ingest\API-Hockey\pull_api_hockey_leagues.ps1 | 4592 | 1774359439.536
+ingest\API-Hockey\pull_api_hockey_players.ps1 | C:\MatchMatrix-platform\ingest\API-Hockey\pull_api_hockey_players.ps1 | 824 | 1774514373.718
 ingest\API-Hockey\pull_api_hockey_teams.ps1 | C:\MatchMatrix-platform\ingest\API-Hockey\pull_api_hockey_teams.ps1 | 6029 | 1774443057.982
+ingest\API-Sport\pull_api_basketball_players.ps1 | C:\MatchMatrix-platform\ingest\API-Sport\pull_api_basketball_players.ps1 | 6188 | 1774517265.148
 ingest\API-Sport\pull_api_sport_fixtures.ps1 | C:\MatchMatrix-platform\ingest\API-Sport\pull_api_sport_fixtures.ps1 | 12895 | 1774449857.026
 ingest\API-Sport\pull_api_sport_leagues.ps1 | C:\MatchMatrix-platform\ingest\API-Sport\pull_api_sport_leagues.ps1 | 7708 | 1774350727.616
 ingest\API-Sport\pull_api_sport_teams.ps1 | C:\MatchMatrix-platform\ingest\API-Sport\pull_api_sport_teams.ps1 | 5374 | 1774437915.482
+ingest\API-Volleyball\pull_api_volleyball_players.ps1 | C:\MatchMatrix-platform\ingest\API-Volleyball\pull_api_volleyball_players.ps1 | 1556 | 1774517819.689
 ingest\artifacts\baseline_logreg_meta.json | C:\MatchMatrix-platform\ingest\artifacts\baseline_logreg_meta.json | 444 | 1771188110.397
 ingest\artifacts\baseline_logreg_v2_meta.json | C:\MatchMatrix-platform\ingest\artifacts\baseline_logreg_v2_meta.json | 548 | 1771192423.097
-ingest\artifacts\baseline_logreg_v3_meta.json | C:\MatchMatrix-platform\ingest\artifacts\baseline_logreg_v3_meta.json | 745 | 1771531302.149
+ingest\artifacts\baseline_logreg_v3_meta.json | C:\MatchMatrix-platform\ingest\artifacts\baseline_logreg_v3_meta.json | 771 | 1774532516.948
 ingest\compute_mmr_ratings.py | C:\MatchMatrix-platform\ingest\compute_mmr_ratings.py | 11392 | 1773235168.625
 ingest\parse_api_football_player_profiles_v1.py | C:\MatchMatrix-platform\ingest\parse_api_football_player_profiles_v1.py | 6460 | 1774205660.629
 ingest\predict_matches_V3.py | C:\MatchMatrix-platform\ingest\predict_matches_V3.py | 5493 | 1773228241.176
@@ -573,14 +663,19 @@ ingest\providers\generic_api_sport_provider.py | C:\MatchMatrix-platform\ingest\
 ingest\providers\provider_registry.py | C:\MatchMatrix-platform\ingest\providers\provider_registry.py | 1672 | 1774303577.393
 ingest\run_compute_mmr_ratings.bat | C:\MatchMatrix-platform\ingest\run_compute_mmr_ratings.bat | 368 | 1771277560.362
 ingest\run_predict_matches_V3.bat | C:\MatchMatrix-platform\ingest\run_predict_matches_V3.bat | 440 | 1771494108.181
-ingest\run_theodds_parse_multi_FINAL.bat | C:\MatchMatrix-platform\ingest\run_theodds_parse_multi_FINAL.bat | 674 | 1771625767.604
+ingest\run_theodds_parse_multi_FINAL.bat | C:\MatchMatrix-platform\ingest\run_theodds_parse_multi_FINAL.bat | 545 | 1774536572.896
 ingest\run_train_baseline_logreg.bat | C:\MatchMatrix-platform\ingest\run_train_baseline_logreg.bat | 337 | 1771168482.856
 ingest\run_train_gbm_v3.bat | C:\MatchMatrix-platform\ingest\run_train_gbm_v3.bat | 276 | 1771407137.634
 ingest\run_unified_ingest_batch_v1.py | C:\MatchMatrix-platform\ingest\run_unified_ingest_batch_v1.py | 11355 | 1774353823.307
 ingest\run_unified_ingest_v1.py | C:\MatchMatrix-platform\ingest\run_unified_ingest_v1.py | 6051 | 1774442569.875
-ingest\theodds_parse_multi_FINAL.py | C:\MatchMatrix-platform\ingest\theodds_parse_multi_FINAL.py | 25075 | 1772964728.342
+ingest\theodds_parse_multi_FINAL.py | C:\MatchMatrix-platform\ingest\theodds_parse_multi_FINAL.py | 28741 | 1774544830.958
 ingest\train_baseline_logreg.py | C:\MatchMatrix-platform\ingest\train_baseline_logreg.py | 8879 | 1771192828.754
 ingest\train_gbm_v3.py | C:\MatchMatrix-platform\ingest\train_gbm_v3.py | 4954 | 1771408582.285
+ingest\unmatched_theodds_149.csv | C:\MatchMatrix-platform\ingest\unmatched_theodds_149.csv | 805 | 1774554917.082
+ingest\unmatched_theodds_149.sql | C:\MatchMatrix-platform\ingest\unmatched_theodds_149.sql | 2621 | 1774554917.083
+launchers\run_check_psql.bat | C:\MatchMatrix-platform\launchers\run_check_psql.bat | 397 | 1774425565.752
+launchers\run_matchmatrix_control_panel_V3.bat | C:\MatchMatrix-platform\launchers\run_matchmatrix_control_panel_V3.bat | 228 | 1773262225.711
+launchers\run_matchmatrix_panel_V4.bat | C:\MatchMatrix-platform\launchers\run_matchmatrix_panel_V4.bat | 330 | 1773409341.505
 legacy\ingest\football_data_pull_V5.py | C:\MatchMatrix-platform\legacy\ingest\football_data_pull_V5.py | 12767 | 1771491116.91
 legacy\ingest\football_data_uk_history_pull.py | C:\MatchMatrix-platform\legacy\ingest\football_data_uk_history_pull.py | 10012 | 1771166023.869
 legacy\ingest\parse_api_sport_fixtures.py | C:\MatchMatrix-platform\legacy\ingest\parse_api_sport_fixtures.py | 11612 | 1773065674.242
@@ -604,6 +699,7 @@ legacy\workers\run_payload_parser.py | C:\MatchMatrix-platform\legacy\workers\ru
 legacy\workers\run_unified_staging_to_public_merge_v3.py | C:\MatchMatrix-platform\legacy\workers\run_unified_staging_to_public_merge_v3.py | 28497 | 1774387337.702
 logs\2026-02-24\0730_daily_report_154956.txt | C:\MatchMatrix-platform\logs\2026-02-24\0730_daily_report_154956.txt | 1278 | 1771944715.42
 logs\api_football_backfill_status_2026-03-04_112228.txt | C:\MatchMatrix-platform\logs\api_football_backfill_status_2026-03-04_112228.txt | 10460 | 1772619751.611
+logs\bk_players_raw\bk_players_target_1966_league_117_season_2023-2024.json | C:\MatchMatrix-platform\logs\bk_players_raw\bk_players_target_1966_league_117_season_2023-2024.json | 388 | 1774516919.348
 logs\control_panel\log_0_2026-03-11.txt | C:\MatchMatrix-platform\logs\control_panel\log_0_2026-03-11.txt | 576 | 1773235341.072
 logs\control_panel\log_1_2026-03-11.txt | C:\MatchMatrix-platform\logs\control_panel\log_1_2026-03-11.txt | 2764 | 1773235345.928
 logs\control_panel\log_2_2026-03-11.txt | C:\MatchMatrix-platform\logs\control_panel\log_2_2026-03-11.txt | 4807171 | 1773235369.999
@@ -611,9 +707,10 @@ logs\control_panel\log_3_2026-03-11.txt | C:\MatchMatrix-platform\logs\control_p
 logs\control_panel\panel_state.json | C:\MatchMatrix-platform\logs\control_panel\panel_state.json | 4749 | 1773238940.059
 logs\reports\mm_report_2026-03-04_12-34-26.txt | C:\MatchMatrix-platform\logs\reports\mm_report_2026-03-04_12-34-26.txt | 0 | 1772624068.044
 logs\temp_api_hockey_coaches_payload.json | C:\MatchMatrix-platform\logs\temp_api_hockey_coaches_payload.json | 122 | 1774512059.675
-MatchMatrix-platform.txt | C:\MatchMatrix-platform\MatchMatrix-platform.txt | 19022 | 1772919178.25
-MatchMatrix-platform\.dbeaver\project-metadata.json | C:\MatchMatrix-platform\MatchMatrix-platform\.dbeaver\project-metadata.json | 5863 | 1774378680.732
+logs\temp_api_hockey_players_players_global_na.json | C:\MatchMatrix-platform\logs\temp_api_hockey_players_players_global_na.json | 149 | 1774514647.531
+MatchMatrix-platform\.dbeaver\project-metadata.json | C:\MatchMatrix-platform\MatchMatrix-platform\.dbeaver\project-metadata.json | 6385 | 1774877313.19
 MatchMatrix-platform\.dbeaver\project-settings.json | C:\MatchMatrix-platform\MatchMatrix-platform\.dbeaver\project-settings.json | 31 | 1772740162.442
+MatchMatrix-platform\Dump\Dump - 202603302257.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\Dump - 202603302257.sql | 640441 | 1774904270.971
 MatchMatrix-platform\Dump\dump-matchmatrix-202602271537_leagues.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202602271537_leagues.sql | 158955 | 1772203056.91
 MatchMatrix-platform\Dump\dump-matchmatrix-202603052038.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202603052038.sql | 193065 | 1772739522.963
 MatchMatrix-platform\Dump\dump-matchmatrix-202603072347.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202603072347.sql | 365219 | 1772923659.077
@@ -640,17 +737,25 @@ MatchMatrix-platform\Dump\dump-matchmatrix-202603242325.sql | C:\MatchMatrix-pla
 MatchMatrix-platform\Dump\dump-matchmatrix-202603251237.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202603251237.sql | 563233 | 1774438673.176
 MatchMatrix-platform\Dump\dump-matchmatrix-202603252015.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202603252015.sql | 563233 | 1774466110.59
 MatchMatrix-platform\Dump\dump-matchmatrix-202603260908.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202603260908.sql | 569604 | 1774512484.354
+MatchMatrix-platform\Dump\dump-matchmatrix-202603261219.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump-matchmatrix-202603261219.sql | 569604 | 1774523980.866
+MatchMatrix-platform\Dump\Dump.ops - 202603310919.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\Dump.ops - 202603310919.sql | 3014438 | 1774941597.347
 MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603181139.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603181139.sql | 82970 | 1773830341.588
 MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603181140.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603181140.sql | 899588 | 1773830423.379
 MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603232120.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603232120.sql | 2477297 | 1774297258.172
 MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603242043.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603242043.sql | 2510480 | 1774381383.013
 MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603260908.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.ops-matchmatrix-202603260908.sql | 3005508 | 1774512527.292
+MatchMatrix-platform\Dump\Dump.public - 202603310921.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\Dump.public - 202603310921.sql | 144615608 | 1774941684.239
 MatchMatrix-platform\Dump\dump.public-matchmatrix-202603172216.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.public-matchmatrix-202603172216.sql | 19661226 | 1773782199.691
 MatchMatrix-platform\Dump\dump.public-matchmatrix-202603260909.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.public-matchmatrix-202603260909.sql | 117564828 | 1774512570.017
+MatchMatrix-platform\Dump\Dump.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\Dump.sql | 625686 | 1774895361.89
+MatchMatrix-platform\Dump\Dump.staging - 202603310921.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\Dump.staging - 202603310921.sql | 279284918 | 1774941707.34
 MatchMatrix-platform\Dump\dump.staging-matchmatrix-202603260909.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.staging-matchmatrix-202603260909.sql | 279284567 | 1774512603.333
+MatchMatrix-platform\Dump\Dump.work - 202603310922.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\Dump.work - 202603310922.sql | 16767 | 1774941729.796
 MatchMatrix-platform\Dump\dump.work-matchmatrix-202603260910.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump.work-matchmatrix-202603260910.sql | 16767 | 1774512621.501
 MatchMatrix-platform\Dump\dump_ops-matchmatrix-202603112252.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump_ops-matchmatrix-202603112252.sql | 518537 | 1773265941.129
 MatchMatrix-platform\Dump\dump_ops-matchmatrix-202603131533.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\dump_ops-matchmatrix-202603131533.sql | 532875 | 1773412397.463
+MatchMatrix-platform\Dump\template_table.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\template_table.sql | 13341 | 1774556368.044
+MatchMatrix-platform\Dump\template_table_markets.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Dump\template_table_markets.sql | 6362 | 1774556545.461
 MatchMatrix-platform\Scripts\00_Schema\001_core_tebles.sql\002_team_aliases.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\00_Schema\001_core_tebles.sql\002_team_aliases.sql | 321 | 1771521009.661
 MatchMatrix-platform\Scripts\00_Schema\001_core_tebles.sql\004_template_block_matches.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\00_Schema\001_core_tebles.sql\004_template_block_matches.sql | 81 | 1770891221.027
 MatchMatrix-platform\Scripts\00_Schema\001_core_tebles.sql\006_template_fixed_picks.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\00_Schema\001_core_tebles.sql\006_template_fixed_picks.sql | 571 | 1770797161.617
@@ -988,6 +1093,13 @@ MatchMatrix-platform\Scripts\11_ops\026_check_bk_raw_payload.sql | C:\MatchMatri
 MatchMatrix-platform\Scripts\11_ops\036_ops_extend_stg_provider_players.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\11_ops\036_ops_extend_stg_provider_players.sql | 1652 | 1773567594.653
 MatchMatrix-platform\Scripts\11_ops\037_ops_insert_new_ingest_entities_players_v1.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\11_ops\037_ops_insert_new_ingest_entities_players_v1.sql | 0 | 1773696001.989
 MatchMatrix-platform\Scripts\11_ops\111_nastavení_ops_jobs.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\11_ops\111_nastavení_ops_jobs.sql | 289 | 1773833552.561
+MatchMatrix-platform\Scripts\11_ops\401_create_provider_entity_coverage.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\11_ops\401_create_provider_entity_coverage.sql | 0 | 1774942400.666
+MatchMatrix-platform\Scripts\11_ops\402_seed_provider_entity_coverage_initial_B.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\11_ops\402_seed_provider_entity_coverage_initial_B.sql | 0 | 1774946846.388
+MatchMatrix-platform\Scripts\11_ops\403_view_provider_entity_status.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\11_ops\403_view_provider_entity_status.sql | 0 | 1774947007.192
+MatchMatrix-platform\Scripts\11_ops\404_celkový_přehled_Databáze.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\11_ops\404_celkový_přehled_Databáze.sql | 0 | 1774950713.799
+MatchMatrix-platform\Scripts\11_ops\404_view_dashboard_summary.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\11_ops\404_view_dashboard_summary.sql | 0 | 1774946923.285
+MatchMatrix-platform\Scripts\11_ops\405_view_run_ready_queue.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\11_ops\405_view_run_ready_queue.sql | 0 | 1774951080.374
+MatchMatrix-platform\Scripts\11_ops\406_view_panel_run_control.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\11_ops\406_view_panel_run_control.sql | 0 | 1774951321.072
 MatchMatrix-platform\Scripts\11_ops\ops_jobs_unified_ingest_batch.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\11_ops\ops_jobs_unified_ingest_batch.sql | 366 | 1773351011.785
 MatchMatrix-platform\Scripts\12_multisport\12_multisport\010_check_vb_staging_teams_after_fix.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\12_multisport\12_multisport\010_check_vb_staging_teams_after_fix.sql | 0 | 1774425206.945
 MatchMatrix-platform\Scripts\12_multisport\12_multisport\025_check_bk_stg_provider_teams.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\12_multisport\12_multisport\025_check_bk_stg_provider_teams.sql | 0 | 1774438275.262
@@ -1145,6 +1257,59 @@ MatchMatrix-platform\Scripts\12_multisport\13_multisport_ingest_volleyball\246a_
 MatchMatrix-platform\Scripts\12_multisport\13_multisport_ingest_volleyball\247_safe_backfill_entity_plan_base_sports.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\12_multisport\13_multisport_ingest_volleyball\247_safe_backfill_entity_plan_base_sports.sql | 0 | 1774424974.659
 MatchMatrix-platform\Scripts\12_multisport\13_multisport_ingest_volleyball\_volleyball_příkazy.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\12_multisport\13_multisport_ingest_volleyball\_volleyball_příkazy.sql | 1335 | 1774378734.398
 MatchMatrix-platform\Scripts\12_multisport\13_multisport_ingest_volleyball\Script.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\12_multisport\13_multisport_ingest_volleyball\Script.sql | 490 | 1774443403.113
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_audit_bad_theodds_aliases.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_audit_bad_theodds_aliases.sql | 0 | 1774540083.259
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_audit_dc_missing_for_matches.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_audit_dc_missing_for_matches.sql | 0 | 1774532053.498
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_audit_market_codes_double_chance.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_audit_market_codes_double_chance.sql | 0 | 1774531864.075
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_check_dc_payload_real.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_check_dc_payload_real.sql | 0 | 1774532234.585
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_cleanup_zero_usage_teams.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_cleanup_zero_usage_teams.sql | 0 | 1774540359.393
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_db_inventory.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_db_inventory.sql | 4753 | 1774539202.926
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_football_duplicate_team_branches.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_football_duplicate_team_branches.sql | 0 | 1774542517.718
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_insert_theodds_aliases_auto.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_insert_theodds_aliases_auto.sql | 0 | 1774538960.611
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_no_match_detail_check.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_no_match_detail_check.sql | 0 | 1774539200.944
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_odds_coverage_audit.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_odds_coverage_audit.sql | 0 | 1774508983.17
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_odds_coverage_check.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_odds_coverage_check.sql | 0 | 1774537637.252
+MatchMatrix-platform\Scripts\13_odds\2026-03-26_serie_a_no_match_audit.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\2026-03-26_serie_a_no_match_audit.sql | 0 | 1774533949.386
+MatchMatrix-platform\Scripts\13_odds\20260326_02_bournemouth_only_safe_merge.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\20260326_02_bournemouth_only_safe_merge.sql | 0 | 1774552141.887
+MatchMatrix-platform\Scripts\13_odds\20260326_03_bournemouth_only_safe_merge_fix_aliases.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\20260326_03_bournemouth_only_safe_merge_fix_aliases.sql | 0 | 1774553375.645
+MatchMatrix-platform\Scripts\13_odds\20260326_04_arsenal_audit_only.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\20260326_04_arsenal_audit_only.sql | 4478 | 1774554325.223
+MatchMatrix-platform\Scripts\13_odds\20260326_05_arsenal_belarus_merge_26871_into_13102.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\20260326_05_arsenal_belarus_merge_26871_into_13102.sql | 0 | 1774554327.458
+MatchMatrix-platform\Scripts\13_odds\20260326_08_check_team_1_references.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\20260326_08_check_team_1_references.sql | 0 | 1774554556.846
+MatchMatrix-platform\Scripts\13_odds\20260326_09_cleanup_team_1_into_11910.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\13_odds\20260326_09_cleanup_team_1_into_11910.sql | 0 | 1774554808.978
+MatchMatrix-platform\Scripts\14_ticket_studio\01_tabulku_přepočítat_pro_všechno.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\01_tabulku_přepočítat_pro_všechno.sql | 41 | 1774784207.934
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29-15_audit_duplicit_Premiere_league.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29-15_audit_duplicit_Premiere_league.sql | 1605 | 1774808934.107
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_01_create_table_standings_rules.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_01_create_table_standings_rules.sql | 222 | 1774562538.819
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_02_create_table_league_standings.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_02_create_table_league_standings.sql | 0 | 1774784203.071
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_02_seed_standings_rules.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_02_seed_standings_rules.sql | 0 | 1774783502.159
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_03_create_function_refresh_league_standings.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_03_create_function_refresh_league_standings.sql | 0 | 1774783602.609
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_04_create_view_v_league_standings_enriched.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_04_create_view_v_league_standings_enriched.sql | 0 | 1774784437.184
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_06_create_table_product_active_leagues.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_06_create_table_product_active_leagues.sql | 0 | 1774784659.551
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_08_create_view_v_current_product_standings.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_08_create_view_v_current_product_standings.sql | 0 | 1774785427.895
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_11_create_function_refresh_product_league_standings.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_11_create_function_refresh_product_league_standings.sql | 0 | 1774805686.157
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_12_fix_product_standings_season_filter.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_12_fix_product_standings_season_filter.sql | 0 | 1774806470.936
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_14_delete_duplicate_matches_football_data_uk.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_14_delete_duplicate_matches_football_data_uk.sql | 0 | 1774807828.14
+MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_16_recreate_view_v_current_product_standings.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\2026-03-29_16_recreate_view_v_current_product_standings.sql | 856 | 1774809248.74
+MatchMatrix-platform\Scripts\14_ticket_studio\debug_ticket_block_A_source.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\debug_ticket_block_A_source.sql | 0 | 1774768713.678
+MatchMatrix-platform\Scripts\14_ticket_studio\fix_mm_ui_run_tickets_dedup_odds.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\14_ticket_studio\fix_mm_ui_run_tickets_dedup_odds.sql | 0 | 1774770455.904
+MatchMatrix-platform\Scripts\15_ticket_history\315_create_ticket_history_base.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\315_create_ticket_history_base.sql | 0 | 1774877321.624
+MatchMatrix-platform\Scripts\15_ticket_history\316_insert_ticket_history_from_generated.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\316_insert_ticket_history_from_generated.sql | 0 | 1774877558.142
+MatchMatrix-platform\Scripts\15_ticket_history\317_view_ticket_history_summary.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\317_view_ticket_history_summary.sql | 0 | 1774877946.382
+MatchMatrix-platform\Scripts\15_ticket_history\318_select_ticket_history_prediction.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\318_select_ticket_history_prediction.sql | 0 | 1774878070.126
+MatchMatrix-platform\Scripts\15_ticket_history\319_ticket_history_sport_features.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\319_ticket_history_sport_features.sql | 0 | 1774878161.189
+MatchMatrix-platform\Scripts\15_ticket_history\321_mm_ticket_scenario_sport_features.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\321_mm_ticket_scenario_sport_features.sql | 0 | 1774880931.519
+MatchMatrix-platform\Scripts\15_ticket_history\322_mm_ticket_scenario_rating_view.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\322_mm_ticket_scenario_rating_view.sql | 0 | 1774881103.821
+MatchMatrix-platform\Scripts\15_ticket_history\323_ticket_history_enrich_full.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\323_ticket_history_enrich_full.sql | 0 | 1774881748.42
+MatchMatrix-platform\Scripts\15_ticket_history\324_v_ticket_history_summary_enriched.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\324_v_ticket_history_summary_enriched.sql | 0 | 1774881890.23
+MatchMatrix-platform\Scripts\15_ticket_history\325_select_ticket_history_prediction_enriched.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\325_select_ticket_history_prediction_enriched.sql | 732 | 1774882454.512
+MatchMatrix-platform\Scripts\15_ticket_history\326_create_saved_tickets.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\326_create_saved_tickets.sql | 0 | 1774882952.46
+MatchMatrix-platform\Scripts\15_ticket_history\327_insert_generated_into_tickets.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\327_insert_generated_into_tickets.sql | 0 | 1774883409.851
+MatchMatrix-platform\Scripts\15_ticket_history\328_insert_generated_blocks_into_ticket_blocks.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\328_insert_generated_blocks_into_ticket_blocks.sql | 0 | 1774883586.693
+MatchMatrix-platform\Scripts\15_ticket_history\329_ulozeni_run_tiketu.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\329_ulozeni_run_tiketu.sql | 0 | 1774896258.498
+MatchMatrix-platform\Scripts\15_ticket_history\330_naplnění_ticket_blocks.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\330_naplnění_ticket_blocks.sql | 0 | 1774896616.675
+MatchMatrix-platform\Scripts\15_ticket_history\331_naplnění_tiket_block_matches.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\331_naplnění_tiket_block_matches.sql | 0 | 1774897004.363
+MatchMatrix-platform\Scripts\15_ticket_history\332_save_generated_run_into_tickets.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\332_save_generated_run_into_tickets.sql | 0 | 1774897365.963
+MatchMatrix-platform\Scripts\15_ticket_history\335_create_function_mm_save_generated_run_full.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\335_create_function_mm_save_generated_run_full.sql | 0 | 1774898691.956
+MatchMatrix-platform\Scripts\15_ticket_history\336_fix_view_vw_ticket_summary_latest_odds.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\336_fix_view_vw_ticket_summary_latest_odds.sql | 0 | 1774902156.526
+MatchMatrix-platform\Scripts\15_ticket_history\337_fix_vw_ticket_summary_with_dc_fallback.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\15_ticket_history\337_fix_vw_ticket_summary_with_dc_fallback.sql | 0 | 1774902726.2
 MatchMatrix-platform\Scripts\99_playground\001_počty_future_matches.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\001_počty_future_matches.sql | 517 | 1772985524.249
 MatchMatrix-platform\Scripts\99_playground\001_run_tests.sql\preview_run_probability.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\001_run_tests.sql\preview_run_probability.sql | 0 | 1770815950.527
 MatchMatrix-platform\Scripts\99_playground\002_přestavba_matches.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\002_přestavba_matches.sql | 5511 | 1772965782.266
@@ -1158,6 +1323,7 @@ MatchMatrix-platform\Scripts\99_playground\099_kontrola_ingest_planneru.sql | C:
 MatchMatrix-platform\Scripts\99_playground\099_kontrola_running_planneru_a_zruseni.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\099_kontrola_running_planneru_a_zruseni.sql | 410 | 1773432314.318
 MatchMatrix-platform\Scripts\99_playground\099_spouštěcí_běhy_různé_druhy.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\099_spouštěcí_běhy_různé_druhy.sql | 2272 | 1772311806.301
 MatchMatrix-platform\Scripts\99_playground\099_vrácení_konkrétní_jobu_zpět.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\099_vrácení_konkrétní_jobu_zpět.sql | 293 | 1773566638.246
+MatchMatrix-platform\Scripts\99_playground\999_výpis_sloupců_tabulek.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\999_výpis_sloupců_tabulek.sql | 311 | 1774904286.537
 MatchMatrix-platform\Scripts\99_playground\blocks_experiments.sql\migrate_fixed.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\blocks_experiments.sql\migrate_fixed.sql | 266 | 1770800251.736
 MatchMatrix-platform\Scripts\99_playground\blocks_experiments.sql\migrate_Variable.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\blocks_experiments.sql\migrate_Variable.sql | 261 | 1770800249.804
 MatchMatrix-platform\Scripts\99_playground\blocks_experiments.sql\template_block_matches.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\blocks_experiments.sql\template_block_matches.sql | 583 | 1770798369.981
@@ -1182,6 +1348,7 @@ MatchMatrix-platform\Scripts\99_playground\volane_funkce\soubor_dotazu_V5.sql | 
 MatchMatrix-platform\Scripts\99_playground\volane_funkce\test_bookmaker_odds.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\volane_funkce\test_bookmaker_odds.sql | 165 | 1770928881.783
 MatchMatrix-platform\Scripts\99_playground\volane_funkce\vyvolani_kodu_procedury.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\volane_funkce\vyvolani_kodu_procedury.sql | 77 | 1770928603.763
 MatchMatrix-platform\Scripts\99_playground\volane_funkce\výkon.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\volane_funkce\výkon.sql | 45 | 1770809932.64
+MatchMatrix-platform\Scripts\99_playground\vrácení konkrétní jobu zpět.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_playground\vrácení konkrétní jobu zpět.sql | 293 | 1773580073.512
 MatchMatrix-platform\Scripts\99_reports\100_rozsah_stažených_lig_FB_football_Data.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_reports\100_rozsah_stažených_lig_FB_football_Data.sql | 467 | 1774004394.05
 MatchMatrix-platform\Scripts\99_reports\99_block_outcome_candidate.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_reports\99_block_outcome_candidate.sql | 297 | 1773088294.396
 MatchMatrix-platform\Scripts\99_reports\99_ingest_behy_pocet_ zapasu_v_DB.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\99_reports\99_ingest_behy_pocet_ zapasu_v_DB.sql | 600 | 1772612861.846
@@ -1195,7 +1362,6 @@ MatchMatrix-platform\Scripts\ingest\001_daily_ingest_healthcheck.sql | C:\MatchM
 MatchMatrix-platform\Scripts\ingest\football_data_pull.py | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\ingest\football_data_pull.py | 4905 | 1770984850.969
 MatchMatrix-platform\Scripts\ingest\run_football_data.bat | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\ingest\run_football_data.bat | 791 | 1770984857.041
 MatchMatrix-platform\Scripts\MatchMatrix.sql | C:\MatchMatrix-platform\MatchMatrix-platform\Scripts\MatchMatrix.sql | 8545 | 1772923149.668
-MatchMatrix_Struktura.txt | C:\MatchMatrix-platform\MatchMatrix_Struktura.txt | 19022 | 1772919279.478
 ops\lib\import json.txt | C:\MatchMatrix-platform\ops\lib\import json.txt | 1867 | 1772960665.015
 ops\lib\job_logger.py | C:\MatchMatrix-platform\ops\lib\job_logger.py | 1867 | 1772960678.359
 ops\mm_autopilot_daily.ps1 | C:\MatchMatrix-platform\ops\mm_autopilot_daily.ps1 | 6928 | 1771944486.351
@@ -1235,6 +1401,7 @@ reports\file_audit\snapshots\snapshot_20260317_085252.json | C:\MatchMatrix-plat
 reports\file_audit\snapshots\snapshot_20260317_091237.json | C:\MatchMatrix-platform\reports\file_audit\snapshots\snapshot_20260317_091237.json | 236783 | 1773735159.054
 reports\player_audit\player_season_statistics_audit_20260316_141136.txt | C:\MatchMatrix-platform\reports\player_audit\player_season_statistics_audit_20260316_141136.txt | 37890 | 1773666696.682
 reports\player_audit\player_season_statistics_audit_20260316_161755.txt | C:\MatchMatrix-platform\reports\player_audit\player_season_statistics_audit_20260316_161755.txt | 37890 | 1773674276.126
+reports\player_audit\player_season_statistics_audit_20260326_091551.txt | C:\MatchMatrix-platform\reports\player_audit\player_season_statistics_audit_20260326_091551.txt | 67122 | 1774512951.857
 reports\reports_runner\soubor na spouštění reportů\Coverage Heatmap (liga × sezóna).txt | C:\MatchMatrix-platform\reports\reports_runner\soubor na spouštění reportů\Coverage Heatmap (liga × sezóna).txt | 375 | 1772744009.26
 reports\reports_runner\soubor na spouštění reportů\Coverage podle lig – ukáže ligy a jejich počet.txt | C:\MatchMatrix-platform\reports\reports_runner\soubor na spouštění reportů\Coverage podle lig – ukáže ligy a jejich počet.txt | 261 | 1772743824.128
 reports\reports_runner\soubor na spouštění reportů\Kolik lig je aktivních v ingest_targets-u API-Football.txt | C:\MatchMatrix-platform\reports\reports_runner\soubor na spouštění reportů\Kolik lig je aktivních v ingest_targets-u API-Football.txt | 248 | 1772609068.591
@@ -1267,6 +1434,7 @@ system\PROJECT_STATE.md | C:\MatchMatrix-platform\system\PROJECT_STATE.md | 1002
 system\RUN_MIGRATIONS.bat | C:\MatchMatrix-platform\system\RUN_MIGRATIONS.bat | 1200 | 1772541289.987
 system\run_reports.ps1 | C:\MatchMatrix-platform\system\run_reports.ps1 | 1319 | 1772536709.852
 tools\8. Doporučený běžný postup.txt | C:\MatchMatrix-platform\tools\8. Doporučený běžný postup.txt | 1575 | 1773959692.089
+tools\check_db_connection.py | C:\MatchMatrix-platform\tools\check_db_connection.py | 516 | 1774535955.114
 tools\Co dělají tlačítka v panelu V7.txt | C:\MatchMatrix-platform\tools\Co dělají tlačítka v panelu V7.txt | 3490 | 1773959614.813
 tools\export_system_tree_v1.py | C:\MatchMatrix-platform\tools\export_system_tree_v1.py | 8204 | 1774253665.225
 tools\matchmatrix_control_panel.py | C:\MatchMatrix-platform\tools\matchmatrix_control_panel.py | 3761 | 1773224811.226
@@ -1279,9 +1447,44 @@ tools\matchmatrix_control_panel_V7.py | C:\MatchMatrix-platform\tools\matchmatri
 tools\matchmatrix_control_panel_V7_fixed.py | C:\MatchMatrix-platform\tools\matchmatrix_control_panel_V7_fixed.py | 54933 | 1774102154.164
 tools\matchmatrix_control_panel_V8.py | C:\MatchMatrix-platform\tools\matchmatrix_control_panel_V8.py | 54214 | 1774131236.806
 tools\matchmatrix_control_panel_V9.py | C:\MatchMatrix-platform\tools\matchmatrix_control_panel_V9.py | 67759 | 1774472525.05
-tools\run_check_psql.bat | C:\MatchMatrix-platform\tools\run_check_psql.bat | 397 | 1774425565.752
-tools\run_matchmatrix_control_panel_V3.bat | C:\MatchMatrix-platform\tools\run_matchmatrix_control_panel_V3.bat | 228 | 1773262225.711
-tools\run_matchmatrix_panel_V4.bat | C:\MatchMatrix-platform\tools\run_matchmatrix_panel_V4.bat | 330 | 1773409341.505
+tools\matchmatrix_ticket_studio_V2_10.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_10.py | 11707 | 1774621362.259
+tools\matchmatrix_ticket_studio_V2_10_4.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_10_4.py | 13398 | 1774615273.806
+tools\matchmatrix_ticket_studio_V2_10_5.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_10_5.py | 15467 | 1774616492.794
+tools\matchmatrix_ticket_studio_V2_11.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_11.py | 18731 | 1774624248.372
+tools\matchmatrix_ticket_studio_V2_12.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_12.py | 25030 | 1774625058.028
+tools\matchmatrix_ticket_studio_V2_13.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_13.py | 21119 | 1774645229.83
+tools\matchmatrix_ticket_studio_V2_14.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_14.py | 11943 | 1774646316.083
+tools\matchmatrix_ticket_studio_V2_15_fix.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_15_fix.py | 9340 | 1774647131.67
+tools\matchmatrix_ticket_studio_V2_16.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_16.py | 29596 | 1774649658.749
+tools\matchmatrix_ticket_studio_V2_17.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_17.py | 29838 | 1774700194.643
+tools\matchmatrix_ticket_studio_V2_18.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_18.py | 9969 | 1774701838.536
+tools\matchmatrix_ticket_studio_V2_19.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_19.py | 17998 | 1774703521.143
+tools\matchmatrix_ticket_studio_V2_19_fix.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_19_fix.py | 18006 | 1774703747.007
+tools\matchmatrix_ticket_studio_V2_2.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_2.py | 40741 | 1774557914.075
+tools\matchmatrix_ticket_studio_V2_20.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_20.py | 18092 | 1774704388.556
+tools\matchmatrix_ticket_studio_V2_21.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_21.py | 19581 | 1774705375.241
+tools\matchmatrix_ticket_studio_V2_22.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_22.py | 19624 | 1774708145.991
+tools\matchmatrix_ticket_studio_V2_22_fix.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_22_fix.py | 19624 | 1774708710.844
+tools\matchmatrix_ticket_studio_V2_22_fix2.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_22_fix2.py | 20154 | 1774711128.708
+tools\matchmatrix_ticket_studio_V2_22_fix3.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_22_fix3.py | 20177 | 1774713638.227
+tools\matchmatrix_ticket_studio_V2_3.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_3.py | 50081 | 1774559498.993
+tools\matchmatrix_ticket_studio_V2_4.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_4.py | 48324 | 1774561797.777
+tools\matchmatrix_ticket_studio_V2_5.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_5.py | 63167 | 1774594317.117
+tools\matchmatrix_ticket_studio_V2_6.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_6.py | 82303 | 1774596473.485
+tools\matchmatrix_ticket_studio_V2_7.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_7.py | 96993 | 1774597602.56
+tools\matchmatrix_ticket_studio_V2_9.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V2_9.py | 21283 | 1774599405.708
+tools\matchmatrix_ticket_studio_V3.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3.py | 72335 | 1774714685.147
+tools\matchmatrix_ticket_studio_V3_fix1.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix1.py | 80332 | 1774725388.991
+tools\matchmatrix_ticket_studio_V3_fix10.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix10.py | 92203 | 1774773267.004
+tools\matchmatrix_ticket_studio_V3_fix11.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix11.py | 96433 | 1774813237.143
+tools\matchmatrix_ticket_studio_V3_fix12.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix12.py | 112609 | 1774814678.632
+tools\matchmatrix_ticket_studio_V3_fix13.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix13.py | 128444 | 1774903824.802
+tools\matchmatrix_ticket_studio_V3_fix3.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix3.py | 83717 | 1774726034.786
+tools\matchmatrix_ticket_studio_V3_fix4.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix4.py | 86121 | 1774726696.847
+tools\matchmatrix_ticket_studio_V3_fix5.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix5.py | 86264 | 1774727278.271
+tools\matchmatrix_ticket_studio_V3_fix6.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix6.py | 88660 | 1774728069.242
+tools\matchmatrix_ticket_studio_V3_fix7.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix7.py | 89358 | 1774729455.59
+tools\matchmatrix_ticket_studio_V3_fix8.py | C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix8.py | 91790 | 1774730609.12
 workers\build_ingest_planner_jobs.py | C:\MatchMatrix-platform\workers\build_ingest_planner_jobs.py | 9524 | 1773412483.793
 workers\build_player_enrichment_jobs.py | C:\MatchMatrix-platform\workers\build_player_enrichment_jobs.py | 2983 | 1773580268.641
 workers\extract_teams_from_fixtures_v2.py | C:\MatchMatrix-platform\workers\extract_teams_from_fixtures_v2.py | 2917 | 1773523589.572
@@ -1300,8 +1503,12 @@ workers\run_player_profiles_public_merge_v1.py | C:\MatchMatrix-platform\workers
 workers\run_player_season_statistics_public_merge_v1.py | C:\MatchMatrix-platform\workers\run_player_season_statistics_public_merge_v1.py | 12325 | 1773609481.423
 workers\run_player_season_statistics_stage_parser_v1.py | C:\MatchMatrix-platform\workers\run_player_season_statistics_stage_parser_v1.py | 14217 | 1774470204.526
 workers\run_players_bridge_v4.py | C:\MatchMatrix-platform\workers\run_players_bridge_v4.py | 9827 | 1773569802.287
+workers\run_players_fetch_bk_only_v1.py | C:\MatchMatrix-platform\workers\run_players_fetch_bk_only_v1.py | 6313 | 1774516909.963
+workers\run_players_fetch_hk_only_v1.py | C:\MatchMatrix-platform\workers\run_players_fetch_hk_only_v1.py | 9979 | 1774514373.745
 workers\run_players_fetch_only_v1.py | C:\MatchMatrix-platform\workers\run_players_fetch_only_v1.py | 7037 | 1774469678.774
+workers\run_players_parse_hk_only_v1.py | C:\MatchMatrix-platform\workers\run_players_parse_hk_only_v1.py | 9660 | 1774514373.751
 workers\run_players_parse_only_v1.py | C:\MatchMatrix-platform\workers\run_players_parse_only_v1.py | 3317 | 1774469996.665
+workers\run_players_pipeline_hk_v1.py | C:\MatchMatrix-platform\workers\run_players_pipeline_hk_v1.py | 2370 | 1774514373.76
 workers\run_players_pipeline_transitional_v1.py | C:\MatchMatrix-platform\workers\run_players_pipeline_transitional_v1.py | 4187 | 1774471266.04
 workers\run_players_public_merge_v2.py | C:\MatchMatrix-platform\workers\run_players_public_merge_v2.py | 14732 | 1773575357.11
 workers\run_players_season_stats_bridge_v3.py | C:\MatchMatrix-platform\workers\run_players_season_stats_bridge_v3.py | 20878 | 1773693295.696

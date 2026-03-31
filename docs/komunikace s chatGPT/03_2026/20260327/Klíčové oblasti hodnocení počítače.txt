@@ -1,0 +1,73 @@
+ Klíčové oblasti hodnocení počítače pro velkou sportovní databázi
+🧠 1. Výpočetní výkon (CPU)
+Pro databázové operace je zásadní:
+• 	Počet jader a vláken – čím více, tím lépe pro paralelní dotazy.
+• 	Single‑core výkon – důležitý pro rychlé transakce a indexové operace.
+• 	Podpora virtualizace – pokud budeš provozovat více služeb (API, DB, cache).
+Doporučení pro rozsáhlou DB:
+• 	Minimálně 8–16 jader (např. AMD Ryzen 9 / Intel i9 / Xeon / EPYC).
+• 	Moderní generace kvůli efektivitě a instrukční sadě.
+
+💾 2. Operační paměť (RAM)
+Databáze milují RAM, protože:
+• 	Čím více dat se vejde do paměti, tím méně se sahá na disk.
+• 	Indexy, cache a často dotazované tabulky běží výrazně rychleji.
+Doporučení:
+• 	Minimum pro seriózní projekt: 32–64 GB RAM.
+• 	Pro velké globální nasazení: 128 GB a více.
+
+📦 3. Úložiště (disky)
+Disk je často největší úzké hrdlo.
+Co je důležité:
+• 	NVMe SSD – dramaticky rychlejší než SATA.
+• 	IOPS – zásadní pro mnoho malých dotazů.
+• 	RAID 1/10 – ochrana dat + rychlost.
+• 	Oddělení disků:
+• 	jeden pro databázi,
+• 	jeden pro logy,
+• 	jeden pro zálohy.
+Doporučení:
+• 	Minimálně 1–2 TB NVMe SSD (PCIe 4.0 nebo 5.0).
+• 	RAID 10 pro produkční prostředí.
+
+🌐 4. Síťová konektivita
+Pro globální webovou službu je nutné:
+• 	Stabilní upload (min. 100–500 Mbps).
+• 	Nízká latence.
+• 	Možnost hostingu v datacentru nebo cloudu.
+Domácí nebo kancelářský internet obvykle nestačí pro celosvětový provoz.
+
+🛡️ 5. Bezpečnost a dostupnost
+Sportovní databáze s globálním přístupem vyžaduje:
+• 	Automatické zálohy.
+• 	UPS (záložní zdroj).
+• 	Monitoring (CPU, RAM, disk, síť).
+• 	Firewall a ochranu proti útokům.
+• 	SSL certifikáty.
+
+🧩 6. Software a architektura
+Výkon počítače je jen část příběhu. Důležité je i to, jak bude databáze navržena.
+Doporučené technologie:
+• 	PostgreSQL nebo MariaDB pro relační data.
+• 	Redis pro cache.
+• 	Elasticsearch pro rychlé vyhledávání.
+• 	API vrstva (Node.js, Python, Go).
+• 	Load balancer pokud bude více serverů.
+
+🖥️ 7. Je běžný počítač dostatečný?
+Pro vývoj, testování a menší provoz ano.
+Pro celosvětovou sportovní databázi s tisíci uživateli už ne – tam je lepší:
+• 	dedikovaný server,
+• 	nebo cloud (AWS, Azure, Google Cloud),
+• 	nebo české datacentrum (MasterDC, vshosting, Wedos DC2).
+
+📊 Co potřebuji od tebe, abych to zhodnotil přesně?
+Abych ti dal konkrétní verdikt, potřebuju znát parametry počítače:
+• 	CPU (model)
+• 	RAM (kapacita + typ)
+• 	Disky (typ, rychlost, kapacita)
+• 	Síť (rychlost připojení)
+• 	Operační systém
+• 	Očekávaný počet uživatelů
+• 	Velikost databáze (v GB nebo počtu záznamů)
+Jakmile mi to pošleš, udělám detailní posouzení a doporučím optimální architekturu.

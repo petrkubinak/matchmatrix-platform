@@ -1,0 +1,202 @@
+|team_id|team_name                 |alias                     |source      |
+|-------|--------------------------|--------------------------|------------|
+|12,070 |1899 Hoffenheim           |1899 Hoffenheim           |api_football|
+|14,773 |1899 Hoffenheim W         |1899 Hoffenheim W         |api_football|
+|12,077 |1. FC Heidenheim          |1. FC Heidenheim          |api_football|
+|534    |1. FC Heidenheim 1846     |1 fc heidenheim 1846      |theodds     |
+|534    |1. FC Heidenheim 1846     |heidenheim                |theodds     |
+|12,735 |1. FC K?ln                |1. FC K?ln                |api_football|
+|518    |1. FC Köln                |1 fc kln                  |theodds     |
+|518    |1. FC Köln                |fc koln                   |theodds     |
+|533    |1. FC Union Berlin        |1 fc union berlin         |theodds     |
+|533    |1. FC Union Berlin        |union berlin              |theodds     |
+|527    |1. FSV Mainz 05           |1 fsv mainz 05            |theodds     |
+|527    |1. FSV Mainz 05           |FSV Mainz 05              |theodds     |
+|527    |1. FSV Mainz 05           |mainz                     |theodds     |
+|606    |2 de Mayo                 |2 de mayo                 |theodds     |
+|594    |AA Argentinos Juniors     |aa argentinos juniors     |theodds     |
+|13,181 |Aalesund                  |Aalesund                  |api_football|
+|12,967 |Aberdeen                  |Aberdeen                  |api_football|
+|15,013 |Abergavenny Town          |Abergavenny Town          |api_football|
+|13,391 |Aberystwyth Town          |Aberystwyth Town          |api_football|
+|12,667 |Accrington ST             |Accrington ST             |api_football|
+|537    |ACF Fiorentina            |acf fiorentina            |theodds     |
+|537    |ACF Fiorentina            |fiorentina                |theodds     |
+|536    |AC Milan                  |ac milan                  |theodds     |
+|27,887 |AC Milan                  |AC Milan                  |api_football|
+|536    |AC Milan                  |milan                     |theodds     |
+|552    |AC Pisa 1909              |ac pisa 1909              |theodds     |
+|13,046 |ACS Sirineasa             |ACS Sirineasa             |api_football|
+|14,007 |Admira Praha              |Admira Praha              |api_football|
+|12,164 |ADO Den Haag              |ADO Den Haag              |api_football|
+|12,687 |AEK Athens FC             |AEK Athens FC             |api_football|
+|13,109 |AEK Larnaca               |AEK Larnaca               |api_football|
+|13,018 |AEL                       |AEL                       |api_football|
+|12,302 |AE Zakakiou               |AE Zakakiou               |api_football|
+|12,274 |Afan Lido                 |Afan Lido                 |api_football|
+|95     |AFC Ajax                  |afc ajax                  |theodds     |
+|95     |AFC Ajax                  |ajax                      |theodds     |
+|13,933 |AFC Amsterdam             |AFC Amsterdam             |api_football|
+|67     |AFC Bournemouth           |afc bournemouth           |theodds     |
+|26,635 |AFC Hermannstadt          |AFC Hermannstadt          |api_football|
+|13,535 |AFC Wimbledon             |AFC Wimbledon             |api_football|
+|15,338 |Agudat Sport Ashdod       |Agudat Sport Ashdod       |api_football|
+|13,402 |Ahironas / Onisilos       |Ahironas / Onisilos       |api_football|
+|13,267 |AIK Stockholm             |AIK Stockholm             |api_football|
+|13,157 |Airbus UK                 |Airbus UK                 |api_football|
+|13,303 |Airdrie United            |Airdrie United            |api_football|
+|1,029  |Ajaccio                   |ajaccio                   |theodds     |
+|13,579 |Ajaccio                   |Ajaccio                   |api_football|
+|503    |AJ Auxerre                |aj auxerre                |theodds     |
+|12,161 |Ajax                      |Ajax                      |api_football|
+|13,475 |Akritas                   |Akritas                   |api_football|
+|12,093 |Alaves                    |Alaves                    |api_football|
+|124    |Albania                   |albania                   |theodds     |
+|13,738 |Albinoleffe               |Albinoleffe               |api_football|
+|15,306 |Alessandria               |Alessandria               |api_football|
+|643    |Algeria                   |algeria                   |theodds     |
+|15,407 |Alki Oroklini             |Alki Oroklini             |api_football|
+|14,862 |Alloa Athletic            |Alloa Athletic            |api_football|
+|1,111  |Almere City               |almere city               |theodds     |
+|1,111  |Almere City               |Almere City FC            |manual      |
+|12,179 |Almere City FC            |Almere City FC            |api_football|
+|1,158  |Almeria                   |almeria                   |theodds     |
+|25,856 |Almeria                   |Almeria                   |api_football|
+|27,650 |Aluminij                  |Aluminij                  |api_football|
+|1,034  |Amiens                    |amiens                    |theodds     |
+|13,442 |Ammanford AFC             |Ammanford AFC             |api_football|
+|12,380 |?amor?n                   |?amor?n                   |api_football|
+|12,608 |Anagennisi Deryneia       |Anagennisi Deryneia       |api_football|
+|15,275 |Ancona                    |Ancona                    |api_football|
+|972    |Anderlecht                |anderlecht                |theodds     |
+|13,948 |Andernach W               |Andernach W               |api_football|
+|1,018  |Angers                    |angers                    |theodds     |
+|12,102 |Angers                    |Angers                    |api_football|
+|510    |Angers SCO                |angers sco                |theodds     |
+|13,251 |Annagh United             |Annagh United             |api_football|
+|12,998 |Anorthosis                |Anorthosis                |api_football|
+|964    |Antwerp                   |antwerp                   |theodds     |
+|12,860 |Apoel Nicosia             |Apoel Nicosia             |api_football|
+|27,070 |Apollon Limassol          |Apollon Limassol          |api_football|
+|15,158 |Arbroath                  |Arbroath                  |api_football|
+|12,714 |Arda Kardzhali            |Arda Kardzhali            |api_football|
+|13,058 |Ards                      |Ards                      |api_football|
+|28,632 |Arendal                   |Arendal                   |api_football|
+|632    |Argentina                 |argentina                 |theodds     |
+|12,347 |Arges Pitesti             |Arges Pitesti             |api_football|
+|27,073 |Aris                      |Aris                      |api_football|
+|13,420 |Aris Thessalonikis        |Aris Thessalonikis        |api_football|
+|13,208 |Arka Gdynia               |Arka Gdynia               |api_football|
+|12,153 |Arouca                    |Arouca                    |api_football|
+|1      |Arsenal                   |arsenal                   |theodds     |
+|13,102 |Arsenal                   |Arsenal                   |api_football|
+|14,068 |Arzignano Valchiampo      |Arzignano Valchiampo      |api_football|
+|13,462 |Asane                     |Asane                     |api_football|
+|14,655 |Ashdod                    |Ashdod                    |api_football|
+|90     |AS Monaco FC              |as monaco                 |theodds     |
+|90     |AS Monaco FC              |monaco                    |theodds     |
+|538    |AS Roma                   |as roma                   |theodds     |
+|12,128 |AS Roma                   |AS Roma                   |api_football|
+|538    |AS Roma                   |roma                      |theodds     |
+|13,448 |Asteras Tripolis          |Asteras Tripolis          |api_football|
+|27,927 |Aston Villa               |Aston Villa               |api_football|
+|49     |Aston Villa FC            |Aston Villa               |theodds     |
+|12,129 |Atalanta                  |Atalanta                  |api_football|
+|83     |Atalanta BC               |atalanta                  |theodds     |
+|83     |Atalanta BC               |atalanta bc               |theodds     |
+|78     |Athletic Club             |ath bilbao                |theodds     |
+|78     |Athletic Club             |Athletic Bilbao           |theodds     |
+|78     |Athletic Club             |athletic club             |theodds     |
+|12,084 |Athletic Club             |Athletic Club             |api_football|
+|12,083 |Atletico Madrid           |Atletico Madrid           |api_football|
+|16,786 |Atl?tico Madrid II        |Atl?tico Madrid II        |api_football|
+|12,568 |Atromitos                 |Atromitos                 |api_football|
+|25,873 |Audace Cerignola          |Audace Cerignola          |api_football|
+|644    |Australia                 |779                       |theodds     |
+|644    |Australia                 |australia                 |theodds     |
+|122    |Austria                   |austria                   |theodds     |
+|1,019  |Auxerre                   |auxerre                   |theodds     |
+|12,116 |Auxerre                   |Auxerre                   |api_football|
+|14,716 |Avellino                  |Avellino                  |api_football|
+|1,140  |Aves                      |aves                      |theodds     |
+|1,140  |Aves                      |Desportivo das Aves       |manual      |
+|591    |AVS                       |avs                       |theodds     |
+|12,159 |AVS                       |AVS                       |api_football|
+|591    |AVS                       |AVS Futebol SAD           |theodds     |
+|13,494 |Ayia Napa                 |Ayia Napa                 |api_football|
+|12,570 |Ayr Utd                   |Ayr Utd                   |api_football|
+|1,106  |AZ Alkmaar                |az                        |theodds     |
+|1,106  |AZ Alkmaar                |az alkmaar                |theodds     |
+|12,166 |AZ Alkmaar                |AZ Alkmaar                |api_football|
+|27,874 |AZ Picerno                |AZ Picerno                |api_football|
+|12,557 |Bala Town                 |Bala Town                 |api_football|
+|12,355 |Ballinamallard United     |Ballinamallard United     |api_football|
+|13,603 |Ballyclare Comrades       |Ballyclare Comrades       |api_football|
+|15,316 |Ballymacash Rangers       |Ballymacash Rangers       |api_football|
+|13,468 |Ballymena United          |Ballymena United          |api_football|
+|13,465 |Ban?k Ostrava II          |Ban?k Ostrava II          |api_football|
+|16,884 |Ban?k Sokolov             |Ban?k Sokolov             |api_football|
+|12,082 |Barcelona                 |Barcelona                 |api_football|
+|1,006  |Barnsley                  |barnsley                  |theodds     |
+|12,890 |Barnsley                  |Barnsley                  |api_football|
+|13,665 |Barrow                    |Barrow                    |api_football|
+|13,088 |Barry Town                |Barry Town                |api_football|
+|68     |Bayer 04 Leverkusen       |bayer 04 leverkusen       |theodds     |
+|68     |Bayer 04 Leverkusen       |Bayer Leverkusen          |theodds     |
+|68     |Bayer 04 Leverkusen       |leverkusen                |theodds     |
+|12,071 |Bayer Leverkusen          |Bayer Leverkusen          |api_football|
+|14,506 |Bayer Leverkusen W        |Bayer Leverkusen W        |api_football|
+|12,063 |Bayern M?nchen            |Bayern M?nchen            |api_football|
+|13,902 |Bayern M?nchen II W       |Bayern M?nchen II W       |api_football|
+|14,139 |Bayern Munich W           |Bayern Munich W           |api_football|
+|27,565 |Beasain                   |Beasain                   |api_football|
+|980    |Beerschot VA              |beerschot va              |theodds     |
+|14,252 |Beitar Jerusalem          |Beitar Jerusalem          |api_football|
+|12,895 |Belasitsa                 |Belasitsa                 |api_football|
+|1,139  |Belenenses                |belenenses                |theodds     |
+|1,139  |Belenenses                |CF Os Belenenses          |manual      |
+|120    |Belgium                   |belgium                   |theodds     |
+|12,560 |Bellinzona                |Bellinzona                |api_football|
+|13,373 |Beltinci                  |Beltinci                  |api_football|
+|1,091  |Benevento                 |benevento                 |theodds     |
+|12,141 |Benfica                   |Benfica                   |api_football|
+|26,295 |Beroe                     |Beroe                     |api_football|
+|1,059  |Bielefeld                 |Arminia Bielefeld         |manual      |
+|1,059  |Bielefeld                 |bielefeld                 |theodds     |
+|12,304 |Bilje                     |Bilje                     |api_football|
+|13,359 |Birmingham                |Birmingham                |api_football|
+|32     |Birmingham City FC        |birmingham                |theodds     |
+|32     |Birmingham City FC        |birmingham city           |theodds     |
+|13,433 |Bistrica                  |Bistrica                  |api_football|
+|25,831 |BK Hacken                 |BK Hacken                 |api_football|
+|12,194 |Blackburn                 |Blackburn                 |api_football|
+|24     |Blackburn Rovers FC       |blackburn                 |theodds     |
+|24     |Blackburn Rovers FC       |blackburn rovers          |theodds     |
+|1,003  |Blackpool                 |blackpool                 |theodds     |
+|13,685 |Blackpool                 |Blackpool                 |api_football|
+|14,607 |Blansko                   |Blansko                   |api_football|
+|14,621 |Bnei Sakhnin              |Bnei Sakhnin              |api_football|
+|13,811 |Bnei Yehuda               |Bnei Yehuda               |api_football|
+|1,132  |Boavista                  |boavista                  |theodds     |
+|12,145 |Boavista                  |Boavista                  |api_football|
+|1,055  |Bochum                    |bochum                    |theodds     |
+|14,347 |Bochum                    |Bochum                    |api_football|
+|1,055  |Bochum                    |VfL Bochum                |manual      |
+|13,611 |Bodo/Glimt                |Bodo/Glimt                |api_football|
+|26,154 |Bohemians 1905 II         |Bohemians 1905 II         |api_football|
+|26,992 |Bologna                   |Bologna                   |api_football|
+|540    |Bologna FC 1909           |bologna                   |theodds     |
+|540    |Bologna FC 1909           |bologna fc 1909           |theodds     |
+|1,009  |Bolton                    |bolton                    |theodds     |
+|12,960 |Bolton                    |Bolton                    |api_football|
+|1,031  |Bordeaux                  |bordeaux                  |theodds     |
+|69     |Borussia Dortmund         |borussia dortmund         |theodds     |
+|12,069 |Borussia Dortmund         |Borussia Dortmund         |api_football|
+|69     |Borussia Dortmund         |dortmund                  |theodds     |
+|12,067 |Borussia M?nchengladbach  |Borussia M?nchengladbach  |api_football|
+|530    |Borussia Mönchengladbach  |borussia mnchengladbach   |theodds     |
+|530    |Borussia Mönchengladbach  |Borussia Monchengladbach  |theodds     |
+|530    |Borussia Mönchengladbach  |mgladbach                 |theodds     |
+|530    |Borussia Mönchengladbach  |M'gladbach                |manual      |
+|26,793 |Borussia Monchengladbach W|Borussia Monchengladbach W|api_football|
+|9      |Botafogo FR               |Botafogo                  |theodds     |

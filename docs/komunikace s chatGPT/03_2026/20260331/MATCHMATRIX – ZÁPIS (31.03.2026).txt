@@ -1,0 +1,207 @@
+MATCHMATRIX – ZÁPIS (31.03.2026)
+🎯 HLAVNÍ CÍL DNES
+
+Dostat systém do stavu:
+
+víme co jde spouštět
+víme co je jen připravené
+máme panel logiku (RUN / VALIDATE / HOLD / BLOCKED)
+ingest reálně běží (ověřeno na HK)
+✅ CO JE HOTOVÉ
+1️⃣ Panel logika (KLÍČOVÉ)
+
+Vytvořeno:
+
+ops.v_run_ready_queue
+ops.v_panel_run_control
+
+👉 Panel teď:
+
+ví co pustit
+ví co nepustit
+eliminuje chyby typu coaches ERROR
+2️⃣ Reálný ingest TEST (HK – HOKEJ)
+✔️ Fixtures
+běží přes panel V9
+API call OK
+parsing OK
+merge OK
+
+Výsledek:
+
+1203 fixtures upserted
+75k matches updated
+pipeline 100% funkční
+✔️ Teams (přes fallback extractor)
+API teams → často 0
+ALE:
+extract_teams_from_fixtures funguje
+2285 teams upserted
+
+👉 zásadní insight:
+
+teams endpoint není potřeba jako primární zdroj
+
+3️⃣ Planner funguje správně
+
+Viděli jsme:
+
+claim jobů ✔️
+prioritizace ✔️
+limit + retry ✔️
+batch i cycle režim ✔️
+4️⃣ Panel rozhodovací stav (nejdůležitější výstup)
+🟢 RUN NOW (OKAMŽITĚ SPUSTIT)
+HK leagues
+HK teams
+HK fixtures
+
+👉 tohle je teď tvoje produkční pipeline
+
+🟡 RUN_VALIDATE (OPATRNĚ)
+FB fixtures (1327 pending)
+FB teams (1326 pending)
+BK fixtures/teams
+VB teams
+
+👉 připraveno na PRO harvest
+
+🔵 MONITOR
+FB leagues
+VB fixtures
+
+👉 hotovo, jen sledovat
+
+🟠 REVIEW (ERROR / UNKNOWN)
+
+👉 všechny ostatní sporty:
+
+AFB, BSB, CK, FH, HB, RGB…
+
+👉 realita:
+
+endpointy existují, ale nejsou validované
+
+⚫ WAIT_PLAN
+
+👉 vše:
+
+odds
+players
+coaches
+external providers
+
+👉 čeká na:
+
+PRO účet
+nebo integraci
+🔴 BLOCKED
+HK players
+football_data odds
+
+👉 reálně neexistuje / nedává smysl
+
+🚨 KLÍČOVÉ INSIGHTY (VELMI DŮLEŽITÉ)
+1. Ne všechny entity mají smysl
+
+👉 typická chyba:
+
+pustil jsi coaches → FAIL
+
+👉 správně:
+
+spouštět jen:
+leagues
+teams
+fixtures
+2. Teams ≠ primary endpoint
+
+👉 realita:
+
+API často vrací 0
+fixtures obsahují teams
+
+👉 architektura:
+
+fixtures → teams extractor → teams DB
+3. HK pipeline = první plně funkční sport
+
+👉 to je milestone
+
+4. Panel = už není “klikací chaos”
+
+👉 teď je to:
+
+řízený orchestrátor
+ne testovací UI
+📊 STAV SYSTÉMU
+SPORT COVERAGE
+Sport	Stav
+HK	🟢 PRODUKČNÍ
+FB	🟡 VALIDACE
+BK	🟡 VALIDACE
+VB	🟡 VALIDACE
+ostatní	🟠 REVIEW
+ENTITY COVERAGE
+Entity	Stav
+leagues	✅
+teams	✅ (via fixtures)
+fixtures	✅
+players	⛔
+odds	⛔
+coaches	⛔
+🧭 CO DĚLAT DÁL (DALŠÍ CHAT)
+🔥 PRIORITA 1
+
+Dokončit HK:
+
+dojet pending:
+HK teams (15)
+HK fixtures (10)
+HK leagues (18)
+🔥 PRIORITA 2
+
+FB VALIDACE:
+
+pustit:
+FB fixtures (limit 5–10)
+FB teams (limit 5–10)
+
+👉 cíl:
+
+ověřit stabilitu pipeline
+🔥 PRIORITA 3
+
+Panel upgrade (další krok)
+
+uděláme:
+👉 407 – dashboard summary
+
+kolik RUN_NOW
+kolik VALIDATE
+kolik BLOCKED
+progress %
+🔥 PRIORITA 4 (po PRO)
+full harvest:
+FB (hlavní)
+HK
+BK
+🧾 KRÁTKÝ EXEC SUMMARY
+
+👉 Dnes se stalo:
+
+panel konečně ví co spouštět
+HK ingest pipeline = funkční end-to-end
+planner funguje jako orchestrátor
+oddělili jsme:
+RUN / VALIDATE / HOLD / BLOCKED
+
+👉 Stav:
+
+Systém je připraven na PRO harvest
+
+🚀 START DO NOVÉHO CHATU
+
+Začni:
+
+pokračujeme 407 – dashboard summary view + panel KPI

@@ -1,0 +1,284 @@
+|match_id|league_name |home_team              |away_team          |market_code|market_name           |outcome_code|outcome_label|bookmaker_name    |odd_value|collected_at           |
+|--------|------------|-----------------------|-------------------|-----------|----------------------|------------|-------------|------------------|---------|-----------------------|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Betfair           |1.92     |2026-03-26 12:49:43.122|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Codere (IT)       |1.88     |2026-03-26 12:49:43.093|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Pinnacle          |1.86     |2026-03-26 12:49:43.150|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Nordic Bet        |1.86     |2026-03-26 12:49:43.190|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Betsson           |1.86     |2026-03-26 12:49:43.177|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |LeoVegas (SE)     |1.85     |2026-03-26 12:49:43.233|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |William Hill      |1.85     |2026-03-26 12:49:43.066|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |888sport          |1.85     |2026-03-26 12:49:43.051|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |1xBet             |1.84     |2026-03-26 12:49:43.080|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (NL)       |1.82     |2026-03-26 12:49:43.205|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Marathon Bet      |1.82     |2026-03-26 12:49:43.163|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (SE)       |1.82     |2026-03-26 12:49:43.219|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Tipico            |1.8      |2026-03-26 12:49:43.136|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Winamax (DE)      |1.8      |2026-03-26 12:49:43.024|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Parions Sport (FR)|1.75     |2026-03-26 12:49:42.995|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (FR)       |1.75     |2026-03-26 13:12:18.629|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Winamax (FR)      |1.72     |2026-03-26 12:49:43.010|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |Betclic (FR)      |1.7      |2026-03-26 12:49:43.107|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|1           |Home Win     |PMU (FR)          |1.66     |2026-03-26 12:49:43.037|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Betfair           |4.3      |2026-03-26 12:49:43.128|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |LeoVegas (SE)     |4.2      |2026-03-26 12:49:43.238|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Betsson           |4.12     |2026-03-26 12:49:43.182|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Nordic Bet        |4.12     |2026-03-26 12:49:43.196|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (NL)       |4.1      |2026-03-26 12:49:43.210|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (SE)       |4.1      |2026-03-26 12:49:43.224|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Marathon Bet      |4.05     |2026-03-26 12:49:43.169|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |1xBet             |4.03     |2026-03-26 12:49:43.085|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Codere (IT)       |4        |2026-03-26 12:49:43.098|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Pinnacle          |3.96     |2026-03-26 12:49:43.156|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Tipico            |3.9      |2026-03-26 12:49:43.141|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |888sport          |3.8      |2026-03-26 12:49:43.057|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |William Hill      |3.8      |2026-03-26 12:49:43.071|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Winamax (DE)      |3.7      |2026-03-26 12:49:43.029|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Parions Sport (FR)|3.65     |2026-03-26 12:49:43.002|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (FR)       |3.65     |2026-03-26 13:12:18.644|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Betclic (FR)      |3.53     |2026-03-26 12:49:43.113|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |PMU (FR)          |3.5      |2026-03-26 12:49:43.043|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|2           |Away Win     |Winamax (FR)      |3.4      |2026-03-26 12:49:43.015|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Pinnacle          |3.8      |2026-03-26 12:49:43.159|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |LeoVegas (SE)     |3.75     |2026-03-26 12:49:43.243|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Codere (IT)       |3.7      |2026-03-26 12:49:43.103|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Nordic Bet        |3.69     |2026-03-26 12:49:43.200|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Betsson           |3.69     |2026-03-26 12:49:43.186|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (SE)       |3.65     |2026-03-26 12:49:43.229|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (NL)       |3.65     |2026-03-26 12:49:43.214|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Betfair           |3.65     |2026-03-26 12:49:43.132|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |1xBet             |3.64     |2026-03-26 12:49:43.089|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Marathon Bet      |3.64     |2026-03-26 12:49:43.173|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Winamax (DE)      |3.6      |2026-03-26 12:49:43.033|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Tipico            |3.6      |2026-03-26 12:49:43.146|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |888sport          |3.5      |2026-03-26 12:49:43.061|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |William Hill      |3.5      |2026-03-26 12:49:43.075|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (FR)       |3.35     |2026-03-26 13:12:18.650|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Parions Sport (FR)|3.35     |2026-03-26 12:49:43.006|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Winamax (FR)      |3.3      |2026-03-26 12:49:43.019|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |Betclic (FR)      |3.25     |2026-03-26 12:49:43.118|
+|62,674  |Championship|Sheffield United FC    |Swansea City AFC   |h2h        |Full Time Result (1X2)|X           |Draw         |PMU (FR)          |3.2      |2026-03-26 12:49:43.047|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |LeoVegas (SE)     |2.2      |2026-03-26 12:49:43.507|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (NL)       |2.17     |2026-03-26 12:49:43.480|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (SE)       |2.17     |2026-03-26 12:49:43.492|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Codere (IT)       |2.17     |2026-03-26 12:49:43.366|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Betfair           |2.14     |2026-03-26 12:49:43.395|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Betsson           |2.12     |2026-03-26 12:49:43.451|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Nordic Bet        |2.12     |2026-03-26 12:49:43.465|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |William Hill      |2.1      |2026-03-26 12:49:43.333|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |888sport          |2.1      |2026-03-26 12:49:43.317|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |1xBet             |2.1      |2026-03-26 12:49:43.350|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Pinnacle          |2.1      |2026-03-26 12:49:43.438|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Marathon Bet      |2.08     |2026-03-26 12:49:43.408|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Tipico            |2.05     |2026-03-26 12:49:43.420|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Winamax (DE)      |2.05     |2026-03-26 12:49:43.288|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Parions Sport (FR)|2        |2026-03-26 12:49:43.257|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (FR)       |2        |2026-03-26 13:12:18.730|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Winamax (FR)      |1.96     |2026-03-26 12:49:43.273|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |Betclic (FR)      |1.93     |2026-03-26 12:49:43.381|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|1           |Home Win     |PMU (FR)          |1.9      |2026-03-26 12:49:43.302|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Pinnacle          |3.61     |2026-03-26 12:49:43.443|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Betsson           |3.54     |2026-03-26 12:49:43.457|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Nordic Bet        |3.54     |2026-03-26 12:49:43.471|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Tipico            |3.5      |2026-03-26 12:49:43.427|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Betfair           |3.5      |2026-03-26 12:49:43.399|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |1xBet             |3.46     |2026-03-26 12:49:43.356|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Marathon Bet      |3.46     |2026-03-26 12:49:43.413|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Codere (IT)       |3.45     |2026-03-26 12:49:43.371|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |William Hill      |3.4      |2026-03-26 12:49:43.340|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |888sport          |3.4      |2026-03-26 12:49:43.323|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |LeoVegas (SE)     |3.35     |2026-03-26 12:49:43.512|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (SE)       |3.25     |2026-03-26 12:49:43.497|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (NL)       |3.25     |2026-03-26 12:49:43.484|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Winamax (DE)      |3.2      |2026-03-26 12:49:43.293|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (FR)       |3.15     |2026-03-26 13:12:18.746|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Parions Sport (FR)|3.15     |2026-03-26 12:49:43.264|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Betclic (FR)      |3.05     |2026-03-26 12:49:43.386|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |PMU (FR)          |3        |2026-03-26 12:49:43.308|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|2           |Away Win     |Winamax (FR)      |2.95     |2026-03-26 12:49:43.278|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |LeoVegas (SE)     |3.45     |2026-03-26 12:49:43.516|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (NL)       |3.4      |2026-03-26 12:49:43.488|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Betfair           |3.4      |2026-03-26 12:49:43.403|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (SE)       |3.4      |2026-03-26 12:49:43.501|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Pinnacle          |3.37     |2026-03-26 12:49:43.447|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Nordic Bet        |3.35     |2026-03-26 12:49:43.475|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Codere (IT)       |3.35     |2026-03-26 12:49:43.377|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Betsson           |3.35     |2026-03-26 12:49:43.461|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |1xBet             |3.3      |2026-03-26 12:49:43.360|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Marathon Bet      |3.3      |2026-03-26 12:49:43.417|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Winamax (DE)      |3.25     |2026-03-26 12:49:43.298|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Tipico            |3.2      |2026-03-26 12:49:43.432|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |888sport          |3.1      |2026-03-26 12:49:43.327|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Parions Sport (FR)|3.1      |2026-03-26 12:49:43.268|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |William Hill      |3.1      |2026-03-26 12:49:43.346|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (FR)       |3.1      |2026-03-26 13:12:18.752|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Winamax (FR)      |3.05     |2026-03-26 12:49:43.283|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |PMU (FR)          |3        |2026-03-26 12:49:43.312|
+|62,677  |Championship|West Bromwich Albion FC|Wrexham AFC        |h2h        |Full Time Result (1X2)|X           |Draw         |Betclic (FR)      |2.98     |2026-03-26 12:49:43.390|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |LeoVegas (SE)     |1.83     |2026-03-26 12:49:42.697|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (SE)       |1.81     |2026-03-26 12:49:42.683|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (NL)       |1.81     |2026-03-26 12:49:42.666|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Betfair           |1.8      |2026-03-26 12:49:42.568|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Nordic Bet        |1.79     |2026-03-26 12:49:42.652|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Betsson           |1.79     |2026-03-26 12:49:42.638|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Pinnacle          |1.79     |2026-03-26 12:49:42.624|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Codere (IT)       |1.77     |2026-03-26 12:49:42.610|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |1xBet             |1.77     |2026-03-26 12:49:42.539|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Marathon Bet      |1.75     |2026-03-26 12:49:42.581|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |888sport          |1.75     |2026-03-26 12:49:42.508|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |William Hill      |1.75     |2026-03-26 12:49:42.524|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Winamax (DE)      |1.7      |2026-03-26 12:49:42.476|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Tipico            |1.7      |2026-03-26 12:49:42.596|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Parions Sport (FR)|1.65     |2026-03-26 12:49:42.421|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (FR)       |1.65     |2026-03-26 13:12:18.403|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Winamax (FR)      |1.62     |2026-03-26 12:49:42.456|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Betclic (FR)      |1.6      |2026-03-26 12:49:42.554|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|1           |Home Win     |PMU (FR)          |1.58     |2026-03-26 12:49:42.491|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Betfair           |4.8      |2026-03-26 12:49:42.573|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Codere (IT)       |4.7      |2026-03-26 12:49:42.615|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |LeoVegas (SE)     |4.5      |2026-03-26 12:49:42.703|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Tipico            |4.5      |2026-03-26 12:49:42.601|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Nordic Bet        |4.46     |2026-03-26 12:49:42.657|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Betsson           |4.46     |2026-03-26 12:49:42.643|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (SE)       |4.4      |2026-03-26 12:49:42.689|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (NL)       |4.4      |2026-03-26 12:49:42.672|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Marathon Bet      |4.4      |2026-03-26 12:49:42.587|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |1xBet             |4.37     |2026-03-26 12:49:42.545|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Parions Sport (FR)|4.3      |2026-03-26 12:49:42.444|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (FR)       |4.3      |2026-03-26 13:12:18.422|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Winamax (DE)      |4.3      |2026-03-26 12:49:42.482|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Pinnacle          |4.28     |2026-03-26 12:49:42.630|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |888sport          |4.2      |2026-03-26 12:49:42.514|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |William Hill      |4.2      |2026-03-26 12:49:42.529|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |PMU (FR)          |4        |2026-03-26 12:49:42.497|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Winamax (FR)      |3.95     |2026-03-26 12:49:42.464|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Betclic (FR)      |3.88     |2026-03-26 12:49:42.559|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Pinnacle          |3.84     |2026-03-26 12:49:42.634|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Nordic Bet        |3.72     |2026-03-26 12:49:42.662|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Betsson           |3.72     |2026-03-26 12:49:42.647|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Marathon Bet      |3.68     |2026-03-26 12:49:42.591|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |1xBet             |3.68     |2026-03-26 12:49:42.549|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Codere (IT)       |3.65     |2026-03-26 12:49:42.619|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Betfair           |3.65     |2026-03-26 12:49:42.577|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |LeoVegas (SE)     |3.65     |2026-03-26 12:49:42.707|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Tipico            |3.6      |2026-03-26 12:49:42.605|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (SE)       |3.55     |2026-03-26 12:49:42.693|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (NL)       |3.55     |2026-03-26 12:49:42.678|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Winamax (DE)      |3.55     |2026-03-26 12:49:42.486|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |William Hill      |3.5      |2026-03-26 12:49:42.534|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |888sport          |3.5      |2026-03-26 12:49:42.519|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (FR)       |3.3      |2026-03-26 13:12:18.428|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Parions Sport (FR)|3.3      |2026-03-26 12:49:42.449|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Winamax (FR)      |3.25     |2026-03-26 12:49:42.470|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |Betclic (FR)      |3.2      |2026-03-26 12:49:42.564|
+|62,678  |Championship|Birmingham City FC     |Blackburn Rovers FC|h2h        |Full Time Result (1X2)|X           |Draw         |PMU (FR)          |3.15     |2026-03-26 12:49:42.503|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |LeoVegas (SE)     |1.64     |2026-03-26 12:49:43.773|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (NL)       |1.6      |2026-03-26 12:49:43.742|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (SE)       |1.6      |2026-03-26 12:49:43.758|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Nordic Bet        |1.59     |2026-03-26 12:49:43.726|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Betsson           |1.59     |2026-03-26 12:49:43.711|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Betfair           |1.58     |2026-03-26 12:49:43.655|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |1xBet             |1.57     |2026-03-26 12:49:43.579|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Codere (IT)       |1.56     |2026-03-26 12:49:43.641|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Pinnacle          |1.56     |2026-03-26 12:49:43.697|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Marathon Bet      |1.55     |2026-03-26 12:49:43.669|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |William Hill      |1.55     |2026-03-26 12:49:43.628|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |888sport          |1.53     |2026-03-26 12:49:43.614|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Winamax (DE)      |1.5      |2026-03-26 12:49:43.559|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Tipico            |1.5      |2026-03-26 12:49:43.683|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Parions Sport (FR)|1.47     |2026-03-26 12:49:43.543|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (FR)       |1.47     |2026-03-26 13:12:18.829|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |Winamax (FR)      |1.44     |2026-03-26 12:49:43.526|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|1           |Home Win     |PMU (FR)          |1.36     |2026-03-26 12:49:43.598|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|2           |Away Win     |Betfair           |5.9      |2026-03-26 12:49:43.660|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|2           |Away Win     |Codere (IT)       |5.6      |2026-03-26 12:49:43.646|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|2           |Away Win     |Pinnacle          |5.51     |2026-03-26 12:49:43.703|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|2           |Away Win     |Tipico            |5.5      |2026-03-26 12:49:43.688|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|2           |Away Win     |Marathon Bet      |5.45     |2026-03-26 12:49:43.674|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|2           |Away Win     |Nordic Bet        |5.44     |2026-03-26 12:49:43.732|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|2           |Away Win     |Betsson           |5.44     |2026-03-26 12:49:43.716|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|2           |Away Win     |1xBet             |5.35     |2026-03-26 12:49:43.586|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|2           |Away Win     |LeoVegas (SE)     |5.1      |2026-03-26 12:49:43.779|
+|62,680  |Championship|Coventry City FC       |Derby County FC    |h2h        |Full Time Result (1X2)|2           |Away Win     |PMU (FR)          |5.1      |2026-03-26 12:49:43.604|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (FR)       |5        |2026-03-26 13:12:18.846|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|2           |Away Win     |Parions Sport (FR)|5        |2026-03-26 12:49:43.549|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|2           |Away Win     |Winamax (DE)      |5        |2026-03-26 12:49:43.566|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|2           |Away Win     |888sport          |5        |2026-03-26 12:49:43.619|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|2           |Away Win     |William Hill      |5        |2026-03-26 12:49:43.632|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (NL)       |5        |2026-03-26 12:49:43.748|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (SE)       |5        |2026-03-26 12:49:43.764|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|2           |Away Win     |Winamax (FR)      |4.6      |2026-03-26 12:49:43.534|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Codere (IT)       |4.3      |2026-03-26 12:49:43.651|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Pinnacle          |4.27     |2026-03-26 12:49:43.707|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Betfair           |4.2      |2026-03-26 12:49:43.665|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Tipico            |4.2      |2026-03-26 12:49:43.692|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |LeoVegas (SE)     |4.2      |2026-03-26 12:49:43.799|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Nordic Bet        |4.16     |2026-03-26 12:49:43.737|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Betsson           |4.16     |2026-03-26 12:49:43.721|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |1xBet             |4.1      |2026-03-26 12:49:43.592|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (NL)       |4.1      |2026-03-26 12:49:43.753|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (SE)       |4.1      |2026-03-26 12:49:43.769|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Winamax (DE)      |4.1      |2026-03-26 12:49:43.572|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Marathon Bet      |4.1      |2026-03-26 12:49:43.678|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |William Hill      |4        |2026-03-26 12:49:43.637|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |888sport          |4        |2026-03-26 12:49:43.624|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Parions Sport (FR)|3.85     |2026-03-26 12:49:43.554|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (FR)       |3.85     |2026-03-26 13:12:18.852|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |Winamax (FR)      |3.8      |2026-03-26 12:49:43.539|
+|62,680  |Championship|Coventry City FC       |Derby County FC     |h2h        |Full Time Result (1X2)|X           |Draw         |PMU (FR)          |3.7      |2026-03-26 12:49:43.609|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |LeoVegas (SE)     |1.96     |2026-03-26 12:49:42.968|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Nordic Bet        |1.94     |2026-03-26 12:49:42.927|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Betsson           |1.94     |2026-03-26 12:49:42.913|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Codere (IT)       |1.93     |2026-03-26 12:49:42.857|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (NL)       |1.93     |2026-03-26 12:49:42.941|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (SE)       |1.93     |2026-03-26 12:49:42.955|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |888sport          |1.91     |2026-03-26 12:49:42.726|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |William Hill      |1.91     |2026-03-26 12:49:42.797|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Pinnacle          |1.88     |2026-03-26 12:49:42.899|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |1xBet             |1.87     |2026-03-26 12:49:42.783|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Betfair           |1.87     |2026-03-26 12:49:42.843|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Marathon Bet      |1.85     |2026-03-26 12:49:42.871|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Winamax (DE)      |1.84     |2026-03-26 12:49:42.767|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Tipico            |1.8      |2026-03-26 12:49:42.885|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Parions Sport (FR)|1.79     |2026-03-26 12:49:42.740|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Unibet (FR)       |1.79     |2026-03-26 13:12:18.520|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Winamax (FR)      |1.74     |2026-03-26 12:49:42.752|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |Betclic (FR)      |1.73     |2026-03-26 12:49:42.827|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|1           |Home Win     |PMU (FR)          |1.7      |2026-03-26 12:49:42.812|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Betfair           |4.2      |2026-03-26 12:49:42.849|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Pinnacle          |4.11     |2026-03-26 12:49:42.904|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Tipico            |4.1      |2026-03-26 12:49:42.890|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Marathon Bet      |4.05     |2026-03-26 12:49:42.877|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |1xBet             |4.03     |2026-03-26 12:49:42.789|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Codere (IT)       |4        |2026-03-26 12:49:42.863|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Nordic Bet        |3.93     |2026-03-26 12:49:42.933|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Betsson           |3.93     |2026-03-26 12:49:42.918|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |William Hill      |3.9      |2026-03-26 12:49:42.802|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |888sport          |3.9      |2026-03-26 12:49:42.731|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |LeoVegas (SE)     |3.85     |2026-03-26 12:49:42.973|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (NL)       |3.75     |2026-03-26 12:49:42.947|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (SE)       |3.75     |2026-03-26 12:49:42.960|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Winamax (DE)      |3.65     |2026-03-26 12:49:42.773|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Unibet (FR)       |3.65     |2026-03-26 13:12:18.540|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Parions Sport (FR)|3.65     |2026-03-26 12:49:42.744|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Betclic (FR)      |3.53     |2026-03-26 12:49:42.833|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |PMU (FR)          |3.45     |2026-03-26 12:49:42.817|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|2           |Away Win     |Winamax (FR)      |3.4      |2026-03-26 12:49:42.756|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Betfair           |3.75     |2026-03-26 12:49:42.853|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Pinnacle          |3.61     |2026-03-26 12:49:42.909|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |LeoVegas (SE)     |3.6      |2026-03-26 12:49:42.977|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (SE)       |3.55     |2026-03-26 12:49:42.964|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Codere (IT)       |3.55     |2026-03-26 12:49:42.867|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (NL)       |3.55     |2026-03-26 12:49:42.951|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Nordic Bet        |3.54     |2026-03-26 12:49:42.937|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Betsson           |3.54     |2026-03-26 12:49:42.923|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Marathon Bet      |3.52     |2026-03-26 12:49:42.881|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |1xBet             |3.52     |2026-03-26 12:49:42.793|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Tipico            |3.5      |2026-03-26 12:49:42.895|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Winamax (DE)      |3.45     |2026-03-26 12:49:42.778|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |William Hill      |3.3      |2026-03-26 12:49:42.807|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |888sport          |3.3      |2026-03-26 12:49:42.735|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Parions Sport (FR)|3.25     |2026-03-26 12:49:42.748|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Unibet (FR)       |3.25     |2026-03-26 13:12:18.546|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Winamax (FR)      |3.2      |2026-03-26 12:49:42.762|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |PMU (FR)          |3.15     |2026-03-26 12:49:42.822|
+|62,681  |Championship|Leicester City FC      |Preston North End FC|h2h        |Full Time Result (1X2)|X           |Draw         |Betclic (FR)      |3.15     |2026-03-26 12:49:42.838|

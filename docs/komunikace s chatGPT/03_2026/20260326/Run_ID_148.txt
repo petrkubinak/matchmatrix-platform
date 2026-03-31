@@ -1,0 +1,158 @@
+========================================
+MATCHMATRIX - THEODDS PARSER
+========================================
+DB_DSN=host=localhost port=5432 dbname=matchmatrix user=matchmatrix password=matchmatrix_pass
+
+Spoustim TheOdds parser...
+
+RUN_ID: 148
+PROVIDER MAP loaded: 0
+ALIAS MAP loaded   : 515
+TEAM MAP loaded    : 4533
+Leagues from DB (theodds_key): 13
+[1/13] Fetching: soccer_brazil_campeonato
+NO MATCH ID: Cruzeiro (id=27987) vs Vitoria (id=586) | kickoff: 2026-04-01T23:00:00Z
+NO MATCH ID: Santos (id=23) vs Remo (id=27914) | kickoff: 2026-04-02T22:00:00Z
+NO MATCH ID: Bragantino-SP (id=19) vs Flamengo (id=27990) | kickoff: 2026-04-03T00:30:00Z
+NO MATCH ID: Palmeiras (id=28061) vs Grêmio (id=27984) | kickoff: 2026-04-03T00:30:00Z
+NO MATCH ID: Sao Paulo (id=12) vs Cruzeiro (id=27987) | kickoff: 2026-04-04T21:30:00Z
+NO MATCH ID: Chapecoense (id=11) vs Vitoria (id=586) | kickoff: 2026-04-05T19:00:00Z
+NO MATCH ID: Flamengo (id=27990) vs Santos (id=23) | kickoff: 2026-04-05T20:30:00Z
+NO MATCH ID: Bahia (id=13) vs Palmeiras (id=28061) | kickoff: 2026-04-05T22:30:00Z
+NO MATCH ID: Grêmio (id=27984) vs Remo (id=27914) | kickoff: 2026-04-05T23:30:00Z
+Inserted odds: 24 (league: soccer_brazil_campeonato )
+[2/13] Fetching: soccer_conmebol_copa_libertadores
+LOW COVERAGE (teams_present=19 < 35): soccer_conmebol_copa_libertadores
+NO TEAM MATCH: Independiente Rivadavia vs Club Bolívar
+NO MATCH ID: Platense (id=28033) vs Corinthians-SP (id=14) | kickoff: 2026-04-07T22:00:00Z
+NO TEAM MATCH: Deportivo La Guaira vs Fluminense-RJ
+NO TEAM MATCH: Rosario Central vs Independiente del Valle
+NO TEAM MATCH: Mirassol vs Lanus
+NO MATCH ID: Barcelona SC (id=80) vs Cruzeiro (id=27987) | kickoff: 2026-04-08T00:00:00Z
+NO TEAM MATCH: Club Always Ready vs LDU Quito
+NO TEAM MATCH: Universidad Católica (CHI) vs Boca Juniors
+NO TEAM MATCH: Deportes Tolima vs Club Universitario de Deportes
+NO TEAM MATCH: Coquimbo Unido vs Nacional de Montevideo
+NO TEAM MATCH: Independiente Medellín vs Estudiantes La Plata
+NO MATCH ID: Cusco FC (id=25940) vs Flamengo-RJ (id=17) | kickoff: 2026-04-09T00:30:00Z
+NO MATCH ID: Junior FC (id=594) vs Palmeiras-SP (id=8) | kickoff: 2026-04-09T00:30:00Z
+NO TEAM MATCH: Sporting Cristal vs Cerro Porteño
+NO MATCH ID: UCV FC (id=27876) vs Libertad Asuncion (id=25942) | kickoff: 2026-04-09T22:00:00Z
+NO MATCH ID: Platense (id=28033) vs Corinthians-SP (id=14) | kickoff: 2026-04-10T00:00:00Z
+NO TEAM MATCH: Independiente Santa Fe vs Peñarol Montevideo
+NO MATCH ID: Cerro Porteño (id=26683) vs Junior FC (id=594) | kickoff: 2026-04-14T22:00:00Z
+NO TEAM MATCH: Estudiantes La Plata vs Cusco FC
+NO TEAM MATCH: Nacional de Montevideo vs Deportes Tolima
+NO TEAM MATCH: Boca Juniors vs Barcelona SC
+NO TEAM MATCH: Club Bolívar vs Deportivo La Guaira
+NO MATCH ID: LDU Quito (id=25943) vs Mirassol (id=21) | kickoff: 2026-04-15T02:00:00Z
+NO MATCH ID: Cruzeiro (id=27987) vs Universidad Católica (CHI) (id=10979) | kickoff: 2026-04-15T22:00:00Z
+NO MATCH ID: Libertad Asuncion (id=25942) vs Rosario Central (id=25886) | kickoff: 2026-04-15T22:00:00Z
+NO TEAM MATCH: Corinthians-SP vs Independiente Santa Fe
+NO TEAM MATCH: Fluminense-RJ vs Independiente Rivadavia
+NO TEAM MATCH: Club Universitario de Deportes vs Coquimbo Unido
+NO TEAM MATCH: Independiente del Valle vs UCV FC
+NO TEAM MATCH: Lanus vs Club Always Ready
+NO TEAM MATCH: Palmeiras-SP vs Sporting Cristal
+NO MATCH ID: Flamengo-RJ (id=17) vs Independiente Medellín (id=605) | kickoff: 2026-04-17T00:30:00Z
+NO TEAM MATCH: Peñarol Montevideo vs Platense
+Inserted odds: 0 (league: soccer_conmebol_copa_libertadores )
+[3/13] Fetching: soccer_efl_champ
+Inserted odds: 2 (league: soccer_efl_champ )
+[4/13] Fetching: soccer_epl
+LOW COVERAGE (teams_present=30 < 35): soccer_epl
+Inserted odds: 40 (league: soccer_epl )
+[5/13] Fetching: soccer_fifa_world_cup
+NO MATCH ID: USA (id=11896) vs Paraguay (id=631) | kickoff: 2026-06-13T01:00:00Z
+NO MATCH ID: Australia (id=644) vs Jordan (id=664) | kickoff: 2026-06-16T04:00:00Z
+NO MATCH ID: Australia (id=644) vs Jordan (id=664) | kickoff: 2026-06-17T04:00:00Z
+NO MATCH ID: USA (id=11896) vs Australia (id=644) | kickoff: 2026-06-19T19:00:00Z
+Inserted odds: 5 (league: soccer_fifa_world_cup )
+[6/13] Fetching: soccer_france_ligue_one
+NO MATCH ID: Strasbourg (id=1022) vs Nice (id=12108) | kickoff: 2026-04-04T15:00:00Z
+NO MATCH ID: Brest (id=1016) vs Rennes (id=1010) | kickoff: 2026-04-04T17:00:00Z
+NO MATCH ID: Lille (id=12103) vs RC Lens (id=1012) | kickoff: 2026-04-04T19:05:00Z
+NO MATCH ID: Angers (id=1018) vs Lyon (id=12104) | kickoff: 2026-04-05T13:00:00Z
+NO MATCH ID: Le Havre (id=511) vs Auxerre (id=12116) | kickoff: 2026-04-05T15:15:00Z
+NO MATCH ID: AS Monaco (id=90) vs Marseille (id=12105) | kickoff: 2026-04-05T18:45:00Z
+NO MATCH ID: Marseille (id=12105) vs Metz (id=513) | kickoff: 2026-04-10T18:45:00Z
+NO MATCH ID: RC Lens (id=1012) vs Paris Saint Germain (id=89) | kickoff: 2026-04-11T15:00:00Z
+NO MATCH ID: Auxerre (id=12116) vs Nantes (id=512) | kickoff: 2026-04-11T17:00:00Z
+NO MATCH ID: Rennes (id=1010) vs Angers (id=1018) | kickoff: 2026-04-11T19:05:00Z
+NO MATCH ID: Brest (id=1016) vs Strasbourg (id=1022) | kickoff: 2026-04-12T15:15:00Z
+NO MATCH ID: Nice (id=12108) vs Le Havre (id=511) | kickoff: 2026-04-12T15:15:00Z
+NO MATCH ID: Toulouse (id=500) vs Lille (id=12103) | kickoff: 2026-04-12T15:15:00Z
+NO MATCH ID: Lyon (id=12104) vs Lorient (id=508) | kickoff: 2026-04-12T18:45:00Z
+Inserted odds: 3 (league: soccer_france_ligue_one )
+[7/13] Fetching: soccer_germany_bundesliga
+LOW COVERAGE (teams_present=29 < 35): soccer_germany_bundesliga
+NO MATCH ID: Borussia Monchengladbach (id=530) vs 1. FC Heidenheim (id=12077) | kickoff: 2026-04-04T13:30:00Z
+NO MATCH ID: Bayer Leverkusen (id=12071) vs VfL Wolfsburg (id=525) | kickoff: 2026-04-04T13:30:00Z
+NO MATCH ID: Union Berlin (id=533) vs FC St. Pauli (id=12079) | kickoff: 2026-04-05T13:30:00Z
+NO MATCH ID: 1. FC Heidenheim (id=12077) vs Union Berlin (id=533) | kickoff: 2026-04-11T13:30:00Z
+NO MATCH ID: Borussia Dortmund (id=69) vs Bayer Leverkusen (id=12071) | kickoff: 2026-04-11T13:30:00Z
+NO MATCH ID: FC St. Pauli (id=12079) vs Bayern Munich (id=70) | kickoff: 2026-04-11T16:30:00Z
+Inserted odds: 40 (league: soccer_germany_bundesliga )
+[8/13] Fetching: soccer_italy_serie_a
+NO MATCH ID: Sassuolo (id=12303) vs Cagliari (id=541) | kickoff: 2026-04-04T13:00:00Z
+NO MATCH ID: Hellas Verona (id=549) vs Fiorentina (id=12131) | kickoff: 2026-04-04T16:00:00Z
+NO MATCH ID: Lazio (id=12121) vs Parma (id=12137) | kickoff: 2026-04-04T18:45:00Z
+NO MATCH ID: Cremonese (id=13414) vs Bologna (id=12130) | kickoff: 2026-04-05T13:00:00Z
+NO MATCH ID: Pisa (id=12937) vs Torino (id=553) | kickoff: 2026-04-05T16:00:00Z
+NO MATCH ID: Lecce (id=12138) vs Atalanta BC (id=83) | kickoff: 2026-04-06T13:00:00Z
+NO MATCH ID: Udinese (id=548) vs Como (id=12139) | kickoff: 2026-04-06T13:00:00Z
+NO MATCH ID: Napoli (id=12124) vs AC Milan (id=536) | kickoff: 2026-04-06T18:45:00Z
+NO MATCH ID: AS Roma (id=538) vs Pisa (id=12937) | kickoff: 2026-04-10T18:45:00Z
+NO MATCH ID: Cagliari (id=541) vs Cremonese (id=13414) | kickoff: 2026-04-11T13:00:00Z
+NO MATCH ID: Genoa (id=542) vs Sassuolo (id=12303) | kickoff: 2026-04-12T10:30:00Z
+NO MATCH ID: Bologna (id=12130) vs Lecce (id=12138) | kickoff: 2026-04-12T13:00:00Z
+NO MATCH ID: Como (id=12139) vs Inter Milan (id=84) | kickoff: 2026-04-12T13:00:00Z
+NO MATCH ID: Parma (id=12137) vs Napoli (id=12124) | kickoff: 2026-04-12T13:00:00Z
+NO MATCH ID: Fiorentina (id=12131) vs Lazio (id=12121) | kickoff: 2026-04-13T18:45:00Z
+Inserted odds: 2 (league: soccer_italy_serie_a )
+[9/13] Fetching: soccer_netherlands_eredivisie
+LOW COVERAGE (teams_present=30 < 35): soccer_netherlands_eredivisie
+NO MATCH ID: PSV Eindhoven (id=1101) vs FC Utrecht (id=562) | kickoff: 2026-04-04T14:30:00Z
+NO MATCH ID: AZ Alkmaar (id=1106) vs Fortuna Sittard (id=572) | kickoff: 2026-04-04T16:45:00Z
+NO MATCH ID: SC Telstar (id=12183) vs Groningen (id=563) | kickoff: 2026-04-04T16:45:00Z
+NO MATCH ID: Excelsior (id=13365) vs NEC Nijmegen (id=12176) | kickoff: 2026-04-04T19:00:00Z
+NO MATCH ID: FC Volendam (id=571) vs Feyenoord (id=1098) | kickoff: 2026-04-05T12:30:00Z
+Inserted odds: 2 (league: soccer_netherlands_eredivisie )
+[10/13] Fetching: soccer_portugal_primeira_liga
+LOW COVERAGE (teams_present=29 < 35): soccer_portugal_primeira_liga
+NO MATCH ID: Sporting Lisbon (id=12150) vs Santa Clara (id=583) | kickoff: 2026-04-03T19:30:00Z
+NO MATCH ID: Nacional (id=582) vs CF Estrela (id=12158) | kickoff: 2026-04-04T14:30:00Z
+NO MATCH ID: Moreirense FC (id=578) vs Braga (id=12144) | kickoff: 2026-04-04T17:00:00Z
+NO MATCH ID: Arouca (id=579) vs Estoril (id=12151) | kickoff: 2026-04-06T17:45:00Z
+NO MATCH ID: Casa Pia (id=588) vs Benfica (id=12141) | kickoff: 2026-04-06T19:45:00Z
+Inserted odds: 0 (league: soccer_portugal_primeira_liga )
+[11/13] Fetching: soccer_spain_la_liga
+LOW COVERAGE (teams_present=28 < 35): soccer_spain_la_liga
+NO MATCH ID: Rayo Vallecano (id=12100) vs Elche CF (id=623) | kickoff: 2026-04-03T19:00:00Z
+NO MATCH ID: Real Sociedad (id=12097) vs Levante (id=13242) | kickoff: 2026-04-04T12:00:00Z
+NO MATCH ID: Mallorca (id=12101) vs Real Madrid (id=81) | kickoff: 2026-04-04T14:15:00Z
+NO MATCH ID: Real Betis (id=12094) vs Espanyol (id=12091) | kickoff: 2026-04-04T16:30:00Z
+NO MATCH ID: Atlético Madrid (id=12083) vs Barcelona (id=80) | kickoff: 2026-04-04T19:00:00Z
+NO MATCH ID: Valencia (id=621) vs Celta Vigo (id=12090) | kickoff: 2026-04-05T14:15:00Z
+NO MATCH ID: Oviedo (id=12918) vs Sevilla (id=626) | kickoff: 2026-04-05T16:30:00Z
+NO MATCH ID: Alavés (id=12093) vs CA Osasuna (id=610) | kickoff: 2026-04-05T19:00:00Z
+NO MATCH ID: Real Sociedad (id=12097) vs Alavés (id=12093) | kickoff: 2026-04-11T12:00:00Z
+NO MATCH ID: Barcelona (id=80) vs Espanyol (id=12091) | kickoff: 2026-04-11T16:30:00Z
+NO MATCH ID: Sevilla (id=626) vs Atlético Madrid (id=12083) | kickoff: 2026-04-11T19:00:00Z
+NO MATCH ID: CA Osasuna (id=610) vs Real Betis (id=12094) | kickoff: 2026-04-12T12:00:00Z
+NO MATCH ID: Mallorca (id=12101) vs Rayo Vallecano (id=12100) | kickoff: 2026-04-12T14:15:00Z
+NO MATCH ID: Celta Vigo (id=12090) vs Oviedo (id=12918) | kickoff: 2026-04-12T16:30:00Z
+NO MATCH ID: Levante (id=13242) vs Getafe (id=613) | kickoff: 2026-04-13T19:00:00Z
+Inserted odds: 43 (league: soccer_spain_la_liga )
+[12/13] Fetching: soccer_uefa_champs_league
+NO MATCH ID: Sporting Lisbon (id=12150) vs Arsenal (id=48) | kickoff: 2026-04-07T19:00:00Z
+NO MATCH ID: Real Madrid (id=81) vs Bayern Munich (id=70) | kickoff: 2026-04-07T19:00:00Z
+NO MATCH ID: Barcelona (id=80) vs Atlético Madrid (id=12083) | kickoff: 2026-04-08T19:00:00Z
+NO MATCH ID: Paris Saint Germain (id=89) vs Liverpool (id=53) | kickoff: 2026-04-08T19:00:00Z
+Inserted odds: 0 (league: soccer_uefa_champs_league )
+[13/13] Fetching: soccer_uefa_euro
+ERROR league: soccer_uefa_euro status: 404 msg: Unknown sport
+DONE. Summary: {'leagues_total': 13, 'leagues_ok': 12, 'leagues_422': 0, 'leagues_error': 1, 'leagues_raw_only': 0, 'raw_saved': 13, 'odds_inserted': 161, 'skipped_no_team': 22, 'skipped_no_match': 88}
+
+HOTOVO
+Press any key to continue . . .

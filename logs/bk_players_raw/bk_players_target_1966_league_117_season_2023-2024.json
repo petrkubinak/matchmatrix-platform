@@ -1,0 +1,15 @@
+﻿{
+    "get":  "players",
+    "parameters":  {
+                       "league":  "117",
+                       "season":  "2023-2024"
+                   },
+    "errors":  {
+                   "team":  "The Team field is required.",
+                   "league":  "The League field do not exist."
+               },
+    "results":  0,
+    "response":  [
+
+                 ]
+}

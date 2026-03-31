@@ -121,24 +121,26 @@ def _strip_diacritics(s: str) -> str:
 
 
 def norm_team_key(name: str) -> str:
-    """Normalizace názvu týmu pro matchování napříč zdroji (TheOdds vs canonical teams).
-
-    Cíl: aby 'Paris Saint-Germain' == 'Paris Saint Germain', '1. FC Köln' == 'FC Koln', atd.
-    """
     if not name:
         return ""
 
     s = name.strip().replace("’", "'")
     s = _strip_diacritics(s).lower()
 
+    # sjednotit & / and
+    s = s.replace("&", " and ")
+
     # odstranění prefixů typu "1. "
     s = re.sub(r"^\d+\.\s*", "", s)
 
-    # odstranění běžných klubových prefixů
-    s = re.sub(r"^(fc|sc|ac|as|sv|fk|rc|tsg)\s+", "", s)
+    # odstranění běžných prefixů na začátku
+    s = re.sub(r"^(fc|sc|ac|as|sv|fk|rc|tsg|afc|cf|cd|ud)\s+", "", s)
 
-    # odstraníme běžné koncovky
-    for suffix in [" football club", " fc", " afc", " cf", " sc", " ac"]:
+    # odstranění běžných koncovek
+    for suffix in [
+        " football club", " fc", " afc", " cf", " sc", " ac",
+        " club", " calcio", " cfc", " bc"
+    ]:
         if s.endswith(suffix):
             s = s[: -len(suffix)].strip()
 
@@ -146,43 +148,142 @@ def norm_team_key(name: str) -> str:
     rewrites = {
         "paris saint germain": "paris saint-germain",
         "borussia monchengladbach": "borussia mönchengladbach",
+        "brighton and hove albion": "brighton hove albion",
+        "paris saint germain": "paris saint-germain",
+        "sporting lisbon": "sporting cp",
+        "internacional": "internacional rs",
+        "atletico paranaense": "athletico paranaense",
     }
     # Pozn.: rewrites děláme až po základním čištění; pro match používáme opět norm klíč,
     # takže diakritika/pomlčky nehrají roli. Tohle je jen pro sjednocení specifických případů.
     if s in rewrites:
         s = rewrites[s]
 
-    # interpunkce pryč (ponecháme písmena/čísla/mezery)
+    # pryč interpunkce
     s = re.sub(r"[^a-z0-9\s]+", " ", s)
+
+    # vyhodit samostatné "and"
+    s = re.sub(r"\band\b", " ", s)
+
     s = " ".join(s.split())
     return s
-def load_team_maps(conn) -> tuple[dict[str, int], dict[str, int]]:
-    """Vrátí dvě mapy pro rychlé mapování týmů:
-    - alias_map: norm(alias z team_aliases pro source='theodds') -> team_id
-    - team_map: norm(canonical jména v teams) -> team_id, kde canonical = teams.name (+ ext_team_id pro football_data_uk)
 
-    Důvod: nechceme míchat aliasy z jiných sources (football_data_uk, apod.) do mapování TheOdds.
+def load_future_match_team_map(conn, days_ahead: int = 120) -> dict[str, int]:
+    """Mapa norm(name z týmů, které se skutečně používají v budoucích matches) -> team_id.
+    Priorita je přesně ta větev týmů, na které jsou navázané fixtures.
     """
+    future_map: dict[str, int] = {}
+
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT DISTINCT t.id, t.name
+            FROM public.matches m
+            JOIN public.teams t
+              ON t.id IN (m.home_team_id, m.away_team_id)
+            WHERE m.kickoff >= now() - interval '3 days'
+              AND m.kickoff < now() + (%s || ' days')::interval
+            """,
+            (days_ahead,),
+        )
+        for tid, name in cur.fetchall():
+            k = norm_team_key(name or "")
+            if k and k not in future_map:
+                future_map[k] = int(tid)
+
+    return future_map
+
+def load_team_maps(conn) -> tuple[dict[str, int], dict[str, int], dict[str, int]]:
+    """Vrátí tři mapy pro TheOdds matching:
+    - provider_map: norm(provider_team_id z team_provider_map pro provider='theodds') -> team_id
+    - alias_map:    norm(alias z team_aliases pro source='theodds') -> team_id
+    - team_map:     norm(canonical jména v teams) -> team_id
+    """
+    provider_map: dict[str, int] = {}
     alias_map: dict[str, int] = {}
     team_map: dict[str, int] = {}
 
-    # canonical teams
+    future_match_map = load_future_match_team_map(conn, days_ahead=120)
+
+    # 1) provider map = nejvyšší priorita pro TheOdds
     with conn.cursor() as cur:
-        cur.execute("SELECT id, name, ext_source, ext_team_id FROM public.teams")
+        cur.execute(
+            """
+            SELECT team_id, provider_team_id
+            FROM public.team_provider_map
+            WHERE provider = 'theodds'
+            """
+        )
+        for tid, provider_team_id in cur.fetchall():
+            k = norm_team_key(provider_team_id or "")
+            if k and k not in provider_map:
+                provider_map[k] = int(tid)
+
+    # 2) canonical teams
+    # Priorita:
+    # 1) football_data  -> nejblíž fixtures v public.matches
+    # 2) football_data_uk
+    # 3) api_football
+    # 4) api_sport
+    # 5) ostatní
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            WITH team_usage AS (
+                SELECT home_team_id AS team_id, COUNT(*) AS cnt
+                FROM public.matches
+                GROUP BY home_team_id
+
+                UNION ALL
+
+                SELECT away_team_id AS team_id, COUNT(*) AS cnt
+                FROM public.matches
+                GROUP BY away_team_id
+            ),
+            team_usage_sum AS (
+                SELECT team_id, SUM(cnt) AS matches_cnt
+                FROM team_usage
+                GROUP BY team_id
+            )
+            SELECT
+                t.id,
+                t.name,
+                t.ext_source,
+                t.ext_team_id
+            FROM public.teams t
+            LEFT JOIN team_usage_sum u
+              ON u.team_id = t.id
+            ORDER BY
+                CASE WHEN COALESCE(u.matches_cnt, 0) > 0 THEN 0 ELSE 1 END,
+                COALESCE(u.matches_cnt, 0) DESC,
+                CASE
+                    WHEN t.ext_source = 'football_data' THEN 1
+                    WHEN t.ext_source = 'football_data_uk' THEN 2
+                    WHEN t.ext_source = 'api_football' THEN 3
+                    WHEN t.ext_source = 'api_sport' THEN 4
+                    ELSE 9
+                END,
+                t.id
+            """
+        )
         for tid, name, ext_source, ext_team_id in cur.fetchall():
             tid = int(tid)
 
             k1 = norm_team_key(name or "")
-            if k1 and k1 not in team_map:
-                team_map[k1] = tid
+            if k1:
+                # pokud existuje tým se stejným klíčem přímo z budoucích fixtures,
+                # preferujeme jeho team_id
+                if k1 in future_match_map:
+                    team_map[k1] = future_match_map[k1]
+                elif k1 not in team_map:
+                    team_map[k1] = tid
 
-            # football_data_uk má často ext_team_id jako "oficiální" jméno – bereme také
             if ext_source == "football_data_uk" and ext_team_id:
                 k2 = norm_team_key(ext_team_id or "")
                 if k2 and k2 not in team_map:
                     team_map[k2] = tid
 
-    # theodds aliasy (pokud tabulka existuje)
+    # 3) theodds aliasy
     with conn.cursor() as cur:
         cur.execute(
             """
@@ -207,7 +308,7 @@ def load_team_maps(conn) -> tuple[dict[str, int], dict[str, int]]:
                 if k and k not in alias_map:
                     alias_map[k] = int(tid)
 
-    return alias_map, team_map
+    return provider_map, alias_map, team_map
 
 
 def _insert_theodds_alias_if_missing(conn, team_id: int, alias_raw: str) -> None:
@@ -232,41 +333,47 @@ def _insert_theodds_alias_if_missing(conn, team_id: int, alias_raw: str) -> None
 
 def resolve_team_id_theodds(
     conn,
+    provider_map: dict[str, int],
     alias_map: dict[str, int],
     team_map: dict[str, int],
     team_name_raw: str,
     auto_insert_alias: bool = True,
 ) -> int | None:
-    """Mapuje tým z TheOdds -> teams.id
-
-    1) přes existující aliasy (team_aliases.source='theodds')
-    2) přes canonical teams (teams.name / teams.ext_team_id pro football_data_uk)
-    3) pokud 2) uspěje, uloží alias do team_aliases (aby příště stačil krok 1)
+    """Mapování TheOdds -> teams.id
+    Nová priorita:
+    1) team_provider_map(provider='theodds')
+    2) canonical teams (team_map)
+    3) team_aliases(source='theodds')
     """
     key = norm_team_key(team_name_raw or "")
     if not key:
         return None
 
+    tid = provider_map.get(key)
+    if tid is not None:
+        return tid
+
+    # DŮLEŽITÉ: canonical map před aliasy
+    tid = team_map.get(key)
+    if tid is not None:
+        if auto_insert_alias:
+            try:
+                _insert_theodds_alias_if_missing(conn, tid, team_name_raw)
+                conn.commit()
+            except Exception:
+                try:
+                    conn.rollback()
+                except Exception:
+                    pass
+        alias_map[key] = tid
+        return tid
+
     tid = alias_map.get(key)
     if tid is not None:
         return tid
 
-    tid = team_map.get(key)
-    if tid is None:
-        return None
+    return None
 
-    if auto_insert_alias:
-        try:
-            _insert_theodds_alias_if_missing(conn, tid, team_name_raw)
-            conn.commit()
-        except Exception:
-            try:
-                conn.rollback()
-            except Exception:
-                pass
-
-    alias_map[key] = tid
-    return tid
 def get_h2h_market_id(conn):
     with conn.cursor() as cur:
         cur.execute("select id from markets where lower(code)=lower('h2h') limit 1")
@@ -347,8 +454,8 @@ def find_match_id(conn, home_team_id: int, away_team_id: int, kickoff_iso: str):
             from matches
             where home_team_id=%s
               and away_team_id=%s
-              and kickoff between ((%s)::timestamptz AT TIME ZONE 'UTC') - interval '12 hours'
-                              and ((%s)::timestamptz AT TIME ZONE 'UTC') + interval '12 hours'
+              and kickoff between ((%s)::timestamptz AT TIME ZONE 'UTC') - interval '72 hours'
+                              and ((%s)::timestamptz AT TIME ZONE 'UTC') + interval '72 hours'
             order by abs(
                 extract(epoch from (kickoff - ((%s)::timestamptz AT TIME ZONE 'UTC')))
             ) asc
@@ -429,6 +536,7 @@ def iter_events_from_payload(payload: Any) -> Iterable[dict[str, Any]]:
 def parse_and_insert_odds(
     conn,
     sport_key: str,
+    provider_map: dict[str, int],
     alias_map: dict[str, int],
     team_map: dict[str, int],
     outcome_map: dict[str, int],
@@ -450,8 +558,8 @@ def parse_and_insert_odds(
         if not home_team_name or not away_team_name or not commence_time:
             continue
 
-        home_id = resolve_team_id_theodds(conn, alias_map, team_map, home_team_name)
-        away_id = resolve_team_id_theodds(conn, alias_map, team_map, away_team_name)
+        home_id = resolve_team_id_theodds(conn, provider_map, alias_map, team_map, home_team_name)
+        away_id = resolve_team_id_theodds(conn, provider_map, alias_map, team_map, away_team_name)
         if not home_id or not away_id:
             print("NO TEAM MATCH:", home_team_name, "vs", away_team_name)
             if not home_id:
@@ -463,6 +571,13 @@ def parse_and_insert_odds(
 
         match_id = find_match_id(conn, home_id, away_id, commence_time)
         if not match_id:
+            print(
+                "NO MATCH ID:",
+                home_team_name, f"(id={home_id})",
+                "vs",
+                away_team_name, f"(id={away_id})",
+                "| kickoff:", commence_time
+            )
             skipped_no_match += 1
             continue
 
@@ -631,8 +746,10 @@ def main():
         run_id = start_import_run(conn, source="theodds")
         print("RUN_ID:", run_id)
 
-        alias_map, team_map = load_team_maps(conn)
-        print("TEAM MAP loaded:", len(team_map))
+        provider_map, alias_map, team_map = load_team_maps(conn)
+        print("PROVIDER MAP loaded:", len(provider_map))
+        print("ALIAS MAP loaded   :", len(alias_map))
+        print("TEAM MAP loaded    :", len(team_map))
 
         market_id = get_h2h_market_id(conn)
         outcome_map = get_market_outcome_map(conn, market_id)
@@ -681,17 +798,16 @@ def main():
                 continue
 
             teams_present = league_coverage.get(sport_key, 0)
+            # POVOL ingest vždy, jen loguj coverage
             if teams_present < min_teams_present:
-                totals["leagues_raw_only"] += 1
-                print(f"RAW-only league (teams_present={teams_present} < {min_teams_present}):", sport_key)
-                time.sleep(THEODDS_SLEEP_SEC)
-                continue
+                print(f"LOW COVERAGE (teams_present={teams_present} < {min_teams_present}):", sport_key)
 
             # OK → parse odds
             try:
                 ins, sk_team, sk_match = parse_and_insert_odds(
                     conn,
                     sport_key,
+                    provider_map,
                     alias_map,
                     team_map,
                     outcome_map,

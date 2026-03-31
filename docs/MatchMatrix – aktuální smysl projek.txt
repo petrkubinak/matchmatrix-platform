@@ -1,0 +1,101 @@
+MatchMatrix – aktuální smysl projektu
+
+MatchMatrix je budovaný jako:
+
+globální sportovní datová a analytická platforma, která má v budoucnu spojit:
+
+robustní sportovní databázi
+historická i aktuální data
+kurzy bookmakerů
+ratingy, statistiky a predikce
+inteligentní tvorbu tiketů
+learning systém nad uloženými variantami tiketů
+webovou platformu pro uživatele po celém světě
+
+Současně platí:
+
+nejsme bookmaker
+nejsme sázková kancelář
+jsme poradní a analytický systém
+Cílové pilíře projektu
+1. Datová platforma
+
+Cíl je mít co nejširší sportovní databázi pro co nejvíce sportů.
+
+Má obsahovat:
+
+sporty
+soutěže
+sezóny
+týmy
+zápasy
+hráče
+trenéry
+kurzy
+standings
+statistiky
+ratingy
+2. Historická vrstva
+
+Dvě úrovně:
+
+5–8 sezon zpět pro predikce, statistiky a modely
+desítky let zpět pro fanouškovskou a databázovou hodnotu
+3. Aktuální vrstva
+
+Aktuální soutěže, zápasy, kurzy a nad nimi tvorba tiketů.
+
+4. Ticket Intelligence
+
+Systém má umět:
+
+generovat varianty tiketů
+ukládat je do DB
+vyhodnocovat jejich úspěšnost
+učit se z historie
+později navrhovat lepší kandidáty do bloků i fixů
+5. Webová platforma
+
+Veřejný web pro celý svět:
+
+výsledky
+statistiky
+přehledy soutěží
+tikety
+predikce
+uživatelské účty
+monetizace
+6. Uživatelská přidaná data
+
+Do budoucna:
+
+možnost vložit amatérské soutěže a týmy
+po schválení je dostat do DB
+vytvořit i pro ně ratingy a historii
+7. Monetizace
+
+Postupné úrovně předplatného:
+
+základ
+analýzy
+pokročilé analýzy
+doporučení tiketových variant a bloků
+Reálný aktuální stav projektu
+Co už existuje
+vícevrstvá DB architektura: ops, staging, work, public
+ingest a provozní panely
+audit panel
+Ticket Studio
+runtime ticket engine
+save pipeline
+historie tiketů
+settlement základy
+variantové tabulky
+pattern/stat vrstvy připravené strukturou
+Co ještě není hotové
+plošné plnění DB napříč sporty, sezónami a ligami
+plně dotažený ingest pro všechny sporty
+kompletní hráči a trenéři pro všechny úrovně soutěží
+sjednocená learning pipeline nad variantami
+plně využitá analytická vrstva
+webový produkt jako finální veřejná platforma

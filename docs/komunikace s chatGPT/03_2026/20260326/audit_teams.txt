@@ -1,0 +1,1737 @@
+|norm_name              |id    |name                   |ext_source      |ext_team_id |matches_used|
+|-----------------------|------|-----------------------|----------------|------------|------------|
+|1461 trabzon fk        |14,636|1461 Trabzon FK        |api_football    |6340        |117         |
+|1461 trabzon fk        |27,353|1461 Trabzon FK        |api_sport       |6340        |1           |
+|1 fc kln               |518   |1. FC Köln             |football_data   |1           |226         |
+|1 fc kln               |12,735|1. FC K?ln             |api_football    |192         |102         |
+|2 de mayo              |606   |2 de Mayo              |football_data   |11242       |4           |
+|2 de mayo              |28,053|2 de Mayo              |api_sport       |2140        |1           |
+|68 aksaray belediyespor|14,197|68 Aksaray Belediyespor|api_football    |6507        |73          |
+|68 aksaray belediyespor|26,254|68 Aksaray Belediyespor|api_sport       |6507        |1           |
+|aalesund               |13,181|Aalesund               |api_football    |757         |35          |
+|aalesund               |25,829|Aalesund               |api_sport       |757         |1           |
+|aarhus                 |13,156|Aarhus                 |api_football    |406         |96          |
+|aarhus                 |27,730|Aarhus                 |api_sport       |406         |1           |
+|ac horsens             |12,236|AC Horsens             |api_football    |404         |96          |
+|ac horsens             |25,814|AC Horsens             |api_sport       |404         |1           |
+|ac milan               |536   |AC Milan               |football_data   |98          |328         |
+|ac milan               |12,122|AC Milan               |api_football    |489         |114         |
+|ac milan               |27,887|AC Milan               |api_sport       |489         |1           |
+|adanaspor              |12,622|Adanaspor              |api_football    |3564        |108         |
+|adanaspor              |26,550|Adanaspor              |api_sport       |3564        |1           |
+|ad ceuta fc            |26,689|AD Ceuta FC            |api_sport       |10139       |1           |
+|ad ceuta fc            |28,745|AD Ceuta FC            |api_football    |10139       |0           |
+|admira wacker          |12,497|Admira Wacker          |api_football    |1023        |90          |
+|admira wacker          |26,162|Admira Wacker          |api_sport       |1023        |1           |
+|ado 20                 |14,830|ADO '20                |api_football    |3886        |34          |
+|ado 20                 |26,790|ADO '20                |api_sport       |3886        |1           |
+|ael                    |13,018|AEL                    |api_football    |3396        |113         |
+|ael                    |27,071|AEL                    |api_sport       |3396        |1           |
+|afc hermannstadt       |13,186|AFC Hermannstadt       |api_football    |2579        |117         |
+|afc hermannstadt       |26,635|AFC Hermannstadt       |api_sport       |2579        |1           |
+|afc wimbledon          |13,535|AFC Wimbledon          |api_football    |1333        |141         |
+|afc wimbledon          |26,524|AFC Wimbledon          |api_sport       |1333        |1           |
+|af elbasani            |12,213|AF Elbasani            |api_football    |20406       |69          |
+|af elbasani            |27,067|AF Elbasani            |api_sport       |20406       |1           |
+|afjet afyonspor        |13,911|Afjet Afyonspor        |api_football    |3565        |106         |
+|afjet afyonspor        |26,670|Afjet Afyonspor        |api_sport       |3565        |1           |
+|aik stockholm          |13,267|AIK Stockholm          |api_football    |377         |36          |
+|aik stockholm          |25,830|AIK Stockholm          |api_sport       |377         |1           |
+|ajaccio                |13,579|Ajaccio                |api_football    |98          |110         |
+|ajaccio                |1,029 |Ajaccio                |football_data_uk|Ajaccio     |38          |
+|ajka                   |13,238|Ajka                   |api_football    |4714        |102         |
+|ajka                   |27,004|Ajka                   |api_sport       |4714        |1           |
+|akademija pandev       |12,591|Akademija Pandev       |api_football    |4194        |66          |
+|akademija pandev       |25,711|Akademija Pandev       |api_sport       |4194        |1           |
+|akhmat                 |13,409|Akhmat                 |api_football    |1085        |62          |
+|akhmat                 |25,725|Akhmat                 |api_sport       |1085        |1           |
+|akron                  |13,582|Akron                  |api_football    |6786        |66          |
+|akron                  |25,779|Akron                  |api_sport       |6786        |1           |
+|alanyaspor             |13,492|Alanyaspor             |api_football    |996         |74          |
+|alanyaspor             |25,810|Alanyaspor             |api_sport       |996         |1           |
+|alaves                 |12,093|Alaves                 |api_football    |542         |122         |
+|alaves                 |27,892|Alaves                 |api_sport       |542         |1           |
+|alcorcon               |28,678|Alcorcon               |api_football    |711         |42          |
+|alcorcon               |26,319|Alcorcon               |api_sport       |711         |1           |
+|alfaro                 |27,562|Alfaro                 |api_sport       |9860        |1           |
+|alfaro                 |28,825|Alfaro                 |api_football    |9860        |0           |
+|almeria                |12,871|Almeria                |api_football    |723         |120         |
+|almeria                |1,158 |Almeria                |football_data_uk|Almeria     |76          |
+|almeria                |25,856|Almeria                |api_sport       |723         |1           |
+|altay                  |14,578|Altay                  |api_football    |3566        |104         |
+|altay                  |13,202|Altay                  |api_football    |4544        |17          |
+|altay                  |26,672|Altay                  |api_sport       |3566        |1           |
+|aluminij               |12,574|Aluminij               |api_football    |4358        |98          |
+|aluminij               |27,650|Aluminij               |api_sport       |4358        |1           |
+|amarante               |14,245|Amarante               |api_football    |4725        |32          |
+|amarante               |27,456|Amarante               |api_sport       |4725        |1           |
+|amiens                 |12,879|Amiens                 |api_football    |87          |110         |
+|amiens                 |1,034 |Amiens                 |football_data_uk|Amiens      |66          |
+|amorebieta             |28,691|Amorebieta             |api_football    |9380        |42          |
+|amorebieta             |27,563|Amorebieta             |api_sport       |9380        |1           |
+|anadia                 |14,502|Anadia                 |api_football    |4727        |56          |
+|anadia                 |27,305|Anadia                 |api_sport       |4727        |1           |
+|anagennisi karditsas   |15,110|Anagennisi Karditsas   |api_football    |2094        |62          |
+|anagennisi karditsas   |26,861|Anagennisi Karditsas   |api_sport       |2094        |1           |
+|anderlecht             |972   |Anderlecht             |football_data_uk|Anderlecht  |266         |
+|anderlecht             |12,940|Anderlecht             |api_football    |554         |114         |
+|anderlecht             |26,633|Anderlecht             |api_sport       |554         |1           |
+|angers                 |1,018 |Angers                 |football_data_uk|Angers      |236         |
+|angers                 |12,102|Angers                 |api_football    |77          |110         |
+|ankara demirspor       |14,438|Ankara Demirspor       |api_football    |3581        |109         |
+|ankara demirspor       |26,551|Ankara Demirspor       |api_sport       |3581        |1           |
+|anorthosis             |12,998|Anorthosis             |api_football    |2269        |109         |
+|anorthosis             |27,340|Anorthosis             |api_sport       |2269        |1           |
+|antalyaspor            |12,631|Antalyaspor            |api_football    |1005        |74          |
+|antalyaspor            |26,245|Antalyaspor            |api_sport       |1005        |1           |
+|antoniano              |13,747|Antoniano              |api_football    |7522        |2           |
+|antoniano              |26,339|Antoniano              |api_sport       |7522        |1           |
+|antwerp                |964   |Antwerp                |football_data_uk|Antwerp     |266         |
+|antwerp                |13,172|Antwerp                |api_football    |740         |121         |
+|apoel nicosia          |12,860|Apoel Nicosia          |api_football    |2247        |108         |
+|apoel nicosia          |27,339|Apoel Nicosia          |api_sport       |2247        |1           |
+|apollon limassol       |12,898|Apollon Limassol       |api_football    |602         |112         |
+|apollon limassol       |27,070|Apollon Limassol       |api_sport       |602         |1           |
+|araratarmenia ii       |12,789|Ararat-Armenia II      |api_football    |3689        |52          |
+|araratarmenia ii       |26,288|Ararat-Armenia II      |api_sport       |3689        |1           |
+|araz                   |13,132|Araz                   |api_football    |11238       |72          |
+|araz                   |27,491|Araz                   |api_sport       |11238       |1           |
+|arezzo                 |14,061|Arezzo                 |api_football    |876         |83          |
+|arezzo                 |25,863|Arezzo                 |api_sport       |876         |1           |
+|arges pitesti          |12,347|Arges Pitesti          |api_football    |2592        |97          |
+|arges pitesti          |27,259|Arges Pitesti          |api_sport       |2592        |1           |
+|aris                   |12,561|Aris                   |api_football    |3408        |108         |
+|aris                   |27,073|Aris                   |api_sport       |3408        |1           |
+|arka gdynia            |13,208|Arka Gdynia            |api_football    |344         |104         |
+|arka gdynia            |25,817|Arka Gdynia            |api_sport       |344         |1           |
+|arnavutky belediyespor |14,158|Arnavutk?y Belediyespor|api_football    |15101       |106         |
+|arnavutky belediyespor |26,654|Arnavutköy Belediyespor|api_sport       |15101       |1           |
+|arosa                  |27,667|Arosa                  |api_sport       |9605        |1           |
+|arosa                  |28,499|Arosa                  |api_hockey      |903         |0           |
+|arsenal                |11,910|Arsenal                |api_football    |42          |114         |
+|arsenal                |13,102|Arsenal                |api_football    |9419        |36          |
+|arsenal                |26,871|Arsenal                |api_sport       |9419        |1           |
+|arsenal                |1     |Arsenal                |                |            |0           |
+|arsenal esk lpa        |14,437|Arsenal ?esk? L?pa     |api_football    |7270        |62          |
+|arsenal esk lpa        |26,963|Arsenal Česká Lípa     |api_sport       |7270        |1           |
+|arsenal tula           |12,336|Arsenal Tula           |api_football    |1077        |70          |
+|arsenal tula           |25,752|Arsenal Tula           |api_sport       |1077        |1           |
+|ascoli                 |14,581|Ascoli                 |api_football    |507         |116         |
+|ascoli                 |25,866|Ascoli                 |api_sport       |507         |1           |
+|asil lysi              |13,477|ASIL Lysi              |api_football    |3405        |58          |
+|asil lysi              |26,978|ASIL Lysi              |api_sport       |3405        |1           |
+|as jeunesse esch       |13,452|AS Jeunesse Esch       |api_football    |2034        |60          |
+|as jeunesse esch       |27,269|AS Jeunesse Esch       |api_sport       |2034        |1           |
+|as roma                |538   |AS Roma                |football_data   |100         |329         |
+|as roma                |12,128|AS Roma                |api_football    |497         |114         |
+|as roma                |27,695|AS Roma                |api_sport       |497         |1           |
+|asteras tripolis       |13,448|Asteras Tripolis       |api_football    |955         |98          |
+|asteras tripolis       |27,016|Asteras Tripolis       |api_sport       |955         |1           |
+|asteras tripolis ii    |12,875|Asteras Tripolis II    |api_football    |25017       |26          |
+|asteras tripolis ii    |26,858|Asteras Tripolis II    |api_sport       |25017       |1           |
+|aston villa            |11,922|Aston Villa            |api_football    |66          |114         |
+|aston villa            |27,927|Aston Villa            |api_sport       |22805       |1           |
+|atalanta ii            |13,901|Atalanta II            |api_football    |22104       |88          |
+|atalanta ii            |25,872|Atalanta II            |api_sport       |22104       |1           |
+|atert bissen           |12,965|Atert Bissen           |api_football    |15847       |1           |
+|atert bissen           |27,278|Atert Bissen           |api_sport       |15847       |1           |
+|athletic carpi         |14,558|Athletic Carpi         |api_football    |17825       |39          |
+|athletic carpi         |26,926|Athletic Carpi         |api_sport       |17825       |1           |
+|athletic club          |78    |Athletic Club          |football_data   |77          |336         |
+|athletic club          |12,084|Athletic Club          |api_football    |531         |114         |
+|athletic club          |25,928|Ath­let­ic Club        |api_sport       |12560       |1           |
+|atltic club descaldes  |13,350|Atl?tic Club d'Escaldes|api_football    |3345        |54          |
+|atltic club descaldes  |27,772|Atlètic Club d'Escaldes|api_sport       |3345        |1           |
+|atltico baleares       |14,375|Atl?tico Baleares      |api_football    |9381        |2           |
+|atltico baleares       |26,355|Atlético Baleares      |api_sport       |9381        |1           |
+|atltico madrid ii      |16,786|Atl?tico Madrid II     |api_football    |9570        |4           |
+|atltico madrid ii      |27,737|Atlético Madrid II     |api_sport       |9570        |1           |
+|atltico paso           |26,562|Atlético Paso          |api_sport       |9791        |1           |
+|atltico paso           |28,819|Atl?tico Paso          |api_football    |9791        |0           |
+|atyrau                 |13,595|Atyrau                 |api_football    |4564        |27          |
+|atyrau                 |26,238|Atyrau                 |api_sport       |4564        |1           |
+|auda                   |12,910|Auda                   |api_football    |4135        |32          |
+|auda                   |27,183|Auda                   |api_sport       |4135        |1           |
+|audace cerignola       |13,835|Audace Cerignola       |api_football    |9539        |126         |
+|audace cerignola       |25,873|Audace Cerignola       |api_sport       |9539        |1           |
+|austria klagenfurt     |13,150|Austria Klagenfurt     |api_football    |1405        |96          |
+|austria klagenfurt     |26,163|Austria Klagenfurt     |api_sport       |1405        |1           |
+|austria vienna         |12,793|Austria Vienna         |api_football    |601         |101         |
+|austria vienna         |27,543|Austria Vienna         |api_sport       |601         |1           |
+|auxerre                |12,116|Auxerre                |api_football    |108         |110         |
+|auxerre                |1,019 |Auxerre                |football_data_uk|Auxerre     |94          |
+|avs                    |591   |AVS                    |football_data   |10340       |90          |
+|avs                    |12,159|AVS                    |api_football    |21595       |38          |
+|az alkmaar             |1,106 |AZ Alkmaar             |football_data_uk|AZ Alkmaar  |252         |
+|az alkmaar             |12,166|AZ Alkmaar             |api_football    |201         |104         |
+|az picerno             |13,968|AZ Picerno             |api_football    |1587        |121         |
+|az picerno             |27,874|AZ Picerno             |api_sport       |1587        |1           |
+|badalona               |27,578|Badalona               |api_sport       |5250        |1           |
+|badalona               |28,784|Badalona               |api_football    |5250        |0           |
+|balkesirspor           |15,215|Bal?kesirspor          |api_football    |3568        |38          |
+|balkesirspor           |26,665|Balıkesirspor          |api_sport       |3568        |1           |
+|ballkani               |13,084|Ballkani               |api_football    |12733       |72          |
+|ballkani               |25,699|Ballkani               |api_sport       |12733       |1           |
+|banants ii             |13,254|Banants II             |api_football    |3690        |52          |
+|banants ii             |25,756|Banants II             |api_sport       |3690        |1           |
+|banga                  |13,646|Banga                  |api_football    |3858        |33          |
+|banga                  |26,628|Banga                  |api_sport       |3858        |1           |
+|bank ostrava           |12,730|Ban?k Ostrava          |api_football    |3713        |70          |
+|bank ostrava           |26,522|Baník Ostrava          |api_sport       |3713        |1           |
+|bank sokolov           |16,884|Ban?k Sokolov          |api_football    |3721        |30          |
+|bank sokolov           |26,161|Baník Sokolov          |api_sport       |3721        |1           |
+|barakaldo              |27,753|Barakaldo              |api_sport       |5251        |1           |
+|barakaldo              |28,785|Barakaldo              |api_football    |5251        |0           |
+|barbastro              |14,590|Barbastro              |api_football    |9879        |2           |
+|barbastro              |26,359|Barbastro              |api_sport       |9879        |1           |
+|bari                   |13,216|Bari                   |api_football    |508         |120         |
+|bari                   |27,804|Bari                   |api_sport       |508         |1           |
+|barnsley               |12,890|Barnsley               |api_football    |747         |143         |
+|barnsley               |1,006 |Barnsley               |football_data_uk|Barnsley    |138         |
+|bashkimi kumanovo      |13,240|Bashkimi Kumanovo      |api_football    |22153       |61          |
+|bashkimi kumanovo      |26,780|Bashkimi Kumanovo      |api_sport       |22153       |1           |
+|beasain                |16,796|Beasain                |api_football    |9657        |2           |
+|beasain                |27,565|Beasain                |api_sport       |9657        |1           |
+|beerschot va           |980   |Beerschot VA           |football_data_uk|Beerschot VA|104         |
+|beerschot va           |12,515|Beerschot VA           |api_football    |263         |98          |
+|beitar jerusalem       |14,252|Beitar Jerusalem       |api_football    |657         |69          |
+|beitar jerusalem       |27,794|Beitar Jerusalem       |api_sport       |657         |1           |
+|bekescsaba 1912        |12,476|Bekescsaba 1912        |api_football    |2406        |68          |
+|bekescsaba 1912        |26,691|Bekescsaba 1912        |api_sport       |2406        |1           |
+|belediye derincespor   |14,329|Belediye Derincespor   |api_football    |6511        |70          |
+|belediye derincespor      |26,653|Belediye Derincespor      |api_sport       |6511         |1           |
+|belenenses                |1,139 |Belenenses                |football_data_uk|Belenenses   |136         |
+|belenenses                |16,933|Belenenses                |api_football    |221          |36          |
+|benevento                 |13,785|Benevento                 |api_football    |506          |123         |
+|benevento                 |1,091 |Benevento                 |football_data_uk|Benevento    |38          |
+|benevento                 |27,663|Benevento                 |api_sport       |506          |1           |
+|benfica                   |12,141|Benfica                   |api_football    |211          |102         |
+|benfica                   |27,769|Benfica                   |api_sport       |211          |1           |
+|benfica b                 |14,450|Benfica B                 |api_football    |229          |68          |
+|benfica b                 |25,822|Benfica B                 |api_sport       |229          |1           |
+|berane                    |28,654|Berane                    |api_football    |3743         |36          |
+|berane                    |26,818|Berane                    |api_sport       |3743         |1           |
+|bergantios                |27,561|Bergantiños               |api_sport       |9383         |1           |
+|bergantios                |28,801|Berganti?os               |api_football    |9383         |0           |
+|beroe                     |13,233|Beroe                     |api_football    |857          |107         |
+|beroe                     |26,295|Beroe                     |api_sport       |857          |1           |
+|beyolu yeni ar            |14,689|Beyo?lu Yeni ?ar??        |api_football    |7406         |70          |
+|beyolu yeni ar            |26,205|Beyoğlu Yeni Çarşı        |api_sport       |7406         |1           |
+|birkirkara                |12,611|Birkirkara                |api_football    |2277         |60          |
+|birkirkara                |26,833|Birkirkara                |api_sport       |2277         |1           |
+|bk hacken                 |13,610|BK Hacken                 |api_football    |367          |34          |
+|bk hacken                 |25,831|BK Hacken                 |api_sport       |367          |1           |
+|bkma                      |13,431|BKMA                      |api_football    |6279         |66          |
+|bkma                      |26,866|BKMA                      |api_sport       |6279         |1           |
+|bkma ii                   |12,852|BKMA II                   |api_football    |17171        |52          |
+|bkma ii                   |25,718|BKMA II                   |api_sport       |17171        |1           |
+|blackpool                 |13,685|Blackpool                 |api_football    |1356         |138         |
+|blackpool                 |1,003 |Blackpool                 |football_data_uk|Blackpool    |92          |
+|blansko                   |14,607|Blansko                   |api_football    |7276         |102         |
+|blansko                   |26,949|Blansko                   |api_sport       |7276         |1           |
+|boavista                  |1,132 |Boavista                  |football_data_uk|Boavista     |238         |
+|boavista                  |12,145|Boavista                  |api_football    |222          |102         |
+|bochum                    |1,055 |Bochum                    |football_data_uk|Bochum       |136         |
+|bochum                    |14,347|Bochum                    |api_football    |20473        |26          |
+|bodrum fk                 |12,906|Bodrum FK                 |api_football    |3583         |114         |
+|bodrum fk                 |27,700|Bodrum FK                 |api_sport       |3583         |1           |
+|bohemians 1905 ii         |14,224|Bohemians 1905 II         |api_football    |14473        |61          |
+|bohemians 1905 ii         |26,154|Bohemians 1905 II         |api_sport       |14473        |1           |
+|bologna                   |12,130|Bologna                   |api_football    |500          |114         |
+|bologna                   |26,992|Bologna                   |api_sport       |500          |1           |
+|bolton                    |12,960|Bolton                    |api_football    |68           |143         |
+|bolton                    |1,009 |Bolton                    |football_data_uk|Bolton       |46          |
+|boluspor                  |12,987|Boluspor                  |api_football    |3569         |112         |
+|boluspor                  |26,698|Boluspor                  |api_sport       |3569         |1           |
+|bordeaux                  |1,031 |Bordeaux                  |football_data_uk|Bordeaux     |142         |
+|bordeaux                  |16,875|Bordeaux                  |api_football    |78           |76          |
+|borussia dortmund         |69    |Borussia Dortmund         |football_data   |4            |304         |
+|borussia dortmund         |12,069|Borussia Dortmund         |api_football    |165          |102         |
+|borussia mnchengladbach   |530   |Borussia Mönchengladbach  |football_data   |18           |294         |
+|borussia mnchengladbach   |12,067|Borussia M?nchengladbach  |api_football    |163          |102         |
+|borussia monchengladbach w|14,702|Borussia Monchengladbach W|api_football    |1864         |52          |
+|borussia monchengladbach w|26,793|Borussia Monchengladbach W|api_sport       |1864         |1           |
+|botev plovdiv             |12,853|Botev Plovdiv             |api_football    |634          |108         |
+|botev plovdiv             |26,893|Botev Plovdiv             |api_sport       |634          |1           |
+|bournemouth               |11,905|Bournemouth               |api_football    |35           |114         |
+|bournemouth               |948   |Bournemouth               |football_data_uk|Bournemouth  |0           |
+|brann                     |13,096|Brann                     |api_football    |319          |34          |
+|brann                     |26,797|Brann                     |api_sport       |319          |1           |
+|bravo                     |13,051|Bravo                     |api_football    |4359         |108         |
+|bravo                     |25,797|Bravo                     |api_sport       |4359         |1           |
+|brentford                 |11,919|Brentford                 |api_football    |55           |114         |
+|brentford                 |25,875|Brentford                 |api_sport       |55           |1           |
+|brescia                   |12,630|Brescia                   |api_football    |518          |117         |
+|brescia                   |1,092 |Brescia                   |football_data_uk|Brescia      |38          |
+|brest                     |1,016 |Brest                     |football_data_uk|Brest        |232         |
+|brest                     |28,532|Brest                     |api_hockey      |3            |0           |
+|brighton                  |11,917|Brighton                  |api_football    |51           |114         |
+|brighton                  |950   |Brighton                  |football_data_uk|Brighton     |0           |
+|brinjegrosuplje           |13,458|Brinje-Grosuplje          |api_football    |12744        |90          |
+|brinjegrosuplje           |26,527|Brinje-Grosuplje          |api_sport       |12744        |1           |
+|bryne                     |13,178|Bryne                     |api_football    |2142         |35          |
+|bryne                     |27,408|Bryne                     |api_sport       |2142         |1           |
+|bsc young boys            |13,021|BSC Young Boys            |api_football    |565          |76          |
+|bsc young boys            |27,522|BSC Young Boys            |api_sport       |565          |1           |
+|budafoki lc               |12,479|Budafoki LC               |api_football    |2399         |102         |
+|budafoki lc               |26,690|Budafoki LC               |api_sport       |2399         |1           |
+|budapest honved           |13,577|Budapest Honved           |api_football    |576          |97          |
+|budapest honved           |25,844|Budapest Honved           |api_sport       |576          |1           |
+|bulawayo chiefs           |26,815|Bulawayo Chiefs           |api_sport       |5217         |1           |
+|bulawayo chiefs           |28,725|Bulawayo Chiefs           |api_football    |5217         |0           |
+|bursaspor                 |15,320|Bursaspor                 |api_football    |1003         |72          |
+|bursaspor                 |26,253|Bursaspor                 |api_sport       |1003         |1           |
+|bvsc                      |13,229|BVSC                      |api_football    |5071         |66          |
+|bvsc                      |26,692|BVSC                      |api_sport       |5071         |1           |
+|bylis                     |13,310|Bylis                     |api_football    |3325         |69          |
+|bylis                     |27,068|Bylis                     |api_sport       |3325         |1           |
+|cacereo                   |14,514|Cacere?o                  |api_football    |9384         |8           |
+|cacereo                   |27,870|Cacereño                  |api_sport       |9384         |1           |
+|cadiz                     |1,159 |Cadiz                     |football_data_uk|Cadiz        |152         |
+|cadiz                     |13,513|Cadiz                     |api_football    |724          |118         |
+|caen                      |12,471|Caen                      |api_football    |88           |110         |
+|caen                      |1,036 |Caen                      |football_data_uk|Caen         |38          |
+|caernarfon town           |13,413|Caernarfon Town           |api_football    |356          |101         |
+|caernarfon town           |26,981|Caernarfon Town           |api_sport       |356          |1           |
+|cagliari                  |1,073 |Cagliari                  |football_data_uk|Cagliari     |253         |
+|cagliari                  |12,123|Cagliari                  |api_football    |490          |119         |
+|cailungo                  |12,562|Cailungo                  |api_football    |5297         |60          |
+|cailungo                  |27,089|Cailungo                  |api_sport       |5297         |1           |
+|cambuur                   |12,180|Cambuur                   |api_football    |420          |112         |
+|cambuur                   |1,114 |Cambuur                   |football_data_uk|Cambuur      |68          |
+|cambuur                   |27,530|Cambuur                   |api_sport       |420          |1           |
+|campobasso fc             |14,203|Campobasso FC             |api_football    |9510         |39          |
+|campobasso fc             |25,862|Campobasso FC             |api_sport       |9510         |1           |
+|caps united               |26,810|CAPS United               |api_sport       |5218         |1           |
+|caps united               |28,726|CAPS United               |api_football    |5218         |0           |
+|carrarese                 |12,319|Carrarese                 |api_football    |1581         |124         |
+|carrarese                 |27,644|Carrarese                 |api_sport       |1581         |1           |
+|carroi                    |13,361|Carroi                    |api_football    |3346         |49          |
+|carroi                    |27,280|Carroi                    |api_sport       |3346         |1           |
+|casertana                 |14,499|Casertana                 |api_football    |885          |81          |
+|casertana                 |25,871|Casertana                 |api_sport       |885          |1           |
+|catania                   |14,341|Catania                   |api_football    |1580         |86          |
+|catania                   |25,870|Catania                   |api_sport       |1580         |1           |
+|catanzaro                 |12,285|Catanzaro                 |api_football    |1687         |123         |
+|catanzaro                 |27,096|Catanzaro                 |api_sport       |1687         |1           |
+|cavese                    |14,393|Cavese                    |api_football    |1712         |39          |
+|cavese                    |27,873|Cavese                    |api_sport       |1712         |1           |
+|cd coria                  |16,987|CD Coria                  |api_football    |9827         |2           |
+|cd coria                  |26,247|CD Coria                  |api_sport       |9827         |1           |
+|celtic                    |13,635|Celtic                    |api_football    |247          |114         |
+|celtic                    |26,869|Celtic                    |api_sport       |247          |1           |
+|cercle brugge             |967   |Cercle Brugge             |football_data_uk|Cercle Brugge|262         |
+|cercle brugge             |12,844|Cercle Brugge             |api_football    |741          |118         |
+|cercle brugge             |27,792|Cercle Brugge             |api_sport       |741          |1           |
+|cf os belenenses          |14,592|CF Os Belenenses          |api_football    |17692        |63          |
+|cf os belenenses          |27,912|CF Os Belenenses          |api_sport       |17692        |1           |
+|cfr 1907 cluj             |13,044|CFR 1907 Cluj             |api_football    |2246         |121         |
+|cfr 1907 cluj             |25,818|CFR 1907 Cluj             |api_sport       |2246         |1           |
+|charleroi                 |975   |Charleroi                 |football_data_uk|Charleroi    |262         |
+|charleroi                 |13,032|Charleroi                 |api_football    |736          |111         |
+|chaves                    |1,136 |Chaves                    |football_data_uk|Chaves       |102         |
+|chaves                    |13,956|Chaves                    |api_football    |223          |102         |
+|chelsea                   |11,915|Chelsea                   |api_football    |49           |114         |
+|chelsea                   |2     |Chelsea                   |                |             |0           |
+|chernomorets balchik      |28,602|Chernomorets Balchik      |api_football    |1422         |34          |
+|chernomorets balchik      |26,841|Chernomorets Balchik      |api_sport       |1422         |1           |
+|chiclana                  |26,401|Chiclana                  |api_sport       |21905        |1           |
+|chiclana                  |28,768|Chiclana                  |api_football    |21905        |0           |
+|chindia targoviste        |13,422|Chindia Targoviste        |api_football    |2586         |93          |
+|chindia targoviste        |25,765|Chindia Targoviste        |api_sport       |2586         |1           |
+|chlumec nad cidlinou      |13,908|Chlumec nad Cidlinou      |api_football    |7281         |92          |
+|chlumec nad cidlinou      |26,158|Chlumec nad Cidlinou      |api_sport       |7281         |1           |
+|chojniczanka chojnice     |14,657|Chojniczanka Chojnice     |api_football    |3482         |105         |
+|chojniczanka chojnice     |26,305|Chojniczanka Chojnice     |api_sport       |3482         |1           |
+|ciudad de lucena          |27,721|Ciudad de Lucena          |api_sport       |9756         |1           |
+|ciudad de lucena          |28,816|Ciudad de Lucena          |api_football    |9756         |0           |
+|club brugge kv            |12,803|Club Brugge KV            |api_football    |569          |120         |
+|club brugge kv            |96    |Club Brugge KV            |football_data   |851          |10          |
+|club brugge kv            |26,632|Club Brugge KV            |api_sport       |569          |1           |
+|como                      |12,139|Como                      |api_football    |895          |114         |
+|como                      |1,075 |Como                      |football_data_uk|Como         |62          |
+|compostela                |16,806|Compostela                |api_football    |5256         |2           |
+|compostela                |27,505|Compostela                |api_sport       |5256         |1           |
+|concordia                 |13,304|Concordia                 |api_football    |2580         |77          |
+|concordia                 |28,545|Concordia                 |api_hockey      |94           |0           |
+|conquense                 |26,341|Conquense                 |api_sport       |5257         |1           |
+|conquense                 |28,786|Conquense                 |api_football    |5257         |0           |
+|cordoba                   |12,934|Cordoba                   |api_football    |713          |42          |
+|cordoba                   |27,750|Cordoba                   |api_sport       |713          |1           |
+|corvinul hunedoara        |12,710|Corvinul Hunedoara        |api_football    |20034        |56          |
+|corvinul hunedoara        |26,201|Corvinul Hunedoara        |api_sport       |20034        |1           |
+|cosenza                   |12,229|Cosenza                   |api_football    |10137        |116         |
+|cosenza                   |26,928|Cosenza                   |api_sport       |10137        |1           |
+|cracovia krakow           |12,363|Cracovia Krakow           |api_football    |350          |102         |
+|cracovia krakow           |27,866|Cracovia Krakow           |api_sport       |350          |1           |
+|cremonese                 |13,414|Cremonese                 |api_football    |520          |122         |
+|cremonese                 |26,491|Cremonese                 |api_sport       |520          |1           |
+|crotone                   |14,302|Crotone                   |api_football    |501          |127         |
+|crotone                   |1,090 |Crotone                   |football_data_uk|Crotone      |38          |
+|crotone                   |26,935|Crotone                   |api_sport       |501          |1           |
+|csakvar                   |13,681|Csakvar                   |api_football    |2409         |102         |
+|csakvar                   |27,005|Csakvar                   |api_sport       |2409         |1           |
+|csf bli                   |13,581|CSF B?l?i                 |api_football    |14008        |48          |
+|csf bli                   |27,616|CSF Bălți                 |api_sport       |14008        |1           |
+|cska 1948                 |13,447|CSKA 1948                 |api_football    |1426         |109         |
+|cska 1948                 |26,892|CSKA 1948                 |api_sport       |1426         |1           |
+|cska moscow               |12,990|CSKA Moscow               |api_football    |555          |60          |
+|cska moscow               |27,656|CSKA Moscow               |api_sport       |555          |1           |
+|cska sofia                |12,228|CSKA Sofia                |api_football    |853          |108         |
+|cska sofia                |27,532|CSKA Sofia                |api_sport       |853          |1           |
+|cska sofia ii             |13,000|CSKA Sofia II             |api_football    |1415         |38          |
+|cska sofia ii             |25,732|CSKA Sofia II             |api_sport       |1415         |1           |
+|csm reia                  |12,695|CSM Re?i?a                |api_football    |6229         |56          |
+|csm reia                  |26,200|CSM Reşiţa                |api_sport       |6229         |1           |
+|cultural leonesa          |25,857|Cultural Leonesa          |api_sport       |725          |1           |
+|cultural leonesa          |28,799|Cultural Leonesa          |api_football    |725          |0           |
+|daciabuiucani             |12,688|Dacia-Buiucani            |api_football    |5375         |48          |
+|daciabuiucani             |26,805|Dacia-Buiucani            |api_sport       |5375         |1           |
+|debreceni vsc             |12,435|Debreceni VSC             |api_football    |2392         |99          |
+|debreceni vsc             |27,691|Debreceni VSC             |api_sport       |2392         |1           |
+|degerfors if              |13,441|Degerfors IF              |api_football    |2172         |33          |
+|degerfors if              |27,188|Degerfors IF              |api_sport       |2172         |1           |
+|de graafschap             |12,165|De Graafschap             |api_football    |199          |118         |
+|de graafschap             |26,480|De Graafschap             |api_sport       |199          |1           |
+|dekani                    |12,953|Dekani                    |api_football    |4370         |90          |
+|dekani                    |27,003|Dekani                    |api_sport       |4370         |1           |
+|den bosch                 |12,181|Den Bosch                 |api_football    |421          |118         |
+|den bosch                 |26,901|Den Bosch                 |api_sport       |421          |1           |
+|dender                    |12,665|Dender                    |api_football    |6215         |102         |
+|dender                    |966   |Dender                    |football_data_uk|Dender       |65          |
+|deportiva minera          |26,334|Deportiva Minera          |api_sport       |9811         |1           |
+|deportiva minera          |28,821|Deportiva Minera          |api_football    |9811         |0           |
+|deportivo alavs ii        |16,715|Deportivo Alav?s II       |api_football    |9582         |4           |
+|deportivo alavs ii        |26,322|Deportivo Alavés II       |api_sport       |9582         |1           |
+|deportivo la coruna       |12,984|Deportivo La Coruna       |api_football    |544          |42          |
+|deportivo la coruna       |27,893|Deportivo La Coruna       |api_sport       |544          |1           |
+|dijon                     |1,032 |Dijon                     |football_data_uk|Dijon        |104         |
+|dijon                     |16,935|Dijon                     |api_football    |89           |38          |
+|dinamo brest              |12,438|Dinamo Brest              |api_football    |386          |32          |
+|dinamo brest              |26,456|Dinamo Brest              |api_sport       |386          |1           |
+|dinamo bucuresti          |13,585|Dinamo Bucuresti          |api_football    |635          |112         |
+|dinamo bucuresti          |25,819|Dinamo Bucuresti          |api_sport       |635          |1           |
+|dinamo makhachkala        |12,817|Dinamo Makhachkala        |api_football    |6813         |64          |
+|dinamo makhachkala        |26,493|Dinamo Makhachkala        |api_sport       |6813         |1           |
+|dinamo tirana             |13,180|Dinamo Tirana             |api_football    |3326         |74          |
+|dinamo tirana             |25,826|Dinamo Tirana             |api_sport       |3326         |1           |
+|dinamo zagreb             |12,284|Dinamo Zagreb             |api_football    |620          |108         |
+|dinamo zagreb             |26,997|Dinamo Zagreb             |api_sport       |620          |1           |
+|diosgyori vtk             |12,981|Diosgyori VTK             |api_football    |2393         |104         |
+|diosgyori vtk             |26,631|Diosgyori VTK             |api_sport       |2393         |1           |
+|djurgardens if            |13,081|Djurgardens IF            |api_football    |364          |35          |
+|djurgardens if            |26,588|Djurgardens IF            |api_sport       |364          |1           |
+|dobrudzha                 |12,437|Dobrudzha                 |api_football    |1427         |106         |
+|dobrudzha                 |26,294|Dobrudzha                 |api_sport       |1427         |1           |
+|doln kubn                 |15,239|Doln? Kub?n               |api_football    |14956        |60          |
+|doln kubn                 |27,101|Dolný Kubín               |api_sport       |14956        |1           |
+|domagnano                 |12,523|Domagnano                 |api_football    |5299         |61          |
+|domagnano                 |27,084|Domagnano                 |api_sport       |5299         |1           |
+|don benito                |27,597|Don Benito                |api_sport       |5259         |1           |
+|don benito                |28,787|Don Benito                |api_football    |5259         |0           |
+|dorogi fc                 |15,205|Dorogi FC                 |api_football    |2401         |38          |
+|dorogi fc                 |27,552|Dorogi FC                 |api_sport       |2401         |1           |
+|duboica                   |13,159|Dubo?ica                  |api_football    |12312        |74          |
+|duboica                   |25,707|Dubočica                  |api_sport       |12312        |1           |
+|dukagjini                 |12,799|Dukagjini                 |api_football    |14393        |72          |
+|dukagjini                 |26,605|Dukagjini                 |api_sport       |14393        |1           |
+|dukla praha ii            |14,523|Dukla Praha II            |api_football    |15132        |61          |
+|dukla praha ii            |26,156|Dukla Praha II            |api_sport       |15132        |1           |
+|dunajska streda           |13,147|Dunajska Streda           |api_football    |2257         |98          |
+|dunajska streda           |27,735|Dunajska Streda           |api_sport       |2257         |1           |
+|dunkerque                 |12,935|Dunkerque                 |api_football    |1304         |74          |
+|dunkerque                 |25,878|Dunkerque                 |api_sport       |1304         |1           |
+|dynamo                    |13,652|Dynamo                    |api_football    |1088         |60          |
+|dynamo                    |27,657|Dynamo                    |api_sport       |1088         |1           |
+|dynamo dresden            |14,244|Dynamo Dresden            |api_football    |183          |114         |
+|dynamo dresden            |26,639|Dynamo Dresden            |api_sport       |183          |1           |
+|dynamo kyiv               |12,873|Dynamo Kyiv               |api_football    |572          |60          |
+|dynamo kyiv               |27,547|Dynamo Kyiv               |api_sport       |572          |1           |
+|dynamos                   |26,107|Dynamos                   |api_sport       |5221         |1           |
+|dynamos                   |28,728|Dynamos                   |api_football    |5221         |0           |
+|dzcespor                  |15,493|D?zcespor                 |api_football    |7399         |72          |
+|dzcespor                  |26,267|Düzcespor                 |api_sport       |7399         |1           |
+|egersund                  |13,014|Egersund                  |api_football    |6976         |17          |
+|egersund                  |25,828|Egersund                  |api_sport       |6976         |1           |
+|egnatia rrogozhin         |13,526|Egnatia Rrogozhin?        |api_football    |3327         |76          |
+|egnatia rrogozhin         |25,824|Egnatia Rrogozhinë        |api_sport       |3327         |1           |
+|eibar                     |12,429|Eibar                     |api_football    |545          |130         |
+|eibar                     |1,161 |Eibar                     |football_data_uk|Eibar        |114         |
+|eibar                     |27,752|Eibar                     |api_sport       |545          |1           |
+|eintracht frankfurt       |71    |Eintracht Frankfurt       |football_data   |19           |302         |
+|eintracht frankfurt       |12,072|Eintracht Frankfurt       |api_football    |169          |102         |
+|eintracht frankfurt       |27,218|Eintracht Frankfurt       |api_sport       |169          |1           |
+|ejea                      |26,324|Ejea                      |api_sport       |9589         |1           |
+|ejea                      |28,811|Ejea                      |api_football    |9589         |0           |
+|elche                     |12,606|Elche                     |api_football    |797          |122         |
+|elche                     |26,687|Elche                     |api_sport       |797          |1           |
+|el dmanyurdu spor         |14,520|??el ?dmanyurdu Spor      |api_football    |6546         |73          |
+|el dmanyurdu spor         |27,355|İçel İdmanyurdu Spor      |api_sport       |6546         |1           |
+|emmen                     |13,306|Emmen                     |api_football    |208          |118         |
+|emmen                     |25,843|Emmen                     |api_sport       |208          |1           |
+|empoli                    |1,083 |Empoli                    |football_data_uk|Empoli       |190         |
+|empoli                    |12,135|Empoli                    |api_football    |511          |114         |
+|empoli                    |27,097|Empoli                    |api_sport       |511          |1           |
+|enisey                    |12,893|Enisey                    |api_football    |1089         |68          |
+|enisey                    |26,108|Enisey                    |api_sport       |1089         |1           |
+|enosis                    |13,660|Enosis                    |api_football    |3399         |102         |
+|enosis                    |27,072|Enosis                    |api_sport       |3399         |1           |
+|escobedo                  |14,457|Escobedo                  |api_football    |9386         |2           |
+|escobedo                  |27,493|Escobedo                  |api_sport       |9386         |1           |
+|esenler erokspor          |13,486|Esenler Erokspor          |api_football    |7402         |113         |
+|esenler erokspor          |27,701|Esenler Erokspor          |api_sport       |7402         |1           |
+|espanyol                  |12,091|Espanyol                  |api_football    |540          |122         |
+|espanyol                  |25,884|Espanyol                  |api_sport       |540          |1           |
+|espanyol ii               |16,990|Espanyol II               |api_football    |9590         |2           |
+|espanyol ii               |27,713|Espanyol II               |api_sport       |9590         |1           |
+|esperana dandorra         |13,100|Esperan?a d'Andorra       |api_football    |19195        |56          |
+|esperana dandorra         |27,279|Esperança d'Andorra       |api_sport       |19195        |1           |
+|estepona                  |14,373|Estepona                  |api_football    |15358        |4           |
+|estepona                  |26,332|Estepona                  |api_sport       |15358        |1           |
+|estrela                   |12,158|Estrela                   |api_football    |15130        |104         |
+|estrela                   |27,496|Estrela                   |api_sport       |15130        |1           |
+|etimesgut sk              |14,966|Etimesgut SK              |api_football    |3587         |74          |
+|etimesgut sk              |26,552|Etimesgut SK              |api_sport       |3587         |1           |
+|extremadura 1924          |26,331|Extremadura 1924          |api_sport       |24612        |1           |
+|extremadura 1924          |28,769|Extremadura 1924          |api_football    |24612        |0           |
+|eypspor                   |12,919|Ey?pspor                  |api_football    |3588         |109         |
+|eypspor                   |25,704|Eyüpspor                  |api_sport       |3588         |1           |
+|f91 dudelange             |13,366|F91 Dudelange             |api_football    |578          |60          |
+|f91 dudelange             |27,264|F91 Dudelange             |api_sport       |578          |1           |
+|fafe                      |14,681|Fafe                      |api_football    |809          |60          |
+|fafe                      |27,459|Fafe                      |api_sport       |809          |1           |
+|fakel                     |12,309|Fakel                     |api_football    |1993         |60          |
+|fakel                     |27,246|Fakel                     |api_sport       |1993         |1           |
+|falkenbergs ff            |28,682|Falkenbergs FF            |api_football    |812          |2           |
+|falkenbergs ff            |26,590|Falkenbergs FF            |api_sport       |812          |1           |
+|fap                       |25,777|FAP                       |api_sport       |19845        |1           |
+|fap                       |27,464|FAP                       |api_sport       |16525        |1           |
+|farense                   |1,133 |Farense                   |football_data_uk|Farense      |102         |
+|farense                   |12,152|Farense                   |api_football    |231          |102         |
+|fatih karagmrk            |13,572|Fatih Karag?mr?k          |api_football    |3589         |77          |
+|fatih karagmrk            |26,243|Fatih Karagümrük          |api_sport       |3589         |1           |
+|fc andorra                |16,827|FC Andorra                |api_football    |8157         |84          |
+|fc andorra                |27,488|FC Andorra                |api_sport       |8157         |1           |
+|fc astana                 |13,591|FC Astana                 |api_football    |562          |24          |
+|fc astana                 |26,882|FC Astana                 |api_sport       |562          |1           |
+|fc augsburg               |528   |FC Augsburg               |football_data   |16           |294         |
+|fc augsburg               |12,073|FC Augsburg               |api_football    |170          |102         |
+|fc basel 1893             |13,290|FC Basel 1893             |api_football    |551          |76          |
+|fc basel 1893             |26,807|FC Basel 1893             |api_sport       |551          |1           |
+|fc bw linz                |13,243|FC BW Linz                |api_football    |1394         |94          |
+|fc bw linz                |27,539|FC BW Linz                |api_sport       |1394         |1           |
+|fc cartagena              |12,348|FC Cartagena              |api_football    |5262         |126         |
+|fc cartagena              |27,344|FC Cartagena              |api_sport       |5262         |1           |
+|fc differdange 03         |13,501|FC Differdange 03         |api_football    |684          |60          |
+|fc differdange 03         |27,265|FC Differdange 03         |api_sport       |684          |1           |
+|fc ingolstadt 04          |13,984|FC Ingolstadt 04          |api_football    |184          |114         |
+|fc ingolstadt 04          |27,799|FC Ingolstadt 04          |api_sport       |184          |1           |
+|fc krasnodar              |12,462|FC Krasnodar              |api_football    |621          |60          |
+|fc krasnodar              |27,015|FC Krasnodar              |api_sport       |621          |1           |
+|fc levadia tallinn        |13,215|FC Levadia Tallinn        |api_football    |2273         |35          |
+|fc levadia tallinn        |26,286|FC Levadia Tallinn        |api_sport       |2273         |1           |
+|fc midtjylland            |12,310|FC Midtjylland            |api_football    |397          |97          |
+|fc midtjylland            |27,729|FC Midtjylland            |api_sport       |397          |1           |
+|fc noah                   |12,624|FC Noah                   |api_football    |3684         |66          |
+|fc noah                   |26,867|FC Noah                   |api_sport       |3684         |1           |
+|fc orenburg               |13,509|FC Orenburg               |api_football    |1080         |60          |
+|fc orenburg               |26,120|FC Orenburg               |api_sport       |1080         |1           |
+|fc porto                  |576   |FC Porto                  |football_data   |503          |294         |
+|fc porto                  |12,142|FC Porto                  |api_football    |212          |102         |
+|fc porto                  |27,770|FC Porto                  |api_sport       |212          |1           |
+|fc porto b                |14,530|FC Porto B                |api_football    |243          |68          |
+|fc porto b                |27,499|FC Porto B                |api_sport       |243          |1           |
+|fc saarbrcken             |12,307|FC Saarbr?cken            |api_football    |1639         |116         |
+|fc saarbrcken             |27,495|FC Saarbrücken            |api_sport       |1639         |1           |
+|fc santa coloma           |12,376|FC Santa Coloma           |api_football    |591          |54          |
+|fc santa coloma           |26,624|FC Santa Coloma           |api_sport       |591          |1           |
+|fc st gallen              |12,461|FC ST. Gallen             |api_football    |1011         |76          |
+|fc st gallen              |26,806|FC ST. Gallen             |api_sport       |1011         |1           |
+|fc st pauli               |12,079|FC St. Pauli              |api_football    |186          |102         |
+|fc st pauli               |27,217|FC St. Pauli              |api_sport       |186          |1           |
+|fc thun                   |12,827|FC Thun                   |api_football    |1012         |110         |
+|fc thun                   |27,523|FC Thun                   |api_sport       |1012         |1           |
+|fc ufa                    |12,268|FC UFA                    |api_football    |1078         |34          |
+|fc ufa                    |25,695|FC UFA                    |api_sport       |1078         |1           |
+|fc volendam               |571   |FC Volendam               |football_data   |1919         |125         |
+|fc volendam               |12,604|FC Volendam               |api_football    |416          |106         |
+|fc volendam               |27,832|FC Volendam               |api_sport       |416          |1           |
+|fehrvr fc                 |13,129|Feh?rv?r FC               |api_football    |610          |99          |
+|fehrvr fc                 |27,006|Fehérvár FC               |api_sport       |610          |1           |
+|feirense                  |14,694|Feirense                  |api_football    |213          |68          |
+|feirense                  |1,142 |Feirense                  |football_data_uk|Feirense     |34          |
+|feirense                  |25,823|Feirense                  |api_sport       |213          |1           |
+|felgueiras 1932           |13,749|Felgueiras 1932           |api_football    |4744         |62          |
+|felgueiras 1932           |26,306|Felgueiras 1932           |api_sport       |4744         |1           |
+|fenerbahe                 |13,008|Fenerbah?e                |api_football    |611          |74          |
+|fenerbahe                 |27,698|Fenerbahçe                |api_sport       |611          |1           |
+|ferencvarosi tc           |13,171|Ferencvarosi TC           |api_football    |651          |99          |
+|ferencvarosi tc           |27,742|Ferencvarosi TC           |api_sport       |651          |1           |
+|ferizaj                   |12,729|Ferizaj                   |api_football    |14394        |36          |
+|ferizaj                   |25,696|Ferizaj                   |api_sport       |14394        |1           |
+|feronikeli                |12,365|Feronikeli                |api_football    |4132         |73          |
+|feronikeli                |26,615|Feronikeli                |api_sport       |4132         |1           |
+|fethiyespor               |14,247|Fethiyespor               |api_football    |3590         |108         |
+|fethiyespor               |26,351|Fethiyespor               |api_sport       |3590         |1           |
+|feyenoord                 |1,098 |Feyenoord                 |football_data_uk|Feyenoord    |252         |
+|feyenoord                 |12,172|Feyenoord                 |api_football    |209          |102         |
+|feyenoord                 |27,529|Feyenoord                 |api_sport       |209          |1           |
+|fiorentina                |12,131|Fiorentina                |api_football    |502          |114         |
+|fiorentina                |26,994|Fiorentina                |api_sport       |502          |1           |
+|fk crvena zvezda          |13,376|FK Crvena Zvezda          |api_football    |598          |74          |
+|fk crvena zvezda          |27,255|FK Crvena Zvezda          |api_sport       |598          |1           |
+|fk neftekhimik            |13,543|FK Neftekhimik            |api_football    |2001         |68          |
+|fk neftekhimik            |27,245|FK Neftekhimik            |api_sport       |2001         |1           |
+|fk partizan               |12,255|FK Partizan               |api_football    |573          |74          |
+|fk partizan               |27,697|FK Partizan               |api_sport       |573          |1           |
+|fk spartak zdrepceva krv  |12,716|FK Spartak Zdrepceva KRV  |api_football    |2251         |74          |
+|fk spartak zdrepceva krv  |27,257|FK Spartak Zdrepceva KRV  |api_sport       |2251         |1           |
+|fk trakai                 |13,230|FK Trakai                 |api_football    |638          |31          |
+|fk trakai                 |26,629|FK Trakai                 |api_sport       |638          |1           |
+|fk trayal                 |13,108|FK Trayal                 |api_football    |2651         |37          |
+|fk trayal                 |25,709|FK Trayal                 |api_sport       |2651         |1           |
+|flamurtari                |12,811|Flamurtari                |api_football    |3317         |69          |
+|flamurtari                |27,704|Flamurtari                |api_sport       |3317         |1           |
+|foggia                    |14,188|Foggia                    |api_football    |521          |132         |
+|foggia                    |27,664|Foggia                    |api_sport       |521          |1           |
+|folgore                   |13,139|Folgore                   |api_football    |672          |65          |
+|folgore                   |27,086|Folgore                   |api_sport       |672          |1           |
+|fortuna sittard           |572   |Fortuna Sittard           |football_data   |1920         |287         |
+|fortuna sittard           |12,169|Fortuna Sittard           |api_football    |205          |102         |
+|fortuna sittard           |26,896|Fortuna Sittard           |api_sport       |205          |1           |
+|francs borains            |13,532|Francs Borains            |api_football    |5805         |60          |
+|francs borains            |27,262|Francs Borains            |api_sport       |5805         |1           |
+|fratria                   |13,683|Fratria                   |api_football    |21836        |38          |
+|fratria                   |26,944|Fratria                   |api_sport       |21836        |1           |
+|frdlant                   |14,882|Fr?dlant                  |api_football    |7289         |68          |
+|frdlant                   |26,153|Frýdlant                  |api_sport       |7289         |1           |
+|fredrikstad               |13,089|Fredrikstad               |api_football    |2149         |35          |
+|fredrikstad               |27,725|Fredrikstad               |api_sport       |2149         |1           |
+|frosinone                 |12,751|Frosinone                 |api_football    |512          |114         |
+|frosinone                 |1,086 |Frosinone                 |football_data_uk|Frosinone    |76          |
+|frosinone                 |27,094|Frosinone                 |api_sport       |512          |1           |
+|fs jelgava                |12,747|FS Jelgava                |api_football    |18834        |32          |
+|fs jelgava                |26,576|FS Jelgava                |api_sport       |18834        |1           |
+|fulham                    |11,906|Fulham                    |api_football    |36           |114         |
+|fulham                    |26,596|Fulham                    |api_sport       |36           |1           |
+|gaziantep fk              |12,711|Gaziantep FK              |api_football    |3573         |74          |
+|gaziantep fk              |26,242|Gaziantep FK              |api_sport       |3573         |1           |
+|genk                      |977   |Genk                      |football_data_uk|Genk         |267         |
+|genk                      |12,254|Genk                      |api_football    |742          |121         |
+|genlerbirlii sk           |12,851|Gen?lerbirli?i S.K.       |api_football    |997          |108         |
+|genlerbirlii sk           |25,811|Gençlerbirliği S.K.       |api_sport       |997          |1           |
+|genoa                     |12,126|Genoa                     |api_football    |495          |114         |
+|genoa                     |27,694|Genoa                     |api_sport       |495          |1           |
+|gent                      |979   |Gent                      |football_data_uk|Gent         |267         |
+|gent                      |12,719|Gent                      |api_football    |631          |121         |
+|gent                      |27,253|Gent                      |api_sport       |631          |1           |
+|gernika                   |16,963|Gernika                   |api_football    |5263         |2           |
+|gernika                   |26,326|Gernika                   |api_sport       |5263         |1           |
+|getafe                    |12,095|Getafe                    |api_football    |546          |114         |
+|getafe                    |27,486|Getafe                    |api_sport       |546          |1           |
+|getafe ii                 |14,477|Getafe II                 |api_football    |9572         |2           |
+|getafe ii                 |26,246|Getafe II                 |api_sport       |9572         |1           |
+|gif sundsvall             |13,195|GIF Sundsvall             |api_football    |373          |36          |
+|gif sundsvall             |26,595|GIF Sundsvall             |api_sport       |373          |1           |
+|gil vicente               |12,155|GIL Vicente               |api_football    |762          |102         |
+|gil vicente               |27,497|GIL Vicente               |api_sport       |762          |1           |
+|gimnstica segoviana       |16,957|Gimn?stica Segoviana      |api_football    |9387         |2           |
+|gimnstica segoviana       |27,352|Gimnástica Segoviana      |api_sport       |9387         |1           |
+|giugliano                 |14,644|Giugliano                 |api_football    |9556         |121         |
+|giugliano                 |26,931|Giugliano                 |api_sport       |9556         |1           |
+|gjilani                   |12,599|Gjilani                   |api_football    |12772        |72          |
+|gjilani                   |25,697|Gjilani                   |api_sport       |12772        |1           |
+|gks katowice              |12,246|GKS Katowice              |api_football    |3484         |102         |
+|gks katowice              |26,989|GKS Katowice              |api_sport       |3484         |1           |
+|go ahead eagles           |568   |Go Ahead Eagles           |football_data   |718          |193         |
+|go ahead eagles           |12,175|GO Ahead Eagles           |api_football    |410          |104         |
+|go ahead eagles           |26,894|GO Ahead Eagles           |api_sport       |410          |1           |
+|gornik zabrze             |12,718|Gornik Zabrze             |api_football    |340          |102         |
+|gornik zabrze             |26,477|Gornik Zabrze             |api_sport       |340          |1           |
+|grafiar                   |13,512|Grafi?ar                  |api_football    |4252         |74          |
+|grafiar                   |25,706|Grafičar                  |api_sport       |4252         |1           |
+|granada cf                |12,732|Granada CF                |api_football    |715          |122         |
+|granada cf                |27,894|Granada CF                |api_sport       |715          |1           |
+|granada ii                |17,007|Granada II                |api_football    |9599         |4           |
+|granada ii                |26,393|Granada II                |api_sport       |9599         |1           |
+|grasshoppers              |13,657|Grasshoppers              |api_football    |1013         |80          |
+|grasshoppers              |27,520|Grasshoppers              |api_sport       |1013         |1           |
+|grazer ak                 |12,680|Grazer AK                 |api_football    |4256         |92          |
+|grazer ak                 |27,541|Grazer AK                 |api_sport       |4256         |1           |
+|grbalj                    |12,218|Grbalj                    |api_football    |3737         |68          |
+|grbalj                    |27,170|Grbalj                    |api_sport       |3737         |1           |
+|grnik polkowice           |15,032|G?rnik Polkowice          |api_football    |9132         |34          |
+|grnik polkowice           |26,311|Górnik Polkowice          |api_sport       |9132         |1           |
+|groene ster               |17,001|Groene Ster               |api_football    |1236         |2           |
+|groene ster               |26,922|Groene Ster               |api_sport       |1236         |1           |
+|gubbio                    |14,497|Gubbio                    |api_football    |866          |124         |
+|gubbio                    |27,872|Gubbio                    |api_sport       |866          |1           |
+|gudja united              |12,842|Gudja United              |api_football    |4616         |48          |
+|gudja united              |26,875|Gudja United              |api_sport       |4616         |1           |
+|guidonia montecelio 1937  |15,300|Guidonia Montecelio 1937  |api_football    |882          |77          |
+|guidonia montecelio 1937  |27,660|Guidonia Montecelio 1937  |api_sport       |882          |1           |
+|guilas                    |27,755|Águilas                   |api_sport       |9823         |1           |
+|guilas                    |28,822|?guilas                   |api_football    |9823         |0           |
+|guimaraes                 |12,146|Guimaraes                 |api_football    |224          |102         |
+|guimaraes                 |27,930|Guimaraes                 |api_sport       |224          |1           |
+|guimaraes b               |16,730|Guimaraes B               |api_football    |232          |28          |
+|guimaraes b               |26,451|Guimaraes B               |api_sport       |232          |1           |
+|guingamp                  |13,686|Guingamp                  |api_football    |90           |111         |
+|guingamp                  |1,035 |Guingamp                  |football_data_uk|Guingamp     |38          |
+|gvora                     |26,513|Gévora                    |api_sport       |25032        |1           |
+|gvora                     |28,772|G?vora                    |api_football    |25032        |0           |
+|gyirmot se                |12,406|Gyirmot SE                |api_football    |2398         |102         |
+|gyirmot se                |27,550|Gyirmot SE                |api_sport       |2398         |1           |
+|halmstad                  |12,614|Halmstad                  |api_football    |766          |36          |
+|halmstad                  |27,621|Halmstad                  |api_sport       |766          |1           |
+|halmstad                  |28,368|Halmstad                  |api_hockey      |1188         |0           |
+|hamburger sv              |12,379|Hamburger SV              |api_football    |175          |104         |
+|hamburger sv              |523   |Hamburger SV              |football_data   |7            |55          |
+|hamrun spartans           |12,373|Hamrun Spartans           |api_football    |4626         |60          |
+|hamrun spartans           |26,832|Hamrun Spartans           |api_sport       |4626         |1           |
+|hannover 96               |13,207|Hannover 96               |api_football    |166          |102         |
+|hannover 96               |26,636|Hannover 96               |api_sport       |166          |1           |
+|hannover 96 ii            |14,391|Hannover 96 II            |api_football    |9341         |38          |
+|hannover 96 ii            |27,046|Hannover 96 II            |api_sport       |9341         |1           |
+|hapoel beer sheva         |13,721|Hapoel Beer Sheva         |api_football    |563          |72          |
+|hapoel beer sheva         |25,839|Hapoel Beer Sheva         |api_sport       |563          |1           |
+|hapoel katamon            |14,462|Hapoel Katamon            |api_football    |4486         |69          |
+|hapoel katamon            |27,793|Hapoel Katamon            |api_sport       |4486         |1           |
+|hapoel kfar saba          |13,892|Hapoel Kfar Saba          |api_football    |4497         |112         |
+|hapoel kfar saba          |25,809|Hapoel Kfar Saba          |api_sport       |4497         |1           |
+|hapoel raanana            |14,231|Hapoel Ra'anana           |api_football    |4509         |37          |
+|hapoel raanana            |25,806|Hapoel Ra'anana           |api_sport       |4509         |1           |
+|hapoel rishon lezion      |14,127|Hapoel Rishon LeZion      |api_football    |4491         |111         |
+|hapoel rishon lezion      |25,820|Hapoel Rishon LeZion      |api_sport       |4491         |1           |
+|hellas verona             |12,133|Hellas Verona             |api_football    |504          |115         |
+|hellas verona             |26,993|Hellas Verona             |api_sport       |504          |1           |
+|helsingborg               |12,468|Helsingborg               |api_football    |811          |34          |
+|helsingborg               |26,594|Helsingborg               |api_sport       |811          |1           |
+|hertha bsc                |12,920|Hertha BSC                |api_football    |159          |102         |
+|hertha bsc                |26,641|Hertha BSC                |api_sport       |159          |1           |
+|highlanders               |26,814|Highlanders               |api_sport       |5224         |1           |
+|highlanders               |28,730|Highlanders               |api_football    |5224         |0           |
+|hnk cibalia               |14,548|HNK Cibalia               |api_football    |1021         |99          |
+|hnk cibalia               |26,482|HNK Cibalia               |api_sport       |1021         |1           |
+|hnk hajduk split          |13,003|HNK Hajduk Split          |api_football    |608          |108         |
+|hnk hajduk split          |26,996|HNK Hajduk Split          |api_sport       |608          |1           |
+|hnk rijeka                |12,607|HNK Rijeka                |api_football    |561          |108         |
+|hnk rijeka                |27,693|HNK Rijeka                |api_sport       |561          |1           |
+|hodonn                    |14,064|Hodon?n                   |api_football    |7297         |102         |
+|hodonn                    |26,149|Hodonín                   |api_sport       |7297         |1           |
+|holstein kiel             |12,080|Holstein Kiel             |api_football    |191          |102         |
+|holstein kiel             |1,054 |Holstein Kiel             |football_data_uk|Holstein Kiel|34          |
+|hradec krlov              |12,350|Hradec Kr?lov?            |api_football    |3723         |69          |
+|hradec krlov              |27,211|Hradec Králové            |api_sport       |3723         |1           |
+|hradec krlov ii           |14,732|Hradec Kr?lov? II         |api_football    |14495        |92          |
+|hradec krlov ii           |26,967|Hradec Králové II         |api_sport       |14495        |1           |
+|hrcules                   |25,977|Hércules                  |api_sport       |26156        |1           |
+|hrcules                   |27,738|Hércules                  |api_sport       |4666         |1           |
+|hrcules                   |28,783|H?rcules                  |api_football    |4666         |0           |
+|huesca                    |12,552|Huesca                    |api_football    |726          |126         |
+|huesca                    |1,162 |Huesca                    |football_data_uk|Huesca       |76          |
+|ibiza islas pitiusas      |26,358|Ibiza Islas Pitiusas      |api_sport       |9781         |1           |
+|ibiza islas pitiusas      |28,818|Ibiza Islas Pitiusas      |api_football    |9781         |0           |
+|idr fk                    |13,283|I?d?r FK                  |api_football    |17259        |80          |
+|idr fk                    |26,699|Iğdır FK                  |api_sport       |17259        |1           |
+|if brommapojkarna         |12,408|IF Brommapojkarna         |api_football    |371          |38          |
+|if brommapojkarna         |26,589|IF Brommapojkarna         |api_sport       |371          |1           |
+|if elfsborg               |13,331|IF Elfsborg               |api_football    |372          |35          |
+|if elfsborg               |26,592|IF Elfsborg               |api_sport       |372          |1           |
+|ifk goteborg              |12,425|IFK Goteborg              |api_football    |366          |36          |
+|ifk goteborg              |27,187|IFK Goteborg              |api_sport       |366          |1           |
+|igalo                     |12,673|Igalo                     |api_football    |3746         |68          |
+|igalo                     |27,169|Igalo                     |api_sport       |3746         |1           |
+|imt novi beograd          |13,604|IMT Novi Beograd          |api_football    |12316        |74          |
+|imt novi beograd          |27,258|IMT Novi Beograd          |api_sport       |12316        |1           |
+|inter                     |12,134|Inter                     |api_football    |505          |114         |
+|inter                     |25,936|Inter                     |api_sport       |26154        |1           |
+|inter                     |27,888|Inter                     |api_sport       |505          |1           |
+|inter club descaldes      |12,227|Inter Club d'Escaldes     |api_football    |3342         |54          |
+|inter club descaldes      |26,625|Inter Club d'Escaldes     |api_sport       |3342         |1           |
+|internacional podgorica   |28,631|Internacional Podgorica   |api_football    |21530        |36          |
+|internacional podgorica   |26,819|Internacional Podgorica   |api_sport       |21530        |1           |
+|iraklis 1908              |13,314|Iraklis 1908              |api_football    |17991        |88          |
+|iraklis 1908              |26,859|Iraklis 1908              |api_sport       |17991        |1           |
+|iskra                     |13,228|Iskra                     |api_football    |3738         |68          |
+|iskra                     |13,255|Iskra                     |api_football    |5372         |48          |
+|iskra                     |25,717|Iskra                     |api_sport       |3738         |1           |
+|isparta 32 spor           |14,720|Isparta 32 Spor           |api_football    |6523         |106         |
+|isparta 32 spor           |26,206|Isparta 32 Spor           |api_sport       |6523         |1           |
+|ivncsa                    |15,118|Iv?ncsa                   |api_football    |5104         |2           |
+|ivncsa                    |26,739|Iváncsa                   |api_sport       |5104         |1           |
+|ivory coast               |662   |Ivory Coast               |football_data   |1935         |3           |
+|ivory coast               |11,897|Ivory Coast               |                |             |0           |
+|jedinstvo ub              |12,520|Jedinstvo Ub              |api_football    |12319        |74          |
+|jedinstvo ub              |25,744|Jedinstvo Ub              |api_sport       |12319        |1           |
+|jeunesse canach           |12,664|Jeunesse Canach           |api_football    |2029         |1           |
+|jeunesse canach           |27,270|Jeunesse Canach           |api_sport       |2029         |1           |
+|jong az                   |13,426|Jong AZ                   |api_football    |418          |114         |
+|jong az                   |25,842|Jong AZ                   |api_sport       |418          |1           |
+|jong utrecht              |12,411|Jong Utrecht              |api_football    |428          |114         |
+|jong utrecht              |27,531|Jong Utrecht              |api_sport       |428          |1           |
+|jove espaol               |26,277|Jove Español              |api_sport       |9694         |1           |
+|jove espaol               |28,814|Jove Espa?ol              |api_football    |9694         |0           |
+|juvenes dogana            |13,549|Juvenes / Dogana          |api_football    |5302         |64          |
+|juvenes dogana            |27,091|Juvenes / Dogana          |api_sport       |5302         |1           |
+|juventud torremolinos     |26,318|Juventud Torremolinos     |api_sport       |15359        |1           |
+|juventud torremolinos     |28,764|Juventud Torremolinos     |api_football    |15359        |0           |
+|juventus u23              |13,829|Juventus U23              |api_football    |1715         |131         |
+|juventus u23              |26,496|Juventus U23              |api_sport       |1715         |1           |
+|juve stabia               |12,849|Juve Stabia               |api_football    |863          |120         |
+|juve stabia               |27,099|Juve Stabia               |api_sport       |863          |1           |
+|kafr qasim                |13,887|Kafr Qasim                |api_football    |4493         |111         |
+|kafr qasim                |25,821|Kafr Qasim                |api_sport       |4493         |1           |
+|kaisar                    |13,626|Kaisar                    |api_football    |4562         |26          |
+|kaisar                    |26,470|Kaisar                    |api_sport       |4562         |1           |
+|kalisz                    |14,567|Kalisz                    |api_football    |12801        |105         |
+|kalisz                    |26,304|Kalisz                    |api_sport       |12801        |1           |
+|kalju nomme               |13,515|Kalju Nomme               |api_football    |662          |37          |
+|kalju nomme               |26,679|Kalju Nomme               |api_sport       |662          |1           |
+|kamaz                     |12,654|KAMAZ                     |api_football    |6801         |68          |
+|kamaz                     |26,109|KAMAZ                     |api_sport       |6801         |1           |
+|kampaniakos chalastra     |12,846|Kampaniakos Chalastra     |api_football    |20683        |60          |
+|kampaniakos chalastra     |26,857|Kampaniakos Chalastra     |api_sport       |20683        |1           |
+|kapaz                     |13,165|Kapaz                     |api_football    |5490         |72          |
+|kapaz                     |25,763|Kapaz                     |api_sport       |5490         |1           |
+|karakpr belediyespor      |14,215|Karak?pr? Belediyespor    |api_football    |7408         |34          |
+|karakpr belediyespor      |26,260|Karaköprü Belediyespor    |api_sport       |7408         |1           |
+|karaman belediyespor      |14,469|Karaman Belediyespor      |api_football    |6526         |70          |
+|karaman belediyespor      |26,204|Karaman Belediyespor      |api_sport       |6526         |1           |
+|karlovac 1919             |12,781|Karlovac 1919             |api_football    |15295        |60          |
+|karlovac 1919             |26,483|Karlovac 1919             |api_sport       |15295        |1           |
+|karlovy vary              |16,991|Karlovy Vary              |api_football    |7306         |30          |
+|karlovy vary              |28,420|Karlovy Vary              |api_hockey      |125          |0           |
+|karlsruher sc             |13,321|Karlsruher SC             |api_football    |785          |102         |
+|karlsruher sc             |26,638|Karlsruher SC             |api_sport       |785          |1           |
+|karpaty                   |12,954|Karpaty                   |api_football    |3617         |58          |
+|karpaty                   |26,902|Karpaty                   |api_sport       |3617         |1           |
+|karvin                    |13,126|Karvin?                   |api_football    |3716         |69          |
+|karvin                    |27,213|Karviná                   |api_sport       |3716         |1           |
+|karvin ii                 |14,133|Karvin? II                |api_football    |15134        |68          |
+|karvin ii                 |26,144|Karviná II                |api_sport       |15134        |1           |
+|kasmpaa                   |13,428|Kas?mpa?a                 |api_football    |1004         |74          |
+|kasmpaa                   |26,697|Kasımpaşa                 |api_sport       |1004         |1           |
+|kaspiy                    |13,446|Kaspiy                    |api_football    |4552         |30          |
+|kaspiy                    |26,141|Kaspiy                    |api_sport       |4552         |1           |
+|kavala                    |12,521|Kavala                    |api_football    |5049         |26          |
+|kavala                    |26,855|Kavala                    |api_sport       |5049         |1           |
+|kayserispor               |12,502|Kayserispor               |api_football    |1001         |74          |
+|kayserispor               |25,812|Kayserispor               |api_sport       |1001         |1           |
+|kazincbarcikai            |13,510|Kazincbarcikai            |api_football    |2410         |102         |
+|kazincbarcikai            |27,690|Kazincbarcikai            |api_sport       |2410         |1           |
+|kecskemti te              |12,813|Kecskem?ti TE             |api_football    |5111         |99          |
+|kecskemti te              |25,845|Kecskeméti TE             |api_sport       |5111         |1           |
+|keshla fc                 |13,680|Keshla FC                 |api_football    |666          |63          |
+|keshla fc                 |26,352|Keshla FC                 |api_sport       |666          |1           |
+|kifisia                   |13,651|Kifisia                   |api_football    |5050         |87          |
+|kifisia                   |25,781|Kifisia                   |api_sport       |5050         |1           |
+|kladno                    |13,737|Kladno                    |api_football    |7307         |32          |
+|kladno                    |26,157|Kladno                    |api_sport       |7307         |1           |
+|kladno                    |28,466|Kladno                    |api_hockey      |144          |0           |
+|kocaelispor               |13,026|Kocaelispor               |api_football    |7411         |111         |
+|kocaelispor               |25,705|Kocaelispor               |api_sport       |7411         |1           |
+|koln                      |14,065|Kol?n                     |api_football    |7309         |92          |
+|koln                      |26,964|Kolín                     |api_sport       |7309         |1           |
+|kom                       |12,762|Kom                       |api_football    |3749         |68          |
+|kom                       |26,976|Kom                       |api_sport       |3749         |1           |
+|komrno                    |13,499|Kom?rno                   |api_football    |10535        |92          |
+|komrno                    |27,249|Komárno                   |api_sport       |10535        |1           |
+|konyaspor                 |12,847|Konyaspor                 |api_football    |607          |74          |
+|konyaspor                 |26,696|Konyaspor                 |api_sport       |607          |1           |
+|koper                     |13,017|Koper                     |api_football    |4374         |108         |
+|koper                     |27,651|Koper                     |api_sport       |4374         |1           |
+|kortrijk                  |981   |Kortrijk                  |football_data_uk|Kortrijk     |233         |
+|kortrijk                  |13,043|Kortrijk                  |api_football    |734          |108         |
+|kozarmisleny fc           |13,602|Kozarmisleny FC           |api_football    |2420         |104         |
+|kozarmisleny fc           |27,011|Kozarmisleny FC           |api_sport       |2420         |1           |
+|krka                      |12,362|Krka                      |api_football    |4375         |90          |
+|krka                      |27,215|Krka                      |api_sport       |4375         |1           |
+|krklarelispor             |13,703|K?rklarelispor            |api_football    |3596         |108         |
+|krklarelispor             |26,350|Kırklarelispor            |api_sport       |3596         |1           |
+|krko                      |15,597|Kr?ko                     |api_football    |4365         |30          |
+|krko                      |27,002|Krško                     |api_sport       |4365         |1           |
+|krylia sovetov            |13,435|Krylia Sovetov            |api_football    |1079         |60          |
+|krylia sovetov            |26,492|Krylia Sovetov            |api_sport       |1079         |1           |
+|ks d                      |13,038|?KS ??d?                  |api_football    |3498         |102         |
+|ks d                      |25,801|ŁKS Łódź                  |api_sport       |3498         |1           |
+|kudrivka                  |12,809|Kudrivka                  |api_football    |21953        |26          |
+|kudrivka                  |26,903|Kudrivka                  |api_sport       |21953        |1           |
+|kuressaare                |13,067|Kuressaare                |api_football    |3526         |38          |
+|kuressaare                |26,287|Kuressaare                |api_sport       |3526         |1           |
+|kv mechelen               |12,517|KV Mechelen               |api_football    |266          |114         |
+|kv mechelen               |27,254|KV Mechelen               |api_sport       |266          |1           |
+|kyzylzhar                 |12,474|Kyzyl-Zhar                |api_football    |4554         |26          |
+|kyzylzhar                 |26,140|Kyzyl-Zhar                |api_sport       |4554         |1           |
+|la fiorita                |12,220|La Fiorita                |api_football    |2249         |70          |
+|la fiorita                |27,087|La Fiorita                |api_sport       |2249         |1           |
+|langenthal                |27,124|Langenthal                |api_sport       |12705        |1           |
+|langenthal                |28,370|Langenthal                |api_hockey      |565          |0           |
+|langreo                   |27,555|Langreo                   |api_sport       |5265         |1           |
+|langreo                   |28,788|Langreo                   |api_football    |5265         |0           |
+|lanzarote                 |26,408|Lanzarote                 |api_sport       |9797         |1           |
+|lanzarote                 |28,820|Lanzarote                 |api_football    |9797         |0           |
+|lask linz                 |13,430|Lask Linz                 |api_football    |1026         |99          |
+|lask linz                 |27,534|Lask Linz                 |api_sport       |1026         |1           |
+|las palmas                |12,087|Las Palmas                |api_football    |534          |118         |
+|las palmas                |1,155 |Las Palmas                |football_data_uk|Las Palmas   |76          |
+|las palmas                |26,688|Las Palmas                |api_sport       |534          |1           |
+|las rozas                 |26,386|Las Rozas                 |api_sport       |9395         |1           |
+|las rozas                 |28,805|Las Rozas                 |api_football    |9395         |0           |
+|latina                    |14,409|Latina                    |api_football    |804          |118         |
+|latina                    |26,933|Latina                    |api_sport       |804          |1           |
+|la unin atltico           |14,833|La Uni?n Atl?tico         |api_football    |15315        |2           |
+|la unin atltico           |26,333|La Unión Atlético         |api_sport       |15315        |1           |
+|lausanne                  |12,865|Lausanne                  |api_football    |1014         |112         |
+|lausanne                  |27,521|Lausanne                  |api_sport       |1014         |1           |
+|lazio                     |12,121|Lazio                     |api_football    |487          |114         |
+|lazio                     |25,876|Lazio                     |api_sport       |487          |1           |
+|lecce                     |12,138|Lecce                     |api_football    |867          |114         |
+|lecce                     |26,490|Lecce                     |api_sport       |867          |1           |
+|leeds                     |12,192|Leeds                     |api_football    |63           |133         |
+|leeds                     |27,678|Leeds                     |api_sport       |63           |1           |
+|leeds                     |956   |Leeds                     |football_data_uk|Leeds        |0           |
+|leganes                   |12,089|Leganes                   |api_football    |537          |122         |
+|leganes                   |1,156 |Leganes                   |football_data_uk|Leganes      |114         |
+|leganes                   |27,751|Leganes                   |api_sport       |537          |1           |
+|legia warszawa            |12,278|Legia Warszawa            |api_football    |339          |102         |
+|legia warszawa            |27,865|Legia Warszawa            |api_sport       |339          |1           |
+|le havre                  |12,117|Le Havre                  |api_football    |111          |106         |
+|le havre                  |27,639|Le Havre                  |api_sport       |111          |1           |
+|leixoes                   |14,059|Leixoes                   |api_football    |244          |68          |
+|leixoes                   |27,012|Leixoes                   |api_sport       |244          |1           |
+|leningradets              |28,674|Leningradets              |api_football    |6811         |34          |
+|leningradets              |26,442|Leningradets              |api_sport       |6811         |1           |
+|lens                      |1,012 |Lens                      |football_data_uk|Lens         |204         |
+|lens                      |12,119|Lens                      |api_football    |116          |106         |
+|lens                      |27,000|Lens                      |api_sport       |116          |1           |
+|levadiakos                |13,183|Levadiakos                |api_football    |957          |101         |
+|levadiakos                |27,702|Levadiakos                |api_sport       |957          |1           |
+|levski sofia              |13,353|Levski Sofia              |api_football    |646          |107         |
+|levski sofia              |25,782|Levski Sofia              |api_sport       |646          |1           |
+|lida                      |13,415|Lida                      |api_football    |3387         |41          |
+|lida                      |28,462|Lida                      |api_hockey      |5            |0           |
+|lille                     |12,103|Lille                     |api_football    |79           |106         |
+|lille                     |27,640|Lille                     |api_sport       |79           |1           |
+|lille osc                 |504   |Lille OSC                 |football_data   |521          |304         |
+|liria prizren             |28,604|Liria Prizren             |api_football    |14402        |36          |
+|liria prizren             |26,612|Liria Prizren             |api_sport       |14402        |1           |
+|liverpool                 |11,908|Liverpool                 |api_football    |40           |114         |
+|liverpool                 |3     |Liverpool                 |                |             |0           |
+|liverpool fc              |53    |Liverpool FC              |football_data   |64           |634         |
+|liverpool fc              |24,732|Liverpool FC              |football_data   |7118         |2           |
+|llanera                   |27,673|Llanera                   |api_sport       |9627         |1           |
+|llanera                   |28,812|Llanera                   |api_football    |9627         |0           |
+|llapi                     |13,212|Llapi                     |api_football    |14395        |73          |
+|llapi                     |25,698|Llapi                     |api_sport       |14395        |1           |
+|lleida esportiu           |27,509|Lleida Esportiu           |api_sport       |5266         |1           |
+|lleida esportiu           |28,789|Lleida Esportiu           |api_football    |5266         |0           |
+|lnz cherkasy              |12,612|LNZ Cherkasy              |api_football    |17161        |60          |
+|lnz cherkasy              |25,775|LNZ Cherkasy              |api_sport       |17161        |1           |
+|lokerentemse              |12,819|Lokeren-Temse             |api_football    |14128        |34          |
+|lokerentemse              |26,642|Lokeren-Temse             |api_sport       |14128        |1           |
+|lokomotiv                 |12,728|Lokomotiv                 |api_football    |597          |60          |
+|lokomotiv                 |25,724|Lokomotiv                 |api_sport       |597          |1           |
+|lokomotiv plovdiv         |12,702|Lokomotiv Plovdiv         |api_football    |858          |108         |
+|lokomotiv plovdiv         |25,783|Lokomotiv Plovdiv         |api_sport       |858          |1           |
+|lokomotiv sofia           |12,720|Lokomotiv Sofia           |api_football    |1416         |108         |
+|lokomotiv sofia           |27,533|Lokomotiv Sofia           |api_sport       |1416         |1           |
+|lokomotva zvolen          |12,755|Lokomot?va Zvolen         |api_football    |10552        |26          |
+|lokomotva zvolen          |26,165|Lokomotíva Zvolen         |api_sport       |10552        |1           |
+|lorient                   |1,020 |Lorient                   |football_data_uk|Lorient      |170         |
+|lorient                   |12,712|Lorient                   |api_football    |97           |106         |
+|lorient                   |27,641|Lorient                   |api_sport       |97           |1           |
+|loven                     |13,450|Lov?en                    |api_football    |3739         |70          |
+|loven                     |27,239|Lovćen                    |api_sport       |3739         |1           |
+|lsk wrocaw ii             |15,255|?l?sk Wroc?aw II          |api_football    |12900        |34          |
+|lsk wrocaw ii             |26,530|Śląsk Wrocław II          |api_sport       |12900        |1           |
+|ludogorets                |12,589|Ludogorets                |api_football    |566          |106         |
+|ludogorets                |25,731|Ludogorets                |api_sport       |566          |1           |
+|lusitnia                  |14,777|Lusit?nia                 |api_football    |4763         |28          |
+|lusitnia                  |26,313|Lusitânia                 |api_sport       |4763         |1           |
+|lusitnia lourosa          |14,680|Lusit?nia Lourosa         |api_football    |6358         |32          |
+|lusitnia lourosa          |27,773|Lusitânia Lourosa         |api_sport       |6358         |1           |
+|lyngby                    |12,765|Lyngby                    |api_football    |625          |96          |
+|lyngby                    |25,815|Lyngby                    |api_sport       |625          |1           |
+|lyon                      |12,104|Lyon                      |api_football    |80           |106         |
+|lyon                      |27,889|Lyon                      |api_sport       |80           |1           |
+|maccabi petah tikva       |14,406|Maccabi Petah Tikva       |api_football    |4495         |70          |
+|maccabi petah tikva       |25,807|Maccabi Petah Tikva       |api_sport       |4495         |1           |
+|maccabi tel aviv          |13,699|Maccabi Tel Aviv          |api_football    |604          |72          |
+|maccabi tel aviv          |25,838|Maccabi Tel Aviv          |api_sport       |604          |1           |
+|macva                     |12,628|Macva                     |api_football    |2637         |76          |
+|macva                     |25,776|Macva                     |api_sport       |2637         |1           |
+|mafra                     |14,212|Mafra                     |api_football    |245          |68          |
+|mafra                     |26,450|Mafra                     |api_sport       |245          |1           |
+|makedonija gjp            |12,287|Makedonija GjP            |api_football    |4196         |63          |
+|makedonija gjp            |26,781|Makedonija GjP            |api_sport       |4196         |1           |
+|makedonikos neapolis      |12,756|Makedonikos Neapolis      |api_football    |12372        |86          |
+|makedonikos neapolis      |26,854|Makedonikos Neapolis      |api_sport       |12372        |1           |
+|malisheva                 |12,219|Malisheva                 |api_football    |15576        |72          |
+|malisheva                 |25,700|Malisheva                 |api_sport       |15576        |1           |
+|malmo ff                  |13,405|Malmo FF                  |api_football    |375          |35          |
+|malmo ff                  |27,620|Malmo FF                  |api_sport       |375          |1           |
+|manica diamonds           |26,816|Manica Diamonds           |api_sport       |5227         |1           |
+|manica diamonds           |28,733|Manica Diamonds           |api_football    |5227         |0           |
+|manresa                   |16,745|Manresa                   |api_football    |9675         |2           |
+|manresa                   |26,376|Manresa                   |api_sport       |9675         |1           |
+|mantova                   |13,399|Mantova                   |api_football    |1693         |118         |
+|mantova                   |27,098|Mantova                   |api_sport       |1693         |1           |
+|maribor                   |12,230|Maribor                   |api_football    |552          |108         |
+|maribor                   |26,999|Maribor                   |api_sport       |552          |1           |
+|maritimo                  |1,137 |Maritimo                  |football_data_uk|Maritimo     |170         |
+|maritimo                  |14,641|Maritimo                  |api_football    |214          |70          |
+|maritimo                  |27,498|Maritimo                  |api_sport       |214          |1           |
+|marsa                     |12,256|Marsa                     |api_football    |4617         |47          |
+|marsa                     |26,874|Marsa                     |api_sport       |4617         |1           |
+|marsaxlokk                |12,713|Marsaxlokk                |api_football    |14507        |58          |
+|marsaxlokk                |27,524|Marsaxlokk                |api_sport       |14507        |1           |
+|martigny sports           |26,787|Martigny Sports           |api_sport       |12694        |1           |
+|martigny sports           |28,696|Martigny Sports           |api_football    |12694        |0           |
+|melita                    |12,469|Melita                    |api_football    |4620         |58          |
+|melita                    |27,248|Melita                    |api_sport       |4620         |1           |
+|menemen belediyespor      |13,812|Menemen Belediyespor      |api_football    |3599         |108         |
+|menemen belediyespor      |26,652|Menemen Belediyespor      |api_sport       |3599         |1           |
+|metalist 1925 kharkiv     |12,415|Metalist 1925 Kharkiv     |api_football    |3628         |57          |
+|metalist 1925 kharkiv     |25,723|Metalist 1925 Kharkiv     |api_sport       |3628         |1           |
+|metalul buzu              |12,722|Metalul Buz?u             |api_football    |6875         |27          |
+|metalul buzu              |26,122|Metalul Buzău             |api_sport       |6875         |1           |
+|metz                      |1,021 |Metz                      |football_data_uk|Metz         |160         |
+|metz                      |12,118|Metz                      |api_football    |112          |111         |
+|metz                      |27,001|Metz                      |api_sport       |112          |1           |
+|mezokovesdzsory           |13,488|Mezokovesd-zsory          |api_football    |2389          |96          |
+|mezokovesdzsory           |27,009|Mezokovesd-zsory          |api_sport       |2389          |1           |
+|mgarr united              |13,583|Mgarr United              |api_football    |17710         |22          |
+|mgarr united              |27,880|Mgarr United              |api_sport       |17710         |1           |
+|middlesbrough             |12,196|Middlesbrough             |api_football    |70            |140         |
+|middlesbrough             |27,653|Middlesbrough             |api_sport       |70            |1           |
+|milmuan                   |12,424|Mil-Mu?an                 |api_football    |5570          |54          |
+|milmuan                   |26,353|Mil-Muğan                 |api_sport       |5570          |1           |
+|mlada boleslav            |12,428|Mlada Boleslav            |api_football    |640           |71          |
+|mlada boleslav            |28,337|Mlada Boleslav            |api_hockey      |129           |0           |
+|mladost ljekopolje        |13,287|Mladost Lje?kopolje       |api_football    |3750          |70          |
+|mladost ljekopolje        |25,716|Mladost Lješkopolje       |api_sport       |3750          |1           |
+|mladost lucani            |13,394|Mladost Lucani            |api_football    |699           |74          |
+|mladost lucani            |25,802|Mladost Lucani            |api_sport       |699           |1           |
+|ml vitebsk                |13,461|ML Vitebsk                |api_football    |7808          |41          |
+|ml vitebsk                |26,457|ML Vitebsk                |api_sport       |7808          |1           |
+|modena                    |12,977|Modena                    |api_football    |899           |114         |
+|modena                    |28,829|Modena                    |api_volleyball  |738           |32          |
+|moncarapachense           |17,004|Moncarapachense           |api_football    |4847          |28          |
+|moncarapachense           |27,325|Moncarapachense           |api_sport       |4847          |1           |
+|montana                   |12,741|Montana                   |api_football    |1424          |106         |
+|montana                   |25,730|Montana                   |api_sport       |1424          |1           |
+|montpellier               |1,027 |Montpellier               |football_data_uk|Montpellier   |248         |
+|montpellier               |12,106|Montpellier               |api_football    |82            |106         |
+|monza                     |1,084 |Monza                     |football_data_uk|Monza         |114         |
+|monza                     |12,140|Monza                     |api_football    |1579          |114         |
+|monza                     |28,834|Monza                     |api_volleyball  |743           |22          |
+|motor lublin              |13,024|Motor Lublin              |api_football    |14562         |106         |
+|motor lublin              |26,476|Motor Lublin              |api_sport       |14562         |1           |
+|mstoles                   |26,296|Móstoles                  |api_sport       |9712          |1           |
+|mstoles                   |28,815|M?stoles                  |api_football    |9712          |0           |
+|msv duisburg              |15,707|MSV Duisburg              |api_football    |187           |76          |
+|msv duisburg              |27,494|MSV Duisburg              |api_sport       |187           |1           |
+|mte 1904                  |15,303|MTE 1904                  |api_football    |2412          |72          |
+|mte 1904                  |26,198|MTE 1904                  |api_sport       |2412          |1           |
+|mtk budapest              |12,494|MTK Budapest              |api_football    |2396          |104         |
+|mtk budapest              |26,630|MTK Budapest              |api_sport       |2396          |1           |
+|nac breda                 |565   |NAC Breda                 |football_data   |681           |125         |
+|nac breda                 |12,168|NAC Breda                 |api_football    |203           |120         |
+|nac breda                 |27,528|NAC Breda                 |api_sport       |203           |1           |
+|nafta                     |13,400|Nafta                     |api_football    |4376          |98          |
+|nafta                     |27,216|Nafta                     |api_sport       |4376          |1           |
+|nantes                    |1,023 |Nantes                    |football_data_uk|Nantes        |270         |
+|nantes                    |12,107|Nantes                    |api_football    |83            |106         |
+|napredak                  |12,995|Napredak                  |api_football    |2655          |76          |
+|napredak                  |27,256|Napredak                  |api_sport       |2655          |1           |
+|navalcarnero              |16,840|Navalcarnero              |api_football    |5271          |4           |
+|navalcarnero              |26,349|Navalcarnero              |api_sport       |5271          |1           |
+|naxxar lions              |12,531|Naxxar Lions              |api_football    |4605          |59          |
+|naxxar lions              |27,525|Naxxar Lions              |api_sport       |4605          |1           |
+|nazilli spor              |14,498|Nazilli Spor              |api_football    |7415          |106         |
+|nazilli spor              |26,664|Nazilli Spor              |api_sport       |7415          |1           |
+|nec nijmegen              |12,176|NEC Nijmegen              |api_football    |413           |104         |
+|nec nijmegen              |27,831|NEC Nijmegen              |api_sport       |413           |1           |
+|neftchi baku              |12,324|Neftchi Baku              |api_football    |2270          |72          |
+|neftchi baku              |25,798|Neftchi Baku              |api_sport       |2270          |1           |
+|newcastle                 |11,904|Newcastle                 |api_football    |34            |114         |
+|newcastle                 |949   |Newcastle                 |football_data_uk|Newcastle     |0           |
+|newport city              |13,029|Newport City              |api_football    |20364         |30          |
+|newport city              |25,881|Newport City              |api_sport       |20364         |1           |
+|nice                      |12,108|Nice                      |api_football    |84            |106         |
+|nice                      |27,642|Nice                      |api_sport       |84            |1           |
+|niki volos                |13,437|Niki Volos                |api_football    |5056          |86          |
+|niki volos                |26,860|Niki Volos                |api_sport       |5056          |1           |
+|nimes                     |1,033 |Nimes                     |football_data_uk|Nimes         |104         |
+|nimes                     |16,902|Nimes                     |api_football    |92            |38          |
+|noah ii                   |12,349|Noah II                   |api_football    |21879         |52          |
+|noah ii                   |25,754|Noah II                   |api_sport       |21879         |1           |
+|northampton               |13,503|Northampton               |api_football    |1337          |138         |
+|northampton               |26,525|Northampton               |api_sport       |1337          |1           |
+|norwich                   |12,197|Norwich                   |api_football    |71            |140         |
+|norwich                   |27,679|Norwich                   |api_sport       |71            |1           |
+|novi pazar                |13,459|Novi Pazar                |api_football    |2643          |74          |
+|novi pazar                |25,803|Novi Pazar                |api_sport       |2643          |1           |
+|nyiregyhaza               |13,393|Nyiregyhaza               |api_football    |2403          |107         |
+|nyiregyhaza               |27,741|Nyiregyhaza               |api_sport       |2403          |1           |
+|oddevold                  |12,273|Oddevold                  |api_football    |11674         |16          |
+|oddevold                  |25,833|Oddevold                  |api_sport       |11674         |1           |
+|odra opole                |12,459|Odra Opole                |api_football    |3488          |103         |
+|odra opole                |26,301|Odra Opole                |api_sport       |3488          |1           |
+|oelul                     |12,959|O?elul                    |api_football    |6886          |108         |
+|oelul                     |26,634|Oţelul                    |api_sport       |6886          |1           |
+|ofi                       |13,270|OFI                       |api_football    |1124          |98          |
+|ofi                       |27,282|OFI                       |api_sport       |1124          |1           |
+|ofk beograd               |12,270|OFK Beograd               |api_football    |2633          |74          |
+|ofk beograd               |25,804|OFK Beograd               |api_sport       |2633          |1           |
+|ofk vrac                  |12,282|OFK Vr?ac                 |api_football    |12329         |74          |
+|ofk vrac                  |26,528|OFK Vršac                 |api_sport       |12329         |1           |
+|ogc nice                  |505   |OGC Nice                  |football_data   |522           |304         |
+|olimpia grudzidz          |14,190|Olimpia Grudzi?dz         |api_football    |4247          |70          |
+|olimpia grudzidz          |26,531|Olimpia Grudziądz         |api_sport       |4247          |1           |
+|olimpija ljubljana        |12,548|Olimpija Ljubljana        |api_football    |677           |108         |
+|olimpija ljubljana        |26,998|Olimpija Ljubljana        |api_sport       |677           |1           |
+|oliveira hospital         |13,793|Oliveira Hospital         |api_football    |4773          |56          |
+|oliveira hospital         |27,320|Oliveira Hospital         |api_sport       |4773          |1           |
+|olot                      |26,501|Olot                      |api_sport       |9403          |1           |
+|olot                      |28,806|Olot                      |api_football    |9403          |0           |
+|olympiakos piraeus        |12,670|Olympiakos Piraeus        |api_football    |553           |104         |
+|olympiakos piraeus        |27,833|Olympiakos Piraeus        |api_sport       |553           |1           |
+|oostende                  |985   |Oostende                  |football_data_uk|Oostende      |161         |
+|oostende                  |15,765|Oostende                  |api_football    |624           |64          |
+|orihuela                  |27,757|Orihuela                  |api_sport       |9404          |1           |
+|orihuela                  |28,807|Orihuela                  |api_football    |9404          |0           |
+|ostersunds fk             |12,357|Ostersunds FK             |api_football    |376           |36          |
+|ostersunds fk             |27,189|Ostersunds FK             |api_sport       |376           |1           |
+|otrantolympic             |12,585|Otrant-Olympic            |api_football    |3751          |74          |
+|otrantolympic             |27,240|Otrant-Olympic            |api_sport       |3751          |1           |
+|ourense cf                |16,824|Ourense CF                |api_football    |9612          |2           |
+|ourense cf                |27,754|Ourense CF                |api_sport       |9612          |1           |
+|oviedo                    |12,918|Oviedo                    |api_football    |718           |134         |
+|oviedo                    |25,885|Oviedo                    |api_sport       |718           |1           |
+|pacos ferreira            |1,138 |Pacos Ferreira            |football_data_uk|Pacos Ferreira|136         |
+|pacos ferreira            |14,073|Pacos Ferreira            |api_football    |234           |70          |
+|padova                    |14,106|Padova                    |api_football    |870           |123         |
+|padova                    |28,835|Padova                    |api_volleyball  |744           |28          |
+|paeek                     |12,466|PAEEK                     |api_football    |3419          |87          |
+|paeek                     |26,979|PAEEK                     |api_sport       |3419          |1           |
+|palermo                   |12,982|Palermo                   |api_football    |522           |118         |
+|palermo                   |27,645|Palermo                   |api_sport       |522           |1           |
+|panathinaikos             |12,543|Panathinaikos             |api_football    |617           |104         |
+|panathinaikos             |27,703|Panathinaikos             |api_sport       |617           |1           |
+|panetolikos               |12,413|Panetolikos               |api_football    |949           |102         |
+|panetolikos               |25,780|Panetolikos               |api_sport       |949           |1           |
+|panserraikos              |12,331|Panserraikos              |api_football    |2099          |97          |
+|panserraikos              |27,017|Panserraikos              |api_sport       |2099          |1           |
+|paok                      |13,128|PAOK                      |api_football    |619           |104         |
+|paok                      |27,834|PAOK                      |api_sport       |619           |1           |
+|paok ii                   |13,682|PAOK II                   |api_football    |18018         |88          |
+|paok ii                   |26,856|PAOK II                   |api_sport       |18018         |1           |
+|pardubice                 |13,334|Pardubice                 |api_football    |3724          |72          |
+|pardubice                 |27,214|Pardubice                 |api_sport       |3724          |1           |
+|pardubice                 |28,339|Pardubice                 |api_hockey      |132           |0           |
+|paredes                   |17,023|Paredes                   |api_football    |4778          |28          |
+|paredes                   |27,458|Paredes                   |api_sport       |4778          |1           |
+|paris fc                  |13,277|Paris FC                  |api_football    |114           |111         |
+|paris fc                  |517   |Paris FC                  |football_data   |1045          |56          |
+|paris fc                  |27,890|Paris FC                  |api_sport       |114           |1           |
+|parma                     |12,137|Parma                     |api_football    |523           |116         |
+|parma                     |26,995|Parma                     |api_sport       |523           |1           |
+|partick                   |13,226|Partick                   |api_football    |901           |122         |
+|partick                   |27,878|Partick                   |api_sport       |901           |1           |
+|partizani                 |12,414|Partizani                 |api_football    |708           |76          |
+|partizani                 |25,827|Partizani                 |api_sport       |708           |1           |
+|pas giannina              |12,289|PAS Giannina              |api_football    |950           |92          |
+|pas giannina              |26,852|PAS Giannina              |api_sport       |950           |1           |
+|pcsi mfc                  |15,309|P?csi MFC                 |api_football    |5130          |72          |
+|pcsi mfc                  |27,548|Pécsi MFC                 |api_sport       |5130          |1           |
+|pea deportiva             |16,808|Pe?a Deportiva            |api_football    |9405          |2           |
+|pea deportiva             |27,374|Peña Deportiva            |api_sport       |9405          |1           |
+|pec zwolle                |567   |PEC Zwolle                |football_data   |684           |253         |
+|pec zwolle                |12,160|PEC Zwolle                |api_football    |193           |106         |
+|pec zwolle                |26,479|PEC Zwolle                |api_sport       |193           |1           |
+|pelister                  |12,649|Pelister                  |api_football    |693           |63          |
+|pelister                  |26,783|Pelister                  |api_sport       |693           |1           |
+|perugia                   |14,479|Perugia                   |api_football    |524           |120         |
+|perugia                   |28,830|Perugia                   |api_volleyball  |739           |32          |
+|perugia                   |25,864|Perugia                   |api_sport       |524           |1           |
+|pescara                   |14,367|Pescara                   |api_football    |525           |134         |
+|pescara                   |27,803|Pescara                   |api_sport       |525           |1           |
+|petn plze                 |14,784|Pet??n Plze?              |api_football    |7330          |31          |
+|petn plze                 |26,177|Petřín Plzeň              |api_sport       |7330          |1           |
+|petralka                  |13,671|Petr?alka                 |api_football    |10538         |88          |
+|petralka                  |26,164|Petržalka                 |api_sport       |10538         |1           |
+|petrocub                  |12,507|Petrocub                  |api_football    |2271          |48          |
+|petrocub                  |26,804|Petrocub                  |api_sport       |2271          |1           |
+|piacenza                  |15,095|Piacenza                  |api_football    |872           |40          |
+|piacenza                  |28,836|Piacenza                  |api_volleyball  |745           |30          |
+|pianese                   |14,822|Pianese                   |api_football    |6381          |41          |
+|pianese                   |26,924|Pianese                   |api_sport       |6381          |1           |
+|piet hotspurs             |13,371|Piet? Hotspurs            |api_football    |4607          |47          |
+|piet hotspurs             |27,247|Pietà Hotspurs            |api_sport       |4607          |1           |
+|pineto                    |13,856|Pineto                    |api_football    |9514          |79          |
+|pineto                    |26,925|Pineto                    |api_sport       |9514          |1           |
+|pirin blagoevgrad         |12,771|Pirin Blagoevgrad         |api_football    |1428          |109         |
+|pirin blagoevgrad         |25,733|Pirin Blagoevgrad         |api_sport       |1428          |1           |
+|pisa                      |12,937|Pisa                      |api_football    |801           |114         |
+|pisa                      |1,078 |Pisa                      |football_data_uk|Pisa          |25          |
+|plymouth                  |12,206|Plymouth                  |api_football    |1357          |138         |
+|plymouth                  |1,001 |Plymouth                  |football_data_uk|Plymouth      |92          |
+|plzen                     |13,158|Plzen                     |api_football    |567           |70          |
+|plzen                     |27,212|Plzen                     |api_sport       |567           |1           |
+|plzen                     |28,382|Plzen                     |api_hockey      |133           |0           |
+|poblense                  |26,275|Poblense                  |api_sport       |5273          |1           |
+|poblense                  |28,791|Poblense                  |api_football    |5273          |0           |
+|podbrezov                 |12,679|Podbrezov?                |api_football    |3548          |99          |
+|podbrezov                 |27,736|Podbrezová                |api_sport       |3548          |1           |
+|pogon szczecin            |12,495|Pogon Szczecin            |api_football    |348           |102         |
+|pogon szczecin            |27,649|Pogon Szczecin            |api_sport       |348           |1           |
+|polessya                  |13,684|Polessya                  |api_football    |6496          |60          |
+|polessya                  |27,546|Polessya                  |api_sport       |6496          |1           |
+|police                    |25,840|Police                    |api_sport       |5322          |1           |
+|police                    |25,929|Police                    |api_sport       |12559         |1           |
+|police                    |28,062|Police                    |api_sport       |16175         |1           |
+|polonia bytom             |14,739|Polonia Bytom             |api_football    |12835         |69          |
+|polonia bytom             |26,898|Polonia Bytom             |api_sport       |12835         |1           |
+|polonia warszawa          |12,748|Polonia Warszawa          |api_football    |16239         |103         |
+|polonia warszawa          |25,800|Polonia Warszawa          |api_sport       |16239         |1           |
+|pontedera                 |13,828|Pontedera                 |api_football    |1591          |123         |
+|pontedera                 |25,865|Pontedera                 |api_sport       |1591          |1           |
+|pontevedra                |27,349|Pontevedra                |api_sport       |9407          |1           |
+|pontevedra                |28,808|Pontevedra                |api_football    |9407          |0           |
+|portimonense              |1,134 |Portimonense              |football_data_uk|Portimonense  |204         |
+|portimonense              |14,036|Portimonense              |api_football    |216           |104         |
+|port vale                 |12,597|Port Vale                 |api_football    |1351          |138         |
+|port vale                 |26,984|Port Vale                 |api_sport       |1351          |1           |
+|potenza                   |14,463|Potenza                   |api_football    |1710          |123         |
+|potenza                   |27,665|Potenza                   |api_sport       |1710          |1           |
+|povltava fa               |13,924|Povltava FA               |api_football    |14005         |61          |
+|povltava fa               |27,168|Povltava FA               |api_sport       |14005         |1           |
+|preuen mnster             |12,293|Preu?en M?nster           |api_football    |1313          |72          |
+|preuen mnster             |26,640|Preußen Münster           |api_sport       |1313          |1           |
+|prishtina                 |13,500|Prishtina                 |api_football    |680           |72          |
+|prishtina                 |25,701|Prishtina                 |api_sport       |680           |1           |
+|progres niederkorn        |13,357|Progres Niederkorn        |api_football    |658           |60          |
+|progres niederkorn        |27,274|Progres Niederkorn        |api_sport       |658           |1           |
+|psv eindhoven             |1,101 |PSV Eindhoven             |football_data_uk|PSV Eindhoven |253         |
+|psv eindhoven             |12,163|PSV Eindhoven             |api_football    |197           |102         |
+|pyunik ii                 |13,427|Pyunik II                 |api_football    |3696          |52          |
+|pyunik ii                 |25,719|Pyunik II                 |api_sport       |3696          |1           |
+|pyunik yerevan            |12,478|Pyunik Yerevan            |api_football    |709           |66          |
+|pyunik yerevan            |25,682|Pyunik Yerevan            |api_sport       |709           |1           |
+|qarabag                   |13,648|Qarabag                   |api_football    |556           |72          |
+|qarabag                   |27,490|Qarabag                   |api_sport       |556           |1           |
+|qpr                       |12,198|QPR                       |api_football    |72            |138         |
+|qpr                       |27,652|QPR                       |api_sport       |72            |1           |
+|racing fc union luxembourg|13,449|Racing FC Union Luxembourg|api_football    |2030          |60          |
+|racing fc union luxembourg|27,272|Racing FC Union Luxembourg|api_sport       |2030          |1           |
+|racing ferrol             |12,825|Racing Ferrol             |api_football    |9409          |84          |
+|racing ferrol             |27,869|Racing Ferrol             |api_sport       |9409          |1           |
+|racing santander          |13,693|Racing Santander          |api_football    |4665          |128         |
+|racing santander          |27,749|Racing Santander          |api_sport       |4665          |1           |
+|radnicki 1923             |12,300|Radnicki 1923             |api_football    |2644          |74          |
+|radnicki 1923             |25,805|Radnicki 1923             |api_sport       |2644          |1           |
+|radnicki nis              |12,511|Radnicki NIS              |api_football    |2254          |76          |
+|radnicki nis              |26,685|Radnicki NIS              |api_sport       |2254          |1           |
+|radnik bijeljina          |12,564|Radnik Bijeljina          |api_football    |3359          |33          |
+|radnik bijeljina          |27,768|Radnik Bijeljina          |api_sport       |3359          |1           |
+|radnik surdulica          |12,258|Radnik Surdulica          |api_football    |2657          |74          |
+|radnik surdulica          |26,684|Radnik Surdulica          |api_sport       |2657          |1           |
+|radomiak radom            |13,259|Radomiak Radom            |api_football    |4248          |102         |
+|radomiak radom            |26,988|Radomiak Radom            |api_sport       |4248          |1           |
+|radomlje                  |12,854|Radomlje                  |api_football    |4378          |110         |
+|radomlje                  |25,796|Radomlje                  |api_sport       |4378          |1           |
+|rakw czstochowa           |12,668|Rak?w Cz?stochowa         |api_football    |3491          |102         |
+|rakw czstochowa           |27,648|Raków Częstochowa         |api_sport       |3491          |1           |
+|rangers                   |12,291|Rangers                   |api_football    |257           |114         |
+|rangers                   |12,672|Ranger's                  |api_football    |3353          |47          |
+|rangers                   |26,868|Rangers                   |api_sport       |257           |1           |
+|rapid                     |12,707|Rapid                     |api_football    |6231          |120         |
+|rapid                     |27,765|Rapid                     |api_sport       |6231          |1           |
+|rapid vienna              |12,456|Rapid Vienna              |api_football    |781           |98          |
+|rapid vienna              |27,536|Rapid Vienna              |api_sport       |781           |1           |
+|rayo majadahonda          |14,348|Rayo Majadahonda          |api_football    |861           |4           |
+|rayo majadahonda          |27,758|Rayo Majadahonda          |api_sport       |861           |1           |
+|rayo vallecano            |12,100|Rayo Vallecano            |api_football    |728           |114         |
+|rayo vallecano            |27,748|Rayo Vallecano            |api_sport       |728           |1           |
+|rb leipzig                |535   |RB Leipzig                |football_data   |721           |294         |
+|rb leipzig                |12,075|RB Leipzig                |api_football    |173           |102         |
+|reading                   |1,004 |Reading                   |football_data_uk|Reading       |230         |
+|reading                   |13,650|Reading                   |api_football    |53            |138         |
+|real avils                |14,369|Real Avil?s               |api_football    |9632          |8           |
+|real avils                |26,320|Real Avilés               |api_sport       |9632          |1           |
+|real betis                |12,094|Real Betis                |api_football    |543           |114         |
+|real betis                |27,487|Real Betis                |api_sport       |543           |1           |
+|real jan                  |26,337|Real Jaén                 |api_sport       |5274          |1           |
+|real jan                  |28,792|Real Ja?n                 |api_football    |5274          |0           |
+|real madrid iii           |14,062|Real Madrid III           |api_football    |22142         |2           |
+|real madrid iii           |26,346|Real Madrid III           |api_sport       |22142         |1           |
+|real zaragoza ii          |16,733|Real Zaragoza II          |api_football    |9887          |2           |
+|real zaragoza ii          |26,328|Real Zaragoza II          |api_sport       |9887          |1           |
+|recreativo huelva         |16,852|Recreativo Huelva         |api_football    |9410          |4           |
+|recreativo huelva         |26,397|Recreativo Huelva         |api_sport       |9410          |2           |
+|red bull salzburg         |12,328|Red Bull Salzburg         |api_football    |571           |96          |
+|red bull salzburg         |27,537|Red Bull Salzburg         |api_sport       |571           |1           |
+|reims                     |1,025 |Reims                     |football_data_uk|Reims         |248         |
+|reims                     |12,111|Reims                     |api_football    |93            |108         |
+|reims                     |25,879|Reims                     |api_sport       |93            |1           |
+|rennes                    |1,010 |Rennes                    |football_data_uk|Rennes        |270         |
+|rennes                    |12,112|Rennes                    |api_football    |94            |106         |
+|rennes                    |27,643|Rennes                    |api_sport       |94            |1           |
+|ried                      |12,420|Ried                      |api_football    |1028          |92          |
+|ried                      |27,542|Ried                      |api_sport       |1028          |1           |
+|rio ave                   |12,148|Rio Ave                   |api_football    |226           |102         |
+|rio ave                   |25,895|Rio Ave                   |api_sport       |226           |1           |
+|rizespor                  |13,257|Rizespor                  |api_football    |1007          |110         |
+|rizespor                  |26,244|Rizespor                  |api_sport       |1007          |1           |
+|roda                      |12,921|Roda                      |api_football    |414           |116         |
+|roda                      |26,279|Roda                      |api_sport       |9684          |1           |
+|rodange 91                |12,988|Rodange 91                |api_football    |2039          |30          |
+|rodange 91                |27,263|Rodange 91                |api_sport       |2039          |1           |
+|rodina moskva             |12,759|Rodina Moskva             |api_football    |6822          |68          |
+|rodina moskva             |26,873|Rodina Moskva             |api_sport       |6822          |1           |
+|rosenborg                 |12,818|Rosenborg                 |api_football    |331           |36          |
+|rosenborg                 |27,409|Rosenborg                 |api_sport       |331           |1           |
+|rotherham                 |1,002 |Rotherham                 |football_data_uk|Rotherham     |184         |
+|rotherham                 |12,814|Rotherham                 |api_football    |73            |138         |
+|rotor volgograd           |13,196|Rotor Volgograd           |api_football    |2010          |34          |
+|rotor volgograd           |25,684|Rotor Volgograd           |api_sport       |2010          |1           |
+|rubin                     |13,174|Rubin                     |api_football    |1083          |60          |
+|rubin                     |27,014|Rubin                     |api_sport       |1083          |1           |
+|ruch chorzw               |12,856|Ruch Chorz?w              |api_football    |6953          |102         |
+|ruch chorzw               |26,899|Ruch Chorzów              |api_sport       |6953          |1           |
+|rudar                     |13,110|Rudar                     |api_football    |4361          |90          |
+|rudar                     |13,615|Rudar                     |api_football    |2258          |70          |
+|rudar                     |26,977|Rudar                     |api_sport       |2258          |1           |
+|ruh lviv                  |12,542|Ruh Lviv                  |api_football    |3632          |60          |
+|ruh lviv                  |25,722|Ruh Lviv                  |api_sport       |3632          |1           |
+|ruomberok                 |13,327|Ru?omberok                |api_football    |3549          |98          |
+|ruomberok                 |27,250|Ružomberok                |api_sport       |3549          |1           |
+|salamanca uds             |27,556|Salamanca UDS             |api_sport       |9588          |1           |
+|salamanca uds             |28,810|Salamanca UDS             |api_football    |9588          |0           |
+|salernitana               |13,019|Salernitana               |api_football    |514           |116         |
+|salernitana               |1,087 |Salernitana               |football_data_uk|Salernitana   |114         |
+|salernitana               |26,932|Salernitana               |api_sport       |514           |1           |
+|sambenedettese            |27,661|Sambenedettese            |api_sport       |871           |1           |
+|sambenedettese            |28,741|Sambenedettese            |api_football    |871           |0           |
+|samgurali                 |12,322|Samgurali                 |api_football    |10017         |35          |
+|samgurali                 |26,441|Samgurali                 |api_sport       |10017         |1           |
+|sampdoria                 |1,088 |Sampdoria                 |football_data_uk|Sampdoria     |190         |
+|sampdoria                 |12,491|Sampdoria                 |api_football    |498           |117         |
+|sampdoria                 |27,095|Sampdoria                 |api_sport       |498           |1           |
+|samsunspor                |12,632|Samsunspor                |api_football    |3603          |110         |
+|samsunspor                |27,699|Samsunspor                |api_sport       |3603          |1           |
+|sandefjord                |13,028|Sandefjord                |api_football    |332           |38          |
+|sandefjord                |27,444|Sandefjord                |api_sport       |332           |1           |
+|sanjoanense               |13,940|Sanjoanense               |api_football    |4792          |56          |
+|sanjoanense               |27,460|Sanjoanense               |api_sport       |4792          |1           |
+|santa clara               |12,149|Santa Clara               |api_football    |227           |68          |
+|santa clara               |27,929|Santa Clara               |api_sport       |227           |1           |
+|santa luca                |13,642|Santa Luc?a               |api_football    |3651          |48          |
+|santa luca                |27,527|Santa Lucía               |api_sport       |3651          |1           |
+|sant andreu               |13,825|Sant Andreu               |api_football    |5277          |2           |
+|sant andreu               |27,714|Sant Andreu               |api_sport       |5277          |1           |
+|sarpsborg 08 ff           |13,235|Sarpsborg 08 FF           |api_football    |333           |37          |
+|sarpsborg 08 ff           |27,726|Sarpsborg 08 FF           |api_sport       |333           |1           |
+|sassuolo                  |12,303|Sassuolo                  |api_football    |488           |114         |
+|sassuolo                  |25,877|Sassuolo                  |api_sport       |488           |1           |
+|sc braga b                |14,781|SC Braga B                |api_football    |246           |58          |
+|sc braga b                |27,463|SC Braga B                |api_sport       |246           |1           |
+|sc freiburg               |529   |SC Freiburg               |football_data   |17            |294         |
+|sc freiburg               |12,064|SC Freiburg               |api_football    |160           |102         |
+|scr altach                |12,610|SCR Altach                |api_football    |618           |96          |
+|scr altach                |27,545|SCR Altach                |api_sport       |618           |1           |
+|sd logros                 |14,095|SD Logro??s               |api_football    |9411          |2           |
+|sd logros                 |27,566|SD Logroñés               |api_sport       |9411          |1           |
+|selaya                    |27,492|Selaya                    |api_sport       |9645          |1           |
+|selaya                    |28,813|Selaya                    |api_football    |9645          |0           |
+|semendrija 1924           |12,514|Semendrija 1924           |api_football    |4254          |74          |
+|semendrija 1924           |25,745|Semendrija 1924           |api_sport       |4254          |1           |
+|seraing united            |12,565|Seraing United            |api_football    |10244         |94          |
+|seraing united            |27,261|Seraing United            |api_sport       |10244         |1           |
+|sevilla                   |12,088|Sevilla                   |api_football    |536           |114         |
+|sevilla                   |27,747|Sevilla                   |api_sport       |536           |1           |
+|shamrock rovers           |13,097|Shamrock Rovers           |api_football    |652           |40          |
+|shamrock rovers           |25,883|Shamrock Rovers           |api_sport       |652           |1           |
+|shelbourne                |13,148|Shelbourne                |api_football    |3854          |43          |
+|shelbourne                |25,882|Shelbourne                |api_sport       |3854          |1           |
+|sheriff tiraspol          |13,613|Sheriff Tiraspol          |api_football    |568           |48          |
+|sheriff tiraspol          |27,617|Sheriff Tiraspol          |api_sport       |568           |1           |
+|shinnik yaroslavl         |13,232|Shinnik Yaroslavl         |api_football    |1998          |68          |
+|shinnik yaroslavl         |25,694|Shinnik Yaroslavl         |api_sport       |1998          |1           |
+|shirak                    |13,205|Shirak                    |api_football    |3686          |66          |
+|shirak                    |25,683|Shirak                    |api_sport       |3686          |1           |
+|shkendija                 |12,587|Shkendija                 |api_football    |609           |66          |
+|shkendija                 |25,710|Shkendija                 |api_sport       |609           |1           |
+|sigma olomouc ii          |13,676|Sigma Olomouc II          |api_football    |8622          |60          |
+|sigma olomouc ii          |26,146|Sigma Olomouc II          |api_sport       |8622          |1           |
+|sileks                    |12,802|Sileks                    |api_football    |4331          |66          |
+|sileks                    |25,712|Sileks                    |api_sport       |4331          |1           |
+|simba bhora               |26,817|Simba Bhora               |api_sport       |21055         |1           |
+|simba bhora               |28,712|Simba Bhora               |api_football    |21055         |0           |
+|siofok                    |15,088|Siofok                    |api_football    |2413          |72          |
+|siofok                    |26,743|Siofok                    |api_sport       |2413          |1           |
+|sirius                    |13,280|Sirius                    |api_football    |370           |36          |
+|sirius                    |26,593|Sirius                    |api_sport       |370           |1           |
+|sk beveren                |13,137|SK Beveren                |api_football    |738           |94          |
+|sk beveren                |26,643|SK Beveren                |api_sport       |738           |1           |
+|sk poltava                |12,979|SK Poltava                |api_football    |17165         |52          |
+|sk poltava                |26,303|SK Poltava                |api_sport       |17165         |1           |
+|slavia mozyr              |12,483|Slavia Mozyr              |api_football    |751           |32          |
+|slavia mozyr              |26,870|Slavia Mozyr              |api_sport       |751           |1           |
+|slavia praha              |12,792|Slavia Praha              |api_football    |560           |70          |
+|slavia praha              |27,745|Slavia Praha              |api_sport       |560           |1           |
+|slovcko ii                |14,831|Slov?cko II               |api_football    |8623          |102         |
+|slovcko ii                |26,148|Slovácko II               |api_sport       |8623          |1           |
+|so joo ver                |14,313|S?o Jo?o Ver              |api_football    |6367          |56          |
+|so joo ver                |27,462|São João Ver              |api_sport       |6367          |1           |
+|sokol brozany             |14,834|Sokol Brozany             |api_football    |7349          |92          |
+|sokol brozany             |26,962|Sokol Brozany             |api_sport       |7349          |1           |
+|sokol zpy                 |14,035|Sokol Z?py                |api_football    |7356          |92          |
+|sokol zpy                 |26,966|Sokol Zápy                |api_sport       |7356          |1           |
+|somaspor                  |14,426|Somaspor                  |api_football    |6538          |106         |
+|somaspor                  |26,655|Somaspor                  |api_sport       |6538          |1           |
+|sonseca                   |27,610|Sonseca                   |api_sport       |25039         |1           |
+|sonseca                   |28,779|Sonseca                   |api_football    |25039         |0           |
+|soroksar                  |12,903|Soroksar                  |api_football    |2404          |102         |
+|soroksar                  |26,695|Soroksar                  |api_sport       |2404          |1           |
+|sorrento                  |14,804|Sorrento                  |api_football    |9537          |77          |
+|sorrento                  |27,662|Sorrento                  |api_sport       |9537          |1           |
+|southampton               |11,909|Southampton               |api_football    |41            |125         |
+|southampton               |26,597|Southampton               |api_sport       |41            |1           |
+|south korea w             |26,135|South Korea W             |api_sport       |1728          |1           |
+|south korea w             |28,405|South Korea W             |api_hockey      |1318          |0           |
+|spal                      |14,707|Spal                      |api_football    |493           |117         |
+|spal                      |1,093 |Spal                      |football_data_uk|Spal          |76          |
+|spartak moscow            |13,260|Spartak Moscow            |api_football    |558           |60          |
+|spartak moscow            |25,778|Spartak Moscow            |api_sport       |558           |1           |
+|sparta praha              |12,269|Sparta Praha              |api_football    |628           |70          |
+|sparta praha              |27,746|Sparta Praha              |api_sport       |628           |1           |
+|sparta praha ii           |13,550|Sparta Praha II           |api_football    |8619          |60          |
+|sparta praha ii           |26,170|Sparta Praha II           |api_sport       |8619          |1           |
+|sparta rotterdam          |573   |Sparta Rotterdam          |football_data   |6806          |252         |
+|sparta rotterdam          |12,182|Sparta Rotterdam          |api_football    |426           |107         |
+|sparta rotterdam          |26,478|Sparta Rotterdam          |api_sport       |426           |1           |
+|spezia                    |13,383|Spezia                    |api_football    |515           |119         |
+|spezia                    |1,089 |Spezia                    |football_data_uk|Spezia        |114         |
+|sporting clube de braga   |587   |Sporting Clube de Braga   |football_data   |5613          |294         |
+|sporting clube de portugal|87    |Sporting Clube de Portugal|football_data   |498           |304         |
+|sporting cp b             |14,157|Sporting CP B             |api_football    |761           |60          |
+|sporting cp b             |27,774|Sporting CP B             |api_sport       |761           |1           |
+|sporting gijon            |12,859|Sporting Gijon            |api_football    |731           |128         |
+|sporting gijon            |27,489|Sporting Gijon            |api_sport       |731           |1           |
+|spvgg greuther frth       |12,916|SpVgg Greuther F?rth      |api_football    |178           |102         |
+|spvgg greuther frth       |26,637|SpVgg Greuther Fürth      |api_sport       |178           |1           |
+|ss monopoli               |14,790|SS Monopoli               |api_football    |10138         |122         |
+|ss monopoli               |25,868|SS Monopoli               |api_sport       |10138         |1           |
+|stade brestois 29         |12,115|Stade Brestois 29         |api_football    |106           |106         |
+|stade brestois 29         |501   |Stade Brestois 29         |football_data   |512           |34          |
+|stade brestois 29         |27,638|Stade Brestois 29         |api_sport       |106           |1           |
+|stade lausanneouchy       |12,883|Stade Lausanne-Ouchy      |api_football    |4269          |110         |
+|stade lausanneouchy       |26,803|Stade Lausanne-Ouchy      |api_sport       |4269          |1           |
+|stal stalowa wola         |13,090|Stal Stalowa Wola         |api_football    |6958          |70          |
+|stal stalowa wola         |27,802|Stal Stalowa Wola         |api_sport       |6958          |1           |
+|standard liege            |13,537|Standard Liege            |api_football    |733           |120         |
+|standard liege            |27,744|Standard Liege            |api_sport       |733           |1           |
+|standard lige ii          |15,182|Standard Li?ge II         |api_football    |19047         |62          |
+|standard lige ii          |27,194|Standard Liège II         |api_sport       |19047         |1           |
+|start                     |12,370|Start                     |api_football    |334           |34          |
+|start                     |27,445|Start                     |api_sport       |334           |1           |
+|start brno                |14,573|Start Brno                |api_football    |7361          |68          |
+|start brno                |26,948|Start Brno                |api_sport       |7361          |1           |
+|star ubova                |12,835|Star? ?ubov?a             |api_football    |19398         |26          |
+|star ubova                |26,183|Stará Ľubovňa             |api_sport       |19398         |1           |
+|stjarnan                  |13,332|Stjarnan                  |api_football    |275           |28          |
+|stjarnan                  |27,455|Stjarnan                  |api_sport       |275           |1           |
+|st mirren                 |12,417|ST Mirren                 |api_football    |251           |114         |
+|st mirren                 |27,877|ST Mirren                 |api_sport       |251           |1           |
+|st nad labem              |14,583|?st? nad Labem            |api_football    |3735          |94          |
+|st nad labem              |26,171|Ústí nad Labem            |api_sport       |3735          |1           |
+|strasbourg                |1,022 |Strasbourg                |football_data_uk|Strasbourg    |269         |
+|strasbourg                |12,113|Strasbourg                |api_football    |95            |106         |
+|strn                      |13,706|Str?n?                    |api_football    |7363          |34          |
+|strn                      |26,151|Strání                    |api_sport       |7363          |1           |
+|st truiden                |978   |St Truiden                |football_data_uk|St Truiden    |262         |
+|st truiden                |12,277|St. Truiden               |api_football    |735           |110         |
+|st truiden                |27,791|St. Truiden               |api_sport       |735           |1           |
+|sturm graz                |13,221|Sturm Graz                |api_football    |637           |96          |
+|sturm graz                |27,544|Sturm Graz                |api_sport       |637           |1           |
+|suhareka                  |12,252|Suhareka                  |api_football    |22817         |36          |
+|suhareka                  |26,616|Suhareka                  |api_sport       |22817         |1           |
+|sunderland                |12,202|Sunderland                |api_football    |746           |143         |
+|sunderland                |26,985|Sunderland                |api_sport       |746           |1           |
+|super nova                |12,924|Super Nova                |api_football    |4143          |33          |
+|super nova                |27,184|Super Nova                |api_sport       |4143          |1           |
+|sv meppen                 |15,547|SV Meppen                 |api_football    |1318          |38          |
+|sv meppen                 |27,045|SV Meppen                 |api_sport       |1318          |1           |
+|swieqi united             |13,598|Swieqi United             |api_football    |4612          |46          |
+|swieqi united             |27,733|Swieqi United             |api_sport       |4612          |1           |
+|swift hesperange          |13,534|Swift Hesperange          |api_football    |11907         |60          |
+|swift hesperange          |27,267|Swift Hesperange          |api_sport       |11907         |1           |
+|syunik                    |12,490|Syunik                    |api_football    |20087         |52          |
+|syunik                    |26,289|Syunik                    |api_sport       |20087         |1           |
+|szeged 2011               |12,430|Szeged 2011               |api_football    |2418          |102         |
+|szeged 2011               |27,008|Szeged 2011               |api_sport       |2418          |1           |
+|szentlrinc se             |13,692|Szentl?rinc SE            |api_football    |5139          |70          |
+|szentlrinc se             |26,694|Szentlőrinc SE            |api_sport       |5139          |1           |
+|tammeka                   |13,454|Tammeka                   |api_football    |3530          |40          |
+|tammeka                   |26,678|Tammeka                   |api_sport       |3530          |1           |
+|taranto                   |14,494|Taranto                   |api_football    |1696          |120         |
+|taranto                   |28,838|Taranto                   |api_volleyball  |751           |22          |
+|tarazona                  |16,967|Tarazona                  |api_football    |9416          |4           |
+|tarazona                  |27,343|Tarazona                  |api_sport       |9416          |1           |
+|tartu kalev               |28,613|Tartu Kalev               |api_football    |16962         |2           |
+|tartu kalev               |27,469|Tartu Kalev               |api_sport       |16962         |1           |
+|tarxien rainbows          |13,504|Tarxien Rainbows          |api_football    |4629          |46          |
+|tarxien rainbows          |27,453|Tarxien Rainbows          |api_sport       |4629          |1           |
+|tatabnya                  |13,141|Tatab?nya                 |api_football    |5145          |30          |
+|tatabnya                  |26,752|Tatabánya                 |api_sport       |5145          |1           |
+|tatran bohunice           |16,099|Tatran Bohunice           |api_football    |19436         |34          |
+|tatran bohunice           |26,953|Tatran Bohunice           |api_sport       |19436         |1           |
+|tborsko                   |13,222|T?borsko                  |api_football    |3726          |62          |
+|tborsko                   |26,990|Táborsko                  |api_sport       |3726          |1           |
+|team altamura             |14,119|Team Altamura             |api_football    |9549          |42          |
+|team altamura             |26,929|Team Altamura             |api_sport       |9549          |1           |
+|tekstilac odaci           |12,407|Tekstilac Od?aci          |api_football    |17438         |76          |
+|tekstilac odaci           |26,778|Tekstilac Odžaci          |api_sport       |17438         |1           |
+|telone                    |26,106|TelOne                    |api_sport       |5231          |1           |
+|telone                    |28,736|TelOne                    |api_football    |5231          |0           |
+|telstar                   |12,183|Telstar                   |api_football    |427           |120         |
+|telstar                   |26,897|Telstar                   |api_sport       |427           |1           |
+|teplice ii                |14,749|Teplice II                |api_football    |12877         |92          |
+|teplice ii                |26,128|Teplice II                |api_sport       |12877         |1           |
+|ternana                   |13,866|Ternana                   |api_football    |516           |123         |
+|ternana                   |27,871|Ternana                   |api_sport       |516           |1           |
+|teruel                    |14,736|Teruel                    |api_football    |5278          |4           |
+|teruel                    |26,316|Teruel                    |api_sport       |5278          |1           |
+|teuta durrs               |13,600|Teuta Durr?s              |api_football    |3320          |72          |
+|teuta durrs               |25,825|Teuta Durrës              |api_sport       |3320          |1           |
+|tikve                     |13,218|Tikve?                    |api_football    |4348          |66          |
+|tikve                     |26,782|Tikveš                    |api_sport       |4348          |1           |
+|tirana                    |13,403|Tirana                    |api_football    |694           |72          |
+|tirana                    |27,066|Tirana                    |api_sport       |694           |1           |
+|tiszakecske fc            |15,351|Tiszakecske FC            |api_football    |2415          |72          |
+|tiszakecske fc            |26,693|Tiszakecske FC            |api_sport       |2415          |1           |
+|tondela                   |14,309|Tondela                   |api_football    |218           |68          |
+|tondela                   |25,894|Tondela                   |api_sport       |218           |1           |
+|torpedo moskva            |12,657|Torpedo Moskva            |api_football    |3985          |68          |
+|torpedo moskva            |26,872|Torpedo Moskva            |api_sport       |3985          |1           |
+|torrent                   |14,140|Torrent                   |api_football    |15348         |4           |
+|torrent                   |26,360|Torrent                   |api_sport       |15348         |1           |
+|torres                    |14,148|Torres                    |api_football    |9534          |121         |
+|torres                    |26,927|Torres                    |api_sport       |9534          |1           |
+|trabzonspor               |13,564|Trabzonspor               |api_football    |998           |74          |
+|trabzonspor               |25,813|Trabzonspor               |api_sport       |998           |1           |
+|trapani 1905              |13,906|Trapani 1905              |api_football    |17862         |44          |
+|trapani 1905              |26,934|Trapani 1905              |api_sport       |17862         |1           |
+|tre fiori                 |12,516|Tre Fiori                 |api_football    |2260          |67          |
+|tre fiori                 |27,088|Tre Fiori                 |api_sport       |2260          |1           |
+|trelleborgs ff            |12,224|trelleborgs FF            |api_football    |369           |34          |
+|trelleborgs ff            |27,190|trelleborgs FF            |api_sport       |369           |1           |
+|tre penne                 |13,169|Tre Penne                 |api_football    |700           |67          |
+|tre penne                 |27,085|Tre Penne                 |api_sport       |700           |1           |
+|trethomas bluebirds       |13,555|Trethomas Bluebirds       |api_football    |11310         |30          |
+|trethomas bluebirds       |25,880|Trethomas Bluebirds       |api_sport       |11310         |1           |
+|triglav                   |12,338|Triglav                   |api_football    |4363          |92          |
+|triglav                   |26,526|Triglav                   |api_sport       |4363          |1           |
+|trofense                  |14,056|Trofense                  |api_football    |4801          |62          |
+|trofense                  |27,457|Trofense                  |api_sport       |4801          |1           |
+|tsv hartberg              |12,386|TSV Hartberg              |api_football    |1072          |99          |
+|tsv hartberg              |27,538|TSV Hartberg              |api_sport       |1072          |1           |
+|tudelano                  |27,568|Tudelano                  |api_sport       |5279          |1           |
+|tudelano                  |28,793|Tudelano                  |api_football    |5279          |0           |
+|tukums                    |12,774|Tukums                    |api_football    |4144          |32          |
+|tukums                    |26,577|Tukums                    |api_sport       |4144          |1           |
+|turan                     |13,115|Turan                     |api_football    |5499          |72          |
+|turan                     |25,799|Turan                     |api_sport       |5499          |1           |
+|turbine potsdam w         |14,268|Turbine Potsdam W         |api_football    |1869          |70          |
+|turbine potsdam w         |26,792|Turbine Potsdam W         |api_sport       |1869          |1           |
+|twente                    |12,177|Twente                    |api_football    |415           |108         |
+|twente                    |26,895|Twente                    |api_sport       |415           |1           |
+|ucam murcia               |14,522|Ucam Murcia               |api_football    |800           |8           |
+|ucam murcia               |27,659|Ucam Murcia               |api_sport       |800           |1           |
+|ud logros                 |26,327|UD Logroñés               |api_sport       |5280          |1           |
+|ud logros                 |28,794|UD Logro??s               |api_football    |5280          |0           |
+|ud san pedro              |26,392|UD San Pedro              |api_sport       |17562         |1           |
+|ud san pedro              |28,765|UD San Pedro              |api_football    |17562         |0           |
+|ue santa coloma           |13,364|UE Santa Coloma           |api_football    |703           |54          |
+|ue santa coloma           |27,771|UE Santa Coloma           |api_sport       |703           |1           |
+|ulytau                    |13,453|Ulytau                    |api_football    |21010         |17          |
+|ulytau                    |26,239|Ulytau                    |api_sport       |21010         |1           |
+|una strassen              |13,644|UNA Strassen              |api_football    |2036          |60          |
+|una strassen              |27,273|UNA Strassen              |api_sport       |2036          |1           |
+|unio de leiria            |14,083|Uni?o de Leiria           |api_football    |4662          |63          |
+|unio de leiria            |27,013|União de Leiria           |api_sport       |4662          |1           |
+|union berlin              |12,078|Union Berlin              |api_football    |182           |102         |
+|union berlin              |27,654|Union Berlin              |api_sport       |182           |1           |
+|unionistas de salamanca   |27,350|Unionistas de Salamanca   |api_sport       |5281          |1           |
+|unionistas de salamanca   |28,795|Unionistas de Salamanca   |api_football    |5281          |0           |
+|union titus petange       |13,036|Union Titus Petange       |api_football    |2032          |60          |
+|union titus petange       |27,275|Union Titus Petange       |api_sport       |2032          |1           |
+|unio santarm              |14,610|Uni?o Santar?m            |api_football    |6369          |28          |
+|unio santarm              |27,911|União Santarém            |api_sport       |6369          |1           |
+|uniov                     |14,253|Uni?ov                    |api_football    |7369          |102         |
+|uniov                     |26,145|Uničov                    |api_sport       |7369          |1           |
+|unirea slobozia           |13,380|Unirea Slobozia           |api_football    |6916          |95          |
+|unirea slobozia           |27,260|Unirea Slobozia           |api_sport       |6916          |1           |
+|universidad catolica      |10,979|Universidad Catolica      |football_data   |9377          |2           |
+|universidad catolica      |27,969|Universidad Catolica      |api_sport       |1157          |1           |
+|universitatea craiova     |12,534|Universitatea Craiova     |api_football    |632           |121         |
+|universitatea craiova     |27,766|Universitatea Craiova     |api_sport       |632           |1           |
+|un kaerjeng 97            |28,623|UN Kaerjeng 97            |api_football    |2035          |31          |
+|un kaerjeng 97            |27,276|UN Kaerjeng 97            |api_sport       |2035          |1           |
+|ural                      |13,690|Ural                      |api_football    |1084          |68          |
+|ural                      |25,685|Ural                      |api_sport       |1084          |1           |
+|us hostert                |12,381|US Hostert                |api_football    |2040          |31          |
+|us hostert                |27,266|US Hostert                |api_sport       |2040          |1           |
+|us mondorflesbains        |12,753|US Mondorf-les-bains      |api_football    |2037          |60          |
+|us mondorflesbains        |27,271|US Mondorf-les-bains      |api_sport       |2037          |1           |
+|utebo                     |14,675|Utebo                     |api_football    |9891          |4           |
+|utebo                     |26,323|Utebo                     |api_sport       |9891          |1           |
+|valencia                  |12,085|Valencia                  |api_football    |532           |114         |
+|valencia                  |27,891|Valencia                  |api_sport       |532           |1           |
+|valencia ii               |16,767|Valencia II               |api_football    |9594          |2           |
+|valencia ii               |26,433|Valencia II               |api_sport       |9594          |1           |
+|valladolid                |1,157 |Valladolid                |football_data_uk|Valladolid    |190         |
+|valladolid                |12,098|Valladolid                |api_football    |720           |118         |
+|valletta fc               |13,261|Valletta FC               |api_football    |659           |48          |
+|valletta fc               |27,452|Valletta FC               |api_sport       |659           |1           |
+|varbergs bois fc          |12,337|Varbergs BoIS FC          |api_football    |2171          |34          |
+|varbergs bois fc          |27,622|Varbergs BoIS FC          |api_sport       |2171          |1           |
+|vardar skopje             |12,374|Vardar Skopje             |api_football    |574           |67          |
+|vardar skopje             |25,713|Vardar Skopje             |api_sport       |574           |1           |
+|varnsdorf                 |12,891|Varnsdorf                 |api_football    |3728          |60          |
+|varnsdorf                 |26,129|Varnsdorf                 |api_sport       |3728          |1           |
+|vasas                     |12,209|Vasas                     |api_football    |675           |97          |
+|vasas                     |27,010|Vasas                     |api_sport       |675           |1           |
+|vasteras sk fk            |13,423|Vasteras SK FK            |api_football    |2241          |36          |
+|vasteras sk fk            |25,832|Vasteras SK FK            |api_sport       |2241          |1           |
+|venezia                   |12,136|Venezia                   |api_football    |517           |119         |
+|venezia                   |1,085 |Venezia                   |football_data_uk|Venezia       |76          |
+|veres rivne               |12,911|Veres Rivne               |api_football    |6501          |62          |
+|veres rivne               |25,774|Veres Rivne               |api_sport       |6501          |1           |
+|verl                      |14,418|Verl                      |api_football    |4265          |114         |
+|verl                      |27,800|Verl                      |api_sport       |4265          |1           |
+|verona                    |1,081 |Verona                    |football_data_uk|Verona        |253         |
+|verona                    |28,837|Verona                    |api_volleyball  |747           |31          |
+|vestri                    |12,251|Vestri                    |api_football    |4165          |32          |
+|vestri                    |27,454|Vestri                    |api_sport       |4165          |1           |
+|veszprm                   |15,184|Veszpr?m                  |api_football    |7569          |2           |
+|veszprm                   |26,199|Veszprém                  |api_sport       |7569          |1           |
+|vfb oldenburg             |15,009|VfB Oldenburg             |api_football    |9347          |38          |
+|vfb oldenburg             |26,647|VfB Oldenburg             |api_sport       |9347          |1           |
+|vfb stuttgart             |524   |VfB Stuttgart             |football_data   |10            |260         |
+|vfb stuttgart             |12,074|VfB Stuttgart             |api_football    |172           |104         |
+|vfl wolfsburg             |525   |VfL Wolfsburg             |football_data   |11            |294         |
+|vfl wolfsburg             |12,065|VfL Wolfsburg             |api_football    |161           |102         |
+|vic                       |26,374|Vic                       |api_sport       |25041         |1           |
+|vic                       |28,781|Vic                       |api_football    |25041         |0           |
+|victoria rosport          |12,862|Victoria Rosport          |api_football    |2038          |60          |
+|victoria rosport          |27,277|Victoria Rosport          |api_sport       |2038          |1           |
+|viktoria plze ii          |14,219|Viktoria Plze? II         |api_football    |8620          |61          |
+|viktoria plze ii          |26,176|Viktoria Plzeň II         |api_sport       |8620          |1           |
+|vilaverdense              |14,226|Vilaverdense              |api_football    |4814          |60          |
+|vilaverdense              |27,293|Vilaverdense              |api_sport       |4814          |1           |
+|villanovense              |14,025|Villanovense              |api_football    |5282          |2           |
+|villanovense              |26,418|Villanovense              |api_sport       |5282          |1           |
+|villarreal                |12,086|Villarreal                |api_football    |533           |114         |
+|villarreal                |26,686|Villarreal                |api_sport       |533           |1           |
+|villarreal ii             |16,779|Villarreal II             |api_football    |9595          |84          |
+|villarreal ii             |26,317|Villarreal II             |api_sport       |9595          |1           |
+|virtus                    |12,834|Virtus                    |api_football    |5308          |60          |
+|virtus                    |27,090|Virtus                    |api_sport       |5308          |1           |
+|vis pesaro                |13,971|Vis Pesaro                |api_football    |1708          |124         |
+|vis pesaro                |26,497|Vis Pesaro                |api_sport       |1708          |1           |
+|vitesse                   |1,113 |Vitesse                   |football_data_uk|Vitesse       |196         |
+|vitesse                   |13,027|Vitesse                   |api_football    |200           |106         |
+|vitesse                   |25,793|Vitesse                   |api_sport       |17923         |1           |
+|vitesse                   |26,481|Vitesse                   |api_sport       |200           |1           |
+|vizela                    |12,156|Vizela                    |api_football    |810           |104         |
+|vizela                    |1,135 |Vizela                    |football_data_uk|Vizela        |102         |
+|vizela                    |26,307|Vizela                    |api_sport       |810           |1           |
+|vllaznia shkodr           |13,457|Vllaznia Shkod?r          |api_football    |3339          |76          |
+|vllaznia shkodr           |27,705|Vllaznia Shkodër          |api_sport       |3339          |1           |
+|vojvodina                 |13,269|Vojvodina                 |api_football    |702           |74          |
+|vojvodina                 |27,696|Vojvodina                 |api_sport       |702           |1           |
+|volgar astrakhan          |28,621|Volgar Astrakhan          |api_football    |2004          |34          |
+|volgar astrakhan          |26,842|Volgar Astrakhan          |api_sport       |2004          |1           |
+|volos nfc                 |13,281|Volos NFC                 |api_football    |2110          |105         |
+|volos nfc                 |27,281|Volos NFC                 |api_sport       |2110          |1           |
+|vora                      |13,192|Vora                      |api_football    |3340          |67          |
+|vora                      |27,069|Vora                      |api_sport       |3340          |1           |
+|vrchovina                 |15,525|Vrchovina                 |api_football    |7376          |34          |
+|vrchovina                 |26,143|Vrchovina                 |api_sport       |7376          |1           |
+|vtkovice                  |15,259|V?tkovice                 |api_football    |3732          |34          |
+|vtkovice                  |26,173|Vítkovice                 |api_sport       |3732          |1           |
+|vukovar                   |14,619|Vukovar                   |api_football    |5730          |99          |
+|vukovar                   |27,692|Vukovar                   |api_sport       |5730          |1           |
+|vushtrria                 |13,225|Vushtrria                 |api_football    |14396         |1           |
+|vushtrria                 |26,613|Vushtrria                 |api_sport       |14396         |1           |
+|vvv venlo                 |12,738|VVV Venlo                 |api_football    |204           |118         |
+|vvv venlo                 |1,116 |VVV Venlo                 |football_data_uk|VVV Venlo     |94          |
+|waalwijk                  |1,112 |Waalwijk                  |football_data_uk|Waalwijk      |196         |
+|waalwijk                  |12,178|Waalwijk                  |api_football    |417           |102         |
+|waldhof mannheim          |14,160|Waldhof Mannheim          |api_football    |4268          |114         |
+|waldhof mannheim          |26,644|Waldhof Mannheim          |api_sport       |4268          |1           |
+|werder bremen             |12,066|Werder Bremen             |api_football    |162           |102         |
+|werder bremen             |27,655|Werder Bremen             |api_sport       |162           |1           |
+|west ham                  |11,914|West Ham                  |api_football    |48            |114         |
+|west ham                  |25,874|West Ham                  |api_sport       |48            |1           |
+|wigan                     |1,005 |Wigan                     |football_data_uk|Wigan         |138         |
+|wigan                     |13,030|Wigan                     |api_football    |61            |138         |
+|willem ii                 |1,110 |Willem II                 |football_data_uk|Willem II     |162         |
+|willem ii                 |12,162|Willem II                 |api_football    |195           |116         |
+|willem ii                 |26,900|Willem II                 |api_sport       |195           |1           |
+|wisla plock               |12,797|Wisla Plock               |api_football    |341           |104         |
+|wisla plock               |25,816|Wisla Plock               |api_sport       |341           |1           |
+|wolfsberger ac            |12,861|Wolfsberger AC            |api_football    |1025          |98          |
+|wolfsberger ac            |27,535|Wolfsberger AC            |api_sport       |1025          |1           |
+|wsg wattens               |13,087|WSG Wattens               |api_football    |1398          |96          |
+|wsg wattens               |27,540|WSG Wattens               |api_sport       |1398          |1           |
+|wycombe                   |13,309|Wycombe                   |api_football    |1358          |140         |
+|wycombe                   |1,008 |Wycombe                   |football_data_uk|Wycombe       |46          |
+|xerez                     |27,708|Xerez                     |api_sport       |9770          |1           |
+|xerez                     |28,817|Xerez                     |api_football    |9770          |0           |
+|yeclano                   |27,658|Yeclano                   |api_sport       |5283          |1           |
+|yeclano                   |28,796|Yeclano                   |api_football    |5283          |0           |
+|yeni malatyaspor          |13,355|Yeni Malatyaspor          |api_football    |999           |74          |
+|yeni malatyaspor          |27,354|Yeni Malatyaspor          |api_sport       |999           |1           |
+|yverdon sport             |12,426|Yverdon Sport             |api_football    |6653          |112         |
+|yverdon sport             |26,802|Yverdon Sport             |api_sport       |6653          |1           |
+|zagbie lubin ii           |14,600|Zag??bie Lubin II         |api_football    |6963          |105         |
+|zagbie lubin ii           |26,310|Zagłębie Lubin II         |api_sport       |6963          |1           |
+|zamora                    |16,999|Zamora                    |api_football    |9418          |2           |
+|zamora                    |26,321|Zamora                    |api_sport       |9418          |1           |
+|zbrojovka brno            |13,164|Zbrojovka Brno            |api_football    |3733          |60          |
+|zbrojovka brno            |26,991|Zbrojovka Brno            |api_sport       |3733          |1           |
+|zbrojovka brno ii         |14,108|Zbrojovka Brno II         |api_football    |8633          |34          |
+|zbrojovka brno ii         |26,142|Zbrojovka Brno II         |api_sport       |8633          |1           |
+|zebbug rangers            |12,454|Zebbug Rangers            |api_football    |4614          |46          |
+|zebbug rangers            |27,879|Zebbug Rangers            |api_sport       |4614          |1           |
+|zemun                     |12,900|Zemun                     |api_football    |2642          |37          |
+|zemun                     |26,529|Zemun                     |api_sport       |2642          |1           |
+|zenit                     |12,625|Zenit                     |api_football    |596           |60          |
+|zenit                     |26,121|Zenit                     |api_sport       |596           |1           |
+|zhenys                    |13,563|Zhenys                    |api_football    |16611         |29          |
+|zhenys                    |26,471|Zhenys                    |api_sport       |16611         |1           |
+|zhetysu                   |13,246|Zhetysu                   |api_football    |4560          |26          |
+|zhetysu                   |26,883|Zhetysu                   |api_sport       |4560          |1           |
+|zira                      |13,495|Zira                      |api_football    |648           |72          |
+|zira                      |25,762|Zira                      |api_sport       |648           |1           |
+|zlin                      |12,941|Zlin                      |api_football    |603           |65          |
+|zlin                      |26,523|Zlin                      |api_sport       |603           |1           |
+|zln ii                    |13,823|Zl?n II                   |api_football    |8625          |102         |
+|zln ii                    |26,172|Zlín II                   |api_sport       |8625          |1           |
+|znicz pruszkw             |13,404|Znicz Pruszk?w            |api_football    |6964          |102         |
+|znicz pruszkw             |26,300|Znicz Pruszków            |api_sport       |6964          |1           |
+|znojmo                    |13,963|Znojmo                    |api_football    |3734          |102         |
+|znojmo                    |26,174|Znojmo                    |api_sport       |3734          |1           |
+|zonguldak kmrspor         |14,870|Zonguldak K?m?rspor       |api_football    |3611          |74          |
+|zonguldak kmrspor         |26,273|Zonguldak Kömürspor       |api_sport       |3611          |1           |
+|zorya luhansk             |13,268|Zorya Luhansk             |api_football    |599           |60          |
+|zorya luhansk             |26,302|Zorya Luhansk             |api_sport       |599           |1           |
+|zrinjski                  |13,009|Zrinjski                  |api_football    |588           |66          |
+|zrinjski                  |27,767|Zrinjski                  |api_sport       |588           |1           |
+|zulte waregem             |12,993|Zulte Waregem             |api_football    |600           |96          |
+|zulte waregem             |27,743|Zulte Waregem             |api_sport       |600           |1           |

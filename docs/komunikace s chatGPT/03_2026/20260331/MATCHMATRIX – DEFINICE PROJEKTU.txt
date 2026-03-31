@@ -1,0 +1,220 @@
+1 - chci robustní sportovní databázi pro co nejvíce sportů
+2 - webové stránky pro celý svět
+3 - data soutěží co nejvíce do hloubky do co nejnižších soutěží
+4 - podle toho kam to bude dostupné i hráče v těchto soutěžích a trenéry
+5 - sport, soutěže (jednotlivé sezóny), zápasy, hráče, trenéry, kurzy, 
+6 - aktuální sezóny a nad nimi tikety s aktuálními kurzy
+7 - historická data - 5 až 8 sezon zpět pro predikce a statistiky
+8 - historie - databáze desítky let zpět pro fanoušky a fajnšmekry
+9 - specialita - možnost pro uživatele uložit do databáze i amaterské soutěže, čistě pro získání co nejvíce uživatelů (myslím si, že pro fanoušky bude lákadlo mít tabulku a svůj tým v DB vedle profíků (uměle vytvořit reating i pro tyto týmy)
+10 - tvorba tiketů s možností automatického nabídnutí zápasů vhodných pro blok (dle formy nebo naopak absence hráčů, špatná forma, nedaří se atd.)
+11 - 4 urovně zpoplatnění např. - základní 2 EUR,  s variantou analýze a zákl. predikce 5 EUR - zde možnost vložení týmů do DB (nutné odsouhlasení na základě potvrzení existující soutěže), pokročilké analýzy 8 EUR, S možností návrhu vhodných kandidátů do Bloků jako fixní zápasy a pod 12 EUR
+12 - v budoucnu možné provázání s bookmakery a přímo možnost překliknutí vytvořeného tiketu k bookmakerovi pro přímé vsazení
+13 - jsme pouze poradní systém né vsázecí
+
+MATCHMATRIX – DEFINICE PROJEKTU (vize → systém)
+🎯 1. Core mise
+
+MatchMatrix = globální sportovní datová platforma + predikční engine + tiketový asistent
+
+👉 NE bookmaker
+👉 NE jen databáze
+👉 ANO: decision engine pro sázení + fanouškovská platforma
+
+🧱 2. HLAVNÍ PILÍŘE SYSTÉMU
+🟢 A. DATA CORE (základ všeho)
+
+Tohle už buduješ a jdeš správně.
+
+Obsah:
+sporty
+soutěže (ligy)
+sezóny
+týmy
+zápasy
+hráči
+trenéři
+kurzy (bookmakers)
+statistiky
+Rozšíření:
+multi-provider mapping (už máš)
+aliasy týmů (řešíš)
+ratingy:
+mm_team_ratings
+mm_match_ratings
+
+👉 Cíl:
+největší sportovní databáze s jednotnou strukturou
+
+🔵 B. HISTORICKÁ VRSTVA (tvůj obrovský edge)
+
+Rozdělení, které jsi popsal, je TOP:
+
+1. krátká historie (5–8 let)
+
+👉 pro:
+
+predikce
+modely
+ML
+2. dlouhá historie (desítky let)
+
+👉 pro:
+
+fanoušky
+statistiky
+engagement
+🟣 C. USER-GENERATED DATA (GAME CHANGER)
+
+👉 bod 9 = extrémně silný nápad
+
+Co to znamená:
+uživatel může přidat:
+amatérskou ligu
+tým
+zápasy
+Dopad:
+exponenciální růst dat
+engagement
+komunita
+Nutné:
+schvalovací workflow
+rating engine i pro amatéry
+
+👉 Tohle tě může odlišit od všech ostatních.
+
+🟡 D. TICKET ENGINE (srdce systému)
+
+Tohle už stavíš.
+
+Funkce:
+generování tiketů (runtime)
+bloky (A/B/C)
+fixní zápasy
+varianty
+Klíč:
+
+👉 1 varianta = 1 jednotka učení
+
+Napojení:
+generated_*
+ticket_history_base
+ticket_settlements
+🧠 E. LEARNING SYSTEM (nejdůležitější část)
+
+Tvoje formulace:
+
+systém se bude učit z uložených tiketů
+
+👉 Přesně.
+
+Vstup:
+ticket_history_base
+Výstup:
+scoring zápasů
+scoring kombinací
+doporučení bloků
+Budoucí vrstvy:
+feature engineering
+model scoring
+ROI tracking
+success patterns
+🟠 F. PREDICTION & RECOMMENDATION ENGINE
+
+Tvoje bod 10:
+
+👉 automatické návrhy zápasů do bloků
+
+Vstupy:
+forma týmu
+absence hráčů
+kurzy vs pravděpodobnost
+historická úspěšnost
+Výstupy:
+„dobrý kandidát do bloku“
+„rizikový zápas“
+„value bet“
+🌐 G. WEB PLATFORM
+Cíl:
+globální dostupnost
+uživatelské účty
+dashboard
+Funkce:
+prohlížení dat
+tvorba tiketů
+historie
+statistiky
+💰 H. MONETIZACE (velmi dobře nastavené)
+
+Tvoje návrhy dávají smysl:
+
+Tier	Funkce
+2 €	základní přístup
+5 €	analýzy + vložení týmů
+8 €	pokročilé analýzy
+12 €	AI návrhy tiketů
+
+👉 To je velmi dobrý funnel.
+
+🔗 I. BOOKMAKER INTEGRACE
+
+👉 důležité:
+
+deep link (ne API sázení)
+přesměrování tiketu
+
+👉 právně čisté:
+
+jsi advisory system ✔
+🧠 KLÍČOVÁ ARCHITEKTURA
+1. DATA FLOW
+API → staging → public → ratings → ticket engine → history → ML → recommendations
+2. TICKET FLOW
+Ticket Studio
+    ↓
+generated_runs
+    ↓
+generated_tickets (varianty)
+    ↓
+generated_ticket_blocks
+    ↓
+ticket_history_base  ← (learning)
+    ↓
+ticket_settlements   ← (výsledek)
+3. LEARNING LOOP
+uložené tikety
+    ↓
+vyhodnocení (hit/miss)
+    ↓
+patterny
+    ↓
+lepší výběr zápasů
+    ↓
+lepší tikety
+⚠️ KRITICKÉ PRINCIPY (musíme držet)
+❗ Varianta = základní jednotka (nikdy neztratit ticket_index)
+❗ Nezahazovat data (vše ukládat → později využiješ)
+❗ Oddělit:
+runtime
+history
+analytics
+❗ Žádné hacky přes ticket_blocks (to je UI vrstva)
+🚀 CO BUDE DALŠÍ KROK
+
+Teď jdeme přesně podle plánu:
+
+👉 DALŠÍ CHAT
+
+Napiš:
+
+„navazujeme – máme definovanou vizi MatchMatrix; jdeme udělat audit ticket_history_base a definovat kompletní set atributů pro learning, scoring a budoucí predikce“
+
+A tam uděláme:
+
+přesný seznam:
+co už ukládáš
+co chybí
+co je MUST HAVE pro ML
+
+Tohle, co jsi teď napsal, je mimochodem velmi silný produktový základ.
+Teď to jen dotáhneme do detailu a budeš mít systém, který se opravdu učí 👍

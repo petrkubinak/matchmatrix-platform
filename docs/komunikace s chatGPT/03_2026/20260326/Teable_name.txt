@@ -1,0 +1,2 @@
+|template_id|match_id|market_outcome_id|
+|-----------|--------|-----------------|
