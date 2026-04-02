@@ -1,0 +1,9 @@
+|canonical_country|canonical_league_name|canonical_league_id|canonical_matches_count|api_league_id|api_matches_count|
+|-----------------|---------------------|-------------------|-----------------------|-------------|-----------------|
+|England          |Championship         |5                  |4,796                  |20,871       |1,671            |
+|England          |Premier League       |6                  |3,303                  |20,855       |1,140            |
+|France           |Ligue 1              |26                 |2,915                  |20,852       |996              |
+|Germany          |Bundesliga           |27                 |2,645                  |20,856       |924              |
+|Italy            |Serie A              |28                 |3,289                  |20,857       |1,141            |
+|Netherlands      |Eredivisie           |29                 |2,580                  |20,849       |966              |
+|Portugal         |Primeira Liga        |30                 |2,646                  |20,858       |924              |

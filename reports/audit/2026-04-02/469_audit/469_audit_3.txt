@@ -1,0 +1,188 @@
+|canonical_country|canonical_league_name|team_id|name                    |ext_source  |ext_team_id|
+|-----------------|---------------------|-------|------------------------|------------|-----------|
+|England          |Championship         |13,359 |Birmingham              |api_football|54         |
+|England          |Championship         |12,194 |Blackburn               |api_football|67         |
+|England          |Championship         |13,685 |Blackpool               |api_football|1356       |
+|England          |Championship         |12,187 |Bristol City            |api_football|56         |
+|England          |Championship         |12,186 |Burnley                 |api_football|44         |
+|England          |Championship         |12,185 |Cardiff                 |api_football|43         |
+|England          |Championship         |12,204 |Coventry                |api_football|1346       |
+|England          |Championship         |12,195 |Derby                   |api_football|69         |
+|England          |Championship         |13,048 |Huddersfield            |api_football|37         |
+|England          |Championship         |12,193 |Hull City               |api_football|64         |
+|England          |Championship         |11,920 |Ipswich                 |api_football|57         |
+|England          |Championship         |12,192 |Leeds                   |api_football|63         |
+|England          |Championship         |11,912 |Leicester               |api_football|46         |
+|England          |Championship         |12,207 |Luton                   |api_football|1359       |
+|England          |Championship         |12,196 |Middlesbrough           |api_football|70         |
+|England          |Championship         |12,188 |Millwall                |api_football|58         |
+|England          |Championship         |12,197 |Norwich                 |api_football|71         |
+|England          |Championship         |12,203 |Oxford United           |api_football|1338       |
+|England          |Championship         |12,206 |Plymouth                |api_football|1357       |
+|England          |Championship         |12,205 |Portsmouth              |api_football|1355       |
+|England          |Championship         |12,189 |Preston                 |api_football|59         |
+|England          |Championship         |12,198 |QPR                     |api_football|72         |
+|England          |Championship         |13,650 |Reading                 |api_football|53         |
+|England          |Championship         |12,814 |Rotherham               |api_football|73         |
+|England          |Championship         |12,191 |Sheffield Utd           |api_football|62         |
+|England          |Championship         |12,199 |Sheffield Wednesday     |api_football|74         |
+|England          |Championship         |11,909 |Southampton             |api_football|41         |
+|England          |Championship         |12,200 |Stoke City              |api_football|75         |
+|England          |Championship         |12,202 |Sunderland              |api_football|746        |
+|England          |Championship         |12,201 |Swansea                 |api_football|76         |
+|England          |Championship         |12,184 |Watford                 |api_football|38         |
+|England          |Championship         |12,190 |West Brom               |api_football|60         |
+|England          |Championship         |13,030 |Wigan                   |api_football|61         |
+|England          |Premier League       |11,910 |Arsenal                 |api_football|42         |
+|England          |Premier League       |11,922 |Aston Villa             |api_football|66         |
+|England          |Premier League       |11,905 |Bournemouth             |api_football|35         |
+|England          |Premier League       |11,919 |Brentford               |api_football|55         |
+|England          |Premier League       |11,917 |Brighton                |api_football|51         |
+|England          |Premier League       |12,186 |Burnley                 |api_football|44         |
+|England          |Premier League       |11,915 |Chelsea                 |api_football|49         |
+|England          |Premier League       |11,918 |Crystal Palace          |api_football|52         |
+|England          |Premier League       |11,911 |Everton                 |api_football|45         |
+|England          |Premier League       |11,906 |Fulham                  |api_football|36         |
+|England          |Premier League       |11,920 |Ipswich                 |api_football|57         |
+|England          |Premier League       |12,192 |Leeds                   |api_football|63         |
+|England          |Premier League       |11,912 |Leicester               |api_football|46         |
+|England          |Premier League       |11,908 |Liverpool               |api_football|40         |
+|England          |Premier League       |12,207 |Luton                   |api_football|1359       |
+|England          |Premier League       |11,916 |Manchester City         |api_football|50         |
+|England          |Premier League       |11,903 |Manchester United       |api_football|33         |
+|England          |Premier League       |11,904 |Newcastle               |api_football|34         |
+|England          |Premier League       |11,921 |Nottingham Forest       |api_football|65         |
+|England          |Premier League       |12,191 |Sheffield Utd           |api_football|62         |
+|England          |Premier League       |11,909 |Southampton             |api_football|41         |
+|England          |Premier League       |11,913 |Tottenham               |api_football|47         |
+|England          |Premier League       |11,914 |West Ham                |api_football|48         |
+|England          |Premier League       |11,907 |Wolves                  |api_football|39         |
+|France           |Ligue 1              |13,579 |Ajaccio                 |api_football|98         |
+|France           |Ligue 1              |12,102 |Angers                  |api_football|77         |
+|France           |Ligue 1              |12,116 |Auxerre                 |api_football|108        |
+|France           |Ligue 1              |13,369 |Clermont Foot           |api_football|99         |
+|France           |Ligue 1              |13,075 |Estac Troyes            |api_football|110        |
+|France           |Ligue 1              |12,117 |Le Havre                |api_football|111        |
+|France           |Ligue 1              |12,119 |Lens                    |api_football|116        |
+|France           |Ligue 1              |12,103 |Lille                   |api_football|79         |
+|France           |Ligue 1              |12,712 |Lorient                 |api_football|97         |
+|France           |Ligue 1              |12,104 |Lyon                    |api_football|80         |
+|France           |Ligue 1              |12,105 |Marseille               |api_football|81         |
+|France           |Ligue 1              |12,118 |Metz                    |api_football|112        |
+|France           |Ligue 1              |12,110 |Monaco                  |api_football|91         |
+|France           |Ligue 1              |12,106 |Montpellier             |api_football|82         |
+|France           |Ligue 1              |12,107 |Nantes                  |api_football|83         |
+|France           |Ligue 1              |12,108 |Nice                    |api_football|84         |
+|France           |Ligue 1              |12,109 |Paris Saint Germain     |api_football|85         |
+|France           |Ligue 1              |12,111 |Reims                   |api_football|93         |
+|France           |Ligue 1              |12,112 |Rennes                  |api_football|94         |
+|France           |Ligue 1              |12,120 |Saint Etienne           |api_football|1063       |
+|France           |Ligue 1              |12,115 |Stade Brestois 29       |api_football|106        |
+|France           |Ligue 1              |12,113 |Strasbourg              |api_football|95         |
+|France           |Ligue 1              |12,114 |Toulouse                |api_football|96         |
+|Germany          |Bundesliga           |12,070 |1899 Hoffenheim         |api_football|167        |
+|Germany          |Bundesliga           |12,077 |1. FC Heidenheim        |api_football|180        |
+|Germany          |Bundesliga           |12,735 |1. FC K?ln              |api_football|192        |
+|Germany          |Bundesliga           |12,071 |Bayer Leverkusen        |api_football|168        |
+|Germany          |Bundesliga           |12,063 |Bayern M?nchen          |api_football|157        |
+|Germany          |Bundesliga           |12,069 |Borussia Dortmund       |api_football|165        |
+|Germany          |Bundesliga           |12,067 |Borussia M?nchengladbach|api_football|163        |
+|Germany          |Bundesliga           |12,072 |Eintracht Frankfurt     |api_football|169        |
+|Germany          |Bundesliga           |12,073 |FC Augsburg             |api_football|170        |
+|Germany          |Bundesliga           |13,544 |FC Schalke 04           |api_football|174        |
+|Germany          |Bundesliga           |12,079 |FC St. Pauli            |api_football|186        |
+|Germany          |Bundesliga           |13,445 |Fortuna D?sseldorf      |api_football|158        |
+|Germany          |Bundesliga           |12,068 |FSV Mainz 05            |api_football|164        |
+|Germany          |Bundesliga           |12,379 |Hamburger SV            |api_football|175        |
+|Germany          |Bundesliga           |12,920 |Hertha BSC              |api_football|159        |
+|Germany          |Bundesliga           |12,080 |Holstein Kiel           |api_football|191        |
+|Germany          |Bundesliga           |12,075 |RB Leipzig              |api_football|173        |
+|Germany          |Bundesliga           |12,064 |SC Freiburg             |api_football|160        |
+|Germany          |Bundesliga           |13,527 |SV Darmstadt 98         |api_football|181        |
+|Germany          |Bundesliga           |12,081 |SV Elversberg           |api_football|1660       |
+|Germany          |Bundesliga           |12,078 |Union Berlin            |api_football|182        |
+|Germany          |Bundesliga           |12,074 |VfB Stuttgart           |api_football|172        |
+|Germany          |Bundesliga           |12,076 |VfL Bochum              |api_football|176        |
+|Germany          |Bundesliga           |12,065 |VfL Wolfsburg           |api_football|161        |
+|Germany          |Bundesliga           |12,066 |Werder Bremen           |api_football|162        |
+|Italy            |Serie A              |12,122 |AC Milan                |api_football|489        |
+|Italy            |Serie A              |12,128 |AS Roma                 |api_football|497        |
+|Italy            |Serie A              |12,129 |Atalanta                |api_football|499        |
+|Italy            |Serie A              |12,130 |Bologna                 |api_football|500        |
+|Italy            |Serie A              |12,123 |Cagliari                |api_football|490        |
+|Italy            |Serie A              |12,139 |Como                    |api_football|895        |
+|Italy            |Serie A              |13,414 |Cremonese               |api_football|520        |
+|Italy            |Serie A              |12,135 |Empoli                  |api_football|511        |
+|Italy            |Serie A              |12,131 |Fiorentina              |api_football|502        |
+|Italy            |Serie A              |12,751 |Frosinone               |api_football|512        |
+|Italy            |Serie A              |12,126 |Genoa                   |api_football|495        |
+|Italy            |Serie A              |12,133 |Hellas Verona           |api_football|504        |
+|Italy            |Serie A              |12,134 |Inter                   |api_football|505        |
+|Italy            |Serie A              |12,127 |Juventus                |api_football|496        |
+|Italy            |Serie A              |12,121 |Lazio                   |api_football|487        |
+|Italy            |Serie A              |12,138 |Lecce                   |api_football|867        |
+|Italy            |Serie A              |12,140 |Monza                   |api_football|1579       |
+|Italy            |Serie A              |12,124 |Napoli                  |api_football|492        |
+|Italy            |Serie A              |12,137 |Parma                   |api_football|523        |
+|Italy            |Serie A              |13,019 |Salernitana             |api_football|514        |
+|Italy            |Serie A              |12,491 |Sampdoria               |api_football|498        |
+|Italy            |Serie A              |12,303 |Sassuolo                |api_football|488        |
+|Italy            |Serie A              |13,383 |Spezia                  |api_football|515        |
+|Italy            |Serie A              |12,132 |Torino                  |api_football|503        |
+|Italy            |Serie A              |12,125 |Udinese                 |api_football|494        |
+|Italy            |Serie A              |12,136 |Venezia                 |api_football|517        |
+|Netherlands      |Eredivisie           |12,164 |ADO Den Haag            |api_football|198        |
+|Netherlands      |Eredivisie           |12,161 |Ajax                    |api_football|194        |
+|Netherlands      |Eredivisie           |12,179 |Almere City FC          |api_football|419        |
+|Netherlands      |Eredivisie           |12,166 |AZ Alkmaar              |api_football|201        |
+|Netherlands      |Eredivisie           |12,180 |Cambuur                 |api_football|420        |
+|Netherlands      |Eredivisie           |12,165 |De Graafschap           |api_football|199        |
+|Netherlands      |Eredivisie           |12,181 |Den Bosch               |api_football|421        |
+|Netherlands      |Eredivisie           |12,174 |Dordrecht               |api_football|409        |
+|Netherlands      |Eredivisie           |13,306 |Emmen                   |api_football|208        |
+|Netherlands      |Eredivisie           |13,365 |Excelsior               |api_football|196        |
+|Netherlands      |Eredivisie           |12,405 |FC Eindhoven            |api_football|422        |
+|Netherlands      |Eredivisie           |12,604 |FC Volendam             |api_football|416        |
+|Netherlands      |Eredivisie           |12,172 |Feyenoord               |api_football|209        |
+|Netherlands      |Eredivisie           |12,169 |Fortuna Sittard         |api_football|205        |
+|Netherlands      |Eredivisie           |12,175 |GO Ahead Eagles         |api_football|410        |
+|Netherlands      |Eredivisie           |12,167 |Groningen               |api_football|202        |
+|Netherlands      |Eredivisie           |12,173 |Heerenveen              |api_football|210        |
+|Netherlands      |Eredivisie           |12,170 |Heracles                |api_football|206        |
+|Netherlands      |Eredivisie           |13,329 |MVV                     |api_football|412        |
+|Netherlands      |Eredivisie           |12,168 |NAC Breda               |api_football|203        |
+|Netherlands      |Eredivisie           |12,176 |NEC Nijmegen            |api_football|413        |
+|Netherlands      |Eredivisie           |12,160 |PEC Zwolle              |api_football|193        |
+|Netherlands      |Eredivisie           |12,163 |PSV Eindhoven           |api_football|197        |
+|Netherlands      |Eredivisie           |12,921 |Roda                    |api_football|414        |
+|Netherlands      |Eredivisie           |12,182 |Sparta Rotterdam        |api_football|426        |
+|Netherlands      |Eredivisie           |12,183 |Telstar                 |api_football|427        |
+|Netherlands      |Eredivisie           |12,177 |Twente                  |api_football|415        |
+|Netherlands      |Eredivisie           |12,171 |Utrecht                 |api_football|207        |
+|Netherlands      |Eredivisie           |13,027 |Vitesse                 |api_football|200        |
+|Netherlands      |Eredivisie           |12,738 |VVV Venlo               |api_football|204        |
+|Netherlands      |Eredivisie           |12,178 |Waalwijk                |api_football|417        |
+|Netherlands      |Eredivisie           |12,162 |Willem II               |api_football|195        |
+|Portugal         |Primeira Liga        |12,153 |Arouca                  |api_football|240        |
+|Portugal         |Primeira Liga        |12,159 |AVS                     |api_football|21595      |
+|Portugal         |Primeira Liga        |12,141 |Benfica                 |api_football|211        |
+|Portugal         |Primeira Liga        |12,145 |Boavista                |api_football|222        |
+|Portugal         |Primeira Liga        |12,157 |Casa Pia                |api_football|4716       |
+|Portugal         |Primeira Liga        |13,956 |Chaves                  |api_football|223        |
+|Portugal         |Primeira Liga        |12,151 |Estoril                 |api_football|230        |
+|Portugal         |Primeira Liga        |12,158 |Estrela                 |api_football|15130      |
+|Portugal         |Primeira Liga        |12,154 |Famalicao               |api_football|242        |
+|Portugal         |Primeira Liga        |12,152 |Farense                 |api_football|231        |
+|Portugal         |Primeira Liga        |12,142 |FC Porto                |api_football|212        |
+|Portugal         |Primeira Liga        |12,155 |GIL Vicente             |api_football|762        |
+|Portugal         |Primeira Liga        |12,146 |Guimaraes               |api_football|224        |
+|Portugal         |Primeira Liga        |14,641 |Maritimo                |api_football|214        |
+|Portugal         |Primeira Liga        |12,143 |Moreirense              |api_football|215        |
+|Portugal         |Primeira Liga        |12,147 |Nacional                |api_football|225        |
+|Portugal         |Primeira Liga        |14,073 |Pacos Ferreira          |api_football|234        |
+|Portugal         |Primeira Liga        |14,036 |Portimonense            |api_football|216        |
+|Portugal         |Primeira Liga        |12,148 |Rio Ave                 |api_football|226        |
+|Portugal         |Primeira Liga        |12,149 |Santa Clara             |api_football|227        |
+|Portugal         |Primeira Liga        |12,144 |SC Braga                |api_football|217        |
+|Portugal         |Primeira Liga        |12,150 |Sporting CP             |api_football|228        |
+|Portugal         |Primeira Liga        |12,156 |Vizela                  |api_football|810        |

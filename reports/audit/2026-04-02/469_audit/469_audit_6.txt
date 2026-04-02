@@ -1,0 +1,2 @@
+|canonical_league_id|provider_league_id|provider|canonical_team_id|provider_team_id|status|note|
+|-------------------|------------------|--------|-----------------|----------------|------|----|

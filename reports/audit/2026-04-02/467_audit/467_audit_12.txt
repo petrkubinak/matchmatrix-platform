@@ -1,0 +1,6 @@
+|metric                        |value |
+|------------------------------|------|
+|api_football_leagues          |1,219 |
+|api_football_matches          |74,583|
+|api_football_teams            |2,289 |
+|team_provider_map_api_football|2,289 |

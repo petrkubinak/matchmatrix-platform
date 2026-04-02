@@ -1,0 +1,4 @@
+|ext_source      |teams_count|
+|----------------|-----------|
+|football_data   |283        |
+|football_data_uk|117        |

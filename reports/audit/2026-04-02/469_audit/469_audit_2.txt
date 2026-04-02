@@ -1,0 +1,239 @@
+|canonical_country|canonical_league_name|team_id|name                      |ext_source      |ext_team_id       |
+|-----------------|---------------------|-------|--------------------------|----------------|------------------|
+|England          |Championship         |67     |AFC Bournemouth           |football_data   |1044              |
+|England          |Championship         |49     |Aston Villa FC            |football_data   |58                |
+|England          |Championship         |1,006  |Barnsley                  |football_data_uk|Barnsley          |
+|England          |Championship         |32     |Birmingham City FC        |football_data   |332               |
+|England          |Championship         |24     |Blackburn Rovers FC       |football_data   |59                |
+|England          |Championship         |1,003  |Blackpool                 |football_data_uk|Blackpool         |
+|England          |Championship         |1,009  |Bolton                    |football_data_uk|Bolton            |
+|England          |Championship         |65     |Brentford FC              |football_data   |402               |
+|England          |Championship         |43     |Bristol City FC           |football_data   |387               |
+|England          |Championship         |60     |Burnley FC                |football_data   |328               |
+|England          |Championship         |11,886 |Cardiff City FC           |                |                  |
+|England          |Championship         |39     |Charlton Athletic FC      |football_data   |348               |
+|England          |Championship         |45     |Coventry City FC          |football_data   |1076              |
+|England          |Championship         |35     |Derby County FC           |football_data   |342               |
+|England          |Championship         |52     |Fulham FC                 |football_data   |63                |
+|England          |Championship         |11,887 |Huddersfield Town AFC     |                |                  |
+|England          |Championship         |30     |Hull City AFC             |football_data   |322               |
+|England          |Championship         |40     |Ipswich Town FC           |football_data   |349               |
+|England          |Championship         |61     |Leeds United FC           |football_data   |341               |
+|England          |Championship         |33     |Leicester City FC         |football_data   |338               |
+|England          |Championship         |11,888 |Luton Town FC             |                |                  |
+|England          |Championship         |36     |Middlesbrough FC          |football_data   |343               |
+|England          |Championship         |42     |Millwall FC               |football_data   |384               |
+|England          |Championship         |25     |Norwich City FC           |football_data   |68                |
+|England          |Championship         |62     |Nottingham Forest FC      |football_data   |351               |
+|England          |Championship         |47     |Oxford United FC          |football_data   |1082              |
+|England          |Championship         |1,007  |Peterboro                 |football_data_uk|Peterboro         |
+|England          |Championship         |1,001  |Plymouth                  |football_data_uk|Plymouth          |
+|England          |Championship         |31     |Portsmouth FC             |football_data   |325               |
+|England          |Championship         |46     |Preston North End FC      |football_data   |1081              |
+|England          |Championship         |26     |Queens Park Rangers FC    |football_data   |69                |
+|England          |Championship         |1,004  |Reading                   |football_data_uk|Reading           |
+|England          |Championship         |1,002  |Rotherham                 |football_data_uk|Rotherham         |
+|England          |Championship         |41     |Sheffield United FC       |football_data   |356               |
+|England          |Championship         |37     |Sheffield Wednesday FC    |football_data   |345               |
+|England          |Championship         |34     |Southampton FC            |football_data   |340               |
+|England          |Championship         |27     |Stoke City FC             |football_data   |70                |
+|England          |Championship         |57     |Sunderland AFC            |football_data   |71                |
+|England          |Championship         |28     |Swansea City AFC          |football_data   |72                |
+|England          |Championship         |38     |Watford FC                |football_data   |346               |
+|England          |Championship         |29     |West Bromwich Albion FC   |football_data   |74                |
+|England          |Championship         |1,005  |Wigan                     |football_data_uk|Wigan             |
+|England          |Championship         |44     |Wrexham AFC               |football_data   |404               |
+|England          |Championship         |1,008  |Wycombe                   |football_data_uk|Wycombe           |
+|England          |Premier League       |67     |AFC Bournemouth           |football_data   |1044              |
+|England          |Premier League       |48     |Arsenal FC                |football_data   |57                |
+|England          |Premier League       |49     |Aston Villa FC            |football_data   |58                |
+|England          |Premier League       |65     |Brentford FC              |football_data   |402               |
+|England          |Premier League       |64     |Brighton & Hove Albion FC |football_data   |397               |
+|England          |Premier League       |60     |Burnley FC                |football_data   |328               |
+|England          |Premier League       |11,886 |Cardiff City FC           |                |                  |
+|England          |Premier League       |50     |Chelsea FC                |football_data   |61                |
+|England          |Premier League       |63     |Crystal Palace FC         |football_data   |354               |
+|England          |Premier League       |51     |Everton FC                |football_data   |62                |
+|England          |Premier League       |52     |Fulham FC                 |football_data   |63                |
+|England          |Premier League       |11,887 |Huddersfield Town AFC     |                |                  |
+|England          |Premier League       |40     |Ipswich Town FC           |football_data   |349               |
+|England          |Premier League       |61     |Leeds United FC           |football_data   |341               |
+|England          |Premier League       |33     |Leicester City FC         |football_data   |338               |
+|England          |Premier League       |53     |Liverpool FC              |football_data   |64                |
+|England          |Premier League       |11,888 |Luton Town FC             |                |                  |
+|England          |Premier League       |54     |Manchester City FC        |football_data   |65                |
+|England          |Premier League       |55     |Manchester United FC      |football_data   |66                |
+|England          |Premier League       |56     |Newcastle United FC       |football_data   |67                |
+|England          |Premier League       |25     |Norwich City FC           |football_data   |68                |
+|England          |Premier League       |62     |Nottingham Forest FC      |football_data   |351               |
+|England          |Premier League       |41     |Sheffield United FC       |football_data   |356               |
+|England          |Premier League       |34     |Southampton FC            |football_data   |340               |
+|England          |Premier League       |57     |Sunderland AFC            |football_data   |71                |
+|England          |Premier League       |58     |Tottenham Hotspur FC      |football_data   |73                |
+|England          |Premier League       |38     |Watford FC                |football_data   |346               |
+|England          |Premier League       |29     |West Bromwich Albion FC   |football_data   |74                |
+|England          |Premier League       |66     |West Ham United FC        |football_data   |563               |
+|England          |Premier League       |59     |Wolverhampton Wanderers FC|football_data   |76                |
+|France           |Ligue 1              |1,029  |Ajaccio                   |football_data_uk|Ajaccio           |
+|France           |Ligue 1              |503    |AJ Auxerre                |football_data   |519               |
+|France           |Ligue 1              |1,034  |Amiens                    |football_data_uk|Amiens            |
+|France           |Ligue 1              |1,018  |Angers                    |football_data_uk|Angers            |
+|France           |Ligue 1              |510    |Angers SCO                |football_data   |532               |
+|France           |Ligue 1              |90     |AS Monaco FC              |football_data   |548               |
+|France           |Ligue 1              |1,019  |Auxerre                   |football_data_uk|Auxerre           |
+|France           |Ligue 1              |1,031  |Bordeaux                  |football_data_uk|Bordeaux          |
+|France           |Ligue 1              |1,016  |Brest                     |football_data_uk|Brest             |
+|France           |Ligue 1              |1,036  |Caen                      |football_data_uk|Caen              |
+|France           |Ligue 1              |1,028  |Clermont                  |football_data_uk|Clermont          |
+|France           |Ligue 1              |1,032  |Dijon                     |football_data_uk|Dijon             |
+|France           |Ligue 1              |508    |FC Lorient                |football_data   |525               |
+|France           |Ligue 1              |513    |FC Metz                   |football_data   |545               |
+|France           |Ligue 1              |512    |FC Nantes                 |football_data   |543               |
+|France           |Ligue 1              |1,035  |Guingamp                  |football_data_uk|Guingamp          |
+|France           |Ligue 1              |511    |Le Havre AC               |football_data   |533               |
+|France           |Ligue 1              |1,012  |Lens                      |football_data_uk|Lens              |
+|France           |Ligue 1              |504    |Lille OSC                 |football_data   |521               |
+|France           |Ligue 1              |1,020  |Lorient                   |football_data_uk|Lorient           |
+|France           |Ligue 1              |1,021  |Metz                      |football_data_uk|Metz              |
+|France           |Ligue 1              |1,027  |Montpellier               |football_data_uk|Montpellier       |
+|France           |Ligue 1              |1,023  |Nantes                    |football_data_uk|Nantes            |
+|France           |Ligue 1              |1,033  |Nimes                     |football_data_uk|Nimes             |
+|France           |Ligue 1              |505    |OGC Nice                  |football_data   |522               |
+|France           |Ligue 1              |88     |Olympique de Marseille    |football_data   |516               |
+|France           |Ligue 1              |506    |Olympique Lyonnais        |football_data   |523               |
+|France           |Ligue 1              |517    |Paris FC                  |football_data   |1045              |
+|France           |Ligue 1              |89     |Paris Saint-Germain FC    |football_data   |524               |
+|France           |Ligue 1              |514    |Racing Club de Lens       |football_data   |546               |
+|France           |Ligue 1              |516    |RC Strasbourg Alsace      |football_data   |576               |
+|France           |Ligue 1              |1,025  |Reims                     |football_data_uk|Reims             |
+|France           |Ligue 1              |1,010  |Rennes                    |football_data_uk|Rennes            |
+|France           |Ligue 1              |501    |Stade Brestois 29         |football_data   |512               |
+|France           |Ligue 1              |509    |Stade Rennais FC 1901     |football_data   |529               |
+|France           |Ligue 1              |1,026  |St Etienne                |football_data_uk|St Etienne        |
+|France           |Ligue 1              |1,022  |Strasbourg                |football_data_uk|Strasbourg        |
+|France           |Ligue 1              |500    |Toulouse FC               |football_data   |511               |
+|France           |Ligue 1              |1,030  |Troyes                    |football_data_uk|Troyes            |
+|Germany          |Bundesliga           |534    |1. FC Heidenheim 1846     |football_data   |44                |
+|Germany          |Bundesliga           |518    |1. FC Köln                |football_data   |1                 |
+|Germany          |Bundesliga           |533    |1. FC Union Berlin        |football_data   |28                |
+|Germany          |Bundesliga           |527    |1. FSV Mainz 05           |football_data   |15                |
+|Germany          |Bundesliga           |68     |Bayer 04 Leverkusen       |football_data   |3                 |
+|Germany          |Bundesliga           |1,059  |Bielefeld                 |football_data_uk|Bielefeld         |
+|Germany          |Bundesliga           |1,055  |Bochum                    |football_data_uk|Bochum            |
+|Germany          |Bundesliga           |69     |Borussia Dortmund         |football_data   |4                 |
+|Germany          |Bundesliga           |530    |Borussia Mönchengladbach  |football_data   |18                |
+|Germany          |Bundesliga           |1,056  |Darmstadt                 |football_data_uk|Darmstadt         |
+|Germany          |Bundesliga           |71     |Eintracht Frankfurt       |football_data   |19                |
+|Germany          |Bundesliga           |528    |FC Augsburg               |football_data   |16                |
+|Germany          |Bundesliga           |70     |FC Bayern München         |football_data   |5                 |
+|Germany          |Bundesliga           |532    |FC St. Pauli 1910         |football_data   |20                |
+|Germany          |Bundesliga           |1,062  |Fortuna Dusseldorf        |football_data_uk|Fortuna Dusseldorf|
+|Germany          |Bundesliga           |1,060  |Greuther Furth            |football_data_uk|Greuther Furth    |
+|Germany          |Bundesliga           |523    |Hamburger SV              |football_data   |7                 |
+|Germany          |Bundesliga           |1,064  |Hannover                  |football_data_uk|Hannover          |
+|Germany          |Bundesliga           |1,057  |Hertha                    |football_data_uk|Hertha            |
+|Germany          |Bundesliga           |1,054  |Holstein Kiel             |football_data_uk|Holstein Kiel     |
+|Germany          |Bundesliga           |1,063  |Nurnberg                  |football_data_uk|Nurnberg          |
+|Germany          |Bundesliga           |1,061  |Paderborn                 |football_data_uk|Paderborn         |
+|Germany          |Bundesliga           |535    |RB Leipzig                |football_data   |721               |
+|Germany          |Bundesliga           |529    |SC Freiburg               |football_data   |17                |
+|Germany          |Bundesliga           |1,058  |Schalke 04                |football_data_uk|Schalke 04        |
+|Germany          |Bundesliga           |526    |SV Werder Bremen          |football_data   |12                |
+|Germany          |Bundesliga           |519    |TSG 1899 Hoffenheim       |football_data   |2                 |
+|Germany          |Bundesliga           |524    |VfB Stuttgart             |football_data   |10                |
+|Germany          |Bundesliga           |525    |VfL Wolfsburg             |football_data   |11                |
+|Italy            |Serie A              |537    |ACF Fiorentina            |football_data   |99                |
+|Italy            |Serie A              |536    |AC Milan                  |football_data   |98                |
+|Italy            |Serie A              |552    |AC Pisa 1909              |football_data   |487               |
+|Italy            |Serie A              |538    |AS Roma                   |football_data   |100               |
+|Italy            |Serie A              |83     |Atalanta BC               |football_data   |102               |
+|Italy            |Serie A              |1,091  |Benevento                 |football_data_uk|Benevento         |
+|Italy            |Serie A              |540    |Bologna FC 1909           |football_data   |103               |
+|Italy            |Serie A              |1,092  |Brescia                   |football_data_uk|Brescia           |
+|Italy            |Serie A              |1,073  |Cagliari                  |football_data_uk|Cagliari          |
+|Italy            |Serie A              |541    |Cagliari Calcio           |football_data   |104               |
+|Italy            |Serie A              |1,094  |Chievo                    |football_data_uk|Chievo            |
+|Italy            |Serie A              |1,075  |Como                      |football_data_uk|Como              |
+|Italy            |Serie A              |555    |Como 1907                 |football_data   |7397              |
+|Italy            |Serie A              |1,090  |Crotone                   |football_data_uk|Crotone           |
+|Italy            |Serie A              |1,083  |Empoli                    |football_data_uk|Empoli            |
+|Italy            |Serie A              |84     |FC Internazionale Milano  |football_data   |108               |
+|Italy            |Serie A              |1,086  |Frosinone                 |football_data_uk|Frosinone         |
+|Italy            |Serie A              |542    |Genoa CFC                 |football_data   |107               |
+|Italy            |Serie A              |549    |Hellas Verona FC          |football_data   |450               |
+|Italy            |Serie A              |85     |Juventus FC               |football_data   |109               |
+|Italy            |Serie A              |1,084  |Monza                     |football_data_uk|Monza             |
+|Italy            |Serie A              |546    |Parma Calcio 1913         |football_data   |112               |
+|Italy            |Serie A              |1,078  |Pisa                      |football_data_uk|Pisa              |
+|Italy            |Serie A              |1,087  |Salernitana               |football_data_uk|Salernitana       |
+|Italy            |Serie A              |1,088  |Sampdoria                 |football_data_uk|Sampdoria         |
+|Italy            |Serie A              |1,093  |Spal                      |football_data_uk|Spal              |
+|Italy            |Serie A              |1,089  |Spezia                    |football_data_uk|Spezia            |
+|Italy            |Serie A              |86     |SSC Napoli                |football_data   |113               |
+|Italy            |Serie A              |545    |SS Lazio                  |football_data   |110               |
+|Italy            |Serie A              |553    |Torino FC                 |football_data   |586               |
+|Italy            |Serie A              |548    |Udinese Calcio            |football_data   |115               |
+|Italy            |Serie A              |550    |US Cremonese              |football_data   |457               |
+|Italy            |Serie A              |554    |US Lecce                  |football_data   |5890              |
+|Italy            |Serie A              |551    |US Sassuolo Calcio        |football_data   |471               |
+|Italy            |Serie A              |1,085  |Venezia                   |football_data_uk|Venezia           |
+|Italy            |Serie A              |1,081  |Verona                    |football_data_uk|Verona            |
+|Netherlands      |Eredivisie           |95     |AFC Ajax                  |football_data   |678               |
+|Netherlands      |Eredivisie           |1,111  |Almere City               |football_data_uk|Almere City       |
+|Netherlands      |Eredivisie           |23,508 |AZ                        |football_data   |682               |
+|Netherlands      |Eredivisie           |1,106  |AZ Alkmaar                |football_data_uk|AZ Alkmaar        |
+|Netherlands      |Eredivisie           |1,114  |Cambuur                   |football_data_uk|Cambuur           |
+|Netherlands      |Eredivisie           |1,117  |Den Haag                  |football_data_uk|Den Haag          |
+|Netherlands      |Eredivisie           |1,115  |FC Emmen                  |football_data_uk|FC Emmen          |
+|Netherlands      |Eredivisie           |563    |FC Groningen              |football_data   |677               |
+|Netherlands      |Eredivisie           |556    |FC Twente '65             |football_data   |666               |
+|Netherlands      |Eredivisie           |562    |FC Utrecht                |football_data   |676               |
+|Netherlands      |Eredivisie           |571    |FC Volendam               |football_data   |1919              |
+|Netherlands      |Eredivisie           |1,098  |Feyenoord                 |football_data_uk|Feyenoord         |
+|Netherlands      |Eredivisie           |23,498 |Feyenoord Rotterdam       |football_data   |675               |
+|Netherlands      |Eredivisie           |572    |Fortuna Sittard           |football_data   |1920              |
+|Netherlands      |Eredivisie           |568    |Go Ahead Eagles           |football_data   |718               |
+|Netherlands      |Eredivisie           |1,118  |Graafschap                |football_data_uk|Graafschap        |
+|Netherlands      |Eredivisie           |558    |Heracles Almelo           |football_data   |671               |
+|Netherlands      |Eredivisie           |565    |NAC Breda                 |football_data   |681               |
+|Netherlands      |Eredivisie           |570    |NEC                       |football_data   |1915              |
+|Netherlands      |Eredivisie           |567    |PEC Zwolle                |football_data   |684               |
+|Netherlands      |Eredivisie           |21,058 |PSV                       |football_data   |674               |
+|Netherlands      |Eredivisie           |1,101  |PSV Eindhoven             |football_data_uk|PSV Eindhoven     |
+|Netherlands      |Eredivisie           |557    |SBV Excelsior             |football_data   |670               |
+|Netherlands      |Eredivisie           |559    |SC Heerenveen             |football_data   |673               |
+|Netherlands      |Eredivisie           |573    |Sparta Rotterdam          |football_data   |6806              |
+|Netherlands      |Eredivisie           |569    |Telstar 1963              |football_data   |1912              |
+|Netherlands      |Eredivisie           |1,113  |Vitesse                   |football_data_uk|Vitesse           |
+|Netherlands      |Eredivisie           |1,116  |VVV Venlo                 |football_data_uk|VVV Venlo         |
+|Netherlands      |Eredivisie           |1,112  |Waalwijk                  |football_data_uk|Waalwijk          |
+|Netherlands      |Eredivisie           |1,110  |Willem II                 |football_data_uk|Willem II         |
+|Portugal         |Primeira Liga        |1,140  |Aves                      |football_data_uk|Aves              |
+|Portugal         |Primeira Liga        |591    |AVS                       |football_data   |10340             |
+|Portugal         |Primeira Liga        |1,139  |Belenenses                |football_data_uk|Belenenses        |
+|Portugal         |Primeira Liga        |1,132  |Boavista                  |football_data_uk|Boavista          |
+|Portugal         |Primeira Liga        |588    |Casa Pia AC               |football_data   |6618              |
+|Portugal         |Primeira Liga        |582    |CD Nacional               |football_data   |5529              |
+|Portugal         |Primeira Liga        |583    |CD Santa Clara            |football_data   |5530              |
+|Portugal         |Primeira Liga        |580    |CD Tondela                |football_data   |1049              |
+|Portugal         |Primeira Liga        |590    |CF Estrela da Amadora     |football_data   |9136              |
+|Portugal         |Primeira Liga        |1,136  |Chaves                    |football_data_uk|Chaves            |
+|Portugal         |Primeira Liga        |1,133  |Farense                   |football_data_uk|Farense           |
+|Portugal         |Primeira Liga        |589    |FC Alverca                |football_data   |7822              |
+|Portugal         |Primeira Liga        |579    |FC Arouca                 |football_data   |712               |
+|Portugal         |Primeira Liga        |584    |FC Famalicão              |football_data   |5531              |
+|Portugal         |Primeira Liga        |576    |FC Porto                  |football_data   |503               |
+|Portugal         |Primeira Liga        |1,142  |Feirense                  |football_data_uk|Feirense          |
+|Portugal         |Primeira Liga        |577    |GD Estoril Praia          |football_data   |582               |
+|Portugal         |Primeira Liga        |585    |Gil Vicente FC            |football_data   |5533              |
+|Portugal         |Primeira Liga        |1,137  |Maritimo                  |football_data_uk|Maritimo          |
+|Portugal         |Primeira Liga        |578    |Moreirense FC             |football_data   |583               |
+|Portugal         |Primeira Liga        |1,138  |Pacos Ferreira            |football_data_uk|Pacos Ferreira    |
+|Portugal         |Primeira Liga        |1,134  |Portimonense              |football_data_uk|Portimonense      |
+|Portugal         |Primeira Liga        |574    |Rio Ave FC                |football_data   |496               |
+|Portugal         |Primeira Liga        |1,141  |Setubal                   |football_data_uk|Setubal           |
+|Portugal         |Primeira Liga        |587    |Sporting Clube de Braga   |football_data   |5613              |
+|Portugal         |Primeira Liga        |87     |Sporting Clube de Portugal|football_data   |498               |
+|Portugal         |Primeira Liga        |99     |Sport Lisboa e Benfica    |football_data   |1903              |
+|Portugal         |Primeira Liga        |586    |Vitória SC                |football_data   |5543              |
+|Portugal         |Primeira Liga        |1,135  |Vizela                    |football_data_uk|Vizela            |

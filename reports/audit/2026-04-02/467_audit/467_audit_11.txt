@@ -1,0 +1,4 @@
+|provider        |rows_count|
+|----------------|----------|
+|football_data   |260       |
+|football_data_uk|118       |
