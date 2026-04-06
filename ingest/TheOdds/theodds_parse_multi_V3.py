@@ -15,6 +15,12 @@ V3:
     LOW_COVERAGE
 - zachovává RAW save, api_import_runs, unmatched reporty
 - používá canonical lookup vrstvu (v_preferred_team_name_lookup + v_canonical_match_lookup)
+- DOPLNĚN fallback resolver přes provider_map / team_map / alias_map
+- DOPLNĚN linker attach reason:
+    EXACT_PAIR_EXACT_KICKOFF
+    EXACT_PAIR_TIME_TOLERANCE
+    FALSE_PAIRING_BLACKLIST
+- DOPLNĚN safe UTF-8 print pro Windows konzoli
 """
 
 from __future__ import annotations
@@ -29,6 +35,35 @@ from typing import Any, Iterable
 
 import psycopg2
 import requests
+
+# ------------------------------------------------------------
+# Safe UTF-8 output pro Windows konzoli
+# ------------------------------------------------------------
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+if hasattr(sys.stderr, "reconfigure"):
+    try:
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
+
+def safe_print(*args, **kwargs):
+    try:
+        print(*args, **kwargs)
+    except UnicodeEncodeError:
+        cleaned = []
+        for a in args:
+            try:
+                cleaned.append(str(a).encode("utf-8", errors="replace").decode("utf-8", errors="replace"))
+            except Exception:
+                cleaned.append(repr(a))
+        print(*cleaned, **kwargs)
+
 
 # ------------------------------------------------------------
 # Přidání PROJECT_ROOT do sys.path kvůli importu worker helperu
@@ -48,7 +83,10 @@ from workers.theodds_matching_v3 import (  # noqa: E402
 # ------------------------------------------------------------
 # ENV / KONFIG
 # ------------------------------------------------------------
-DB_DSN = os.environ["DB_DSN"]
+DB_DSN = os.environ.get(
+    "DB_DSN",
+    "host=localhost port=5432 dbname=matchmatrix user=matchmatrix password=matchmatrix_pass",
+)
 THEODDS_API_KEY = os.environ.get("THEODDS_API_KEY")
 
 THEODDS_BASE_URL = os.environ.get("THEODDS_BASE_URL", "https://api.the-odds-api.com/v4").rstrip("/")
@@ -60,6 +98,7 @@ THEODDS_MIN_TEAMS_PRESENT = int(os.environ.get("THEODDS_MIN_TEAMS_PRESENT", "35"
 
 TEAM_MATCH_THRESHOLD = float(os.environ.get("THEODDS_TEAM_MATCH_THRESHOLD", "0.78"))
 LOW_COVERAGE_THRESHOLD = float(os.environ.get("THEODDS_LOW_COVERAGE_THRESHOLD", "0.75"))
+
 
 # ------------------------------------------------------------
 # DB helpers
@@ -179,6 +218,8 @@ def load_team_maps(conn) -> tuple[dict[str, int], dict[str, int], dict[str, int]
     alias_map: dict[str, int] = {}
     team_map: dict[str, int] = {}
 
+    future_match_map = load_future_match_team_map(conn, days_ahead=120)
+
     # 1) provider map
     with conn.cursor() as cur:
         cur.execute(
@@ -238,8 +279,11 @@ def load_team_maps(conn) -> tuple[dict[str, int], dict[str, int], dict[str, int]
             tid = int(tid)
 
             k1 = norm_team_key(name or "")
-            if k1 and k1 not in team_map:
-                team_map[k1] = tid
+            if k1:
+                if k1 in future_match_map:
+                    team_map[k1] = future_match_map[k1]
+                elif k1 not in team_map:
+                    team_map[k1] = tid
 
             if ext_source == "football_data_uk" and ext_team_id:
                 k2 = norm_team_key(ext_team_id or "")
@@ -297,6 +341,23 @@ def load_preferred_team_lookup(conn) -> dict[str, int]:
     return lookup
 
 
+def _insert_theodds_alias_if_missing(conn, team_id: int, alias_raw: str) -> None:
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO public.team_aliases(team_id, alias, source)
+            SELECT %s, %s, 'theodds'
+            WHERE NOT EXISTS (
+                SELECT 1
+                FROM public.team_aliases ta
+                WHERE ta.source = 'theodds'
+                  AND lower(ta.alias) = lower(%s)
+            )
+            """,
+            (team_id, alias_raw, alias_raw),
+        )
+
+
 def resolve_team_id_theodds_canonical(
     conn,
     preferred_lookup: dict[str, int],
@@ -346,6 +407,63 @@ def resolve_team_id_theodds_canonical(
     return None, best_name, score
 
 
+def resolve_team_id_theodds(
+    conn,
+    preferred_lookup: dict[str, int],
+    provider_map: dict[str, int],
+    alias_map: dict[str, int],
+    team_map: dict[str, int],
+    team_name_raw: str,
+    auto_insert_alias: bool = True,
+) -> int | None:
+    """
+    Fallback resolver:
+    1) v_preferred_team_name_lookup
+    2) team_provider_map(provider='theodds')
+    3) canonical teams
+    4) team_aliases(source='theodds')
+    """
+    key = norm_team_key(team_name_raw or "")
+    if not key:
+        return None
+
+    tid = preferred_lookup.get(key)
+    if tid is not None:
+        if auto_insert_alias:
+            try:
+                _insert_theodds_alias_if_missing(conn, tid, team_name_raw)
+                conn.commit()
+            except Exception:
+                try:
+                    conn.rollback()
+                except Exception:
+                    pass
+        return int(tid)
+
+    tid = provider_map.get(key)
+    if tid is not None:
+        return int(tid)
+
+    tid = team_map.get(key)
+    if tid is not None:
+        if auto_insert_alias:
+            try:
+                _insert_theodds_alias_if_missing(conn, tid, team_name_raw)
+                conn.commit()
+            except Exception:
+                try:
+                    conn.rollback()
+                except Exception:
+                    pass
+        return int(tid)
+
+    tid = alias_map.get(key)
+    if tid is not None:
+        return int(tid)
+
+    return None
+
+
 def find_match_id_canonical(conn, home_team_id: int, away_team_id: int, kickoff_iso: str, sport_key: str | None = None):
     """
     Hledání zápasu přes public.v_canonical_match_lookup.
@@ -379,43 +497,17 @@ def find_match_id_canonical(conn, home_team_id: int, away_team_id: int, kickoff_
         return r[0] if r else None
 
 
-def _insert_theodds_alias_if_missing(conn, team_id: int, alias_raw: str) -> None:
-    with conn.cursor() as cur:
-        cur.execute(
-            """
-            INSERT INTO public.team_aliases(team_id, alias, source)
-            SELECT %s, %s, 'theodds'
-            WHERE NOT EXISTS (
-                SELECT 1
-                FROM public.team_aliases ta
-                WHERE ta.source = 'theodds'
-                  AND lower(ta.alias) = lower(%s)
-            )
-            """,
-            (team_id, alias_raw, alias_raw),
-        )
-
-
-def load_candidate_names(provider_map: dict[str, int], alias_map: dict[str, int], team_map: dict[str, int]) -> list[str]:
-    return sorted(set(provider_map.keys()) | set(alias_map.keys()) | set(team_map.keys()))
-
-
-def resolve_team_id_theodds(
-    conn,
-    preferred_lookup: dict[str, int],
-    team_name_raw: str,
-    auto_insert_alias: bool = True,
-) -> tuple[int | None, str | None, float]:
+def find_match_id(conn, home_team_id: int, away_team_id: int, kickoff_iso: str, sport_key: str | None = None):
     """
-    Backward-compatible wrapper.
-    Nově používá preferovaný canonical lookup místo staré provider/canonical/alias logiky.
+    Backward-compatible public match lookup wrapper.
+    Nově deleguje na kanonický lookup přes v_canonical_match_lookup.
     """
-    preferred_lookup = load_preferred_team_lookup(conn)
-    return resolve_team_id_theodds_canonical(
+    return find_match_id_canonical(
         conn=conn,
-        preferred_lookup=preferred_lookup,
-        team_name_raw=team_name_raw,
-        auto_insert_alias=auto_insert_alias,
+        home_team_id=home_team_id,
+        away_team_id=away_team_id,
+        kickoff_iso=kickoff_iso,
+        sport_key=sport_key,
     )
 
 
@@ -479,20 +571,6 @@ def get_or_create_bookmaker(conn, btitle: str, bregion: str | None, bkey: str):
             )
             row = cur.fetchone()
             return row[0] if row else None
-
-
-def find_match_id(conn, home_team_id: int, away_team_id: int, kickoff_iso: str, sport_key: str | None = None):
-    """
-    Backward-compatible public match lookup wrapper.
-    Nově deleguje na kanonický lookup přes v_canonical_match_lookup.
-    """
-    return find_match_id_canonical(
-        conn=conn,
-        home_team_id=home_team_id,
-        away_team_id=away_team_id,
-        kickoff_iso=kickoff_iso,
-        sport_key=sport_key,
-    )
 
 
 def odds_exists(conn, match_id: int, bookmaker_id: int, market_outcome_id: int, odd_value: float):
@@ -563,6 +641,9 @@ def parse_and_insert_odds(
     conn,
     sport_key: str,
     preferred_lookup: dict[str, int],
+    provider_map: dict[str, int],
+    alias_map: dict[str, int],
+    team_map: dict[str, int],
     outcome_map: dict[str, int],
     payload: Any,
     unmatched_rows: list[dict[str, Any]],
@@ -591,17 +672,122 @@ def parse_and_insert_odds(
             preferred_lookup=preferred_lookup,
             team_name_raw=home_team_name,
         )
+        if home_id is None:
+            fallback_home_id = resolve_team_id_theodds(
+                conn=conn,
+                preferred_lookup=preferred_lookup,
+                provider_map=provider_map,
+                alias_map=alias_map,
+                team_map=team_map,
+                team_name_raw=home_team_name,
+                auto_insert_alias=True,
+            )
+            if fallback_home_id is not None:
+                home_id = fallback_home_id
+                best_home_candidate = norm_team_key(home_team_name)
+                best_home_score = 1.0
+
         away_id, best_away_candidate, best_away_score = resolve_team_id_theodds_canonical(
             conn=conn,
             preferred_lookup=preferred_lookup,
             team_name_raw=away_team_name,
         )
+        if away_id is None:
+            fallback_away_id = resolve_team_id_theodds(
+                conn=conn,
+                preferred_lookup=preferred_lookup,
+                provider_map=provider_map,
+                alias_map=alias_map,
+                team_map=team_map,
+                team_name_raw=away_team_name,
+                auto_insert_alias=True,
+            )
+            if fallback_away_id is not None:
+                away_id = fallback_away_id
+                best_away_candidate = norm_team_key(away_team_name)
+                best_away_score = 1.0
 
         similarity_score = min(best_home_score or 0.0, best_away_score or 0.0)
 
         match_id = None
+        attach_reason = None
+
         if home_id and away_id:
-            match_id = find_match_id(conn, home_id, away_id, commence_time, sport_key=sport_key)
+            # --------------------------------------------------
+            # 1) STRICT MATCH (±6 hodin)
+            # --------------------------------------------------
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT v.match_id, v.kickoff
+                    FROM public.v_canonical_match_lookup v
+                    LEFT JOIN public.leagues l
+                    ON l.id = v.league_id
+                    WHERE v.canonical_home_team_id = %s
+                    AND v.canonical_away_team_id = %s
+                    AND v.kickoff BETWEEN (%s)::timestamptz - interval '6 hours'
+                                    AND (%s)::timestamptz + interval '6 hours'
+                    AND (
+                            l.theodds_key = %s
+                            OR l.theodds_key IS NULL
+                        )
+                    ORDER BY
+                        CASE WHEN l.theodds_key = %s THEN 0 ELSE 1 END,
+                        ABS(EXTRACT(EPOCH FROM (v.kickoff - (%s)::timestamptz))) ASC
+                    LIMIT 1
+                    """,
+                    (home_id, away_id, commence_time, commence_time, sport_key, sport_key, commence_time),
+                )
+                r = cur.fetchone()
+
+            if r:
+                match_id = r[0]
+                attach_reason = "EXACT_PAIR_EXACT_KICKOFF"
+
+            # --------------------------------------------------
+            # 2) TIME TOLERANCE MATCH (±72 hodin)
+            # --------------------------------------------------
+            if not match_id:
+                with conn.cursor() as cur:
+                    cur.execute(
+                        """
+                        SELECT v.match_id, v.kickoff
+                        FROM public.v_canonical_match_lookup v
+                        LEFT JOIN public.leagues l
+                        ON l.id = v.league_id
+                        WHERE v.canonical_home_team_id = %s
+                        AND v.canonical_away_team_id = %s
+                        AND v.kickoff BETWEEN (%s)::timestamptz - interval '72 hours'
+                                        AND (%s)::timestamptz + interval '72 hours'
+                        AND (
+                                l.theodds_key = %s
+                                OR l.theodds_key IS NULL
+                            )
+                        ORDER BY
+                            CASE WHEN l.theodds_key = %s THEN 0 ELSE 1 END,
+                            ABS(EXTRACT(EPOCH FROM (v.kickoff - (%s)::timestamptz))) ASC
+                        LIMIT 1
+                        """,
+                        (home_id, away_id, commence_time, commence_time, sport_key, sport_key, commence_time),
+                    )
+                    r = cur.fetchone()
+
+                if r:
+                    match_id = r[0]
+                    attach_reason = "EXACT_PAIR_TIME_TOLERANCE"
+
+            # --------------------------------------------------
+            # 3) FALSE PAIR GUARD
+            # --------------------------------------------------
+            if not match_id:
+                if best_home_score < 0.9 or best_away_score < 0.9:
+                    attach_reason = "FALSE_PAIRING_BLACKLIST"
+
+            # --------------------------------------------------
+            # 4) EXACT PAIR exists, but no fixture found
+            # --------------------------------------------------
+            if not match_id and attach_reason is None:
+                attach_reason = "EXACT_PAIR_NO_FIXTURE_FOUND"
 
         issue_code = classify_matching_issue(
             home_name=home_team_name,
@@ -616,82 +802,97 @@ def parse_and_insert_odds(
             pass
         elif issue_code.startswith("NO_TEAM_MATCH"):
             skipped_no_team += 1
-            print("NO TEAM MATCH:", home_team_name, "vs", away_team_name)
-            add_unmatched_row(
-                unmatched_rows,
-                build_match_debug_payload(
-                    provider_name="theodds",
-                    league_name=sport_key,
-                    event_name=f"{home_team_name} vs {away_team_name}",
-                    home_name_raw=home_team_name,
-                    away_name_raw=away_team_name,
-                    home_name_normalized=norm_team_key(home_team_name),
-                    away_name_normalized=norm_team_key(away_team_name),
-                    best_home_candidate=best_home_candidate,
-                    best_away_candidate=best_away_candidate,
-                    best_home_score=best_home_score,
-                    best_away_score=best_away_score,
-                    match_id=match_id,
-                    issue_code=issue_code,
-                ),
+            safe_print("NO TEAM MATCH:", home_team_name, "vs", away_team_name)
+
+            debug_row = build_match_debug_payload(
+                provider_name="theodds",
+                league_name=sport_key,
+                event_name=f"{home_team_name} vs {away_team_name}",
+                home_name_raw=home_team_name,
+                away_name_raw=away_team_name,
+                home_name_normalized=norm_team_key(home_team_name),
+                away_name_normalized=norm_team_key(away_team_name),
+                best_home_candidate=best_home_candidate,
+                best_away_candidate=best_away_candidate,
+                best_home_score=best_home_score,
+                best_away_score=best_away_score,
+                match_id=match_id,
+                issue_code=issue_code,
             )
+            debug_row["attach_reason"] = attach_reason
+
+            add_unmatched_row(unmatched_rows, debug_row)
             continue
+
         elif issue_code == "LOW_COVERAGE":
             skipped_low_coverage += 1
-            print(
+            safe_print(
                 "LOW COVERAGE:",
                 home_team_name, f"(score={best_home_score})",
                 "vs",
                 away_team_name, f"(score={best_away_score})",
                 "| kickoff:", commence_time,
             )
-            add_unmatched_row(
-                unmatched_rows,
-                build_match_debug_payload(
-                    provider_name="theodds",
-                    league_name=sport_key,
-                    event_name=f"{home_team_name} vs {away_team_name}",
-                    home_name_raw=home_team_name,
-                    away_name_raw=away_team_name,
-                    home_name_normalized=norm_team_key(home_team_name),
-                    away_name_normalized=norm_team_key(away_team_name),
-                    best_home_candidate=best_home_candidate,
-                    best_away_candidate=best_away_candidate,
-                    best_home_score=best_home_score,
-                    best_away_score=best_away_score,
-                    match_id=match_id,
-                    issue_code=issue_code,
-                ),
+
+            debug_row = build_match_debug_payload(
+                provider_name="theodds",
+                league_name=sport_key,
+                event_name=f"{home_team_name} vs {away_team_name}",
+                home_name_raw=home_team_name,
+                away_name_raw=away_team_name,
+                home_name_normalized=norm_team_key(home_team_name),
+                away_name_normalized=norm_team_key(away_team_name),
+                best_home_candidate=best_home_candidate,
+                best_away_candidate=best_away_candidate,
+                best_home_score=best_home_score,
+                best_away_score=best_away_score,
+                match_id=match_id,
+                issue_code=issue_code,
             )
+            debug_row["attach_reason"] = attach_reason
+
+            add_unmatched_row(unmatched_rows, debug_row)
             continue
+
         elif issue_code == "NO_MATCH_ID":
             skipped_no_match += 1
-            print(
+            safe_print(
                 "NO MATCH ID:",
                 home_team_name, f"(id={home_id})",
                 "vs",
                 away_team_name, f"(id={away_id})",
-                "| kickoff:", commence_time
+                "| kickoff:", commence_time,
+                "| reason:", attach_reason,
             )
-            add_unmatched_row(
-                unmatched_rows,
-                build_match_debug_payload(
-                    provider_name="theodds",
-                    league_name=sport_key,
-                    event_name=f"{home_team_name} vs {away_team_name}",
-                    home_name_raw=home_team_name,
-                    away_name_raw=away_team_name,
-                    home_name_normalized=norm_team_key(home_team_name),
-                    away_name_normalized=norm_team_key(away_team_name),
-                    best_home_candidate=best_home_candidate,
-                    best_away_candidate=best_away_candidate,
-                    best_home_score=best_home_score,
-                    best_away_score=best_away_score,
-                    match_id=match_id,
-                    issue_code=issue_code,
-                ),
+
+            debug_row = build_match_debug_payload(
+                provider_name="theodds",
+                league_name=sport_key,
+                event_name=f"{home_team_name} vs {away_team_name}",
+                home_name_raw=home_team_name,
+                away_name_raw=away_team_name,
+                home_name_normalized=norm_team_key(home_team_name),
+                away_name_normalized=norm_team_key(away_team_name),
+                best_home_candidate=best_home_candidate,
+                best_away_candidate=best_away_candidate,
+                best_home_score=best_home_score,
+                best_away_score=best_away_score,
+                match_id=match_id,
+                issue_code=issue_code,
             )
+            debug_row["attach_reason"] = attach_reason
+
+            add_unmatched_row(unmatched_rows, debug_row)
             continue
+
+        safe_print(
+            "ATTACH DEBUG:",
+            home_team_name,
+            "vs",
+            away_team_name,
+            "| reason:",
+            attach_reason,
+        )
 
         # MATCH_OK -> insert odds
         for bookmaker in event.get("bookmakers", []) or []:
@@ -726,7 +927,27 @@ def parse_and_insert_odds(
                     if not market_outcome_id:
                         continue
 
-                    odd_value = float(price)
+                    try:
+                        odd_value = float(price)
+                    except Exception:
+                        continue
+
+                    # DB public.odds.odd_value = numeric(6,3)
+                    # => povolený rozsah je přibližně 0.001 až 999.999
+                    # extrémní / vadné hodnoty raději přeskočíme
+                    if odd_value <= 0:
+                        continue
+
+                    if odd_value >= 1000:
+                        safe_print(
+                            "SKIP odd_value out of range:",
+                            f"match_id={match_id}",
+                            f"bookmaker_id={bookmaker_id}",
+                            f"market_outcome_id={market_outcome_id}",
+                            f"odd_value={odd_value}",
+                        )
+                        continue
+
                     if odds_exists(conn, match_id, bookmaker_id, market_outcome_id, odd_value):
                         continue
 
@@ -752,7 +973,7 @@ def parse_and_insert_odds(
                             conn.rollback()
                         except Exception:
                             pass
-                        print("DB ERROR insert odds:", e)
+                        safe_print("DB ERROR insert odds:", e)
                         continue
 
     return inserted, skipped_no_team, skipped_no_match, skipped_low_coverage
@@ -802,6 +1023,7 @@ def write_unmatched_reports(run_id: int, unmatched_rows: list[dict[str, Any]]) -
         "best_away_score",
         "match_id",
         "issue_code",
+        "attach_reason",
     ]
 
     with csv_path.open("w", newline="", encoding="utf-8-sig") as f:
@@ -860,11 +1082,15 @@ def main():
 
     try:
         run_id = start_import_run(conn, source="theodds")
-        print("RUN_ID:", run_id)
+        safe_print("RUN_ID:", run_id)
 
         preferred_lookup = load_preferred_team_lookup(conn)
+        provider_map, alias_map, team_map = load_team_maps(conn)
 
-        print("PREFERRED LOOKUP loaded:", len(preferred_lookup))
+        safe_print("PREFERRED LOOKUP loaded:", len(preferred_lookup))
+        safe_print("PROVIDER MAP loaded    :", len(provider_map))
+        safe_print("ALIAS MAP loaded       :", len(alias_map))
+        safe_print("TEAM MAP loaded        :", len(team_map))
 
         market_id = get_h2h_market_id(conn)
         outcome_map = get_market_outcome_map(conn, market_id)
@@ -873,10 +1099,10 @@ def main():
         league_coverage = load_league_team_coverage(conn)
 
         totals["leagues_total"] = len(sport_keys)
-        print("Leagues from DB (theodds_key):", len(sport_keys))
+        safe_print("Leagues from DB (theodds_key):", len(sport_keys))
 
         for i, sport_key in enumerate(sport_keys, start=1):
-            print(f"[{i}/{len(sport_keys)}] Fetching: {sport_key}")
+            safe_print(f"[{i}/{len(sport_keys)}] Fetching: {sport_key}")
             status, payload, endpoint = fetch_odds_for_sport(sport_key)
 
             raw_payload = {
@@ -892,11 +1118,11 @@ def main():
                     conn.rollback()
                 except Exception:
                     pass
-                print("DB ERROR insert api_raw_payloads:", e)
+                safe_print("DB ERROR insert api_raw_payloads:", e)
 
             if status == 422:
                 totals["leagues_422"] += 1
-                print("SKIP 422 (plan limitation):", sport_key)
+                safe_print("SKIP 422 (plan limitation):", sport_key)
                 time.sleep(THEODDS_SLEEP_SEC)
                 continue
 
@@ -905,19 +1131,22 @@ def main():
                 msg = None
                 if isinstance(payload, dict):
                     msg = payload.get("message") or payload.get("error") or payload.get("raw_text")
-                print("ERROR league:", sport_key, "status:", status, "msg:", (msg or "")[:200])
+                safe_print("ERROR league:", sport_key, "status:", status, "msg:", (msg or "")[:200])
                 time.sleep(THEODDS_SLEEP_SEC)
                 continue
 
             teams_present = league_coverage.get(sport_key, 0)
             if teams_present < THEODDS_MIN_TEAMS_PRESENT:
-                print(f"LOW COVERAGE (teams_present={teams_present} < {THEODDS_MIN_TEAMS_PRESENT}):", sport_key)
+                safe_print(f"LOW COVERAGE (teams_present={teams_present} < {THEODDS_MIN_TEAMS_PRESENT}):", sport_key)
 
             try:
                 ins, sk_team, sk_match, sk_cov = parse_and_insert_odds(
                     conn,
                     sport_key,
                     preferred_lookup,
+                    provider_map,
+                    alias_map,
+                    team_map,
                     outcome_map,
                     payload,
                     unmatched_rows,
@@ -930,7 +1159,7 @@ def main():
                 if ins > 0:
                     totals["match_ok_leagues"] += 1
 
-                print(
+                safe_print(
                     "Inserted odds:", ins,
                     "| no_team:", sk_team,
                     "| no_match:", sk_match,
@@ -943,7 +1172,7 @@ def main():
                     conn.rollback()
                 except Exception:
                     pass
-                print("ERROR parsing/inserting league:", sport_key, e)
+                safe_print("ERROR parsing/inserting league:", sport_key, e)
 
             time.sleep(THEODDS_SLEEP_SEC)
 
@@ -952,7 +1181,7 @@ def main():
         totals["unmatched_rows"] = len(unmatched_rows)
 
         finish_import_run(conn, run_id, status="ok", details=totals)
-        print("DONE. Summary:", totals)
+        safe_print("DONE. Summary:", totals)
 
     except Exception as e:
         if conn:

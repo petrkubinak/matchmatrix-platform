@@ -1,0 +1,22 @@
+﻿provider,league_name,event_name,home_raw,away_raw,home_normalized,away_normalized,best_home_candidate,best_away_candidate,best_home_score,best_away_score,match_id,issue_code
+theodds,soccer_france_ligue_one,RC Lens vs Paris Saint Germain,RC Lens,Paris Saint Germain,rc lens,paris saint germain,rc lens,paris saint germain,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_france_ligue_one,Rennes vs Angers,Rennes,Angers,rennes,angers,rennes,angers,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_france_ligue_one,Brest vs Strasbourg,Brest,Strasbourg,brest,strasbourg,brest,strasbourg,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_france_ligue_one,RC Lens vs Toulouse,RC Lens,Toulouse,rc lens,toulouse,rc lens,toulouse,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_france_ligue_one,Angers vs Le Havre,Angers,Le Havre,angers,le havre,angers,le havre,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_france_ligue_one,Nantes vs Brest,Nantes,Brest,nantes,brest,nantes,brest,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_france_ligue_one,Strasbourg vs Rennes,Strasbourg,Rennes,strasbourg,rennes,strasbourg,rennes,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,Udinese vs Como,Udinese,Como,udinese,como,udinese,como,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,AS Roma vs Pisa,AS Roma,Pisa,as roma,pisa,as roma,pisa,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,Cagliari vs Cremonese,Cagliari,Cremonese,cagliari,cremonese,cagliari,cremonese,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,Como vs Inter Milan,Como,Inter Milan,como,inter milan,como,inter milan,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,Sassuolo vs Como,Sassuolo,Como,sassuolo,como,sassuolo,como,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,Inter Milan vs Cagliari,Inter Milan,Cagliari,inter milan,cagliari,inter milan,cagliari,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,Pisa vs Genoa,Pisa,Genoa,pisa,genoa,pisa,genoa,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,Sparta Rotterdam vs PSV Eindhoven,Sparta Rotterdam,PSV Eindhoven,sparta rotterdam,psv eindhoven,sparta rotterdam,psv eindhoven,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,FC Zwolle vs Excelsior,FC Zwolle,Excelsior,zwolle,excelsior,zwolle,excelsior,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,NEC Nijmegen vs Feyenoord,NEC Nijmegen,Feyenoord,nec nijmegen,feyenoord,nec nijmegen,feyenoord,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,AZ Alkmaar vs Heerenveen,AZ Alkmaar,Heerenveen,az alkmaar,heerenveen,az alkmaar,heerenveen,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,Go Ahead Eagles vs AZ Alkmaar,Go Ahead Eagles,AZ Alkmaar,go ahead eagles,az alkmaar,go ahead eagles,az alkmaar,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,PSV Eindhoven vs FC Zwolle,PSV Eindhoven,FC Zwolle,psv eindhoven,zwolle,psv eindhoven,zwolle,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,Feyenoord vs Groningen,Feyenoord,Groningen,feyenoord,groningen,feyenoord,groningen,1.0,1.0,,NO_MATCH_ID

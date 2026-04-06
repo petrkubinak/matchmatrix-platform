@@ -1,7 +1,7 @@
 # TicketMatrixPlatform – denní přehled vývoje
 
 Datum: 02.04.2026  
-Čas kontroly systému: 11:28
+Čas kontroly systému: 23:57
 
 ---
 
@@ -24,11 +24,11 @@ Byly zkontrolovány tyto části projektu:
 
 - Celý projekt
 
-Celkem bylo projito 1721 sledovaných souborů.
+Celkem bylo projito 1853 sledovaných souborů.
 
 Ve srovnání s minulým auditem:
-- bylo přidáno 53 nových souborů
-- u 2 souborů proběhla úprava
+- bylo přidáno 132 nových souborů
+- u 3 souborů proběhla úprava
 
 ---
 
@@ -37,7 +37,7 @@ Ve srovnání s minulým auditem:
 Databáze je dostupná a základní stav je následující:
 
 - ligy: 2986
-- týmy: 5437
+- týmy: 5399
 - zápasy: 105603
 - hráči: 1490
 
@@ -56,17 +56,17 @@ Git větev:
 - main
 
 Poslední commit:
-- 38bf38e | 2026-03-31 16:52:13 +0200 | update players pipeline
+- a5d20ae | 2026-04-02 11:37:42 +0200 | %1
 
 Aktuální neuložené změny:
-- M MatchMatrix-platform/.dbeaver/.project-metadata.json.bak
--  M MatchMatrix-platform/.dbeaver/project-metadata.json
--  D ingest/run_theodds_parse_multi_FINAL.bat
--  D ingest/theodds_parse_multi_FINAL.py
--  D reports/audit/2026-03-17/09-48-14/MATCHMATRIX_AUDIT_REPORT.md
--  D reports/audit/2026-03-17/09-48-14/changes.csv
--  D reports/audit/2026-03-17/09-48-14/files.csv
--  D reports/audit/2026-03-17/09-48-14/run_meta.json
+- M MatchMatrix-platform/.dbeaver/project-metadata.json
+-  M db/sql/Script.sql
+-  M reports/audit/latest_snapshot.txt
+-  M reports/audit/latest_system_tree.txt
+-  M unmatched_theodds_165.sql
+- ?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/493_494_audit_suspicious_no_match_resolves.sql"
+- ?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/493_audit_remaining_no_match_groups.sql"
+- ?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/495_fix_team_alias_blacklist_youth.sql"
 
 ---
 
@@ -81,14 +81,14 @@ Na základě dnešního auditu je vidět, že projekt má:
 
 
 Hlavní změněné soubory dnes:
-- ingest\TheOdds\theodds_parse_multi_V3.py
+- db\sql\Script.sql
 - MatchMatrix-platform\.dbeaver\project-metadata.json
-- db\audit\473_audit_manual_team_mapping_candidates.sql
-- db\audit\474_audit_unmapped_top_league_teams_side_by_side.sql
-- db\audit\477_audit_review_batch2_candidates.sql
-- db\audit\481_audit_theodds_against_canonical_match_lookup.sql
-- db\audit\483_audit_theodds_against_preferred_team_name_lookup.sql
-- db\audit\484_audit_suspicious_team_aliases.sql
+- unmatched_theodds_165.sql
+- db\audit\493_494_audit_suspicious_no_match_resolves.sql
+- db\audit\493_audit_remaining_no_match_groups.sql
+- db\audit\496_c_export_team_not_mapped_alias_candidates.sql
+- db\fix\493_audit_remaining_no_match_groups.sql
+- db\sql\496_k_find_last_4_canonical_targets.sql
 
 ---
 

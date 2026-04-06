@@ -1,0 +1,35 @@
+-- 497_t_merge_feyenoord_safe.sql
+-- Cíl:
+-- sloučit duplicitní Feyenoord
+-- OLD = 27529
+-- NEW = 1098
+
+BEGIN;
+
+UPDATE public.league_standings
+SET team_id = 1098
+WHERE team_id = 27529;
+
+UPDATE public.player_season_statistics
+SET team_id = 1098
+WHERE team_id = 27529;
+
+DELETE FROM public.team_aliases a_old
+WHERE a_old.team_id = 27529
+  AND EXISTS (
+      SELECT 1
+      FROM public.team_aliases a_new
+      WHERE a_new.team_id = 1098
+        AND LOWER(BTRIM(a_new.alias)) = LOWER(BTRIM(a_old.alias))
+  );
+
+SELECT public.merge_team(
+    27529,
+    1098,
+    'Audit 497: Eredivisie duplicate cleanup - Feyenoord',
+    'audit_497_merge_feyenoord',
+    true,
+    true
+);
+
+COMMIT;

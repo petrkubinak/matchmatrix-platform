@@ -1,0 +1,188 @@
+|alias_norm         |team_count|team_ids    |team_names                                  |
+|-------------------|----------|------------|--------------------------------------------|
+|ac milan           |2         |27887, 536  |AC Milan                                    |
+|ado den haag       |2         |1117, 12164 |ADO Den Haag | Den Haag                     |
+|ajaccio            |2         |1029, 13579 |Ajaccio                                     |
+|ajax               |2         |12161, 95   |AFC Ajax | Ajax                             |
+|alaves             |2         |12093, 622  |Alaves | Deportivo Alavés                   |
+|almere city fc     |2         |1111, 12179 |Almere City | Almere City FC                |
+|almeria            |2         |1158, 25856 |Almeria                                     |
+|angers             |2         |1018, 12102 |Angers                                      |
+|arouca             |2         |12153, 579  |Arouca | FC Arouca                          |
+|arsenal            |2         |11910, 13102|Arsenal                                     |
+|as roma            |2         |12128, 538  |AS Roma                                     |
+|aston villa        |2         |27927, 49   |Aston Villa | Aston Villa FC                |
+|atalanta           |2         |12129, 83   |Atalanta | Atalanta BC                      |
+|athletic club      |2         |12084, 78   |Athletic Club                               |
+|auxerre            |2         |1019, 12116 |Auxerre                                     |
+|avs                |2         |12159, 591  |AVS                                         |
+|az alkmaar         |2         |1106, 12166 |AZ Alkmaar                                  |
+|barcelona          |2         |12082, 80   |Barcelona | FC Barcelona                    |
+|barnsley           |2         |1006, 12890 |Barnsley                                    |
+|bayer leverkusen   |2         |12071, 68   |Bayer 04 Leverkusen | Bayer Leverkusen      |
+|benfica            |2         |12141, 99   |Benfica | Sport Lisboa e Benfica            |
+|birmingham         |2         |13359, 32   |Birmingham | Birmingham City FC             |
+|blackburn          |2         |12194, 24   |Blackburn | Blackburn Rovers FC             |
+|blackpool          |2         |1003, 13685 |Blackpool                                   |
+|boavista           |2         |1132, 12145 |Boavista                                    |
+|bochum             |2         |1055, 14347 |Bochum                                      |
+|bologna            |2         |26992, 540  |Bologna | Bologna FC 1909                   |
+|bolton             |2         |1009, 12960 |Bolton                                      |
+|borussia dortmund  |2         |12069, 69   |Borussia Dortmund                           |
+|bournemouth        |2         |11905, 67   |AFC Bournemouth | Bournemouth               |
+|brentford          |2         |25875, 65   |Brentford | Brentford FC                    |
+|brighton           |2         |11917, 950  |Brighton                                    |
+|bristol city       |2         |12187, 43   |Bristol City | Bristol City FC              |
+|burnley            |2         |12186, 60   |Burnley | Burnley FC                        |
+|cadiz              |2         |1159, 13513 |Cadiz                                       |
+|cagliari           |2         |1073, 12123 |Cagliari                                    |
+|cambuur            |2         |1114, 12180 |Cambuur                                     |
+|cardiff            |2         |11886, 12185|Cardiff | Cardiff City FC                   |
+|casa pia           |2         |12157, 588  |Casa Pia | Casa Pia AC                      |
+|celta vigo         |2         |12090, 625  |Celta Vigo | RC Celta de Vigo               |
+|charlton           |2         |13320, 39   |Charlton | Charlton Athletic FC             |
+|chaves             |2         |1136, 13956 |Chaves                                      |
+|chelsea            |2         |11915, 2    |Chelsea                                     |
+|como               |2         |1075, 12139 |Como                                        |
+|coventry           |2         |12204, 45   |Coventry | Coventry City FC                 |
+|cremonese          |2         |26491, 550  |Cremonese | US Cremonese                    |
+|crotone            |2         |1090, 26935 |Crotone                                     |
+|crystal palace     |2         |11918, 63   |Crystal Palace | Crystal Palace FC          |
+|de graafschap      |2         |1118, 12165 |De Graafschap | Graafschap                  |
+|derby              |2         |12195, 35   |Derby | Derby County FC                     |
+|eintracht frankfurt|2         |12072, 71   |Eintracht Frankfurt                         |
+|elche              |2         |26687, 623  |Elche | Elche CF                            |
+|emmen              |2         |1115, 13306 |Emmen | FC Emmen                            |
+|empoli             |2         |1083, 27097 |Empoli                                      |
+|espanyol           |2         |25884, 611  |Espanyol | RCD Espanyol de Barcelona        |
+|estoril            |2         |12151, 577  |Estoril | GD Estoril Praia                  |
+|estrela            |2         |12158, 590  |CF Estrela da Amadora | Estrela             |
+|everton            |2         |11911, 51   |Everton | Everton FC                        |
+|excelsior          |2         |13365, 557  |Excelsior | SBV Excelsior                   |
+|famalicao          |2         |12154, 584  |Famalicao | FC Famalicão                    |
+|farense            |2         |1133, 12152 |Farense                                     |
+|fc augsburg        |2         |12073, 528  |FC Augsburg                                 |
+|fc porto           |2         |27770, 576  |FC Porto                                    |
+|fc schalke 04      |2         |1058, 13544 |FC Schalke 04 | Schalke 04                  |
+|fc st. pauli       |2         |12079, 27217|FC St. Pauli                                |
+|fc volendam        |2         |12604, 571  |FC Volendam                                 |
+|feyenoord          |2         |1098, 27529 |Feyenoord                                   |
+|fiorentina         |2         |26994, 537  |ACF Fiorentina | Fiorentina                 |
+|fortuna sittard    |2         |12169, 572  |Fortuna Sittard                             |
+|fsv mainz 05       |2         |12068, 527  |1. FSV Mainz 05 | FSV Mainz 05              |
+|fulham             |2         |11906, 52   |Fulham | Fulham FC                          |
+|genoa              |2         |12126, 542  |Genoa | Genoa CFC                           |
+|getafe             |2         |27486, 613  |Getafe | Getafe CF                          |
+|gil vicente        |2         |12155, 585  |GIL Vicente | Gil Vicente FC                |
+|girona             |2         |12096, 624  |Girona | Girona FC                          |
+|go ahead eagles    |2         |12175, 568  |Go Ahead Eagles | GO Ahead Eagles           |
+|groningen          |2         |12167, 563  |FC Groningen | Groningen                    |
+|guimaraes          |2         |27930, 586  |Guimaraes | Vitória SC                      |
+|hamburger sv       |2         |12379, 523  |Hamburger SV                                |
+|heerenveen         |2         |12173, 559  |Heerenveen | SC Heerenveen                  |
+|hellas verona      |2         |12133, 549  |Hellas Verona | Hellas Verona FC            |
+|heracles           |2         |12170, 558  |Heracles | Heracles Almelo                  |
+|hertha bsc         |2         |1057, 12920 |Hertha | Hertha BSC                         |
+|holstein kiel      |2         |1054, 12080 |Holstein Kiel                               |
+|huddersfield       |2         |11887, 13048|Huddersfield | Huddersfield Town AFC        |
+|hull city          |2         |12193, 30   |Hull City | Hull City AFC                   |
+|inter              |2         |12134, 84   |FC Internazionale Milano | Inter            |
+|ipswich            |2         |11920, 40   |Ipswich | Ipswich Town FC                   |
+|juventus           |2         |12127, 85   |Juventus | Juventus FC                      |
+|las palmas         |2         |1155, 12087 |Las Palmas                                  |
+|lazio              |2         |12121, 545  |Lazio | SS Lazio                            |
+|lecce              |2         |12138, 554  |Lecce | US Lecce                            |
+|leeds              |2         |12192, 956  |Leeds                                       |
+|leganes            |2         |1156, 12089 |Leganes                                     |
+|le havre           |2         |27639, 511  |Le Havre | Le Havre AC                      |
+|lens               |2         |1012, 12119 |Lens                                        |
+|lille              |2         |12103, 504  |Lille | Lille OSC                           |
+|liverpool          |2         |11908, 3    |Liverpool                                   |
+|lorient            |2         |1020, 12712 |Lorient                                     |
+|luton              |2         |11888, 12207|Luton | Luton Town FC                       |
+|lyon               |2         |12104, 506  |Lyon | Olympique Lyonnais                   |
+|mallorca           |2         |12101, 617  |Mallorca | RCD Mallorca                     |
+|manchester city    |2         |11916, 54   |Manchester City | Manchester City FC        |
+|manchester united  |2         |11903, 55   |Manchester United | Manchester United FC    |
+|maritimo           |2         |1137, 27498 |Maritimo                                    |
+|marseille          |2         |12105, 88   |Marseille | Olympique de Marseille          |
+|metz               |2         |1021, 12118 |Metz                                        |
+|middlesbrough      |2         |27653, 36   |Middlesbrough | Middlesbrough FC            |
+|millwall           |2         |12188, 42   |Millwall | Millwall FC                      |
+|monaco             |2         |12110, 90   |AS Monaco FC | Monaco                       |
+|montpellier        |2         |1027, 12106 |Montpellier                                 |
+|monza              |2         |1084, 12140 |Monza                                       |
+|moreirense         |2         |12143, 578  |Moreirense | Moreirense FC                  |
+|nac breda          |2         |27528, 565  |NAC Breda                                   |
+|nacional           |2         |12147, 582  |CD Nacional | Nacional                      |
+|nantes             |2         |1023, 12107 |Nantes                                      |
+|napoli             |2         |12124, 86   |Napoli | SSC Napoli                         |
+|nec nijmegen       |2         |12176, 570  |NEC | NEC Nijmegen                          |
+|newcastle          |2         |11904, 949  |Newcastle                                   |
+|nice               |2         |12108, 505  |Nice | OGC Nice                             |
+|nottingham forest  |2         |11921, 62   |Nottingham Forest | Nottingham Forest FC    |
+|olympiakos piraeus |2         |12670, 93   |Olympiakos Piraeus | PAE Olympiakos SFP     |
+|osasuna            |2         |12099, 610  |CA Osasuna | Osasuna                        |
+|oxford united      |2         |12203, 47   |Oxford United | Oxford United FC            |
+|pacos ferreira     |2         |1138, 14073 |Pacos Ferreira                              |
+|paris saint germain|2         |12109, 89   |Paris Saint Germain | Paris Saint-Germain FC|
+|parma              |2         |12137, 546  |Parma | Parma Calcio 1913                   |
+|pec zwolle         |2         |26479, 567  |PEC Zwolle                                  |
+|plymouth           |2         |1001, 12206 |Plymouth                                    |
+|portimonense       |2         |1134, 14036 |Portimonense                                |
+|portsmouth         |2         |12205, 31   |Portsmouth | Portsmouth FC                  |
+|preston            |2         |12189, 46   |Preston | Preston North End FC              |
+|psv eindhoven      |2         |1101, 12163 |PSV Eindhoven                               |
+|qpr                |2         |12198, 26   |QPR | Queens Park Rangers FC                |
+|rayo vallecano     |2         |12100, 615  |Rayo Vallecano | Rayo Vallecano de Madrid   |
+|rb leipzig         |2         |12075, 535  |RB Leipzig                                  |
+|reading            |2         |1004, 13650 |Reading                                     |
+|real betis         |2         |12094, 618  |Real Betis | Real Betis Balompié            |
+|real madrid        |2         |12092, 81   |Real Madrid | Real Madrid CF                |
+|real sociedad      |2         |12097, 619  |Real Sociedad | Real Sociedad de Fútbol     |
+|reims              |2         |1025, 25879 |Reims                                       |
+|rennes             |2         |1010, 12112 |Rennes                                      |
+|rio ave            |2         |12148, 574  |Rio Ave | Rio Ave FC                        |
+|rotherham          |2         |1002, 12814 |Rotherham                                   |
+|salernitana        |2         |1087, 13019 |Salernitana                                 |
+|sampdoria          |2         |1088, 27095 |Sampdoria                                   |
+|santa clara        |2         |27929, 583  |CD Santa Clara | Santa Clara                |
+|sassuolo           |2         |12303, 551  |Sassuolo | US Sassuolo Calcio               |
+|sc freiburg        |2         |12064, 529  |SC Freiburg                                 |
+|sc telstar         |2         |12183, 569  |Telstar | Telstar 1963                      |
+|sevilla            |2         |27747, 626  |Sevilla | Sevilla FC                        |
+|sheffield wednesday|2         |12199, 37   |Sheffield Wednesday | Sheffield Wednesday FC|
+|southampton        |2         |26597, 34   |Southampton | Southampton FC                |
+|sparta rotterdam   |2         |12182, 573  |Sparta Rotterdam                            |
+|spezia             |2         |1089, 13383 |Spezia                                      |
+|stade brestois 29  |2         |27638, 501  |Stade Brestois 29                           |
+|stoke city         |2         |12200, 27   |Stoke City | Stoke City FC                  |
+|strasbourg         |2         |1022, 12113 |Strasbourg                                  |
+|sunderland         |2         |26985, 57   |Sunderland | Sunderland AFC                 |
+|swansea            |2         |12201, 28   |Swansea | Swansea City AFC                  |
+|telstar            |2         |26897, 569  |Telstar | Telstar 1963                      |
+|torino             |2         |12132, 553  |Torino | Torino FC                          |
+|tottenham          |2         |11913, 58   |Tottenham | Tottenham Hotspur FC            |
+|toulouse           |2         |12114, 500  |Toulouse | Toulouse FC                      |
+|twente             |2         |26895, 556  |FC Twente '65 | Twente                      |
+|udinese            |2         |12125, 548  |Udinese | Udinese Calcio                    |
+|union berlin       |2         |27654, 533  |1. FC Union Berlin | Union Berlin           |
+|utrecht            |2         |12171, 562  |FC Utrecht | Utrecht                        |
+|valencia           |2         |12085, 621  |Valencia | Valencia CF                      |
+|valladolid         |2         |1157, 12098 |Valladolid                                  |
+|venezia            |2         |1085, 12136 |Venezia                                     |
+|vfb stuttgart      |2         |12074, 524  |VfB Stuttgart                               |
+|vfl bochum         |2         |1055, 12076 |Bochum | VfL Bochum                         |
+|vfl wolfsburg      |2         |12065, 525  |VfL Wolfsburg                               |
+|villarreal         |2         |12086, 82   |Villarreal | Villarreal CF                  |
+|vitesse            |2         |1113, 25793 |Vitesse                                     |
+|vizela             |2         |1135, 12156 |Vizela                                      |
+|vvv venlo          |2         |1116, 12738 |VVV Venlo                                   |
+|waalwijk           |2         |1112, 12178 |Waalwijk                                    |
+|watford            |2         |12184, 38   |Watford | Watford FC                        |
+|werder bremen      |2         |27655, 526  |SV Werder Bremen | Werder Bremen            |
+|west ham           |2         |11914, 66   |West Ham | West Ham United FC               |
+|wigan              |2         |1005, 13030 |Wigan                                       |
+|willem ii          |2         |1110, 26900 |Willem II                                   |
+|wolves             |2         |11907, 59   |Wolverhampton Wanderers FC | Wolves         |
+|wycombe            |2         |1008, 13309 |Wycombe                                     |

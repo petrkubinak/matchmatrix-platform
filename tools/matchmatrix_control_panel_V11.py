@@ -26,7 +26,7 @@ PYTHON_EXE = r"C:\Python314\python.exe"
 BATCH_RUNNER = str(PROJECT_ROOT / "ingest" / "run_unified_ingest_batch_v1.py")
 SCHEDULER_RUNNER = str(PROJECT_ROOT / "workers" / "run_ingest_cycle_v3.py")
 PLAYERS_PIPELINE_RUNNER = str(PROJECT_ROOT / "workers" / "run_players_pipeline_transitional_v1.py")
-THEODDS_RUNNER = str(PROJECT_ROOT / "workers" / "run_theodds_ingest_v2.py")
+THEODDS_RUNNER = str(PROJECT_ROOT / "workers" / "run_theodds_ingest_v3.py")
 FOOTBALL_DATA_RUNNER = str(PROJECT_ROOT / "workers" / "run_football_data_ingest_v1.py")
 
 PROVIDER_UPDATE_COMMANDS = {

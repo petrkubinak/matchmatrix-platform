@@ -1,263 +1,185 @@
 # TicketMatrixPlatform – technický audit
 
-Datum a čas: 2026-04-02 11:28:05
+Datum a čas: 2026-04-02 23:57:21
 Project root: C:\MatchMatrix-platform
 
 ## Vybrané části projektu
 - Celý projekt
 
 ## Souhrn souborů
-- Celkem souborů: 1721
-- NEW: 53
-- MODIFIED: 2
+- Celkem souborů: 1853
+- NEW: 132
+- MODIFIED: 3
 - DELETED: 0
 
 ## Nejvýznamnější změny
-- MODIFIED: ingest\TheOdds\theodds_parse_multi_V3.py
+- MODIFIED: db\sql\Script.sql
 - MODIFIED: MatchMatrix-platform\.dbeaver\project-metadata.json
-- NEW: db\audit\473_audit_manual_team_mapping_candidates.sql
-- NEW: db\audit\474_audit_unmapped_top_league_teams_side_by_side.sql
-- NEW: db\audit\477_audit_review_batch2_candidates.sql
-- NEW: db\audit\481_audit_theodds_against_canonical_match_lookup.sql
-- NEW: db\audit\483_audit_theodds_against_preferred_team_name_lookup.sql
-- NEW: db\audit\484_audit_suspicious_team_aliases.sql
-- NEW: db\audit\486_rerun_audit_483_after_alias_cleanup.sql
-- NEW: db\audit\487_extract_missing_teams_from_theodds.sql
-- NEW: db\audit\488_audit_missing_theodds_team_candidates.sql
-- NEW: db\audit\492_final_theodds_match_test.sql
-- NEW: db\cleanup\467_audit_api_football_cleanup_overview.sql
-- NEW: db\cleanup\468_disable_api_football_leagues.sql
-- NEW: db\cleanup\485_cleanup_wrong_team_aliases.sql
-- NEW: db\cleanup\491_cleanup_duplicate_theodds_teams.sql
-- NEW: db\migrations\479_create_canonical_team_resolve_view.sql
-- NEW: db\migrations\480_create_canonical_match_lookup_view.sql
-- NEW: db\migrations\482_create_preferred_team_name_lookup_view.sql
-- NEW: db\seeds\470_seed_canonical_league_team_mapping.sql
+- MODIFIED: unmatched_theodds_165.sql
+- NEW: db\audit\493_494_audit_suspicious_no_match_resolves.sql
+- NEW: db\audit\493_audit_remaining_no_match_groups.sql
+- NEW: db\audit\496_c_export_team_not_mapped_alias_candidates.sql
+- NEW: db\fix\493_audit_remaining_no_match_groups.sql
+- NEW: db\sql\496_k_find_last_4_canonical_targets.sql
+- NEW: db\sql\496_l_find_last_4_via_maps.sql
+- NEW: db\sql\496_m_seed_final_normalized_aliases.sql
+- NEW: db\sql\496_n_audit_pair_missing_detail.sql
+- NEW: db\sql\496_o_find_ambiguous_aliases.sql
+- NEW: db\sql\496_p_bundesliga_duplicate_teams.sql
+- NEW: db\sql\496_s_merge_union_berlin_safe_v2.sql
+- NEW: db\sql\496_t_fc_st_pauli_duplicate_check.sql
+- NEW: db\sql\496_u_merge_fc_st_pauli_safe.sql
+- NEW: db\sql\496_v_ligue1_duplicate_check.sql
+- NEW: db\sql\496_w_merge_lyon_safe.sql
+- NEW: db\sql\496_x_merge_nice_safe.sql
+- NEW: db\sql\496_y_merge_strasbourg_safe_v2.sql
 
 ## Git
 - Branch: main
-- Last commit: 38bf38e | 2026-03-31 16:52:13 +0200 | update players pipeline
+- Last commit: a5d20ae | 2026-04-02 11:37:42 +0200 | %1
 ```
-M MatchMatrix-platform/.dbeaver/.project-metadata.json.bak
- M MatchMatrix-platform/.dbeaver/project-metadata.json
- D ingest/run_theodds_parse_multi_FINAL.bat
- D ingest/theodds_parse_multi_FINAL.py
- D reports/audit/2026-03-17/09-48-14/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-17/09-48-14/changes.csv
- D reports/audit/2026-03-17/09-48-14/files.csv
- D reports/audit/2026-03-17/09-48-14/run_meta.json
- D reports/audit/2026-03-17/09-48-14/snapshot.json
- D reports/audit/2026-03-17/09-56-27/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-17/09-56-27/changes.csv
- D reports/audit/2026-03-17/09-56-27/files.csv
- D reports/audit/2026-03-17/09-56-27/run_meta.json
- D reports/audit/2026-03-17/09-56-27/snapshot.json
- D reports/audit/2026-03-17/10-11-43/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-17/10-28-12/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-17/10-28-12/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-17/10-28-12/changes.csv
- D reports/audit/2026-03-17/10-28-12/files.csv
- D reports/audit/2026-03-17/10-28-12/snapshot.json
- D reports/audit/2026-03-17/11-10-19/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-17/11-10-19/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-17/11-10-19/changes.csv
- D reports/audit/2026-03-17/11-10-19/files.csv
- D reports/audit/2026-03-17/11-10-19/snapshot.json
- D reports/audit/2026-03-17/12-44-22/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-17/12-44-22/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-17/12-44-22/changes.csv
- D reports/audit/2026-03-17/12-44-22/files.csv
- D reports/audit/2026-03-17/12-44-22/snapshot.json
- D reports/audit/2026-03-17/12-44-41/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-17/12-44-41/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-17/12-44-41/changes.csv
- D reports/audit/2026-03-17/12-44-41/files.csv
- D reports/audit/2026-03-17/12-44-41/snapshot.json
- D reports/audit/2026-03-17/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-17/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-18/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-18/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-19/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-19/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-20/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-20/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-22/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-22/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-23/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-23/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-24/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-24/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-25/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-25/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-26/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-26/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-27/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-27/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-29/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-29/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-30/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-30/MATCHMATRIX_PROGRESS.md
- D reports/audit/2026-03-31/MATCHMATRIX_AUDIT_REPORT.md
- D reports/audit/2026-03-31/MATCHMATRIX_PROGRESS.md
- M reports/audit/latest_audit_report.md
- M reports/audit/latest_progress_report.md
+M MatchMatrix-platform/.dbeaver/project-metadata.json
+ M db/sql/Script.sql
  M reports/audit/latest_snapshot.txt
  M reports/audit/latest_system_tree.txt
- D reports/audit/system_tree_2026-03-23_110914.txt
- D reports/audit/system_tree_2026-03-23_203905.txt
- D reports/audit/system_tree_2026-03-24_071848.txt
- D reports/audit/system_tree_2026-03-24_204041.txt
- D reports/audit/system_tree_2026-03-24_232620.txt
- D reports/audit/system_tree_2026-03-25_123722.txt
- D reports/audit/system_tree_2026-03-25_201624.txt
- D reports/audit/system_tree_2026-03-26_091238.txt
- D reports/audit/system_tree_2026-03-27_160114.txt
- D reports/audit/system_tree_2026-03-29_090423.txt
- D reports/audit/system_tree_2026-03-30_202733.txt
- D reports/audit/system_tree_2026-03-31_071441.txt
- D reports/audit/system_tree_2026-03-31_124918.txt
-?? MatchMatrix-platform/Scripts/07_audity/466_audit_theodds_no_match_id_fixtures_coverage.sql
-?? MatchMatrix-platform/Scripts/11_ops/415_audit_ticket_history_structure.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/416_audit_auto_ticket_flow.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/418_create_auto_ticket_strategies.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/419_create_v_auto_ticket_candidates_safe.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/420_preview_safe_01_builder.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/421_build_template_safe_01_fix.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/423_generate_template_201.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/424_check_run_105.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/425_save_run_105_full.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/426_prepare_auto_safe_pipeline_notes.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/428_audit_ticket_generation_runs.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/430_preview_safe_02_builder.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/431_build_template_safe_02.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/432_preview_template_202.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/433_generate_template_202.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/434_check_run_109.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/435_save_run_109_full.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/437_preview_safe_03_builder.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/438_build_template_safe_03.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/439_preview_template_203.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/440_generate_template_203.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/441_check_run_112.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/442_save_run_112_full.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/445_audit_auto_multi_run_last_batch.sql
-?? MatchMatrix-platform/Scripts/15_ticket_history/446_add_safe02_odds_cap.sql
-?? "MatchMatrix-platform/Scripts/16_ticket_vyhodnocen\303\255/"
-?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/"
-?? db/audit/415_audit_ticket_history_structure.sql
-?? db/audit/416_audit_auto_ticket_flow.sql
-?? db/audit/466_audit_theodds_no_match_id_fixtures_coverage.sql
-?? db/audit/473_audit_manual_team_mapping_candidates.sql
-?? db/audit/474_audit_unmapped_top_league_teams_side_by_side.sql
-?? db/audit/477_audit_review_batch2_candidates.sql
-?? db/audit/481_audit_theodds_against_canonical_match_lookup.sql
-?? db/audit/483_audit_theodds_against_preferred_team_name_lookup.sql
-?? db/audit/484_audit_suspicious_team_aliases.sql
-?? db/audit/486_rerun_audit_483_after_alias_cleanup.sql
-?? db/audit/487_extract_missing_teams_from_theodds.sql
-?? db/audit/488_audit_missing_theodds_team_candidates.sql
-?? db/audit/492_final_theodds_match_test.sql
-?? db/cleanup/467_audit_api_football_cleanup_overview.sql
-?? db/cleanup/468_disable_api_football_leagues.sql
-?? db/cleanup/485_cleanup_wrong_team_aliases.sql
-?? db/cleanup/491_cleanup_duplicate_theodds_teams.sql
-?? db/debug/420_preview_safe_01_builder.sql
-?? db/debug/421_build_template_safe_01_fix.sql
-?? db/debug/423_generate_template_201.sql
-?? db/debug/424_check_run_105.sql
-?? db/debug/425_save_run_105_full.sql
-?? db/debug/426_prepare_auto_safe_pipeline_notes.sql
-?? db/debug/428_audit_ticket_generation_runs.sql
-?? db/debug/430_preview_safe_02_builder.sql
-?? db/debug/431_build_template_safe_02.sql
-?? db/debug/432_preview_template_202.sql
-?? db/debug/433_generate_template_202.sql
-?? db/debug/434_check_run_109.sql
-?? db/debug/435_save_run_109_full.sql
-?? db/debug/437_preview_safe_03_builder.sql
-?? db/debug/438_build_template_safe_03.sql
-?? db/debug/439_preview_template_203.sql
-?? db/debug/440_generate_template_203.sql
-?? db/debug/441_check_run_112.sql
-?? db/debug/442_save_run_112_full.sql
-?? db/debug/445_audit_auto_multi_run_last_batch.sql
-?? db/debug/446_add_safe02_odds_cap.sql
-?? db/debug/465_audit_pattern_fix5_bl2_1_1_t7.sql
-?? db/migrations/418_create_auto_ticket_strategies.sql
-?? db/migrations/454_create_ticket_strategy_catalog.sql
-?? db/migrations/457_create_ticket_pattern_catalog.sql
-?? db/migrations/459_upsert_ticket_pattern_catalog_from_runs.sql
-?? db/migrations/461_upsert_generated_run_pattern_map.sql
-?? db/migrations/462_alter_ticket_history_base_add_pattern.sql
-?? db/migrations/463_update_ticket_history_with_pattern.sql
-?? db/migrations/472_upsert_ticket_pattern_settlements.sql
-?? db/migrations/479_create_canonical_team_resolve_view.sql
-?? db/migrations/480_create_canonical_match_lookup_view.sql
-?? db/migrations/482_create_preferred_team_name_lookup_view.sql
-?? db/migrations/Script-1.sql
-?? db/seeds/470_seed_canonical_league_team_mapping.sql
-?? db/seeds/475_seed_manual_team_mapping_review.sql
-?? db/seeds/476_cleanup_wrong_manual_team_mapping_review.sql
-?? db/seeds/478_seed_manual_team_mapping_confirmed.sql
-?? db/seeds/489_seed_missing_theodds_aliases.sql
-?? db/seeds/490_insert_missing_theodds_teams.sql
-?? db/views/419_create_v_auto_ticket_candidates_safe.sql
-?? db/views/448_strategy_comparison_view.sql
-?? db/views/449_strategy_ranking_view.sql
-?? db/views/450_strategy_recommendation_view.sql
-?? db/views/451_strategy_recommendation_current.sql
-?? db/views/455_strategy_recommendation_by_catalog.sql
-?? db/views/458_create_v_generated_run_pattern_candidates.sql
-?? db/views/464_create_v_ticket_pattern_history_summary.sql
-?? db/views/466_create_v_ticket_pattern_history_quality.sql
-?? db/views/467_create_v_ticket_pattern_history_summary_normalized.sql
-?? db/views/468_create_v_ticket_pattern_settlement_ready.sql
-?? db/views/470_create_v_ticket_pattern_settlement_source.sql
-?? db/views/471_create_v_ticket_pattern_settlement_aggregate.sql
-?? "docs/komunikace s chatGPT/03_2026/20260329/ticket_history_base.txt"
-?? "docs/komunikace s chatGPT/04_2026/"
-?? "docs/komunikace s chatGPT/20260329/"
-?? ingest/Football-Data/
-?? ingest/TheOdds/
-?? ingest/unmatched_theodds_155.csv
-?? ingest/unmatched_theodds_155.sql
-?? launchers/453_run_recommended_strategy.vbs
-?? launchers/run_matchmatrix_panel_v11.vbs
-?? reports/audit/03_2026/
-?? reports/audit/2026-04-01/
-?? reports/audit/2026-04-02/
-?? reports/audit/system_tree_2026-03-31_165503.txt
-?? reports/audit/system_tree_2026-04-01_103734.txt
-?? reports/audit/system_tree_2026-04-01_205300.txt
-?? reports/audit/system_tree_2026-04-02_074300.txt
-?? reports/audit/system_tree_2026-04-02_112803.txt
-?? tools/matchmatrix_control_panel_V11.py
-?? unmatched_theodds_156.csv
-?? unmatched_theodds_156.sql
-?? unmatched_theodds_158.csv
-?? unmatched_theodds_158.sql
-?? unmatched_theodds_160.csv
-?? unmatched_theodds_160.sql
-?? unmatched_theodds_161.csv
-?? unmatched_theodds_161.sql
-?? unmatched_theodds_162.csv
-?? unmatched_theodds_162.sql
-?? unmatched_theodds_163.csv
-?? unmatched_theodds_163.sql
-?? unmatched_theodds_165.csv
-?? unmatched_theodds_165.sql
-?? workers/417_auto_ticket_seeder_v1.py
-?? workers/427_auto_safe_seeder_v2.py
-?? workers/429_update_auto_safe_seeder_logging.py
-?? workers/436_auto_safe_seeder_v3.py
-?? workers/443_auto_safe_seeder_v3.py
-?? workers/444_auto_multi_run.py
-?? workers/452_auto_run_recommended_strategy.py
-?? workers/run_football_data_ingest_v1.py
-?? workers/run_theodds_ingest_v1.py
-?? workers/run_theodds_ingest_v2.py
-?? workers/run_theodds_ingest_v3.py
-?? workers/theodds_matching_v3.py
+ M unmatched_theodds_165.sql
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/493_494_audit_suspicious_no_match_resolves.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/493_audit_remaining_no_match_groups.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/495_fix_team_alias_blacklist_youth.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_audit_missing_fixture_coverage.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_b_audit_no_match_id_coverage.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_c_export_team_not_mapped_alias_candidates.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_d_seed_missing_team_aliases_FIX2.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_e_export_remaining_team_not_mapped.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_f_find_canonical_targets_for_remaining_aliases.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_g_seed_remaining_clear_aliases.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_i_export_last_6_team_not_mapped.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_j_seed_last_clear_aliases.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_k_find_last_4_canonical_targets.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_l_find_last_4_via_maps.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_m_seed_final_normalized_aliases.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_n_audit_pair_missing_detail.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_o_find_ambiguous_aliases.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_p_bundesliga_duplicate_teams.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_q_merge_union_berlin.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_r_merge_union_berlin_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_s_merge_union_berlin_safe_v2.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_t_fc_st_pauli_duplicate_check.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_u_merge_fc_st_pauli_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_v_ligue1_duplicate_check.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_w_merge_lyon_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_x_merge_nice_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_y_merge_strasbourg_safe_v2.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/496_z_auxerre_profile_check.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_a_merge_auxerre_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_b_merge_nantes_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_c_merge_angers_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_d_merge_rennes_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_e_merge_burnley_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_f_merge_crystal_palace_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_g_merge_newcastle_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_h_merge_bournemouth_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_i_merge_brighton_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_j_merge_leeds_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_k_merge_manchester_united_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_m_merge_cagliari_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_n_merge_psv_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_o_merge_barcelona_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_p_merge_nacional_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_q_merge_utrecht_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_r_merge_az_alkmaar_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_s_merge_como_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_t_merge_feyenoord_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_u_merge_nec_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_v_merge_udinese_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/497_w_merge_sevilla_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/501_inspect_odds_table.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/502_find_theodds_raw_tables.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/503_debug_theodds_from_raw.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/504_inspect_matches_columns.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/505_debug_theodds_match_linking.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/506_inspect_api_raw_payloads_theodds.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/508_debug_theodds_valid_match_linking.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/509_debug_real_madrid_and_sporting_arsenal.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/510_merge_real_madrid_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/511_batch_merge_remaining_duplicates.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/511_merge_arsenal_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/512_a_merge_psg_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/512_b_merge_atletico_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/512_c_merge_valencia_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/512_d_merge_real_sociedad_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/512_e_merge_alaves_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/512_f_merge_rayo_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/512_g_merge_mallorca_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/512_h_merge_real_madrid_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/512_i_merge_villarreal_safe.sql"
+?? "MatchMatrix-platform/Scripts/17_\304\215i\305\241t\304\233n\303\255_DB/512_j_merge_getafe_safe.sql"
+?? db/audit/493_494_audit_suspicious_no_match_resolves.sql
+?? db/audit/493_audit_remaining_no_match_groups.sql
+?? db/audit/496_c_export_team_not_mapped_alias_candidates.sql
+?? db/fix/493_audit_remaining_no_match_groups.sql
+?? db/sql/496_k_find_last_4_canonical_targets.sql
+?? db/sql/496_l_find_last_4_via_maps.sql
+?? db/sql/496_m_seed_final_normalized_aliases.sql
+?? db/sql/496_n_audit_pair_missing_detail.sql
+?? db/sql/496_o_find_ambiguous_aliases.sql
+?? db/sql/496_p_bundesliga_duplicate_teams.sql
+?? db/sql/496_s_merge_union_berlin_safe_v2.sql
+?? db/sql/496_t_fc_st_pauli_duplicate_check.sql
+?? db/sql/496_u_merge_fc_st_pauli_safe.sql
+?? db/sql/496_v_ligue1_duplicate_check.sql
+?? db/sql/496_w_merge_lyon_safe.sql
+?? db/sql/496_x_merge_nice_safe.sql
+?? db/sql/496_y_merge_strasbourg_safe_v2.sql
+?? db/sql/496_z_auxerre_profile_check.sql
+?? db/sql/497_a_merge_auxerre_safe.sql
+?? db/sql/497_b_merge_nantes_safe.sql
+?? db/sql/497_c_merge_angers_safe.sql
+?? db/sql/497_d_merge_rennes_safe.sql
+?? db/sql/497_e_merge_burnley_safe.sql
+?? db/sql/497_f_merge_crystal_palace_safe.sql
+?? db/sql/497_g_merge_newcastle_safe.sql
+?? db/sql/497_h_merge_bournemouth_safe.sql
+?? db/sql/497_i_merge_brighton_safe.sql
+?? db/sql/497_j_merge_leeds_safe.sql
+?? db/sql/497_k_merge_manchester_united_safe.sql
+?? db/sql/497_m_merge_cagliari_safe.sql
+?? db/sql/497_n_merge_psv_safe.sql
+?? db/sql/497_o_merge_barcelona_safe.sql
+?? db/sql/497_p_merge_nacional_safe.sql
+?? db/sql/497_q_merge_utrecht_safe.sql
+?? db/sql/497_r_merge_az_alkmaar_safe.sql
+?? db/sql/497_s_merge_como_safe.sql
+?? db/sql/497_u_merge_nec_safe.sql
+?? db/sql/497_v_merge_udinese_safe.sql
+?? db/sql/497_w_merge_sevilla_safe.sql
+?? db/sql/501_inspect_odds_table.sql
+?? db/sql/502_find_theodds_raw_tables.sql
+?? db/sql/504_inspect_matches_columns.sql
+?? db/sql/505_debug_theodds_match_linking.sql
+?? db/sql/506_inspect_api_raw_payloads_theodds.sql
+?? db/sql/508_debug_theodds_valid_match_linking.sql
+?? db/sql/509_debug_real_madrid_and_sporting_arsenal.sql
+?? db/sql/510_merge_real_madrid_safe.sql
+?? db/sql/511_batch_merge_remaining_duplicates.sql
+?? db/sql/511_merge_arsenal_safe.sql
+?? db/sql/512_a_merge_psg_safe.sql
+?? db/sql/512_b_merge_atletico_safe.sql
+?? db/sql/512_c_merge_valencia_safe.sql
+?? db/sql/512_d_merge_real_sociedad_safe.sql
+?? db/sql/512_e_merge_alaves_safe.sql
+?? db/sql/512_f_merge_rayo_safe.sql
+?? db/sql/512_g_merge_mallorca_safe.sql
+?? db/sql/512_h_merge_real_madrid_safe.sql
+?? db/sql/512_i_merge_villarreal_safe.sql
+?? db/sql/512_j_merge_getafe_safe.sql
+?? "docs/komunikace s chatGPT/04_2026/20260402/MATCHMATRIX \342\200\223 STAV PROJEKTU .md"
+?? reports/audit/2026-04-02/469_audit/494_audit_2.txt
+?? reports/audit/2026-04-02/469_audit/494_audit_3.txt
+?? reports/audit/2026-04-02/469_audit/496_n_audit_3.txt
+?? reports/audit/2026-04-02/469_audit/496_o_audit_1.txt
+?? reports/audit/2026-04-02/469_audit/508_audit.txt
+?? reports/audit/system_tree_2026-04-02_235719.txt
 ```
 
 ## Databáze
@@ -266,7 +188,7 @@ M MatchMatrix-platform/.dbeaver/.project-metadata.json.bak
   - leagues: 2986
   - matches: 105603
   - players: 1490
-  - teams: 5437
+  - teams: 5399
 - OPS counts:
   - ingest_planner: 3084
   - job_runs: 469

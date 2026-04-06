@@ -22,7 +22,7 @@ from typing import Iterable
 
 # Slova, která často jen znečišťují matching
 GENERIC_WORDS = {
-    "fc", "cf", "sc", "ac", "afc", "fk", "sk", "bk",
+    "fc", "cf", "ac", "afc", "fk", "sk", "bk",
     "club", "football", "soccer", "team", "deportivo",
     "club atletico", "atletico club"
 }
@@ -165,9 +165,25 @@ def remove_generic_words(value: str) -> str:
 def normalize_team_name(value: str) -> str:
     """
     Hlavní normalizace týmového názvu.
+
+    Důležité:
+    - běžně odstraňujeme generická slova (fc, sc, club...)
+    - ale u některých názvů je "club" součást identity a NESMÍ zmizet,
+      jinak vznikají kolize:
+        Club Nacional -> nacional   (špatně)
+        CD Nacional   -> nacional   (jiný klub)
+
+    Proto pro citlivé prefixy zachováme původní tvar po basic cleanup.
     """
     text = basic_cleanup(value)
     text = replace_safe_tokens(text)
+
+    # --- citlivé výjimky: "club" je zde součást identity ---
+    # Club Nacional / Club Nacional de Football / Club Nacional Potosi ...
+    if text.startswith("club nacional"):
+        return normalize_whitespace(text)
+
+    # standardní větev pro ostatní týmy
     text = remove_generic_words(text)
     return normalize_whitespace(text)
 

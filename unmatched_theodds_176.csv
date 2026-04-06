@@ -1,0 +1,29 @@
+﻿provider,league_name,event_name,home_raw,away_raw,home_normalized,away_normalized,best_home_candidate,best_away_candidate,best_home_score,best_away_score,match_id,issue_code
+theodds,soccer_conmebol_copa_libertadores,Mirassol vs Lanus,Mirassol,Lanus,mirassol,lanus,mirassol,lanus,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_conmebol_copa_libertadores,Independiente Medellín vs Estudiantes La Plata,Independiente Medellín,Estudiantes La Plata,independiente medellin,estudiantes la plata,independiente medellin,estudiantes la plata,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_conmebol_copa_libertadores,UCV FC vs Libertad Asuncion,UCV FC,Libertad Asuncion,ucv,libertad asuncion,ucv,libertad asuncion,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_conmebol_copa_libertadores,Platense vs Corinthians-SP,Platense,Corinthians-SP,platense,corinthians sp,platense,corinthians sp,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_epl,Burnley vs Brighton and Hove Albion,Burnley,Brighton and Hove Albion,burnley,brighton and hove albion,burnley,brighton and hove albion,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_epl,Crystal Palace vs Newcastle United,Crystal Palace,Newcastle United,crystal palace,newcastle united,crystal palace,newcastle united,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_epl,Manchester United vs Leeds United,Manchester United,Leeds United,manchester united,leeds united,manchester united,leeds united,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_epl,Newcastle United vs Bournemouth,Newcastle United,Bournemouth,newcastle united,bournemouth,newcastle united,bournemouth,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_epl,Leeds United vs Wolverhampton Wanderers,Leeds United,Wolverhampton Wanderers,leeds united,wolverhampton wanderers,leeds united,wolverhampton wanderers,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_epl,Tottenham Hotspur vs Brighton and Hove Albion,Tottenham Hotspur,Brighton and Hove Albion,tottenham hotspur,brighton and hove albion,tottenham hotspur,brighton and hove albion,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_fifa_world_cup,Australia vs Jordan,Australia,Jordan,australia,jordan,australia,jordan,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_fifa_world_cup,Australia vs Jordan,Australia,Jordan,australia,jordan,australia,jordan,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_france_ligue_one,Angers vs Lyon,Angers,Lyon,angers,lyon,angers,lyon,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_france_ligue_one,RC Lens vs Paris Saint Germain,RC Lens,Paris Saint Germain,rc lens,paris saint germain,rc lens,paris saint germain,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_france_ligue_one,Rennes vs Angers,Rennes,Angers,rennes,angers,rennes,angers,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_france_ligue_one,Brest vs Strasbourg,Brest,Strasbourg,brest,strasbourg,brest,strasbourg,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_germany_bundesliga,1. FC Heidenheim vs Union Berlin,1. FC Heidenheim,Union Berlin,1 heidenheim,union berlin,1 heidenheim,union berlin,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,Pisa vs Torino,Pisa,Torino,pisa,torino,pisa,torino,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,Udinese vs Como,Udinese,Como,udinese,como,udinese,como,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,AS Roma vs Pisa,AS Roma,Pisa,as roma,pisa,as roma,pisa,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,Cagliari vs Cremonese,Cagliari,Cremonese,cagliari,cremonese,cagliari,cremonese,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_italy_serie_a,Como vs Inter Milan,Como,Inter Milan,como,inter milan,como,inter milan,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,Go Ahead Eagles vs FC Zwolle,Go Ahead Eagles,FC Zwolle,go ahead eagles,zwolle,go ahead eagles,zwolle,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,FC Volendam vs Feyenoord,FC Volendam,Feyenoord,volendam,feyenoord,volendam,feyenoord,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,Sparta Rotterdam vs PSV Eindhoven,Sparta Rotterdam,PSV Eindhoven,sparta rotterdam,psv eindhoven,sparta rotterdam,psv eindhoven,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,FC Zwolle vs Excelsior,FC Zwolle,Excelsior,zwolle,excelsior,zwolle,excelsior,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,NEC Nijmegen vs Feyenoord,NEC Nijmegen,Feyenoord,nec nijmegen,feyenoord,nec nijmegen,feyenoord,1.0,1.0,,NO_MATCH_ID
+theodds,soccer_netherlands_eredivisie,AZ Alkmaar vs Heerenveen,AZ Alkmaar,Heerenveen,az alkmaar,heerenveen,az alkmaar,heerenveen,1.0,1.0,,NO_MATCH_ID
