@@ -1,0 +1,14 @@
+-- =====================================================================
+-- 286_note_duplicate_provider_id_arsenal.sql
+-- Poznamka: Arsenal external_team_id 9419 je duplicate provider ID
+-- =====================================================================
+
+-- Arsenal:
+-- external_team_id 9419 ma presny canonical match na team_id 118199,
+-- ale team_id 118199 uz ma pro provider api_football existujici mapovani:
+-- provider_team_id = 42
+--
+-- ZAVER:
+-- 9419 neinsertovat do public.team_provider_map
+-- klasifikovat jako DUPLICATE_PROVIDER_ID
+-- analogicky k drive potvrzenemu Arsenal duplicate case

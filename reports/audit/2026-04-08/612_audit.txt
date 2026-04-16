@@ -1,0 +1,122 @@
+|sport|provider             |entity  |provider_role  |structure_status |provider_status    |build_mode          |next_build_step               |rows_count|
+|-----|---------------------|--------|---------------|-----------------|-------------------|--------------------|------------------------------|----------|
+|AFB  |api_american_football|coaches |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|AFB  |api_american_football|fixtures|CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|AFB  |api_american_football|leagues |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|AFB  |api_american_football|odds    |ODDS_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|AFB  |api_american_football|players |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|AFB  |api_american_football|teams   |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|BK   |api_sport            |coaches |PEOPLE_PROVIDER|DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1         |
+|BK   |api_sport            |coaches |PEOPLE_PROVIDER|STRUCTURE_READY  |REVIEW_PROVIDER    |PREPARE_ALT_PROVIDER|ADD_ALT_PEOPLE_PROVIDER_SLOT  |426       |
+|BK   |api_sport            |fixtures|CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |STANDARDIZE_PARSER_AND_STAGING|426       |
+|BK   |api_sport            |fixtures|CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1         |
+|BK   |api_sport            |leagues |CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |STANDARDIZE_PARSER_AND_STAGING|426       |
+|BK   |api_sport            |leagues |CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1         |
+|BK   |api_sport            |odds    |ODDS_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |STANDARDIZE_ODDS_LINKING      |426       |
+|BK   |api_sport            |odds    |ODDS_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1         |
+|BK   |api_sport            |players |PEOPLE_PROVIDER|DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1         |
+|BK   |api_sport            |players |PEOPLE_PROVIDER|STRUCTURE_READY  |REVIEW_PROVIDER    |PREPARE_ALT_PROVIDER|ADD_ALT_PEOPLE_PROVIDER_SLOT  |426       |
+|BK   |api_sport            |teams   |CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |STANDARDIZE_PARSER_AND_STAGING|426       |
+|BK   |api_sport            |teams   |CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1         |
+|BSB  |api_baseball         |coaches |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|BSB  |api_baseball         |fixtures|CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|BSB  |api_baseball         |leagues |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|BSB  |api_baseball         |odds    |ODDS_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|BSB  |api_baseball         |players |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|BSB  |api_baseball         |teams   |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|CK   |api_cricket          |coaches |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|CK   |api_cricket          |fixtures|CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|CK   |api_cricket          |leagues |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|CK   |api_cricket          |odds    |ODDS_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|CK   |api_cricket          |players |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|CK   |api_cricket          |teams   |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|DRT  |api_darts            |coaches |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|DRT  |api_darts            |fixtures|CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|DRT  |api_darts            |leagues |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|DRT  |api_darts            |odds    |ODDS_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|DRT  |api_darts            |players |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|DRT  |api_darts            |teams   |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|ESP  |api_esports          |coaches |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|ESP  |api_esports          |fixtures|CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|ESP  |api_esports          |leagues |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|ESP  |api_esports          |odds    |ODDS_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|ESP  |api_esports          |players |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|ESP  |api_esports          |teams   |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|FB   |api_football         |coaches |PEOPLE_PROVIDER|DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1,219     |
+|FB   |api_football         |coaches |PEOPLE_PROVIDER|STRUCTURE_REVIEW |REVIEW_PROVIDER    |MANUAL_REVIEW       |MANUAL_REVIEW                 |1,217     |
+|FB   |api_football         |fixtures|CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |ALIGN_TO_REFERENCE_CORE       |1,217     |
+|FB   |api_football         |fixtures|CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1,219     |
+|FB   |api_football         |leagues |CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |ALIGN_TO_REFERENCE_CORE       |1,217     |
+|FB   |api_football         |leagues |CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1,219     |
+|FB   |api_football         |odds    |ODDS_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |KEEP_MATCH_LINK_READY         |1,217     |
+|FB   |api_football         |odds    |ODDS_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1,219     |
+|FB   |api_football         |players |PEOPLE_PROVIDER|DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1,219     |
+|FB   |api_football         |players |PEOPLE_PROVIDER|STRUCTURE_READY  |PROVIDER_LIMITED   |PREPARE_ALT_PROVIDER|DEFINE_ALT_PEOPLE_PROVIDER    |1,217     |
+|FB   |api_football         |teams   |CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |ALIGN_TO_REFERENCE_CORE       |1,217     |
+|FB   |api_football         |teams   |CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |1,219     |
+|FB   |api_sport            |coaches |PEOPLE_PROVIDER|DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |792       |
+|FB   |api_sport            |fixtures|CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |792       |
+|FB   |api_sport            |leagues |CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |792       |
+|FB   |api_sport            |odds    |ODDS_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |792       |
+|FB   |api_sport            |players |PEOPLE_PROVIDER|DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |792       |
+|FB   |api_sport            |teams   |CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |792       |
+|FB   |football_data        |coaches |PEOPLE_PROVIDER|DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |16        |
+|FB   |football_data        |coaches |PEOPLE_PROVIDER|STRUCTURE_REVIEW |ALT_PROVIDER_NEEDED|MANUAL_REVIEW       |MANUAL_REVIEW                 |10        |
+|FB   |football_data        |fixtures|CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |16        |
+|FB   |football_data        |fixtures|CORE_PROVIDER  |REFERENCE_CORE   |ACTIVE_PROVIDER    |REFERENCE_CORE      |KEEP_AS_REFERENCE_BASELINE    |10        |
+|FB   |football_data        |leagues |CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |16        |
+|FB   |football_data        |leagues |CORE_PROVIDER  |REFERENCE_CORE   |ACTIVE_PROVIDER    |REFERENCE_CORE      |KEEP_AS_REFERENCE_BASELINE    |10        |
+|FB   |football_data        |odds    |ODDS_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |16        |
+|FB   |football_data        |odds    |ODDS_PROVIDER  |STRUCTURE_REVIEW |ALT_PROVIDER_NEEDED|MANUAL_REVIEW       |MANUAL_REVIEW                 |10        |
+|FB   |football_data        |players |PEOPLE_PROVIDER|DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |16        |
+|FB   |football_data        |players |PEOPLE_PROVIDER|STRUCTURE_REVIEW |ALT_PROVIDER_NEEDED|MANUAL_REVIEW       |MANUAL_REVIEW                 |10        |
+|FB   |football_data        |teams   |CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |16        |
+|FB   |football_data        |teams   |CORE_PROVIDER  |REFERENCE_CORE   |ACTIVE_PROVIDER    |REFERENCE_CORE      |KEEP_AS_REFERENCE_BASELINE    |10        |
+|FH   |api_field_hockey     |coaches |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|FH   |api_field_hockey     |fixtures|CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|FH   |api_field_hockey     |leagues |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|FH   |api_field_hockey     |odds    |ODDS_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|FH   |api_field_hockey     |players |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|FH   |api_field_hockey     |teams   |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|HB   |api_handball         |coaches |PEOPLE_PROVIDER|STRUCTURE_READY  |ALT_PROVIDER_NEEDED|PREPARE_ALT_PROVIDER|ADD_ALT_PEOPLE_PROVIDER_SLOT  |1         |
+|HB   |api_handball         |fixtures|CORE_PROVIDER  |STRUCTURE_READY  |REVIEW_PROVIDER    |EXPAND_CORE         |PREPARE_SHARED_SPORT_MODEL    |1         |
+|HB   |api_handball         |leagues |CORE_PROVIDER  |STRUCTURE_READY  |REVIEW_PROVIDER    |EXPAND_CORE         |PREPARE_SHARED_SPORT_MODEL    |1         |
+|HB   |api_handball         |odds    |ODDS_PROVIDER  |STRUCTURE_READY  |REVIEW_PROVIDER    |EXPAND_CORE         |PREPARE_SHARED_SPORT_MODEL    |1         |
+|HB   |api_handball         |players |PEOPLE_PROVIDER|STRUCTURE_READY  |ALT_PROVIDER_NEEDED|PREPARE_ALT_PROVIDER|ADD_ALT_PEOPLE_PROVIDER_SLOT  |1         |
+|HB   |api_handball         |teams   |CORE_PROVIDER  |STRUCTURE_READY  |REVIEW_PROVIDER    |EXPAND_CORE         |PREPARE_SHARED_SPORT_MODEL    |1         |
+|HK   |api_hockey           |coaches |PEOPLE_PROVIDER|DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |281       |
+|HK   |api_hockey           |coaches |PEOPLE_PROVIDER|STRUCTURE_READY  |ALT_PROVIDER_NEEDED|PREPARE_ALT_PROVIDER|ADD_ALT_PEOPLE_PROVIDER_SLOT  |243       |
+|HK   |api_hockey           |fixtures|CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |NORMALIZE_TO_SHARED_CORE_MODEL|243       |
+|HK   |api_hockey           |fixtures|CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |281       |
+|HK   |api_hockey           |leagues |CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |NORMALIZE_TO_SHARED_CORE_MODEL|243       |
+|HK   |api_hockey           |leagues |CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |281       |
+|HK   |api_hockey           |odds    |ODDS_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |PREPARE_SHARED_ODDS_MODEL     |243       |
+|HK   |api_hockey           |odds    |ODDS_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |281       |
+|HK   |api_hockey           |players |PEOPLE_PROVIDER|DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |281       |
+|HK   |api_hockey           |players |PEOPLE_PROVIDER|STRUCTURE_READY  |ALT_PROVIDER_NEEDED|PREPARE_ALT_PROVIDER|ADD_ALT_PEOPLE_PROVIDER_SLOT  |243       |
+|HK   |api_hockey           |teams   |CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |NORMALIZE_TO_SHARED_CORE_MODEL|243       |
+|HK   |api_hockey           |teams   |CORE_PROVIDER  |DISABLED         |DISABLED           |KEEP_DISABLED       |DO_NOT_USE                    |281       |
+|MMA  |api_mma              |coaches |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|MMA  |api_mma              |fixtures|CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|MMA  |api_mma              |leagues |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|MMA  |api_mma              |odds    |ODDS_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|MMA  |api_mma              |players |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|MMA  |api_mma              |teams   |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|RGB  |api_rugby            |coaches |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|RGB  |api_rugby            |fixtures|CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|RGB  |api_rugby            |leagues |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|RGB  |api_rugby            |odds    |ODDS_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|RGB  |api_rugby            |players |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|RGB  |api_rugby            |teams   |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |1         |
+|TN   |api_tennis           |coaches |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |2         |
+|TN   |api_tennis           |fixtures|CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |2         |
+|TN   |api_tennis           |leagues |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |2         |
+|TN   |api_tennis           |odds    |ODDS_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |2         |
+|TN   |api_tennis           |players |PEOPLE_PROVIDER|STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |2         |
+|TN   |api_tennis           |teams   |CORE_PROVIDER  |STRUCTURE_PARTIAL|NOT_VALIDATED      |PREPARE_STRUCTURE   |PREPARE_PROVIDER_CONTRACT     |2         |
+|VB   |api_volleyball       |coaches |PEOPLE_PROVIDER|STRUCTURE_READY  |ALT_PROVIDER_NEEDED|PREPARE_ALT_PROVIDER|ADD_ALT_PEOPLE_PROVIDER_SLOT  |1         |
+|VB   |api_volleyball       |fixtures|CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |STANDARDIZE_PARSER_AND_STAGING|1         |
+|VB   |api_volleyball       |leagues |CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |STANDARDIZE_PARSER_AND_STAGING|1         |
+|VB   |api_volleyball       |odds    |ODDS_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |STANDARDIZE_ODDS_LINKING      |1         |
+|VB   |api_volleyball       |players |PEOPLE_PROVIDER|STRUCTURE_READY  |ALT_PROVIDER_NEEDED|PREPARE_ALT_PROVIDER|ADD_ALT_PEOPLE_PROVIDER_SLOT  |1         |
+|VB   |api_volleyball       |teams   |CORE_PROVIDER  |STRUCTURE_READY  |ACTIVE_PROVIDER    |EXPAND_CORE         |STANDARDIZE_PARSER_AND_STAGING|1         |

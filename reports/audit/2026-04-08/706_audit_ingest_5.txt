@@ -1,0 +1,362 @@
+|provider_league_id|league_name   |season|player_id|name                  |team_id|team_name                |ext_source  |ext_player_id|
+|------------------|--------------|------|---------|----------------------|-------|-------------------------|------------|-------------|
+|140               |La Liga       |2022  |2,441    |Diego Fuoli           |12,871 |Almeria                  |api_football|182713       |
+|140               |La Liga       |2022  |2,533    |Balenziaga            |12,084 |Athletic Club            |api_football|47272        |
+|140               |La Liga       |2022  |2,534    |Capa                  |12,084 |Athletic Club            |api_football|47274        |
+|140               |La Liga       |2022  |2,513    |Junior Bita           |12,084 |Athletic Club            |api_football|384266       |
+|140               |La Liga       |2022  |2,472    |Luis Bilbao           |12,084 |Athletic Club            |api_football|313026       |
+|140               |La Liga       |2022  |2,535    |Raúl García           |12,084 |Athletic Club            |api_football|47282        |
+|140               |La Liga       |2022  |2,531    |Alberto Perea         |13,513 |Cadiz                    |api_football|47041        |
+|140               |La Liga       |2022  |2,428    |Carlos García-Die     |13,513 |Cadiz                    |api_football|144261       |
+|140               |La Liga       |2022  |2,530    |David Mayoral         |13,513 |Cadiz                    |api_football|46950        |
+|140               |La Liga       |2022  |2,439    |Genar Fornés          |13,513 |Cadiz                    |api_football|181211       |
+|140               |La Liga       |2022  |2,527    |José Mari             |13,513 |Cadiz                    |api_football|46772        |
+|140               |La Liga       |2022  |2,497    |Kikín                 |13,513 |Cadiz                    |api_football|351235       |
+|140               |La Liga       |2022  |2,442    |L. Spatz              |13,513 |Cadiz                    |api_football|192024       |
+|140               |La Liga       |2022  |2,481    |Nando                 |13,513 |Cadiz                    |api_football|327552       |
+|140               |La Liga       |2022  |2,532    |Nano                  |13,513 |Cadiz                    |api_football|47095        |
+|140               |La Liga       |2022  |2,430    |Barragán              |12,606 |Elche                    |api_football|1560         |
+|140               |La Liga       |2022  |2,504    |Jesús                 |12,606 |Elche                    |api_football|364416       |
+|140               |La Liga       |2022  |2,517    |Luismi Quirant        |12,606 |Elche                    |api_football|400020       |
+|140               |La Liga       |2022  |2,542    |Pape Cheikh           |12,606 |Elche                    |api_football|660          |
+|140               |La Liga       |2022  |2,444    |Aleix Vidal           |12,091 |Espanyol                 |api_football|2047         |
+|140               |La Liga       |2022  |2,537    |Dídac Vilá Rosselló   |12,091 |Espanyol                 |api_football|47335        |
+|140               |La Liga       |2022  |2,459    |Joan Puig             |12,091 |Espanyol                 |api_football|286620       |
+|140               |La Liga       |2022  |2,460    |Koffi                 |12,095 |Getafe                   |api_football|286643       |
+|140               |La Liga       |2022  |2,494    |Pablo Ramírez         |12,095 |Getafe                   |api_football|348329       |
+|140               |La Liga       |2022  |2,526    |Darío                 |12,099 |Osasuna                  |api_football|46700        |
+|140               |La Liga       |2022  |2,443    |Diego Moreno          |12,099 |Osasuna                  |api_football|195918       |
+|140               |La Liga       |2022  |2,524    |Iñigo Pérez           |12,099 |Osasuna                  |api_football|46665        |
+|140               |La Liga       |2022  |2,525    |Roberto Torres        |12,099 |Osasuna                  |api_football|46666        |
+|140               |La Liga       |2022  |2,463    |Yoel Ramírez          |12,099 |Osasuna                  |api_football|289788       |
+|140               |La Liga       |2022  |2,438    |M. Herzig             |12,088 |Sevilla                  |api_football|177587       |
+|140               |La Liga       |2022  |2,529    |J. Narváez            |12,098 |Valladolid               |api_football|46922        |
+|140               |La Liga       |2022  |2,539    |Jordi Masip           |12,098 |Valladolid               |api_football|47474        |
+|140               |La Liga       |2022  |2,483    |Roberto Arroyo        |12,098 |Valladolid               |api_football|331003       |
+|140               |La Liga       |2022  |2,437    |Sergio Asenjo         |12,098 |Valladolid               |api_football|1682         |
+|140               |La Liga       |2022  |2,431    |Sergio León           |12,098 |Valladolid               |api_football|1583         |
+|140               |La Liga       |2022  |2,462    |Adrián Corral         |       |                         |api_football|287177       |
+|140               |La Liga       |2022  |2,484    |Aleix Garrido         |       |                         |api_football|336557       |
+|140               |La Liga       |2022  |2,514    |A. Raihani            |       |                         |api_football|386849       |
+|140               |La Liga       |2022  |2,540    |Borja García          |       |                         |api_football|47515        |
+|140               |La Liga       |2022  |2,432    |Charlie Pérez         |       |                         |api_football|162449       |
+|140               |La Liga       |2022  |2,445    |Diego Bri             |       |                         |api_football|208670       |
+|140               |La Liga       |2022  |719      |Diego Piñeiro         |       |                         |api_football|334575       |
+|140               |La Liga       |2022  |2,468    |Enrique Fernández     |       |                         |api_football|305797       |
+|140               |La Liga       |2022  |2,491    |Félix Garreta         |       |                         |api_football|347886       |
+|140               |La Liga       |2022  |2,461    |Fran López            |       |                         |api_football|286798       |
+|140               |La Liga       |2022  |2,440    |Gaizka Ayesa          |       |                         |api_football|182664       |
+|140               |La Liga       |2022  |2,516    |Germán García         |       |                         |api_football|392455       |
+|140               |La Liga       |2022  |2,515    |Héctor Fort           |       |                         |api_football|386859       |
+|140               |La Liga       |2022  |2,536    |Illarramendi          |       |                         |api_football|47310        |
+|140               |La Liga       |2022  |2,434    |Javi Domínguez        |       |                         |api_football|162605       |
+|140               |La Liga       |2022  |2,436    |José Lara             |       |                         |api_football|163447       |
+|140               |La Liga       |2022  |2,503    |Juan Martín Ginzo     |       |                         |api_football|363331       |
+|140               |La Liga       |2022  |2,424    |Mario Hernández       |       |                         |api_football|107207       |
+|140               |La Liga       |2022  |2,474    |M. Fall               |       |                         |api_football|317418       |
+|140               |La Liga       |2022  |2,512    |Pablo Muñoz           |       |                         |api_football|377197       |
+|140               |La Liga       |2022  |2,528    |Salvi                 |       |                         |api_football|46775        |
+|140               |La Liga       |2022  |2,485    |Sergio Díez           |       |                         |api_football|336681       |
+|140               |La Liga       |2022  |2,433    |Sergio Santos         |       |                         |api_football|162530       |
+|140               |La Liga       |2022  |2,495    |Unai Hernández        |       |                         |api_football|348539       |
+|140               |La Liga       |2022  |2,538    |Víctor Sánchez Mata   |       |                         |api_football|47342        |
+|39                |Premier League|2022  |2,219    |L. Dendoncker         |64     |Brighton & Hove Albion FC|api_football|162517       |
+|39                |Premier League|2022  |2,263    |T. Wilson-Brown       |11,912 |Leicester                |api_football|305732       |
+|39                |Premier League|2022  |2,234    |W. Fofana             |11,912 |Leicester                |api_football|22094        |
+|39                |Premier League|2022  |2,214    |A. Elanga             |55     |Manchester United FC     |api_football|153430       |
+|39                |Premier League|2022  |2,246    |A. Garnacho           |55     |Manchester United FC     |api_football|284324       |
+|39                |Premier League|2022  |2,247    |B. Hardley            |55     |Manchester United FC     |api_football|284362       |
+|39                |Premier League|2022  |2,307    |Lee Grant             |55     |Manchester United FC     |api_football|883          |
+|39                |Premier League|2022  |2,248    |S. Murray             |55     |Manchester United FC     |api_football|284391       |
+|39                |Premier League|2022  |2,267    |T. Fredricson         |55     |Manchester United FC     |api_football|328101       |
+|39                |Premier League|2022  |2,308    |V. Lindelöf           |55     |Manchester United FC     |api_football|889          |
+|39                |Premier League|2022  |2,215    |T. Livramento         |11,909 |Southampton              |api_football|158694       |
+|39                |Premier League|2022  |2,258    |Joshua Keeley         |11,913 |Tottenham                |api_football|291022       |
+|39                |Premier League|2022  |2,268    |R. Flamingo           |13,027 |Vitesse                  |api_football|342054       |
+|39                |Premier League|2022  |2,261    |D. Rice               |11,914 |West Ham                 |api_football|2937         |
+|39                |Premier League|2022  |2,225    |Mark Noble            |11,914 |West Ham                 |api_football|18826        |
+|39                |Premier League|2022  |2,256    |James Storer          |11,907 |Wolves                   |api_football|288115       |
+|39                |Premier League|2022  |2,224    |M. Gibbs-White        |11,907 |Wolves                   |api_football|18746        |
+|39                |Premier League|2022  |2,223    |W. Boly               |11,907 |Wolves                   |api_football|18739        |
+|39                |Premier League|2022  |2,243    |A. Raikhy             |       |                         |api_football|283289       |
+|39                |Premier League|2022  |2,204    |A. Sambi Lokonga      |       |                         |api_football|1427         |
+|39                |Premier League|2022  |2,249    |B. Elliott            |       |                         |api_football|284405       |
+|39                |Premier League|2022  |2,230    |B. Genesini           |       |                         |api_football|196000       |
+|39                |Premier League|2022  |2,198    |B. Gilmour            |       |                         |api_football|130423       |
+|39                |Premier League|2022  |2,304    |B. Mendy              |       |                         |api_football|623          |
+|39                |Premier League|2022  |2,232    |B. White              |       |                         |api_football|19959        |
+|39                |Premier League|2022  |2,262    |C. Nørgaard           |       |                         |api_football|30407        |
+|39                |Premier League|2022  |2,237    |Daniel Noel Drinkwater|       |                         |api_football|2288         |
+|39                |Premier League|2022  |2,228    |David Raya            |       |                         |api_football|19465        |
+|39                |Premier League|2022  |2,245    |D. Corness            |       |                         |api_football|284253       |
+|39                |Premier League|2022  |2,227    |D. Henderson          |       |                         |api_football|19088        |
+|39                |Premier League|2022  |2,254    |D. Ouattara           |       |                         |api_football|284797       |
+|39                |Premier League|2022  |2,217    |D. Rankine            |       |                         |api_football|162114       |
+|39                |Premier League|2022  |2,229    |E. Eze                |       |                         |api_football|19586        |
+|39                |Premier League|2022  |2,265    |E. Nwaneri            |       |                         |api_football|313236       |
+|39                |Premier League|2022  |2,291    |Fábio Vieira          |       |                         |api_football|41725        |
+|39                |Premier League|2022  |2,216    |F. Burns              |       |                         |api_football|158696       |
+|39                |Premier League|2022  |2,305    |F. Delph              |       |                         |api_football|630          |
+|39                |Premier League|2022  |2,235    |Gabriel Magalhães     |       |                         |api_football|22224        |
+|39                |Premier League|2022  |2,236    |Gary Cahill           |       |                         |api_football|2281         |
+|39                |Premier League|2022  |2,226    |H. Arter              |       |                         |api_football|18996        |
+|39                |Premier League|2022  |2,244    |H. Blair              |       |                         |api_football|284247       |
+|39                |Premier League|2022  |2,252    |H. Graczyk            |       |                         |api_football|284539       |
+|39                |Premier League|2022  |2,271    |J. Addae              |       |                         |api_football|350627       |
+|39                |Premier League|2022  |2,222    |J. Brooking           |       |                         |api_football|181796       |
+|39                |Premier League|2022  |2,303    |J. Kiwior             |       |                         |api_football|61431        |
+|39                |Premier League|2022  |2,259    |J. Raymond            |       |                         |api_football|293162       |
+|39                |Premier League|2022  |2,260    |J. Sheridan           |       |                         |api_football|293167       |
+|39                |Premier League|2022  |2,255    |Kaide Gordon          |       |                         |api_football|286764       |
+|39                |Premier League|2022  |586      |Kepa                  |       |                         |api_football|2273         |
+|39                |Premier League|2022  |2,220    |K. Hein               |       |                         |api_football|169295       |
+|39                |Premier League|2022  |2,221    |Marcelo               |       |                         |api_football|180866       |
+|39                |Premier League|2022  |2,251    |M. Cadogan            |       |                         |api_football|284464       |
+|39                |Premier League|2022  |2,266    |M. Lewis-Skelly       |       |                         |api_football|313245       |
+|39                |Premier League|2022  |2,250    |M. Mothersille        |       |                         |api_football|284459       |
+|39                |Premier League|2022  |2,277    |M. Ødegaard           |       |                         |api_football|37127        |
+|39                |Premier League|2022  |2,269    |M. Vigor              |       |                         |api_football|344908       |
+|39                |Premier League|2022  |2,306    |O. Zinchenko          |       |                         |api_football|641          |
+|39                |Premier League|2022  |2,270    |T. Gidaree            |       |                         |api_football|350590       |
+|39                |Premier League|2022  |2,233    |W. Saliba             |       |                         |api_football|22090        |
+|39                |Premier League|2022  |2,253    |Z. Monlouis           |       |                         |api_football|284557       |
+|62                |Ligue 2       |2022  |2,666    |I. Mandefu            |12,879 |Amiens                   |api_football|162111       |
+|62                |Ligue 2       |2022  |2,711    |J. Adeyileka          |12,879 |Amiens                   |api_football|353729       |
+|62                |Ligue 2       |2022  |2,682    |P. Charruau           |12,879 |Amiens                   |api_football|21052        |
+|62                |Ligue 2       |2022  |2,713    |I. Eckenfelder        |12,416 |Annecy                   |api_football|358081       |
+|62                |Ligue 2       |2022  |2,691    |J. Gonçalvés          |12,416 |Annecy                   |api_football|23285        |
+|62                |Ligue 2       |2022  |2,699    |M. Bado               |12,416 |Annecy                   |api_football|294567       |
+|62                |Ligue 2       |2022  |2,677    |M. Sans               |12,416 |Annecy                   |api_football|20799        |
+|62                |Ligue 2       |2022  |2,663    |O. Wade               |12,416 |Annecy                   |api_football|113821       |
+|62                |Ligue 2       |2022  |2,709    |Q. Manteau            |12,416 |Annecy                   |api_football|346702       |
+|62                |Ligue 2       |2022  |2,696    |R. Spano              |12,416 |Annecy                   |api_football|24265        |
+|62                |Ligue 2       |2022  |2,771    |S. Pinto Borges       |12,416 |Annecy                   |api_football|8964         |
+|62                |Ligue 2       |2022  |2,672    |C. Ben Saada          |12,962 |Bastia                   |api_football|20579        |
+|62                |Ligue 2       |2022  |2,684    |G. Coulibaly          |12,962 |Bastia                   |api_football|21309        |
+|62                |Ligue 2       |2022  |2,706    |G. Fontana            |12,962 |Bastia                   |api_football|340984       |
+|62                |Ligue 2       |2022  |2,674    |J. Sainati            |12,962 |Bastia                   |api_football|20630        |
+|62                |Ligue 2       |2022  |2,719    |L. Boucher            |12,962 |Bastia                   |api_football|396806       |
+|62                |Ligue 2       |2022  |2,770    |L. Palun              |12,962 |Bastia                   |api_football|8668         |
+|62                |Ligue 2       |2022  |2,720    |L. Rocrou             |16,875 |Bordeaux                 |api_football|404142       |
+|62                |Ligue 2       |2022  |2,687    |B. Jeannot            |12,471 |Caen                     |api_football|21713        |
+|62                |Ligue 2       |2022  |2,675    |F. Wadja              |12,471 |Caen                     |api_football|20643        |
+|62                |Ligue 2       |2022  |2,668    |S. Ewange             |12,471 |Caen                     |api_football|191476       |
+|62                |Ligue 2       |2022  |2,685    |L. Deaux              |16,935 |Dijon                    |api_football|21499        |
+|62                |Ligue 2       |2022  |2,725    |O. Thioune            |16,935 |Dijon                    |api_football|47233        |
+|62                |Ligue 2       |2022  |2,703    |E. Strazzeri          |13,569 |Grenoble                 |api_football|325259       |
+|62                |Ligue 2       |2022  |2,679    |L. Néry               |13,569 |Grenoble                 |api_football|20912        |
+|62                |Ligue 2       |2022  |2,676    |M. Perez              |13,569 |Grenoble                 |api_football|20781        |
+|62                |Ligue 2       |2022  |2,714    |Y. Mangane            |13,569 |Grenoble                 |api_football|358448       |
+|62                |Ligue 2       |2022  |2,671    |Z. Labyad             |13,569 |Grenoble                 |api_football|202344       |
+|62                |Ligue 2       |2022  |2,693    |F. Fumu Tamuzo        |13,080 |Laval                    |api_football|24125        |
+|62                |Ligue 2       |2022  |2,695    |K. Perrot             |13,080 |Laval                    |api_football|24144        |
+|62                |Ligue 2       |2022  |2,688    |R. Ferhaoui           |13,080 |Laval                    |api_football|21834        |
+|62                |Ligue 2       |2022  |2,716    |Luka Elsner           |12,117 |Le Havre                 |api_football|371223       |
+|62                |Ligue 2       |2022  |2,727    |Z. Diallo             |12,117 |Le Havre                 |api_football|50782        |
+|62                |Ligue 2       |2022  |2,667    |J. Megier             |16,902 |Nimes                    |api_football|179478       |
+|62                |Ligue 2       |2022  |2,705    |R. Nasraoui           |16,902 |Nimes                    |api_football|334946       |
+|62                |Ligue 2       |2022  |2,678    |C. Kaboré             |16,818 |Niort                    |api_football|2082         |
+|62                |Ligue 2       |2022  |2,704    |F. Senga              |16,818 |Niort                    |api_football|329271       |
+|62                |Ligue 2       |2022  |2,708    |P. Endong             |16,818 |Niort                    |api_football|345504       |
+|62                |Ligue 2       |2022  |2,686    |P. Lasne              |13,277 |Paris FC                 |api_football|21580        |
+|62                |Ligue 2       |2022  |2,673    |V. Demarconnay        |13,277 |Paris FC                 |api_football|20593        |
+|62                |Ligue 2       |2022  |2,775    |B. Bertrand           |13,669 |PAU                      |api_football|98825        |
+|62                |Ligue 2       |2022  |2,768    |D. Abzi               |13,669 |PAU                      |api_football|78457        |
+|62                |Ligue 2       |2022  |2,690    |L. Bury               |13,669 |PAU                      |api_football|23115        |
+|62                |Ligue 2       |2022  |2,701    |M. Yattara            |13,669 |PAU                      |api_football|3136         |
+|62                |Ligue 2       |2022  |2,689    |C. Zabou              |16,960 |Quevilly                 |api_football|21915        |
+|62                |Ligue 2       |2022  |2,670    |D. G&apos;Beuly       |16,960 |Quevilly                 |api_football|194074       |
+|62                |Ligue 2       |2022  |2,707    |G. Madjo-Matsingi     |16,960 |Quevilly                 |api_football|345152       |
+|62                |Ligue 2       |2022  |2,694    |S. Lambese            |16,960 |Quevilly                 |api_football|24140        |
+|62                |Ligue 2       |2022  |2,681    |Y. Boé-Kane           |16,960 |Quevilly                 |api_football|20949        |
+|62                |Ligue 2       |2022  |2,692    |A. Sanaia             |12,682 |Rodez                    |api_football|24019        |
+|62                |Ligue 2       |2022  |2,773    |E. Mangala            |12,120 |Saint Etienne            |api_football|90498        |
+|62                |Ligue 2       |2022  |1,377    |G. Charbonnier        |12,120 |Saint Etienne            |api_football|20563        |
+|62                |Ligue 2       |2022  |2,683    |M. Pavlović           |12,120 |Saint Etienne            |api_football|21142        |
+|62                |Ligue 2       |2022  |2,726    |R. Boudebouz          |12,120 |Saint Etienne            |api_football|47436        |
+|62                |Ligue 2       |2022  |2,702    |F. Kanouté            |16,994 |Sochaux                  |api_football|31492        |
+|62                |Ligue 2       |2022  |2,669    |C. Laurent            |16,707 |Valenciennes             |api_football|193906       |
+|62                |Ligue 2       |2022  |2,769    |F. Martin             |16,707 |Valenciennes             |api_football|85073        |
+|62                |Ligue 2       |2022  |1,385    |J. Berthomier         |16,707 |Valenciennes             |api_football|20773        |
+|62                |Ligue 2       |2022  |2,712    |J. N&apos;Duquidi     |       |                         |api_football|354861       |
+|62                |Ligue 2       |2022  |2,680    |M. Cabit              |       |                         |api_football|20940        |
+|78                |Bundesliga    |2022  |2,335    |D. Raum               |12,070 |1899 Hoffenheim          |api_football|25158        |
+|78                |Bundesliga    |2022  |2,416    |S. Rudy               |12,070 |1899 Hoffenheim          |api_football|416          |
+|78                |Bundesliga    |2022  |2,328    |G. Strauch            |12,735 |1. FC K?ln               |api_football|203042       |
+|78                |Bundesliga    |2022  |2,332    |J. Hector             |12,735 |1. FC K?ln               |api_football|24801        |
+|78                |Bundesliga    |2022  |2,329    |J. Schwirten          |12,735 |1. FC K?ln               |api_football|203182       |
+|78                |Bundesliga    |2022  |2,384    |R. Smajić             |12,735 |1. FC K?ln               |api_football|334337       |
+|78                |Bundesliga    |2022  |2,382    |T. Buchmann           |12,063 |Bayern M?nchen           |api_football|330612       |
+|78                |Bundesliga    |2022  |2,354    |Y. Sommer             |12,063 |Bayern M?nchen           |api_football|2802         |
+|78                |Bundesliga    |2022  |2,338    |A. Hahn               |12,073 |FC Augsburg              |api_football|25298        |
+|78                |Bundesliga    |2022  |2,377    |A. Zehnter            |12,073 |FC Augsburg              |api_football|323951       |
+|78                |Bundesliga    |2022  |2,415    |D. Caligiuri          |12,073 |FC Augsburg              |api_football|410          |
+|78                |Bundesliga    |2022  |2,356    |D. Katić              |12,073 |FC Augsburg              |api_football|281924       |
+|78                |Bundesliga    |2022  |832      |E. Demirović          |12,073 |FC Augsburg              |api_football|46930        |
+|78                |Bundesliga    |2022  |2,422    |J. Baumgartlinger     |12,073 |FC Augsburg              |api_football|975          |
+|78                |Bundesliga    |2022  |2,345    |T. Strobl             |12,073 |FC Augsburg              |api_football|25640        |
+|78                |Bundesliga    |2022  |2,414    |L. Britscho           |13,544 |FC Schalke 04            |api_football|409050       |
+|78                |Bundesliga    |2022  |2,337    |M. Bülter             |13,544 |FC Schalke 04            |api_football|25242        |
+|78                |Bundesliga    |2022  |2,410    |Salif Sané            |13,544 |FC Schalke 04            |api_football|406          |
+|78                |Bundesliga    |2022  |428      |T. Krauß              |13,544 |FC Schalke 04            |api_football|1156         |
+|78                |Bundesliga    |2022  |2,359    |D. Scherhant                |12,920 |Hertha BSC               |api_football|286710       |
+|78                |Bundesliga    |2022  |2,402    |I. Maza                     |12,920 |Hertha BSC               |api_football|380587       |
+|78                |Bundesliga    |2022  |2,341    |M. Mittelstädt              |12,920 |Hertha BSC               |api_football|25342        |
+|78                |Bundesliga    |2022  |2,321    |M. Morgenstern              |12,920 |Hertha BSC               |api_football|163072       |
+|78                |Bundesliga    |2022  |2,342    |M. Plattenhardt             |12,920 |Hertha BSC               |api_football|25344        |
+|78                |Bundesliga    |2022  |2,339    |M. Richter                  |12,920 |Hertha BSC               |api_football|25307        |
+|78                |Bundesliga    |2022  |2,340    |R. Jarstein                 |12,920 |Hertha BSC               |api_football|25333        |
+|78                |Bundesliga    |2022  |2,385    |M. Pannewig                 |12,076 |VfL Bochum               |api_football|336224       |
+|78                |Bundesliga    |2022  |2,387    |N. Böll                     |12,076 |VfL Bochum               |api_football|339221       |
+|78                |Bundesliga    |2022  |2,370    |F. Chiarodia                |12,066 |Werder Bremen            |api_football|322627       |
+|78                |Bundesliga    |2022  |866      |M. Zetterer                 |12,066 |Werder Bremen            |api_football|7288         |
+|78                |Bundesliga    |2022  |427      |O. Burke                    |12,066 |Werder Bremen            |api_football|1124         |
+|78                |Bundesliga    |2022  |863      |A. Hložek                   |       |                         |api_football|66019        |
+|78                |Bundesliga    |2022  |2,355    |B. Klefisch                 |       |                         |api_football|280411       |
+|78                |Bundesliga    |2022  |2,334    |D. Ramaj                    |       |                         |api_football|24894        |
+|78                |Bundesliga    |2022  |2,376    |Enrique Herrero             |       |                         |api_football|323950       |
+|78                |Bundesliga    |2022  |2,344    |E. Rexhbeçaj                |       |                         |api_football|25413        |
+|78                |Bundesliga    |2022  |2,327    |F. Otto                     |       |                         |api_football|202942       |
+|78                |Bundesliga    |2022  |2,326    |F. Passlack                 |       |                         |api_football|19068        |
+|78                |Bundesliga    |2022  |473      |G. Reyna                    |       |                         |api_football|161921       |
+|78                |Bundesliga    |2022  |2,381    |H. Ito                      |       |                         |api_football|32893        |
+|78                |Bundesliga    |2022  |2,398    |J. Blaswich                 |       |                         |api_football|37246        |
+|78                |Bundesliga    |2022  |2,353    |J. Horz                     |       |                         |api_football|280044       |
+|78                |Bundesliga    |2022  |2,333    |J. Ryerson                  |       |                         |api_football|24845        |
+|78                |Bundesliga    |2022  |2,357    |J. Schröder                 |       |                         |api_football|286369       |
+|78                |Bundesliga    |2022  |2,423    |K. Bellarabi                |       |                         |api_football|976          |
+|78                |Bundesliga    |2022  |2,313    |K. Laimer                   |       |                         |api_football|1157         |
+|78                |Bundesliga    |2022  |2,383    |L. Köhl                     |       |                         |api_football|330625       |
+|78                |Bundesliga    |2022  |2,324    |Martin Josef Hinteregger    |       |                         |api_football|1805         |
+|78                |Bundesliga    |2022  |2,347    |M. Flekken                  |       |                         |api_football|26232        |
+|78                |Bundesliga    |2022  |2,330    |M. Neutgens                 |       |                         |api_football|203370       |
+|78                |Bundesliga    |2022  |2,346    |M. Wolf                     |       |                         |api_football|26           |
+|78                |Bundesliga    |2022  |2,420    |N. Amiri                    |       |                         |api_football|714          |
+|78                |Bundesliga    |2022  |2,348    |N. Petersen                 |       |                         |api_football|26258        |
+|78                |Bundesliga    |2022  |2,380    |N. Simić                    |       |                         |api_football|327888       |
+|78                |Bundesliga    |2022  |2,421    |Raphaël Guerreiro           |       |                         |api_football|8            |
+|78                |Bundesliga    |2022  |601      |R. Dōan                     |       |                         |api_football|2598         |
+|78                |Bundesliga    |2022  |581      |S. Guirassy                 |       |                         |api_football|21393        |
+|78                |Bundesliga    |2022  |703      |T. Rothe                    |       |                         |api_football|324957       |
+|78                |Bundesliga    |2022  |2,343    |W. Anton                    |       |                         |api_football|25368        |
+|78                |Bundesliga    |2022  |2,323    |Y. Keitel                   |       |                         |api_football|178093       |
+|79                |2. Bundesliga |2022  |2,543    |B. Tomiak                   |12,567 |1. FC Kaiserslautern     |api_football|108605       |
+|79                |2. Bundesliga |2022  |2,589    |M. Wunderlich               |12,567 |1. FC Kaiserslautern     |api_football|26078        |
+|79                |2. Bundesliga |2022  |2,551    |N. de Préville              |12,567 |1. FC Kaiserslautern     |api_football|1275         |
+|79                |2. Bundesliga |2022  |2,574    |N. Rapp                     |12,567 |1. FC Kaiserslautern     |api_football|24843        |
+|79                |2. Bundesliga |2022  |2,597    |P. Hercher                  |12,567 |1. FC Kaiserslautern     |api_football|26574        |
+|79                |2. Bundesliga |2022  |2,594    |R. Klingenburg              |12,567 |1. FC Kaiserslautern     |api_football|26381        |
+|79                |2. Bundesliga |2022  |2,563    |A. Müller                   |12,249 |1. FC Magdeburg          |api_football|178199       |
+|79                |2. Bundesliga |2022  |2,591    |F. Kath                     |12,249 |1. FC Magdeburg          |api_football|26251        |
+|79                |2. Bundesliga |2022  |2,659    |M. Franzke                  |12,249 |1. FC Magdeburg          |api_football|70097        |
+|79                |2. Bundesliga |2022  |2,575    |M. Wintzheimer              |13,523 |1. FC N?rnberg           |api_football|24890        |
+|79                |2. Bundesliga |2022  |2,568    |N. Kemlein                  |13,523 |1. FC N?rnberg           |api_football|202709       |
+|79                |2. Bundesliga |2022  |2,651    |B. Oczipka                  |13,700 |Arminia Bielefeld        |api_football|404          |
+|79                |2. Bundesliga |2022  |2,633    |C. Dogan                    |13,700 |Arminia Bielefeld        |api_football|334313       |
+|79                |2. Bundesliga |2022  |2,547    |J. Consbruch                |13,700 |Arminia Bielefeld        |api_football|125681       |
+|79                |2. Bundesliga |2022  |2,601    |J. Frommann                 |13,700 |Arminia Bielefeld        |api_football|273315       |
+|79                |2. Bundesliga |2022  |2,604    |K. Bauer                    |13,700 |Arminia Bielefeld        |api_football|280442       |
+|79                |2. Bundesliga |2022  |2,658    |M. Rzatkowski               |13,700 |Arminia Bielefeld        |api_football|50965        |
+|79                |2. Bundesliga |2022  |2,635    |N. Hahne                    |13,700 |Arminia Bielefeld        |api_football|334346       |
+|79                |2. Bundesliga |2022  |2,592    |J. Fejzić                   |13,105 |Eintracht Braunschweig   |api_football|26264        |
+|79                |2. Bundesliga |2022  |2,585    |R. Wolf                     |13,445 |Fortuna D?sseldorf       |api_football|25447        |
+|79                |2. Bundesliga |2022  |2,584    |H. Weydandt                 |13,207 |Hannover 96              |api_football|25388        |
+|79                |2. Bundesliga |2022  |2,580    |L. Hinterseer               |14,823 |Hansa Rostock            |api_football|25080        |
+|79                |2. Bundesliga |2022  |2,634    |L. Köster                   |14,823 |Hansa Rostock            |api_football|334338       |
+|79                |2. Bundesliga |2022  |2,595    |M. Litka                    |14,823 |Hansa Rostock            |api_football|26495        |
+|79                |2. Bundesliga |2022  |2,565    |O. Daedlow                  |14,823 |Hansa Rostock            |api_football|195729       |
+|79                |2. Bundesliga |2022  |2,582    |A. Ignjovski                |12,080 |Holstein Kiel            |api_football|25236        |
+|79                |2. Bundesliga |2022  |2,660    |B. Pichler                  |12,080 |Holstein Kiel            |api_football|7305         |
+|79                |2. Bundesliga |2022  |2,583    |F. Bartels                  |12,080 |Holstein Kiel            |api_football|25319        |
+|79                |2. Bundesliga |2022  |2,567    |J. Sterner                  |12,080 |Holstein Kiel            |api_football|202481       |
+|79                |2. Bundesliga |2022  |2,578    |J. van den Bergh            |12,080 |Holstein Kiel            |api_football|24960        |
+|79                |2. Bundesliga |2022  |2,576    |R. Himmelmann               |12,080 |Holstein Kiel            |api_football|24919        |
+|79                |2. Bundesliga |2022  |2,590    |D. Gordon                   |13,321 |Karlsruher SC            |api_football|26088        |
+|79                |2. Bundesliga |2022  |2,605    |L. Mirković                 |13,321 |Karlsruher SC            |api_football|286738       |
+|79                |2. Bundesliga |2022  |2,639    |Ricardo van Rhijn           |13,321 |Karlsruher SC            |api_football|36890        |
+|79                |2. Bundesliga |2022  |2,570    |S. Kronemayer               |13,321 |Karlsruher SC            |api_football|202759       |
+|79                |2. Bundesliga |2022  |2,564    |D. Srbeny                   |12,272 |SC Paderborn 07          |api_football|19087        |
+|79                |2. Bundesliga |2022  |2,560    |J. Heuer                    |12,272 |SC Paderborn 07          |api_football|177648       |
+|79                |2. Bundesliga |2022  |2,561    |J. Justvan                  |12,272 |SC Paderborn 07          |api_football|177661       |
+|79                |2. Bundesliga |2022  |2,603    |K. Dağ                      |12,272 |SC Paderborn 07          |api_football|279955       |
+|79                |2. Bundesliga |2022  |2,588    |K. Klefisch                 |12,272 |SC Paderborn 07          |api_football|26073        |
+|79                |2. Bundesliga |2022  |2,562    |M. Pieringer                |12,272 |SC Paderborn 07          |api_football|178106       |
+|79                |2. Bundesliga |2022  |2,544    |M. Schuster                 |12,272 |SC Paderborn 07          |api_football|114944       |
+|79                |2. Bundesliga |2022  |2,548    |S. Conteh                   |12,272 |SC Paderborn 07          |api_football|125720       |
+|79                |2. Bundesliga |2022  |2,572    |N. Žebrauskas               |12,916 |SpVgg Greuther F?rth     |api_football|215918       |
+|79                |2. Bundesliga |2022  |2,545    |R. Kehr                     |12,916 |SpVgg Greuther F?rth     |api_football|115600       |
+|79                |2. Bundesliga |2022  |2,602    |B. Zempelin                 |13,574 |SSV Jahn Regensburg      |api_football|277757       |
+|79                |2. Bundesliga |2022  |2,579    |S. Nachreiner               |13,574 |SSV Jahn Regensburg      |api_football|24981        |
+|79                |2. Bundesliga |2022  |2,661    |T. Kirschbaum               |13,574 |SSV Jahn Regensburg      |api_football|964          |
+|79                |2. Bundesliga |2022  |2,628    |Antonis Makatounakis        |13,527 |SV Darmstadt 98          |api_football|323565       |
+|79                |2. Bundesliga |2022  |2,569    |M. Papela                   |14,617 |SV Sandhausen            |api_football|202727       |
+|79                |2. Bundesliga |2022  |2,577    |C. Avevor                   |       |                         |api_football|24921        |
+|79                |2. Bundesliga |2022  |2,587    |C. Kühlwetter               |       |                         |api_football|25826        |
+|79                |2. Bundesliga |2022  |2,581    |D. Burnić                   |       |                         |api_football|25129        |
+|79                |2. Bundesliga |2022  |2,549    |F. Bilbija                  |       |                         |api_football|125726       |
+|79                |2. Bundesliga |2022  |2,631    |Frank  Feller               |       |                         |api_football|328008       |
+|79                |2. Bundesliga |2022  |2,632    |L. Schbar                   |       |                         |api_football|328011       |
+|79                |2. Bundesliga |2022  |2,593    |M. Heyer                    |       |                         |api_football|26356        |
+|79                |2. Bundesliga |2022  |2,571    |M. Ramusović                |       |                         |api_football|202920       |
+|79                |2. Bundesliga |2022  |2,550    |M. Rohr                     |       |                         |api_football|126951       |
+|79                |2. Bundesliga |2022  |2,650    |N. Ahlers                   |       |                         |api_football|401689       |
+|89                |Eerste Divisie|2022  |2,818    |Abdel Belarbi               |12,164 |ADO Den Haag             |api_football|322867       |
+|89                |Eerste Divisie|2022  |2,843    |Aiman Achemlal              |12,164 |ADO Den Haag             |api_football|366578       |
+|89                |Eerste Divisie|2022  |2,830    |Yunus Emre Ateş             |12,164 |ADO Den Haag             |api_football|329210       |
+|89                |Eerste Divisie|2022  |2,786    |Guus Vaags                  |12,165 |De Graafschap            |api_football|129063       |
+|89                |Eerste Divisie|2022  |2,859    |Johnatan Opoku Agyemang     |12,165 |De Graafschap            |api_football|37782        |
+|89                |Eerste Divisie|2022  |2,812    |Thomas Kleinpenning         |12,165 |De Graafschap            |api_football|295138       |
+|89                |Eerste Divisie|2022  |2,816    |J. Vos                      |12,181 |Den Bosch                |api_football|314011       |
+|89                |Eerste Divisie|2022  |2,853    |K. Sikking                  |12,181 |Den Bosch                |api_football|37448        |
+|89                |Eerste Divisie|2022  |2,823    |Ayoub Hamdani               |12,174 |Dordrecht                |api_football|325800       |
+|89                |Eerste Divisie|2022  |2,835    |Ocean Polonius              |12,174 |Dordrecht                |api_football|344817       |
+|89                |Eerste Divisie|2022  |2,894    |Ayoub Boukhari              |12,405 |FC Eindhoven             |api_football|92989        |
+|89                |Eerste Divisie|2022  |2,815    |Joey van Casand             |12,405 |FC Eindhoven             |api_football|313500       |
+|89                |Eerste Divisie|2022  |2,822    |Jordy Huybers               |12,405 |FC Eindhoven             |api_football|325718       |
+|89                |Eerste Divisie|2022  |2,849    |N. Bertrams                 |12,405 |FC Eindhoven             |api_football|37216        |
+|89                |Eerste Divisie|2022  |2,783    |P. Bogaers                  |12,405 |FC Eindhoven             |api_football|127807       |
+|89                |Eerste Divisie|2022  |2,851    |Willem de Groot             |12,405 |FC Eindhoven             |api_football|373794       |
+|89                |Eerste Divisie|2022  |2,892    |Bodhi Prinssen              |13,530 |FC OSS                   |api_football|68424        |
+|89                |Eerste Divisie|2022  |2,796    |C. Kalulika                 |13,263 |Helmond Sport            |api_football|163162       |
+|89                |Eerste Divisie|2022  |2,855    |Daniël Breedijk             |13,263 |Helmond Sport            |api_football|37698        |
+|89                |Eerste Divisie|2022  |2,893    |G. Bosiers                  |13,263 |Helmond Sport            |api_football|8936         |
+|89                |Eerste Divisie|2022  |2,811    |Jessy Hendrikx              |13,263 |Helmond Sport            |api_football|291781       |
+|89                |Eerste Divisie|2022  |2,819    |Jules Houttequiet           |13,263 |Helmond Sport            |api_football|322932       |
+|89                |Eerste Divisie|2022  |2,787    |Keyennu Lont                |13,263 |Helmond Sport            |api_football|129070       |
+|89                |Eerste Divisie|2022  |2,790    |Lucas Nsiona Defise         |13,263 |Helmond Sport            |api_football|138861       |
+|89                |Eerste Divisie|2022  |2,862    |Sander Vereijken            |13,263 |Helmond Sport            |api_football|38156        |
+|89                |Eerste Divisie|2022  |2,842    |Dylan Hopman                |12,345 |Jong PSV U21             |api_football|357050       |
+|89                |Eerste Divisie|2022  |2,814    |I. Bougafer                 |12,345 |Jong PSV U21             |api_football|309765       |
+|89                |Eerste Divisie|2022  |2,836    |Julian Kuijpers             |12,345 |Jong PSV U21             |api_football|350644       |
+|89                |Eerste Divisie|2022  |2,839    |Besfort Arifi               |13,329 |MVV                      |api_football|353063       |
+|89                |Eerste Divisie|2022  |2,799    |Bob Nijsten                 |13,329 |MVV                      |api_football|194518       |
+|89                |Eerste Divisie|2022  |2,782    |Ermin Cavcic                |13,329 |MVV                      |api_football|127798       |
+|89                |Eerste Divisie|2022  |2,840    |Jesse Probst                |13,329 |MVV                      |api_football|353064       |
+|89                |Eerste Divisie|2022  |2,834    |Keone Maho                  |13,329 |MVV                      |api_football|340286       |
+|89                |Eerste Divisie|2022  |2,826    |L. Ancion                   |13,329 |MVV                      |api_football|326785       |
+|89                |Eerste Divisie|2022  |2,829    |L. Noviello                 |13,329 |MVV                      |api_football|328174       |
+|89                |Eerste Divisie|2022  |2,860    |Luc Joordens                |13,329 |MVV                      |api_football|379609       |
+|89                |Eerste Divisie|2022  |2,781    |Mehdi Lazaar                |13,329 |MVV                      |api_football|114050       |
+|89                |Eerste Divisie|2022  |2,797    |Milo Delrock                |13,329 |MVV                      |api_football|194516       |
+|89                |Eerste Divisie|2022  |2,798    |Twan Visser                 |13,329 |MVV                      |api_football|194517       |
+|89                |Eerste Divisie|2022  |2,854    |Kevin Owen Marcelino Silva  |12,168 |NAC Breda                |api_football|376670       |
+|89                |Eerste Divisie|2022  |2,824    |Quincy Tavares Mojica       |12,168 |NAC Breda                |api_football|325846       |
+|89                |Eerste Divisie|2022  |2,844    |D. Bajselmani               |12,160 |PEC Zwolle               |api_football|36915        |
+|89                |Eerste Divisie|2022  |2,850    |D. Misidjan                 |12,160 |PEC Zwolle               |api_football|373785       |
+|89                |Eerste Divisie|2022  |2,867    |L. Reijnen                  |12,160 |PEC Zwolle               |api_football|392588       |
+|89                |Eerste Divisie|2022  |2,847    |M. van der Werff            |12,160 |PEC Zwolle               |api_football|37119        |
+|89                |Eerste Divisie|2022  |2,825    |Quinten-Eladio Beckx        |12,921 |Roda                     |api_football|326031       |
+|89                |Eerste Divisie|2022  |2,858    |A. Bastiaans                |12,738 |VVV Venlo                |api_football|37779        |
+|89                |Eerste Divisie|2022  |2,857    |Bram Verbong                |12,738 |VVV Venlo                |api_football|37767        |
+|89                |Eerste Divisie|2022  |2,832    |Ian Hussein Ngobi           |12,738 |VVV Venlo                |api_football|335735       |
+|89                |Eerste Divisie|2022  |2,833    |Jonas Theuerzeit            |12,738 |VVV Venlo                |api_football|335736       |
+|89                |Eerste Divisie|2022  |2,807    |Lars Nabbe                  |12,738 |VVV Venlo                |api_football|282643       |
+|89                |Eerste Divisie|2022  |2,869    |M. Nelom                    |12,162 |Willem II                |api_football|44835        |
+|89                |Eerste Divisie|2022  |2,785    |R. Zuijderwijk              |12,162 |Willem II                |api_football|129045       |
+|89                |Eerste Divisie|2022  |2,856    |A. Berenstein               |       |                         |api_football|37756        |
+|89                |Eerste Divisie|2022  |2,841    |Emmanuel Akotei             |       |                         |api_football|353809       |
+|89                |Eerste Divisie|2022  |2,800    |Jip Cornelis Willem Molenaar|       |                         |api_football|202866       |
+|89                |Eerste Divisie|2022  |2,784    |Roscello Vlijter            |       |                         |api_football|128315       |
+|89                |Eerste Divisie|2022  |2,846    |Stanley Akoy                |       |                         |api_football|37041        |
+|89                |Eerste Divisie|2022  |2,821    |Tyrese Gemert               |       |                         |api_football|325366       |
+|89                |Eerste Divisie|2022  |2,864    |Vincent Regeling            |       |                         |api_football|38816        |

@@ -1,0 +1,102 @@
+|provider    |sport_code|external_team_id|team_name          |country_name|external_league_id|season|is_active|created_at                   |
+|------------|----------|----------------|-------------------|------------|------------------|------|---------|-----------------------------|
+|api_football|football  |1               |Belgium            |Belgium     |10                |2024  |true     |2026-04-13 22:46:21.440 +0200|
+|api_football|football  |2               |France             |France      |10                |2024  |true     |2026-04-13 22:46:21.691 +0200|
+|api_football|football  |3               |Croatia            |Croatia     |10                |2024  |true     |2026-04-13 22:46:21.949 +0200|
+|api_football|football  |4               |Russia             |Russia      |10                |2024  |true     |2026-04-13 22:46:22.187 +0200|
+|api_football|football  |5               |Sweden             |Sweden      |10                |2024  |true     |2026-04-13 22:46:22.422 +0200|
+|api_football|football  |6               |Brazil             |Brazil      |10                |2024  |true     |2026-04-13 22:46:22.663 +0200|
+|api_football|football  |7               |Uruguay            |Uruguay     |10                |2024  |true     |2026-04-13 22:46:22.936 +0200|
+|api_football|football  |8               |Colombia           |Colombia    |10                |2024  |true     |2026-04-13 22:46:23.187 +0200|
+|api_football|football  |9               |Spain              |Spain       |10                |2024  |true     |2026-04-13 22:46:23.399 +0200|
+|api_football|football  |10              |England            |England     |10                |2024  |true     |2026-04-13 22:46:23.660 +0200|
+|api_football|football  |11              |Panama             |Panama      |10                |2024  |true     |2026-04-13 22:46:23.892 +0200|
+|api_football|football  |12              |Japan              |Japan       |10                |2024  |true     |2026-04-13 22:46:24.135 +0200|
+|api_football|football  |13              |Senegal            |Senegal     |10                |2024  |true     |2026-04-13 22:46:24.387 +0200|
+|api_football|football  |14              |Serbia             |Serbia      |10                |2024  |true     |2026-04-13 22:46:24.655 +0200|
+|api_football|football  |15              |Switzerland        |Switzerland |10                |2024  |true     |2026-04-13 22:46:24.907 +0200|
+|api_football|football  |16              |Mexico             |Mexico      |10                |2024  |true     |2026-04-13 22:46:25.124 +0200|
+|api_football|football  |17              |South Korea        |South-Korea |10                |2024  |true     |2026-04-13 22:46:25.397 +0200|
+|api_football|football  |18              |Iceland            |Iceland     |10                |2024  |true     |2026-04-13 22:46:25.628 +0200|
+|api_football|football  |19              |Nigeria            |Nigeria     |10                |2024  |true     |2026-04-13 22:46:25.857 +0200|
+|api_football|football  |20              |Australia          |Australia   |10                |2024  |true     |2026-04-13 22:46:26.082 +0200|
+|api_football|football  |21              |Denmark            |Denmark     |10                |2024  |true     |2026-04-13 22:46:26.325 +0200|
+|api_football|football  |22              |Iran               |Iran        |10                |2024  |true     |2026-04-13 22:46:26.561 +0200|
+|api_football|football  |23              |Saudi Arabia       |Saudi-Arabia|10                |2024  |true     |2026-04-13 22:46:26.788 +0200|
+|api_football|football  |24              |Poland             |Poland      |10                |2024  |true     |2026-04-13 22:46:27.017 +0200|
+|api_football|football  |25              |Germany            |Germany     |10                |2024  |true     |2026-04-13 22:46:27.247 +0200|
+|api_football|football  |26              |Argentina          |Argentina   |10                |2024  |true     |2026-04-13 22:46:27.488 +0200|
+|api_football|football  |27              |Portugal           |Portugal    |10                |2024  |true     |2026-04-13 22:46:27.723 +0200|
+|api_football|football  |28              |Tunisia            |Tunisia     |10                |2024  |true     |2026-04-13 22:46:27.946 +0200|
+|api_football|football  |29              |Costa Rica         |Costa-Rica  |10                |2024  |true     |2026-04-13 22:46:28.170 +0200|
+|api_football|football  |30              |Peru               |Peru        |10                |2024  |true     |2026-04-13 22:46:28.404 +0200|
+|api_football|football  |31              |Morocco            |Morocco     |10                |2024  |true     |2026-04-13 22:46:28.667 +0200|
+|api_football|football  |32              |Egypt              |Egypt       |10                |2024  |true     |2026-04-13 22:46:28.901 +0200|
+|api_football|football  |33              |Manchester United  |England     |39                |2022  |true     |2026-03-22 22:21:02.740 +0100|
+|api_football|football  |34              |Newcastle          |England     |39                |2022  |true     |2026-03-22 22:21:03.352 +0100|
+|api_football|football  |35              |Bournemouth        |England     |39                |2022  |true     |2026-03-22 22:21:03.699 +0100|
+|api_football|football  |36              |Fulham             |England     |39                |2022  |true     |2026-03-22 22:21:04.046 +0100|
+|api_football|football  |37              |Huddersfield       |England     |40                |2022  |true     |2026-03-02 13:18:57.685 +0100|
+|api_football|football  |38              |Watford            |England     |40                |2022  |true     |2026-03-02 13:18:57.898 +0100|
+|api_football|football  |39              |Wolves             |England     |39                |2022  |true     |2026-03-22 22:21:04.391 +0100|
+|api_football|football  |40              |Liverpool          |England     |39                |2022  |true     |2026-03-22 22:21:04.789 +0100|
+|api_football|football  |41              |Southampton        |England     |39                |2022  |true     |2026-03-22 22:21:05.210 +0100|
+|api_football|football  |42              |Arsenal            |England     |39                |2022  |true     |2026-03-22 22:21:05.604 +0100|
+|api_football|football  |43              |Cardiff            |Wales       |40                |2022  |true     |2026-03-02 13:18:58.123 +0100|
+|api_football|football  |44              |Burnley            |England     |40                |2022  |true     |2026-03-02 13:18:58.341 +0100|
+|api_football|football  |45              |Everton            |England     |39                |2022  |true     |2026-03-22 22:21:05.996 +0100|
+|api_football|football  |46              |Leicester          |England     |39                |2022  |true     |2026-03-22 22:21:06.388 +0100|
+|api_football|football  |47              |Tottenham          |England     |39                |2022  |true     |2026-03-22 22:21:06.763 +0100|
+|api_football|football  |48              |West Ham           |England     |39                |2022  |true     |2026-03-22 22:21:07.132 +0100|
+|api_football|football  |49              |Chelsea            |England     |39                |2022  |true     |2026-03-22 22:21:07.480 +0100|
+|api_football|football  |50              |Manchester City    |England     |39                |2022  |true     |2026-03-22 22:21:07.829 +0100|
+|api_football|football  |51              |Brighton           |England     |39                |2022  |true     |2026-03-22 22:21:08.170 +0100|
+|api_football|football  |52              |Crystal Palace     |England     |39                |2022  |true     |2026-03-22 22:21:08.508 +0100|
+|api_football|football  |53              |Reading            |England     |40                |2022  |true     |2026-03-02 13:18:58.568 +0100|
+|api_football|football  |54              |Birmingham         |England     |40                |2022  |true     |2026-03-02 13:18:58.791 +0100|
+|api_football|football  |55              |Brentford          |England     |39                |2022  |true     |2026-03-22 22:21:08.906 +0100|
+|api_football|football  |56              |Bristol City       |England     |40                |2022  |true     |2026-03-02 13:18:59.023 +0100|
+|api_football|football  |57              |Ipswich            |England     |41                |2022  |true     |2026-03-02 13:19:44.507 +0100|
+|api_football|football  |58              |Millwall           |England     |40                |2022  |true     |2026-03-02 13:18:59.246 +0100|
+|api_football|football  |59              |Preston            |England     |40                |2022  |true     |2026-03-02 13:18:59.471 +0100|
+|api_football|football  |60              |West Brom          |England     |40                |2022  |true     |2026-03-02 13:18:59.692 +0100|
+|api_football|football  |61              |Wigan              |England     |40                |2022  |true     |2026-03-02 13:18:59.904 +0100|
+|api_football|football  |62              |Sheffield Utd      |England     |40                |2022  |true     |2026-03-02 13:19:00.121 +0100|
+|api_football|football  |63              |Leeds              |England     |39                |2022  |true     |2026-03-22 22:21:09.254 +0100|
+|api_football|football  |64              |Hull City          |England     |10                |2024  |true     |2026-04-13 22:46:29.137 +0200|
+|api_football|football  |65              |Nottingham Forest  |England     |39                |2022  |true     |2026-03-22 22:21:09.593 +0100|
+|api_football|football  |66              |Aston Villa        |England     |39                |2022  |true     |2026-03-22 22:21:09.879 +0100|
+|api_football|football  |67              |Blackburn          |England     |40                |2022  |true     |2026-03-02 13:19:00.604 +0100|
+|api_football|football  |68              |Bolton             |England     |41                |2022  |true     |2026-03-02 13:19:44.755 +0100|
+|api_football|football  |69              |Derby              |England     |41                |2022  |true     |2026-03-02 13:19:45.056 +0100|
+|api_football|football  |70              |Middlesbrough      |England     |40                |2022  |true     |2026-03-02 13:19:00.828 +0100|
+|api_football|football  |71              |Norwich            |England     |40                |2022  |true     |2026-03-02 13:19:01.048 +0100|
+|api_football|football  |72              |QPR                |England     |40                |2022  |true     |2026-03-02 13:19:01.270 +0100|
+|api_football|football  |73              |Rotherham          |England     |40                |2022  |true     |2026-03-02 13:19:01.494 +0100|
+|api_football|football  |74              |Sheffield Wednesday|England     |41                |2022  |true     |2026-03-02 13:19:45.358 +0100|
+|api_football|football  |75              |Stoke City         |England     |40                |2022  |true     |2026-03-02 13:19:01.727 +0100|
+|api_football|football  |76              |Swansea            |Wales       |40                |2022  |true     |2026-03-02 13:19:01.980 +0100|
+|api_football|football  |77              |Angers             |France      |61                |2022  |true     |2026-03-02 13:19:03.756 +0100|
+|api_football|football  |79              |Lille              |France      |61                |2022  |true     |2026-03-02 13:19:03.983 +0100|
+|api_football|football  |80              |Lyon               |France      |61                |2022  |true     |2026-03-02 13:19:04.199 +0100|
+|api_football|football  |81              |Marseille          |France      |61                |2022  |true     |2026-03-02 13:19:04.438 +0100|
+|api_football|football  |82              |Montpellier        |France      |61                |2022  |true     |2026-03-02 13:19:04.656 +0100|
+|api_football|football  |83              |Nantes             |France      |61                |2022  |true     |2026-03-02 13:19:04.889 +0100|
+|api_football|football  |84              |Nice               |France      |61                |2022  |true     |2026-03-02 13:19:05.127 +0100|
+|api_football|football  |85              |Paris Saint Germain|France      |61                |2022  |true     |2026-03-02 13:19:05.354 +0100|
+|api_football|football  |91              |Monaco             |France      |61                |2022  |true     |2026-03-02 13:19:05.580 +0100|
+|api_football|football  |93              |Reims              |France      |61                |2022  |true     |2026-03-02 13:19:05.802 +0100|
+|api_football|football  |94              |Rennes             |France      |61                |2022  |true     |2026-03-02 13:19:06.036 +0100|
+|api_football|football  |95              |Strasbourg         |France      |61                |2022  |true     |2026-03-02 13:19:06.282 +0100|
+|api_football|football  |96              |Toulouse           |France      |61                |2022  |true     |2026-03-02 13:19:06.513 +0100|
+|api_football|football  |97              |Lorient            |France      |61                |2022  |true     |2026-03-02 13:19:06.745 +0100|
+|api_football|football  |98              |Ajaccio            |France      |61                |2022  |true     |2026-03-02 13:19:06.979 +0100|
+|api_football|football  |99              |Clermont Foot      |France      |61                |2022  |true     |2026-03-02 13:19:07.193 +0100|
+|api_football|football  |106             |Stade Brestois 29  |France      |61                |2022  |true     |2026-03-02 13:19:07.421 +0100|
+|api_football|football  |108             |Auxerre            |France      |61                |2022  |true     |2026-03-02 13:19:07.653 +0100|
+|api_football|football  |110             |Estac Troyes       |France      |61                |2022  |true     |2026-03-02 13:19:07.871 +0100|
+|api_football|football  |111             |Le Havre           |France      |61                |2024  |true     |2026-02-26 18:33:36.504 +0100|
+|api_football|football  |112             |Metz               |France      |61                |2024  |true     |2026-02-26 18:33:36.732 +0100|
+|api_football|football  |116             |Lens               |France      |61                |2022  |true     |2026-03-02 13:19:08.120 +0100|
+|api_football|football  |157             |Bayern M?nchen     |Germany     |78                |2022  |true     |2026-03-22 22:21:02.721 +0100|
+|api_football|football  |159             |Hertha BSC         |Germany     |78                |2022  |true     |2026-03-22 22:21:03.373 +0100|

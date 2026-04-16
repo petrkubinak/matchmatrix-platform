@@ -1,0 +1,4 @@
+cd C:\MatchMatrix-platform\db\scripts\
+.\112_runtime_audit_export_V2.ps1
+.\614_worker_file_scan_v2.ps1
+.\run_api_football_backfill_report.ps1

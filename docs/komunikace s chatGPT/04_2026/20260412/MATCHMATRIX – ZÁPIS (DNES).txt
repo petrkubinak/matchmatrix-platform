@@ -1,0 +1,172 @@
+MATCHMATRIX – ZÁPIS (DNES)
+🎯 HLAVNÍ CÍL DNES
+
+Rozjet Baseball (BSB) ingest pipeline → staging → parser → validace
+
+🧱 1. PROBLÉMY (a jejich řešení)
+❌ 1.1 DSN chyba
+invalid dsn: missing "=" after "set"
+🔧 ŘEŠENÍ
+upraven get_dsn() → odstranění:
+set DB_DSN=
+DB_DSN=
+přidán fallback DSN
+❌ 1.2 Permission denied (staging schema)
+permission denied for schema staging
+🔧 ROOT CAUSE
+
+Používal jsi:
+
+user=mm_ingest
+
+➡️ ten NEMÁ práva na staging
+
+✅ ŘEŠENÍ
+
+Používáš:
+
+user=matchmatrix
+
+✔️ confirmed:
+
+usage=True
+create=True
+❌ 1.3 Column "entity" does not exist
+column "entity" does not exist
+🔧 ŘEŠENÍ
+
+Parser upraven na dynamické mapování sloupců
+
+Používá:
+
+entity_type
+payload_json
+sport_code
+❌ 1.4 Script nic nedělal (ticho)
+
+➡️ nebyl main entrypoint / debug
+
+🔧 ŘEŠENÍ
+doplněn běh + logy
+ověřen run přes -u
+🚀 2. FUNKČNÍ PIPELINE (CONFIRMED)
+🔗 FLOW
+API-Sport (baseball)
+        ↓
+staging.stg_api_payloads
+        ↓
+parse_api_baseball_teams_to_staging.py
+        ↓
+staging.stg_provider_teams
+📊 3. VÝSLEDEK
+RAW payload id: 480
+results: 32
+Filtrace:
+❌ American League
+❌ National League
+✔️ FINAL:
+30 teams vloženo
+✅ OPS CONFIRM
+api_baseball | baseball | league_id=1 | season=2024
+
+rows_count = 30
+distinct_teams = 30
+
+✔️ 100% match
+✔️ žádné duplicity
+✔️ parser funguje správně
+
+🧠 4. CO JE HOTOVÉ
+
+✔️ DB connection robustní
+✔️ staging payload load funguje
+✔️ parser dynamický (schema-proof)
+✔️ filtr non-playable entit
+✔️ zápis do stg_provider_teams
+✔️ OPS validace
+
+🚧 5. CO JE ROZDĚLANÉ
+
+➡️ CHYBÍ:
+
+staging → public (canonical vrstva)
+
+Konkrétně:
+
+public.teams
+team_aliases
+team_provider_map
+🔥 6. KLÍČOVÝ POSUN
+
+Dnes se stalo tohle:
+
+👉 Baseball už NENÍ skeleton
+👉 Je to plnohodnotný ingest chain jako FB
+
+To je zásadní milestone pro:
+
+multi-sport architekturu
+provider abstraction
+budoucí odds + tickets
+▶️ 7. ZÍTRA – PŘESNĚ NAVÁZÁNÍ
+🎯 KROK 1 (HNED RÁNO)
+
+Spustíš:
+
+136_bsb_teams_provider_map.sql
+🎯 KROK 2
+
+Validace:
+
+count teams
+count provider_map
+sample teams
+🎯 KROK 3 (NAVÁŽEME SPOLU)
+
+👉 Přechod na:
+
+BSB fixtures ingest
+📈 8. STRATEGICKÝ SMĚR
+
+Teď jedeme:
+
+BSB → teams ✔️
+BSB → provider_map (zítra)
+BSB → fixtures
+BSB → odds
+
+A pak:
+
+→ BK
+→ HK
+→ VB
+→ AFB
+⚠️ DŮLEŽITÉ (NA ZÁVĚR)
+
+Tohle si zapamatuj:
+
+👉 NEPOUŽÍVEJ mm_ingest pro staging
+👉 vždy:
+
+user=matchmatrix
+
+Pokud tohle změníš → rozbije se ingest
+
+🧾 SHRNUTÍ
+
+Dnes:
+
+✔️ opraven parser
+✔️ opraven DSN
+✔️ opraven permissions
+✔️ baseball teams ingest běží
+✔️ data validní
+✔️ připraveno na canonical vrstvu
+
+Zítra:
+
+👉 provider_map
+👉 fixtures
+
+💬 Dobrá práce dnes. Tohle byl velký krok.
+Zítra už jedeme rychleji 🚀

@@ -1,0 +1,125 @@
+|planner_id|provider_league_id|league_name                      |season|run_group               |priority|status |staging_players|pro_wave_bucket|
+|----------|------------------|---------------------------------|------|------------------------|--------|-------|---------------|---------------|
+|1,306     |1034              |2. Frauen Bundesliga             |2024  |FOOTBALL_MAINTENANCE    |20      |done   |60             |WAVE_1_FILL    |
+|1,682     |95                |Segunda Liga                     |2024  |FOOTBALL_MAINTENANCE    |20      |done   |60             |WAVE_1_FILL    |
+|1,302     |103               |Eliteserien                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,310     |104               |1. Division                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,314     |106               |Ekstraklasa                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,318     |107               |I Liga                           |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,322     |109               |II Liga - East                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,214     |110               |Premier League                   |2022  |FB_API_EXPANSION        |20      |error  |0              |WAVE_3_TOP     |
+|1,326     |111               |FAW Championship                 |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,330     |113               |Allsvenskan                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,334     |114               |Superettan                       |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,338     |116               |Premier League                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,342     |117               |1. Division                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,346     |1195              |Liga E Pare                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,222     |120               |1. Division                      |2022  |FB_API_EXPANSION        |20      |error  |0              |WAVE_3_TOP     |
+|1,350     |136               |Serie B                          |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,354     |138               |Serie C - Girone A               |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,694     |140               |La Liga                          |2022  |FOOTBALL_MAINTENANCE_TOP|20      |pending|0              |WAVE_3_TOP     |
+|1,358     |141               |Segunda Divisi?n                 |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,362     |144               |Jupiler Pro League               |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,366     |145               |Challenger Pro League            |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,370     |164               |?rvalsdeild                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,374     |165               |1. Deild                         |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,378     |172               |First League                     |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,382     |203               |S?per Lig                        |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,386     |204               |1. Lig                           |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,390     |205               |2. Lig                           |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,394     |207               |Super League                     |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,398     |208               |Challenge League                 |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,402     |218               |Bundesliga                       |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,406     |219               |2. Liga                          |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,410     |235               |Premier League                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,414     |236               |First League                     |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,418     |244               |Veikkausliiga                    |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,422     |245               |Ykk?nen                          |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,426     |261               |National Division                |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,430     |286               |Super Liga                       |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,434     |287               |Prva Liga                        |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,438     |310               |Superliga                        |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,442     |311               |1st Division                     |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,446     |312               |1a Divisi?                       |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,450     |313               |2a Divisi?                       |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,454     |315               |Premijer Liga                    |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,458     |318               |1. Division                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,462     |319               |2. Division                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,466     |326               |Erovnuli Liga 2                  |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,470     |327               |Erovnuli Liga                    |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,474     |328               |Esiliiga A                       |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,478     |329               |Meistriliiga                     |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,482     |332               |Super Liga                       |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,486     |333               |Premier League                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,490     |334               |Persha Liga                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,494     |342               |Premier League                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,498     |343               |First League                     |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,502     |345               |Czech Liga                       |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,506     |346               |FNL                              |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,510     |348               |3. liga - CFL A                  |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,514     |349               |3. liga - MSFL                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,518     |355               |First League                     |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,522     |356               |Second League                    |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,526     |357               |Premier Division                 |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,530     |358               |First Division                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,534     |361               |1 Lyga                           |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,538     |362               |A Lyga                           |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,542     |364               |1. Liga                          |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,546     |365               |Virsliga                         |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,550     |371               |First League                     |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,554     |372               |Second League                    |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,558     |373               |1. SNL                           |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,562     |374               |2. SNL                           |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,566     |382               |Liga Leumit                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,570     |383               |Ligat Ha'al                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,574     |388               |1. Division                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,578     |389               |Premier League                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,698     |39                |Premier League                   |2022  |FOOTBALL_MAINTENANCE_TOP|20      |pending|0              |WAVE_3_TOP     |
+|1,582     |392               |Challenge League                 |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,586     |393               |Premier League                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,590     |394               |Super Liga                       |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,594     |395               |Liga 1                           |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,598     |404               |Campionato                       |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,602     |407               |Championship                     |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,606     |408               |Premiership                      |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,610     |418               |Birinci Dasta                    |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,614     |419               |Premyer Liqa                     |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,618     |492               |Tweede Divisie                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,622     |494               |Super League 2                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,626     |506               |2. liga                          |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,630     |518               |Reserve Pro League               |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,634     |62                |Ligue 2                          |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,638     |664               |Superliga                        |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,642     |685               |3. liga - CFL B                  |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,702     |78                |Bundesliga                       |2022  |FOOTBALL_MAINTENANCE_TOP|20      |pending|0              |WAVE_3_TOP     |
+|1,646     |79                |2. Bundesliga                    |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,650     |80                |3. Liga                          |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,654     |82                |Frauen Bundesliga                |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,658     |865               |Liga 3                           |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,662     |89                |Eerste Divisie                   |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,666     |891               |Coppa Italia Serie C             |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,670     |942               |Serie C - Girone B               |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,674     |943               |Serie C - Girone C               |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,678     |946               |Second NL                        |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,686     |975               |Serie C - Relegation - Play-offs |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,690     |976               |Serie C - Promotion - Play-offs  |2022  |FOOTBALL_MAINTENANCE    |20      |pending|0              |WAVE_3_TOP     |
+|1,226     |135               |Serie A                          |2022  |FB_API_EXPANSION        |20      |done   |0              |WAVE_3_TOP     |
+|1,230     |173               |Second League                    |2022  |FB_API_EXPANSION        |20      |done   |0              |WAVE_3_TOP     |
+|1,234     |179               |Premiership                      |2022  |FB_API_EXPANSION        |20      |done   |0              |WAVE_3_TOP     |
+|1,238     |180               |Championship                     |2022  |FB_API_EXPANSION        |20      |done   |0              |WAVE_3_TOP     |
+|1,242     |197               |Super League 1                   |2022  |FB_API_EXPANSION        |20      |done   |0              |WAVE_3_TOP     |
+|1,246     |210               |HNL                              |2022  |FB_API_EXPANSION        |20      |done   |0              |WAVE_3_TOP     |
+|1,250     |211               |First NL                         |2022  |FB_API_EXPANSION        |20      |done   |0              |WAVE_3_TOP     |
+|1,298     |1010              |3. liga - Promotion Play-off     |2022  |FOOTBALL_MAINTENANCE    |20      |done   |6              |LATER          |
+|1,290     |94                |Primeira Liga                    |2022  |FB_API_EXPANSION        |20      |done   |56             |LATER          |
+|1,258     |272               |NB II                            |2022  |FB_API_EXPANSION        |20      |done   |59             |LATER          |
+|1,270     |40                |Championship                     |2022  |FB_API_EXPANSION        |20      |done   |59             |LATER          |
+|1,294     |1000              |Segunda Divisi?n RFEF - Play-offs|2022  |FOOTBALL_MAINTENANCE    |20      |done   |60             |LATER          |
+|1,254     |271               |NB I                             |2022  |FB_API_EXPANSION        |20      |done   |60             |LATER          |
+|1,262     |283               |Liga I                           |2022  |FB_API_EXPANSION        |20      |done   |60             |LATER          |
+|1,266     |284               |Liga II                          |2022  |FB_API_EXPANSION        |20      |done   |60             |LATER          |
+|1,274     |41                |League One                       |2022  |FB_API_EXPANSION        |20      |done   |60             |LATER          |
+|1,278     |42                |League Two                       |2022  |FB_API_EXPANSION        |20      |done   |60             |LATER          |
+|1,282     |61                |Ligue 1                          |2022  |FB_API_EXPANSION        |20      |done   |60             |LATER          |
+|1,286     |88                |Eredivisie                       |2022  |FB_API_EXPANSION        |20      |done   |60             |LATER          |
+|1,218     |119               |Superliga                        |2022  |FB_API_EXPANSION        |20      |running|0              |WAVE_3_TOP     |

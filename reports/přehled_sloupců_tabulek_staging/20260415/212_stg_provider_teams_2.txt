@@ -1,0 +1,598 @@
+|external_team_id|team_name                 |matched_canonical_count|candidate_team_ids       |
+|----------------|--------------------------|-----------------------|-------------------------|
+|200             |Vitesse                   |4                      |1113, 13027, 25793, 26481|
+|723             |Almeria                   |3                      |1158, 12871, 25856       |
+|420             |Cambuur                   |3                      |1114, 12180, 27530       |
+|501             |Crotone                   |3                      |1090, 14302, 26935       |
+|545             |Eibar                     |3                      |1161, 12429, 27752       |
+|511             |Empoli                    |3                      |1083, 12135, 27097       |
+|766             |Halmstad                  |3                      |12614, 27621, 28368      |
+|505             |Inter                     |3                      |12134, 25936, 27888      |
+|534             |Las Palmas                |3                      |1155, 12087, 26688       |
+|537             |Leganes                   |3                      |1156, 12089, 27751       |
+|116             |Lens                      |3                      |1012, 12119, 27000       |
+|9675            |Manresa                   |3                      |118266, 16745, 26376     |
+|214             |Maritimo                  |3                      |1137, 14641, 27498       |
+|1579            |Monza                     |3                      |1084, 12140, 28834       |
+|193             |PEC Zwolle                |3                      |12160, 26479, 567        |
+|93              |Reims                     |3                      |1025, 12111, 25879       |
+|514             |Salernitana               |3                      |1087, 13019, 26932       |
+|498             |Sampdoria                 |3                      |1088, 12491, 27095       |
+|106             |Stade Brestois 29         |3                      |12115, 27638, 501        |
+|810             |Vizela                    |3                      |1135, 12156, 26307       |
+|195             |Willem II                 |3                      |1110, 12162, 26900       |
+|757             |Aalesund                  |2                      |13181, 25829             |
+|406             |Aarhus                    |2                      |13156, 27730             |
+|404             |AC Horsens                |2                      |12236, 25814             |
+|489             |AC Milan                  |2                      |12122, 536               |
+|10139           |AD Ceuta FC               |2                      |26689, 28745             |
+|3396            |AEL                       |2                      |13018, 27071             |
+|2579            |AFC Hermannstadt          |2                      |13186, 26635             |
+|1333            |AFC Wimbledon             |2                      |13535, 26524             |
+|377             |AIK Stockholm             |2                      |13267, 25830             |
+|98              |Ajaccio                   |2                      |1029, 13579              |
+|996             |Alanyaspor                |2                      |13492, 25810             |
+|711             |Alcorcon                  |2                      |26319, 28678             |
+|9860            |Alfaro                    |2                      |27562, 28825             |
+|4358            |Aluminij                  |2                      |12574, 27650             |
+|9380            |Amorebieta                |2                      |27563, 28691             |
+|2269            |Anorthosis                |2                      |12998, 27340             |
+|7522            |Antoniano                 |2                      |13747, 26339             |
+|2247            |Apoel Nicosia             |2                      |12860, 27339             |
+|602             |Apollon Limassol          |2                      |12898, 27070             |
+|11238           |Araz                      |2                      |13132, 27491             |
+|2592            |Arges Pitesti             |2                      |12347, 27259             |
+|3408            |Aris                      |2                      |12561, 27073             |
+|344             |Arka Gdynia               |2                      |13208, 25817             |
+|497             |AS Roma                   |2                      |27695, 538               |
+|955             |Asteras Tripolis          |2                      |13448, 27016             |
+|531             |Athletic Club             |2                      |12084, 78                |
+|9539            |Audace Cerignola          |2                      |13835, 25873             |
+|21595           |AVS                       |2                      |12159, 591               |
+|1587            |AZ Picerno                |2                      |13968, 27874             |
+|5250            |Badalona                  |2                      |27578, 28784             |
+|5251            |Barakaldo                 |2                      |27753, 28785             |
+|9879            |Barbastro                 |2                      |14590, 26359             |
+|529             |Barcelona                 |2                      |118203, 118267           |
+|747             |Barnsley                  |2                      |1006, 12890              |
+|9657            |Beasain                   |2                      |16796, 27565             |
+|657             |Beitar Jerusalem          |2                      |14252, 27794             |
+|857             |Beroe                     |2                      |13233, 26295             |
+|367             |BK Hacken                 |2                      |13610, 25831             |
+|1356            |Blackpool                 |2                      |1003, 13685              |
+|7276            |Blansko                   |2                      |14607, 26949             |
+|222             |Boavista                  |2                      |1132, 12145              |
+|20473           |Bochum                    |2                      |1055, 14347              |
+|14473           |Bohemians 1905 II         |2                      |14224, 26154             |
+|68              |Bolton                    |2                      |1009, 12960              |
+|1864            |Borussia Monchengladbach W|2                      |14702, 26793             |
+|634             |Botev Plovdiv             |2                      |12853, 26893             |
+|319             |Brann                     |2                      |13096, 26797             |
+|4359            |Bravo                     |2                      |13051, 25797             |
+|12744           |Brinje-Grosuplje          |2                      |13458, 26527             |
+|2142            |Bryne                     |2                      |13178, 27408             |
+|724             |Cadiz                     |2                      |1159, 13513              |
+|356             |Caernarfon Town           |2                      |13413, 26981             |
+|1581            |Carrarese                 |2                      |12319, 27644             |
+|1687            |Catanzaro                 |2                      |12285, 27096             |
+|9827            |CD Coria                  |2                      |16987, 26247             |
+|247             |Celtic                    |2                      |13635, 26869             |
+|2246            |CFR 1907 Cluj             |2                      |13044, 25818             |
+|223             |Chaves                    |2                      |1136, 13956              |
+|21905           |Chiclana                  |2                      |26401, 28768             |
+|2586            |Chindia Targoviste        |2                      |13422, 25765             |
+|3482            |Chojniczanka Chojnice     |2                      |14657, 26305             |
+|9756            |Ciudad de Lucena          |2                      |27721, 28816             |
+|5256            |Compostela                |2                      |16806, 27505             |
+|2580            |Concordia                 |2                      |13304, 28545             |
+|5257            |Conquense                 |2                      |26341, 28786             |
+|713             |Cordoba                   |2                      |12934, 27750             |
+|350             |Cracovia Krakow           |2                      |12363, 27866             |
+|1426            |CSKA 1948                 |2                      |13447, 26892             |
+|853             |CSKA Sofia                |2                      |12228, 27532             |
+|725             |Cultural Leonesa          |2                      |25857, 28799             |
+|2172            |Degerfors IF              |2                      |13441, 27188             |
+|199             |De Graafschap             |2                      |12165, 26480             |
+|4370            |Dekani                    |2                      |12953, 27003             |
+|421             |Den Bosch                 |2                      |12181, 26901             |
+|9811            |Deportiva Minera          |2                      |26334, 28821             |
+|544             |Deportivo La Coruna       |2                      |12984, 27893             |
+|386             |Dinamo Brest              |2                      |12438, 26456             |
+|635             |Dinamo Bucuresti          |2                      |13585, 25819             |
+|620             |Dinamo Zagreb             |2                      |12284, 26997             |
+|364             |Djurgardens IF            |2                      |13081, 26588             |
+|1427            |Dobrudzha                 |2                      |12437, 26294             |
+|5259            |Don Benito                |2                      |27597, 28787             |
+|15132           |Dukla Praha II            |2                      |14523, 26156             |
+|169             |Eintracht Frankfurt       |2                      |27218, 71                |
+|9589            |Ejea                      |2                      |26324, 28811             |
+|797             |Elche                     |2                      |12606, 26687             |
+|208             |Emmen                     |2                      |13306, 25843             |
+|3399            |Enosis                    |2                      |13660, 27072             |
+|9386            |Escobedo                  |2                      |14457, 27493             |
+|9590            |Espanyol II               |2                      |16990, 27713             |
+|15358           |Estepona                  |2                      |14373, 26332             |
+|15130           |Estrela                   |2                      |12158, 27496             |
+|24612           |Extremadura 1924          |2                      |26331, 28769             |
+|812             |Falkenbergs FF            |2                      |26590, 28682             |
+|231             |Farense                   |2                      |1133, 12152              |
+|8157            |FC Andorra                |2                      |16827, 27488             |
+|170             |FC Augsburg               |2                      |12073, 528               |
+|5262            |FC Cartagena              |2                      |12348, 27344             |
+|397             |FC Midtjylland            |2                      |12310, 27729             |
+|212             |FC Porto                  |2                      |12142, 576               |
+|1012            |FC Thun                   |2                      |12827, 27523             |
+|416             |FC Volendam               |2                      |27832, 571               |
+|209             |Feyenoord                 |2                      |1098, 12172              |
+|521             |Foggia                    |2                      |14188, 27664             |
+|205             |Fortuna Sittard           |2                      |26896, 572               |
+|2149            |Fredrikstad               |2                      |13089, 27725             |
+|5263            |Gernika                   |2                      |16963, 26326             |
+|9572            |Getafe II                 |2                      |14477, 26246             |
+|373             |GIF Sundsvall             |2                      |13195, 26595             |
+|9556            |Giugliano                 |2                      |14644, 26931             |
+|3484            |GKS Katowice              |2                      |12246, 26989             |
+|410             |GO Ahead Eagles           |2                      |26894, 568               |
+|340             |Gornik Zabrze             |2                      |12718, 26477             |
+|715             |Granada CF                |2                      |12732, 27894             |
+|9599            |Granada II                |2                      |17007, 26393             |
+|1236            |Groene Ster               |2                      |17001, 26922             |
+|866             |Gubbio                    |2                      |14497, 27872             |
+|882             |Guidonia Montecelio 1937  |2                      |15300, 27660             |
+|224             |Guimaraes                 |2                      |12146, 27930             |
+|563             |Hapoel Beer Sheva         |2                      |13721, 25839             |
+|4486            |Hapoel Katamon            |2                      |14462, 27793             |
+|4497            |Hapoel Kfar Saba          |2                      |13892, 25809             |
+|4491            |Hapoel Rishon LeZion      |2                      |14127, 25820             |
+|811             |Helsingborg               |2                      |12468, 26594             |
+|159             |Hertha BSC                |2                      |12920, 26641             |
+|1021            |HNK Cibalia               |2                      |14548, 26482             |
+|608             |HNK Hajduk Split          |2                      |13003, 26996             |
+|561             |HNK Rijeka                |2                      |12607, 27693             |
+|191             |Holstein Kiel             |2                      |1054, 12080              |
+|726             |Huesca                    |2                      |1162, 12552              |
+|9781            |Ibiza Islas Pitiusas      |2                      |26358, 28818             |
+|371             |IF Brommapojkarna         |2                      |12408, 26589             |
+|372             |IF Elfsborg               |2                      |13331, 26592             |
+|366             |IFK Goteborg              |2                      |12425, 27187             |
+|15359           |Juventud Torremolinos     |2                      |26318, 28764             |
+|1715            |Juventus U23              |2                      |13829, 26496             |
+|863             |Juve Stabia               |2                      |12849, 27099             |
+|4493            |Kafr Qasim                |2                      |13887, 25821             |
+|12801           |Kalisz                    |2                      |14567, 26304             |
+|5490            |Kapaz                     |2                      |13165, 25763             |
+|7306            |Karlovy Vary              |2                      |16991, 28420             |
+|4374            |Koper                     |2                      |13017, 27651             |
+|4375            |Krka                      |2                      |12362, 27215             |
+|5265            |Langreo                   |2                      |27555, 28788             |
+|9797            |Lanzarote                 |2                      |26408, 28820             |
+|9395            |Las Rozas                 |2                      |26386, 28805             |
+|804             |Latina                    |2                      |14409, 26933             |
+|1014            |Lausanne                  |2                      |12865, 27521             |
+|339             |Legia Warszawa            |2                      |12278, 27865             |
+|957             |Levadiakos                |2                      |13183, 27702             |
+|646             |Levski Sofia              |2                      |13353, 25782             |
+|3387            |Lida                      |2                      |13415, 28462             |
+|9627            |Llanera                   |2                      |27673, 28812             |
+|5266            |Lleida Esportiu           |2                      |27509, 28789             |
+|858             |Lokomotiv Plovdiv         |2                      |12702, 25783             |
+|1416            |Lokomotiv Sofia           |2                      |12720, 27533             |
+|97              |Lorient                   |2                      |1020, 27641              |
+|566             |Ludogorets                |2                      |12589, 25731             |
+|625             |Lyngby                    |2                      |12765, 25815             |
+|4495            |Maccabi Petah Tikva       |2                      |14406, 25807             |
+|604             |Maccabi Tel Aviv          |2                      |13699, 25838             |
+|375             |Malmo FF                  |2                      |13405, 27620             |
+|1693            |Mantova                   |2                      |13399, 27098             |
+|552             |Maribor                   |2                      |12230, 26999             |
+|12694           |Martigny Sports           |2                      |26787, 28696             |
+|112             |Metz                      |2                      |1021, 27001              |
+|7808            |ML Vitebsk                |2                      |13461, 26457             |
+|1424            |Montana                   |2                      |12741, 25730             |
+|82              |Montpellier               |2                      |1027, 12106              |
+|14562           |Motor Lublin              |2                      |13024, 26476             |
+|203             |NAC Breda                 |2                      |12168, 565               |
+|4376            |Nafta                     |2                      |13400, 27216             |
+|5271            |Navalcarnero              |2                      |16840, 26349             |
+|2270            |Neftchi Baku              |2                      |12324, 25798             |
+|1337            |Northampton               |2                      |13503, 26525             |
+|71              |Norwich                   |2                      |12197, 27679             |
+|3488            |Odra Opole                |2                      |12459, 26301             |
+|1124            |OFI                       |2                      |13270, 27282             |
+|677             |Olimpija Ljubljana        |2                      |12548, 26998             |
+|9403            |Olot                      |2                      |26501, 28806             |
+|553             |Olympiakos Piraeus        |2                      |12670, 27833             |
+|9404            |Orihuela                  |2                      |27757, 28807             |
+|376             |Ostersunds FK             |2                      |12357, 27189             |
+|9612            |Ourense CF                |2                      |16824, 27754             |
+|718             |Oviedo                    |2                      |12918, 25885             |
+|234             |Pacos Ferreira            |2                      |1138, 14073              |
+|870             |Padova                    |2                      |14106, 28835             |
+|3419            |PAEEK                     |2                      |12466, 26979             |
+|617             |Panathinaikos             |2                      |12543, 27703             |
+|949             |Panetolikos               |2                      |12413, 25780             |
+|619             |PAOK                      |2                      |13128, 27834             |
+|901             |Partick                   |2                      |13226, 27878             |
+|950             |PAS Giannina              |2                      |12289, 26852             |
+|525             |Pescara                   |2                      |14367, 27803             |
+|872             |Piacenza                  |2                      |15095, 28836             |
+|1428            |Pirin Blagoevgrad         |2                      |12771, 25733             |
+|1357            |Plymouth                  |2                      |1001, 12206              |
+|5273            |Poblense                  |2                      |26275, 28791             |
+|348             |Pogon Szczecin            |2                      |12495, 27649             |
+|16239           |Polonia Warszawa          |2                      |12748, 25800             |
+|1591            |Pontedera                 |2                      |13828, 25865             |
+|9407            |Pontevedra                |2                      |27349, 28808             |
+|216             |Portimonense              |2                      |1134, 14036              |
+|1351            |Port Vale                 |2                      |12597, 26984             |
+|1710            |Potenza                   |2                      |14463, 27665             |
+|14005           |Povltava FA               |2                      |13924, 27168             |
+|556             |Qarabag                   |2                      |13648, 27490             |
+|72              |QPR                       |2                      |12198, 27652             |
+|9409            |Racing Ferrol             |2                      |12825, 27869             |
+|4665            |Racing Santander          |2                      |13693, 27749             |
+|4248            |Radomiak Radom            |2                      |13259, 26988             |
+|4378            |Radomlje                  |2                      |12854, 25796             |
+|257             |Rangers                   |2                      |12291, 26868             |
+|6231            |Rapid                     |2                      |12707, 27765             |
+|861             |Rayo Majadahonda          |2                      |14348, 27758             |
+|53              |Reading                   |2                      |1004, 13650              |
+|541             |Real Madrid               |2                      |118250, 118275           |
+|22142           |Real Madrid III           |2                      |14062, 26346             |
+|9887            |Real Zaragoza II          |2                      |16733, 26328             |
+|9410            |Recreativo Huelva         |2                      |16852, 26397             |
+|94              |Rennes                    |2                      |1010, 27643              |
+|226             |Rio Ave                   |2                      |12148, 25895             |
+|331             |Rosenborg                 |2                      |12818, 27409             |
+|73              |Rotherham                 |2                      |1002, 12814              |
+|4361            |Rudar                     |2                      |13110, 26977             |
+|9588            |Salamanca UDS             |2                      |27556, 28810             |
+|871             |Sambenedettese            |2                      |27661, 28741             |
+|332             |Sandefjord                |2                      |13028, 27444             |
+|5277            |Sant Andreu               |2                      |13825, 27714             |
+|333             |Sarpsborg 08 FF           |2                      |13235, 27726             |
+|9645            |Selaya                    |2                      |27492, 28813             |
+|370             |Sirius                    |2                      |13280, 26593             |
+|751             |Slavia Mozyr              |2                      |12483, 26870             |
+|25039           |Sonseca                   |2                      |27610, 28779             |
+|426             |Sparta Rotterdam          |2                      |26478, 573               |
+|515             |Spezia                    |2                      |1089, 13383              |
+|731             |Sporting Gijon            |2                      |12859, 27489             |
+|10138           |SS Monopoli               |2                      |14790, 25868             |
+|4269            |Stade Lausanne-Ouchy      |2                      |12883, 26803             |
+|334             |Start                     |2                      |12370, 27445             |
+|251             |ST Mirren                 |2                      |12417, 27877             |
+|1696            |Taranto                   |2                      |14494, 28838             |
+|9416            |Tarazona                  |2                      |16967, 27343             |
+|719             |Tenerife                  |2                      |118276, 13210            |
+|5278            |Teruel                    |2                      |14736, 26316             |
+|15348           |Torrent                   |2                      |14140, 26360             |
+|9534            |Torres                    |2                      |14148, 26927             |
+|369             |trelleborgs FF            |2                      |12224, 27190             |
+|4363            |Triglav                   |2                      |12338, 26526             |
+|5279            |Tudelano                  |2                      |27568, 28793             |
+|5499            |Turan                     |2                      |13115, 25799             |
+|1869            |Turbine Potsdam W         |2                      |14268, 26792             |
+|415             |Twente                    |2                      |12177, 26895             |
+|800             |Ucam Murcia               |2                      |14522, 27659             |
+|17562           |UD San Pedro              |2                      |26392, 28765             |
+|5281            |Unionistas de Salamanca   |2                      |27350, 28795             |
+|6916            |Unirea Slobozia           |2                      |13380, 27260             |
+|632             |Universitatea Craiova     |2                      |12534, 27766             |
+|9891            |Utebo                     |2                      |14675, 26323             |
+|532             |Valencia                  |2                      |118278, 27891            |
+|9594            |Valencia II               |2                      |16767, 26433             |
+|720             |Valladolid                |2                      |1157, 12098              |
+|2171            |Varbergs BoIS FC          |2                      |12337, 27622             |
+|2241            |Vasteras SK FK            |2                      |13423, 25832             |
+|517             |Venezia                   |2                      |1085, 12136              |
+|25041           |Vic                       |2                      |26374, 28781             |
+|5282            |Villanovense              |2                      |14025, 26418             |
+|1708            |Vis Pesaro                |2                      |13971, 26497             |
+|2110            |Volos NFC                 |2                      |13281, 27281             |
+|7376            |Vrchovina                 |2                      |15525, 26143             |
+|5730            |Vukovar                   |2                      |14619, 27692             |
+|204             |VVV Venlo                 |2                      |1116, 12738              |
+|417             |Waalwijk                  |2                      |1112, 12178              |
+|48              |West Ham                  |2                      |11914, 25874             |
+|61              |Wigan                     |2                      |1005, 13030              |
+|341             |Wisla Plock               |2                      |12797, 25816             |
+|1358            |Wycombe                   |2                      |1008, 13309              |
+|9770            |Xerez                     |2                      |27708, 28817             |
+|5283            |Yeclano                   |2                      |27658, 28796             |
+|6653            |Yverdon Sport             |2                      |12426, 26802             |
+|9418            |Zamora                    |2                      |16999, 26321             |
+|648             |Zira                      |2                      |13495, 25762             |
+|3734            |Znojmo                    |2                      |13963, 26174             |
+|9419            |Arsenal                   |1                      |118199                   |
+|25270           |A?da?                     |0                      |                         |
+|1553            |Afghanistan               |0                      |                         |
+|5576            |?ahda?                    |0                      |                         |
+|1266            |Ajax Amateurs             |0                      |                         |
+|10354           |Albania U19               |0                      |                         |
+|11017           |Algeria U20               |0                      |                         |
+|9877            |Almud?var                 |0                      |                         |
+|666             |?amax? FK                 |0                      |                         |
+|1110            |Andorra                   |0                      |                         |
+|1529            |Angola                    |0                      |                         |
+|9742            |Antequera                 |0                      |                         |
+|18785           |Aral                      |0                      |                         |
+|10187           |Argentina U23             |0                      |                         |
+|1094            |Armenia                   |0                      |                         |
+|8167            |Aruba                     |0                      |                         |
+|9878            |Atl?tico Monz?n           |0                      |                         |
+|21460           |Austria U18               |0                      |                         |
+|8180            |Austria U21               |0                      |                         |
+|1096            |Azerbaijan                |0                      |                         |
+|4314            |Azul Claro Numazu         |0                      |                         |
+|1547            |Bahrain                   |0                      |                         |
+|1560            |Bangladesh                |0                      |                         |
+|23263           |Basque Country            |0                      |                         |
+|1100            |Belarus                   |0                      |                         |
+|22425           |Belgium U18               |0                      |                         |
+|5528            |Belize                    |0                      |                         |
+|1516            |Benin                     |0                      |                         |
+|5158            |Bermuda                   |0                      |                         |
+|1540            |Bhutan                    |0                      |                         |
+|9881            |Bin?far                   |0                      |                         |
+|2381            |Bolivia                   |0                      |                         |
+|10982           |Bonaire                   |0                      |                         |
+|7431            |Bonnyrigg Rose Athletic   |0                      |                         |
+|1113            |Bosnia & Herzegovina      |0                      |                         |
+|1520            |Botswana                  |0                      |                         |
+|9883            |Brea                      |0                      |                         |
+|5538            |Brunei                    |0                      |                         |
+|1103            |Bulgaria                  |0                      |                         |
+|1502            |Burkina Faso              |0                      |                         |
+|1528            |Burundi                   |0                      |                         |
+|4211            |Buxoro                    |0                      |                         |
+|1543            |Cambodia                  |0                      |                         |
+|1530            |Cameroon                  |0                      |                         |
+|19080           |Canada U20 W              |0                      |                         |
+|17615           |Caspe                     |0                      |                         |
+|8169            |Cayman Islands            |0                      |                         |
+|1527            |Central African Republic  |0                      |                         |
+|2383            |Chile                     |0                      |                         |
+|1566            |China                     |0                      |                         |
+|17262           |China PR U20              |0                      |                         |
+|10932           |China PR U23              |0                      |                         |
+|1557            |Chinese Taipei            |0                      |                         |
+|6762            |Clyde                     |0                      |                         |
+|1524            |Comoros                   |0                      |                         |
+|1517            |Congo                     |0                      |                         |
+|29              |Costa Rica                |0                      |                         |
+|19082           |Costa Rica U20 W          |0                      |                         |
+|16620           |C?te d'Ivoire U23         |0                      |                         |
+|2388            |Cuba                      |0                      |                         |
+|5530            |Cura?ao                   |0                      |                         |
+|1106            |Cyprus                    |0                      |                         |
+|23256           |Cyprus U18                |0                      |                         |
+|8187            |Cyprus U21                |0                      |                         |
+|770             |Czech Republic            |0                      |                         |
+|22580           |Czech Republic U16        |0                      |                         |
+|8188            |Czech Republic U21        |0                      |                         |
+|22428           |Denmark U18               |0                      |                         |
+|8189            |Denmark U21               |0                      |                         |
+|25271           |Dinamo Bak?               |0                      |                         |
+|1535            |Djibouti                  |0                      |                         |
+|5531            |Dominica                  |0                      |                         |
+|5532            |Dominican Republic        |0                      |                         |
+|17871           |Dominican Republic U23    |0                      |                         |
+|21367           |Dominican Republic W U20  |0                      |                         |
+|18787           |Dostlik                   |0                      |                         |
+|6764            |East Fife                 |0                      |                         |
+|6765            |East Kilbride             |0                      |                         |
+|6766            |Edinburgh City            |0                      |                         |
+|11027           |Egypt U20                 |0                      |                         |
+|6767            |Elgin City                |0                      |                         |
+|5159            |El Salvador               |0                      |                         |
+|12762           |Eltersdorf                |0                      |                         |
+|21466           |England U18               |0                      |                         |
+|1521            |Equatorial Guinea         |0                      |                         |
+|19220           |Erlbach                   |0                      |                         |
+|1101            |Estonia                   |0                      |                         |
+|10361           |Estonia U19               |0                      |                         |
+|1506            |Ethiopia                  |0                      |                         |
+|6263            |Excelsior '31             |0                      |                         |
+|1098            |Faroe Islands             |0                      |                         |
+|3890            |FC 's-Gravenzande         |0                      |                         |
+|5160            |Fiji                      |0                      |                         |
+|1099            |Finland                   |0                      |                         |
+|3891            |Flevo Boys                |0                      |                         |
+|4250            |Forfar Athletic           |0                      |                         |
+|8158            |Fraga                     |0                      |                         |
+|16621           |France U23                |0                      |                         |
+|8118            |French Guyana             |0                      |                         |
+|20445           |Fuentes                   |0                      |                         |
+|1105            |FYR Macedonia             |0                      |                         |
+|1503            |Gabon                     |0                      |                         |
+|1492            |Gambia                    |0                      |                         |
+|23257           |Georgia U18               |0                      |                         |
+|8195            |Georgia U21               |0                      |                         |
+|22430           |Germany U16               |0                      |                         |
+|1093            |Gibraltar                 |0                      |                         |
+|12704           |Grasshopper II            |0                      |                         |
+|1117            |Greece                    |0                      |                         |
+|5533            |Grenada                   |0                      |                         |
+|4321            |Grulla Morioka            |0                      |                         |
+|5161            |Guatemala                 |0                      |                         |
+|1509            |Guinea                    |0                      |                         |
+|1513            |Guinea-Bissau             |0                      |                         |
+|20547           |Guinea U23                |0                      |                         |
+|5162            |Guyana                    |0                      |                         |
+|12780           |Hankofen-Hailing          |0                      |                         |
+|26096           |Heino                     |0                      |                         |
+|4672            |Honduras                  |0                      |                         |
+|4460            |Hong Kong                 |0                      |                         |
+|16500           |Hungary U21               |0                      |                         |
+|25272           |Hypers Guba               |0                      |                         |
+|18              |Iceland                   |0                      |                         |
+|23260           |Iceland U20               |0                      |                         |
+|25273           |?imal                     |0                      |                         |
+|5570            |Imisli FK                 |0                      |                         |
+|1537            |India                     |0                      |                         |
+|10935           |India U23                 |0                      |                         |
+|1571            |Indonesia                 |0                      |                         |
+|21057           |Indonesia U20             |0                      |                         |
+|10936           |Indonesia U23             |0                      |                         |
+|1020            |Inter Zapresic            |0                      |                         |
+|1116            |Israel                    |0                      |                         |
+|22255           |Italy U16                 |0                      |                         |
+|19071           |Italy U18                 |0                      |                         |
+|2385            |Jamaica                   |0                      |                         |
+|21368           |Jamaica W U20             |0                      |                         |
+|22724           |Japan U16                 |0                      |                         |
+|10176           |Japan U23                 |0                      |                         |
+|19627           |Jordan U20                |0                      |                         |
+|3895            |JOS Watergraafsmeer       |0                      |                         |
+|21421           |Kampong                   |0                      |                         |
+|1095            |Kazakhstan                |0                      |                         |
+|1511            |Kenya                     |0                      |                         |
+|11034           |Kenya U20                 |0                      |                         |
+|805             |Kitakyushu                |0                      |                         |
+|4212            |Kokand-1912               |0                      |                         |
+|1111            |Kosovo                    |0                      |                         |
+|14504           |Kreuzlingen               |0                      |                         |
+|1570            |Kuwait                    |0                      |                         |
+|1554            |Kyrgyzstan                |0                      |                         |
+|6628            |Lancy                     |0                      |                         |
+|1558            |Laos                      |0                      |                         |
+|1092            |Latvia                    |0                      |                         |
+|12693           |Lausanne Sport II         |0                      |                         |
+|1551            |Lebanon                   |0                      |                         |
+|1518            |Lesotho                   |0                      |                         |
+|1526            |Libya                     |0                      |                         |
+|1107            |Liechtenstein             |0                      |                         |
+|1102            |Luxembourg                |0                      |                         |
+|1490            |Madagascar                |0                      |                         |
+|1495            |Malawi                    |0                      |                         |
+|11037           |Malawi U20                |0                      |                         |
+|1538            |Malaysia                  |0                      |                         |
+|10945           |Malaysia U23              |0                      |                         |
+|1549            |Maldives                  |0                      |                         |
+|1500            |Mali                      |0                      |                         |
+|20551           |Mali U23                  |0                      |                         |
+|1112            |Malta                     |0                      |                         |
+|10372           |Malta U19                 |0                      |                         |
+|8208            |Malta U21                 |0                      |                         |
+|8117            |Martinique                |0                      |                         |
+|4213            |Mash'al                   |0                      |                         |
+|304             |Matsumoto Yamaga          |0                      |                         |
+|1491            |Mauritania                |0                      |                         |
+|11038           |Mauritania U20            |0                      |                         |
+|1497            |Mauritius                 |0                      |                         |
+|19088           |Mexico U20 W              |0                      |                         |
+|10178           |Mexico U23                |0                      |                         |
+|6630            |Meyrin                    |0                      |                         |
+|5577            |??mkir                    |0                      |                         |
+|1114            |Moldova                   |0                      |                         |
+|10373           |Moldova U19               |0                      |                         |
+|8209            |Moldova U21               |0                      |                         |
+|5534            |Mongolia                  |0                      |                         |
+|1109            |Montenegro                |0                      |                         |
+|21302           |Morocco U17               |0                      |                         |
+|19072           |Morocco U18               |0                      |                         |
+|10179           |Morocco U23               |0                      |                         |
+|1512            |Mozambique                |0                      |                         |
+|10140           |M?rida AD                 |0                      |                         |
+|1556            |Myanmar                   |0                      |                         |
+|1493            |Namibia                   |0                      |                         |
+|7135            |Nara Club                 |0                      |                         |
+|1545            |Nepal                     |0                      |                         |
+|8211            |Netherlands U21           |0                      |                         |
+|5163            |New Caledonia             |0                      |                         |
+|5164            |Nicaragua                 |0                      |                         |
+|1505            |Niger                     |0                      |                         |
+|19              |Nigeria                   |0                      |                         |
+|771             |Northern Ireland          |0                      |                         |
+|8213            |Northern Ireland U21      |0                      |                         |
+|1561            |North Korea               |0                      |                         |
+|21472           |North Macedonia U18       |0                      |                         |
+|10342           |Norway U19                |0                      |                         |
+|8214            |Norway U21                |0                      |                         |
+|1241            |OJC Rosmalen              |0                      |                         |
+|23309           |Olimpik-Mobiuz            |0                      |                         |
+|1552            |Oman                      |0                      |                         |
+|313             |Omiya Ardija              |0                      |                         |
+|19043           |Orion                     |0                      |                         |
+|7138            |Osaka                     |0                      |                         |
+|1562            |Palestine                 |0                      |                         |
+|21369           |Panama W U20              |0                      |                         |
+|8175            |Papua New Guinea          |0                      |                         |
+|22925           |Paraguay U23              |0                      |                         |
+|30              |Peru                      |0                      |                         |
+|6777            |Peterhead                 |0                      |                         |
+|1555            |Philippines               |0                      |                         |
+|15329           |?pila                     |0                      |                         |
+|24634           |Poortugaal                |0                      |                         |
+|19073           |Portugal U18              |0                      |                         |
+|10299           |Portugal U20              |0                      |                         |
+|5539            |Puerto Rico               |0                      |                         |
+|21370           |Puerto Rico W U20         |0                      |                         |
+|10954           |Qatar U23                 |0                      |                         |
+|5275            |Real Murcia               |0                      |                         |
+|9585            |Real Sociedad II          |0                      |                         |
+|776             |Rep. Of Ireland           |0                      |                         |
+|21422           |RKAVV                     |0                      |                         |
+|19266           |Roosendaal                |0                      |                         |
+|4               |Russia                    |0                      |                         |
+|1514            |Rwanda                    |0                      |                         |
+|25318           |Safa Baku                 |0                      |                         |
+|1115            |San Marino                |0                      |                         |
+|10955           |Saudi Arabia U23          |0                      |                         |
+|4222            |Shortan                   |0                      |                         |
+|1499            |Sierra Leone              |0                      |                         |
+|1546            |Singapore                 |0                      |                         |
+|3903            |SJC Noordwijk             |0                      |                         |
+|8223            |Slovakia U21              |0                      |                         |
+|5165            |Solomon Islands           |0                      |                         |
+|8224            |Spain U21                 |0                      |                         |
+|6781            |Spartans                  |0                      |                         |
+|5166            |Sri Lanka                 |0                      |                         |
+|1239            |Staphorst                 |0                      |                         |
+|4669            |Stirling Albion           |0                      |                         |
+|5536            |St. Kitts and Nevis       |0                      |                         |
+|6785            |Stranraer                 |0                      |                         |
+|5541            |St. Vincent / Grenadines  |0                      |                         |
+|1510            |Sudan                     |0                      |                         |
+|8171            |Suriname                  |0                      |                         |
+|8225            |Sweden U21                |0                      |                         |
+|1565            |Syria                     |0                      |                         |
+|21059           |Syria U20                 |0                      |                         |
+|1536            |Tajikistan                |0                      |                         |
+|10959           |Tajikistan U23            |0                      |                         |
+|1489            |Tanzania                  |0                      |                         |
+|10409           |Tegevajaro Miyazaki       |0                      |                         |
+|1564            |Thailand                  |0                      |                         |
+|1534            |Togo                      |0                      |                         |
+|5168            |Trinidad and Tobago       |0                      |                         |
+|777             |T?rkiye                   |0                      |                         |
+|22930           |Tunisia U17               |0                      |                         |
+|11049           |Tunisia U20               |0                      |                         |
+|19075           |Turkey U18                |0                      |                         |
+|8227            |Turkey U21                |0                      |                         |
+|1539            |Turkmenistan              |0                      |                         |
+|1519            |Uganda                    |0                      |                         |
+|8228            |Ukraine U21               |0                      |                         |
+|1563            |United Arab Emirates      |0                      |                         |
+|19091           |United States U20 W       |0                      |                         |
+|17883           |United States U23         |0                      |                         |
+|2384            |USA                       |0                      |                         |
+|10963           |Uzbekistan U23            |0                      |                         |
+|5170            |Vanuatu                   |0                      |                         |
+|2379            |Venezuela                 |0                      |                         |
+|1542            |Vietnam                   |0                      |                         |
+|10964           |Vietnam U23               |0                      |                         |
+|9336            |Viktoria Aschaffenburg    |0                      |                         |
+|767             |Wales                     |0                      |                         |
+|21481           |Wales U18                 |0                      |                         |
+|8229            |Wales U21                 |0                      |                         |
+|21644           |XerxesDZB (Zat)           |0                      |                         |
+|16381           |Xorazm                    |0                      |                         |
+|1550            |Yemen                     |0                      |                         |
+|6652            |YF Juventus               |0                      |                         |
+|4327            |YSCC                      |0                      |                         |
+|1507            |Zambia                    |0                      |                         |
+|10316           |Zambia U20                |0                      |                         |
+|1522            |Zimbabwe                  |0                      |                         |
+|16198           |Zimbabwe U20              |0                      |                         |

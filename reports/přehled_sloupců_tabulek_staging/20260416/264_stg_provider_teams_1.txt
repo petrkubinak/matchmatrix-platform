@@ -1,0 +1,208 @@
+|external_team_id|team_name               |src_norm               |team_id|canonical_team_name         |canon_norm                 |
+|----------------|------------------------|-----------------------|-------|----------------------------|---------------------------|
+|192             |1. FC K?ln              |1 fc kln               |12,735 |1. FC K?ln                  |1 fc kln                   |
+|25270           |A?da?                   |ada                    |26,085 |Adamstown Rosebuds          |adamstown rosebuds         |
+|25270           |A?da?                   |ada                    |14,455 |Adana 1954 FK               |adana 1954 fk              |
+|25270           |A?da?                   |ada                    |13,667 |Adana Demirspor             |adana demirspor            |
+|25270           |A?da?                   |ada                    |26,550 |Adanaspor                   |adanaspor                  |
+|25270           |A?da?                   |ada                    |12,622 |Adanaspor                   |adanaspor                  |
+|25270           |A?da?                   |ada                    |27,312 |Alpendorada                 |alpendorada                |
+|25270           |A?da?                   |ada                    |26,416 |Badajoz                     |badajoz                    |
+|25270           |A?da?                   |ada                    |27,578 |Badalona                    |badalona                   |
+|25270           |A?da?                   |ada                    |27,572 |Barbadás                    |barbadas                   |
+|25270           |A?da?                   |ada                    |28,348 |Blainville-Boisbriand Armada|blainvilleboisbriand armada|
+|25270           |A?da?                   |ada                    |657    |Canada                      |canada                     |
+|25270           |A?da?                   |ada                    |28,543 |Canada U18                  |canada u18                 |
+|25270           |A?da?                   |ada                    |28,562 |Canada U18 W                |canada u18 w               |
+|25270           |A?da?                   |ada                    |28,332 |Canada U20                  |canada u20                 |
+|25270           |A?da?                   |ada                    |28,440 |Canada W                    |canada w                   |
+|25270           |A?da?                   |ada                    |35,230 |CS Independiente Rivadavia  |cs independiente rivadavia |
+|25270           |A?da?                   |ada                    |1,160  |Granada                     |granada                    |
+|25270           |A?da?                   |ada                    |118,262|Granada                     |granada                    |
+|25270           |A?da?                   |ada                    |12,732 |Granada CF                  |granada cf                 |
+|25270           |A?da?                   |ada                    |17,007 |Granada II                  |granada ii                 |
+|25270           |A?da?                   |ada                    |27,347 |Guadalajara                 |guadalajara                |
+|25270           |A?da?                   |ada                    |25,981 |Guadalajara Chivas          |guadalajara chivas         |
+|25270           |A?da?                   |ada                    |28,754 |Guadalajara W               |guadalajara w              |
+|25270           |A?da?                   |ada                    |26,197 |Haladás VSE                 |haladas vse                |
+|25270           |A?da?                   |ada                    |28,607 |HNK Zadar                   |hnk zadar                  |
+|25270           |A?da?                   |ada                    |118,271|Joventut Badalona           |joventut badalona          |
+|25270           |A?da?                   |ada                    |118,231|Joventut Badalona           |joventut badalona          |
+|25270           |A?da?                   |ada                    |27,724 |La Calzada                  |la calzada                 |
+|25270           |A?da?                   |ada                    |26,406 |Mercadal                    |mercadal                   |
+|25270           |A?da?                   |ada                    |28,337 |Mlada Boleslav              |mlada boleslav             |
+|25270           |A?da?                   |ada                    |12,428 |Mlada Boleslav              |mlada boleslav             |
+|25270           |A?da?                   |ada                    |14,970 |Olympiada Lympion           |olympiada lympion          |
+|25270           |A?da?                   |ada                    |12,528 |Penya Encarnada             |penya encarnada            |
+|25270           |A?da?                   |ada                    |27,508 |Peralada                    |peralada                   |
+|25270           |A?da?                   |ada                    |27,759 |Puebla Calzada              |puebla calzada             |
+|25270           |A?da?                   |ada                    |13,397 |Qarada? L?kbatan            |qarada lkbatan             |
+|25270           |A?da?                   |ada                    |14,348 |Rayo Majadahonda            |rayo majadahonda           |
+|25270           |A?da?                   |ada                    |25,729 |Semen Padang                |semen padang               |
+|25270           |A?da?                   |ada                    |15,256 |Szombathelyi Haladas        |szombathelyi haladas       |
+|25270           |A?da?                   |ada                    |26,384 |Unión Adarve                |union adarve               |
+|25270           |A?da?                   |ada                    |28,737 |Yadah                       |yadah                      |
+|10545           |?amor?n                 |amorn                  |12,380 |?amor?n                     |amorn                      |
+|14868           |Am?rica W               |amrica w               |28,746 |Am?rica W                   |amrica w                   |
+|9381            |Atl?tico Baleares       |atltico baleares       |14,375 |Atl?tico Baleares           |atltico baleares           |
+|9570            |Atl?tico Madrid II      |atltico madrid ii      |16,786 |Atl?tico Madrid II          |atltico madrid ii          |
+|9791            |Atl?tico Paso           |atltico paso           |28,819 |Atl?tico Paso               |atltico paso               |
+|14874           |Atl?tico San Luis W     |atltico san luis w     |28,752 |Atl?tico San Luis W         |atltico san luis w         |
+|14874           |Atl?tico San Luis W     |atltico san luis w     |28,059 |San Luis                    |san luis                   |
+|20259           |Aurrer? Vitoria         |aurrer vitoria         |28,767 |Aurrer? Vitoria             |aurrer vitoria             |
+|8621            |Ban?k Ostrava II        |bank ostrava ii        |12,730 |Ban?k Ostrava               |bank ostrava               |
+|8621            |Ban?k Ostrava II        |bank ostrava ii        |13,465 |Ban?k Ostrava II            |bank ostrava ii            |
+|3721            |Ban?k Sokolov           |bank sokolov           |16,884 |Ban?k Sokolov               |bank sokolov               |
+|157             |Bayern M?nchen          |bayern mnchen          |12,063 |Bayern M?nchen              |bayern mnchen              |
+|157             |Bayern M?nchen          |bayern mnchen          |13,902 |Bayern M?nchen II W         |bayern mnchen ii w         |
+|22295           |Bayern M?nchen II W     |bayern mnchen ii w     |12,063 |Bayern M?nchen              |bayern mnchen              |
+|22295           |Bayern M?nchen II W     |bayern mnchen ii w     |13,902 |Bayern M?nchen II W         |bayern mnchen ii w         |
+|9843            |Bazt?n                  |baztn                  |23,508 |AZ                          |az                         |
+|9843            |Bazt?n                  |baztn                  |28,823 |Bazt?n                      |baztn                      |
+|9383            |Berganti?os             |bergantios             |28,801 |Berganti?os                 |bergantios                 |
+|163             |Borussia M?nchengladbach|borussia mnchengladbach|12,067 |Borussia M?nchengladbach    |borussia mnchengladbach    |
+|17358           |Bra?ov Steagul Rena?te  |braov steagul renate   |15,163 |Bra?ov Steagul Rena?te      |braov steagul renate       |
+|17358           |Bra?ov Steagul Rena?te  |braov steagul renate   |14,709 |Renate                      |renate                     |
+|9384            |Cacere?o                |cacereo                |14,514 |Cacere?o                    |cacereo                    |
+|5254            |Castell?n               |castelln               |12,752 |Castell?n                   |castelln                   |
+|22789           |C?bray?l                |cbrayl                 |13,054 |C?bray?l                    |cbrayl                     |
+|3483            |Chrobry G?og?w          |chrobry gogw           |13,152 |Chrobry G?og?w              |chrobry gogw               |
+|3483            |Chrobry G?og?w          |chrobry gogw           |26,548 |ØB                          |ob                         |
+|17412           |Ch?tel-St-Denis         |chtelstdenis           |28,705 |Ch?tel-St-Denis             |chtelstdenis               |
+|24687           |Citt? di Isernia        |citt di isernia        |28,723 |Citt? di Isernia            |citt di isernia            |
+|7466            |CSA Steaua Bucure?ti    |csa steaua bucureti    |12,627 |CSA Steaua Bucure?ti        |csa steaua bucureti        |
+|5530            |Cura?ao                 |curaao                 |15,353 |Ra?a                        |raa                        |
+|9582            |Deportivo Alav?s II     |deportivo alavs ii     |591    |AVS                         |avs                        |
+|9582            |Deportivo Alav?s II     |deportivo alavs ii     |16,715 |Deportivo Alav?s II         |deportivo alavs ii         |
+|9610            |Deportivo La Coru?a II  |deportivo la corua ii  |14,588 |Deportivo La Coru?a II      |deportivo la corua ii      |
+|22280           |Difai A?su              |difai asu              |12,389 |Difai A?su                  |difai asu                  |
+|14956           |Doln? Kub?n             |doln kubn              |15,239 |Doln? Kub?n                 |doln kubn                  |
+|7469            |Dumbr?vi?a              |dumbrvia               |12,744 |Dumbr?vi?a                  |dumbrvia                   |
+|8629            |?esk? Bud?jovice II     |esk budjovice ii       |13,362 |?esk? Bud?jovice            |esk budjovice              |
+|8629            |?esk? Bud?jovice II     |esk budjovice ii       |14,316 |?esk? Bud?jovice II         |esk budjovice ii           |
+|8629            |?esk? Bud?jovice II     |esk budjovice ii       |26,374 |Vic                         |vic                        |
+|10534           |FK Ko?ice               |fk koice               |12,214 |FK Ko?ice                   |fk koice                   |
+|7288            |Fr?dek-M?stek           |frdekmstek             |14,529 |Fr?dek-M?stek               |frdekmstek                 |
+|7289            |Fr?dlant                |frdlant                |14,882 |Fr?dlant                    |frdlant                    |
+|4373            |Fu?inar                 |fuinar                 |14,881 |Fu?inar                     |fuinar                     |
+|3485            |Garbarnia Krak?w        |garbarnia krakw        |14,877 |Garbarnia Krak?w            |garbarnia krakw            |
+|9387            |Gimn?stica Segoviana    |gimnstica segoviana    |16,957 |Gimn?stica Segoviana        |gimnstica segoviana        |
+|6941            |G?rnik ??czna           |grnik czna             |12,685 |G?rnik ??czna               |grnik czna                 |
+|9132            |G?rnik Polkowice        |grnik polkowice        |15,032 |G?rnik Polkowice            |grnik polkowice            |
+|20480           |G?tersloh               |gtersloh               |13,740 |G?tersloh                   |gtersloh                   |
+|9823            |?guilas                 |guilas                 |27,755 |Águilas                     |aguilas                    |
+|9823            |?guilas                 |guilas                 |27,593 |Águilas II                  |aguilas ii                 |
+|9823            |?guilas                 |guilas                 |26,111 |Davao Aguilas               |davao aguilas              |
+|9823            |?guilas                 |guilas                 |28,822 |?guilas                     |guilas                     |
+|9823            |?guilas                 |guilas                 |28,597 |?ilas                       |ilas                       |
+|25032           |G?vora                  |gvora                  |28,772 |G?vora                      |gvora                      |
+|25032           |G?vora                  |gvora                  |13,192 |Vora                        |vora                       |
+|25032           |G?vora                  |gvora                  |27,069 |Vora                        |vora                       |
+|7291            |Han?ck?                 |hanck                  |14,370 |Han?ck?                     |hanck                      |
+|6026            |Hiller?d                |hillerd                |13,601 |Hiller?d                    |hillerd                    |
+|7296            |Hlu??n                  |hlun                   |14,489 |Hlu??n                      |hlun                       |
+|7297            |Hodon?n                 |hodonn                 |14,064 |Hodon?n                     |hodonn                     |
+|4666            |H?rcules                |hrcules                |28,783 |H?rcules                    |hrcules                    |
+|14068           |Humenn?                 |humenn                 |13,482 |Humenn?                     |humenn                     |
+|6942            |Hutnik Krak?w           |hutnik krakw           |13,846 |Hutnik Krak?w               |hutnik krakw               |
+|10546           |?ilina II               |ilina ii               |13,098 |?ilina                      |ilina                      |
+|10546           |?ilina II               |ilina ii               |12,743 |?ilina II                   |ilina ii                   |
+|3486            |Jastrz?bie              |jastrzbie              |14,442 |Jastrz?bie                  |jastrzbie                  |
+|7304            |Jiskra Doma?lice        |jiskra domalice        |25,717 |Iskra                       |iskra                      |
+|7304            |Jiskra Doma?lice        |jiskra domalice        |13,228 |Iskra                       |iskra                      |
+|7304            |Jiskra Doma?lice        |jiskra domalice        |14,421 |Jiskra Doma?lice            |jiskra domalice            |
+|9694            |Jove Espa?ol            |jove espaol            |28,814 |Jove Espa?ol                |jove espaol                |
+|14869           |Ju?rez W                |jurez w                |28,747 |Ju?rez W                    |jurez w                    |
+|10535           |Kom?rno                 |komrno                 |12,762 |Kom                         |kom                        |
+|10535           |Kom?rno                 |komrno                 |26,976 |Kom                         |kom                        |
+|10535           |Kom?rno                 |komrno                 |13,499 |Kom?rno                     |komrno                     |
+|16249           |Kotwica Ko?obrzeg       |kotwica koobrzeg       |13,211 |Kotwica Ko?obrzeg           |kotwica koobrzeg           |
+|16249           |Kotwica Ko?obrzeg       |kotwica koobrzeg       |26,548 |ØB                          |ob                         |
+|4365            |Kr?ko                   |krko                   |28,670 |Krk                         |krk                        |
+|4365            |Kr?ko                   |krko                   |15,597 |Kr?ko                       |krko                       |
+|7312            |Kr?l?v Dv?r             |krlv dvr               |16,850 |Kr?l?v Dv?r                 |krlv dvr                   |
+|3498            |?KS ??d?                |ks d                   |13,038 |?KS ??d?                    |ks d                       |
+|3498            |?KS ??d?                |ks d                   |13,771 |?KS ??d? II                 |ks d ii                    |
+|15315           |La Uni?n Atl?tico       |la unin atltico        |14,833 |La Uni?n Atl?tico           |la unin atltico            |
+|9133            |Lech Pozna? II          |lech pozna ii          |15,427 |Lech Pozna? II              |lech pozna ii              |
+|14877           |Le?n W                  |len w                  |28,755 |Le?n W                      |len w                      |
+|7315            |Loko Vltav?n            |loko vltavn            |14,202 |Loko Vltav?n                |loko vltavn                |
+|12900           |?l?sk Wroc?aw II        |lsk wrocaw ii          |15,255 |?l?sk Wroc?aw II            |lsk wrocaw ii              |
+|14878           |Mazatl?n W              |mazatln w              |23,508 |AZ                          |az                         |
+|14878           |Mazatl?n W              |mazatln w              |28,756 |Mazatl?n W                  |mazatln w                  |
+|5573            |Ming??evir              |mingevir               |13,163 |Ming??evir                  |mingevir                   |
+|9712            |M?stoles                |mstoles                |28,815 |M?stoles                    |mstoles                    |
+|20487           |N?rnberg                |nrnberg                |13,523 |1. FC N?rnberg              |1 fc nrnberg               |
+|20487           |N?rnberg                |nrnberg                |14,782 |N?rnberg                    |nrnberg                    |
+|6886            |O?elul                  |oelul                  |12,959 |O?elul                      |oelul                      |
+|6945            |Olimpia Elbl?g          |olimpia elblg          |28,687 |MP                          |mp                         |
+|6945            |Olimpia Elbl?g          |olimpia elblg          |27,993 |Olimpia                     |olimpia                    |
+|6945            |Olimpia Elbl?g          |olimpia elblg          |14,273 |Olimpia Elbl?g              |olimpia elblg              |
+|6635            |Olympique de Gen?ve     |olympique de genve     |28,687 |MP                          |mp                         |
+|6635            |Olympique de Gen?ve     |olympique de genve     |28,738 |Olympique de Gen?ve         |olympique de genve         |
+|25034           |Onti?ena                |ontiena                |28,774 |Onti?ena                    |ontiena                    |
+|10540           |P?chov                  |pchov                  |13,326 |P?chov                      |pchov                      |
+|9405            |Pe?a Deportiva          |pea deportiva          |16,808 |Pe?a Deportiva              |pea deportiva              |
+|7337            |P?e?tice                |petice                 |14,669 |P?e?tice                    |petice                     |
+|10538           |Petr?alka               |petralka               |13,671 |Petr?alka                   |petralka                   |
+|15329           |?pila                   |pila                   |27,608 |Épila                       |epila                      |
+|6947            |Pogo? Siedlce           |pogo siedlce           |12,905 |Pogo? Siedlce               |pogo siedlce               |
+|14062           |Pova?sk? Bystrica       |povask bystrica        |12,994 |Pova?sk? Bystrica           |povask bystrica            |
+|7334            |P?sek                   |psek                   |14,656 |P?sek                       |psek                       |
+|3490            |Puszcza Niepo?omice     |puszcza niepoomice     |12,902 |Puszcza Niepo?omice         |puszcza niepoomice         |
+|5495            |Qarada? L?kbatan        |qarada lkbatan         |13,397 |Qarada? L?kbatan            |qarada lkbatan             |
+|14871           |Quer?taro W             |quertaro w             |28,749 |Quer?taro W                 |quertaro w                 |
+|14046           |Ra?a                    |raa                    |12,165 |De Graafschap               |de graafschap              |
+|14046           |Ra?a                    |raa                    |1,118  |Graafschap                  |graafschap                 |
+|14046           |Ra?a                    |raa                    |14,231 |Hapoel Ra'anana             |hapoel raanana             |
+|14046           |Ra?a                    |raa                    |25,806 |Hapoel Ra'anana             |hapoel raanana             |
+|14046           |Ra?a                    |raa                    |27,681 |Jaraaf                      |jaraaf                     |
+|14046           |Ra?a                    |raa                    |15,353 |Ra?a                        |raa                        |
+|14046           |Ra?a                    |raa                    |970    |RAAL La Louviere            |raal la louviere           |
+|14046           |Ra?a                    |raa                    |14,427 |RAAL La Louviere U21        |raal la louviere u21       |
+|14046           |Ra?a                    |raa                    |12,427 |RAAL La Louvi?re            |raal la louvire            |
+|12837           |Radunia St??yca         |radunia styca          |14,524 |Radunia St??yca             |radunia styca              |
+|3491            |Rak?w Cz?stochowa       |rakw czstochowa        |12,668 |Rak?w Cz?stochowa           |rakw czstochowa            |
+|9632            |Real Avil?s             |real avils             |16,845 |Real                        |real                       |
+|9632            |Real Avil?s             |real avils             |14,369 |Real Avil?s                 |real avils                 |
+|5274            |Real Ja?n               |real jan               |16,845 |Real                        |real                       |
+|5274            |Real Ja?n               |real jan               |28,792 |Real Ja?n                   |real jan                   |
+|9736            |Real ?vila              |real vila              |16,845 |Real                        |real                       |
+|9736            |Real ?vila              |real vila              |14,328 |Real ?vila                  |real vila                  |
+|6951            |Resovia Rzesz?w         |resovia rzeszw         |14,697 |Resovia Rzesz?w             |resovia rzeszw             |
+|4379            |Roga?ka                 |rogaka                 |14,928 |Roga?ka                     |rogaka                     |
+|6953            |Ruch Chorz?w            |ruch chorzw            |12,856 |Ruch Chorz?w                |ruch chorzw                |
+|3492            |Sandecja Nowy S?cz      |sandecja nowy scz      |15,191 |Sandecja Nowy S?cz          |sandecja nowy scz          |
+|9601            |Sanluque?o              |sanluqueo              |16,891 |Sanluque?o                  |sanluqueo                  |
+|4199            |S?bail                  |sbail                  |13,474 |S?bail                      |sbail                      |
+|6232            |SCM Gloria Buz?u        |scm gloria buzu        |12,247 |SCM Gloria Buz?u            |scm gloria buzu            |
+|9411            |SD Logro??s             |sd logros              |14,095 |SD Logro??s                 |sd logros                  |
+|6954            |SKRA Cz?stochowa        |skra czstochowa        |13,936 |SKRA Cz?stochowa            |skra czstochowa            |
+|6698            |Sk?vde AIK              |skvde aik              |12,399 |Sk?vde AIK                  |skvde aik                  |
+|10543           |Slavoj Trebi?ov         |slavoj trebiov         |14,998 |Slavoj Trebi?ov             |slavoj trebiov             |
+|8623            |Slov?cko II             |slovcko ii             |13,245 |Slov?cko                    |slovcko                    |
+|8623            |Slov?cko II             |slovcko ii             |14,831 |Slov?cko II                 |slovcko ii                 |
+|7350            |Sokol Hostou?           |sokol hostou           |14,752 |Sokol Hostou?               |sokol hostou               |
+|25040           |Sporting Mah?n          |sporting mahn          |25,659 |Sporting                    |sporting                   |
+|25040           |Sporting Mah?n          |sporting mahn          |28,780 |Sporting Mah?n              |sporting mahn              |
+|6957            |Stal Rzesz?w            |stal rzeszw            |12,936 |Stal Rzesz?w                |stal rzeszw                |
+|7033            |Stj?rdals-Blink         |stjrdalsblink          |28,677 |Stj?rdals-Blink             |stjrdalsblink              |
+|5503            |Sumqay?t                |sumqayt                |12,795 |Sumqay?t                    |sumqayt                    |
+|4362            |Tabor Se?ana            |tabor seana            |13,689 |Tabor Se?ana                |tabor seana                |
+|10550           |Tatran Pre?ov           |tatran preov           |13,395 |Tatran Pre?ov               |tatran preov               |
+|5280            |UD Logro??s             |ud logros              |28,794 |UD Logro??s                 |ud logros                  |
+|8624            |Uhersk? Brod            |uhersk brod            |13,972 |Uhersk? Brod                |uhersk brod                |
+|7369            |Uni?ov                  |uniov                  |14,253 |Uni?ov                      |uniov                      |
+|17136           |Unirea Constan?a        |unirea constana        |15,484 |Unirea Constan?a            |unirea constana            |
+|7373            |Velk? Mezi????          |velk mezi              |15,471 |Velk? Mezi????              |velk mezi                  |
+|6927            |Viitorul ?elimb?r       |viitorul elimbr        |13,278 |Viitorul ?elimb?r           |viitorul elimbr            |
+|3729            |Viktoria ?i?kov         |viktoria ikov          |12,770 |Viktoria ?i?kov             |viktoria ikov              |
+|8620            |Viktoria Plze? II       |viktoria plze ii       |14,219 |Viktoria Plze? II           |viktoria plze ii           |
+|3732            |V?tkovice               |vtkovice               |26,374 |Vic                         |vic                        |
+|3732            |V?tkovice               |vtkovice               |15,259 |V?tkovice                   |vtkovice                   |
+|3496            |Warta Pozna?            |warta pozna            |12,633 |Warta Pozna?                |warta pozna                |
+|6962            |Widzew ??d?             |widzew d               |12,351 |Widzew ??d?                 |widzew d                   |
+|16272           |Wis?a Pu?awy            |wisa puawy             |13,916 |Wis?a Pu?awy                |wisa puawy                 |
+|6963            |Zag??bie Lubin II       |zagbie lubin ii        |14,600 |Zag??bie Lubin II           |zagbie lubin ii            |
+|8625            |Zl?n II                 |zln ii                 |13,823 |Zl?n II                     |zln ii                     |
+|6964            |Znicz Pruszk?w          |znicz pruszkw          |13,404 |Znicz Pruszk?w              |znicz pruszkw              |

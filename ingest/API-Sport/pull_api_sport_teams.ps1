@@ -181,3 +181,12 @@ if ($LASTEXITCODE -ne 0) {
 Remove-Item $TempSql -ErrorAction SilentlyContinue
 
 Write-Host "DONE | provider=$Provider | sport=$SportCode | entity=teams | league=$LeagueId | season=$Season | results=$ResultsCount"
+
+Write-Host "Spoustim PARSE TEAMS..."
+
+$pythonExe = "C:\Python314\python.exe"
+$parserScript = "C:\MatchMatrix-platform\workers\run_parse_api_sport_teams_v1.py"
+
+& $pythonExe $parserScript
+
+Write-Host "PARSE TEAMS HOTOVO"

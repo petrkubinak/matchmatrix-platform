@@ -777,7 +777,7 @@ def parse_and_insert_odds(
                     attach_reason = "EXACT_PAIR_TIME_TOLERANCE"
 
             # --------------------------------------------------
-            # 3) FALSE PAIR GUARD
+            
             # --------------------------------------------------
             if not match_id:
                 if best_home_score < 0.9 or best_away_score < 0.9:

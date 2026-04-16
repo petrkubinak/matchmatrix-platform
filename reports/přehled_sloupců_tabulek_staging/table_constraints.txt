@@ -1,0 +1,26 @@
+|table_schema|table_name              |column_name |foreign_table_schema|foreign_table_name|foreign_column_name|constraint_name                      |
+|------------|------------------------|------------|--------------------|------------------|-------------------|-------------------------------------|
+|public      |article_team_map        |team_id     |public              |teams             |id                 |fk_article_team_map_team             |
+|public      |injuries                |team_id     |public              |teams             |id                 |fk_injuries_team                     |
+|public      |league_standings        |team_id     |public              |teams             |id                 |fk_league_standings_team             |
+|public      |league_team_seasons     |team_id     |public              |teams             |id                 |league_team_seasons_team_id_fkey     |
+|public      |league_teams            |team_id     |public              |teams             |id                 |league_teams_team_id_fkey            |
+|public      |lineups                 |team_id     |public              |teams             |id                 |fk_lineups_team                      |
+|public      |match_events            |team_id     |public              |teams             |id                 |fk_match_events_team                 |
+|public      |matches                 |away_team_id|public              |teams             |id                 |matches_away_team_id_fkey            |
+|public      |matches                 |home_team_id|public              |teams             |id                 |matches_home_team_id_fkey            |
+|public      |player_match_statistics |team_id     |public              |teams             |id                 |fk_player_match_statistics_team      |
+|public      |player_season_statistics|team_id     |public              |teams             |id                 |player_season_statistics_team_id_fkey|
+|public      |player_team_history     |team_id     |public              |teams             |id                 |fk_player_team_history_team          |
+|public      |players                 |team_id     |public              |teams             |id                 |fk_players_team                      |
+|public      |team_aliases            |team_id     |public              |teams             |id                 |team_aliases_team_id_fkey            |
+|public      |team_coach_history      |team_id     |public              |teams             |id                 |fk_team_coach_history_team           |
+|public      |team_coaches            |team_id     |public              |teams             |id                 |fk_team_coaches_team                 |
+|public      |team_match_statistics   |team_id     |public              |teams             |id                 |fk_team_match_statistics_team        |
+|public      |team_provider_map       |team_id     |public              |teams             |id                 |team_provider_map_team_id_fkey       |
+|public      |team_social_links       |team_id     |public              |teams             |id                 |fk_team_social_links_team            |
+|public      |team_stadiums           |team_id     |public              |teams             |id                 |fk_team_stadiums_team                |
+|public      |team_transfers          |from_team_id|public              |teams             |id                 |fk_team_transfers_from_team          |
+|public      |team_transfers          |to_team_id  |public              |teams             |id                 |fk_team_transfers_to_team            |
+|public      |team_translations       |team_id     |public              |teams             |id                 |fk_team_translations_team            |
+|public      |user_favorite_teams     |team_id     |public              |teams             |id                 |fk_user_favorite_teams_team          |

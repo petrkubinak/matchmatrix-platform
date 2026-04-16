@@ -179,7 +179,7 @@ def main() -> int:
 
         if result.get("status") == "warning":
             print("Unified ingest finished with WARNING.")
-            return 1
+            return 0
 
         print("Unified ingest finished with ERROR.")
         return 2

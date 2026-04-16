@@ -1,0 +1,234 @@
+|provider    |external_team_id|team_name               |candidate_count|candidate_team_ids|candidate_team_names                               |
+|------------|----------------|------------------------|---------------|------------------|---------------------------------------------------|
+|api_football|10139           |AD Ceuta FC             |2              |26689,28745       |AD Ceuta FC | AD Ceuta FC                          |
+|api_football|3396            |AEL                     |2              |13018,27071       |AEL | AEL                                          |
+|api_football|2579            |AFC Hermannstadt        |2              |13186,26635       |AFC Hermannstadt | AFC Hermannstadt                |
+|api_football|9860            |Alfaro                  |2              |27562,28825       |Alfaro | Alfaro                                    |
+|api_football|7522            |Antoniano               |2              |13747,26339       |Antoniano | Antoniano                              |
+|api_football|21905           |Chiclana                |2              |26401,28768       |Chiclana | Chiclana                                |
+|api_football|3482            |Chojniczanka Chojnice   |2              |14657,26305       |Chojniczanka Chojnice | Chojniczanka Chojnice      |
+|api_football|9756            |Ciudad de Lucena        |2              |27721,28816       |Ciudad de Lucena | Ciudad de Lucena                |
+|api_football|5256            |Compostela              |2              |16806,27505       |Compostela | Compostela                            |
+|api_football|2580            |Concordia               |2              |13304,28545       |Concordia | Concordia                              |
+|api_football|5257            |Conquense               |2              |26341,28786       |Conquense | Conquense                              |
+|api_football|713             |Cordoba                 |2              |12934,27750       |Cordoba | Cordoba                                  |
+|api_football|350             |Cracovia Krakow         |2              |12363,27866       |Cracovia Krakow | Cracovia Krakow                  |
+|api_football|1426            |CSKA 1948               |2              |13447,26892       |CSKA 1948 | CSKA 1948                              |
+|api_football|853             |CSKA Sofia              |2              |12228,27532       |CSKA Sofia | CSKA Sofia                            |
+|api_football|725             |Cultural Leonesa        |2              |25857,28799       |Cultural Leonesa | Cultural Leonesa                |
+|api_football|2172            |Degerfors IF            |2              |13441,27188       |Degerfors IF | Degerfors IF                        |
+|api_football|199             |De Graafschap           |2              |12165,26480       |De Graafschap | De Graafschap                      |
+|api_football|4370            |Dekani                  |2              |12953,27003       |Dekani | Dekani                                    |
+|api_football|421             |Den Bosch               |2              |12181,26901       |Den Bosch | Den Bosch                              |
+|api_football|9811            |Deportiva Minera        |2              |26334,28821       |Deportiva Minera | Deportiva Minera                |
+|api_football|544             |Deportivo La Coruna     |2              |12984,27893       |Deportivo La Coruna | Deportivo La Coruna          |
+|api_football|386             |Dinamo Brest            |2              |12438,26456       |Dinamo Brest | Dinamo Brest                        |
+|api_football|635             |Dinamo Bucuresti        |2              |13585,25819       |Dinamo Bucuresti | Dinamo Bucuresti                |
+|api_football|620             |Dinamo Zagreb           |2              |12284,26997       |Dinamo Zagreb | Dinamo Zagreb                      |
+|api_football|364             |Djurgardens IF          |2              |13081,26588       |Djurgardens IF | Djurgardens IF                    |
+|api_football|1427            |Dobrudzha               |2              |12437,26294       |Dobrudzha | Dobrudzha                              |
+|api_football|5259            |Don Benito              |2              |27597,28787       |Don Benito | Don Benito                            |
+|api_football|15132           |Dukla Praha II          |2              |14523,26156       |Dukla Praha II | Dukla Praha II                    |
+|api_football|169             |Eintracht Frankfurt     |2              |71,27218          |Eintracht Frankfurt | Eintracht Frankfurt          |
+|api_football|9589            |Ejea                    |2              |26324,28811       |Ejea | Ejea                                        |
+|api_football|797             |Elche                   |2              |12606,26687       |Elche | Elche                                      |
+|api_football|208             |Emmen                   |2              |13306,25843       |Emmen | Emmen                                      |
+|api_football|3399            |Enosis                  |2              |13660,27072       |Enosis | Enosis                                    |
+|api_football|9386            |Escobedo                |2              |14457,27493       |Escobedo | Escobedo                                |
+|api_football|9590            |Espanyol II             |2              |16990,27713       |Espanyol II | Espanyol II                          |
+|api_football|15358           |Estepona                |2              |14373,26332       |Estepona | Estepona                                |
+|api_football|15130           |Estrela                 |2              |12158,27496       |Estrela | Estrela                                  |
+|api_football|24612           |Extremadura 1924        |2              |26331,28769       |Extremadura 1924 | Extremadura 1924                |
+|api_football|812             |Falkenbergs FF          |2              |26590,28682       |Falkenbergs FF | Falkenbergs FF                    |
+|api_football|231             |Farense                 |2              |1133,12152        |Farense | Farense                                  |
+|api_football|8157            |FC Andorra              |2              |16827,27488       |FC Andorra | FC Andorra                            |
+|api_football|170             |FC Augsburg             |2              |528,12073         |FC Augsburg | FC Augsburg                          |
+|api_football|5262            |FC Cartagena            |2              |12348,27344       |FC Cartagena | FC Cartagena                        |
+|api_football|397             |FC Midtjylland          |2              |12310,27729       |FC Midtjylland | FC Midtjylland                    |
+|api_football|212             |FC Porto                |2              |576,12142         |FC Porto | FC Porto                                |
+|api_football|1012            |FC Thun                 |2              |12827,27523       |FC Thun | FC Thun                                  |
+|api_football|416             |FC Volendam             |2              |571,27832         |FC Volendam | FC Volendam                          |
+|api_football|209             |Feyenoord               |2              |1098,12172        |Feyenoord | Feyenoord                              |
+|api_football|521             |Foggia                  |2              |14188,27664       |Foggia | Foggia                                    |
+|api_football|205             |Fortuna Sittard         |2              |572,26896         |Fortuna Sittard | Fortuna Sittard                  |
+|api_football|2149            |Fredrikstad             |2              |13089,27725       |Fredrikstad | Fredrikstad                          |
+|api_football|5263            |Gernika                 |2              |16963,26326       |Gernika | Gernika                                  |
+|api_football|9572            |Getafe II               |2              |14477,26246       |Getafe II | Getafe II                              |
+|api_football|373             |GIF Sundsvall           |2              |13195,26595       |GIF Sundsvall | GIF Sundsvall                      |
+|api_football|9556            |Giugliano               |2              |14644,26931       |Giugliano | Giugliano                              |
+|api_football|3484            |GKS Katowice            |2              |12246,26989       |GKS Katowice | GKS Katowice                        |
+|api_football|410             |GO Ahead Eagles         |2              |568,26894         |Go Ahead Eagles | GO Ahead Eagles                  |
+|api_football|340             |Gornik Zabrze           |2              |12718,26477       |Gornik Zabrze | Gornik Zabrze                      |
+|api_football|715             |Granada CF              |2              |12732,27894       |Granada CF | Granada CF                            |
+|api_football|9599            |Granada II              |2              |17007,26393       |Granada II | Granada II                            |
+|api_football|1236            |Groene Ster             |2              |17001,26922       |Groene Ster | Groene Ster                          |
+|api_football|866             |Gubbio                  |2              |14497,27872       |Gubbio | Gubbio                                    |
+|api_football|882             |Guidonia Montecelio 1937|2              |15300,27660       |Guidonia Montecelio 1937 | Guidonia Montecelio 1937|
+|api_football|224             |Guimaraes               |2              |12146,27930       |Guimaraes | Guimaraes                              |
+|api_football|766             |Halmstad                |3              |12614,27621,28368 |Halmstad | Halmstad | Halmstad                     |
+|api_football|563             |Hapoel Beer Sheva       |2              |13721,25839       |Hapoel Beer Sheva | Hapoel Beer Sheva              |
+|api_football|4486            |Hapoel Katamon          |2              |14462,27793       |Hapoel Katamon | Hapoel Katamon                    |
+|api_football|4497            |Hapoel Kfar Saba        |2              |13892,25809       |Hapoel Kfar Saba | Hapoel Kfar Saba                |
+|api_football|4491            |Hapoel Rishon LeZion    |2              |14127,25820       |Hapoel Rishon LeZion | Hapoel Rishon LeZion        |
+|api_football|811             |Helsingborg             |2              |12468,26594       |Helsingborg | Helsingborg                          |
+|api_football|159             |Hertha BSC              |2              |12920,26641       |Hertha BSC | Hertha BSC                            |
+|api_football|1021            |HNK Cibalia             |2              |14548,26482       |HNK Cibalia | HNK Cibalia                          |
+|api_football|608             |HNK Hajduk Split        |2              |13003,26996       |HNK Hajduk Split | HNK Hajduk Split                |
+|api_football|561             |HNK Rijeka              |2              |12607,27693       |HNK Rijeka | HNK Rijeka                            |
+|api_football|191             |Holstein Kiel           |2              |1054,12080        |Holstein Kiel | Holstein Kiel                      |
+|api_football|726             |Huesca                  |2              |1162,12552        |Huesca | Huesca                                    |
+|api_football|9781            |Ibiza Islas Pitiusas    |2              |26358,28818       |Ibiza Islas Pitiusas | Ibiza Islas Pitiusas        |
+|api_football|371             |IF Brommapojkarna       |2              |12408,26589       |IF Brommapojkarna | IF Brommapojkarna              |
+|api_football|372             |IF Elfsborg             |2              |13331,26592       |IF Elfsborg | IF Elfsborg                          |
+|api_football|366             |IFK Goteborg            |2              |12425,27187       |IFK Goteborg | IFK Goteborg                        |
+|api_football|505             |Inter                   |3              |12134,25936,27888 |Inter | Inter | Inter                              |
+|api_football|15359           |Juventud Torremolinos   |2              |26318,28764       |Juventud Torremolinos | Juventud Torremolinos      |
+|api_football|1715            |Juventus U23            |2              |13829,26496       |Juventus U23 | Juventus U23                        |
+|api_football|863             |Juve Stabia             |2              |12849,27099       |Juve Stabia | Juve Stabia                          |
+|api_football|4493            |Kafr Qasim              |2              |13887,25821       |Kafr Qasim | Kafr Qasim                            |
+|api_football|12801           |Kalisz                  |2              |14567,26304       |Kalisz | Kalisz                                    |
+|api_football|5490            |Kapaz                   |2              |13165,25763       |Kapaz | Kapaz                                      |
+|api_football|7306            |Karlovy Vary            |2              |16991,28420       |Karlovy Vary | Karlovy Vary                        |
+|api_football|4374            |Koper                   |2              |13017,27651       |Koper | Koper                                      |
+|api_football|4375            |Krka                    |2              |12362,27215       |Krka | Krka                                        |
+|api_football|5265            |Langreo                 |2              |27555,28788       |Langreo | Langreo                                  |
+|api_football|9797            |Lanzarote               |2              |26408,28820       |Lanzarote | Lanzarote                              |
+|api_football|9395            |Las Rozas               |2              |26386,28805       |Las Rozas | Las Rozas                              |
+|api_football|804             |Latina                  |2              |14409,26933       |Latina | Latina                                    |
+|api_football|1014            |Lausanne                |2              |12865,27521       |Lausanne | Lausanne                                |
+|api_football|339             |Legia Warszawa          |2              |12278,27865       |Legia Warszawa | Legia Warszawa                    |
+|api_football|957             |Levadiakos              |2              |13183,27702       |Levadiakos | Levadiakos                            |
+|api_football|646             |Levski Sofia            |2              |13353,25782       |Levski Sofia | Levski Sofia                        |
+|api_football|3387            |Lida                    |2              |13415,28462       |Lida | Lida                                        |
+|api_football|9627            |Llanera                 |2              |27673,28812       |Llanera | Llanera                                  |
+|api_football|5266            |Lleida Esportiu         |2              |27509,28789       |Lleida Esportiu | Lleida Esportiu                  |
+|api_football|858             |Lokomotiv Plovdiv       |2              |12702,25783       |Lokomotiv Plovdiv | Lokomotiv Plovdiv              |
+|api_football|1416            |Lokomotiv Sofia         |2              |12720,27533       |Lokomotiv Sofia | Lokomotiv Sofia                  |
+|api_football|97              |Lorient                 |2              |1020,27641        |Lorient | Lorient                                  |
+|api_football|566             |Ludogorets              |2              |12589,25731       |Ludogorets | Ludogorets                            |
+|api_football|625             |Lyngby                  |2              |12765,25815       |Lyngby | Lyngby                                    |
+|api_football|4495            |Maccabi Petah Tikva     |2              |14406,25807       |Maccabi Petah Tikva | Maccabi Petah Tikva          |
+|api_football|604             |Maccabi Tel Aviv        |2              |13699,25838       |Maccabi Tel Aviv | Maccabi Tel Aviv                |
+|api_football|375             |Malmo FF                |2              |13405,27620       |Malmo FF | Malmo FF                                |
+|api_football|9675            |Manresa                 |3              |16745,26376,118266|Manresa | Manresa | Manresa                        |
+|api_football|1693            |Mantova                 |2              |13399,27098       |Mantova | Mantova                                  |
+|api_football|552             |Maribor                 |2              |12230,26999       |Maribor | Maribor                                  |
+|api_football|12694           |Martigny Sports         |2              |26787,28696       |Martigny Sports | Martigny Sports                  |
+|api_football|112             |Metz                    |2              |1021,27001        |Metz | Metz                                        |
+|api_football|7808            |ML Vitebsk              |2              |13461,26457       |ML Vitebsk | ML Vitebsk                            |
+|api_football|1424            |Montana                 |2              |12741,25730       |Montana | Montana                                  |
+|api_football|82              |Montpellier             |2              |1027,12106        |Montpellier | Montpellier                          |
+|api_football|14562           |Motor Lublin            |2              |13024,26476       |Motor Lublin | Motor Lublin                        |
+|api_football|203             |NAC Breda               |2              |565,12168         |NAC Breda | NAC Breda                              |
+|api_football|4376            |Nafta                   |2              |13400,27216       |Nafta | Nafta                                      |
+|api_football|5271            |Navalcarnero            |2              |16840,26349       |Navalcarnero | Navalcarnero                        |
+|api_football|2270            |Neftchi Baku            |2              |12324,25798       |Neftchi Baku | Neftchi Baku                        |
+|api_football|1337            |Northampton             |2              |13503,26525       |Northampton | Northampton                          |
+|api_football|71              |Norwich                 |2              |12197,27679       |Norwich | Norwich                                  |
+|api_football|3488            |Odra Opole              |2              |12459,26301       |Odra Opole | Odra Opole                            |
+|api_football|1124            |OFI                     |2              |13270,27282       |OFI | OFI                                          |
+|api_football|677             |Olimpija Ljubljana      |2              |12548,26998       |Olimpija Ljubljana | Olimpija Ljubljana            |
+|api_football|9403            |Olot                    |2              |26501,28806       |Olot | Olot                                        |
+|api_football|553             |Olympiakos Piraeus      |2              |12670,27833       |Olympiakos Piraeus | Olympiakos Piraeus            |
+|api_football|9404            |Orihuela                |2              |27757,28807       |Orihuela | Orihuela                                |
+|api_football|376             |Ostersunds FK           |2              |12357,27189       |Ostersunds FK | Ostersunds FK                      |
+|api_football|9612            |Ourense CF              |2              |16824,27754       |Ourense CF | Ourense CF                            |
+|api_football|718             |Oviedo                  |2              |12918,25885       |Oviedo | Oviedo                                    |
+|api_football|234             |Pacos Ferreira          |2              |1138,14073        |Pacos Ferreira | Pacos Ferreira                    |
+|api_football|870             |Padova                  |2              |14106,28835       |Padova | Padova                                    |
+|api_football|3419            |PAEEK                   |2              |12466,26979       |PAEEK | PAEEK                                      |
+|api_football|617             |Panathinaikos           |2              |12543,27703       |Panathinaikos | Panathinaikos                      |
+|api_football|949             |Panetolikos             |2              |12413,25780       |Panetolikos | Panetolikos                          |
+|api_football|619             |PAOK                    |2              |13128,27834       |PAOK | PAOK                                        |
+|api_football|901             |Partick                 |2              |13226,27878       |Partick | Partick                                  |
+|api_football|950             |PAS Giannina            |2              |12289,26852       |PAS Giannina | PAS Giannina                        |
+|api_football|525             |Pescara                 |2              |14367,27803       |Pescara | Pescara                                  |
+|api_football|872             |Piacenza                |2              |15095,28836       |Piacenza | Piacenza                                |
+|api_football|1428            |Pirin Blagoevgrad       |2              |12771,25733       |Pirin Blagoevgrad | Pirin Blagoevgrad              |
+|api_football|1357            |Plymouth                |2              |1001,12206        |Plymouth | Plymouth                                |
+|api_football|5273            |Poblense                |2              |26275,28791       |Poblense | Poblense                                |
+|api_football|348             |Pogon Szczecin          |2              |12495,27649       |Pogon Szczecin | Pogon Szczecin                    |
+|api_football|16239           |Polonia Warszawa        |2              |12748,25800       |Polonia Warszawa | Polonia Warszawa                |
+|api_football|1591            |Pontedera               |2              |13828,25865       |Pontedera | Pontedera                              |
+|api_football|9407            |Pontevedra              |2              |27349,28808       |Pontevedra | Pontevedra                            |
+|api_football|216             |Portimonense            |2              |1134,14036        |Portimonense | Portimonense                        |
+|api_football|1351            |Port Vale               |2              |12597,26984       |Port Vale | Port Vale                              |
+|api_football|1710            |Potenza                 |2              |14463,27665       |Potenza | Potenza                                  |
+|api_football|14005           |Povltava FA             |2              |13924,27168       |Povltava FA | Povltava FA                          |
+|api_football|556             |Qarabag                 |2              |13648,27490       |Qarabag | Qarabag                                  |
+|api_football|72              |QPR                     |2              |12198,27652       |QPR | QPR                                          |
+|api_football|9409            |Racing Ferrol           |2              |12825,27869       |Racing Ferrol | Racing Ferrol                      |
+|api_football|4665            |Racing Santander        |2              |13693,27749       |Racing Santander | Racing Santander                |
+|api_football|4248            |Radomiak Radom          |2              |13259,26988       |Radomiak Radom | Radomiak Radom                    |
+|api_football|4378            |Radomlje                |2              |12854,25796       |Radomlje | Radomlje                                |
+|api_football|257             |Rangers                 |2              |12291,26868       |Rangers | Rangers                                  |
+|api_football|6231            |Rapid                   |2              |12707,27765       |Rapid | Rapid                                      |
+|api_football|861             |Rayo Majadahonda        |2              |14348,27758       |Rayo Majadahonda | Rayo Majadahonda                |
+|api_football|53              |Reading                 |2              |1004,13650        |Reading | Reading                                  |
+|api_football|541             |Real Madrid             |2              |118250,118275     |Real Madrid | Real Madrid                          |
+|api_football|22142           |Real Madrid III         |2              |14062,26346       |Real Madrid III | Real Madrid III                  |
+|api_football|9887            |Real Zaragoza II        |2              |16733,26328       |Real Zaragoza II | Real Zaragoza II                |
+|api_football|9410            |Recreativo Huelva       |2              |16852,26397       |Recreativo Huelva | Recreativo Huelva              |
+|api_football|94              |Rennes                  |2              |1010,27643        |Rennes | Rennes                                    |
+|api_football|226             |Rio Ave                 |2              |12148,25895       |Rio Ave | Rio Ave                                  |
+|api_football|331             |Rosenborg               |2              |12818,27409       |Rosenborg | Rosenborg                              |
+|api_football|73              |Rotherham               |2              |1002,12814        |Rotherham | Rotherham                              |
+|api_football|4361            |Rudar                   |2              |13110,26977       |Rudar | Rudar                                      |
+|api_football|9588            |Salamanca UDS           |2              |27556,28810       |Salamanca UDS | Salamanca UDS                      |
+|api_football|871             |Sambenedettese          |2              |27661,28741       |Sambenedettese | Sambenedettese                    |
+|api_football|332             |Sandefjord              |2              |13028,27444       |Sandefjord | Sandefjord                            |
+|api_football|5277            |Sant Andreu             |2              |13825,27714       |Sant Andreu | Sant Andreu                          |
+|api_football|333             |Sarpsborg 08 FF         |2              |13235,27726       |Sarpsborg 08 FF | Sarpsborg 08 FF                  |
+|api_football|9645            |Selaya                  |2              |27492,28813       |Selaya | Selaya                                    |
+|api_football|370             |Sirius                  |2              |13280,26593       |Sirius | Sirius                                    |
+|api_football|751             |Slavia Mozyr            |2              |12483,26870       |Slavia Mozyr | Slavia Mozyr                        |
+|api_football|25039           |Sonseca                 |2              |27610,28779       |Sonseca | Sonseca                                  |
+|api_football|426             |Sparta Rotterdam        |2              |573,26478         |Sparta Rotterdam | Sparta Rotterdam                |
+|api_football|515             |Spezia                  |2              |1089,13383        |Spezia | Spezia                                    |
+|api_football|731             |Sporting Gijon          |2              |12859,27489       |Sporting Gijon | Sporting Gijon                    |
+|api_football|10138           |SS Monopoli             |2              |14790,25868       |SS Monopoli | SS Monopoli                          |
+|api_football|4269            |Stade Lausanne-Ouchy    |2              |12883,26803       |Stade Lausanne-Ouchy | Stade Lausanne-Ouchy        |
+|api_football|334             |Start                   |2              |12370,27445       |Start | Start                                      |
+|api_football|251             |ST Mirren               |2              |12417,27877       |ST Mirren | ST Mirren                              |
+|api_football|1696            |Taranto                 |2              |14494,28838       |Taranto | Taranto                                  |
+|api_football|9416            |Tarazona                |2              |16967,27343       |Tarazona | Tarazona                                |
+|api_football|719             |Tenerife                |2              |13210,118276      |Tenerife | Tenerife                                |
+|api_football|5278            |Teruel                  |2              |14736,26316       |Teruel | Teruel                                    |
+|api_football|15348           |Torrent                 |2              |14140,26360       |Torrent | Torrent                                  |
+|api_football|9534            |Torres                  |2              |14148,26927       |Torres | Torres                                    |
+|api_football|369             |trelleborgs FF          |2              |12224,27190       |trelleborgs FF | trelleborgs FF                    |
+|api_football|4363            |Triglav                 |2              |12338,26526       |Triglav | Triglav                                  |
+|api_football|5279            |Tudelano                |2              |27568,28793       |Tudelano | Tudelano                                |
+|api_football|5499            |Turan                   |2              |13115,25799       |Turan | Turan                                      |
+|api_football|1869            |Turbine Potsdam W       |2              |14268,26792       |Turbine Potsdam W | Turbine Potsdam W              |
+|api_football|415             |Twente                  |2              |12177,26895       |Twente | Twente                                    |
+|api_football|800             |Ucam Murcia             |2              |14522,27659       |Ucam Murcia | Ucam Murcia                          |
+|api_football|17562           |UD San Pedro            |2              |26392,28765       |UD San Pedro | UD San Pedro                        |
+|api_football|5281            |Unionistas de Salamanca |2              |27350,28795       |Unionistas de Salamanca | Unionistas de Salamanca  |
+|api_football|6916            |Unirea Slobozia         |2              |13380,27260       |Unirea Slobozia | Unirea Slobozia                  |
+|api_football|632             |Universitatea Craiova   |2              |12534,27766       |Universitatea Craiova | Universitatea Craiova      |
+|api_football|9891            |Utebo                   |2              |14675,26323       |Utebo | Utebo                                      |
+|api_football|532             |Valencia                |2              |27891,118278      |Valencia | Valencia                                |
+|api_football|9594            |Valencia II             |2              |16767,26433       |Valencia II | Valencia II                          |
+|api_football|720             |Valladolid              |2              |1157,12098        |Valladolid | Valladolid                            |
+|api_football|2171            |Varbergs BoIS FC        |2              |12337,27622       |Varbergs BoIS FC | Varbergs BoIS FC                |
+|api_football|2241            |Vasteras SK FK          |2              |13423,25832       |Vasteras SK FK | Vasteras SK FK                    |
+|api_football|517             |Venezia                 |2              |1085,12136        |Venezia | Venezia                                  |
+|api_football|25041           |Vic                     |2              |26374,28781       |Vic | Vic                                          |
+|api_football|5282            |Villanovense            |2              |14025,26418       |Villanovense | Villanovense                        |
+|api_football|1708            |Vis Pesaro              |2              |13971,26497       |Vis Pesaro | Vis Pesaro                            |
+|api_football|2110            |Volos NFC               |2              |13281,27281       |Volos NFC | Volos NFC                              |
+|api_football|7376            |Vrchovina               |2              |15525,26143       |Vrchovina | Vrchovina                              |
+|api_football|5730            |Vukovar                 |2              |14619,27692       |Vukovar | Vukovar                                  |
+|api_football|204             |VVV Venlo               |2              |1116,12738        |VVV Venlo | VVV Venlo                              |
+|api_football|417             |Waalwijk                |2              |1112,12178        |Waalwijk | Waalwijk                                |
+|api_football|48              |West Ham                |2              |11914,25874       |West Ham | West Ham                                |
+|api_football|61              |Wigan                   |2              |1005,13030        |Wigan | Wigan                                      |
+|api_football|341             |Wisla Plock             |2              |12797,25816       |Wisla Plock | Wisla Plock                          |
+|api_football|1358            |Wycombe                 |2              |1008,13309        |Wycombe | Wycombe                                  |
+|api_football|9770            |Xerez                   |2              |27708,28817       |Xerez | Xerez                                      |
+|api_football|5283            |Yeclano                 |2              |27658,28796       |Yeclano | Yeclano                                  |
+|api_football|6653            |Yverdon Sport           |2              |12426,26802       |Yverdon Sport | Yverdon Sport                      |
+|api_football|9418            |Zamora                  |2              |16999,26321       |Zamora | Zamora                                    |
+|api_football|648             |Zira                    |2              |13495,25762       |Zira | Zira                                        |
+|api_football|3734            |Znojmo                  |2              |13963,26174       |Znojmo | Znojmo                                    |

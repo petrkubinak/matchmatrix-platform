@@ -1,0 +1,102 @@
+|provider    |sport_code|external_league_id|league_name                                         |country_name|season|is_active|
+|------------|----------|------------------|----------------------------------------------------|------------|------|---------|
+|api_football|football  |1                 |World Cup                                           |World       |      |true     |
+|api_football|football  |2                 |UEFA Champions League                               |World       |      |true     |
+|api_football|football  |3                 |UEFA Europa League                                  |World       |      |true     |
+|api_football|football  |4                 |Euro Championship                                   |World       |      |true     |
+|api_football|football  |5                 |UEFA Nations League                                 |World       |      |true     |
+|api_football|football  |6                 |Africa Cup of Nations                               |World       |      |true     |
+|api_football|football  |7                 |Asian Cup                                           |World       |      |true     |
+|api_football|football  |8                 |World Cup - Women                                   |World       |      |true     |
+|api_football|football  |9                 |Copa America                                        |World       |      |true     |
+|api_football|football  |10                |Friendlies                                          |World       |      |true     |
+|api_football|football  |11                |CONMEBOL Sudamericana                               |World       |      |true     |
+|api_football|football  |12                |CAF Champions League                                |World       |      |true     |
+|api_football|football  |13                |CONMEBOL Libertadores                               |World       |      |true     |
+|api_football|football  |14                |UEFA Youth League                                   |World       |      |true     |
+|api_football|football  |15                |FIFA Club World Cup                                 |World       |      |true     |
+|api_football|football  |16                |CONCACAF Champions League                           |World       |      |true     |
+|api_football|football  |17                |AFC Champions League Elite                          |World       |      |true     |
+|api_football|football  |18                |AFC Champions League Two                            |World       |      |true     |
+|api_football|football  |19                |African Nations Championship                        |World       |      |true     |
+|api_football|football  |20                |CAF Confederation Cup                               |World       |      |true     |
+|api_football|football  |21                |Confederations Cup                                  |World       |      |true     |
+|api_football|football  |22                |CONCACAF Gold Cup                                   |World       |      |true     |
+|api_football|football  |23                |EAFF E-1 Football Championship                      |World       |      |true     |
+|api_football|football  |24                |ASEAN Championship                                  |World       |      |true     |
+|api_football|football  |25                |Gulf Cup of Nations                                 |World       |      |true     |
+|api_football|football  |26                |International Champions Cup                         |World       |      |true     |
+|api_football|football  |27                |OFC Champions League                                |World       |      |true     |
+|api_football|football  |28                |SAFF Championship                                   |World       |      |true     |
+|api_football|football  |29                |World Cup - Qualification Africa                    |World       |      |true     |
+|api_football|football  |30                |World Cup - Qualification Asia                      |World       |      |true     |
+|api_football|football  |31                |World Cup - Qualification CONCACAF                  |World       |      |true     |
+|api_football|football  |32                |World Cup - Qualification Europe                    |World       |      |true     |
+|api_football|football  |33                |World Cup - Qualification Oceania                   |World       |      |true     |
+|api_football|football  |34                |World Cup - Qualification South America             |World       |      |true     |
+|api_football|football  |35                |Asian Cup - Qualification                           |World       |      |true     |
+|api_football|football  |36                |Africa Cup of Nations - Qualification               |World       |      |true     |
+|api_football|football  |37                |World Cup - Qualification Intercontinental Play-offs|World       |      |true     |
+|api_football|football  |38                |UEFA U21 Championship                               |World       |      |true     |
+|api_football|football  |39                |Premier League                                      |England     |      |true     |
+|api_football|football  |40                |Championship                                        |England     |      |true     |
+|api_football|football  |41                |League One                                          |England     |      |true     |
+|api_football|football  |42                |League Two                                          |England     |      |true     |
+|api_football|football  |43                |National League                                     |England     |      |true     |
+|api_football|football  |44                |FA WSL                                              |England     |      |true     |
+|api_football|football  |45                |FA Cup                                              |England     |      |true     |
+|api_football|football  |46                |EFL Trophy                                          |England     |      |true     |
+|api_football|football  |47                |FA Trophy                                           |England     |      |true     |
+|api_football|football  |48                |League Cup                                          |England     |      |true     |
+|api_football|football  |49                |National League - Play-offs                         |England     |      |true     |
+|api_football|football  |50                |National League - North                             |England     |      |true     |
+|api_football|football  |51                |National League - South                             |England     |      |true     |
+|api_football|football  |52                |Non League Div One - Isthmian North                 |England     |      |true     |
+|api_football|football  |53                |Non League Div One - Isthmian South Central         |England     |      |true     |
+|api_football|football  |54                |Non League Div One - Northern West                  |England     |      |true     |
+|api_football|football  |55                |Non League Div One - Northern Midlands              |England     |      |true     |
+|api_football|football  |56                |Non League Div One - Southern South                 |England     |      |true     |
+|api_football|football  |57                |Non League Div One - Isthmian South East            |England     |      |true     |
+|api_football|football  |58                |Non League Premier - Isthmian                       |England     |      |true     |
+|api_football|football  |59                |Non League Premier - Northern                       |England     |      |true     |
+|api_football|football  |60                |Non League Premier - Southern South                 |England     |      |true     |
+|api_football|football  |61                |Ligue 1                                             |France      |      |true     |
+|api_football|football  |62                |Ligue 2                                             |France      |      |true     |
+|api_football|football  |63                |National 1                                          |France      |      |true     |
+|api_football|football  |64                |Feminine Division 1                                 |France      |      |true     |
+|api_football|football  |65                |Coupe de la Ligue                                   |France      |      |true     |
+|api_football|football  |66                |Coupe de France                                     |France      |      |true     |
+|api_football|football  |67                |National 2 - Group A                                |France      |      |true     |
+|api_football|football  |68                |National 2 - Group B                                |France      |      |true     |
+|api_football|football  |69                |National 2 - Group C                                |France      |      |true     |
+|api_football|football  |70                |National 2 - Group D                                |France      |      |true     |
+|api_football|football  |71                |Serie A                                             |Brazil      |      |true     |
+|api_football|football  |72                |Serie B                                             |Brazil      |      |true     |
+|api_football|football  |73                |Copa Do Brasil                                      |Brazil      |      |true     |
+|api_football|football  |74                |Brasileiro Women                                    |Brazil      |      |true     |
+|api_football|football  |75                |Serie C                                             |Brazil      |      |true     |
+|api_football|football  |76                |Serie D                                             |Brazil      |      |true     |
+|api_football|football  |77                |Alagoano                                            |Brazil      |      |true     |
+|api_football|football  |78                |Bundesliga                                          |Germany     |      |true     |
+|api_football|football  |79                |2. Bundesliga                                       |Germany     |      |true     |
+|api_football|football  |80                |3. Liga                                             |Germany     |      |true     |
+|api_football|football  |81                |DFB Pokal                                           |Germany     |      |true     |
+|api_football|football  |82                |Frauen Bundesliga                                   |Germany     |      |true     |
+|api_football|football  |83                |Regionalliga - Bayern                               |Germany     |      |true     |
+|api_football|football  |84                |Regionalliga - Nord                                 |Germany     |      |true     |
+|api_football|football  |85                |Regionalliga - Nordost                              |Germany     |      |true     |
+|api_football|football  |86                |Regionalliga - SudWest                              |Germany     |      |true     |
+|api_football|football  |87                |Regionalliga - West                                 |Germany     |      |true     |
+|api_football|football  |88                |Eredivisie                                          |Netherlands |      |true     |
+|api_football|football  |89                |Eerste Divisie                                      |Netherlands |      |true     |
+|api_football|football  |90                |KNVB Beker                                          |Netherlands |      |true     |
+|api_football|football  |91                |Eredivisie Women                                    |Netherlands |      |true     |
+|api_football|football  |92                |Derde Divisie - Saturday                            |Netherlands |      |true     |
+|api_football|football  |93                |Derde Divisie - Sunday                              |Netherlands |      |true     |
+|api_football|football  |94                |Primeira Liga                                       |Portugal    |      |true     |
+|api_football|football  |95                |Segunda Liga                                        |Portugal    |      |true     |
+|api_football|football  |96                |Ta?a de Portugal                                    |Portugal    |      |true     |
+|api_football|football  |97                |Ta?a da Liga                                        |Portugal    |      |true     |
+|api_football|football  |98                |J1 League                                           |Japan       |      |true     |
+|api_football|football  |99                |J2/J3 League                                        |Japan       |      |true     |
+|api_football|football  |100               |J3 League                                           |Japan       |      |true     |

@@ -9,7 +9,12 @@ class GenericApiSportProvider(BaseProvider):
     """
     Generic provider pro multisport (api_sport, api_tennis, api_*)
 
-    Používá PowerShell skripty podle entity.
+    Aktuální scope:
+    - leagues   = shared API-Sport script
+    - teams     = shared API-Sport script
+    - fixtures  = shared API-Sport script
+    - odds      = architektonicky připraveno, ale runtime zatím čeká na placený API plán
+    - players   = záměrně nepodporováno, bude řešeno přes jiného providera
     """
 
     def __init__(self, provider: str, sport: str):
@@ -28,25 +33,72 @@ class GenericApiSportProvider(BaseProvider):
         force: bool = False,
     ):
         try:
+            entity = (entity or "").strip().lower()
+
+            # Shared multisport entity map
             script_map = {
                 "leagues": "pull_api_sport_leagues.ps1",
                 "teams": "pull_api_sport_teams.ps1",
                 "fixtures": "pull_api_sport_fixtures.ps1",
-                "players": "pull_api_sport_players.ps1",
             }
 
+            # Players zde záměrně blokujeme:
+            # tato entita bude řešena přes samostatného providera.
+            if entity == "players":
+                raise ValueError(
+                    f"Entity 'players' není podporována v GenericApiSportProvider "
+                    f"pro provider={self.provider}. Players budou řešeni přes samostatného providera."
+                )
+
+            # Odds chceme mít připravené architektonicky už teď,
+            # ale runtime pull zatím neaktivujeme, protože čeká na placený plán.
+            if entity == "odds":
+                return {
+                    "status": "warning",
+                    "message": (
+                        f"Entity 'odds' je v GenericApiSportProvider architektonicky připravena "
+                        f"pro provider={self.provider}, ale runtime je zatím vypnutý "
+                        f"a čeká na placený API plán."
+                    ),
+                    "returncode": 0,
+                    "stdout_lines": 0,
+                }
+
             if entity not in script_map:
-                raise ValueError(f"Entity '{entity}' není podporována v Generic provideru.")
+                raise ValueError(
+                    f"Entity '{entity}' není podporována v GenericApiSportProvider."
+                )
 
-            script_name = script_map[entity]
+            # 🔥 SPECIAL CASE: AFB má vlastní provider scripts
+            if str(self.provider) == "api_american_football":
+                afb_script_map = {
+                    "leagues": "pull_api_american_football_leagues.ps1",
+                    "teams": "pull_api_american_football_teams.ps1",
+                    "fixtures": "pull_api_american_football_fixtures.ps1",
+                }
 
-            script_path = os.path.join(
-                os.getcwd(),
-                "ingest",
-                "API-Sport",
-                script_name
-            )
+                if entity not in afb_script_map:
+                    raise ValueError(f"Entity '{entity}' není podporována pro AFB.")
 
+                script_name = afb_script_map[entity]
+
+                script_path = os.path.join(
+                    os.getcwd(),
+                    "ingest",
+                    "API-American-Football",
+                    script_name
+                )
+
+            else:
+                script_name = script_map[entity]
+
+                script_path = os.path.join(
+                    os.getcwd(),
+                    "ingest",
+                    "API-Sport",
+                    script_name
+                )
+  
             sport_map = {
                 "FB": "football",
                 "HK": "hockey",

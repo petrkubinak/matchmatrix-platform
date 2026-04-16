@@ -1,0 +1,332 @@
+# 614 – CODE WORKER AUDIT CHECKLIST
+
+Datum: 2026-04-09
+
+## 1. Cíl
+
+Cílem tohoto checklistu je přepnout MatchMatrix z:
+- DB/OPS připravenosti
+
+na:
+- skutečnou runtime připravenost pro každý sport a entitu
+
+Neřešíme teď kvalitu dat.
+Řešíme existenci a úplnost execution layer.
+
+---
+
+## 2. Základní princip
+
+Sport je runtime ready pouze pokud pro danou entitu existuje:
+
+1. worker
+2. ingest script / runner
+3. parser / transform
+4. merge flow do public vrstvy
+5. OPS napojení
+6. run/test způsob spuštění
+7. audit / health check
+
+Pokud některý bod chybí, sport/entity není runtime ready.
+
+---
+
+## 3. Auditované sporty
+
+Priority pro audit:
+
+1. FB
+2. HK
+3. BK
+4. VB
+5. HB
+6. AFB
+7. BSB
+8. CK
+9. RGB
+10. FH
+11. TN
+12. MMA
+
+---
+
+## 4. Auditované entity
+
+Minimální core entity:
+
+- leagues
+- teams
+- fixtures
+- odds
+
+Rozšířené entity:
+
+- players
+- player_stats
+- player_season_stats
+- coaches
+- standings
+- injuries
+- lineups
+- events
+
+---
+
+## 5. Povinné kontrolní body pro každou sport × entity kombinaci
+
+### A. Worker existence
+- Existuje dedikovaný worker v `workers\`?
+- Má jasný naming?
+- Je sport-specific nebo reusable template?
+- Umí logovat run_id / provider / sport / entity?
+- Umí fail-fast při chybě configu?
+
+### B. Ingest entrypoint
+- Existuje spouštěcí `.py` nebo `.ps1`?
+- Je jasné, jak se spouští ručně?
+- Je jasné, jak se spouští z OPS/planneru?
+- Má vstupní parametry provider / sport / entity / run_group?
+
+### C. Provider pull layer
+- Existuje pull script pro provider?
+- Umí uložit RAW payload?
+- Umí retry / timeout?
+- Umí page/season/league loop?
+- Umí budget-safe režim?
+
+### D. Parser / staging layer
+- Existuje parser do `staging.stg_provider_*`?
+- Má sport-specific mapping?
+- Umí canonical provider keys?
+- Umí logovat counts: fetched / parsed / skipped / failed?
+- Má ochranu proti duplicitám?
+
+### E. Merge / public layer
+- Existuje merge SQL nebo merge runner?
+- Je znám cílový public objekt?
+- Umí provider_map update?
+- Umí alias sync?
+- Umí safe upsert?
+- Umí rerun bez rozbití dat?
+
+### F. OPS binding
+- Existuje vazba do:
+  - `ops.provider_sport_matrix`
+  - `ops.ingest_entity_plan`
+  - `ops.provider_entity_coverage`
+  - `ops.ingest_targets`
+  - `ops.ingest_planner`
+  - `ops.provider_jobs`
+- Je entita vidět ve view pro orchestraci?
+- Je možné ji zařadit do queue?
+
+### G. Runtime control
+- Existuje healthcheck?
+- Existuje smoke test?
+- Existuje debug SQL pro poslední běh?
+- Existuje logický stav:
+  - STRUCTURE_READY
+  - PROVIDER_LIMITED / ACTIVE_PROVIDER
+  - EXECUTION_MISSING / EXECUTION_READY
+
+### H. Reusability
+- Dá se worker pattern použít pro další sporty?
+- Co je hardcoded na football?
+- Co musí být parametrizované?
+- Co má být v shared helper vrstvě?
+
+---
+
+## 6. Výstup auditu pro každý řádek
+
+Každá sport × entity kombinace musí skončit jedním výsledkem:
+
+### READY
+Existuje kompletní execution chain a lze spustit.
+
+### PARTIAL
+Existuje část execution chain, ale chybí některé klíčové části.
+
+### OPS_ONLY
+OPS a DB existují, ale runtime neexistuje.
+
+### DESIGN_ONLY
+Existuje návrh nebo struktura, ale není implementace.
+
+### BLOCKED_PROVIDER
+Execution lze postavit, ale provider je limitovaný nebo nevhodný.
+
+---
+
+## 7. Povinná auditní matice
+
+Pro každý řádek evidovat:
+
+- sport_code
+- provider_key
+- entity_key
+- worker_exists
+- runner_exists
+- pull_exists
+- parser_exists
+- merge_exists
+- ops_binding_exists
+- healthcheck_exists
+- reusable_template_ready
+- current_state
+- next_action
+- priority
+- note
+
+---
+
+## 8. Definice priority
+
+### P1
+Nutné pro build platformy hned:
+- HK teams
+- HK fixtures
+- BK teams
+- BK fixtures
+- VB teams
+- VB fixtures
+
+### P2
+Nutné pro plnou core platformu:
+- leagues
+- odds
+- standings
+
+### P3
+Rozšíření:
+- players
+- coaches
+- stats
+- injuries
+- events
+
+---
+
+## 9. První praktický cíl po auditu
+
+Po dokončení checklistu nesmí být dalším krokem další audit.
+
+Další krok musí být:
+
+### build `worker_template_multisport_v1`
+
+Template musí řešit:
+
+- provider_key
+- sport_code
+- entity_key
+- run_group
+- logging
+- retry wrapper
+- RAW save
+- parser call
+- merge call
+- OPS run update
+- error exit code
+
+---
+
+## 10. První implementační kandidát
+
+Preferovaný první sport po auditu:
+
+### HK
+
+Důvod:
+- už existují HK audit starty a top runnable pohledy v OPS
+- staging tabulky pro hockey už v systému jsou
+- sport je dostatečně jednoduchý pro core flow
+- football nebude míchat logiku a false positive “už to máme hotové”
+
+Alternativa:
+### BK
+
+---
+
+## 11. Co kontrolovat fyzicky ve stromu projektu
+
+### Složky
+- `C:\MatchMatrix-platform\workers`
+- `C:\MatchMatrix-platform\ingest`
+- `C:\MatchMatrix-platform\db\checks`
+- `C:\MatchMatrix-platform\db\audit`
+- `C:\MatchMatrix-platform\db\migrations`
+- `C:\MatchMatrix-platform\reports`
+- `C:\MatchMatrix-platform\ops_admin`
+
+### Hledat patterny
+- `run_*`
+- `parse_*`
+- `pull_*`
+- `merge_*`
+- `*_ingest_*`
+- `*_pipeline_*`
+- `*_runtime_*`
+
+---
+
+## 12. Auditní rozhodovací pravidla
+
+### Worker exists = ANO
+Pouze pokud:
+- soubor skutečně existuje
+- je spustitelný
+- patří ke konkrétní entitě
+- není to jen experiment nebo starý zbytek
+
+### Parser exists = ANO
+Pouze pokud:
+- skutečně plní staging/public flow
+- není to jen raw fetch bez transformace
+
+### Merge exists = ANO
+Pouze pokud:
+- existuje jasný merge do public vrstvy
+- ne pouze staging insert
+
+### OPS binding exists = ANO
+Pouze pokud:
+- worker je skutečně napojen do OPS logiky, ne jen ručně spustitelný
+
+---
+
+## 13. Požadovaný výstup 614
+
+Výsledkem 614 musí být:
+
+1. seznam všech chybějících workerů
+2. seznam všech chybějících parserů
+3. seznam všech chybějících merge kroků
+4. seznam reusable částí z FB
+5. návrh jednotného worker frameworku
+6. určení prvního sportu pro build
+7. backlog: co stavět jako 615 / 616 / 617
+
+---
+
+## 14. Navazující soubory
+
+Po dokončení 614 vytvořit:
+
+- `615_multisport_worker_framework_v1.md`
+- `616_hk_runtime_build_plan.md`
+- `617_bk_runtime_build_plan.md`
+
+---
+
+## 15. Praktická poznámka
+
+Teď už nehledáme “kde jsou data”.
+Teď hledáme:
+
+- kde je executable chain
+- kde chain chybí
+- co umíme z FB zreusovat
+- co musíme postavit jako shared framework
+
+To je hlavní přechod z audit fáze do platform build fáze.

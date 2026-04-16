@@ -1,0 +1,182 @@
+MATCHMATRIX – ZÁPIS (2026-04-08)
+🎯 HLAVNÍ POSUN DNES
+
+👉 Přechod z:
+
+řešíme jednotlivé ingesty
+
+na:
+
+stavíme kompletní harvest engine pro všechny sporty
+✅ 1. FB PLAYERS – HOTOVO (VELKÝ MILESTONE)
+Stav
+FB | players | DONE | PRO READY
+Co je hotové
+
+✔ fetch (API-Football)
+✔ staging (players_import)
+✔ bridge → stg_provider_players
+✔ public merge → public.players + player_provider_map
+✔ stats parse + merge → player_season_statistics
+
+Reálný důkaz
+pipeline běží end-to-end ✔
+WAVE 1 run funguje ✔
+data rostou:
+players: 1490 → ~1958
+stats: 1308 → ~1548
+Limit (free plan)
+max 3 pages = ~60 hráčů / liga / sezóna
+
+👉 ALE:
+pipeline je připravená → PRO unlock = lavina
+
+⚠️ 2. ZÁSADNÍ ZJIŠTĚNÍ
+❗ PROBLÉM NENÍ V PIPELINE
+
+ALE v:
+
+řízení toho CO stahovat a KDY
+🧠 3. ARCHITEKTURA OPS (POTVRZENO)
+
+Máme hotové jádro:
+
+provider_sport_matrix        → co provider umí
+ingest_entity_plan           → co je technicky připravené
+provider_entity_coverage     → realita (free/paid/priority)
+ingest_targets               → co chceme stahovat
+ingest_planner               → co se reálně spouští
+job_runs                     → historie
+
+👉 Tohle je KLÍČOVÉ:
+
+architektura NECHYBÍ
+jen ji musíme začít používat správně
+🔍 4. REUSE AUDIT – VÝSLEDEK
+Co NEdělat
+
+❌ nevytvářet nové „master“ tabulky
+❌ neduplikovat logiku mimo OPS
+
+Co dělat
+
+✔ reuse OPS jako:
+
+OPS = jediný zdroj pravdy
+🚨 5. SKUTEČNÝ PROBLÉM (ROOT CAUSE)
+
+Podle auditu:
+
+enabled = TRUE ≠ pipeline ready
+tech_ready ≠ runtime_ready
+
+A chybí:
+
+production_ready status
+napojení coverage → planner
+jasný harvest reporting
+
+👉 přesně potvrzeno v audit dokumentu
+
+🧭 6. NOVÝ SMĚR (KRITICKÝ)
+
+Teď NEbudeme:
+
+psát další ingest script
+
+Teď budeme:
+
+řídit celý harvest systém
+🏗️ 7. CO CHCEME POSTAVIT
+🎯 HARVEST ENGINE
+coverage + targets + planner + orchestrace
+📊 8. REALITA SPORTŮ DNES
+🟢 FB (football)
+CORE: READY
+players: READY
+odds: READY (linker ladění)
+🟢 HK (hockey)
+CORE: READY
+players: BLOCKED
+🟡 BK / VB
+CORE: PARTIAL
+🟠 ostatní sporty
+SKELETON / REVIEW
+🔥 9. CO JE TEĎ HLAVNÍ PRÁCE
+
+Ne:
+
+psát další kód
+
+Ale:
+
+udělat CONTROL NAD TÍM CO MÁME
+🚀 DALŠÍ POSTUP (PRO DALŠÍ CHAT)
+🧩 KROK 1 — REUSE AUDIT QUERY (hlavní)
+
+👉 cílem je dostat:
+
+SPORT × ENTITY × STATUS
+
+ze stávajících OPS tabulek
+
+🧩 KROK 2 — KLASIFIKACE
+
+Každý řádek dostane:
+
+production_ready
+runtime_tested
+tech_ready
+planned
+blocked
+🧩 KROK 3 — HARVEST SCOPE
+
+Z ingest_targets uděláme:
+
+co se bude stahovat v PRO režimu
+🧩 KROK 4 — PLANNER GENERATION
+targets → planner jobs
+🧩 KROK 5 — ORCHESTRACE
+WAVE 0
+WAVE 1
+WAVE 2
+⚠️ DŮLEŽITÉ PRAVIDLO
+NEJDŘÍV:
+→ připravit sporty + entity + coverage
+
+PAK:
+→ orchestraci
+🧠 STRATEGICKÝ POSUN
+
+Dnes jsi udělal:
+
+z ingest systému → harvest platformu
+
+To je zásadní rozdíl.
+
+📌 TL;DR
+
+👉 Players pipeline:
+
+HOTOVO
+
+👉 OPS:
+
+stačí reuse (ne nové tabulky)
+
+👉 Problém:
+
+řízení harvestu
+
+👉 Další krok:
+
+vytáhnout realitu z OPS a klasifikovat sporty + entity
+▶️ START DALŠÍHO CHATU
+
+Napiš:
+
+navazujeme – udělej reuse audit query nad ops core (sport × entity × status)
+
+a jdeme:
+
+👉 přesně do SQL, který z toho udělá řiditelný harvest systém 🚀

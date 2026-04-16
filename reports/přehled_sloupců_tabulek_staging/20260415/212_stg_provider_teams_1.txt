@@ -1,0 +1,598 @@
+|provider    |external_team_id|team_name                 |country_name            |external_league_id|season|
+|------------|----------------|--------------------------|------------------------|------------------|------|
+|api_football|757             |Aalesund                  |Norway                  |103               |2022  |
+|api_football|406             |Aarhus                    |Denmark                 |119               |2022  |
+|api_football|404             |AC Horsens                |Denmark                 |120               |2024  |
+|api_football|489             |AC Milan                  |Italy                   |135               |2022  |
+|api_football|25270           |A?da?                     |Azerbaijan              |420               |2024  |
+|api_football|10139           |AD Ceuta FC               |Spain                   |1006              |2024  |
+|api_football|3396            |AEL                       |Cyprus                  |318               |2022  |
+|api_football|2579            |AFC Hermannstadt          |Romania                 |283               |2022  |
+|api_football|1333            |AFC Wimbledon             |England                 |42                |2022  |
+|api_football|1553            |Afghanistan               |Afghanistan             |10                |2024  |
+|api_football|5576            |?ahda?                    |Azerbaijan              |420               |2024  |
+|api_football|377             |AIK Stockholm             |Sweden                  |113               |2022  |
+|api_football|98              |Ajaccio                   |France                  |61                |2022  |
+|api_football|1266            |Ajax Amateurs             |Netherlands             |1004              |2024  |
+|api_football|996             |Alanyaspor                |Turkey                  |10                |2024  |
+|api_football|10354           |Albania U19               |Albania                 |10                |2024  |
+|api_football|711             |Alcorcon                  |Spain                   |143               |2024  |
+|api_football|9860            |Alfaro                    |Spain                   |143               |2024  |
+|api_football|11017           |Algeria U20               |Algeria                 |10                |2024  |
+|api_football|723             |Almeria                   |Spain                   |143               |2024  |
+|api_football|9877            |Almud?var                 |Spain                   |455               |2024  |
+|api_football|4358            |Aluminij                  |Slovenia                |374               |2022  |
+|api_football|666             |?amax? FK                 |Azerbaijan              |420               |2024  |
+|api_football|9380            |Amorebieta                |Spain                   |143               |2024  |
+|api_football|1110            |Andorra                   |Andorra                 |10                |2024  |
+|api_football|1529            |Angola                    |Angola                  |10                |2024  |
+|api_football|2269            |Anorthosis                |Cyprus                  |318               |2022  |
+|api_football|9742            |Antequera                 |Spain                   |1006              |2024  |
+|api_football|7522            |Antoniano                 |Spain                   |1000              |2024  |
+|api_football|2247            |Apoel Nicosia             |Cyprus                  |318               |2022  |
+|api_football|602             |Apollon Limassol          |Cyprus                  |318               |2022  |
+|api_football|18785           |Aral                      |Uzbekistan              |1075              |2024  |
+|api_football|11238           |Araz                      |Azerbaijan              |420               |2024  |
+|api_football|10187           |Argentina U23             |Argentina               |10                |2024  |
+|api_football|2592            |Arges Pitesti             |Romania                 |283               |2022  |
+|api_football|3408            |Aris                      |Cyprus                  |318               |2022  |
+|api_football|344             |Arka Gdynia               |Poland                  |107               |2022  |
+|api_football|1094            |Armenia                   |Armenia                 |10                |2024  |
+|api_football|9419            |Arsenal                   |Belarus                 |116               |2022  |
+|api_football|8167            |Aruba                     |Aruba                   |10                |2024  |
+|api_football|497             |AS Roma                   |Italy                   |135               |2022  |
+|api_football|955             |Asteras Tripolis          |Greece                  |197               |2022  |
+|api_football|531             |Athletic Club             |Spain                   |143               |2024  |
+|api_football|9878            |Atl?tico Monz?n           |Spain                   |455               |2024  |
+|api_football|9539            |Audace Cerignola          |Italy                   |943               |2022  |
+|api_football|21460           |Austria U18               |Austria                 |10                |2024  |
+|api_football|8180            |Austria U21               |Austria                 |10                |2024  |
+|api_football|21595           |AVS                       |Portugal                |94                |2024  |
+|api_football|1096            |Azerbaijan                |Azerbaijan              |10                |2024  |
+|api_football|1587            |AZ Picerno                |Italy                   |943               |2022  |
+|api_football|4314            |Azul Claro Numazu         |Japan                   |100               |2024  |
+|api_football|5250            |Badalona                  |Spain                   |143               |2024  |
+|api_football|1547            |Bahrain                   |Bahrain                 |10                |2024  |
+|api_football|1560            |Bangladesh                |Bangladesh              |10                |2024  |
+|api_football|5251            |Barakaldo                 |Spain                   |143               |2024  |
+|api_football|9879            |Barbastro                 |Spain                   |1000              |2024  |
+|api_football|529             |Barcelona                 |Spain                   |143               |2024  |
+|api_football|747             |Barnsley                  |England                 |41                |2022  |
+|api_football|23263           |Basque Country            |World                   |10                |2024  |
+|api_football|9657            |Beasain                   |Spain                   |143               |2024  |
+|api_football|657             |Beitar Jerusalem          |Israel                  |383               |2022  |
+|api_football|1100            |Belarus                   |Belarus                 |10                |2024  |
+|api_football|22425           |Belgium U18               |Belgium                 |10                |2024  |
+|api_football|5528            |Belize                    |Belize                  |10                |2024  |
+|api_football|1516            |Benin                     |Benin                   |10                |2024  |
+|api_football|5158            |Bermuda                   |Bermuda                 |10                |2024  |
+|api_football|857             |Beroe                     |Bulgaria                |172               |2022  |
+|api_football|1540            |Bhutan                    |Bhutan                  |10                |2024  |
+|api_football|9881            |Bin?far                   |Spain                   |455               |2024  |
+|api_football|367             |BK Hacken                 |Sweden                  |113               |2022  |
+|api_football|1356            |Blackpool                 |England                 |40                |2022  |
+|api_football|7276            |Blansko                   |Czech-Republic          |349               |2022  |
+|api_football|222             |Boavista                  |Portugal                |94                |2022  |
+|api_football|20473           |Bochum                    |Germany                 |1034              |2024  |
+|api_football|14473           |Bohemians 1905 II         |Czech-Republic          |348               |2022  |
+|api_football|2381            |Bolivia                   |Bolivia                 |10                |2024  |
+|api_football|68              |Bolton                    |England                 |41                |2022  |
+|api_football|10982           |Bonaire                   |Bonaire                 |10                |2024  |
+|api_football|7431            |Bonnyrigg Rose Athletic   |Scotland                |184               |2024  |
+|api_football|1864            |Borussia Monchengladbach W|Germany                 |1034              |2024  |
+|api_football|1113            |Bosnia & Herzegovina      |Bosnia                  |10                |2024  |
+|api_football|634             |Botev Plovdiv             |Bulgaria                |172               |2022  |
+|api_football|1520            |Botswana                  |Botswana                |10                |2024  |
+|api_football|319             |Brann                     |Norway                  |104               |2022  |
+|api_football|4359            |Bravo                     |Slovenia                |373               |2022  |
+|api_football|9883            |Brea                      |Spain                   |455               |2024  |
+|api_football|12744           |Brinje-Grosuplje          |Slovenia                |374               |2022  |
+|api_football|5538            |Brunei                    |Brunei                  |10                |2024  |
+|api_football|2142            |Bryne                     |Norway                  |104               |2022  |
+|api_football|1103            |Bulgaria                  |Bulgaria                |10                |2024  |
+|api_football|1502            |Burkina Faso              |Burkina-Faso            |10                |2024  |
+|api_football|1528            |Burundi                   |Burundi                 |10                |2024  |
+|api_football|4211            |Buxoro                    |Uzbekistan              |1075              |2024  |
+|api_football|724             |Cadiz                     |Spain                   |143               |2024  |
+|api_football|356             |Caernarfon Town           |Wales                   |110               |2022  |
+|api_football|1543            |Cambodia                  |Cambodia                |10                |2024  |
+|api_football|420             |Cambuur                   |Netherlands             |88                |2022  |
+|api_football|1530            |Cameroon                  |Cameroon                |10                |2024  |
+|api_football|19080           |Canada U20 W              |Canada                  |1001              |2024  |
+|api_football|1581            |Carrarese                 |Italy                   |942               |2022  |
+|api_football|17615           |Caspe                     |Spain                   |455               |2024  |
+|api_football|1687            |Catanzaro                 |Italy                   |943               |2022  |
+|api_football|8169            |Cayman Islands            |Cayman-Islands          |10                |2024  |
+|api_football|9827            |CD Coria                  |Spain                   |143               |2024  |
+|api_football|247             |Celtic                    |Scotland                |179               |2022  |
+|api_football|1527            |Central African Republic  |Central-African-Republic|10                |2024  |
+|api_football|2246            |CFR 1907 Cluj             |Romania                 |283               |2022  |
+|api_football|223             |Chaves                    |Portugal                |94                |2022  |
+|api_football|21905           |Chiclana                  |Spain                   |143               |2024  |
+|api_football|2383            |Chile                     |Chile                   |10                |2024  |
+|api_football|1566            |China                     |China                   |10                |2024  |
+|api_football|17262           |China PR U20              |China                   |10                |2024  |
+|api_football|10932           |China PR U23              |China                   |10                |2024  |
+|api_football|2586            |Chindia Targoviste        |Romania                 |283               |2022  |
+|api_football|1557            |Chinese Taipei            |Chinese-Taipei          |10                |2024  |
+|api_football|3482            |Chojniczanka Chojnice     |Poland                  |107               |2022  |
+|api_football|9756            |Ciudad de Lucena          |Spain                   |143               |2024  |
+|api_football|6762            |Clyde                     |Scotland                |184               |2024  |
+|api_football|1524            |Comoros                   |Comoros                 |10                |2024  |
+|api_football|5256            |Compostela                |Spain                   |143               |2024  |
+|api_football|2580            |Concordia                 |Romania                 |284               |2022  |
+|api_football|1517            |Congo                     |Congo                   |10                |2024  |
+|api_football|5257            |Conquense                 |Spain                   |143               |2024  |
+|api_football|713             |Cordoba                   |Spain                   |143               |2024  |
+|api_football|29              |Costa Rica                |Costa-Rica              |10                |2024  |
+|api_football|19082           |Costa Rica U20 W          |Costa-Rica              |1001              |2024  |
+|api_football|350             |Cracovia Krakow           |Poland                  |106               |2022  |
+|api_football|501             |Crotone                   |Italy                   |943               |2022  |
+|api_football|1426            |CSKA 1948                 |Bulgaria                |172               |2022  |
+|api_football|853             |CSKA Sofia                |Bulgaria                |172               |2022  |
+|api_football|16620           |C?te d'Ivoire U23         |Ivory-Coast             |10                |2024  |
+|api_football|2388            |Cuba                      |Cuba                    |10                |2024  |
+|api_football|725             |Cultural Leonesa          |Spain                   |1006              |2024  |
+|api_football|5530            |Cura?ao                   |Curacao                 |10                |2024  |
+|api_football|1106            |Cyprus                    |Cyprus                  |10                |2024  |
+|api_football|23256           |Cyprus U18                |Cyprus                  |10                |2024  |
+|api_football|8187            |Cyprus U21                |Cyprus                  |10                |2024  |
+|api_football|770             |Czech Republic            |Czech-Republic          |10                |2024  |
+|api_football|22580           |Czech Republic U16        |Czech-Republic          |10                |2024  |
+|api_football|8188            |Czech Republic U21        |Czech-Republic          |10                |2024  |
+|api_football|2172            |Degerfors IF              |Sweden                  |113               |2022  |
+|api_football|199             |De Graafschap             |Netherlands             |88                |2024  |
+|api_football|4370            |Dekani                    |Slovenia                |374               |2022  |
+|api_football|421             |Den Bosch                 |Netherlands             |88                |2024  |
+|api_football|22428           |Denmark U18               |Denmark                 |10                |2024  |
+|api_football|8189            |Denmark U21               |Denmark                 |10                |2024  |
+|api_football|9811            |Deportiva Minera          |Spain                   |143               |2024  |
+|api_football|544             |Deportivo La Coruna       |Spain                   |143               |2024  |
+|api_football|25271           |Dinamo Bak?               |Azerbaijan              |420               |2024  |
+|api_football|386             |Dinamo Brest              |Belarus                 |116               |2022  |
+|api_football|635             |Dinamo Bucuresti          |Romania                 |284               |2022  |
+|api_football|620             |Dinamo Zagreb             |Croatia                 |210               |2022  |
+|api_football|1535            |Djibouti                  |Djibouti                |10                |2024  |
+|api_football|364             |Djurgardens IF            |Sweden                  |113               |2022  |
+|api_football|1427            |Dobrudzha                 |Bulgaria                |173               |2022  |
+|api_football|5531            |Dominica                  |Dominica                |10                |2024  |
+|api_football|5532            |Dominican Republic        |Dominican-Republic      |10                |2024  |
+|api_football|17871           |Dominican Republic U23    |Dominican-Republic      |10                |2024  |
+|api_football|21367           |Dominican Republic W U20  |Dominican-Republic      |1001              |2024  |
+|api_football|5259            |Don Benito                |Spain                   |143               |2024  |
+|api_football|18787           |Dostlik                   |Uzbekistan              |1075              |2024  |
+|api_football|15132           |Dukla Praha II            |Czech-Republic          |348               |2022  |
+|api_football|6764            |East Fife                 |Scotland                |184               |2024  |
+|api_football|6765            |East Kilbride             |Scotland                |184               |2024  |
+|api_football|6766            |Edinburgh City            |Scotland                |184               |2024  |
+|api_football|11027           |Egypt U20                 |Egypt                   |10                |2024  |
+|api_football|545             |Eibar                     |Spain                   |143               |2024  |
+|api_football|169             |Eintracht Frankfurt       |Germany                 |78                |2022  |
+|api_football|9589            |Ejea                      |Spain                   |143               |2024  |
+|api_football|797             |Elche                     |Spain                   |143               |2024  |
+|api_football|6767            |Elgin City                |Scotland                |184               |2024  |
+|api_football|5159            |El Salvador               |El-Salvador             |10                |2024  |
+|api_football|12762           |Eltersdorf                |Germany                 |1003              |2024  |
+|api_football|208             |Emmen                     |Netherlands             |88                |2022  |
+|api_football|511             |Empoli                    |Italy                   |135               |2022  |
+|api_football|21466           |England U18               |England                 |10                |2024  |
+|api_football|3399            |Enosis                    |Cyprus                  |318               |2022  |
+|api_football|1521            |Equatorial Guinea         |Equatorial-Guinea       |10                |2024  |
+|api_football|19220           |Erlbach                   |Germany                 |1003              |2024  |
+|api_football|9386            |Escobedo                  |Spain                   |1000              |2024  |
+|api_football|9590            |Espanyol II               |Spain                   |1000              |2022  |
+|api_football|15358           |Estepona                  |Spain                   |1000              |2024  |
+|api_football|1101            |Estonia                   |Estonia                 |10                |2024  |
+|api_football|10361           |Estonia U19               |Estonia                 |10                |2024  |
+|api_football|15130           |Estrela                   |Portugal                |94                |2022  |
+|api_football|1506            |Ethiopia                  |Ethiopia                |10                |2024  |
+|api_football|6263            |Excelsior '31             |Netherlands             |1004              |2024  |
+|api_football|24612           |Extremadura 1924          |Spain                   |143               |2024  |
+|api_football|812             |Falkenbergs FF            |Sweden                  |114               |2022  |
+|api_football|231             |Farense                   |Portugal                |94                |2024  |
+|api_football|1098            |Faroe Islands             |Faroe-Islands           |10                |2024  |
+|api_football|8157            |FC Andorra                |Spain                   |1006              |2024  |
+|api_football|170             |FC Augsburg               |Germany                 |78                |2022  |
+|api_football|5262            |FC Cartagena              |Spain                   |143               |2024  |
+|api_football|397             |FC Midtjylland            |Denmark                 |119               |2022  |
+|api_football|212             |FC Porto                  |Portugal                |94                |2022  |
+|api_football|3890            |FC 's-Gravenzande         |Netherlands             |1004              |2024  |
+|api_football|1012            |FC Thun                   |Switzerland             |208               |2022  |
+|api_football|416             |FC Volendam               |Netherlands             |88                |2022  |
+|api_football|209             |Feyenoord                 |Netherlands             |88                |2022  |
+|api_football|5160            |Fiji                      |Fiji                    |10                |2024  |
+|api_football|1099            |Finland                   |Finland                 |10                |2024  |
+|api_football|3891            |Flevo Boys                |Netherlands             |1004              |2024  |
+|api_football|521             |Foggia                    |Italy                   |943               |2022  |
+|api_football|4250            |Forfar Athletic           |Scotland                |184               |2024  |
+|api_football|205             |Fortuna Sittard           |Netherlands             |88                |2022  |
+|api_football|8158            |Fraga                     |Spain                   |455               |2024  |
+|api_football|16621           |France U23                |France                  |10                |2024  |
+|api_football|2149            |Fredrikstad               |Norway                  |104               |2022  |
+|api_football|8118            |French Guyana             |French-Guiana           |10                |2024  |
+|api_football|20445           |Fuentes                   |Spain                   |455               |2024  |
+|api_football|1105            |FYR Macedonia             |Macedonia               |10                |2024  |
+|api_football|1503            |Gabon                     |Gabon                   |10                |2024  |
+|api_football|1492            |Gambia                    |Gambia                  |10                |2024  |
+|api_football|23257           |Georgia U18               |Georgia                 |10                |2024  |
+|api_football|8195            |Georgia U21               |Georgia                 |10                |2024  |
+|api_football|22430           |Germany U16               |Germany                 |10                |2024  |
+|api_football|5263            |Gernika                   |Spain                   |1000              |2022  |
+|api_football|9572            |Getafe II                 |Spain                   |1000              |2024  |
+|api_football|1093            |Gibraltar                 |Gibraltar               |10                |2024  |
+|api_football|373             |GIF Sundsvall             |Sweden                  |113               |2022  |
+|api_football|9556            |Giugliano                 |Italy                   |943               |2022  |
+|api_football|3484            |GKS Katowice              |Poland                  |107               |2022  |
+|api_football|410             |GO Ahead Eagles           |Netherlands             |88                |2022  |
+|api_football|340             |Gornik Zabrze             |Poland                  |106               |2022  |
+|api_football|715             |Granada CF                |Spain                   |143               |2024  |
+|api_football|9599            |Granada II                |Spain                   |1000              |2022  |
+|api_football|12704           |Grasshopper II            |Switzerland             |1005              |2024  |
+|api_football|1117            |Greece                    |Greece                  |10                |2024  |
+|api_football|5533            |Grenada                   |Grenada                 |10                |2024  |
+|api_football|1236            |Groene Ster               |Netherlands             |1004              |2024  |
+|api_football|4321            |Grulla Morioka            |Japan                   |100               |2024  |
+|api_football|5161            |Guatemala                 |Guatemala               |10                |2024  |
+|api_football|866             |Gubbio                    |Italy                   |942               |2022  |
+|api_football|882             |Guidonia Montecelio 1937  |Italy                   |943               |2022  |
+|api_football|224             |Guimaraes                 |Portugal                |94                |2022  |
+|api_football|1509            |Guinea                    |Guinea                  |10                |2024  |
+|api_football|1513            |Guinea-Bissau             |Guinea-Bissau           |10                |2024  |
+|api_football|20547           |Guinea U23                |Guinea                  |10                |2024  |
+|api_football|5162            |Guyana                    |Guyana                  |10                |2024  |
+|api_football|766             |Halmstad                  |Sweden                  |114               |2022  |
+|api_football|12780           |Hankofen-Hailing          |Germany                 |1003              |2024  |
+|api_football|563             |Hapoel Beer Sheva         |Israel                  |383               |2022  |
+|api_football|4486            |Hapoel Katamon            |Israel                  |383               |2022  |
+|api_football|4497            |Hapoel Kfar Saba          |Israel                  |382               |2022  |
+|api_football|4491            |Hapoel Rishon LeZion      |Israel                  |382               |2022  |
+|api_football|26096           |Heino                     |Netherlands             |1004              |2024  |
+|api_football|811             |Helsingborg               |Sweden                  |113               |2022  |
+|api_football|159             |Hertha BSC                |Germany                 |78                |2022  |
+|api_football|1021            |HNK Cibalia               |Croatia                 |211               |2022  |
+|api_football|608             |HNK Hajduk Split          |Croatia                 |210               |2022  |
+|api_football|561             |HNK Rijeka                |Croatia                 |210               |2022  |
+|api_football|191             |Holstein Kiel             |Germany                 |78                |2024  |
+|api_football|4672            |Honduras                  |Honduras                |10                |2024  |
+|api_football|4460            |Hong Kong                 |Hong-Kong               |10                |2024  |
+|api_football|726             |Huesca                    |Spain                   |143               |2024  |
+|api_football|16500           |Hungary U21               |Hungary                 |10                |2024  |
+|api_football|25272           |Hypers Guba               |Azerbaijan              |420               |2024  |
+|api_football|9781            |Ibiza Islas Pitiusas      |Spain                   |143               |2024  |
+|api_football|18              |Iceland                   |Iceland                 |10                |2024  |
+|api_football|23260           |Iceland U20               |Iceland                 |10                |2024  |
+|api_football|371             |IF Brommapojkarna         |Sweden                  |114               |2022  |
+|api_football|372             |IF Elfsborg               |Sweden                  |113               |2022  |
+|api_football|366             |IFK Goteborg              |Sweden                  |113               |2022  |
+|api_football|25273           |?imal                     |Azerbaijan              |420               |2024  |
+|api_football|5570            |Imisli FK                 |Azerbaijan              |420               |2024  |
+|api_football|1537            |India                     |India                   |10                |2024  |
+|api_football|10935           |India U23                 |India                   |10                |2024  |
+|api_football|1571            |Indonesia                 |Indonesia               |10                |2024  |
+|api_football|21057           |Indonesia U20             |Indonesia               |10                |2024  |
+|api_football|10936           |Indonesia U23             |Indonesia               |1105              |2024  |
+|api_football|505             |Inter                     |Italy                   |135               |2022  |
+|api_football|1020            |Inter Zapresic            |Croatia                 |211               |2022  |
+|api_football|1116            |Israel                    |Israel                  |10                |2024  |
+|api_football|22255           |Italy U16                 |Italy                   |10                |2024  |
+|api_football|19071           |Italy U18                 |Italy                   |10                |2024  |
+|api_football|2385            |Jamaica                   |Jamaica                 |10                |2024  |
+|api_football|21368           |Jamaica W U20             |Jamaica                 |1001              |2024  |
+|api_football|22724           |Japan U16                 |Japan                   |10                |2024  |
+|api_football|10176           |Japan U23                 |Japan                   |10                |2024  |
+|api_football|19627           |Jordan U20                |Jordan                  |10                |2024  |
+|api_football|3895            |JOS Watergraafsmeer       |Netherlands             |1004              |2024  |
+|api_football|15359           |Juventud Torremolinos     |Spain                   |143               |2024  |
+|api_football|1715            |Juventus U23              |Italy                   |138               |2022  |
+|api_football|863             |Juve Stabia               |Italy                   |943               |2022  |
+|api_football|4493            |Kafr Qasim                |Israel                  |382               |2022  |
+|api_football|12801           |Kalisz                    |Poland                  |109               |2022  |
+|api_football|21421           |Kampong                   |Netherlands             |1004              |2024  |
+|api_football|5490            |Kapaz                     |Azerbaijan              |420               |2024  |
+|api_football|7306            |Karlovy Vary              |Czech-Republic          |348               |2022  |
+|api_football|1095            |Kazakhstan                |Kazakhstan              |10                |2024  |
+|api_football|1511            |Kenya                     |Kenya                   |10                |2024  |
+|api_football|11034           |Kenya U20                 |Kenya                   |10                |2024  |
+|api_football|805             |Kitakyushu                |Japan                   |100               |2024  |
+|api_football|4212            |Kokand-1912               |Uzbekistan              |1075              |2024  |
+|api_football|4374            |Koper                     |Slovenia                |373               |2022  |
+|api_football|1111            |Kosovo                    |Kosovo                  |10                |2024  |
+|api_football|14504           |Kreuzlingen               |Switzerland             |1005              |2024  |
+|api_football|4375            |Krka                      |Slovenia                |374               |2022  |
+|api_football|1570            |Kuwait                    |Kuwait                  |10                |2024  |
+|api_football|1554            |Kyrgyzstan                |Kyrgyzstan              |10                |2024  |
+|api_football|6628            |Lancy                     |Switzerland             |1005              |2024  |
+|api_football|5265            |Langreo                   |Spain                   |143               |2024  |
+|api_football|9797            |Lanzarote                 |Spain                   |143               |2024  |
+|api_football|1558            |Laos                      |Laos                    |10                |2024  |
+|api_football|534             |Las Palmas                |Spain                   |143               |2024  |
+|api_football|9395            |Las Rozas                 |Spain                   |143               |2024  |
+|api_football|804             |Latina                    |Italy                   |943               |2022  |
+|api_football|1092            |Latvia                    |Latvia                  |10                |2024  |
+|api_football|1014            |Lausanne                  |Switzerland             |208               |2022  |
+|api_football|12693           |Lausanne Sport II         |Switzerland             |1005              |2024  |
+|api_football|1551            |Lebanon                   |Lebanon                 |10                |2024  |
+|api_football|537             |Leganes                   |Spain                   |143               |2024  |
+|api_football|339             |Legia Warszawa            |Poland                  |106               |2022  |
+|api_football|116             |Lens                      |France                  |61                |2022  |
+|api_football|1518            |Lesotho                   |Lesotho                 |10                |2024  |
+|api_football|957             |Levadiakos                |Greece                  |197               |2022  |
+|api_football|646             |Levski Sofia              |Bulgaria                |172               |2022  |
+|api_football|1526            |Libya                     |Libya                   |10                |2024  |
+|api_football|3387            |Lida                      |Belarus                 |117               |2022  |
+|api_football|1107            |Liechtenstein             |Liechtenstein           |10                |2024  |
+|api_football|9627            |Llanera                   |Spain                   |143               |2024  |
+|api_football|5266            |Lleida Esportiu           |Spain                   |143               |2024  |
+|api_football|858             |Lokomotiv Plovdiv         |Bulgaria                |172               |2022  |
+|api_football|1416            |Lokomotiv Sofia           |Bulgaria                |172               |2022  |
+|api_football|97              |Lorient                   |France                  |61                |2022  |
+|api_football|566             |Ludogorets                |Bulgaria                |172               |2022  |
+|api_football|1102            |Luxembourg                |Luxembourg              |10                |2024  |
+|api_football|625             |Lyngby                    |Denmark                 |119               |2022  |
+|api_football|4495            |Maccabi Petah Tikva       |Israel                  |382               |2022  |
+|api_football|604             |Maccabi Tel Aviv          |Israel                  |383               |2022  |
+|api_football|1490            |Madagascar                |Madagascar              |10                |2024  |
+|api_football|1495            |Malawi                    |Malawi                  |10                |2024  |
+|api_football|11037           |Malawi U20                |Malawi                  |10                |2024  |
+|api_football|1538            |Malaysia                  |Malaysia                |10                |2024  |
+|api_football|10945           |Malaysia U23              |Malaysia                |10                |2024  |
+|api_football|1549            |Maldives                  |Maldives                |10                |2024  |
+|api_football|1500            |Mali                      |Mali                    |10                |2024  |
+|api_football|20551           |Mali U23                  |Mali                    |10                |2024  |
+|api_football|375             |Malmo FF                  |Sweden                  |113               |2022  |
+|api_football|1112            |Malta                     |Malta                   |10                |2024  |
+|api_football|10372           |Malta U19                 |Malta                   |10                |2024  |
+|api_football|8208            |Malta U21                 |Malta                   |10                |2024  |
+|api_football|9675            |Manresa                   |Spain                   |1000              |2022  |
+|api_football|1693            |Mantova                   |Italy                   |138               |2022  |
+|api_football|552             |Maribor                   |Slovenia                |373               |2022  |
+|api_football|214             |Maritimo                  |Portugal                |94                |2022  |
+|api_football|12694           |Martigny Sports           |Switzerland             |796               |2024  |
+|api_football|8117            |Martinique                |Martinique              |10                |2024  |
+|api_football|4213            |Mash'al                   |Uzbekistan              |1075              |2024  |
+|api_football|304             |Matsumoto Yamaga          |Japan                   |100               |2024  |
+|api_football|1491            |Mauritania                |Mauritania              |10                |2024  |
+|api_football|11038           |Mauritania U20            |France                  |10                |2024  |
+|api_football|1497            |Mauritius                 |Mauritius               |10                |2024  |
+|api_football|112             |Metz                      |France                  |61                |2024  |
+|api_football|19088           |Mexico U20 W              |Mexico                  |1001              |2024  |
+|api_football|10178           |Mexico U23                |Mexico                  |10                |2024  |
+|api_football|6630            |Meyrin                    |Switzerland             |1005              |2024  |
+|api_football|5577            |??mkir                    |Azerbaijan              |420               |2024  |
+|api_football|7808            |ML Vitebsk                |Belarus                 |117               |2022  |
+|api_football|1114            |Moldova                   |Moldova                 |10                |2024  |
+|api_football|10373           |Moldova U19               |Poland                  |10                |2024  |
+|api_football|8209            |Moldova U21               |Moldova                 |10                |2024  |
+|api_football|5534            |Mongolia                  |Mongolia                |10                |2024  |
+|api_football|1424            |Montana                   |Bulgaria                |173               |2022  |
+|api_football|1109            |Montenegro                |Montenegro              |10                |2024  |
+|api_football|82              |Montpellier               |France                  |61                |2022  |
+|api_football|1579            |Monza                     |Italy                   |135               |2022  |
+|api_football|21302           |Morocco U17               |Morocco                 |10                |2024  |
+|api_football|19072           |Morocco U18               |Morocco                 |10                |2024  |
+|api_football|10179           |Morocco U23               |Morocco                 |10                |2024  |
+|api_football|14562           |Motor Lublin              |Poland                  |109               |2022  |
+|api_football|1512            |Mozambique                |Mozambique              |10                |2024  |
+|api_football|10140           |M?rida AD                 |Spain                   |1006              |2024  |
+|api_football|1556            |Myanmar                   |Myanmar                 |10                |2024  |
+|api_football|203             |NAC Breda                 |Netherlands             |88                |2022  |
+|api_football|4376            |Nafta                     |Slovenia                |374               |2022  |
+|api_football|1493            |Namibia                   |Namibia                 |10                |2024  |
+|api_football|7135            |Nara Club                 |Japan                   |100               |2024  |
+|api_football|5271            |Navalcarnero              |Spain                   |1000              |2022  |
+|api_football|2270            |Neftchi Baku              |Azerbaijan              |420               |2024  |
+|api_football|1545            |Nepal                     |Nepal                   |10                |2024  |
+|api_football|8211            |Netherlands U21           |Netherlands             |10                |2024  |
+|api_football|5163            |New Caledonia             |New-Caledonia           |10                |2024  |
+|api_football|5164            |Nicaragua                 |Nicaragua               |10                |2024  |
+|api_football|1505            |Niger                     |Niger                   |10                |2024  |
+|api_football|19              |Nigeria                   |Nigeria                 |10                |2024  |
+|api_football|1337            |Northampton               |England                 |42                |2022  |
+|api_football|771             |Northern Ireland          |Northern-Ireland        |10                |2024  |
+|api_football|8213            |Northern Ireland U21      |Northern-Ireland        |10                |2024  |
+|api_football|1561            |North Korea               |North-Korea             |10                |2024  |
+|api_football|21472           |North Macedonia U18       |Macedonia               |10                |2024  |
+|api_football|10342           |Norway U19                |Norway                  |10                |2024  |
+|api_football|8214            |Norway U21                |Norway                  |10                |2024  |
+|api_football|71              |Norwich                   |England                 |40                |2022  |
+|api_football|3488            |Odra Opole                |Poland                  |107               |2022  |
+|api_football|1124            |OFI                       |Greece                  |197               |2022  |
+|api_football|1241            |OJC Rosmalen              |Netherlands             |1004              |2024  |
+|api_football|677             |Olimpija Ljubljana        |Slovenia                |373               |2022  |
+|api_football|23309           |Olimpik-Mobiuz            |Uzbekistan                    |1075              |2024  |
+|api_football|9403            |Olot                      |Spain                         |143               |2024  |
+|api_football|553             |Olympiakos Piraeus        |Greece                        |197               |2022  |
+|api_football|1552            |Oman                      |Oman                          |10                |2024  |
+|api_football|313             |Omiya Ardija              |Japan                         |100               |2024  |
+|api_football|9404            |Orihuela                  |Spain                         |143               |2024  |
+|api_football|19043           |Orion                     |Netherlands                   |1004              |2024  |
+|api_football|7138            |Osaka                     |Japan                         |100               |2024  |
+|api_football|376             |Ostersunds FK             |Sweden                        |114               |2022  |
+|api_football|9612            |Ourense CF                |Spain                         |143               |2024  |
+|api_football|718             |Oviedo                    |Spain                         |143               |2024  |
+|api_football|234             |Pacos Ferreira            |Portugal                      |94                |2022  |
+|api_football|870             |Padova                    |Italy                         |138               |2022  |
+|api_football|3419            |PAEEK                     |Cyprus                        |319               |2022  |
+|api_football|1562            |Palestine                 |Palestine                     |10                |2024  |
+|api_football|21369           |Panama W U20              |Panama                        |1001              |2024  |
+|api_football|617             |Panathinaikos             |Greece                        |197               |2022  |
+|api_football|949             |Panetolikos               |Greece                        |197               |2022  |
+|api_football|619             |PAOK                      |Greece                        |197               |2022  |
+|api_football|8175            |Papua New Guinea          |Papua-New-Guinea              |10                |2024  |
+|api_football|22925           |Paraguay U23              |Paraguay                      |10                |2024  |
+|api_football|901             |Partick                   |Scotland                      |180               |2022  |
+|api_football|950             |PAS Giannina              |Greece                        |197               |2022  |
+|api_football|193             |PEC Zwolle                |Netherlands                   |88                |2024  |
+|api_football|30              |Peru                      |Peru                          |10                |2024  |
+|api_football|525             |Pescara                   |Italy                         |943               |2022  |
+|api_football|6777            |Peterhead                 |Scotland                      |184               |2024  |
+|api_football|1555            |Philippines               |Philippines                   |10                |2024  |
+|api_football|872             |Piacenza                  |Italy                         |138               |2022  |
+|api_football|15329           |?pila                     |Spain                         |455               |2024  |
+|api_football|1428            |Pirin Blagoevgrad         |Bulgaria                      |172               |2022  |
+|api_football|1357            |Plymouth                  |England                       |41                |2022  |
+|api_football|5273            |Poblense                  |Spain                         |143               |2024  |
+|api_football|348             |Pogon Szczecin            |Poland                        |106               |2022  |
+|api_football|16239           |Polonia Warszawa          |Poland                        |109               |2022  |
+|api_football|1591            |Pontedera                 |Italy                         |942               |2022  |
+|api_football|9407            |Pontevedra                |Spain                         |143               |2024  |
+|api_football|24634           |Poortugaal                |Netherlands                   |1004              |2024  |
+|api_football|216             |Portimonense              |Portugal                      |94                |2022  |
+|api_football|19073           |Portugal U18              |Portugal                      |10                |2024  |
+|api_football|10299           |Portugal U20              |Portugal                      |10                |2024  |
+|api_football|1351            |Port Vale                 |England                       |41                |2022  |
+|api_football|1710            |Potenza                   |Italy                         |943               |2022  |
+|api_football|14005           |Povltava FA               |Czech-Republic                |348               |2022  |
+|api_football|5539            |Puerto Rico               |Puerto-Rico                   |10                |2024  |
+|api_football|21370           |Puerto Rico W U20         |Puerto-Rico                   |1001              |2024  |
+|api_football|556             |Qarabag                   |Azerbaijan                    |420               |2024  |
+|api_football|10954           |Qatar U23                 |Qatar                         |10                |2024  |
+|api_football|72              |QPR                       |England                       |40                |2022  |
+|api_football|9409            |Racing Ferrol             |Spain                         |143               |2024  |
+|api_football|4665            |Racing Santander          |Spain                         |143               |2024  |
+|api_football|4248            |Radomiak Radom            |Poland                        |106               |2022  |
+|api_football|4378            |Radomlje                  |Slovenia                      |373               |2022  |
+|api_football|257             |Rangers                   |Scotland                      |179               |2022  |
+|api_football|6231            |Rapid                     |Romania                       |283               |2022  |
+|api_football|861             |Rayo Majadahonda          |Spain                         |1000              |2024  |
+|api_football|53              |Reading                   |England                       |40                |2022  |
+|api_football|541             |Real Madrid               |Spain                         |143               |2024  |
+|api_football|22142           |Real Madrid III           |Spain                         |1000              |2024  |
+|api_football|5275            |Real Murcia               |Spain                         |1006              |2024  |
+|api_football|9585            |Real Sociedad II          |Spain                         |1006              |2024  |
+|api_football|9887            |Real Zaragoza II          |Spain                         |1000              |2022  |
+|api_football|9410            |Recreativo Huelva         |Spain                         |1000              |2022  |
+|api_football|93              |Reims                     |France                        |61                |2022  |
+|api_football|94              |Rennes                    |France                        |61                |2022  |
+|api_football|776             |Rep. Of Ireland           |Ireland                       |10                |2024  |
+|api_football|226             |Rio Ave                   |Portugal                      |94                |2022  |
+|api_football|21422           |RKAVV                     |Netherlands                   |1004              |2024  |
+|api_football|19266           |Roosendaal                |Netherlands                   |1004              |2024  |
+|api_football|331             |Rosenborg                 |Norway                        |103               |2022  |
+|api_football|73              |Rotherham                 |England                       |40                |2022  |
+|api_football|4361            |Rudar                     |Slovenia                      |374               |2022  |
+|api_football|4               |Russia                    |Russia                        |10                |2024  |
+|api_football|1514            |Rwanda                    |Rwanda                        |10                |2024  |
+|api_football|25318           |Safa Baku                 |Azerbaijan                    |420               |2024  |
+|api_football|9588            |Salamanca UDS             |Spain                         |143               |2024  |
+|api_football|514             |Salernitana               |Italy                         |135               |2022  |
+|api_football|871             |Sambenedettese            |Italy                         |431               |2024  |
+|api_football|498             |Sampdoria                 |Italy                         |135               |2022  |
+|api_football|332             |Sandefjord                |Norway                        |103               |2022  |
+|api_football|1115            |San Marino                |San-Marino                    |10                |2024  |
+|api_football|5277            |Sant Andreu               |Spain                         |1000              |2024  |
+|api_football|333             |Sarpsborg 08 FF           |Norway                        |103               |2022  |
+|api_football|10955           |Saudi Arabia U23          |Saudi-Arabia                  |10                |2024  |
+|api_football|9645            |Selaya                    |Spain                         |143               |2024  |
+|api_football|4222            |Shortan                   |Uzbekistan                    |1075              |2024  |
+|api_football|1499            |Sierra Leone              |Sierra-Leone                  |10                |2024  |
+|api_football|1546            |Singapore                 |Singapore                     |10                |2024  |
+|api_football|370             |Sirius                    |Sweden                        |113               |2022  |
+|api_football|3903            |SJC Noordwijk             |Netherlands                   |1004              |2024  |
+|api_football|751             |Slavia Mozyr              |Belarus                       |116               |2022  |
+|api_football|8223            |Slovakia U21              |Slovakia                      |10                |2024  |
+|api_football|5165            |Solomon Islands           |Solomon-Islands               |10                |2024  |
+|api_football|25039           |Sonseca                   |Spain                         |143               |2024  |
+|api_football|8224            |Spain U21                 |Spain                         |10                |2024  |
+|api_football|6781            |Spartans                  |Scotland                      |184               |2024  |
+|api_football|426             |Sparta Rotterdam          |Netherlands                   |88                |2022  |
+|api_football|515             |Spezia                    |Italy                         |135               |2022  |
+|api_football|731             |Sporting Gijon            |Spain                         |143               |2024  |
+|api_football|5166            |Sri Lanka                 |Sri-Lanka                     |10                |2024  |
+|api_football|10138           |SS Monopoli               |Italy                         |943               |2022  |
+|api_football|106             |Stade Brestois 29         |France                        |61                |2022  |
+|api_football|4269            |Stade Lausanne-Ouchy      |Switzerland                   |208               |2022  |
+|api_football|1239            |Staphorst                 |Netherlands                   |1004              |2024  |
+|api_football|334             |Start                     |Norway                        |104               |2022  |
+|api_football|4669            |Stirling Albion           |Scotland                      |184               |2024  |
+|api_football|5536            |St. Kitts and Nevis       |Saint-Kitts-and-Nevis         |10                |2024  |
+|api_football|251             |ST Mirren                 |Scotland                      |179               |2022  |
+|api_football|6785            |Stranraer                 |Scotland                      |184               |2024  |
+|api_football|5541            |St. Vincent / Grenadines  |Saint-Vincent-and-the-Grenadin|10                |2024  |
+|api_football|1510            |Sudan                     |Sudan                         |10                |2024  |
+|api_football|8171            |Suriname                  |Suriname                      |10                |2024  |
+|api_football|8225            |Sweden U21                |Sweden                        |10                |2024  |
+|api_football|1565            |Syria                     |Syria                         |10                |2024  |
+|api_football|21059           |Syria U20                 |Syria                         |10                |2024  |
+|api_football|1536            |Tajikistan                |Tajikistan                    |10                |2024  |
+|api_football|10959           |Tajikistan U23            |Tajikistan                    |10                |2024  |
+|api_football|1489            |Tanzania                  |Tanzania                      |10                |2024  |
+|api_football|1696            |Taranto                   |Italy                         |943               |2022  |
+|api_football|9416            |Tarazona                  |Spain                         |1000              |2022  |
+|api_football|10409           |Tegevajaro Miyazaki       |Japan                         |100               |2024  |
+|api_football|719             |Tenerife                  |Spain                         |143               |2024  |
+|api_football|5278            |Teruel                    |Spain                         |1000              |2024  |
+|api_football|1564            |Thailand                  |Thailand                      |10                |2024  |
+|api_football|1534            |Togo                      |Togo                          |10                |2024  |
+|api_football|15348           |Torrent                   |Spain                         |1000              |2024  |
+|api_football|9534            |Torres                    |Italy                         |942               |2022  |
+|api_football|369             |trelleborgs FF            |Sweden                        |114               |2022  |
+|api_football|4363            |Triglav                   |Slovenia                      |374               |2022  |
+|api_football|5168            |Trinidad and Tobago       |Trinidad-And-Tobago           |10                |2024  |
+|api_football|777             |T?rkiye                   |Turkey                        |10                |2024  |
+|api_football|5279            |Tudelano                  |Spain                         |143               |2024  |
+|api_football|22930           |Tunisia U17               |Tunisia                       |10                |2024  |
+|api_football|11049           |Tunisia U20               |Tunisia                       |10                |2024  |
+|api_football|5499            |Turan                     |Azerbaijan                    |420               |2024  |
+|api_football|1869            |Turbine Potsdam W         |Germany                       |82                |2022  |
+|api_football|19075           |Turkey U18                |Turkey                        |10                |2024  |
+|api_football|8227            |Turkey U21                |Turkey                        |10                |2024  |
+|api_football|1539            |Turkmenistan              |Turkmenistan                  |10                |2024  |
+|api_football|415             |Twente                    |Netherlands                   |88                |2022  |
+|api_football|800             |Ucam Murcia               |Spain                         |1000              |2024  |
+|api_football|17562           |UD San Pedro              |Spain                         |143               |2024  |
+|api_football|1519            |Uganda                    |Uganda                        |10                |2024  |
+|api_football|8228            |Ukraine U21               |Ukraine                       |10                |2024  |
+|api_football|5281            |Unionistas de Salamanca   |Spain                         |143               |2024  |
+|api_football|6916            |Unirea Slobozia           |Romania                       |284               |2022  |
+|api_football|1563            |United Arab Emirates      |United-Arab-Emirates          |10                |2024  |
+|api_football|19091           |United States U20 W       |USA                           |1001              |2024  |
+|api_football|17883           |United States U23         |USA                           |10                |2024  |
+|api_football|632             |Universitatea Craiova     |Romania                       |283               |2022  |
+|api_football|2384            |USA                       |USA                           |10                |2024  |
+|api_football|9891            |Utebo                     |Spain                         |1000              |2024  |
+|api_football|10963           |Uzbekistan U23            |Uzbekistan                    |10                |2024  |
+|api_football|532             |Valencia                  |Spain                         |143               |2024  |
+|api_football|9594            |Valencia II               |Spain                         |1000              |2022  |
+|api_football|720             |Valladolid                |Spain                         |143               |2024  |
+|api_football|5170            |Vanuatu                   |Vanuatu                       |10                |2024  |
+|api_football|2171            |Varbergs BoIS FC          |Sweden                        |113               |2022  |
+|api_football|2241            |Vasteras SK FK            |Sweden                        |114               |2022  |
+|api_football|517             |Venezia                   |Italy                         |135               |2024  |
+|api_football|2379            |Venezuela                 |Venezuela                     |10                |2024  |
+|api_football|25041           |Vic                       |Spain                         |143               |2024  |
+|api_football|1542            |Vietnam                   |Vietnam                       |10                |2024  |
+|api_football|10964           |Vietnam U23               |Vietnam                       |10                |2024  |
+|api_football|9336            |Viktoria Aschaffenburg    |Germany                       |1003              |2024  |
+|api_football|5282            |Villanovense              |Spain                         |1000              |2024  |
+|api_football|1708            |Vis Pesaro                |Italy                         |942               |2022  |
+|api_football|200             |Vitesse                   |Netherlands                   |88                |2022  |
+|api_football|810             |Vizela                    |Portugal                      |94                |2022  |
+|api_football|2110            |Volos NFC                 |Greece                        |197               |2022  |
+|api_football|7376            |Vrchovina                 |Czech-Republic                |349               |2022  |
+|api_football|5730            |Vukovar                   |Croatia                       |211               |2022  |
+|api_football|204             |VVV Venlo                 |Netherlands                   |88                |2022  |
+|api_football|417             |Waalwijk                  |Netherlands                   |88                |2022  |
+|api_football|767             |Wales                     |Wales                         |10                |2024  |
+|api_football|21481           |Wales U18                 |Wales                         |10                |2024  |
+|api_football|8229            |Wales U21                 |Wales                         |10                |2024  |
+|api_football|48              |West Ham                  |England                       |39                |2022  |
+|api_football|61              |Wigan                     |England                       |40                |2022  |
+|api_football|195             |Willem II                 |Netherlands                   |88                |2022  |
+|api_football|341             |Wisla Plock               |Poland                        |106               |2022  |
+|api_football|1358            |Wycombe                   |England                       |41                |2022  |
+|api_football|9770            |Xerez                     |Spain                         |143               |2024  |
+|api_football|21644           |XerxesDZB (Zat)           |Netherlands                   |1004              |2024  |
+|api_football|16381           |Xorazm                    |Uzbekistan                    |1075              |2024  |
+|api_football|5283            |Yeclano                   |Spain                         |143               |2024  |
+|api_football|1550            |Yemen                     |Yemen                         |10                |2024  |
+|api_football|6652            |YF Juventus               |Switzerland                   |1005              |2024  |
+|api_football|4327            |YSCC                      |Japan                         |100               |2024  |
+|api_football|6653            |Yverdon Sport             |Switzerland                   |208               |2022  |
+|api_football|1507            |Zambia                    |Zambia                        |10                |2024  |
+|api_football|10316           |Zambia U20                |Zambia                        |10                |2024  |
+|api_football|9418            |Zamora                    |Spain                         |143               |2024  |
+|api_football|1522            |Zimbabwe                  |Zimbabwe                      |10                |2024  |
+|api_football|16198           |Zimbabwe U20              |Zimbabwe                      |10                |2024  |
+|api_football|648             |Zira                      |Azerbaijan                    |420               |2024  |
+|api_football|3734            |Znojmo                    |Czech-Republic                |349               |2022  |

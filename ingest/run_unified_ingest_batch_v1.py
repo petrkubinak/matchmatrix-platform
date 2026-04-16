@@ -200,6 +200,13 @@ def detect_result(output_text: str, process_returncode: int) -> str:
 
     if "FATAL ERROR" in output_text:
         return "ERROR"
+    
+    # 🔥 NOVÉ: explicitní WARNING detekce
+    if "Unified ingest finished with WARNING." in output_text:
+        return "WARNING"
+
+    if "STATUS       : warning" in output_text:
+        return "WARNING"
 
     if "No fixtures returned." in output_text:
         return "WARNING"
