@@ -1,0 +1,27 @@
+|sort_order|table_name                        |column_count|
+|----------|----------------------------------|------------|
+|1         |stg_provider_teams                |12          |
+|2         |stg_provider_fixtures             |15          |
+|3         |stg_provider_leagues              |11          |
+|4         |stg_provider_odds                 |12          |
+|5         |stg_provider_players              |24          |
+|6         |stg_provider_player_stats         |14          |
+|7         |stg_provider_player_season_stats  |13          |
+|8         |stg_provider_player_profiles      |31          |
+|9         |stg_provider_team_stats           |9           |
+|10        |stg_provider_coaches              |26          |
+|11        |stg_provider_events               |11          |
+|12        |stg_api_payloads                  |13          |
+|13        |stg_player_source_payloads        |16          |
+|14        |stg_api_american_football_teams   |18          |
+|15        |stg_api_american_football_fixtures|18          |
+|16        |api_hockey_teams_raw              |3           |
+|17        |api_hockey_leagues_raw            |3           |
+|18        |api_football_teams                |14          |
+|19        |api_football_fixtures             |12          |
+|20        |api_football_leagues              |12          |
+|21        |api_football_odds                 |10          |
+|22        |players_import                    |24          |
+|23        |player_provider_map_import        |7           |
+|24        |api_hockey_teams                  |12          |
+|25        |api_hockey_leagues                |12          |

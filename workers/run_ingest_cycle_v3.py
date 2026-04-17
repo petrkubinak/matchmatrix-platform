@@ -1,3 +1,5 @@
+
+
 from __future__ import annotations
 
 import argparse
@@ -44,6 +46,11 @@ PARSE_FIXTURES = os.path.join(BASE_DIR, "workers", "run_parse_api_sport_fixtures
 PLAYERS_PIPELINE = os.path.join(BASE_DIR, "workers", "run_players_fetch_only_v1.py")
 PLAYERS_PARSE = os.path.join(BASE_DIR, "workers", "run_players_parse_only_v1.py")
 LOCK_NAME = "ingest_cycle_v3"
+API_FOOTBALL_RAW_TO_PUBLIC = os.path.join(
+    BASE_DIR,
+    "workers",
+    "run_api_football_fixtures_raw_to_public.ps1"
+)
 
 DB_CONFIG = {
     "host": "localhost",
@@ -221,7 +228,65 @@ def build_merge_command() -> list[str]:
         PYTHON_EXE,
         MERGE_WORKER,
     ]
+def should_run_api_football_raw_to_public(args: argparse.Namespace) -> bool:
+    """
+    API-Football fixtures mají vlastní raw -> public větev.
+    Spouštět pouze pro provider=api_football a entity=fixtures.
+    """
+    provider_ok = (args.provider or "").strip().lower() == "api_football"
+    entity_ok = (args.entity or "").strip().lower() == "fixtures"
+    return provider_ok and entity_ok
 
+
+def extract_api_football_fixture_run_ids(planner_output: str) -> list[int]:
+    """
+    Z planner outputu vytáhne RUN ID pro API-Football fixtures.
+    Hledáme řádky ve tvaru:
+    RUN ID     : 20260416223527869
+    """
+    run_ids: list[int] = []
+
+    for raw_line in planner_output.splitlines():
+        line = raw_line.strip()
+
+        if not line.startswith("RUN ID"):
+            continue
+
+        parts = line.split(":", 1)
+        if len(parts) != 2:
+            continue
+
+        value = parts[1].strip()
+        if not value:
+            continue
+
+        try:
+            run_id = int(value)
+        except ValueError:
+            continue
+
+        run_ids.append(run_id)
+
+    # zachovat pořadí, odstranit duplicity
+    seen = set()
+    unique_run_ids: list[int] = []
+    for rid in run_ids:
+        if rid not in seen:
+            seen.add(rid)
+            unique_run_ids.append(rid)
+
+    return unique_run_ids
+
+
+def build_api_football_raw_to_public_command(run_ids: list[int]) -> list[str]:
+    run_ids_arg = "@(" + ",".join(str(rid) for rid in run_ids) + ")"
+
+    return [
+        "powershell",
+        "-ExecutionPolicy", "Bypass",
+        "-Command",
+        f'& "{API_FOOTBALL_RAW_TO_PUBLIC}" -RunIds {run_ids_arg}'
+    ]
 
 def parse_processed_jobs(output_text: str) -> int:
     marker = "Processed jobs:"
@@ -494,6 +559,10 @@ def main() -> int:
         print(f"ERROR: Fixtures parser nebyl nalezen: {PARSE_FIXTURES}")
         return 1
 
+    if not os.path.exists(API_FOOTBALL_RAW_TO_PUBLIC):
+        print(f"ERROR: API-Football RAW->PUBLIC worker nebyl nalezen: {API_FOOTBALL_RAW_TO_PUBLIC}")
+        return 1
+
     if not os.path.exists(PLAYERS_PIPELINE):
         print(f"ERROR: Players pipeline nebyl nalezen: {PLAYERS_PIPELINE}")
         return 1
@@ -702,6 +771,11 @@ def main() -> int:
             print("ERROR: Teams parser skončil s chybou.")
             return 1
 
+        api_fb_raw_merge_executed = False
+        api_fb_raw_merge_returncode = None
+        api_fb_raw_merge_output = ""
+        api_fb_run_ids: list[int] = []
+
         parse_fixtures_command = build_parse_fixtures_command()
         parse_fixtures_rc, parse_fixtures_output = run_command(
             parse_fixtures_command,
@@ -729,6 +803,10 @@ def main() -> int:
                 "parse_fixtures_returncode": parse_fixtures_rc,
                 "parse_fixtures_output": parse_fixtures_output,
                 "merge_executed": False,
+                "api_fb_raw_merge_executed": api_fb_raw_merge_executed,
+                "api_fb_run_ids": api_fb_run_ids,
+                "api_fb_raw_merge_returncode": api_fb_raw_merge_returncode,
+                "api_fb_raw_merge_output": api_fb_raw_merge_output,
                 "owner_id": owner_id,
                 "lock_name": LOCK_NAME,
             }
@@ -755,6 +833,65 @@ def main() -> int:
             "STEP 2 - STAGING TO PUBLIC MERGE"
         )
 
+        if should_run_api_football_raw_to_public(args):
+            api_fb_run_ids = extract_api_football_fixture_run_ids(planner_output)
+
+            if api_fb_run_ids:
+                api_fb_command = build_api_football_raw_to_public_command(api_fb_run_ids)
+                api_fb_raw_merge_executed = True
+
+                api_fb_raw_merge_returncode, api_fb_raw_merge_output = run_command(
+                    api_fb_command,
+                    "STEP 2B - API FOOTBALL RAW TO PUBLIC MERGE"
+                )
+
+                conn = get_connection()
+                try:
+                    heartbeat_lock(conn, LOCK_NAME, owner_id, args.lock_ttl_minutes)
+                finally:
+                    conn.close()
+
+                if api_fb_raw_merge_returncode != 0:
+                    details = {
+                        "planner_returncode": planner_rc,
+                        "planner_output": planner_output,
+                        "processed_jobs": processed_jobs,
+                        "teams_extractor_executed": True,
+                        "teams_extractor_returncode": teams_rc,
+                        "teams_extractor_output": teams_output,
+                        "parse_teams_executed": True,
+                        "parse_teams_returncode": parse_teams_rc,
+                        "parse_teams_output": parse_teams_output,
+                        "parse_fixtures_executed": True,
+                        "parse_fixtures_returncode": parse_fixtures_rc,
+                        "parse_fixtures_output": parse_fixtures_output,
+                        "merge_executed": True,
+                        "merge_returncode": merge_rc,
+                        "merge_output": merge_output,
+                        "api_fb_raw_merge_executed": api_fb_raw_merge_executed,
+                        "api_fb_run_ids": api_fb_run_ids,
+                        "api_fb_raw_merge_returncode": api_fb_raw_merge_returncode,
+                        "api_fb_raw_merge_output": api_fb_raw_merge_output,
+                        "owner_id": owner_id,
+                        "lock_name": LOCK_NAME,
+                    }
+
+                    conn = get_connection()
+                    try:
+                        finish_job_run(
+                            conn=conn,
+                            job_run_id=job_run_id,
+                            status="error",
+                            message="API-Football RAW->PUBLIC merge failed.",
+                            details=details,
+                            rows_affected=processed_jobs,
+                        )
+                    finally:
+                        conn.close()
+
+                    print("ERROR: API-Football RAW->PUBLIC merge skončil s chybou.")
+                    return 1
+        
         conn = get_connection()
         try:
             heartbeat_lock(conn, LOCK_NAME, owner_id, args.lock_ttl_minutes)
@@ -778,6 +915,10 @@ def main() -> int:
                 "merge_executed": True,
                 "merge_returncode": merge_rc,
                 "merge_output": merge_output,
+                "api_fb_raw_merge_executed": api_fb_raw_merge_executed,
+                "api_fb_run_ids": api_fb_run_ids,
+                "api_fb_raw_merge_returncode": api_fb_raw_merge_returncode,
+                "api_fb_raw_merge_output": api_fb_raw_merge_output,
                 "owner_id": owner_id,
                 "lock_name": LOCK_NAME,
             }
@@ -814,6 +955,10 @@ def main() -> int:
             "merge_executed": True,
             "merge_returncode": merge_rc,
             "merge_output": merge_output,
+            "api_fb_raw_merge_executed": api_fb_raw_merge_executed,
+            "api_fb_run_ids": api_fb_run_ids,
+            "api_fb_raw_merge_returncode": api_fb_raw_merge_returncode,
+            "api_fb_raw_merge_output": api_fb_raw_merge_output,
             "owner_id": owner_id,
             "lock_name": LOCK_NAME,
         }
@@ -839,6 +984,9 @@ def main() -> int:
         print("Teams parser          : YES")
         print("Fixtures parser       : YES")
         print("Merge executed        : YES")
+        print("API-FB raw->public    :", "YES" if api_fb_raw_merge_executed else "NO")
+        if api_fb_run_ids:
+            print("API-FB run_ids        :", ", ".join(str(x) for x in api_fb_run_ids))
         print("Final status          : OK")
         print("=" * 80)
 

@@ -1,0 +1,1227 @@
+|provider    |external_league_id|league_name                                  |country_name  |season|mapped_league_id|
+|------------|------------------|---------------------------------------------|--------------|------|----------------|
+|api_football|1225              |Copa Centro-Oeste                            |Brazil        |      |                |
+|api_football|1220              |Copa De La Liga                              |Chile         |      |                |
+|api_football|1223              |Copa Norte                                   |Brazil        |      |                |
+|api_football|1224              |Copa Sul-Sudeste                             |Brazil        |      |                |
+|api_football|1222              |FIFA Series                                  |World         |      |                |
+|api_football|1221              |Super Cup                                    |Bosnia        |      |                |
+|api_football|312               |1a Divisi?                                   |Andorra       |      |20,912          |
+|api_football|948               |1a Divis?o - Women                           |Portugal      |      |21,842          |
+|api_football|165               |1. Deild                                     |Iceland       |      |21,097          |
+|api_football|366               |1. Deild                                     |Faroe-Islands |      |20,994          |
+|api_football|117               |1. Division                                  |Belarus       |      |21,013          |
+|api_football|318               |1. Division                                  |Cyprus        |      |21,250          |
+|api_football|120               |1. Division                                  |Denmark       |      |20,940          |
+|api_football|388               |1. Division                                  |Kazakhstan    |      |20,937          |
+|api_football|104               |1. Division                                  |Norway        |      |21,099          |
+|api_football|915               |1. Division Women                            |Norway        |      |21,761          |
+|api_football|204               |1. Lig                                       |Turkey        |      |20,893          |
+|api_football|364               |1. Liga                                      |Latvia        |      |20,974          |
+|api_football|599               |1. Liga Classic - Group 1                    |Switzerland   |      |21,412          |
+|api_football|600               |1. Liga Classic - Group 2                    |Switzerland   |      |21,413          |
+|api_football|601               |1. Liga Classic - Group 3                    |Switzerland   |      |21,414          |
+|api_football|1005              |1. Liga Classic - Play-offs                  |Switzerland   |      |21,816          |
+|api_football|510               |1. Liga Promotion                            |Switzerland   |      |21,206          |
+|api_football|668               |1. Liga U19                                  |Czech-Republic|      |21,518          |
+|api_football|669               |1. Liga Women                                |Czech-Republic|      |21,519          |
+|api_football|361               |1 Lyga                                       |Lithuania     |      |20,977          |
+|api_football|373               |1. SNL                                       |Slovenia      |      |21,230          |
+|api_football|289               |1st Division                                 |South-Africa  |      |21,115          |
+|api_football|311               |1st Division                                 |Albania       |      |20,970          |
+|api_football|316               |1st League - FBiH                            |Bosnia        |      |21,168          |
+|api_football|317               |1st League - RS                              |Bosnia        |      |21,167          |
+|api_football|313               |2a Divisi?                                   |Andorra       |      |20,913          |
+|api_football|79                |2. Bundesliga                                |Germany       |      |20,963          |
+|api_football|166               |2. Deild                                     |Iceland       |      |21,137          |
+|api_football|118               |2. Division                                  |Belarus       |      |21,014          |
+|api_football|122               |2. Division                                  |Denmark       |      |21,042          |
+|api_football|319               |2. Division                                  |Cyprus        |      |21,251          |
+|api_football|473               |2. Division - Group 1                        |Norway        |      |21,386          |
+|api_football|474               |2. Division - Group 2                        |Norway        |      |21,387          |
+|api_football|1054              |2. Division - Play-offs                      |Norway        |      |21,900          |
+|api_football|1034              |2. Frauen Bundesliga                         |Germany       |      |21,882          |
+|api_football|205               |2. Lig                                       |Turkey        |      |20,894          |
+|api_football|506               |2. liga                                      |Slovakia      |      |21,172          |
+|api_football|219               |2. Liga                                      |Austria       |      |20,923          |
+|api_football|796               |2. Liga Interregional - Group 1              |Switzerland   |      |21,640          |
+|api_football|797               |2. Liga Interregional - Group 2              |Switzerland   |      |21,641          |
+|api_football|798               |2. Liga Interregional - Group 3              |Switzerland   |      |21,642          |
+|api_football|799               |2. Liga Interregional - Group 4              |Switzerland   |      |21,643          |
+|api_football|800               |2. Liga Interregional - Group 5              |Switzerland   |      |21,644          |
+|api_football|801               |2. Liga Interregional - Group 6              |Switzerland   |      |21,645          |
+|api_football|123               |2nd Division - Group 2                       |Denmark       |      |21,043          |
+|api_football|512               |2nd Division - Group A                       |Albania       |      |20,909          |
+|api_football|513               |2nd Division - Group B                       |Albania       |      |20,910          |
+|api_football|978               |2nd Division - Play-offs                     |Albania       |      |21,789          |
+|api_football|374               |2. SNL                                       |Slovenia      |      |21,231          |
+|api_football|320               |3. Division                                  |Cyprus        |      |21,243          |
+|api_football|862               |3. Division                                  |Denmark       |      |21,695          |
+|api_football|774               |3. Division - Girone 1                       |Norway        |      |21,620          |
+|api_football|775               |3. Division - Girone 2                       |Norway        |      |21,613          |
+|api_football|776               |3. Division - Girone 3                       |Norway        |      |21,614          |
+|api_football|777               |3. Division - Girone 4                       |Norway        |      |21,621          |
+|api_football|778               |3. Division - Girone 5                       |Norway        |      |21,622          |
+|api_football|779               |3. Division - Girone 6                       |Norway        |      |21,623          |
+|api_football|80                |3. Liga                                      |Germany       |      |20,964          |
+|api_football|643               |3. liga - Bratislava                         |Slovakia      |      |21,497          |
+|api_football|646               |3. liga - Center                             |Slovakia      |      |21,500          |
+|api_football|348               |3. liga - CFL A                              |Czech-Republic|      |21,308          |
+|api_football|685               |3. liga - CFL B                              |Czech-Republic|      |21,534          |
+|api_football|645               |3. liga - East                               |Slovakia      |      |21,499          |
+|api_football|349               |3. liga - MSFL                               |Czech-Republic|      |21,309          |
+|api_football|1185              |3. liga - Play-offs                          |Slovakia      |      |22,033          |
+|api_football|1010              |3. liga - Promotion Play-off                 |Czech-Republic|      |21,819          |
+|api_football|644               |3. liga - West                               |Slovakia      |      |21,498          |
+|api_football|552               |3. Lig - Group 1                             |Turkey        |      |20,896          |
+|api_football|553               |3. Lig - Group 2                             |Turkey        |      |20,897          |
+|api_football|554               |3. Lig - Group 3                             |Turkey        |      |20,898          |
+|api_football|1027              |3. Lig - Group 4                             |Turkey        |      |21,874          |
+|api_football|1007              |3. Lig - Play-offs                           |Turkey        |      |21,776          |
+|api_football|794               |3. SNL - East                                |Slovenia      |      |21,638          |
+|api_football|795               |3. SNL - West                                |Slovenia      |      |21,639          |
+|api_football|350               |4. liga - Divizie A                          |Czech-Republic|      |21,310          |
+|api_football|351               |4. liga - Divizie B                          |Czech-Republic|      |21,311          |
+|api_football|352               |4. liga - Divizie C                          |Czech-Republic|      |21,312          |
+|api_football|353               |4. liga - Divizie D                          |Czech-Republic|      |21,313          |
+|api_football|354               |4. liga - Divizie E                          |Czech-Republic|      |21,314          |
+|api_football|686               |4. liga - Divizie F                          |Czech-Republic|      |21,535          |
+|api_football|509               |8 Cup                                        |South-Africa  |      |21,396          |
+|api_football|520               |Acreano                                      |Brazil        |      |21,038          |
+|api_football|590               |A Division                                   |Nepal         |      |21,411          |
+|api_football|807               |AFC Challenge Cup                            |World         |      |21,036          |
+|api_football|1132              |AFC Challenge League                         |World         |      |21,985          |
+|api_football|17                |AFC Champions League Elite                   |World         |      |21,164          |
+|api_football|18                |AFC Champions League Two                     |World         |      |21,193          |
+|api_football|1012              |AFC U17 Asian Cup                            |World         |      |21,861          |
+|api_football|1161              |AFC U17 Asian Cup - Qualification            |World         |      |22,015          |
+|api_football|1101              |AFC U17 Asian Cup - Women                    |World         |      |21,949          |
+|api_football|965               |AFC U20 Asian Cup                            |World         |      |21,855          |
+|api_football|1153              |AFC U20 Asian Cup - Qualification            |World         |      |22,006          |
+|api_football|1070              |AFC U20 Asian Cup - Women                    |World         |      |21,925          |
+|api_football|532               |AFC U23 Asian Cup                            |World         |      |21,671          |
+|api_football|952               |AFC U23 Asian Cup - Qualification            |World         |      |21,823          |
+|api_football|1140              |AFC Women's Champions League                 |World         |      |21,993          |
+|api_football|6                 |Africa Cup of Nations                        |World         |      |21,047          |
+|api_football|36                |Africa Cup of Nations - Qualification        |World         |      |21,726          |
+|api_football|538               |Africa Cup of Nations U20                    |World         |      |21,673          |
+|api_football|922               |Africa Cup of Nations - Women                |World         |      |21,769          |
+|api_football|1043              |African Football League                      |World         |      |21,891          |
+|api_football|19                |African Nations Championship                 |World         |      |20,968          |
+|api_football|1163              |African Nations Championship - Qualification |World         |      |22,017          |
+|api_football|953               |Africa U23 Cup of Nations - Qualification    |World         |      |21,829          |
+|api_football|1162              |AGCFF Gulf Champions League                  |World         |      |22,016          |
+|api_football|545               |AIFF Super Cup                               |India         |      |21,227          |
+|api_football|77                |Alagoano                                     |Brazil        |      |21,197          |
+|api_football|1146              |Alagoano - 2                                 |Brazil        |      |22,000          |
+|api_football|1110              |Alagoano U20                                 |Brazil        |      |21,957          |
+|api_football|188               |A-League                                     |Australia     |      |20,919          |
+|api_football|190               |A-League Women                               |Australia     |      |21,095          |
+|api_football|902               |Algarve Cup                                  |World         |      |21,722          |
+|api_football|1072              |All Africa Games                             |World         |      |21,909          |
+|api_football|1013              |All-Island Cup - Women                       |World         |      |21,862          |
+|api_football|113               |Allsvenskan                                  |Sweden        |      |21,067          |
+|api_football|362               |A Lyga                                       |Lithuania     |      |20,978          |
+|api_football|521               |Amapaense                                    |Brazil        |      |21,124          |
+|api_football|522               |Amazonense                                   |Brazil        |      |21,125          |
+|api_football|1134              |Amazonense - 2                               |Brazil        |      |21,987          |
+|api_football|934               |Arab Championship - U20                      |World         |      |21,827          |
+|api_football|768               |Arab Club Champions Cup                      |World         |      |21,269          |
+|api_football|860               |Arab Cup                                     |World         |      |21,693          |
+|api_football|1208              |Arabian Gulf Cup U23                         |World         |      |21,557          |
+|api_football|24                |ASEAN Championship                           |World         |      |20,976          |
+|api_football|928               |ASEAN Championship U19                       |World         |      |21,775          |
+|api_football|908               |ASEAN Championship U23                       |World         |      |21,755          |
+|api_football|1189              |Asean Championship Women                     |World         |      |22,036          |
+|api_football|1129              |ASEAN Club Championship                      |World         |      |21,982          |
+|api_football|7                 |Asian Cup                                    |World         |      |20,905          |
+|api_football|35                |Asian Cup - Qualification                    |World         |      |21,281          |
+|api_football|897               |Asian Cup Women                              |World         |      |21,750          |
+|api_football|894               |Asian Cup Women - Qualification              |World         |      |21,749          |
+|api_football|803               |Asian Games                                  |World         |      |20,863          |
+|api_football|874               |Australia Cup                                |Australia     |      |21,706          |
+|api_football|1202              |Australian Championship                      |Australia     |      |22,048          |
+|api_football|739               |AXA Women?s Super League                     |Switzerland   |      |21,590          |
+|api_football|291               |Azadegan League                              |Iran          |      |21,117          |
+|api_football|602               |Baiano - 1                                   |Brazil        |      |21,464          |
+|api_football|613               |Baiano - 2                                   |Brazil        |      |21,407          |
+|api_football|1073              |Baiano U20                                   |Brazil        |      |21,927          |
+|api_football|849               |Baltic Cup                                   |World         |      |21,670          |
+|api_football|418               |Birinci Dasta                                |Azerbaijan    |      |20,925          |
+|api_football|201               |Botola 2                                     |Morocco       |      |21,252          |
+|api_football|200               |Botola Pro                                   |Morocco       |      |21,072          |
+|api_football|741               |Brasileiro de Aspirantes                     |Brazil        |      |21,592          |
+|api_football|1128              |Brasileiro U17                               |Brazil        |      |21,981          |
+|api_football|740               |Brasileiro U20 A                             |Brazil        |      |21,591          |
+|api_football|1183              |Brasileiro U20 B                             |Brazil        |      |22,031          |
+|api_football|74                |Brasileiro Women                             |Brazil        |      |21,088          |
+|api_football|610               |Brasiliense                                  |Brazil        |      |21,472          |
+|api_football|1141              |Brasiliense B                                |Brazil        |      |21,994          |
+|api_football|1100              |Brasiliense U20                              |Brazil        |      |21,948          |
+|api_football|191               |Brisbane Premier League                      |Australia     |      |20,920          |
+|api_football|78                |Bundesliga                                   |Germany       |      |20,856          |
+|api_football|218               |Bundesliga                                   |Austria       |      |20,924          |
+|api_football|1016              |CAC Games                                    |World         |      |21,822          |
+|api_football|1008              |CAFA Nations Cup                             |World         |      |21,860          |
+|api_football|12                |CAF Champions League                         |World         |      |21,449          |
+|api_football|20                |CAF Confederation Cup                        |World         |      |21,194          |
+|api_football|973               |CAF Cup of Nations - U17                     |World         |      |21,859          |
+|api_football|533               |CAF Super Cup                                |World         |      |21,433          |
+|api_football|1015              |CAF U23 Cup of Nations                       |World         |      |21,863          |
+|api_football|1164              |CAF Women's Champions League                 |World         |      |22,018          |
+|api_football|1020              |Calcutta Premier Division                    |India         |      |21,867          |
+|api_football|857               |Campe?n de Campeones                         |Mexico        |      |21,691          |
+|api_football|457               |Campeonato de Portugal Prio - Group A        |Portugal      |      |21,369          |
+|api_football|458               |Campeonato de Portugal Prio - Group B        |Portugal      |      |21,370          |
+|api_football|459               |Campeonato de Portugal Prio - Group C        |Portugal      |      |21,371          |
+|api_football|460               |Campeonato de Portugal Prio - Group D        |Portugal      |      |21,372          |
+|api_football|681               |Campeonato de Portugal Prio - Group E        |Portugal      |      |21,530          |
+|api_football|682               |Campeonato de Portugal Prio - Group F        |Portugal      |      |21,531          |
+|api_football|683               |Campeonato de Portugal Prio - Group G        |Portugal      |      |21,532          |
+|api_football|684               |Campeonato de Portugal Prio - Group H        |Portugal      |      |21,533          |
+|api_football|991               |Campeonato de Portugal Prio - Promotion Round|Portugal      |      |21,803          |
+|api_football|885               |Campeones Cup                                |World         |      |21,684          |
+|api_football|404               |Campionato                                   |San-Marino    |      |21,154          |
+|api_football|705               |Campionato Primavera - 1                     |Italy         |      |21,561          |
+|api_football|706               |Campionato Primavera - 2                     |Italy         |      |21,562          |
+|api_football|259               |Canadian Championship                        |Canada        |      |21,104          |
+|api_football|479               |Canadian Premier League                      |Canada        |      |21,546          |
+|api_football|258               |Canadian Soccer League                       |Canada        |      |21,184          |
+|api_football|189               |Capital Territory NPL                        |Australia     |      |21,083          |
+|api_football|1092              |Capital Territory NPL 2                      |Australia     |      |21,941          |
+|api_football|611               |Capixaba                                     |Brazil        |      |21,473          |
+|api_football|1147              |Capixaba B                                   |Brazil        |      |22,022          |
+|api_football|804               |Caribbean Cup                                |World         |      |20,866          |
+|api_football|624               |Carioca - 1                                  |Brazil        |      |21,484          |
+|api_football|625               |Carioca - 2                                  |Brazil        |      |21,416          |
+|api_football|851               |Carioca A2                                   |Brazil        |      |21,685          |
+|api_football|1155              |Carioca B2                                   |Brazil        |      |22,008          |
+|api_football|1106              |Carioca C                                    |Brazil        |      |21,954          |
+|api_football|1114              |Carioca U20                                  |Brazil        |      |21,960          |
+|api_football|604               |Catarinense - 1                              |Brazil        |      |21,466          |
+|api_football|936               |Catarinense - 2                               |Brazil              |      |21,830          |
+|api_football|1154              |Catarinense - 3                               |Brazil              |      |22,007          |
+|api_football|1076              |Catarinense U20                               |Brazil              |      |21,929          |
+|api_football|609               |Cearense - 1                                  |Brazil              |      |21,471          |
+|api_football|620               |Cearense - 2                                  |Brazil              |      |21,415          |
+|api_football|1124              |Cearense - 3                                  |Brazil              |      |21,969          |
+|api_football|1112              |Cearense U20                                  |Brazil              |      |21,958          |
+|api_football|869               |CECAFA Club Cup                               |World               |      |21,701          |
+|api_football|535               |CECAFA Senior Challenge Cup                   |World               |      |21,006          |
+|api_football|1159              |CECAFA U20 Championship                       |World               |      |22,013          |
+|api_football|676               |Central Youth League                          |Poland              |      |21,526          |
+|api_football|1173              |Challenge Cup                                 |Malta               |      |21,977          |
+|api_football|182               |Challenge Cup                                 |Scotland            |      |21,455          |
+|api_football|392               |Challenge League                              |Malta               |      |21,145          |
+|api_football|208               |Challenge League                              |Switzerland         |      |21,101          |
+|api_football|145               |Challenger Pro League                         |Belgium             |      |21,080          |
+|api_football|968               |Championnat D1                                |Gabon               |      |21,784          |
+|api_football|1084              |Championnat National                          |Togo                |      |21,911          |
+|api_football|415               |Championnat National                          |Benin               |      |21,158          |
+|api_football|407               |Championship                                  |Northern-Ireland    |      |21,179          |
+|api_football|40                |Championship                                  |England             |      |20,871          |
+|api_football|180               |Championship                                  |Scotland            |      |20,861          |
+|api_football|1019              |Charity Shield                                |Northern-Ireland    |      |21,866          |
+|api_football|1127              |Chatham Cup                                   |New-Zealand         |      |21,973          |
+|api_football|766               |China Cup                                     |World               |      |21,187          |
+|api_football|410               |C-League                                      |Cambodia            |      |21,156          |
+|api_football|528               |Community Shield                              |England             |      |20,979          |
+|api_football|670               |Community Shield Women                        |England             |      |21,520          |
+|api_football|856               |CONCACAF Caribbean Club Championship          |World               |      |21,690          |
+|api_football|534               |CONCACAF Caribbean Club Shield                |World               |      |21,434          |
+|api_football|1028              |CONCACAF Central American Cup                 |World               |      |21,875          |
+|api_football|16                |CONCACAF Champions League                     |World               |      |21,163          |
+|api_football|22                |CONCACAF Gold Cup                             |World               |      |21,049          |
+|api_football|858               |CONCACAF Gold Cup - Qualification             |World               |      |21,692          |
+|api_football|1046              |CONCACAF Gold Cup - Qualification - Women     |World               |      |21,980          |
+|api_football|1057              |CONCACAF Gold Cup - Women                     |World               |      |21,834          |
+|api_football|767               |CONCACAF League                               |World               |      |21,618          |
+|api_football|536               |CONCACAF Nations League                       |World               |      |21,672          |
+|api_football|808               |CONCACAF Nations League - Qualification       |World               |      |21,263          |
+|api_football|1207              |CONCACAF Series                               |World               |      |22,054          |
+|api_football|963               |CONCACAF U17                                  |World               |      |21,853          |
+|api_football|537               |CONCACAF U20                                  |World               |      |21,225          |
+|api_football|1066              |CONCACAF U20 - Qualification                  |World               |      |21,921          |
+|api_football|1136              |CONCACAF W Champions Cup                      |World               |      |21,989          |
+|api_football|912               |CONCACAF Women U17                            |World               |      |21,758          |
+|api_football|1001              |CONCACAF Women U20                            |World               |      |21,937          |
+|api_football|21                |Confederations Cup                            |World               |      |20,850          |
+|api_football|13                |CONMEBOL Libertadores                         |World               |      |21,450          |
+|api_football|949               |CONMEBOL Libertadores Femenina                |World               |      |21,843          |
+|api_football|540               |CONMEBOL Libertadores U20                     |World               |      |21,674          |
+|api_football|1206              |CONMEBOL Nations League Women                 |World               |      |22,052          |
+|api_football|1060              |CONMEBOL - Pre-Olympic Tournament             |World               |      |21,918          |
+|api_football|541               |CONMEBOL Recopa                               |World               |      |21,675          |
+|api_football|11                |CONMEBOL Sudamericana                         |World               |      |21,448          |
+|api_football|970               |CONMEBOL - U17                                |World               |      |21,857          |
+|api_football|1081              |CONMEBOL - U17 Femenino                       |World               |      |21,931          |
+|api_football|1085              |CONMEBOL U20 Femenino                         |World               |      |21,933          |
+|api_football|913               |CONMEBOL - UEFA Finalissima                   |World               |      |21,759          |
+|api_football|1063              |Copa Alagoas                                  |Brazil              |      |21,920          |
+|api_football|9                 |Copa America                                  |World               |      |20,985          |
+|api_football|926               |Copa America Femenina                         |World               |      |21,773          |
+|api_football|130               |Copa Argentina                                |Argentina           |      |21,094          |
+|api_football|502               |Copa Bicentenario                             |Peru                |      |21,394          |
+|api_football|805               |Copa Centroamericana                          |World               |      |21,173          |
+|api_football|267               |Copa Chile                                    |Chile               |      |21,438          |
+|api_football|241               |Copa Colombia                                 |Colombia            |      |21,440          |
+|api_football|655               |Copa Constituci?                              |Andorra             |      |21,277          |
+|api_football|958               |Copa Costa Rica                               |Costa-Rica          |      |21,850          |
+|api_football|964               |Copa de la Divisi?n Profesional               |Bolivia             |      |21,854          |
+|api_football|1212              |Copa De La Liga Auf                           |Uruguay             |      |22,058          |
+|api_football|1032              |Copa de la Liga Profesional                   |Argentina           |      |21,879          |
+|api_football|483               |Copa de la Superliga                          |Argentina           |      |21,547          |
+|api_football|143               |Copa del Rey                                  |Spain               |      |21,233          |
+|api_football|73                |Copa Do Brasil                                |Brazil              |      |21,078          |
+|api_football|1179              |Copa do Brasil U17                            |Brazil              |      |22,028          |
+|api_football|617               |Copa do Brasil U20                            |Brazil              |      |21,478          |
+|api_football|612               |Copa do Nordeste                              |Brazil              |      |21,474          |
+|api_football|917               |Copa Ecuador                                  |Ecuador             |      |21,763          |
+|api_football|1097              |Copa Esp?rito Santo                           |Brazil              |      |21,946          |
+|api_football|1165              |Copa Fares Lopes                              |Brazil              |      |22,019          |
+|api_football|735               |Copa Federacion                               |Spain               |      |21,587          |
+|api_football|1158              |Copa Ga?cha                                   |Brazil              |      |22,012          |
+|api_football|1184              |Copa Gr?o Par?                                |Brazil              |      |22,032          |
+|api_football|1180              |Copa LDF                                      |Dominican-Republic  |      |22,024          |
+|api_football|264               |Copa MX                                       |Mexico              |      |21,447          |
+|api_football|1187              |Copa Nicaragua                                |Nicaragua           |      |22,009          |
+|api_football|501               |Copa Paraguay                                 |Paraguay            |      |21,393          |
+|api_football|867               |Copa Paulino Alcantara                        |Philippines         |      |21,718          |
+|api_football|742               |Copa Paulista                                 |Brazil              |      |21,593          |
+|api_football|503               |Copa Per?                                     |Peru                |      |21,395          |
+|api_football|662               |Copa por M?xico                               |Mexico              |      |21,514          |
+|api_football|1219              |Copa Presidente                               |El-Salvador         |      |22,064          |
+|api_football|1035              |Copa Rio                                      |Brazil              |      |21,883          |
+|api_football|1082              |Copa Rio U20                                  |Brazil              |      |21,932          |
+|api_football|1036              |Copa Santa Catarina                           |Brazil              |      |21,884          |
+|api_football|930               |Copa Uruguay                                  |Uruguay             |      |21,778          |
+|api_football|1113              |Copa Venezuela                                |Venezuela           |      |21,959          |
+|api_football|843               |Copa Verde                                    |Brazil              |      |21,666          |
+|api_football|486               |Coppa                                         |Belarus             |      |21,390          |
+|api_football|137               |Coppa Italia                                  |Italy               |      |21,071          |
+|api_football|704               |Coppa Italia Primavera                        |Italy               |      |21,560          |
+|api_football|891               |Coppa Italia Serie C                          |Italy               |      |21,699          |
+|api_football|892               |Coppa Italia Serie D                          |Italy               |      |21,717          |
+|api_football|1171              |Coppa Italia Women                            |Italy               |      |21,976          |
+|api_football|729               |Coppa Titano                                  |San-Marino          |      |21,582          |
+|api_football|859               |COSAFA Cup                                    |World               |      |21,679          |
+|api_football|771               |COSAFA U20 Championship                       |World               |      |21,619          |
+|api_football|940               |COTIF Tournament                              |World               |      |21,835          |
+|api_football|66                |Coupe de France                               |France              |      |20,900          |
+|api_football|832               |Coupe de la Ligue                             |Algeria             |      |21,660          |
+|api_football|65                |Coupe de la Ligue                             |France              |      |20,901          |
+|api_football|514               |Coupe Nationale                               |Algeria             |      |21,123          |
+|api_football|827               |Crown Prince Cup                              |Saudi-Arabia        |      |21,188          |
+|api_football|820               |Crown Prince Cup                              |Kuwait              |      |21,654          |
+|api_football|863               |Cup                                           |Jordan              |      |21,681          |
+|api_football|959               |Cup                                           |Singapore           |      |21,851          |
+|api_football|680               |Cup                                           |Slovakia            |      |21,529          |
+|api_football|237               |Cup                                           |Russia              |      |21,456          |
+|api_football|707               |Cup                                           |Albania             |      |21,563          |
+|api_football|709               |Cup                                           |Armenia             |      |21,565          |
+|api_football|714               |Cup                                           |Egypt               |      |21,267          |
+|api_football|314               |Cup                                           |Bosnia              |      |21,139          |
+|api_football|511               |Cup                                           |Tunisia             |      |21,061          |
+|api_football|822               |Cup                                           |Morocco             |      |21,656          |
+|api_football|966               |Cup                                           |Ghana               |      |21,782          |
+|api_football|321               |Cup                                           |Cyprus              |      |21,240          |
+|api_football|507               |Cup                                           |South-Africa        |      |21,204          |
+|api_football|498               |Cup                                           |Kazakhstan          |      |21,202          |
+|api_football|721               |Cup                                           |Luxembourg          |      |21,574          |
+|api_football|335               |Cup                                           |Ukraine             |      |20,883          |
+|api_football|723               |Cup                                           |Montenegro          |      |21,576          |
+|api_football|341               |Cup                                           |Vietnam             |      |21,330          |
+|api_football|220               |Cup                                           |Austria             |      |20,922          |
+|api_football|732               |Cup                                           |Serbia              |      |21,585          |
+|api_football|347               |Cup                                           |Czech-Republic      |      |21,462          |
+|api_football|167               |Cup                                           |Iceland             |      |21,442          |
+|api_football|967               |Cup                                           |Lebanon             |      |21,783          |
+|api_football|108               |Cup                                           |Poland              |      |21,458          |
+|api_football|212               |Cup                                           |Croatia             |      |21,237          |
+|api_football|147               |Cup                                           |Belgium             |      |21,441          |
+|api_football|665               |Cup                                           |Kosovo              |      |21,279          |
+|api_football|199               |Cup                                           |Greece              |      |20,960          |
+|api_football|661               |Cup                                           |Lithuania           |      |21,513          |
+|api_football|756               |Cup                                           |Macedonia           |      |21,606          |
+|api_football|658               |Cup                                           |Latvia              |      |21,511          |
+|api_football|375               |Cup                                           |Slovenia            |      |21,453          |
+|api_football|802               |Cup                                           |Uzbekistan          |      |21,646          |
+|api_football|761               |Cup                                           |Liechtenstein       |      |21,611          |
+|api_football|174               |Cup                                           |Bulgaria            |      |21,190          |
+|api_football|657               |Cup                                           |Estonia             |      |21,510          |
+|api_football|420               |Cup                                           |Azerbaijan          |      |21,029          |
+|api_football|674               |Cupa                                          |Moldova             |      |21,524          |
+|api_football|285               |Cupa Rom?niei                                 |Romania             |      |21,239          |
+|api_football|642               |Cura?ao Sekshon Pag?                          |Curacao             |      |21,276          |
+|api_football|345               |Czech Liga                                    |Czech-Republic      |      |21,257          |
+|api_football|549               |Damallsvenskan                                |Sweden              |      |21,678          |
+|api_football|672               |David Kipiani Cup                             |Georgia             |      |21,522          |
+|api_football|121               |DBU Pokalen                                   |Denmark             |      |21,024          |
+|api_football|124               |Denmark Series - Group 1                      |Denmark             |      |20,941          |
+|api_football|125               |Denmark Series - Group 2                      |Denmark             |      |20,942          |
+|api_football|126               |Denmark Series - Group 3                      |Denmark             |      |20,943          |
+|api_football|127               |Denmark Series - Group 4                      |Denmark             |      |21,133          |
+|api_football|982               |Denmark Series - Promotion Round              |Denmark             |      |21,793          |
+|api_football|983               |Denmark Series - Relegation Round             |Denmark             |      |21,794          |
+|api_football|1004              |Derde Divisie - Relegation Round              |Netherlands         |      |21,815          |
+|api_football|92                |Derde Divisie - Saturday                      |Netherlands         |      |21,327          |
+|api_football|93                |Derde Divisie - Sunday                        |Netherlands         |      |21,328          |
+|api_football|715               |DFB Junioren Pokal                            |Germany             |      |21,570          |
+|api_football|81                |DFB Pokal                                     |Germany             |      |20,966          |
+|api_football|947               |DFB Pokal - Women                             |Germany             |      |21,841          |
+|api_football|855               |Dhivehi Premier League                        |Maldives            |      |21,689          |
+|api_football|734               |Diski Challenge                               |South-Africa        |      |21,577          |
+|api_football|935               |Diski Shield                                  |South-Africa        |      |21,828          |
+|api_football|308               |Division 1                                    |Saudi-Arabia        |      |21,121          |
+|api_football|303               |Division 1                                    |United-Arab-Emirates|      |20,888          |
+|api_football|331               |Division 1                                    |Kuwait              |      |21,181          |
+|api_football|309               |Division 2                                    |Saudi-Arabia        |      |21,122          |
+|api_football|592               |Division 2 - Norra G?taland                   |Sweden              |      |21,055          |
+|api_football|593               |Division 2 - Norra Svealand                   |Sweden              |      |21,056          |
+|api_football|594               |Division 2 - Norrland                         |Sweden              |      |21,057          |
+|api_football|1053              |Division 2 - Play-offs                        |Sweden              |      |21,899          |
+|api_football|595               |Division 2 - S?dra Svealand                   |Sweden              |      |21,058          |
+|api_football|597               |Division 2 - ?stra G?taland                   |Sweden              |      |21,060          |
+|api_football|596               |Division 2 - V?stra G?taland                  |Sweden              |      |21,059          |
+|api_football|377               |Division d'Honneur                            |Guadeloupe          |      |20,957          |
+|api_football|421               |Division di Honor                             |Aruba               |      |21,028          |
+|api_football|251               |Division Intermedia                           |Paraguay            |      |21,098          |
+|api_football|1196              |Division One League                           |Ghana               |      |22,042          |
+|api_football|250               |Division Profesional - Apertura               |Paraguay            |      |21,077          |
+|api_football|252               |Division Profesional - Clausura               |Paraguay            |      |21,136          |
+|api_football|336               |Druha Liga                                    |Ukraine             |      |20,884          |
+|api_football|337               |Druha Liga - Group B                          |Ukraine             |      |21,198          |
+|api_football|23                |EAFF E-1 Football Championship                |World               |      |21,050          |
+|api_football|1169              |EAFF E-1 Football Championship - Qualification|World               |      |22,023          |
+|api_football|1188              |EAFF E-1 Football Championship - Women        |World               |      |21,923          |
+|api_football|89                |Eerste Divisie                                |Netherlands         |      |21,065          |
+|api_football|568               |Eerste Divisie                                |Suriname            |      |20,878          |
+|api_football|46                |EFL Trophy                                    |England             |      |20,872          |
+|api_football|106               |Ekstraklasa                                   |Poland              |      |21,241          |
+|api_football|1033              |Ekstraliga Women                              |Poland              |      |21,881          |
+|api_football|411               |Elite One                                     |Cameroon            |      |21,155          |
+|api_football|103               |Eliteserien                                   |Norway              |      |21,064          |
+|api_football|736               |Elitettan                                     |Sweden              |      |21,728          |
+|api_football|813               |Elite Two                                     |Cameroon            |      |21,650          |
+|api_football|937               |Emirates Cup                                  |World               |      |21,831          |
+|api_football|824               |Emir Cup                                      |Qatar               |      |21,735          |
+|api_football|720               |Emir Cup                                      |Kuwait              |      |21,573          |
+|api_football|102               |Emperor Cup                                   |Japan               |      |21,017          |
+|api_football|88                |Eredivisie                                    |Netherlands         |      |20,849          |
+|api_football|91                |Eredivisie Women                              |Netherlands         |      |21,092          |
+|api_football|327               |Erovnuli Liga                                 |Georgia             |      |21,034          |
+|api_football|326               |Erovnuli Liga 2                               |Georgia             |      |20,955          |
+|api_football|1044              |Erste Liga Cup                                |Switzerland         |      |21,892          |
+|api_football|328               |Esiliiga A                                    |Estonia             |      |20,953          |
+|api_football|1126              |Esiliiga B                                    |Estonia             |      |21,971          |
+|api_football|1143              |Estadual Junior U20                           |Brazil              |      |21,996          |
+|api_football|563               |Ettan - Norra                                 |Sweden              |      |21,134          |
+|api_football|1055              |Ettan - Relegation Round                      |Sweden              |      |21,901          |
+|api_football|564               |Ettan - S?dra                                 |Sweden              |      |21,135          |
+|api_football|4                 |Euro Championship                             |World               |      |20,848          |
+|api_football|960               |Euro Championship - Qualification             |World               |      |21,852          |
+|api_football|1197              |FA Cup                                        |Oman                |      |22,043          |
+|api_football|181               |FA Cup                                        |Scotland            |      |21,454          |
+|api_football|171               |FA Cup                                        |China               |      |21,439          |
+|api_football|45                |FA Cup                                        |England             |      |20,864          |
+|api_football|544               |FA Cup                                        |Hong-Kong           |      |21,226          |
+|api_football|500               |FA Cup                                        |Malaysia            |      |21,548          |
+|api_football|294               |FA Cup                                        |South-Korea         |      |21,460          |
+|api_football|298               |FA Cup                                        |Thailand            |      |21,030          |
+|api_football|359               |FAI Cup                                       |Ireland             |      |21,444          |
+|api_football|546               |FAI President's Cup                           |Ireland             |      |21,317          |
+|api_football|821               |FA Trophy                                     |Malta               |      |21,655          |
+|api_football|47                |FA Trophy                                     |England             |      |20,873          |
+|api_football|111               |FAW Championship                              |Wales               |      |21,246          |
+|api_football|698               |FA Women's Cup                                |England             |      |21,266          |
+|api_football|44                |FA WSL                                        |England             |      |21,089          |
+|api_football|1068              |FA Youth Cup                                  |England             |      |21,908          |
+|api_football|485               |Federation Cup                                |Bahrain             |      |21,389          |
+|api_football|1018              |Federation Cup                                |Lebanon             |      |21,865          |
+|api_football|811               |Federation Cup                                |Bangladesh          |      |21,649          |
+|api_football|64                |Feminine Division 1                           |France              |      |21,032          |
+|api_football|15                |FIFA Club World Cup                           |World               |      |20,967          |
+|api_football|1186              |FIFA Club World Cup - Play-In                 |World               |      |22,034          |
+|api_football|1168              |FIFA Intercontinental Cup                     |World               |      |21,998          |
+|api_football|1217              |FIFA Women Champions Cup                      |World               |      |22,063          |
+|api_football|487               |First Amateur Division                        |Belgium             |      |21,383          |
+|api_football|358               |First Division                                |Ireland             |      |21,427          |
+|api_football|371               |First League                                  |Macedonia           |      |21,141          |
+|api_football|172               |First League                                  |Bulgaria            |      |21,242          |
+|api_football|236               |First League                                  |Russia              |      |21,096          |
+|api_football|355               |First League                                  |Montenegro          |      |21,259          |
+|api_football|343               |First League                                  |Armenia             |      |21,008          |
+|api_football|211               |First NL                                      |Croatia             |      |21,085          |
+|api_football|276               |FKF Premier League                            |Kenya               |      |21,023          |
+|api_football|346               |FNL                                           |Czech-Republic      |      |21,258          |
+|api_football|198               |Football League                               |Greece              |      |20,961          |
+|api_football|992               |Football League - Championship                |Scotland            |      |21,804          |
+|api_football|730               |Football League - Highland League             |Scotland            |      |21,583          |
+|api_football|731               |Football League - Lowland League              |Scotland            |      |21,584          |
+|api_football|815               |Fotbolti.net Cup A                            |Iceland             |      |21,732          |
+|api_football|82                |Frauen Bundesliga                             |Germany             |      |21,090          |
+|api_football|484               |Frauenliga                                    |Austria             |      |21,388          |
+|api_football|10                |Friendlies                                    |World               |      |21,191          |
+|api_football|667               |Friendlies Clubs                              |World               |      |21,517          |
+|api_football|666               |Friendlies Women                              |World               |      |21,516          |
+|api_football|477               |Ga?cho - 1                                    |Brazil              |      |21,544          |
+|api_football|478               |Ga?cho - 2                                    |Brazil              |      |21,545          |
+|api_football|1150              |Ga?cho - 3                                    |Brazil              |      |22,003          |
+|api_football|576               |Gamma Ethniki - Group 1                       |Greece              |      |21,401          |
+|api_football|694               |Gamma Ethniki - Group 10                      |Greece              |      |21,550          |
+|api_football|577               |Gamma Ethniki - Group 2                       |Greece              |      |21,402          |
+|api_football|578               |Gamma Ethniki - Group 3                       |Greece              |      |21,403          |
+|api_football|579               |Gamma Ethniki - Group 4                       |Greece              |      |21,404          |
+|api_football|580               |Gamma Ethniki - Group 5                       |Greece              |      |21,405          |
+|api_football|581               |Gamma Ethniki - Group 6                       |Greece              |      |21,406          |
+|api_football|582               |Gamma Ethniki - Group 7                       |Greece              |      |21,408          |
+|api_football|583               |Gamma Ethniki - Group 8                       |Greece              |      |21,409          |
+|api_football|693               |Gamma Ethniki - Group 9                       |Greece              |      |21,549          |
+|api_football|990               |Gamma Ethniki - Promotion Group               |Greece              |      |21,801          |
+|api_football|1099              |Gamma Ethniki - Relegation Play-offs          |Greece              |      |21,912          |
+|api_football|845               |GFA League                                    |Gambia              |      |21,668          |
+|api_football|397               |Girabola                                      |Angola              |      |21,007          |
+|api_football|628               |Goiano - 1                                    |Brazil              |      |21,487          |
+|api_football|1030              |Goiano - 2                                    |Brazil              |      |21,877          |
+|api_football|1133              |Goiano - 3                                    |Brazil              |      |21,986          |
+|api_football|1069              |Goiano U20                                    |Brazil              |      |21,924          |
+|api_football|1209              |Guangdong - Hong Kong Cup                     |Hong-Kong           |      |22,055          |
+|api_football|25                |Gulf Cup of Nations                           |World               |      |21,165          |
+|api_football|495               |Hazfi Cup                                     |Iran                |      |21,170          |
+|api_football|381               |HKFA 1st Division                             |Hong-Kong           |      |20,945          |
+|api_football|1051              |HKPL Cup                                      |Hong-Kong           |      |21,802          |
+|api_football|210               |HNL                                           |Croatia             |      |21,074          |
+|api_football|1174              |Hun Sen Cup                                   |Cambodia            |      |21,978          |
+|api_football|1201              |IFA Shield                                    |India               |      |22,047          |
+|api_football|780               |III Liga - Group 1                            |Poland              |      |21,624          |
+|api_football|781               |III Liga - Group 2                            |Poland              |      |21,625          |
+|api_football|782               |III Liga - Group 3                            |Poland              |      |21,626          |
+|api_football|783               |III Liga - Group 4                            |Poland              |      |21,627          |
+|api_football|109               |II Liga - East                                |Poland              |      |21,329          |
+|api_football|324               |I-League                                      |India               |      |21,254          |
+|api_football|717               |I-League - 2nd Division                       |India               |      |21,571          |
+|api_football|107               |I Liga                                        |Poland              |      |21,255          |
+|api_football|733               |I Liga - Women                                |Slovakia            |      |21,586          |
+|api_football|323               |Indian Super League                           |India               |      |21,253          |
+|api_football|26                |International Champions Cup                   |World               |      |21,166          |
+|api_football|945               |International Champions Cup - Women           |World               |      |21,838          |
+|api_football|542               |Iraqi League                                  |Iraq                |      |21,676          |
+|api_football|757               |Irish Cup                                     |Northern-Ireland    |      |21,607          |
+|api_football|941               |Islamic Solidarity Games                      |World               |      |21,836          |
+|api_football|98                |J1 League                                     |Japan               |      |21,019          |
+|api_football|99                |J2/J3 League                                  |Japan               |      |21,020          |
+|api_football|100               |J3 League                                     |Japan               |      |21,021          |
+|api_football|497               |Japan Football League                         |Japan               |      |21,132          |
+|api_football|101               |J-League Cup                                  |Japan               |      |21,018          |
+|api_football|1041              |J?niores U19                                  |Portugal            |      |21,889          |
+|api_football|144               |Jupiler Pro League                            |Belgium             |      |20,853          |
+|api_football|295               |K3 League                                     |South-Korea         |      |21,169          |
+|api_football|247               |Kakkonen - Lohko A                            |Finland             |      |20,999          |
+|api_football|248               |Kakkonen - Lohko B                            |Finland             |      |21,000          |
+|api_football|249               |Kakkonen - Lohko C                            |Finland             |      |21,001          |
+|api_football|1052              |Kakkonen - Play-offs                          |Finland             |      |21,898          |
+|api_football|700               |Kakkosen Cup                                  |Finland             |      |21,555          |
+|api_football|640               |Kansallinen Liiga                             |Finland             |      |21,495          |
+|api_football|1038              |King's Cup                                    |World               |      |21,886          |
+|api_football|504               |King's Cup                                    |Saudi-Arabia        |      |21,203          |
+|api_football|1049              |King's Cup                                    |Bahrain             |      |21,895          |
+|api_football|1205              |Kings Cup                                     |Brazil              |      |22,051          |
+|api_football|1213              |Kings World Cup Nations                       |World               |      |22,059          |
+|api_football|916               |Kirin Cup                                     |World               |      |21,762          |
+|api_football|292               |K League 1                                    |South-Korea         |      |21,118          |
+|api_football|293               |K League 2                                    |South-Korea         |      |21,119          |
+|api_football|90                |KNVB Beker                                    |Netherlands         |      |21,079          |
+|api_football|638               |Kvindeliga                                    |Denmark             |      |21,275          |
+|api_football|140               |La Liga                                       |Spain               |      |20,859          |
+|api_football|224               |Landesliga - Burgenland                       |Austria             |      |21,282          |
+|api_football|225               |Landesliga - Karnten                          |Austria             |      |21,283          |
+|api_football|226               |Landesliga - Niederosterreich                 |Austria             |      |21,284          |
+|api_football|227               |Landesliga - Oberosterreich                   |Austria             |      |21,285          |
+|api_football|228               |Landesliga - Salzburg                         |Austria             |      |21,286          |
+|api_football|229               |Landesliga - Steiermark                       |Austria             |      |21,287          |
+|api_football|230               |Landesliga - Tirol                            |Austria             |      |21,288          |
+|api_football|231               |Landesliga - Vorarlbergliga                   |Austria             |      |21,289          |
+|api_football|232               |Landesliga - Wien                             |Austria             |      |21,290          |
+|api_football|647               |Lao League                                    |Laos                |      |21,501          |
+|api_football|387               |League                                        |Jordan              |      |20,936          |
+|api_football|923               |League 1 Ontario                              |Canada              |      |21,771          |
+|api_football|559               |League Cup                                    |Northern-Ireland    |      |21,176          |
+|api_football|302               |League Cup                                    |United-Arab-Emirates|      |20,889          |
+|api_football|508               |League Cup                                    |South-Africa        |      |21,205          |
+|api_football|505               |League Cup                                    |Singapore           |      |21,027          |
+|api_football|185               |League Cup                                    |Scotland            |      |21,199          |
+|api_football|899               |League Cup                                    |Finland             |      |21,751          |
+|api_football|898               |League Cup                                    |Thailand            |      |21,721          |
+|api_football|895               |League Cup                                    |Egypt               |      |21,719          |
+|api_football|1199              |League Cup                                    |Hong-Kong           |      |22,045          |
+|api_football|738               |League Cup                                    |Wales               |      |21,589          |
+|api_football|168               |League Cup                                    |Iceland             |      |21,443          |
+|api_football|48                |League Cup                                    |England             |      |20,874          |
+|api_football|360               |League Cup                                    |Ireland             |      |21,445          |
+|api_football|170               |League One                                    |China               |      |21,082          |
+|api_football|183               |League One                                    |Scotland            |      |21,045          |
+|api_football|41                |League One                                    |England             |      |20,876          |
+|api_football|772               |Leagues Cup                                   |World               |      |21,273          |
+|api_football|42                |League Two                                    |England             |      |20,877          |
+|api_football|184               |League Two                                    |Scotland            |      |21,046          |
+|api_football|929               |League Two                                    |China               |      |21,777          |
+|api_football|760               |LFA First Division                            |Liberia             |      |21,610          |
+|api_football|491               |L?gmanssteypid                                |Faroe-Islands       |      |21,222          |
+|api_football|395               |Liga 1                                        |Moldova             |      |21,437          |
+|api_football|274               |Liga 1                                        |Indonesia           |      |21,185          |
+|api_football|728               |Liga 1 Feminin                                |Romania             |      |21,581          |
+|api_football|275               |Liga 2                                        |Indonesia           |      |21,436          |
+|api_football|865               |Liga 3                                        |Portugal            |      |21,697          |
+|api_football|1104              |Liga 3                                        |Georgia             |      |21,952          |
+|api_football|496               |Liga Alef                                     |Israel              |      |21,171          |
+|api_football|163               |Liga de Ascenso                               |Costa-Rica          |      |21,245          |
+|api_football|263               |Liga de Expansi?n MX                          |Mexico              |      |21,103          |
+|api_football|1195              |Liga E Pare                                   |Kosovo              |      |22,041          |
+|api_football|712               |Liga Femenina                                 |Colombia            |      |21,568          |
+|api_football|283               |Liga I                                        |Romania             |      |21,110          |
+|api_football|284               |Liga II                                       |Romania             |      |21,111          |
+|api_football|1009              |Liga III - Play-offs                          |Romania             |      |21,818          |
+|api_football|784               |Liga III - Serie 1                            |Romania             |      |21,628          |
+|api_football|793               |Liga III - Serie 10                           |Romania             |      |21,637          |
+|api_football|785               |Liga III - Serie 2                            |Romania             |      |21,629          |
+|api_football|786               |Liga III - Serie 3                            |Romania             |      |21,630          |
+|api_football|787               |Liga III - Serie 4                            |Romania             |      |21,631          |
+|api_football|788               |Liga III - Serie 5                            |Romania             |      |21,632          |
+|api_football|789               |Liga III - Serie 6                            |Romania             |      |21,633          |
+|api_football|790               |Liga III - Serie 7                            |Romania             |      |21,634          |
+|api_football|791               |Liga III - Serie 8                            |Romania             |      |21,635          |
+|api_football|792               |Liga III - Serie 9                            |Romania             |      |21,636          |
+|api_football|382               |Liga Leumit                                   |Israel              |      |21,142          |
+|api_football|759               |Liga Mayor                                    |Dominican-Republic  |      |21,609          |
+|api_football|262               |Liga MX                                       |Mexico              |      |21,102          |
+|api_football|673               |Liga MX Femenil                               |Mexico              |      |21,523          |
+|api_football|1200              |Liga MX U21                                   |Mexico              |      |22,046          |
+|api_football|234               |Liga Nacional                                 |Honduras            |      |20,944          |
+|api_football|339               |Liga Nacional                                 |Guatemala           |      |20,958          |
+|api_football|304               |Liga Paname?a de F?tbol                       |Panama              |      |21,186          |
+|api_football|722               |Liga Premier Serie A                             |Mexico              |      |21,575          |
+|api_football|872               |Liga Premier Serie B                             |Mexico              |      |21,704          |
+|api_football|565               |Liga Primera U20                                 |Nicaragua           |      |21,463          |
+|api_football|242               |Liga Pro                                         |Ecuador             |      |21,003          |
+|api_football|128               |Liga Profesional Argentina                       |Argentina           |      |21,044          |
+|api_football|243               |Liga Pro Serie B                                 |Ecuador             |      |21,004          |
+|api_football|701               |Liga Revela??o U23                               |Portugal            |      |21,556          |
+|api_football|383               |Ligat Ha'al                                      |Israel              |      |21,143          |
+|api_football|567               |Ligi kuu Bara                                    |Tanzania            |      |21,052          |
+|api_football|424               |Ligue 1                                          |Congo-DR            |      |21,302          |
+|api_football|378               |Ligue 1                                          |Guinea              |      |21,035          |
+|api_football|386               |Ligue 1                                          |Ivory-Coast         |      |21,144          |
+|api_football|61                |Ligue 1                                          |France              |      |20,852          |
+|api_football|844               |Ligue 1                                          |Congo               |      |21,667          |
+|api_football|423               |Ligue 1                                          |Burkina-Faso        |      |21,301          |
+|api_football|202               |Ligue 1                                          |Tunisia             |      |20,891          |
+|api_football|186               |Ligue 1                                          |Algeria             |      |20,907          |
+|api_football|403               |Ligue 1                                          |Senegal             |      |21,153          |
+|api_football|62                |Ligue 2                                          |France              |      |20,851          |
+|api_football|828               |Ligue 2                                          |Tunisia             |      |21,657          |
+|api_football|187               |Ligue 2                                          |Algeria             |      |20,908          |
+|api_football|566               |Ligue A                                          |Burundi             |      |21,397          |
+|api_football|379               |Ligue Ha?tienne                                  |Haiti               |      |21,025          |
+|api_football|273               |Magyar Kupa                                      |Hungary             |      |20,947          |
+|api_football|253               |Major League Soccer                              |USA                 |      |20,986          |
+|api_football|499               |Malaysia Cup                                     |Malaysia            |      |21,224          |
+|api_football|608               |Maranhense                                       |Brazil              |      |21,470          |
+|api_football|1148              |Maranhense - 2                                   |Brazil              |      |22,001          |
+|api_football|630               |Matogrossense                                    |Brazil              |      |21,489          |
+|api_football|1096              |Matogrossense 2                                  |Brazil              |      |21,945          |
+|api_football|763               |Mauritian League                                 |Mauritius           |      |21,615          |
+|api_football|919               |Mediterranean Games                              |World               |      |21,766          |
+|api_football|367               |Meistaradeildin                                  |Faroe-Islands       |      |20,995          |
+|api_football|329               |Meistriliiga                                     |Estonia             |      |20,954          |
+|api_football|1170              |MFL Cup                                          |Malaysia            |      |21,975          |
+|api_football|629               |Mineiro - 1                                      |Brazil              |      |21,488          |
+|api_football|619               |Mineiro - 2                                      |Brazil              |      |21,480          |
+|api_football|1142              |Mineiro - 3                                      |Brazil              |      |21,995          |
+|api_football|1107              |Mineiro U20                                      |Brazil              |      |21,955          |
+|api_football|866               |MLS All-Star                                     |USA                 |      |21,698          |
+|api_football|909               |MLS Next Pro                                     |USA                 |      |21,756          |
+|api_football|710               |Nacional B                                       |Bolivia             |      |21,566          |
+|api_football|823               |Nasjonal U19 Champions League                    |Norway              |      |21,734          |
+|api_football|63                |National 1                                       |France              |      |20,899          |
+|api_football|67                |National 2 - Group A                             |France              |      |20,902          |
+|api_football|68                |National 2 - Group B                             |France              |      |20,903          |
+|api_football|69                |National 2 - Group C                             |France              |      |20,904          |
+|api_football|70                |National 2 - Group D                             |France              |      |20,950          |
+|api_football|461               |National 3 - Group A                             |France              |      |21,373          |
+|api_football|462               |National 3 - Group B                             |France              |      |21,374          |
+|api_football|463               |National 3 - Group C                             |France              |      |21,375          |
+|api_football|464               |National 3 - Group D                             |France              |      |21,376          |
+|api_football|465               |National 3 - Group E                             |France              |      |21,377          |
+|api_football|466               |National 3 - Group F                             |France              |      |21,378          |
+|api_football|1029              |National 3 - Group G                             |France              |      |21,876          |
+|api_football|467               |National 3 - Group H                             |France              |      |21,379          |
+|api_football|468               |National 3 - Group I                             |France              |      |21,380          |
+|api_football|469               |National 3 - Group J                             |France              |      |21,381          |
+|api_football|470               |National 3 - Group K                             |France              |      |21,382          |
+|api_football|471               |National 3 - Group L                             |France              |      |21,384          |
+|api_football|472               |National 3 - Group M                             |France              |      |21,385          |
+|api_football|261               |National Division                                |Luxembourg          |      |20,868          |
+|api_football|376               |National Football League                         |Fiji                |      |21,031          |
+|api_football|43                |National League                                  |England             |      |20,875          |
+|api_football|588               |National League                                  |Myanmar             |      |20,881          |
+|api_football|954               |National League - Central                        |New-Zealand         |      |21,846          |
+|api_football|1056              |National League - Championship - Final           |New-Zealand         |      |21,902          |
+|api_football|1156              |National League Cup                              |England             |      |22,010          |
+|api_football|955               |National League - National                       |New-Zealand         |      |21,847          |
+|api_football|50                |National League - North                          |England             |      |21,315          |
+|api_football|956               |National League - Northern                       |New-Zealand         |      |21,848          |
+|api_football|984               |National League - North - Play-offs              |England             |      |21,795          |
+|api_football|49                |National League - Play-offs                      |England             |      |21,221          |
+|api_football|51                |National League - South                          |England             |      |21,316          |
+|api_football|957               |National League - Southern                       |New-Zealand         |      |21,849          |
+|api_football|985               |National League - South - Play-offs              |England             |      |21,796          |
+|api_football|405               |National Soccer League                           |Rwanda              |      |21,234          |
+|api_football|271               |NB I                                             |Hungary             |      |20,948          |
+|api_football|272               |NB II                                            |Hungary             |      |20,949          |
+|api_football|633               |NB III - Northeast                               |Hungary             |      |21,417          |
+|api_football|635               |NB III - Northwest                               |Hungary             |      |21,419          |
+|api_football|1111              |NB III - Promotion Play-offs                     |Hungary             |      |21,914          |
+|api_football|1023              |NB III - Southeast                               |Hungary             |      |21,869          |
+|api_football|634               |NB III - Southwest                               |Hungary             |      |21,418          |
+|api_football|192               |New South Wales NPL                              |Australia           |      |21,422          |
+|api_football|835               |New South Wales NPL 2                            |Australia           |      |21,742          |
+|api_football|523               |NISA                                             |USA                 |      |21,431          |
+|api_football|105               |NM Cupen                                         |Norway              |      |21,459          |
+|api_football|1090              |NNSW League 1                                    |Australia           |      |21,939          |
+|api_football|52                |Non League Div One - Isthmian North              |England             |      |21,318          |
+|api_football|53                |Non League Div One - Isthmian South Central      |England             |      |21,319          |
+|api_football|57                |Non League Div One - Isthmian South East         |England             |      |21,323          |
+|api_football|932               |Non League Div One - Northern East               |England             |      |21,825          |
+|api_football|55                |Non League Div One - Northern Midlands           |England             |      |21,321          |
+|api_football|54                |Non League Div One - Northern West               |England             |      |21,320          |
+|api_football|986               |Non League Div One - Play-offs                   |England             |      |21,797          |
+|api_football|933               |Non League Div One - Southern Central            |England             |      |21,826          |
+|api_football|56                |Non League Div One - Southern South              |England             |      |21,322          |
+|api_football|58                |Non League Premier - Isthmian                    |England             |      |21,324          |
+|api_football|993               |Non League Premier - Isthmian - Play-offs        |England             |      |21,805          |
+|api_football|59                |Non League Premier - Northern                    |England             |      |21,325          |
+|api_football|994               |Non League Premier - Northern - Play-offs        |England             |      |21,806          |
+|api_football|931               |Non League Premier - Southern Central            |England             |      |21,824          |
+|api_football|996               |Non League Premier - Southern Central - Play-offs|England             |      |21,808          |
+|api_football|60                |Non League Premier - Southern South              |England             |      |21,326          |
+|api_football|995               |Non League Premier - Southern South - Play-offs  |England             |      |21,807          |
+|api_football|481               |Northern NSW NPL                                 |Australia           |      |21,011          |
+|api_football|1182              |Northern Super League                            |Canada              |      |22,030          |
+|api_football|193               |Northern Territory Premier League                |Australia           |      |20,921          |
+|api_football|399               |NPFL                                             |Nigeria             |      |21,150          |
+|api_football|1118              |NPSL                                             |USA                 |      |21,964          |
+|api_football|1119              |NWSL - Liga MXF Summer Cup                       |USA                 |      |21,965          |
+|api_football|254               |NWSL Women                                       |USA                 |      |21,420          |
+|api_football|641               |NWSL Women - Challenge Cup                       |USA                 |      |21,496          |
+|api_football|753               |Oberliga - Baden-W?rttemberg                     |Germany             |      |21,603          |
+|api_football|938               |Oberliga - Bayern Nord                           |Germany             |      |21,832          |
+|api_football|939               |Oberliga - Bayern S?d                            |Germany             |      |21,833          |
+|api_football|749               |Oberliga - Bremen                                |Germany             |      |21,599          |
+|api_football|745               |Oberliga - Hamburg                               |Germany             |      |21,595          |
+|api_football|750               |Oberliga - Hessen                                |Germany             |      |21,600          |
+|api_football|746               |Oberliga - Mittelrhein                           |Germany             |      |21,596          |
+|api_football|751               |Oberliga - Niederrhein                           |Germany             |      |21,601          |
+|api_football|748               |Oberliga - Niedersachsen                         |Germany             |      |21,598          |
+|api_football|754               |Oberliga - Nordost-Nord                          |Germany             |      |21,604          |
+|api_football|755               |Oberliga - Nordost-S?d                           |Germany             |      |21,605          |
+|api_football|988               |Oberliga - Promotion Round                       |Germany             |      |21,799          |
+|api_football|989               |Oberliga - Relegation Round                      |Germany             |      |21,800          |
+|api_football|752               |Oberliga - Rheinland-Pfalz / Saar                |Germany             |      |21,602          |
+|api_football|744               |Oberliga - Schleswig-Holstein                    |Germany             |      |21,594          |
+|api_football|747               |Oberliga - Westfalen                             |Germany             |      |21,597          |
+|api_football|1215              |Obos Supercup                                    |Norway              |      |22,061          |
+|api_football|27                |OFC Champions League                             |World               |      |21,051          |
+|api_football|806               |OFC Nations Cup                                  |World               |      |21,174          |
+|api_football|1214              |OFC Pro League                                   |World               |      |22,060          |
+|api_football|1122              |OFC U19 Championship                             |World               |      |21,967          |
+|api_football|636               |?okary Liga                                      |Turkmenistan        |      |21,492          |
+|api_football|1105              |Olympics - Intercontinental Play-offs            |World               |      |21,953          |
+|api_football|480               |Olympics Men                                     |World               |      |20,973          |
+|api_football|881               |Olympics Men - Qualification Concacaf            |World               |      |21,682          |
+|api_football|524               |Olympics Women                                   |World               |      |21,126          |
+|api_football|882               |Olympics Women - Qualification Asia              |World               |      |21,683          |
+|api_football|1047              |Olympics Women - Qualification CAF               |World               |      |21,972          |
+|api_football|260               |Pacific Coast Soccer League                      |Canada              |      |21,421          |
+|api_football|770               |Pacific Games                                    |World               |      |21,272          |
+|api_football|1045              |Pan American Games                               |World               |      |21,893          |
+|api_football|627               |Paraense                                         |Brazil              |      |21,486          |
+|api_football|1115              |Paraense A3                                      |Brazil              |      |21,961          |
+|api_football|1145              |Paraense B1                                      |Brazil              |      |21,999          |
+|api_football|1157              |Paraense U20                                     |Brazil              |      |22,011          |
+|api_football|603               |Paraibano                                        |Brazil              |      |21,465          |
+|api_football|1037              |Paraibano 2                                      |Brazil              |      |21,885          |
+|api_football|1120              |Paraibano U20                                    |Brazil              |      |21,966          |
+|api_football|606               |Paranaense - 1                                   |Brazil              |      |21,468          |
+|api_football|614               |Paranaense - 2                                   |Brazil              |      |21,475          |
+|api_football|1138              |Paranaense - 3                                   |Brazil              |      |21,991          |
+|api_football|1071              |Paranaense U20                                   |Brazil              |      |21,926          |
+|api_football|475               |Paulista - A1                                    |Brazil              |      |21,542          |
+|api_football|476               |Paulista - A2                                    |Brazil              |      |21,543          |
+|api_football|605               |Paulista - A3                                    |Brazil              |      |21,467          |
+|api_football|1062              |Paulista - A4                                    |Brazil              |      |21,919          |
+|api_football|1098              |Paulista S?rie B                                 |Brazil              |      |21,947          |
+|api_football|1086              |Paulista - U20                                   |Brazil              |      |21,934          |
+|api_football|622               |Pernambucano - 1                                 |Brazil              |      |21,482          |
+|api_football|1125              |Pernambucano - 2                                 |Brazil              |      |21,970          |
+|api_football|1151              |Pernambucano - 3                                 |Brazil              |      |22,004          |
+|api_football|1088              |Pernambucano - U20                               |Brazil              |      |21,936          |
+|api_football|334               |Persha Liga                                      |Ukraine             |      |20,885          |
+|api_football|290               |Persian Gulf Pro League                          |Iran                |      |21,116          |
+|api_football|765               |PFL                                              |Philippines         |      |21,617          |
+|api_football|718               |Piala Indonesia                                  |Indonesia           |      |21,262          |
+|api_football|924               |Piala Presiden                                   |Indonesia           |      |21,772          |
+|api_football|621               |Piauiense                                        |Brazil              |      |21,481          |
+|api_football|1203              |Piauiense - 2                                    |Brazil              |      |22,049          |
+|api_football|616               |Potiguar                                         |Brazil              |      |21,477          |
+|api_football|1149              |Potiguar - 2                                     |Brazil              |      |22,002          |
+|api_football|1139              |Potiguar - U20                                   |Brazil              |      |21,992          |
+|api_football|1048              |Premier Division                                 |Antigua-And-Barbuda |      |21,894          |
+|api_football|758               |Premier Division                                 |Gibraltar           |      |21,608          |
+|api_football|1080              |Premier Division                                 |Grenada             |      |21,910          |
+|api_football|357               |Premier Division                                 |Ireland             |      |21,426          |
+|api_football|561               |Premier Intermediate League                      |Northern-Ireland    |      |21,178          |
+|api_football|569               |Premier League                                   |Kyrgyzstan          |      |21,054          |
+|api_football|39                |Premier League                                   |England             |      |20,855          |
+|api_football|1031              |Premier League                                   |Bhutan              |      |21,878          |
+|api_football|116               |Premier League                                   |Belarus             |      |21,012          |
+|api_football|762               |Premier League                                   |Mauritania          |      |21,612          |
+|api_football|764               |Premier League                                   |Mongolia            |      |21,616          |
+|api_football|962               |Premier League                                   |Lesotho             |      |21,781          |
+|api_football|570               |Premier League                                   |Ghana               |      |20,956          |
+|api_football|425               |Premier League                                   |Syria               |      |21,196          |
+|api_football|422               |Premier League                                   |Barbados            |      |20,972          |
+|api_football|417               |Premier League                                   |Bahrain             |      |21,157          |
+|api_football|416               |Premier League                                   |Belize              |      |21,236          |
+|api_football|414               |Premier League                                   |Bermuda             |      |21,159          |
+|api_football|412               |Premier League                                   |Botswana            |      |21,161          |
+|api_football|409               |Premier League                                   |Namibia             |      |21,235          |
+|api_football|584               |Premier League                                   |Libya               |      |21,182          |
+|api_football|585               |Premier League                                   |Uganda              |      |20,983          |
+|api_football|398               |Premier League                                   |Bangladesh          |      |21,162          |
+|api_football|393               |Premier League                                   |Malta               |      |21,146          |
+|api_football|110               |Premier League                                   |Wales               |      |20,930          |
+|api_football|390               |Premier League                                   |Lebanon             |      |20,867          |
+|api_football|389               |Premier League                                   |Kazakhstan          |      |21,022          |
+|api_football|380               |Premier League                                   |Hong-Kong           |      |20,946          |
+|api_football|368               |Premier League                                   |Singapore           |      |21,138          |
+|api_football|363               |Premier League                                   |Ethiopia            |      |21,048          |
+|api_football|342               |Premier League                                   |Armenia             |      |21,009          |
+|api_football|333               |Premier League                                   |Ukraine             |      |20,886          |
+|api_football|330               |Premier League                                   |Kuwait              |      |20,938          |
+|api_football|322               |Premier League                                   |Jamaica             |      |20,935          |
+|api_football|279               |Premier League                                   |Malaysia            |      |21,106          |
+|api_football|847               |Premier League                                   |Eswatini            |      |21,669          |
+|api_football|870               |Premier League                                   |Crimea              |      |21,702          |
+|api_football|235               |Premier League                                   |Russia              |      |21,075          |
+|api_football|868               |Premier League                                   |Pakistan            |      |21,700          |
+|api_football|233               |Premier League                                   |Egypt               |      |20,951          |
+|api_football|702               |Premier League 2 Division One                    |England             |      |21,558          |
+|api_football|769               |Premier League Asia Trophy                       |World               |      |21,270          |
+|api_football|871               |Premier League Cup                               |England             |      |21,703          |
+|api_football|1039              |Premier League International Cup                 |World               |      |21,887          |
+|api_football|1022              |Premier League - Summer Series                   |England             |      |21,840          |
+|api_football|179               |Premiership                                      |Scotland            |      |20,860          |
+|api_football|408               |Premiership                                      |Northern-Ireland    |      |21,180          |
+|api_football|280               |Premiership                                      |New-Zealand         |      |21,107          |
+|api_football|1103              |Premiership Women                                |Northern-Ireland    |      |21,951          |
+|api_football|288               |Premier Soccer League                            |South-Africa        |      |21,114          |
+|api_football|401               |Premier Soccer League                            |Zimbabwe            |      |21,151          |
+|api_football|315               |Premijer Liga                                    |Bosnia              |      |21,140          |
+|api_football|598               |Premi?re Division                                |Mali                |      |20,984          |
+|api_football|419               |Premyer Liqa                                     |Azerbaijan          |      |20,926          |
+|api_football|560               |Presidents Cup                                   |United-Arab-Emirates|      |21,177          |
+|api_football|969               |Primeira Divis?o                                 |Macao               |      |21,856          |
+|api_football|94                |Primeira Liga                                    |Portugal            |      |20,858          |
+|api_football|239               |Primera A                                        |Colombia            |      |21,076          |
+|api_football|266               |Primera B                                        |Chile               |      |21,248          |
+|api_football|240               |Primera B                                        |Colombia            |      |21,084          |
+|api_football|131               |Primera B Metropolitana                          |Argentina           |      |20,914          |
+|api_football|132               |Primera C                                        |Argentina           |      |20,916          |
+|api_football|133               |Primera D                                        |Argentina           |      |20,917          |
+|api_football|281               |Primera Divisi?n                                 |Peru                |      |21,108          |
+|api_football|344               |Primera Divisi?n                                 |Bolivia             |      |21,261          |
+|api_football|265               |Primera Divisi?n                                 |Chile               |      |21,247          |
+|api_football|162               |Primera Divisi?n                                 |Costa-Rica          |      |21,068          |
+|api_football|299               |Primera Divisi?n                                 |Venezuela           |      |20,932          |
+|api_football|268               |Primera Divisi?n - Apertura                      |Uruguay             |      |20,988          |
+|api_football|270               |Primera Divisi?n - Clausura                      |Uruguay             |      |20,989          |
+|api_football|142               |Primera Divisi?n Femenina                        |Spain               |      |21,093          |
+|api_football|435               |Primera Divisi?n RFEF - Group 1                  |Spain               |      |21,346          |
+|api_football|436               |Primera Divisi?n RFEF - Group 2                  |Spain               |      |21,347          |
+|api_football|437               |Primera Divisi?n RFEF - Group 3                  |Spain               |      |21,348          |
+|api_football|438               |Primera Divisi?n RFEF - Group 4                  |Spain               |      |21,349          |
+|api_football|692               |Primera Divisi?n RFEF - Group 5                  |Spain               |      |21,541          |
+|api_football|1006              |Primera Divisi?n RFEF - Play Offs                |Spain               |      |21,817          |
+|api_football|396               |Primera Division                                 |Nicaragua           |      |21,148          |
+|api_football|907               |Primera Division                                 |Cuba                |      |21,754          |
+|api_football|370               |Primera Division                                 |El-Salvador         |      |20,952          |
+|api_football|338               |Primera Division                                 |Guatemala           |      |20,959          |
+|api_football|129               |Primera Nacional                                 |Argentina           |      |20,915          |
+|api_football|703               |Professional Development League                  |England             |      |21,559          |
+|api_football|406               |Professional League                              |Oman                |      |20,934          |
+|api_football|307               |Pro League                                       |Saudi-Arabia        |      |21,120          |
+|api_football|301               |Pro League                                       |United-Arab-Emirates|      |20,887          |
+|api_football|591               |Pro League                                       |Trinidad-And-Tobago |      |20,882          |
+|api_football|1075              |Pro League A                                     |Uzbekistan          |      |21,928          |
+|api_football|1218              |Pro League U23                                   |United-Arab-Emirates|      |22,053          |
+|api_football|153               |Provincial - Antwerpen                           |Belgium             |      |21,292          |
+|api_football|691               |Provincial - Brabant ACFF                        |Belgium             |      |21,540          |
+|api_football|154               |Provincial - Brabant VFV                         |Belgium             |      |21,293          |
+|api_football|155               |Provincial - Hainaut                             |Belgium             |      |21,294          |
+|api_football|156               |Provincial - Liege                               |Belgium             |      |21,295          |
+|api_football|157               |Provincial - Limburg                             |Belgium             |      |21,296          |
+|api_football|158               |Provincial - Luxembourg                          |Belgium             |      |21,297          |
+|api_football|159               |Provincial - Namur                               |Belgium             |      |21,298          |
+|api_football|160               |Provincial - Oost-Vlaanderen                     |Belgium             |      |21,299          |
+|api_football|980               |Provincial - Play-offs ACFF                      |Belgium             |      |21,791          |
+|api_football|979               |Provincial - Play-offs VV                        |Belgium             |      |21,790          |
+|api_football|161               |Provincial - West-Vlaanderen                     |Belgium             |      |21,300          |
+|api_football|287               |Prva Liga                                        |Serbia              |      |21,113          |
+|api_football|825               |Qatar Cup                                        |Qatar               |      |21,737          |
+|api_football|841               |QFA Cup                                          |Qatar               |      |21,665          |
+|api_football|677               |QSL Cup                                          |Qatar               |      |21,280          |
+|api_football|482               |Queensland NPL                                   |Australia           |      |21,435          |
+|api_football|833               |Queensland Premier League                        |Australia           |      |21,740          |
+|api_football|1167              |Recopa                                           |Costa-Rica          |      |22,021          |
+|api_football|1059              |Recopa Catarinense                               |Brazil              |      |21,880          |
+|api_football|83                |Regionalliga - Bayern                            |Germany             |      |21,332          |
+|api_football|222               |Regionalliga - Mitte                             |Austria             |      |20,927          |
+|api_football|84                |Regionalliga - Nord                              |Germany             |      |21,333          |
+|api_football|85                |Regionalliga - Nordost                           |Germany             |      |21,334          |
+|api_football|221               |Regionalliga - Ost                               |Austria             |      |20,928          |
+|api_football|1002              |Regionalliga - Promotion Play-offs               |Germany             |      |21,813          |
+|api_football|1003              |Regionalliga - Relegation Round                  |Germany             |      |21,814          |
+|api_football|688               |Regionalliga - Salzburg                          |Austria             |      |21,537          |
+|api_football|86                |Regionalliga - SudWest                           |Germany             |      |21,335          |
+|api_football|687               |Regionalliga - Tirol                             |Austria             |      |21,536          |
+|api_football|223               |Regionalliga - West                              |Austria             |      |20,929          |
+|api_football|87                |Regionalliga - West                              |Germany             |      |21,336          |
+|api_football|906               |Reserve League                                   |Argentina           |      |21,753          |
+|api_football|562               |Reserve League                                   |Belarus             |      |21,680          |
+|api_football|883               |Reserve League                                   |Netherlands         |      |21,712          |
+|api_football|518               |Reserve Pro League                               |Belgium             |      |21,430          |
+|api_football|814               |Reykjavik Cup                                    |Iceland             |      |21,731          |
+|api_football|837               |Rock Cup                                         |Gibraltar           |      |21,661          |
+|api_football|615               |Rondoniense                                      |Brazil              |      |21,476          |
+|api_football|1204              |Rondoniense - 2                                  |Brazil              |      |22,050          |
+|api_football|607               |Roraimense                                       |Brazil              |      |21,469          |
+|api_football|164               |?rvalsdeild                                      |Iceland             |      |21,069          |
+|api_football|671               |?rvalsdeild Women                                |Iceland             |      |21,521          |
+|api_football|28                |SAFF Championship                                |World               |      |21,026          |
+|api_football|325               |Santosh Trophy                                   |India               |      |21,461          |
+|api_football|1160              |Sapling Cup                                      |Hong-Kong           |      |22,014          |
+|api_football|209               |Schweizer Cup                                    |Switzerland         |      |21,451          |
+|api_football|148               |Second Amateur Division - ACFF                   |Belgium             |      |21,291          |
+|api_football|1011              |Second Amateur Division - Play-offs              |Belgium             |      |21,820          |
+|api_football|149               |Second Amateur Division - VFV A                  |Belgium             |      |21,214          |
+|api_football|150               |Second Amateur Division - VFV B                  |Belgium             |      |21,215          |
+|api_football|306               |Second Division                                  |Qatar               |      |20,869          |
+|api_football|356               |Second League                                    |Montenegro          |      |21,260          |
+|api_football|372               |Second League                                    |Macedonia           |      |21,189          |
+|api_football|887               |Second League                                    |Egypt               |      |21,713          |
+|api_football|173               |Second League                                    |Bulgaria            |      |21,081          |
+|api_football|1025              |Second League A - Division A Gold                |Russia              |      |21,872          |
+|api_football|1026              |Second League A - Division A Silver              |Russia              |      |21,873          |
+|api_football|1121              |Second League A - Promotion Play-offs            |Russia              |      |21,915          |
+|api_football|1061              |Second League A - Spring Season Gold             |Russia              |      |21,905          |
+|api_football|1064              |Second League A - Spring Season Silver           |Russia              |      |21,906          |
+|api_football|651               |Second League - Group 1                          |Russia              |      |21,505          |
+|api_football|652               |Second League - Group 2                          |Russia              |      |21,506          |
+|api_football|650               |Second League - Group 3                          |Russia              |      |21,504          |
+|api_football|653               |Second League - Group 4                          |Russia              |      |21,507          |
+|api_football|888               |Second League - Group B                          |Egypt               |      |21,714          |
+|api_football|889               |Second League - Group C                          |Egypt               |      |21,715          |
+|api_football|1014              |Second League - Play-offs                        |Egypt               |      |21,821          |
+|api_football|946               |Second NL                                        |Croatia             |      |21,839          |
+|api_football|282               |Segunda Divisi?n                                 |Peru                |      |21,109          |
+|api_football|141               |Segunda Divisi?n                                 |Spain               |      |21,062          |
+|api_football|300               |Segunda Divisi?n                                 |Venezuela           |      |20,933          |
+|api_football|711               |Segunda Divisi?n                                 |Chile               |      |21,567          |
+|api_football|269               |Segunda Divisi?n                                 |Uruguay             |      |20,890          |
+|api_football|875               |Segunda Divisi?n RFEF - Group 1                  |Spain               |      |21,707          |
+|api_football|876               |Segunda Divisi?n RFEF - Group 2                  |Spain               |      |21,708          |
+|api_football|877               |Segunda Divisi?n RFEF - Group 3                  |Spain               |      |21,709          |
+|api_football|878               |Segunda Divisi?n RFEF - Group 4                  |Spain               |      |21,710          |
+|api_football|879               |Segunda Divisi?n RFEF - Group 5                  |Spain               |      |21,711          |
+|api_football|1000              |Segunda Divisi?n RFEF - Play-offs                |Spain               |      |21,812          |
+|api_football|95                |Segunda Liga                                     |Portugal            |      |21,066          |
+|api_football|716               |Senior Shield                                    |Hong-Kong           |      |21,268          |
+|api_football|626               |Sergipano                                        |Brazil              |      |21,485          |
+|api_football|1135              |Sergipano - 2                                    |Brazil              |      |21,988          |
+|api_football|1108              |Sergipano U20                                    |Brazil              |      |21,956          |
+|api_football|135               |Serie A                                          |Italy               |      |20,857          |
+|api_football|71                |Serie A                                          |Brazil              |      |20,854          |
+|api_football|1198              |Serie A Cup Women                                |Italy               |      |22,044          |
+|api_football|139               |Serie A Women                                    |Italy               |      |21,091          |
+|api_football|72                |Serie B                                          |Brazil              |      |20,980          |
+|api_football|136               |Serie B                                          |Italy               |      |21,063          |
+|api_football|75                |Serie C                                          |Brazil              |      |20,981          |
+|api_football|138               |Serie C - Girone A                               |Italy               |      |21,086          |
+|api_football|942               |Serie C - Girone B                               |Italy               |      |21,264          |
+|api_football|943               |Serie C - Girone C                               |Italy               |      |21,265          |
+|api_football|976               |Serie C - Promotion - Play-offs                  |Italy               |      |21,770          |
+|api_football|975               |Serie C - Relegation - Play-offs                 |Italy               |      |21,786          |
+|api_football|974               |Serie C - Supercoppa Lega Finals                 |Italy               |      |21,787          |
+|api_football|76                |Serie D                                          |Brazil              |      |20,982          |
+|api_football|999               |Serie D - Championship Round                     |Italy               |      |21,811          |
+|api_football|426               |Serie D - Girone A                               |Italy               |      |21,337          |
+|api_football|427               |Serie D - Girone B                               |Italy               |      |21,338          |
+|api_football|428               |Serie D - Girone C                               |Italy               |      |21,339          |
+|api_football|429               |Serie D - Girone D                               |Italy               |      |21,340          |
+|api_football|430               |Serie D - Girone E                               |Italy               |      |21,341          |
+|api_football|431               |Serie D - Girone F                               |Italy               |      |21,342          |
+|api_football|432               |Serie D - Girone G                               |Italy               |      |21,343          |
+|api_football|433               |Serie D - Girone H                               |Italy               |      |21,344          |
+|api_football|434               |Serie D - Girone I                               |Italy               |      |21,345          |
+|api_football|997               |Serie D - Promotion - Play-offs                  |Italy               |      |21,809          |
+|api_football|998               |Serie D - Relegation - Play-offs                 |Italy               |      |21,810          |
+|api_football|1216              |Serie Rio De La Plata                            |World               |      |22,062          |
+|api_football|904               |SheBelieves Cup                                  |World               |      |21,271          |
+|api_football|816               |Shield Cup                                       |Jordan              |      |21,651          |
+|api_football|971               |Shield Cup                                       |Kenya               |      |21,785          |
+|api_football|846               |Somali Premier League                            |Somalia             |      |21,746          |
+|api_football|618               |S?o Paulo Youth Cup                              |Brazil              |      |21,479          |
+|api_football|951               |South American Youth Games                       |World               |      |21,845          |
+|api_football|194               |South Australia NPL                              |Australia           |      |21,423          |
+|api_football|834               |South Australia State League 1                   |Australia           |      |21,741          |
+|api_football|911               |Southeast Asian Games                            |World               |      |21,757          |
+|api_football|203               |S?per Lig                                        |Turkey              |      |20,892          |
+|api_football|572               |Srpska Liga - Belgrade                           |Serbia              |      |21,398          |
+|api_football|574               |Srpska Liga - East                               |Serbia              |      |21,355          |
+|api_football|573               |Srpska Liga - Vojvodina                          |Serbia              |      |21,399          |
+|api_football|575               |Srpska Liga - West                               |Serbia              |      |21,400          |
+|api_football|305               |Stars League                                     |Qatar               |      |20,870          |
+|api_football|384               |State Cup                                        |Israel              |      |21,238          |
+|api_football|773               |Sudamericano U20                                 |World               |      |21,274          |
+|api_football|402               |Sudani Premier League                            |Sudan               |      |21,152          |
+|api_football|623               |Sul-Matogrossense                                |Brazil              |      |21,483          |
+|api_football|726               |Sultan Cup                                       |Oman                |      |21,579          |
+|api_football|246               |Suomen Cup                                       |Finland             |      |20,998          |
+|api_football|864               |Supercopa                                        |Costa-Rica          |      |21,696          |
+|api_football|1181              |Supercopa                                        |Venezuela           |      |22,029          |
+|api_football|961               |Supercopa                                        |Paraguay            |      |21,780          |
+|api_football|558               |Supercopa                                        |Peru                |      |21,664          |
+|api_football|842               |Super Copa                                       |Uruguay             |      |21,745          |
+|api_football|810               |Super Copa                                       |Argentina           |      |21,648          |
+|api_football|853               |Supercopa de Ecuador                             |Ecuador             |      |21,687          |
+|api_football|632               |Supercopa do Brasil                              |Brazil              |      |21,491          |
+|api_football|1058              |Supercopa Femenina                               |Spain               |      |21,904          |
+|api_football|1178              |Super Copa International                         |Argentina           |      |21,979          |
+|api_football|819               |Super Cup                                        |Kosovo              |      |21,653          |
+|api_football|557               |Super Cup                                        |Norway              |      |21,228          |
+|api_football|1021              |Super Cup                                        |Croatia             |      |21,868          |
+|api_football|556               |Super Cup                                        |Spain               |      |21,131          |
+|api_football|818               |Super Cup                                        |Kazakhstan          |      |21,733          |
+|api_football|826               |Super Cup                                        |Saudi-Arabia        |      |21,738          |
+|api_football|905               |Super Cup                                        |Iran                |      |21,724          |
+|api_football|551               |Super Cup                                        |Turkey              |      |20,993          |
+|api_football|550               |Super Cup                                        |Portugal            |      |21,129          |
+|api_football|548               |Super Cup                                        |Japan               |      |21,677          |
+|api_football|547               |Super Cup                                        |Italy               |      |21,039          |
+|api_football|543               |Super Cup                                        |Netherlands         |      |21,128          |
+|api_football|539               |Super Cup                                        |Egypt               |      |21,005          |
+|api_football|1144              |Super Cup                                        |Ghana               |      |21,997          |
+|api_football|530               |Super Cup                                        |Georgia             |      |20,865          |
+|api_football|529               |Super Cup                                        |Germany             |      |20,965          |
+|api_football|527               |Super Cup                                        |Chile               |      |21,041          |
+|api_football|1177              |Super Cup                                        |Faroe-Islands       |      |22,027          |
+|api_football|1176              |Super Cup                                        |Latvia              |      |22,026          |
+|api_football|1042              |Super Cup                                        |Gibraltar           |      |21,890          |
+|api_football|519               |Super Cup                                        |Belgium             |      |21,040          |
+|api_football|812               |Super Cup                                        |Belarus             |      |21,730          |
+|api_football|830               |Super Cup                                        |Uzbekistan          |      |21,659          |
+|api_football|516               |Super Cup                                        |Algeria             |      |20,911          |
+|api_football|831               |Super Cup                                        |Vietnam             |      |21,739          |
+|api_football|884               |Super Cup                                        |San-Marino          |      |20,847          |
+|api_football|896               |Super Cup                                        |United-Arab-Emirates|      |21,720          |
+|api_football|1050              |Super Cup                                        |Malta               |      |21,896          |
+|api_football|839               |Super Cup                                        |Lithuania           |      |21,744          |
+|api_football|1166              |Super Cup                                        |Cameroon            |      |22,020          |
+|api_football|809               |Super Cup                                        |Andorra             |      |21,647          |
+|api_football|1109              |Super Cup                                        |Bahrain             |      |21,913          |
+|api_football|852               |Super Cup                                        |Cyprus              |      |21,686          |
+|api_football|708               |Super Cup                                        |Albania             |      |21,564          |
+|api_football|1210              |Super Cup                                        |Greece              |      |22,056          |
+|api_football|654               |Super Cup                                        |Armenia             |      |21,508          |
+|api_football|656               |Super Cup                                        |Bulgaria            |      |21,509          |
+|api_football|719               |Super Cup                                        |Kuwait              |      |21,572          |
+|api_football|944               |Super Cup                                        |Oman                |      |21,837          |
+|api_football|1131              |Super Cup                                        |Mongolia            |      |21,984          |
+|api_football|1194              |Super Cup                                        |Tunisia             |      |22,040          |
+|api_football|1193              |Super Cup                                        |Kenya               |      |22,039          |
+|api_football|659               |Super Cup                                        |Israel              |      |20,846          |
+|api_football|1192              |Super Cup                                        |Angola              |      |22,038          |
+|api_football|972               |Super Cup                                        |China               |      |21,858          |
+|api_football|838               |Super Cup                                        |Jordan              |      |21,662          |
+|api_football|727               |Super Cup                                        |Poland              |      |21,580          |
+|api_football|663               |Super Cup                                        |Russia              |      |21,515          |
+|api_football|925               |Super Cup                                        |Czech-Republic      |      |21,010          |
+|api_football|639               |Super Cup                                        |Iceland             |      |21,494          |
+|api_football|678               |Super Cup                                        |Ukraine             |      |21,527          |
+|api_football|555               |Supercupa                                        |Romania             |      |21,130          |
+|api_football|1137              |Supercup der Frauen                              |Germany             |      |21,990          |
+|api_football|817               |Super Cup Primavera                              |Italy               |      |21,652          |
+|api_football|1190              |Super Cup Women                                  |Netherlands         |      |21,974          |
+|api_football|114               |Superettan                                       |Sweden              |      |21,100          |
+|api_football|277               |Super League                                     |Kenya               |      |21,249          |
+|api_football|207               |Super League                                     |Switzerland         |      |21,073          |
+|api_football|413               |Super League                                     |Bhutan              |      |21,160          |
+|api_football|369               |Super League                                     |Uzbekistan          |      |20,990          |
+|api_football|169               |Super League                                     |China               |      |21,070          |
+|api_football|278               |Super League                                     |Malaysia            |      |21,105          |
+|api_football|391               |Super League                                     |Malawi              |      |21,232          |
+|api_football|400               |Super League                                     |Zambia              |      |21,015          |
+|api_football|197               |Super League 1                                   |Greece              |      |20,962          |
+|api_football|494               |Super League 2                                   |Greece              |      |21,392          |
+|api_football|146               |Super League Women                               |Belgium             |      |21,087          |
+|api_football|310               |Superliga                                        |Albania             |      |20,971          |
+|api_football|713               |Superliga                                        |Colombia            |      |21,569          |
+|api_football|664               |Superliga                                        |Kosovo              |      |21,278          |
+|api_football|119               |Superliga                                        |Denmark             |      |20,939          |
+|api_football|286               |Super Liga                                       |Serbia              |      |21,112          |
+|api_football|332               |Super Liga                                       |Slovakia            |      |21,256          |
+|api_football|394               |Super Liga                                       |Moldova             |      |21,147          |
+|api_football|649               |Supreme Division Women                           |Russia              |      |21,503          |
+|api_football|115               |Svenska Cupen                                    |Sweden              |      |21,452          |
+|api_football|737               |Svenska Cupen - Women                            |Sweden              |      |21,588          |
+|api_football|1078              |SWF Scottish Cup                                 |Scotland            |      |21,903          |
+|api_football|1074              |SWPL Cup                                         |Scotland            |      |21,897          |
+|api_football|97                |Ta?a da Liga                                     |Portugal            |      |21,457          |
+|api_football|96                |Ta?a de Portugal                                 |Portugal            |      |21,149          |
+|api_football|840               |Ta?a Revela??o U23                               |Portugal            |      |21,663          |
+|api_football|589               |Taiwan Football Premier League                   |Chinese-Taipei      |      |21,183          |
+|api_football|1091              |Tasmania Northern Championship                   |Australia           |      |21,940          |
+|api_football|648               |Tasmania NPL                                     |Australia           |      |21,502          |
+|api_football|1093              |Tasmania Southern Championship                   |Australia           |      |21,942          |
+|api_football|439               |Tercera Divisi?n RFEF - Group 1                  |Spain               |      |21,350          |
+|api_football|448               |Tercera Divisi?n RFEF - Group 10                 |Spain               |      |21,360          |
+|api_football|449               |Tercera Divisi?n RFEF - Group 11                 |Spain               |      |21,361          |
+|api_football|450               |Tercera Divisi?n RFEF - Group 12                 |Spain               |      |21,362          |
+|api_football|451               |Tercera Divisi?n RFEF - Group 13                 |Spain               |      |21,363          |
+|api_football|452               |Tercera Divisi?n RFEF - Group 14                 |Spain               |      |21,364          |
+|api_football|453               |Tercera Divisi?n RFEF - Group 15                 |Spain               |      |21,365          |
+|api_football|454               |Tercera Divisi?n RFEF - Group 16                 |Spain               |      |21,366          |
+|api_football|455               |Tercera Divisi?n RFEF - Group 17                 |Spain               |      |21,367          |
+|api_football|456               |Tercera Divisi?n RFEF - Group 18                 |Spain               |      |21,368          |
+|api_football|440               |Tercera Divisi?n RFEF - Group 2                  |Spain               |      |21,351          |
+|api_football|441               |Tercera Divisi?n RFEF - Group 3                  |Spain               |      |21,352          |
+|api_football|442               |Tercera Divisi?n RFEF - Group 4                  |Spain               |      |21,353          |
+|api_football|443               |Tercera Divisi?n RFEF - Group 5                  |Spain               |      |21,354          |
+|api_football|444               |Tercera Divisi?n RFEF - Group 6                  |Spain               |      |21,356          |
+|api_football|445               |Tercera Divisi?n RFEF - Group 7                  |Spain               |      |21,357          |
+|api_football|446               |Tercera Divisi?n RFEF - Group 8                  |Spain               |      |21,358          |
+|api_football|447               |Tercera Divisi?n RFEF - Group 9                  |Spain               |      |21,359          |
+|api_football|977               |Tercera Divisi?n RFEF - Promotion - Play-offs    |Spain               |      |21,788          |
+|api_football|873               |Thai Champions Cup                               |Thailand            |      |21,705          |
+|api_football|296               |Thai League 1                                    |Thailand            |      |20,991          |
+|api_football|297               |Thai League 2                                    |Thailand            |      |20,992          |
+|api_football|903               |The Atlantic Cup                                 |World               |      |21,723          |
+|api_football|689               |Third Amateur Division - ACFF A                  |Belgium             |      |21,538          |
+|api_football|690               |Third Amateur Division - ACFF B                  |Belgium             |      |21,539          |
+|api_football|981               |Third Amateur Division - Play-offs               |Belgium             |      |21,792          |
+|api_football|151               |Third Amateur Division - VFV A                   |Belgium             |      |21,209          |
+|api_football|152               |Third Amateur Division - VFV B                   |Belgium             |      |21,216          |
+|api_football|175               |Third League - Northeast                         |Bulgaria            |      |21,217          |
+|api_football|176               |Third League - Northwest                         |Bulgaria            |      |21,218          |
+|api_football|177               |Third League - Southeast                         |Bulgaria            |      |21,219          |
+|api_football|178               |Third League - Southwest                         |Bulgaria            |      |21,220          |
+|api_football|213               |Third NL - Istok                                 |Croatia             |      |21,303          |
+|api_football|214               |Third NL - Jug                                   |Croatia             |      |21,304          |
+|api_football|215               |Third NL - Sjever                                |Croatia             |      |21,305          |
+|api_football|216               |Third NL - Sredite                               |Croatia             |      |21,306          |
+|api_football|217               |Third NL - Zapad                                 |Croatia             |      |21,307          |
+|api_football|1211              |Tipsport Liga                                    |Czech-Republic      |      |22,057          |
+|api_football|900               |Tipsport Malta Cup                               |World               |      |21,752          |
+|api_football|631               |Tocantinense                                     |Brazil              |      |21,490          |
+|api_football|725               |Toppserien                                       |Norway              |      |21,727          |
+|api_football|1172              |Torneo Amistoso de Verano                        |Bolivia             |      |22,025          |
+|api_football|134               |Torneo Federal A                                 |Argentina           |      |20,918          |
+|api_football|1067              |Torneo Promocional Amateur                       |Argentina           |      |21,922          |
+|api_football|385               |Toto Cup Ligat Al                                |Israel              |      |21,446          |
+|api_football|914               |Tournoi Maurice Revello                          |World               |      |21,760          |
+|api_football|206               |T?rkiye Kupas?                                   |Turkey              |      |20,895          |
+|api_football|517               |Trofeo de Campeones de la Superliga              |Argentina           |      |21,429          |
+|api_football|526               |Troph?e des Champions                            |France              |      |21,002          |
+|api_football|492               |Tweede Divisie                                   |Netherlands         |      |21,201          |
+|api_football|724               |U18 Divisie 1                                    |Netherlands         |      |21,578          |
+|api_football|987               |U18 Premier League - Championship                |England             |      |21,798          |
+|api_football|695               |U18 Premier League - North                       |England             |      |21,551          |
+|api_football|696               |U18 Premier League - South                       |England             |      |21,552          |
+|api_football|488               |U19 Bundesliga                                   |Germany             |      |21,175          |
+|api_football|1152              |U19 Divisie 1                                    |Netherlands         |      |22,005          |
+|api_football|1065              |U19 League                                       |Ukraine             |      |21,907          |
+|api_football|890               |U20 Elite League                                 |World               |      |21,716          |
+|api_football|861               |U20 League                                       |Mexico              |      |21,694          |
+|api_football|675               |U21 Divisie 1                                    |Netherlands         |      |21,525          |
+|api_football|679               |U21 League                                       |Ukraine             |      |21,528          |
+|api_football|515               |U21 League 1                                     |Algeria             |      |21,428          |
+|api_football|1017              |U23 League                                       |Mexico              |      |21,864          |
+|api_football|1123              |UAE-Qatar - Super Cup                            |World               |      |21,968          |
+|api_football|1089              |UAE-Qatar - Super Shield                         |World               |      |21,938          |
+|api_football|743               |UEFA Championship - Women                        |World               |      |21,729          |
+|api_football|1083              |UEFA Championship - Women - Qualification        |World               |      |22,035          |
+|api_football|2                 |UEFA Champions League                            |World               |      |20,969          |
+|api_football|525               |UEFA Champions League Women                      |World               |      |21,432          |
+|api_football|1024              |UEFA - CONMEBOL - Club Challenge                 |World               |      |21,871          |
+|api_football|848               |UEFA Europa Conference League                    |World               |      |21,747          |
+|api_football|1191              |UEFA Europa Cup - Women                          |World               |      |22,037          |
+|api_football|3                 |UEFA Europa League                               |World               |      |21,033          |
+|api_football|5                 |UEFA Nations League                              |World               |      |21,244          |
+|api_football|1040              |UEFA Nations League - Women                      |World               |      |21,888          |
+|api_football|531               |UEFA Super Cup                                   |World               |      |21,127          |
+|api_football|921               |UEFA U17 Championship                            |World               |      |21,768          |
+|api_football|886               |UEFA U17 Championship - Qualification            |World               |      |21,779          |
+|api_football|1102              |UEFA U17 Championship - Women                    |World               |      |21,950          |
+|api_football|493               |UEFA U19 Championship                            |World               |      |21,223          |
+|api_football|893               |UEFA U19 Championship - Qualification            |World               |      |21,748          |
+|api_football|918               |UEFA U19 Championship - Women                    |World               |      |21,765          |
+|api_football|38                |UEFA U21 Championship                            |World               |      |21,195          |
+|api_football|850               |UEFA U21 Championship - Qualification            |World               |      |21,917          |
+|api_football|14                |UEFA Youth League                                |World               |      |21,192          |
+|api_football|255               |USL Championship                                 |USA                 |      |21,053          |
+|api_football|489               |USL League One                                   |USA                 |      |21,391          |
+|api_football|1095              |USL League One Cup                               |USA                 |      |21,944          |
+|api_football|256               |USL League Two                                   |USA                 |      |21,229          |
+|api_football|1130              |USL Super League                                 |USA                 |      |21,983          |
+|api_football|1117              |USL W League                                     |USA                 |      |21,963          |
+|api_football|257               |US Open Cup                                      |USA                 |      |20,987          |
+|api_football|244               |Veikkausliiga                                    |Finland             |      |20,997          |
+|api_football|195               |Victoria NPL                                     |Australia           |      |21,424          |
+|api_football|836               |Victoria NPL 2                                   |Australia           |      |21,743          |
+|api_football|365               |Virsliga                                         |Latvia              |      |20,975          |
+|api_football|340               |V.League 1                                       |Vietnam             |      |21,016          |
+|api_football|637               |V.League 2                                       |Vietnam             |      |21,493          |
+|api_football|571               |Vysshaya Liga                                    |Tajikistan          |      |20,879          |
+|api_football|1077              |WAFF Championship U23                            |World               |      |21,930          |
+|api_football|854               |WE League                                        |Japan               |      |21,688          |
+|api_football|112               |Welsh Cup                                        |Wales               |      |20,931          |
+|api_football|586               |West Bank Premier League                         |Palestine           |      |20,880          |
+|api_football|196               |Western Australia NPL                            |Australia           |      |21,425          |
+|api_football|1094              |Western Australia State League 1                 |Australia           |      |21,943          |
+|api_football|660               |WK-League                                        |South-Korea         |      |21,512          |
+|api_football|699               |Women's Championship                                |England             |      |21,554          |
+|api_football|1175              |Women's President's Cup                             |Ireland             |      |21,916          |
+|api_football|1                 |World Cup                                           |World               |      |20,862          |
+|api_football|29                |World Cup - Qualification Africa                    |World               |      |21,212          |
+|api_football|30                |World Cup - Qualification Asia                      |World               |      |21,213          |
+|api_football|31                |World Cup - Qualification CONCACAF                  |World               |      |21,207          |
+|api_football|32                |World Cup - Qualification Europe                    |World               |      |21,208          |
+|api_football|37                |World Cup - Qualification Intercontinental Play-offs|World               |      |21,037          |
+|api_football|33                |World Cup - Qualification Oceania                   |World               |      |21,210          |
+|api_football|34                |World Cup - Qualification South America             |World               |      |21,211          |
+|api_football|587               |World Cup - U17                                     |World               |      |21,410          |
+|api_football|950               |World Cup - U17 - Women                             |World               |      |21,844          |
+|api_football|490               |World Cup - U20                                     |World               |      |21,200          |
+|api_football|920               |World Cup - U20 - Women                             |World               |      |21,767          |
+|api_football|8                 |World Cup - Women                                   |World               |      |20,906          |
+|api_football|927               |World Cup - Women - Qualification Concacaf          |World               |      |21,774          |
+|api_football|880               |World Cup - Women - Qualification Europe            |World               |      |21,870          |
+|api_football|1116              |WPSL                                                |USA                 |      |21,962          |
+|api_football|697               |WSL Cup                                             |England             |      |21,553          |
+|api_football|1079              |Yemeni League                                       |Yemen               |      |21,764          |
+|api_football|245               |Ykk?nen                                             |Finland             |      |20,996          |
+|api_football|901               |Ykk?scup                                            |Finland             |      |21,736          |
+|api_football|1087              |Ykk?sliiga                                          |Finland             |      |21,935          |
+|api_football|238               |Youth Championship                                  |Russia              |      |21,331          |
+|api_football|829               |Youth League                                        |Turkmenistan        |      |21,658          |
+|api_football|910               |Youth Viareggio Cup                                 |World               |      |21,725          |

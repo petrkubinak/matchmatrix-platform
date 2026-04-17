@@ -1,0 +1,21 @@
+﻿
+FullName                                                              
+--------                                                              
+C:\MatchMatrix-platform\ops\lib                                       
+C:\MatchMatrix-platform\ops\snapshots                                 
+C:\MatchMatrix-platform\ops\mm_autopilot_daily.ps1                    
+C:\MatchMatrix-platform\ops\mm_env.ps1                                
+C:\MatchMatrix-platform\ops\mm_mail_config.ps1                        
+C:\MatchMatrix-platform\ops\mm_master.ps1                             
+C:\MatchMatrix-platform\ops\run_daily_pipeline.py                     
+C:\MatchMatrix-platform\ops\run_sql.ps1                               
+C:\MatchMatrix-platform\ops\run_sql_task.py                           
+C:\MatchMatrix-platform\ops\run_ticket_generation.py                  
+C:\MatchMatrix-platform\ops\lib\__pycache__                           
+C:\MatchMatrix-platform\ops\lib\import json.txt                       
+C:\MatchMatrix-platform\ops\lib\job_logger.py                         
+C:\MatchMatrix-platform\ops\lib\__pycache__\job_logger.cpython-314.pyc
+C:\MatchMatrix-platform\ops\snapshots\EU_keep_ids.txt                 
+C:\MatchMatrix-platform\ops\snapshots\EU_tymy.txt                     
+
+
