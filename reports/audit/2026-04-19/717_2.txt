@@ -1,0 +1,60 @@
+|id     |provider    |sport_code|external_team_id|team_name            |external_league_id|season|raw_payload_id|is_active|created_at                   |
+|-------|------------|----------|----------------|---------------------|------------------|------|--------------|---------|-----------------------------|
+|131,798|api_handball|handball  |779             |ABC Braga            |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,799|api_handball|handball  |957             |Ademar               |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,800|api_handball|handball  |782             |Benfica              |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,801|api_handball|handball  |176             |Bjerringbro/Silkeborg|145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,802|api_handball|handball  |964             |CD Bidasoa Irun      |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,803|api_handball|handball  |685             |Chrobry Glogow       |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,804|api_handball|handball  |4118            |CSM Constanta        |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,805|api_handball|handball  |636             |Elverum              |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,806|api_handball|handball  |412             |Ferencvaros          |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,807|api_handball|handball  |468             |FH Hafnarfjordur     |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,808|api_handball|handball  |314             |Flensburg-H.         |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,809|api_handball|handball  |178             |GOG                  |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,810|api_handball|handball  |931             |Gorenje              |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,811|api_handball|handball  |966             |Granollers           |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,812|api_handball|handball  |339             |Gummersbach          |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,813|api_handball|handball  |1063            |HC Kriens            |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,814|api_handball|handball  |54              |Izvidac              |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,815|api_handball|handball  |4178            |Kadetten Schaffhausen|145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,816|api_handball|handball  |110             |Karvina              |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,817|api_handball|handball  |321             |Kiel                 |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,818|api_handball|handball  |1041            |Kristianstad         |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,819|api_handball|handball  |256             |Limoges              |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,820|api_handball|handball  |4406            |Maritimo             |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,821|api_handball|handball  |248             |Montpellier          |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,822|api_handball|handball  |173             |Mors                 |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,823|api_handball|handball  |324             |MT Melsungen         |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,824|api_handball|handball  |81              |Nexe                 |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,825|api_handball|handball  |778             |Porto                |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,826|api_handball|handball  |908             |Presov               |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,827|api_handball|handball  |1046            |Savehof              |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,828|api_handball|handball  |85              |Sesvete              |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,829|api_handball|handball  |418             |Tatabanya            |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,830|api_handball|handball  |972             |Torrelavega          |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,831|api_handball|handball  |260             |Toulouse             |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,832|api_handball|handball  |942             |Trimo Trebnje        |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,833|api_handball|handball  |477             |Valur                |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,834|api_handball|handball  |1162            |Vardar 1961          |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,835|api_handball|handball  |89              |Vinkovci             |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,836|api_handball|handball  |899             |Vojvodina            |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,837|api_handball|handball  |1048            |Ystads IF            |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,838|api_handball|handball  |696             |Zabrze               |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,839|api_handball|handball  |1070            |Zurich               |145               |2024  |              |true     |2026-04-19 21:07:58.834 +0200|
+|131,840|api_handball|handball  |2655            |Algeria              |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,841|api_handball|handball  |3289            |Angola               |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,842|api_handball|handball  |3290            |Cameroon             |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,843|api_handball|handball  |3291            |Cape Verde           |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,844|api_handball|handball  |3292            |Congo                |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,845|api_handball|handball  |3293            |D.R. Congo           |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,846|api_handball|handball  |2661            |Egypt                |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,847|api_handball|handball  |3294            |Gabon                |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,848|api_handball|handball  |3295            |Guinea               |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,849|api_handball|handball  |3297            |Kenya                |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,850|api_handball|handball  |3298            |Libya                |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,851|api_handball|handball  |3299            |Morocco              |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,852|api_handball|handball  |3063            |Nigeria              |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,853|api_handball|handball  |4497            |Rwanda               |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,854|api_handball|handball  |2673            |Tunisia              |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|
+|131,855|api_handball|handball  |3300            |Zambia               |183               |2024  |              |true     |2026-04-19 21:08:00.230 +0200|

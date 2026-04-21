@@ -21,7 +21,7 @@ param(
     [string]$Provider = "api_sport",
 
     [Parameter(Mandatory = $false)]
-    [string]$ApiBase = "https://v1.$SportCode.api-sports.io",
+    [string]$ApiBase = "",
 
     [Parameter(Mandatory = $false)]
     [string]$ApiKey = "",
@@ -116,7 +116,7 @@ function Resolve-ApiBase {
     }
 
     if (-not $apiBaseMap.ContainsKey($sportKey)) {
-        throw "Sport '$SportKey' není podporovaný providerem api_sport v Resolve-ApiBase. Pro tento sport použij jiný provider."
+        throw "Sport '$sportKey' není podporovaný providerem api_sport v Resolve-ApiBase. Pro tento sport použij jiný provider."
     }
 
     return $apiBaseMap[$sportKey]
@@ -133,7 +133,6 @@ function Resolve-EndpointName {
         $requested = [string]$RequestedEndpointName
     }
 
-    # Pokud už je endpoint explicitně jiný než default, nech ho být
     if (-not [string]::IsNullOrWhiteSpace($requested) -and $requested.Trim().ToLower() -ne "fixtures") {
         return $requested.Trim().ToLower()
     }
@@ -150,6 +149,7 @@ function Resolve-EndpointName {
         "hockey"     { return "games" }
         "baseball"   { return "games" }
         "volleyball" { return "games" }
+        "handball"   { return "games" }
         default      { return "fixtures" }
     }
 }
@@ -261,17 +261,26 @@ function Invoke-SqlText {
             "local_psql_url" {
                 Write-Log "DB insert přes lokální psql + DATABASE_URL"
                 & psql "$($db.Value)" -v ON_ERROR_STOP=1 -f $tempSql
+                if ($LASTEXITCODE -ne 0) {
+                    throw "local psql (DATABASE_URL) skončil s kódem $LASTEXITCODE"
+                }
                 break
             }
             "local_psql_parts" {
                 Write-Log "DB insert přes lokální psql + POSTGRES_*"
                 $env:PGPASSWORD = $db.Pass
                 & psql -h $db.Host -p $db.Port -U $db.User -d $db.Db -v ON_ERROR_STOP=1 -f $tempSql
+                if ($LASTEXITCODE -ne 0) {
+                    throw "local psql (POSTGRES_*) skončil s kódem $LASTEXITCODE"
+                }
                 break
             }
             default {
                 Write-Log "DB insert přes docker exec do kontejneru: $DockerContainerName"
                 Get-Content $tempSql | docker exec -i $DockerContainerName psql -U matchmatrix -d matchmatrix -v ON_ERROR_STOP=1
+                if ($LASTEXITCODE -ne 0) {
+                    throw "docker exec psql skončil s kódem $LASTEXITCODE"
+                }
                 break
             }
         }
@@ -305,7 +314,6 @@ $From      = $From.Trim()
 $To        = $To.Trim()
 $Provider  = $Provider.Trim()
 
-# --- FIX: fallback season (kritické pro API-Sports) ---
 if (-not $Season -or $Season -eq "" -or $Season -eq "0") {
     $Season = "2024"
     Write-Log "Season not set or 0 -> using fallback 2024"
@@ -399,6 +407,8 @@ if ($SkipDb) {
 
 # ------------------------------------------------------------
 # 4) Insert do staging.stg_api_payloads
+# FIX: payload musí jít do DB jako pending, ne processed
+# processed nastavuje až parser run_parse_api_sport_fixtures_v1.py
 # ------------------------------------------------------------
 $providerSql   = Escape-SqlLiteral $Provider
 $sportSql      = Escape-SqlLiteral $SportCode
@@ -423,7 +433,6 @@ INSERT INTO staging.stg_api_payloads
     payload_hash,
     parse_status,
     parse_message,
-    fetched_at,
     created_at
 )
 VALUES
@@ -438,12 +447,32 @@ VALUES
     $hashSql,
     'pending',
     $messageSql,
-    now(),
     now()
 );
 "@
 
 Invoke-SqlText -SqlText $sql -DockerContainerName $DockerContainer
 
-Write-Log "Payload uložen do staging.stg_api_payloads"
+Write-Log "Payload uložen do staging.stg_api_payloads se stavem parse_status='pending'"
+
+# ------------------------------------------------------------
+# 5) Auto-parse binding -> stg_provider_fixtures
+# ------------------------------------------------------------
+$ParserScript = "C:\MatchMatrix-platform\workers\run_parse_api_sport_fixtures_v1.py"
+
+if (Test-Path $ParserScript) {
+    Write-Log "Spouštím parser: $ParserScript"
+
+    & "C:\Python314\python.exe" $ParserScript
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "Parser run_parse_api_sport_fixtures_v1.py skončil s kódem $LASTEXITCODE"
+    }
+
+    Write-Log "Parser dokončen OK."
+}
+else {
+    throw "Parser script nebyl nalezen: $ParserScript"
+}
+
 Write-Log "Hotovo."

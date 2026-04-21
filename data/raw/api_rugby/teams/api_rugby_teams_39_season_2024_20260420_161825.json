@@ -1,0 +1,14 @@
+﻿{
+    "get":  "teams",
+    "parameters":  {
+                       "league":  "39",
+                       "season":  "2024"
+                   },
+    "errors":  [
+
+               ],
+    "results":  0,
+    "response":  [
+
+                 ]
+}

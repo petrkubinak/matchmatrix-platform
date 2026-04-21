@@ -1,0 +1,267 @@
+Cílová posloupnost vrstev
+1. Core sport data
+
+Pro každý sport nejdřív připravit:
+
+ligy
+zápasy
+týmy
+kurzy
+
+To je správně, protože právě tohle tvoří základ celé platformy a ticket vrstvy. MatchMatrix je postavený tak, že ingest vrstva naplní databázi a nad ní pak běží ratingy, predikce, odds analýza a ticket engine.
+
+2. People vrstva
+
+Až bude core hotový, teprve potom:
+
+hráči
+trenéři
+
+To je logické, protože lidi jsou už navázaná entitní vrstva nad ligami, týmy a zápasy.
+
+3. Content vrstva
+
+Potom:
+
+komentáře
+články
+příspěvky / zprávy
+
+To už je vyšší enrichment vrstva.
+
+4. Visual vrstva
+
+Nakonec:
+
+video
+sestřihy
+další mediální obsah
+
+To je nejvyšší nadstavba.
+
+To nejdůležitější, co jsi právě upřesnil
+
+Nechceš systém ve stylu:
+
+ručně vybírat pár lig
+ručně rozhodovat každou soutěž zvlášť
+
+Ale chceš systém ve stylu:
+
+Harvest model
+
+zadám rok → provider vrátí všechny dostupné soutěže pro daný sport a rok → z toho se postaví rozsah pro teams + fixtures + odds
+
+To je přesně ten správný enterprise model.
+
+Jak bych to přeložil do systémové logiky
+Master princip
+
+Pro každý sport a provider:
+
+pull leagues pro daný rok / season
+z toho vytvořit rozsah aktivních soutěží
+nad tím spustit:
+teams
+fixtures
+odds
+uložit coverage do DB
+teprve potom navazovat další entity
+
+Takže ne „nejdřív ručně ligy a pak možná něco dalšího“, ale:
+
+ligy definují harvest scope.
+
+To je podle mě přesně správně.
+
+Praktický datový model, který tím vzniká
+Vrstva A — Scope / discovery
+
+Provider řekne:
+
+jaké ligy jsou dostupné
+pro jaké sezóny
+které entity umí:
+teams
+fixtures
+odds
+players
+coaches
+news
+video
+
+To je vrstva „co je vůbec možné stahovat“.
+
+Vrstva B — Core ingest
+
+Na základě scope se pustí:
+
+leagues
+teams
+fixtures
+odds
+Vrstva C — Enrichment ingest
+
+Pak se přidá:
+
+players
+coaches
+Vrstva D — Media / content ingest
+
+Pak:
+
+articles
+commentary
+social/news
+video/highlights
+To je důležité i kvůli provider strategii
+
+A přesně jak píšeš:
+
+pak dál pořešíme hráče a případně trenéry. Kde od kterého providera budeme stahovat.
+
+To je správně.
+
+Protože provider pro:
+
+ligy/zápasy/týmy/kurzy
+nemusí být stejný jako provider pro:
+hráče/trenéry
+a už vůbec nemusí být stejný jako provider pro:
+news/video
+
+Takže architektura musí být:
+
+Provider-by-entity
+
+ne
+
+Provider-by-sport-only
+
+To je velký rozdíl a správný návrh.
+
+Doporučené pořadí práce teď
+
+Abych to srovnal úplně přesně:
+
+Etapa 1 — všechny sporty: core
+
+U všech prozatím natažených sportů dotáhnout:
+
+ligy
+týmy
+zápasy
+kurzy
+
+A to ve stejném systému.
+
+Etapa 2 — entity readiness matrix
+
+Pro každý sport/provider říct:
+
+leagues = ready / not ready
+teams = ready / not ready
+fixtures = ready / not ready
+odds = ready / not ready
+Etapa 3 — people vrstva
+
+Potom:
+
+players
+coaches
+Etapa 4 — content vrstva
+
+Potom:
+
+commentary
+articles
+posts
+Etapa 5 — visual vrstva
+
+Potom:
+
+highlights
+videos
+clips
+Co to znamená pro HB a ostatní sporty
+
+Tohle je důležité:
+
+HB teď není samostatný problém.
+HB je jen první sport, na kterém si ověřujeme, že:
+
+scope podle lig funguje
+teams fungují
+fixtures fungují
+public merge funguje
+provider map funguje
+
+A to samé pak musí mít:
+
+BK
+VB
+AFB
+HK
+FB
+další sporty
+
+Takže z HB si vlastně stavíme šablonu pro všechny sporty.
+
+Jak bych to formuloval jako finální pravidlo projektu
+Pravidlo 1
+
+Každý sport se nejdřív připraví v core rozsahu:
+
+leagues
+teams
+fixtures
+odds
+Pravidlo 2
+
+Harvest scope nevzniká ručně, ale z provider leagues discovery podle roku/sezóny.
+
+Pravidlo 3
+
+Teprve po core vrstvě se řeší:
+
+players
+coaches
+Pravidlo 4
+
+Teprve potom se řeší:
+
+content
+media
+visual
+Pravidlo 5
+
+Provider se vybírá podle entity, ne jen podle sportu.
+
+Co je teď nejlepší další krok
+
+Teď už bych neřešil další jednotlivou HB tabulku.
+
+Teď bych připravil:
+
+master harvest model pro všechny sporty
+
+tedy něco jako:
+
+rok / sezóna
+sport
+provider
+leagues discovery
+scope creation
+teams / fixtures / odds readiness
+status matice
+
+To bude základ, na kterém pak půjde stavět automatický harvestr.
+
+Další správný krok je podle mě:
+
+navrhnout jednotnou “core harvest orchestraci” pro všechny sporty
+tak, aby platilo:
+
+zadám rok → stáhnou se všechny dostupné soutěže → nad nimi teams + fixtures + odds
+
+Až tohle bude hotové, pak už budeš mít opravdu připravený základ pro PRO režim

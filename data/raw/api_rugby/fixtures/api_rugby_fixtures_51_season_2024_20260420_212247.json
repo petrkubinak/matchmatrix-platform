@@ -1,0 +1,898 @@
+﻿{
+    "get":  "games",
+    "parameters":  {
+                       "league":  "51",
+                       "season":  "2024"
+                   },
+    "errors":  [
+
+               ],
+    "results":  15,
+    "response":  [
+                     {
+                         "id":  40688,
+                         "date":  "2024-02-02T20:00:00+00:00",
+                         "time":  "20:00",
+                         "timestamp":  1706904000,
+                         "timezone":  "UTC",
+                         "week":  "1",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  387,
+                                                    "name":  "France",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/387.png"
+                                                },
+                                       "away":  {
+                                                    "id":  388,
+                                                    "name":  "Ireland",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/388.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  17,
+                                        "away":  38
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  10,
+                                                       "away":  17
+                                                   },
+                                         "second":  {
+                                                        "home":  7,
+                                                        "away":  21
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40689,
+                         "date":  "2024-02-03T14:15:00+00:00",
+                         "time":  "14:15",
+                         "timestamp":  1706969700,
+                         "timezone":  "UTC",
+                         "week":  "1",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  389,
+                                                    "name":  "Italy",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/389.png"
+                                                },
+                                       "away":  {
+                                                    "id":  386,
+                                                    "name":  "England",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/386.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  24,
+                                        "away":  27
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  17,
+                                                       "away":  14
+                                                   },
+                                         "second":  {
+                                                        "home":  7,
+                                                        "away":  13
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40690,
+                         "date":  "2024-02-03T16:45:00+00:00",
+                         "time":  "16:45",
+                         "timestamp":  1706978700,
+                         "timezone":  "UTC",
+                         "week":  "1",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  391,
+                                                    "name":  "Wales",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/391.png"
+                                                },
+                                       "away":  {
+                                                    "id":  390,
+                                                    "name":  "Scotland",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/390.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  26,
+                                        "away":  27
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  0,
+                                                       "away":  20
+                                                   },
+                                         "second":  {
+                                                        "home":  26,
+                                                        "away":  7
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40691,
+                         "date":  "2024-02-10T14:15:00+00:00",
+                         "time":  "14:15",
+                         "timestamp":  1707574500,
+                         "timezone":  "UTC",
+                         "week":  "2",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  390,
+                                                    "name":  "Scotland",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/390.png"
+                                                },
+                                       "away":  {
+                                                    "id":  387,
+                                                    "name":  "France",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/387.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  16,
+                                        "away":  20
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  13,
+                                                       "away":  10
+                                                   },
+                                         "second":  {
+                                                        "home":  3,
+                                                        "away":  10
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40692,
+                         "date":  "2024-02-10T16:45:00+00:00",
+                         "time":  "16:45",
+                         "timestamp":  1707583500,
+                         "timezone":  "UTC",
+                         "week":  "2",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  386,
+                                                    "name":  "England",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/386.png"
+                                                },
+                                       "away":  {
+                                                    "id":  391,
+                                                    "name":  "Wales",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/391.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  16,
+                                        "away":  14
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  5,
+                                                       "away":  14
+                                                   },
+                                         "second":  {
+                                                        "home":  11,
+                                                        "away":  0
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40693,
+                         "date":  "2024-02-11T15:00:00+00:00",
+                         "time":  "15:00",
+                         "timestamp":  1707663600,
+                         "timezone":  "UTC",
+                         "week":  "2",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  388,
+                                                    "name":  "Ireland",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/388.png"
+                                                },
+                                       "away":  {
+                                                    "id":  389,
+                                                    "name":  "Italy",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/389.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  36,
+                                        "away":  0
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  19,
+                                                       "away":  0
+                                                   },
+                                         "second":  {
+                                                        "home":  17,
+                                                        "away":  0
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40694,
+                         "date":  "2024-02-24T14:15:00+00:00",
+                         "time":  "14:15",
+                         "timestamp":  1708784100,
+                         "timezone":  "UTC",
+                         "week":  "3",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  388,
+                                                    "name":  "Ireland",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/388.png"
+                                                },
+                                       "away":  {
+                                                    "id":  391,
+                                                    "name":  "Wales",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/391.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  31,
+                                        "away":  7
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  17,
+                                                       "away":  0
+                                                   },
+                                         "second":  {
+                                                        "home":  14,
+                                                        "away":  7
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40695,
+                         "date":  "2024-02-24T16:45:00+00:00",
+                         "time":  "16:45",
+                         "timestamp":  1708793100,
+                         "timezone":  "UTC",
+                         "week":  "3",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  390,
+                                                    "name":  "Scotland",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/390.png"
+                                                },
+                                       "away":  {
+                                                    "id":  386,
+                                                    "name":  "England",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/386.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  30,
+                                        "away":  21
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  17,
+                                                       "away":  13
+                                                   },
+                                         "second":  {
+                                                        "home":  13,
+                                                        "away":  8
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40696,
+                         "date":  "2024-02-25T15:00:00+00:00",
+                         "time":  "15:00",
+                         "timestamp":  1708873200,
+                         "timezone":  "UTC",
+                         "week":  "3",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  387,
+                                                    "name":  "France",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/387.png"
+                                                },
+                                       "away":  {
+                                                    "id":  389,
+                                                    "name":  "Italy",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/389.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  13,
+                                        "away":  13
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  10,
+                                                       "away":  3
+                                                   },
+                                         "second":  {
+                                                        "home":  3,
+                                                        "away":  10
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40697,
+                         "date":  "2024-03-09T14:15:00+00:00",
+                         "time":  "14:15",
+                         "timestamp":  1709993700,
+                         "timezone":  "UTC",
+                         "week":  "4",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  389,
+                                                    "name":  "Italy",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/389.png"
+                                                },
+                                       "away":  {
+                                                    "id":  390,
+                                                    "name":  "Scotland",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/390.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  31,
+                                        "away":  29
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  16,
+                                                       "away":  22
+                                                   },
+                                         "second":  {
+                                                        "home":  15,
+                                                        "away":  7
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40698,
+                         "date":  "2024-03-09T16:45:00+00:00",
+                         "time":  "16:45",
+                         "timestamp":  1710002700,
+                         "timezone":  "UTC",
+                         "week":  "4",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  386,
+                                                    "name":  "England",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/386.png"
+                                                },
+                                       "away":  {
+                                                    "id":  388,
+                                                    "name":  "Ireland",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/388.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  23,
+                                        "away":  22
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  8,
+                                                       "away":  12
+                                                   },
+                                         "second":  {
+                                                        "home":  15,
+                                                        "away":  10
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40699,
+                         "date":  "2024-03-10T15:00:00+00:00",
+                         "time":  "15:00",
+                         "timestamp":  1710082800,
+                         "timezone":  "UTC",
+                         "week":  "4",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  391,
+                                                    "name":  "Wales",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/391.png"
+                                                },
+                                       "away":  {
+                                                    "id":  387,
+                                                    "name":  "France",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/387.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  24,
+                                        "away":  45
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  17,
+                                                       "away":  20
+                                                   },
+                                         "second":  {
+                                                        "home":  7,
+                                                        "away":  25
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40700,
+                         "date":  "2024-03-16T14:15:00+00:00",
+                         "time":  "14:15",
+                         "timestamp":  1710598500,
+                         "timezone":  "UTC",
+                         "week":  "5",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  391,
+                                                    "name":  "Wales",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/391.png"
+                                                },
+                                       "away":  {
+                                                    "id":  389,
+                                                    "name":  "Italy",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/389.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  21,
+                                        "away":  24
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  0,
+                                                       "away":  11
+                                                   },
+                                         "second":  {
+                                                        "home":  21,
+                                                        "away":  13
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40701,
+                         "date":  "2024-03-16T16:45:00+00:00",
+                         "time":  "16:45",
+                         "timestamp":  1710607500,
+                         "timezone":  "UTC",
+                         "week":  "5",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  388,
+                                                    "name":  "Ireland",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/388.png"
+                                                },
+                                       "away":  {
+                                                    "id":  390,
+                                                    "name":  "Scotland",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/390.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  17,
+                                        "away":  13
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  7,
+                                                       "away":  6
+                                                   },
+                                         "second":  {
+                                                        "home":  10,
+                                                        "away":  7
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     },
+                     {
+                         "id":  40702,
+                         "date":  "2024-03-16T20:00:00+00:00",
+                         "time":  "20:00",
+                         "timestamp":  1710619200,
+                         "timezone":  "UTC",
+                         "week":  "5",
+                         "status":  {
+                                        "long":  "Finished",
+                                        "short":  "FT"
+                                    },
+                         "country":  {
+                                         "id":  25,
+                                         "name":  "Europe",
+                                         "code":  null,
+                                         "flag":  null
+                                     },
+                         "league":  {
+                                        "id":  51,
+                                        "name":  "Six Nations",
+                                        "type":  "Cup",
+                                        "logo":  "https://media.api-sports.io/rugby/leagues/51.png",
+                                        "season":  2024
+                                    },
+                         "teams":  {
+                                       "home":  {
+                                                    "id":  387,
+                                                    "name":  "France",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/387.png"
+                                                },
+                                       "away":  {
+                                                    "id":  386,
+                                                    "name":  "England",
+                                                    "logo":  "https://media.api-sports.io/rugby/teams/386.png"
+                                                }
+                                   },
+                         "scores":  {
+                                        "home":  33,
+                                        "away":  31
+                                    },
+                         "periods":  {
+                                         "first":  {
+                                                       "home":  16,
+                                                       "away":  10
+                                                   },
+                                         "second":  {
+                                                        "home":  17,
+                                                        "away":  21
+                                                    },
+                                         "overtime":  {
+                                                          "home":  null,
+                                                          "away":  null
+                                                      },
+                                         "second_overtime":  {
+                                                                 "home":  null,
+                                                                 "away":  null
+                                                             }
+                                     }
+                     }
+                 ]
+}

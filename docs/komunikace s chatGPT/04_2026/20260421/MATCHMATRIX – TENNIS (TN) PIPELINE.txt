@@ -1,0 +1,109 @@
+MATCHMATRIX – TENNIS (TN) PIPELINE – STAV A NAVÁZÁNÍ
+✅ 1) TN LEAGUES – HOTOVO (SEED VRSTVA)
+pull: RapidAPI search endpoint
+raw: staging.api_tennis_leagues_raw
+parser: staging.api_tennis_leagues
+merge: public.leagues
+
+✔ výsledek:
+
+ATP / WTA turnaje zapsány do public.leagues
+zatím jako search-based seed
+✅ 2) TN FIXTURES – CORE PIPELINE HOTOVO
+🔹 Pull
+provider: tennisapi1.p.rapidapi.com
+endpoint: /api/tennis/events/live
+🔹 RAW
+staging.api_tennis_fixtures_raw
+✔ funguje
+🔹 PARSE
+staging.api_tennis_fixtures
+✔ 1 RAW → 69 fixtures
+🔹 PARTICIPANTS (KLÍČOVÝ KROK)
+players/doubles → public.teams
+mapování → public.team_provider_map
+
+✔ příklad:
+
+player:adolfo daniel vallejo
+player:majdandzic m / voelzke g
+✅ 3) TN MATCHES – HOTOVO
+🔹 Merge do public.matches
+
+✔ výsledek:
+
+~50+ live zápasů
+sport_id = 4 (TN)
+ext_source = api_tennis
+home_team_id / away_team_id napojené
+status = LIVE
+
+✔ ukázka:
+
+362317  TN  Vallejo vs Rocha
+362320  TN  Montgomery vs Linette
+362330  TN  Mmoh vs Roncadelli
+...
+
+👉 TN matches jsou plně funkční v core vrstvě
+
+📊 AKTUÁLNÍ STAV TN
+Vrstva	Stav
+leagues	PARTIAL (seed)
+fixtures pull	✅
+fixtures raw	✅
+fixtures staging	✅
+participants (teams)	✅
+matches (public)	✅
+odds	❌
+players (detail)	❌
+enrichment	❌
+🧠 KLÍČOVÉ ARCHITEKTONICKÉ ROZHODNUTÍ
+
+✔ Tennis byl úspěšně namapován na team-based model:
+
+hráč = team
+dvojice = team
+kompatibilní s:
+public.matches
+odds
+ticket engine
+
+👉 Tím pádem TN zapadá do MatchMatrix bez speciální větve
+
+🚀 NAVÁZÁNÍ – DALŠÍ KROK
+👉 DALŠÍ KROK (JEDEN):
+TN MATCH DETAIL ENRICHMENT
+
+Použít endpoint:
+
+/api/tennis/event/{id}
+
+a následně:
+
+/statistics
+/highlights
+🎯 CÍL DALŠÍHO KROKU
+
+Obohatit public.matches o:
+
+score (sety)
+detailní status
+surface
+round
+tournament detail
+případně odds-ready strukturu
+📌 DALŠÍ KROKY (ROADMAP)
+TN match detail parser
+TN statistics ingest
+TN odds provider (pokud existuje)
+runtime_entity_audit → TN fixtures = CONFIRMED
+napojení do ticket engine
+🔥 SHRnutí
+
+👉 TN už není experiment
+👉 TN už je produkčně použitelný core pipeline
+
+máš matches
+máš identity
+máš live data

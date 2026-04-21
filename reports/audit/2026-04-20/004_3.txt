@@ -1,0 +1,213 @@
+|id    |name                                         |country               |ext_source  |ext_league_id|
+|------|---------------------------------------------|----------------------|------------|-------------|
+|24,924|WHA Women                                    |Austria               |api_handball|1            |
+|24,993|HLA                                          |Austria               |api_handball|2            |
+|25,040|OHB Cup                                      |Austria               |api_handball|3            |
+|24,916|OHB Cup Women                                |Austria               |api_handball|4            |
+|24,927|Supercup                                     |Austria               |api_handball|5            |
+|25,041|Division 1                                   |Belarus               |api_handball|6            |
+|24,964|Division 1                                   |Belgium               |api_handball|7            |
+|24,933|Premijer Liga                                |Bosnia-And-Herzegovina|api_handball|8            |
+|24,910|A RHG                                        |Bulgaria              |api_handball|9            |
+|25,054|Premijer liga                                |Croatia               |api_handball|10           |
+|24,996|1. HRL Women                                 |Croatia               |api_handball|11           |
+|24,900|Extraliga                                    |Czech-Republic        |api_handball|12           |
+|24,966|Czech Cup                                    |Czech-Republic        |api_handball|13           |
+|24,989|Czech Cup Women                              |Czech-Republic        |api_handball|14           |
+|25,069|1. Division                                  |Denmark               |api_handball|15           |
+|24,984|1. Division Women                            |Denmark               |api_handball|16           |
+|25,073|Super Cup                                    |Denmark               |api_handball|17           |
+|24,977|Super Cup Women                              |Denmark               |api_handball|18           |
+|25,007|Santander Cup                                |Denmark               |api_handball|19           |
+|24,944|Santander Cup Women                          |Denmark               |api_handball|20           |
+|25,009|888ligaen                                    |Denmark               |api_handball|21           |
+|24,995|Herre Handbold Ligaen                        |Denmark               |api_handball|23           |
+|25,088|HTH Ligaen Women                             |Denmark               |api_handball|24           |
+|25,067|Bambusa Kvindeligaen Women                   |Denmark               |api_handball|25           |
+|24,922|Meistriliiga                                 |Estonia               |api_handball|26           |
+|25,036|SM-sarja                                     |Finland               |api_handball|27           |
+|24,902|SM-sarja Women                               |Finland               |api_handball|28           |
+|24,980|Division 1 Women                             |France                |api_handball|29           |
+|25,030|Coupe de la Ligue                            |France                |api_handball|30           |
+|25,056|Coupe de la Ligue Women                      |France                |api_handball|31           |
+|25,020|Coupe de France                              |France                |api_handball|32           |
+|24,899|Trophee des Champions                        |France                |api_handball|33           |
+|24,942|Starligue                                    |France                |api_handball|34           |
+|24,971|Coupe de France Women                        |France                |api_handball|35           |
+|24,941|Proligue                                     |France                |api_handball|36           |
+|25,052|Superleague                                  |North-Macedonia       |api_handball|37           |
+|24,994|Superleague Women                            |North-Macedonia       |api_handball|38           |
+|24,963|Bundesliga                                   |Germany               |api_handball|39           |
+|24,909|Super Cup                                    |Germany               |api_handball|40           |
+|25,046|DHB Pokal                                    |Germany               |api_handball|41           |
+|24,997|1. Bundesliga Women                          |Germany               |api_handball|42           |
+|24,911|2. Bundesliga                                |Germany               |api_handball|43           |
+|24,990|DHB Pokal Women                              |Germany               |api_handball|44           |
+|25,059|2. Bundesliga Women                          |Germany               |api_handball|45           |
+|24,923|Super Cup Women                              |Germany               |api_handball|46           |
+|24,940|A1                                           |Greece                |api_handball|47           |
+|24,948|Greek Cup                                    |Greece                |api_handball|48           |
+|24,987|NB I                                         |Hungary               |api_handball|49           |
+|24,961|NB I Women                                   |Hungary               |api_handball|50           |
+|25,019|Hungarian Cup                                |Hungary               |api_handball|51           |
+|24,970|Hungarian Cup Women                          |Hungary               |api_handball|52           |
+|25,003|Olis Deildin                                 |Iceland               |api_handball|53           |
+|25,055|Olis Deild Women                             |Iceland               |api_handball|54           |
+|25,083|Division 1                                   |Israel                |api_handball|55           |
+|24,979|Serie A                                      |Italy                 |api_handball|56           |
+|25,027|Coppa Italia                                 |Italy                 |api_handball|57           |
+|24,981|Serie A Women                                |Italy                 |api_handball|58           |
+|24,983|Coppa Italia Women                           |Italy                 |api_handball|59           |
+|24,935|SynotTip Virsliga                            |Latvia                |api_handball|60           |
+|24,908|Lietuvos Lyga                                |Lithuania             |api_handball|61           |
+|24,931|Sales Lentz League                           |Luxembourg            |api_handball|62           |
+|24,976|AXA League                                   |Luxembourg            |api_handball|63           |
+|24,938|1st Division                                 |Malta                 |api_handball|64           |
+|24,886|Prva liga                                    |Montenegro            |api_handball|65           |
+|25,051|Eredivisie                                   |Netherlands           |api_handball|66           |
+|25,087|Eredivisie Women                             |Netherlands           |api_handball|67           |
+|24,897|HandbalNL League                             |Netherlands           |api_handball|68           |
+|25,049|1. Division                                  |Norway                |api_handball|69           |
+|24,949|1. Division Women                            |Norway                |api_handball|70           |
+|25,021|NM Cup                                       |Norway                |api_handball|71           |
+|24,953|NM Cup Women                                 |Norway                |api_handball|72           |
+|24,934|Grundigligaen                                |Norway                |api_handball|73           |
+|25,018|Grundigligaen women                          |Norway                |api_handball|74           |
+|25,037|REMA 1000-ligaen                             |Norway                |api_handball|75           |
+|24,928|REMA 1000-ligaen women                       |Norway                |api_handball|76           |
+|24,974|Superliga Women                              |Poland                |api_handball|77           |
+|25,066|Superliga                                    |Poland                |api_handball|78           |
+|25,029|Polish Cup Women                             |Poland                |api_handball|79           |
+|24,887|Polish Cup                                   |Poland                |api_handball|80           |
+|25,057|I Liga                                       |Poland                |api_handball|81           |
+|24,894|I Liga Women                                 |Poland                |api_handball|82           |
+|25,082|Super Cup                                    |Portugal              |api_handball|83           |
+|24,912|Andebol 1                                    |Portugal              |api_handball|84           |
+|24,965|1a Divisao Women                             |Portugal              |api_handball|85           |
+|24,969|Taca de Portugal                             |Portugal              |api_handball|86           |
+|24,898|Liga Nationala                               |Romania               |api_handball|87           |
+|25,006|Liga Nationala Women                         |Romania               |api_handball|88           |
+|25,071|Romanian Cup                                 |Romania               |api_handball|89           |
+|24,888|Romanian Cup Women                           |Romania               |api_handball|90           |
+|25,000|Superleague                                  |Russia                |api_handball|91           |
+|25,064|Superleague Women                            |Russia                |api_handball|92           |
+|24,925|Russian Cup                                  |Russia                |api_handball|93           |
+|25,032|Supercup Women                               |Russia                |api_handball|94           |
+|24,914|Supercup                                     |Russia                |api_handball|95           |
+|24,918|Russian Cup Women                            |Russia                |api_handball|96           |
+|25,063|Superliga                                    |Serbia                |api_handball|97           |
+|25,086|Extraliga                                    |Slovakia              |api_handball|98           |
+|24,962|1.A DRL Women                                |Slovenia              |api_handball|99           |
+|25,039|1. NLB Liga                                  |Slovenia              |api_handball|100          |
+|24,885|1st League Women                             |South-Korea           |api_handball|101          |
+|25,022|1st League                                   |South-Korea           |api_handball|102          |
+|24,893|Liga ASOBAL                                  |Spain                 |api_handball|103          |
+|24,913|Division de Honor Plata                      |Spain                 |api_handball|104          |
+|25,061|Copa Asobal                                  |Spain                 |api_handball|105          |
+|24,950|Supercopa                                    |Spain                 |api_handball|106          |
+|24,968|Copa del Rey                                 |Spain                 |api_handball|107          |
+|24,985|Division de Honor Women                      |Spain                 |api_handball|108          |
+|24,958|Supercopa Women                              |Spain                 |api_handball|109          |
+|25,089|Copa de la Reina Women                       |Spain                 |api_handball|110          |
+|25,062|Allsvenskan                                  |Sweden                |api_handball|111          |
+|24,890|Allsvenskan Women                            |Sweden                |api_handball|112          |
+|24,892|Handbollsligan                               |Sweden                |api_handball|113          |
+|25,025|SHE Women                                    |Sweden                |api_handball|114          |
+|24,946|NLA                                          |Switzerland           |api_handball|115          |
+|25,048|SPL Women                                    |Switzerland           |api_handball|116          |
+|25,075|Schweizer Cup                                |Switzerland           |api_handball|117          |
+|24,955|Schweizer Cup Women                          |Switzerland           |api_handball|118          |
+|24,998|Super Cup                                    |Switzerland           |api_handball|119          |
+|24,975|Superlig                                     |Turkey                |api_handball|120          |
+|25,085|Superlig Women                               |Turkey                |api_handball|121          |
+|24,954|Superleague                                  |Ukraine               |api_handball|122          |
+|25,024|Super Cup                                    |Italy                 |api_handball|123          |
+|25,004|Super Cup Women                              |Italy                 |api_handball|124          |
+|25,008|JHL                                          |Japan                 |api_handball|125          |
+|25,001|JHL Women                                    |Japan                 |api_handball|126          |
+|25,053|Central League                               |Poland                |api_handball|127          |
+|24,945|Swedish Cup                                  |Sweden                |api_handball|128          |
+|25,078|Swedish Cup Women                            |Sweden                |api_handball|129          |
+|24,884|Super Cup Women                              |Switzerland           |api_handball|130          |
+|24,881|Champions League                             |Europe                |api_handball|131          |
+|24,919|Champions League Women                       |Europe                |api_handball|132          |
+|25,065|European Championship Women                  |Europe                |api_handball|133          |
+|24,951|European Championship U20                    |Europe                |api_handball|134          |
+|24,905|Baltic League                                |Europe                |api_handball|135          |
+|24,936|SEHA Liga                                    |Europe                |api_handball|136          |
+|25,047|European Championship U19 Women              |Europe                |api_handball|137          |
+|24,939|BENE-League                                  |Europe                |api_handball|138          |
+|25,033|European Championship U17 Women              |Europe                |api_handball|139          |
+|24,937|MOL Liga Women                               |Europe                |api_handball|140          |
+|24,889|European Championship U20 B                  |Europe                |api_handball|141          |
+|25,017|EHF Euro Cup                                 |Europe                |api_handball|142          |
+|24,947|European Championship U19 B Women            |Europe                |api_handball|143          |
+|25,077|European Championship U17 B Women            |Europe                |api_handball|144          |
+|24,882|EHF European League                          |Europe                |api_handball|145          |
+|24,926|EHF European League Women                    |Europe                |api_handball|146          |
+|24,999|European Cup                                 |Europe                |api_handball|147          |
+|25,042|European Cup Women                           |Europe                |api_handball|148          |
+|25,031|IHF/EHF Trophy                               |Europe                |api_handball|149          |
+|24,901|EHF Euro Cup Women                           |Europe                |api_handball|150          |
+|25,002|European Championship U19                    |Europe                |api_handball|151          |
+|25,005|European Championship U19 B                  |Europe                |api_handball|152          |
+|25,058|World Championship                           |World                 |api_handball|153          |
+|25,072|World Championship Women                     |World                 |api_handball|154          |
+|24,930|Olympic Games                                |World                 |api_handball|155          |
+|24,904|Olympic Games Women                          |World                 |api_handball|156          |
+|24,988|World Championship U20 Women                 |World                 |api_handball|157          |
+|25,034|World Championship U18 Women                 |World                 |api_handball|158          |
+|25,068|World Championship U21                       |World                 |api_handball|159          |
+|24,895|Mediterranean Games Women                    |World                 |api_handball|160          |
+|25,090|Mediterranean Games                          |World                 |api_handball|161          |
+|24,986|World Championship U19                       |World                 |api_handball|162          |
+|25,044|Super Globe                                  |World                 |api_handball|163          |
+|24,960|Super Globe Women                            |World                 |api_handball|164          |
+|25,045|South and Central American Championship      |World                 |api_handball|165          |
+|24,896|South and Central American Championship Women|World                 |api_handball|166          |
+|25,011|Intersport Cup Women                         |World                 |api_handball|167          |
+|25,050|IHF Emerging Nations Championship            |World                 |api_handball|168          |
+|25,035|Pan American Games Women                     |World                 |api_handball|169          |
+|25,012|Pan American Games                           |World                 |api_handball|170          |
+|24,959|Pan American Club Championship               |World                 |api_handball|171          |
+|24,917|Pan American Championship                    |World                 |api_handball|172          |
+|24,973|Pan American Club Championship Women         |World                 |api_handball|173          |
+|25,015|Pan American Championship Women              |World                 |api_handball|174          |
+|25,013|Challenge Cup                                |Europe                |api_handball|175          |
+|24,956|Challenge Cup Women                          |Europe                |api_handball|176          |
+|24,907|European Championship                        |Europe                |api_handball|177          |
+|24,957|EHF Cup Women                                |Europe                |api_handball|178          |
+|25,084|EHF Cup                                      |Europe                |api_handball|179          |
+|24,903|EHF Challenge Trophy Women                   |Europe                |api_handball|180          |
+|25,038|European Championship U18 B                  |Europe                |api_handball|181          |
+|24,992|Czech-Slovak Cup                             |Europe                |api_handball|182          |
+|24,883|African Championship                         |Africa                |api_handball|183          |
+|25,023|African Championship Women                   |Africa                |api_handball|184          |
+|25,028|Asian Championship Women                     |Asia                  |api_handball|185          |
+|24,972|Asian Championship                           |Asia                  |api_handball|186          |
+|24,967|Asian Games                                  |Asia                  |api_handball|187          |
+|24,929|Asian Games Women                            |Asia                  |api_handball|188          |
+|24,978|Golden League - France Women                 |Europe                |api_handball|189          |
+|24,906|Golden League - Denmark Women                |Europe                |api_handball|190          |
+|24,952|Golden League - Denmark                      |Europe                |api_handball|192          |
+|24,891|Golden League - Norway                       |Europe                |api_handball|193          |
+|25,081|Club Friendly                                |World                 |api_handball|194          |
+|25,076|Club Friendly Women                          |World                 |api_handball|195          |
+|25,016|Friendly International                       |World                 |api_handball|196          |
+|25,026|Friendly International Women                 |World                 |api_handball|197          |
+|24,921|African Games                                |Africa                |api_handball|198          |
+|25,080|African Games Women                          |Africa                |api_handball|199          |
+|24,982|European Championship U18                    |Europe                |api_handball|200          |
+|25,060|Golden League - France                       |Europe                |api_handball|201          |
+|24,991|Supercopa Iberica                            |Europe                |api_handball|202          |
+|25,010|Supercopa Iberica Women                      |Europe                |api_handball|203          |
+|25,014|Golden League - Netherlands Women            |Europe                |api_handball|204          |
+|24,915|Suomen Cup                                   |Finland               |api_handball|205          |
+|25,070|Suomen Cup Women                             |Finland               |api_handball|206          |
+|25,074|Central League Women                         |Poland                |api_handball|207          |
+|25,043|Super Cup                                    |Romania               |api_handball|208          |
+|24,932|Super Cup Women                              |Romania               |api_handball|209          |
+|25,079|Superliga Women                              |Serbia                |api_handball|210          |
+|25,091|Slovakia Cup                                 |Slovakia              |api_handball|211          |
+|24,920|Slovenian Cup                                |Slovakia              |api_handball|212          |
+|24,943|Posten Cup Women                             |World                 |api_handball|213          |

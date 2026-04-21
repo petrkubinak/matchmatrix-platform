@@ -222,10 +222,39 @@ def main() -> None:
         }
 
         def build_sport_id_case(expr: str) -> str:
+            """
+            Překlad sport identifier -> public.sports.id
+
+            Umí:
+            - plné názvy provider sportů (football, handball, ...)
+            - interní kódy sportů (FB, HB, BK, ...)
+            """
+            aliases = {
+                "football": ["football", "fb"],
+                "hockey": ["hockey", "hk"],
+                "basketball": ["basketball", "bk"],
+                "tennis": ["tennis", "tn"],
+                "mma": ["mma"],
+                "darts": ["darts", "drt"],
+                "volleyball": ["volleyball", "vb"],
+                "handball": ["handball", "hb"],
+                "baseball": ["baseball", "bsb"],
+                "rugby": ["rugby", "rgb"],
+                "cricket": ["cricket", "ck"],
+                "field_hockey": ["field_hockey", "fh"],
+                "american_football": ["american_football", "afb"],
+                "esports": ["esports", "esp"],
+            }
+
             lines = ["CASE"]
+
             for sport_name, sport_id in sport_name_to_id.items():
-                if sport_id is not None:
-                    lines.append(f"    WHEN lower({expr}) = '{sport_name}' THEN {sport_id}")
+                if sport_id is None:
+                    continue
+
+                for alias in aliases.get(sport_name, [sport_name]):
+                    lines.append(f"    WHEN lower({expr}) = '{alias}' THEN {sport_id}")
+
             lines.append("    ELSE NULL")
             lines.append("END")
             return "\n".join(lines)

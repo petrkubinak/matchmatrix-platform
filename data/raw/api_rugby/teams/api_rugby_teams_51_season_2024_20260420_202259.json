@@ -1,0 +1,121 @@
+﻿{
+    "get":  "teams",
+    "parameters":  {
+                       "league":  "51",
+                       "season":  "2024"
+                   },
+    "errors":  [
+
+               ],
+    "results":  6,
+    "response":  [
+                     {
+                         "id":  386,
+                         "name":  "England",
+                         "logo":  "https://media.api-sports.io/rugby/teams/386.png",
+                         "national":  true,
+                         "founded":  null,
+                         "arena":  {
+                                       "name":  null,
+                                       "capacity":  null,
+                                       "location":  null
+                                   },
+                         "country":  {
+                                         "id":  6,
+                                         "name":  "England",
+                                         "code":  "GB",
+                                         "flag":  "https://media.api-sports.io/flags/gb.svg"
+                                     }
+                     },
+                     {
+                         "id":  387,
+                         "name":  "France",
+                         "logo":  "https://media.api-sports.io/rugby/teams/387.png",
+                         "national":  true,
+                         "founded":  null,
+                         "arena":  {
+                                       "name":  null,
+                                       "capacity":  null,
+                                       "location":  null
+                                   },
+                         "country":  {
+                                         "id":  7,
+                                         "name":  "France",
+                                         "code":  "FR",
+                                         "flag":  "https://media.api-sports.io/flags/fr.svg"
+                                     }
+                     },
+                     {
+                         "id":  388,
+                         "name":  "Ireland",
+                         "logo":  "https://media.api-sports.io/rugby/teams/388.png",
+                         "national":  true,
+                         "founded":  null,
+                         "arena":  {
+                                       "name":  null,
+                                       "capacity":  null,
+                                       "location":  null
+                                   },
+                         "country":  {
+                                         "id":  10,
+                                         "name":  "Ireland",
+                                         "code":  "IE",
+                                         "flag":  "https://media.api-sports.io/flags/ie.svg"
+                                     }
+                     },
+                     {
+                         "id":  389,
+                         "name":  "Italy",
+                         "logo":  "https://media.api-sports.io/rugby/teams/389.png",
+                         "national":  true,
+                         "founded":  null,
+                         "arena":  {
+                                       "name":  null,
+                                       "capacity":  null,
+                                       "location":  null
+                                   },
+                         "country":  {
+                                         "id":  11,
+                                         "name":  "Italy",
+                                         "code":  "IT",
+                                         "flag":  "https://media.api-sports.io/flags/it.svg"
+                                     }
+                     },
+                     {
+                         "id":  390,
+                         "name":  "Scotland",
+                         "logo":  "https://media.api-sports.io/rugby/teams/390.png",
+                         "national":  true,
+                         "founded":  null,
+                         "arena":  {
+                                       "name":  null,
+                                       "capacity":  null,
+                                       "location":  null
+                                   },
+                         "country":  {
+                                         "id":  19,
+                                         "name":  "Scotland",
+                                         "code":  "GB",
+                                         "flag":  "https://media.api-sports.io/flags/gb.svg"
+                                     }
+                     },
+                     {
+                         "id":  391,
+                         "name":  "Wales",
+                         "logo":  "https://media.api-sports.io/rugby/teams/391.png",
+                         "national":  true,
+                         "founded":  null,
+                         "arena":  {
+                                       "name":  null,
+                                       "capacity":  null,
+                                       "location":  null
+                                   },
+                         "country":  {
+                                         "id":  23,
+                                         "name":  "Wales",
+                                         "code":  "GB",
+                                         "flag":  "https://media.api-sports.io/flags/gb.svg"
+                                     }
+                     }
+                 ]
+}

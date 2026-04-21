@@ -35,12 +35,13 @@ function Load-DotEnvFile {
     if ([string]::IsNullOrWhiteSpace($Path)) { return }
     if (-not (Test-Path $Path)) { return }
 
-    Write-Log "Načítám ENV z: $Path"
+    Write-Log "Nacitám ENV z: $Path"
 
     Get-Content $Path | ForEach-Object {
         $line = $_.Trim()
         if ([string]::IsNullOrWhiteSpace($line)) { return }
         if ($line.StartsWith("#")) { return }
+
         $eqIndex = $line.IndexOf("=")
         if ($eqIndex -lt 1) { return }
 
@@ -69,20 +70,20 @@ function Resolve-ApiBase {
     $sportKey = $sportValue.Trim().ToLower()
 
     $apiBaseMap = @{
-        football           = "https://v3.football.api-sports.io"
-        hockey             = "https://v1.hockey.api-sports.io"
-        basketball         = "https://v1.basketball.api-sports.io"
-        baseball           = "https://v1.baseball.api-sports.io"
-        volleyball         = "https://v1.volleyball.api-sports.io"
-        handball           = "https://v1.handball.api-sports.io"
-        rugby              = "https://v1.rugby.api-sports.io"
-        mma                = "https://v1.mma.api-sports.io"
-        american_football  = "https://v1.american-football.api-sports.io"
-        nfl                = "https://v1.american-football.api-sports.io"
+        football          = "https://v3.football.api-sports.io"
+        hockey            = "https://v1.hockey.api-sports.io"
+        basketball        = "https://v1.basketball.api-sports.io"
+        baseball          = "https://v1.baseball.api-sports.io"
+        volleyball        = "https://v1.volleyball.api-sports.io"
+        handball          = "https://v1.handball.api-sports.io"
+        rugby             = "https://v1.rugby.api-sports.io"
+        mma               = "https://v1.mma.api-sports.io"
+        american_football = "https://v1.american-football.api-sports.io"
+        nfl               = "https://v1.american-football.api-sports.io"
     }
 
     if (-not $apiBaseMap.ContainsKey($sportKey)) {
-        throw "Sport '$sportKey' není podporovaný providerem api_sport."
+        throw "Sport '$sportKey' neni podporovaný providerem api_sport."
     }
 
     return $apiBaseMap[$sportKey]
@@ -100,17 +101,17 @@ function Resolve-ApiKey {
 
     $key = [Environment]::GetEnvironmentVariable("API_SPORTS_KEY")
     if (-not [string]::IsNullOrWhiteSpace($key)) {
-        Write-Log "Použit API klíč z ENV: API_SPORTS_KEY"
+        Write-Log "Pouzit API klic z ENV: API_SPORTS_KEY"
         return $key
     }
 
     $key = [Environment]::GetEnvironmentVariable("APISPORTS_KEY")
     if (-not [string]::IsNullOrWhiteSpace($key)) {
-        Write-Log "Použit API klíč z ENV: APISPORTS_KEY"
+        Write-Log "Pouzit API klic z ENV: APISPORTS_KEY"
         return $key
     }
 
-    throw "Chybí API key. Předej -ApiKey nebo nastav ENV."
+    throw "Chybi API key. Predej -ApiKey nebo nastav ENV."
 }
 
 function Escape-SqlLiteral {
@@ -171,7 +172,7 @@ Write-Log "Provider   : $Provider"
 Write-Log "Endpoint   : $EndpointName"
 Write-Log "API Base   : $ApiBase"
 Write-Log "URL        : $Url"
-Write-Log "Volám API-Sports leagues endpoint..."
+Write-Log "Volam API-Sports leagues endpoint..."
 
 $headers = @{
     "x-apisports-key" = $ApiKey
@@ -195,15 +196,15 @@ $payloadHash = [System.BitConverter]::ToString(
 
 Write-Log "Payload SHA256: $payloadHash"
 
-$providerSql    = Escape-SqlLiteral $Provider
-$sportSql       = Escape-SqlLiteral $SportCode
-$entitySql      = Escape-SqlLiteral "leagues"
-$endpointSql    = Escape-SqlLiteral $EndpointName
-$externalIdSql  = Escape-SqlLiteral $SportCode
-$seasonSql      = Escape-SqlLiteral $Season
-$payloadSql     = Escape-SqlLiteral $payloadJson
-$hashSql        = Escape-SqlLiteral $payloadHash
-$messageSql     = Escape-SqlLiteral "leagues pull OK | sport=$SportCode | results=$results | run_id=$RunId"
+$providerSql   = Escape-SqlLiteral $Provider
+$sportSql      = Escape-SqlLiteral $SportCode
+$entitySql     = Escape-SqlLiteral "leagues"
+$endpointSql   = Escape-SqlLiteral $EndpointName
+$externalIdSql = Escape-SqlLiteral $SportCode
+$seasonSql     = Escape-SqlLiteral $Season
+$payloadSql    = Escape-SqlLiteral $payloadJson
+$hashSql       = Escape-SqlLiteral $payloadHash
+$messageSql    = Escape-SqlLiteral "leagues pull OK | sport=$SportCode | results=$results | run_id=$RunId"
 
 $sql = @"
 INSERT INTO staging.stg_api_payloads
@@ -238,32 +239,54 @@ VALUES
 
 $db = Get-DbExecCommand
 
-# SQL uložíme do dočasného souboru, ať nenarážíme na limit délky command line
+# SQL ulozime do docasneho souboru, at nenarazime na limit delky command line
 $tempSqlFile = Join-Path $env:TEMP ("matchmatrix_api_sport_leagues_" + $RunId + ".sql")
 Set-Content -Path $tempSqlFile -Value $sql -Encoding UTF8
 
 try {
     if ($db.Mode -eq "docker_exec") {
-        Write-Log "DB insert přes docker exec do kontejneru: $($db.Container)"
+        Write-Log "DB insert pres docker exec do kontejneru: $($db.Container)"
         Get-Content -Path $tempSqlFile | docker exec -i $($db.Container) psql -U $($db.User) -d $($db.Db)
         if ($LASTEXITCODE -ne 0) {
-            throw "docker exec psql skončil s kódem $LASTEXITCODE"
+            throw "docker exec psql skoncil s kodem $LASTEXITCODE"
         }
     }
     else {
-        Write-Log "DB insert přes local psql"
+        Write-Log "DB insert pres local psql"
         $env:PGPASSWORD = $db.Pass
         psql -h $db.Host -p $db.Port -U $db.User -d $db.Db -f $tempSqlFile
         if ($LASTEXITCODE -ne 0) {
-            throw "local psql skončil s kódem $LASTEXITCODE"
+            throw "local psql skoncil s kodem $LASTEXITCODE"
         }
     }
+
+    Write-Log "RAW payload insert OK."
 }
 finally {
     if (Test-Path $tempSqlFile) {
-        Remove-Item $tempSqlFile -Force
+        Remove-Item $tempSqlFile -Force -ErrorAction SilentlyContinue
     }
 }
 
-Write-Log "Payload uložen do staging.stg_api_payloads"
-Write-Log "Hotovo."
+# =========================================================
+# PARSE BINDING -> stg_provider_leagues
+# =========================================================
+$ParserScript = "C:\MatchMatrix-platform\workers\run_parse_api_sport_leagues_v1.py"
+
+if (Test-Path $ParserScript) {
+    Write-Log "Spoustim parser: $ParserScript"
+
+    & "C:\Python314\python.exe" $ParserScript `
+        --provider $Provider `
+        --sport $SportCode `
+        --entity "leagues"
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "Parser run_parse_api_sport_leagues_v1.py skoncil s kodem $LASTEXITCODE"
+    }
+
+    Write-Log "Parser dokoncen OK."
+}
+else {
+    throw "Parser script nebyl nalezen: $ParserScript"
+}

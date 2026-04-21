@@ -1,0 +1,155 @@
+|external_league_id|league_name                            |country_name          |season|is_active|
+|------------------|---------------------------------------|----------------------|------|---------|
+|184               |African Championship Women             |Africa                |2024  |false    |
+|198               |African Games                          |Africa                |2024  |false    |
+|199               |African Games Women                    |Africa                |2024  |false    |
+|186               |Asian Championship                     |Asia                  |2024  |false    |
+|185               |Asian Championship Women               |Asia                  |2024  |false    |
+|2                 |HLA                                    |Austria               |2024  |false    |
+|3                 |OHB Cup                                |Austria               |2024  |false    |
+|4                 |OHB Cup Women                          |Austria               |2024  |false    |
+|5                 |Supercup                               |Austria               |2024  |false    |
+|1                 |WHA Women                              |Austria               |2024  |false    |
+|6                 |Division 1                             |Belarus               |2024  |false    |
+|7                 |Division 1                             |Belgium               |2024  |false    |
+|8                 |Premijer Liga                          |Bosnia-And-Herzegovina|2024  |false    |
+|9                 |A RHG                                  |Bulgaria              |2024  |false    |
+|11                |1. HRL Women                           |Croatia               |2024  |false    |
+|10                |Premijer liga                          |Croatia               |2024  |false    |
+|13                |Czech Cup                              |Czech-Republic        |2024  |false    |
+|14                |Czech Cup Women                        |Czech-Republic        |2024  |false    |
+|12                |Extraliga                              |Czech-Republic        |2024  |false    |
+|15                |1. Division                            |Denmark               |2024  |false    |
+|16                |1. Division Women                      |Denmark               |2024  |false    |
+|25                |Bambusa Kvindeligaen Women             |Denmark               |2024  |false    |
+|23                |Herre Handbold Ligaen                  |Denmark               |2024  |false    |
+|19                |Santander Cup                          |Denmark               |2024  |false    |
+|20                |Santander Cup Women                    |Denmark               |2024  |false    |
+|17                |Super Cup                              |Denmark               |2024  |false    |
+|18                |Super Cup Women                        |Denmark               |2024  |false    |
+|26                |Meistriliiga                           |Estonia               |2024  |false    |
+|135               |Baltic League                          |Europe                |2024  |false    |
+|138               |BENE-League                            |Europe                |2024  |false    |
+|132               |Champions League Women                 |Europe                |2024  |false    |
+|142               |EHF Euro Cup                           |Europe                |2024  |false    |
+|146               |EHF European League Women              |Europe                |2024  |false    |
+|177               |European Championship                  |Europe                |2024  |false    |
+|181               |European Championship U18 B            |Europe                |2024  |false    |
+|134               |European Championship U20              |Europe                |2024  |false    |
+|141               |European Championship U20 B            |Europe                |2024  |false    |
+|147               |European Cup                           |Europe                |2024  |false    |
+|148               |European Cup Women                     |Europe                |2024  |false    |
+|190               |Golden League - Denmark Women          |Europe                |2024  |false    |
+|201               |Golden League - France                 |Europe                |2024  |false    |
+|189               |Golden League - France Women           |Europe                |2024  |false    |
+|193               |Golden League - Norway                 |Europe                |2024  |false    |
+|140               |MOL Liga Women                         |Europe                |2024  |false    |
+|202               |Supercopa Iberica                      |Europe                |2024  |false    |
+|203               |Supercopa Iberica Women                |Europe                |2024  |false    |
+|27                |SM-sarja                               |Finland               |2024  |false    |
+|28                |SM-sarja Women                         |Finland               |2024  |false    |
+|32                |Coupe de France                        |France                |2024  |false    |
+|35                |Coupe de France Women                  |France                |2024  |false    |
+|29                |Division 1 Women                       |France                |2024  |false    |
+|36                |Proligue                               |France                |2024  |false    |
+|34                |Starligue                              |France                |2024  |false    |
+|33                |Trophee des Champions                  |France                |2024  |false    |
+|42                |1. Bundesliga Women                    |Germany               |2024  |false    |
+|43                |2. Bundesliga                          |Germany               |2024  |false    |
+|45                |2. Bundesliga Women                    |Germany               |2024  |false    |
+|39                |Bundesliga                             |Germany               |2024  |false    |
+|41                |DHB Pokal                              |Germany               |2024  |false    |
+|44                |DHB Pokal Women                        |Germany               |2024  |false    |
+|40                |Super Cup                              |Germany               |2024  |false    |
+|46                |Super Cup Women                        |Germany               |2024  |false    |
+|47                |A1                                     |Greece                |2024  |false    |
+|48                |Greek Cup                              |Greece                |2024  |false    |
+|51                |Hungarian Cup                          |Hungary               |2024  |false    |
+|52                |Hungarian Cup Women                    |Hungary               |2024  |false    |
+|49                |NB I                                   |Hungary               |2024  |false    |
+|50                |NB I Women                             |Hungary               |2024  |false    |
+|53                |Olis Deildin                           |Iceland               |2024  |false    |
+|54                |Olis Deild Women                       |Iceland               |2024  |false    |
+|55                |Division 1                             |Israel                |2024  |false    |
+|57                |Coppa Italia                           |Italy                 |2024  |false    |
+|59                |Coppa Italia Women                     |Italy                 |2024  |false    |
+|56                |Serie A                                |Italy                 |2024  |false    |
+|58                |Serie A Women                          |Italy                 |2024  |false    |
+|123               |Super Cup                              |Italy                 |2024  |false    |
+|124               |Super Cup Women                        |Italy                 |2024  |false    |
+|125               |JHL                                    |Japan                 |2024  |false    |
+|126               |JHL Women                              |Japan                 |2024  |false    |
+|60                |SynotTip Virsliga                      |Latvia                |2024  |false    |
+|61                |Lietuvos Lyga                          |Lithuania             |2024  |false    |
+|63                |AXA League                             |Luxembourg            |2024  |false    |
+|64                |1st Division                           |Malta                 |2024  |false    |
+|65                |Prva liga                              |Montenegro            |2024  |false    |
+|66                |Eredivisie                             |Netherlands           |2024  |false    |
+|67                |Eredivisie Women                       |Netherlands           |2024  |false    |
+|68                |HandbalNL League                       |Netherlands           |2024  |false    |
+|37                |Superleague                            |North-Macedonia       |2024  |false    |
+|38                |Superleague Women                      |North-Macedonia       |2024  |false    |
+|69                |1. Division                            |Norway                |2024  |false    |
+|70                |1. Division Women                      |Norway                |2024  |false    |
+|71                |NM Cup                                 |Norway                |2024  |false    |
+|72                |NM Cup Women                           |Norway                |2024  |false    |
+|75                |REMA 1000-ligaen                       |Norway                |2024  |false    |
+|76                |REMA 1000-ligaen women                 |Norway                |2024  |false    |
+|127               |Central League                         |Poland                |2024  |false    |
+|207               |Central League Women                   |Poland                |2024  |false    |
+|81                |I Liga                                 |Poland                |2024  |false    |
+|82                |I Liga Women                           |Poland                |2024  |false    |
+|80                |Polish Cup                             |Poland                |2024  |false    |
+|79                |Polish Cup Women                       |Poland                |2024  |false    |
+|78                |Superliga                              |Poland                |2024  |false    |
+|77                |Superliga Women                        |Poland                |2024  |false    |
+|85                |1a Divisao Women                       |Portugal              |2024  |false    |
+|84                |Andebol 1                              |Portugal              |2024  |false    |
+|83                |Super Cup                              |Portugal              |2024  |false    |
+|86                |Taca de Portugal                       |Portugal              |2024  |false    |
+|87                |Liga Nationala                         |Romania               |2024  |false    |
+|88                |Liga Nationala Women                   |Romania               |2024  |false    |
+|89                |Romanian Cup                           |Romania               |2024  |false    |
+|90                |Romanian Cup Women                     |Romania               |2024  |false    |
+|208               |Super Cup                              |Romania               |2024  |false    |
+|209               |Super Cup Women                        |Romania               |2024  |false    |
+|93                |Russian Cup                            |Russia                |2024  |false    |
+|96                |Russian Cup Women                      |Russia                |2024  |false    |
+|95                |Supercup                               |Russia                |2024  |false    |
+|94                |Supercup Women                         |Russia                |2024  |false    |
+|91                |Superleague                            |Russia                |2024  |false    |
+|92                |Superleague Women                      |Russia                |2024  |false    |
+|97                |Superliga                              |Serbia                |2024  |false    |
+|98                |Extraliga                              |Slovakia              |2024  |false    |
+|99                |1.A DRL Women                          |Slovenia              |2024  |false    |
+|100               |1. NLB Liga                            |Slovenia              |2024  |false    |
+|105               |Copa Asobal                            |Spain                 |2024  |false    |
+|110               |Copa de la Reina Women                 |Spain                 |2024  |false    |
+|107               |Copa del Rey                           |Spain                 |2024  |false    |
+|104               |Division de Honor Plata                |Spain                 |2024  |false    |
+|108               |Division de Honor Women                |Spain                 |2024  |false    |
+|103               |Liga ASOBAL                            |Spain                 |2024  |false    |
+|111               |Allsvenskan                            |Sweden                |2024  |false    |
+|112               |Allsvenskan Women                      |Sweden                |2024  |false    |
+|113               |Handbollsligan                         |Sweden                |2024  |false    |
+|114               |SHE Women                              |Sweden                |2024  |false    |
+|128               |Swedish Cup                            |Sweden                |2024  |false    |
+|129               |Swedish Cup Women                      |Sweden                |2024  |false    |
+|115               |NLA                                    |Switzerland           |2024  |false    |
+|117               |Schweizer Cup                          |Switzerland           |2024  |false    |
+|118               |Schweizer Cup Women                    |Switzerland           |2024  |false    |
+|116               |SPL Women                              |Switzerland           |2024  |false    |
+|119               |Super Cup                              |Switzerland           |2024  |false    |
+|130               |Super Cup Women                        |Switzerland           |2024  |false    |
+|120               |Superlig                               |Turkey                |2024  |false    |
+|121               |Superlig Women                         |Turkey                |2024  |false    |
+|122               |Superleague                            |Ukraine               |2024  |false    |
+|194               |Club Friendly                          |World                 |2024  |false    |
+|195               |Club Friendly Women                    |World                 |2024  |false    |
+|196               |Friendly International                 |World                 |2024  |false    |
+|197               |Friendly International Women           |World                 |2024  |false    |
+|155               |Olympic Games                          |World                 |2024  |false    |
+|213               |Posten Cup Women                       |World                 |2024  |false    |
+|165               |South and Central American Championship|World                 |2024  |false    |
+|158               |World Championship U18 Women           |World                 |2024  |false    |
+|154               |World Championship Women               |World                 |2024  |false    |
