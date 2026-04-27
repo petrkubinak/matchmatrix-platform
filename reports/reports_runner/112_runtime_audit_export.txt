@@ -1,3 +1,0 @@
-cd C:\MatchMatrix-platform\db\scripts\
-
-.\112_runtime_audit_export.ps1

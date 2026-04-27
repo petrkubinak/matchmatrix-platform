@@ -1,9 +1,0 @@
-|canonical_league_id|canonical_league_name|canonical_country|canonical_source|canonical_ext_league_id|api_league_id|api_source  |api_ext_league_id|
-|-------------------|---------------------|-----------------|----------------|-----------------------|-------------|------------|-----------------|
-|5                  |Championship         |England          |football_data   |2016                   |20,871       |api_football|40               |
-|6                  |Premier League       |England          |football_data   |2021                   |20,855       |api_football|39               |
-|26                 |Ligue 1              |France           |football_data   |2015                   |20,852       |api_football|61               |
-|27                 |Bundesliga           |Germany          |football_data   |2002                   |20,856       |api_football|78               |
-|28                 |Serie A              |Italy            |football_data   |2019                   |20,857       |api_football|135              |
-|29                 |Eredivisie           |Netherlands      |football_data   |2003                   |20,849       |api_football|88               |
-|30                 |Primeira Liga        |Portugal         |football_data   |2017                   |20,858       |api_football|94               |

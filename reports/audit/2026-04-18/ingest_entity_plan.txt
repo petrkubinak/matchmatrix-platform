@@ -1,8 +1,0 @@
-|source_table      |provider    |sport_code|entity  |worker_script|target_table                 |source_endpoint|default_run_group|notes            |
-|------------------|------------|----------|--------|-------------|-----------------------------|---------------|-----------------|-----------------|
-|ingest_entity_plan|api_handball|HB        |coaches |             |                             |               |HB_CORE          |Handball coaches |
-|ingest_entity_plan|api_handball|HB        |fixtures|             |staging.stg_provider_fixtures|fixtures       |HB_CORE          |Handball fixtures|
-|ingest_entity_plan|api_handball|HB        |leagues |             |staging.stg_provider_leagues |leagues        |HB_CORE          |Handball leagues |
-|ingest_entity_plan|api_handball|HB        |odds    |             |                             |               |HB_CORE          |Handball odds    |
-|ingest_entity_plan|api_handball|HB        |players |             |                             |               |HB_CORE          |Handball players |
-|ingest_entity_plan|api_handball|HB        |teams   |             |staging.stg_provider_teams   |teams          |HB_CORE          |Handball teams   |

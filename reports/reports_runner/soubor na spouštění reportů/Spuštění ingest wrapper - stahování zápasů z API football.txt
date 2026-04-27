@@ -1,5 +1,0 @@
-C:\MatchMatrix-platform\ingest\API-Football\run_ingest_fixtures_all_targets.ps1 -RunGroup "EU_top,EU_exact_v1"
-
---K obejití ochrany když to nejede--
-
-powershell -ExecutionPolicy Bypass -File "C:\MatchMatrix-platform\ingest\API-Football\run_ingest_fixtures_all_targets.ps1" -RunGroup "EU_top,EU_exact_v1"

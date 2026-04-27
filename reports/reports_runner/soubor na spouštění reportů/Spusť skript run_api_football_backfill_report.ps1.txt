@@ -1,1 +1,0 @@
-powershell -ExecutionPolicy Bypass -File "C:\MatchMatrix-platform\scripts\run_api_football_backfill_report.ps1"

@@ -1,5 +1,0 @@
-docker exec -it matchmatrix_postgres psql -U matchmatrix -d matchmatrix -c "
-SELECT
-  (SELECT COUNT(*) FROM staging.api_football_fixtures WHERE run_id=112) AS staging_fixtures_34,
-  (SELECT COUNT(*) FROM public.matches WHERE ext_source='api_football') AS public_matches_api_football;
-"

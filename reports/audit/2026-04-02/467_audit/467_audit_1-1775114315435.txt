@@ -1,8 +1,0 @@
-|ext_source    |leagues_count|
-|--------------|-------------|
-|api_football  |1,219        |
-|api_sport     |1,219        |
-|api_hockey    |262          |
-|api_volleyball|261          |
-|football_data |13           |
-|(null)        |12           |

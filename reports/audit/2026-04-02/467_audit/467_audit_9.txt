@@ -1,3 +1,0 @@
-|provider    |rows_count|
-|------------|----------|
-|api_football|2,289     |

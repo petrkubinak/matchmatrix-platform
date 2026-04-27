@@ -1,6 +1,0 @@
-﻿change_type,category,relative_path,old_modified_at,new_modified_at,old_size_bytes,new_size_bytes
-DELETED,ingest,providers\__pycache__\api_football_provider.cpython-314.pyc,2026-03-13 23:08:15,,10462,
-DELETED,ingest,providers\__pycache__\api_hockey_provider.cpython-314.pyc,2026-03-11 22:19:46,,5531,
-DELETED,ingest,providers\__pycache__\base_provider.cpython-314.pyc,2026-03-11 22:10:03,,4676,
-DELETED,ingest,providers\__pycache__\provider_registry.cpython-314.pyc,2026-03-11 22:10:03,,1795,
-DELETED,workers,__pycache__\run_player_profiles_public_merge_v1.cpython-314.pyc,2026-03-15 20:31:11,,7880,

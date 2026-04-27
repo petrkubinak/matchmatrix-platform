@@ -1,2 +1,0 @@
-Get-Content "C:\MATCHMATRIX-PLATFORM\MatchMatrix-platform\Scripts\99_reports\mm_api_football_backfill_status.sql" -Raw |
-docker exec -i matchmatrix_postgres psql -U matchmatrix -d matchmatrix -P pager=off

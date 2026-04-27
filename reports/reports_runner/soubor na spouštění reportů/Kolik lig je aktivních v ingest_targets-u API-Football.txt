@@ -1,1 +1,0 @@
-docker exec -it matchmatrix_postgres psql -U matchmatrix -d matchmatrix -c "SELECT season, run_group, COUNT(*) AS cnt FROM ops.ingest_targets WHERE enabled=true AND provider='api_football' GROUP BY season, run_group ORDER BY season DESC, cnt DESC;"

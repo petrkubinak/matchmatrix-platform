@@ -1,3 +1,0 @@
-$rid = docker exec -it matchmatrix_postgres psql -U matchmatrix -d matchmatrix -t -A -c "SELECT MAX(run_id) FROM staging.api_football_fixtures;"
-$rid = $rid.Trim()
-powershell -ExecutionPolicy Bypass -File "C:\MATCHMATRIX-PLATFORM\ops\merge_api_football_run_ids.ps1" -RunIds @([int]$rid)

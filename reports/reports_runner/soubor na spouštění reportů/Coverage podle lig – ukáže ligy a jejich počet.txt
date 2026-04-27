@@ -1,7 +1,0 @@
-docker exec -it matchmatrix_postgres psql -U matchmatrix -d matchmatrix -c "
-SELECT l.name, m.season, COUNT(*) AS matches
-FROM public.matches m
-JOIN public.leagues l ON l.id = m.league_id
-GROUP BY l.name, m.season
-ORDER BY l.name, m.season DESC
-LIMIT 50;"

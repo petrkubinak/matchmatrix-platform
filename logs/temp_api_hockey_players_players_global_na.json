@@ -1,9 +1,0 @@
-{
-  "get": "players",
-  "parameters": [],
-  "errors": {
-    "endpoint": "This endpoint do not exist."
-  },
-  "results": 0,
-  "response": []
-}
