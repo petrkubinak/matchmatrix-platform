@@ -1,44 +1,101 @@
 # ==========================
-# MATCHMATRIX GIT IGNORE
+# MATCHMATRIX .gitignore
 # ==========================
 
-# Python
-__pycache__/
+# --------------------------
+# PYTHON
+# --------------------------
+
+**pycache**/
 *.pyc
 *.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
 
-# Logs
+# --------------------------
+# ENV / SECRETS
+# --------------------------
+
+.env
+.env.*
+!.env.example
+
+# --------------------------
+# LOGS & RUNTIME OUTPUT
+# --------------------------
+
+logs/
 *.log
 
-# PostgreSQL dumpy
+# --------------------------
+# DATA (RAW / STAGING / EXPORT)
+# --------------------------
+
+data/
+data/raw/
+data/staging/
+data/exports/
+
+# Keep empty folder structure if needed
+
+!data/.gitkeep
+
+# --------------------------
+# REPORTS (GENERATED)
+# --------------------------
+
+reports/
+
+# Keep structure if needed
+
+!reports/.gitkeep
+
+# --------------------------
+# DATABASE DUMPS / BACKUPS
+# --------------------------
+
 *.sql.dump
 *.dump
 *.backup
-
-# Lokální velké DB exporty
+backups/
 Dump/
 MatchMatrix-platform/Dump/
-backups/postgres_dumps/*.sql
-backups/postgres_dumps/*.dump
 
-# Reports
-reports/*.txt
-reports/*.csv
+# --------------------------
+# DOCKER VOLUMES
+# --------------------------
 
-# Docker volumes
 postgres-data/
 redis-data/
 
-# Local env
-.env
-.env.*
+# --------------------------
+# IDE / EDITORS
+# --------------------------
 
-# VSCode
 .vscode/
+.idea/
 
-# OS
+# --------------------------
+# OS FILES
+# --------------------------
+
 Thumbs.db
 .DS_Store
 
-# Temporary
-_tmp_*
+# --------------------------
+# TEMP / CACHE
+# --------------------------
+
+*tmp**
+*.tmp
+*.cache
+
+# --------------------------
+# OPTIONAL (large binaries)
+# --------------------------
+
+*.zip
+*.tar
+*.gz
