@@ -1,0 +1,22 @@
+# Default text handling
+* text=auto
+
+# SQL / Python / PowerShell držet jako text
+*.sql text eol=lf
+*.py text eol=lf
+*.ps1 text eol=crlf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.svg text eol=lf
+
+# Binární soubory
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.zip binary
+*.xlsm binary
+*.db binary
+*.sqlite binary
