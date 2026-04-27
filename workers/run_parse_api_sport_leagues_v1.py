@@ -287,6 +287,14 @@ def upsert_stg_provider_league(
                 (
                     %s, %s, %s, %s, %s, %s, %s, %s, now(), now()
                 )
+                ON CONFLICT (provider, external_league_id, season)
+                DO UPDATE SET
+                    sport_code = EXCLUDED.sport_code,
+                    league_name = EXCLUDED.league_name,
+                    country_name = EXCLUDED.country_name,
+                    raw_payload_id = EXCLUDED.raw_payload_id,
+                    is_active = EXCLUDED.is_active,
+                    updated_at = now()
             """
             cur.execute(
                 insert_sql,

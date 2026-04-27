@@ -1,7 +1,7 @@
 # TicketMatrixPlatform – denní přehled vývoje
 
 Datum: 21.04.2026  
-Čas kontroly systému: 12:30
+Čas kontroly systému: 22:56
 
 ---
 
@@ -24,12 +24,12 @@ Byly zkontrolovány tyto části projektu:
 
 - Celý projekt
 
-Celkem bylo projito 3101 sledovaných souborů.
+Celkem bylo projito 3138 sledovaných souborů.
 
 Ve srovnání s minulým auditem:
-- bylo přidáno 63 nových souborů
-- u 1 souborů proběhla úprava
-- 9 souborů bylo odstraněno
+- bylo přidáno 244 nových souborů
+- u 2 souborů proběhla úprava
+- 207 souborů bylo odstraněno
 
 ---
 
@@ -37,9 +37,9 @@ Ve srovnání s minulým auditem:
 
 Databáze je dostupná a základní stav je následující:
 
-- ligy: 3424
-- týmy: 6828
-- zápasy: 114644
+- ligy: 3429
+- týmy: 6966
+- zápasy: 114713
 - hráči: 2435
 
 Player pipeline přehled:
@@ -57,17 +57,12 @@ Git větev:
 - main
 
 Poslední commit:
-- 626bdfd | 2026-04-17 22:18:50 +0200 | update players pipeline
+- a174b42 | 2026-04-21 22:56:01 +0200 | update players pipeline
 
 Aktuální neuložené změny:
-- M MatchMatrix-platform/.dbeaver/.project-metadata.json.bak
--  M MatchMatrix-platform/.dbeaver/project-metadata.json
--  D MatchMatrix-platform/Scripts/07_Audity/718_audit_fb_run_group_distribution.sql
--  D "docs/komunikace s chatGPT/03_2026/20260331/404_celkov\303\275_p\305\231ehled_Datab\303\241ze.sql"
--  D "docs/komunikace s chatGPT/03_2026/20260331/405_p\305\231ehled_co_je_spustiteln\303\251_.sql"
--  D "docs/komunikace s chatGPT/03_2026/20260331/Kontroln\303\255 checklist MatchMatrix.docx"
--  D "docs/komunikace s chatGPT/03_2026/20260331/MATCHMATRIX \342\200\223 DEFINICE PROJEKTU.txt"
--  D "docs/komunikace s chatGPT/03_2026/20260331/MATCHMATRIX \342\200\223 Z\303\201PIS (31.03.2026).txt"
+- M reports/audit/latest_snapshot.txt
+-  M reports/audit/latest_system_tree.txt
+- ?? reports/audit/system_tree_2026-04-21_225633.txt
 
 ---
 
@@ -82,14 +77,14 @@ Na základě dnešního auditu je vidět, že projekt má:
 
 
 Hlavní změněné soubory dnes:
-- docs\komunikace s chatGPT\03_2026\20260331\404_celkový_přehled_Databáze.sql
-- docs\komunikace s chatGPT\03_2026\20260331\405_přehled_co_je_spustitelné_.sql
-- docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX – DEFINICE PROJEKTU.txt
-- docs\komunikace s chatGPT\03_2026\20260331\MatchMatrix – dnešní zápis.md
-- docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX – ZÁPIS (31.03.2026).txt
-- docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX_AUDIT_MASTER.md
-- docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX_AUDIT_MASTER_V2.1.md
-- docs\komunikace s chatGPT\03_2026\20260331\MATCHMATRIX_AUDIT_MASTER_V2.md
+- ingest\API-Tennis\param(.txt
+- MatchMatrix-platform\Scripts\18_stahování_dat_z_API\18_0_přehled_celé_DB\000_check_hb_leagues_ingest_planner.sql
+- MatchMatrix-platform\Scripts\18_stahování_dat_z_API\18_0_přehled_celé_DB\001_check_hb_leagues_public_after_run.sql
+- MatchMatrix-platform\Scripts\18_stahování_dat_z_API\18_0_přehled_celé_DB\002_find_hb_leagues_merge_logic.sql
+- MatchMatrix-platform\Scripts\18_stahování_dat_z_API\18_0_přehled_celé_DB\004_check_hb_leagues_after_sportcode_fix.sql
+- MatchMatrix-platform\Scripts\18_stahování_dat_z_API\18_0_přehled_celé_DB\005_check_hb_teams_fixtures_after_leagues_fix.sql
+- MatchMatrix-platform\Scripts\18_stahování_dat_z_API\18_0_přehled_celé_DB\006_check_hb_staging_fixtures_coverage.sql
+- MatchMatrix-platform\Scripts\18_stahování_dat_z_API\18_0_přehled_celé_DB\008_check_hb_planner_vs_targets.sql
 
 ---
 

@@ -5,6 +5,7 @@ C:\MatchMatrix-platform\tools\__pycache__
 C:\MatchMatrix-platform\tools\8. Doporučený běžný postup.txt                                 
 C:\MatchMatrix-platform\tools\check_db_connection.py                                         
 C:\MatchMatrix-platform\tools\Co dělají tlačítka v panelu V7.txt                             
+C:\MatchMatrix-platform\tools\export_schema_reports_v1.py                                    
 C:\MatchMatrix-platform\tools\export_system_tree_v1.py                                       
 C:\MatchMatrix-platform\tools\matchmatrix_control_panel.py                                   
 C:\MatchMatrix-platform\tools\matchmatrix_control_panel_V10.py                               
@@ -56,6 +57,7 @@ C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix5.py
 C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix6.py                           
 C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix7.py                           
 C:\MatchMatrix-platform\tools\matchmatrix_ticket_studio_V3_fix8.py                           
+C:\MatchMatrix-platform\tools\run_export_schema_reports_v1.vbs                               
 C:\MatchMatrix-platform\tools\__pycache__\matchmatrix_control_panel_V9.cpython-314.pyc       
 C:\MatchMatrix-platform\tools\__pycache__\matchmatrix_ticket_studio_V2_10.cpython-314.pyc    
 C:\MatchMatrix-platform\tools\__pycache__\matchmatrix_ticket_studio_V2_10_4.cpython-314.pyc  

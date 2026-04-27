@@ -25,7 +25,9 @@ C:\MatchMatrix-platform\workers\run_ingest_cycle_v3.py
 C:\MatchMatrix-platform\workers\run_ingest_planner_jobs.py                                     
 C:\MatchMatrix-platform\workers\run_multisport_scheduler_v4.py                                 
 C:\MatchMatrix-platform\workers\run_parse_api_sport_fixtures_v1.py                             
+C:\MatchMatrix-platform\workers\run_parse_api_sport_leagues_v1.py                              
 C:\MatchMatrix-platform\workers\run_parse_api_sport_teams_v1.py                                
+C:\MatchMatrix-platform\workers\run_parse_tennis_odds_v1.py                                    
 C:\MatchMatrix-platform\workers\run_players_bridge_v4.py                                       
 C:\MatchMatrix-platform\workers\run_players_fetch_bk_only_v1.py                                
 C:\MatchMatrix-platform\workers\run_players_fetch_hk_only_v1.py                                

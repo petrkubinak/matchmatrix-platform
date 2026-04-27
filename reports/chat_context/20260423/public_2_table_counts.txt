@@ -1,0 +1,11 @@
+|table_name|column_count|
+|----------|------------|
+|leagues|17|
+|matches|13|
+|odds|6|
+|player_provider_map|10|
+|player_season_statistics|35|
+|players|18|
+|team_aliases|4|
+|team_provider_map|5|
+|teams|7|

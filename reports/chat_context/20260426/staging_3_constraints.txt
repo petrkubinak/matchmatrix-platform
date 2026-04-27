@@ -1,0 +1,308 @@
+|table_name|constraint_name|constraint_type|column_name|foreign_table_schema|foreign_table_name|foreign_column_name|
+|----------|---------------|---------------|-----------|--------------------|------------------|-------------------|
+|api_football_fixtures|106505_106522_11_not_null|CHECK|||||
+|api_football_fixtures|106505_106522_12_not_null|CHECK|||||
+|api_football_fixtures|106505_106522_1_not_null|CHECK|||||
+|api_football_fixtures|106505_106522_2_not_null|CHECK|||||
+|api_football_fixtures|106505_106522_3_not_null|CHECK|||||
+|api_football_fixtures|106505_106522_4_not_null|CHECK|||||
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|run_id|staging|api_football_fixtures|league_id|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|run_id|staging|api_football_fixtures|run_id|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|run_id|staging|api_football_fixtures|season|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|run_id|staging|api_football_fixtures|fixture_id|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|league_id|staging|api_football_fixtures|fixture_id|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|league_id|staging|api_football_fixtures|season|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|league_id|staging|api_football_fixtures|league_id|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|league_id|staging|api_football_fixtures|run_id|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|season|staging|api_football_fixtures|season|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|season|staging|api_football_fixtures|run_id|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|season|staging|api_football_fixtures|league_id|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|season|staging|api_football_fixtures|fixture_id|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|fixture_id|staging|api_football_fixtures|fixture_id|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|fixture_id|staging|api_football_fixtures|season|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|fixture_id|staging|api_football_fixtures|league_id|
+|api_football_fixtures|api_football_fixtures_pkey|PRIMARY KEY|fixture_id|staging|api_football_fixtures|run_id|
+|api_football_leagues|106505_106506_11_not_null|CHECK|||||
+|api_football_leagues|106505_106506_12_not_null|CHECK|||||
+|api_football_leagues|106505_106506_1_not_null|CHECK|||||
+|api_football_leagues|106505_106506_2_not_null|CHECK|||||
+|api_football_leagues|106505_106506_4_not_null|CHECK|||||
+|api_football_leagues|api_football_leagues_pkey|PRIMARY KEY|run_id|staging|api_football_leagues|run_id|
+|api_football_leagues|api_football_leagues_pkey|PRIMARY KEY|run_id|staging|api_football_leagues|league_id|
+|api_football_leagues|api_football_leagues_pkey|PRIMARY KEY|league_id|staging|api_football_leagues|run_id|
+|api_football_leagues|api_football_leagues_pkey|PRIMARY KEY|league_id|staging|api_football_leagues|league_id|
+|api_football_odds|106505_106530_10_not_null|CHECK|||||
+|api_football_odds|106505_106530_1_not_null|CHECK|||||
+|api_football_odds|106505_106530_2_not_null|CHECK|||||
+|api_football_odds|106505_106530_3_not_null|CHECK|||||
+|api_football_odds|106505_106530_4_not_null|CHECK|||||
+|api_football_odds|106505_106530_5_not_null|CHECK|||||
+|api_football_odds|106505_106530_6_not_null|CHECK|||||
+|api_football_odds|106505_106530_7_not_null|CHECK|||||
+|api_football_odds|106505_106530_9_not_null|CHECK|||||
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|run_id|staging|api_football_odds|outcome|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|run_id|staging|api_football_odds|run_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|run_id|staging|api_football_odds|league_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|run_id|staging|api_football_odds|season|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|run_id|staging|api_football_odds|fixture_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|run_id|staging|api_football_odds|bookmaker_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|run_id|staging|api_football_odds|market|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|league_id|staging|api_football_odds|run_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|league_id|staging|api_football_odds|league_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|league_id|staging|api_football_odds|season|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|league_id|staging|api_football_odds|fixture_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|league_id|staging|api_football_odds|bookmaker_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|league_id|staging|api_football_odds|market|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|league_id|staging|api_football_odds|outcome|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|season|staging|api_football_odds|outcome|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|season|staging|api_football_odds|run_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|season|staging|api_football_odds|league_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|season|staging|api_football_odds|season|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|season|staging|api_football_odds|fixture_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|season|staging|api_football_odds|bookmaker_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|season|staging|api_football_odds|market|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|fixture_id|staging|api_football_odds|run_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|fixture_id|staging|api_football_odds|league_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|fixture_id|staging|api_football_odds|season|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|fixture_id|staging|api_football_odds|fixture_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|fixture_id|staging|api_football_odds|bookmaker_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|fixture_id|staging|api_football_odds|market|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|fixture_id|staging|api_football_odds|outcome|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|bookmaker_id|staging|api_football_odds|run_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|bookmaker_id|staging|api_football_odds|league_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|bookmaker_id|staging|api_football_odds|season|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|bookmaker_id|staging|api_football_odds|fixture_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|bookmaker_id|staging|api_football_odds|bookmaker_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|bookmaker_id|staging|api_football_odds|market|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|bookmaker_id|staging|api_football_odds|outcome|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|market|staging|api_football_odds|run_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|market|staging|api_football_odds|league_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|market|staging|api_football_odds|season|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|market|staging|api_football_odds|fixture_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|market|staging|api_football_odds|bookmaker_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|market|staging|api_football_odds|market|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|market|staging|api_football_odds|outcome|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|outcome|staging|api_football_odds|run_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|outcome|staging|api_football_odds|league_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|outcome|staging|api_football_odds|season|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|outcome|staging|api_football_odds|fixture_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|outcome|staging|api_football_odds|bookmaker_id|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|outcome|staging|api_football_odds|market|
+|api_football_odds|api_football_odds_pkey|PRIMARY KEY|outcome|staging|api_football_odds|outcome|
+|api_football_teams|106505_106514_13_not_null|CHECK|||||
+|api_football_teams|106505_106514_14_not_null|CHECK|||||
+|api_football_teams|106505_106514_1_not_null|CHECK|||||
+|api_football_teams|106505_106514_2_not_null|CHECK|||||
+|api_football_teams|106505_106514_3_not_null|CHECK|||||
+|api_football_teams|106505_106514_4_not_null|CHECK|||||
+|api_football_teams|106505_106514_5_not_null|CHECK|||||
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|run_id|staging|api_football_teams|league_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|run_id|staging|api_football_teams|team_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|run_id|staging|api_football_teams|season|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|run_id|staging|api_football_teams|run_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|league_id|staging|api_football_teams|league_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|league_id|staging|api_football_teams|run_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|league_id|staging|api_football_teams|season|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|league_id|staging|api_football_teams|team_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|season|staging|api_football_teams|team_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|season|staging|api_football_teams|run_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|season|staging|api_football_teams|league_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|season|staging|api_football_teams|season|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|team_id|staging|api_football_teams|team_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|team_id|staging|api_football_teams|run_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|team_id|staging|api_football_teams|league_id|
+|api_football_teams|api_football_teams_pkey|PRIMARY KEY|team_id|staging|api_football_teams|season|
+|api_hockey_leagues|106505_147468_11_not_null|CHECK|||||
+|api_hockey_leagues|106505_147468_12_not_null|CHECK|||||
+|api_hockey_leagues|106505_147468_1_not_null|CHECK|||||
+|api_hockey_leagues|106505_147468_2_not_null|CHECK|||||
+|api_hockey_leagues_raw|106505_147461_3_not_null|CHECK|||||
+|api_hockey_teams|106505_155666_12_not_null|CHECK|||||
+|api_hockey_teams|106505_155666_1_not_null|CHECK|||||
+|api_hockey_teams|106505_155666_2_not_null|CHECK|||||
+|api_hockey_teams|106505_155666_5_not_null|CHECK|||||
+|api_hockey_teams_raw|106505_155659_1_not_null|CHECK|||||
+|api_hockey_teams_raw|106505_155659_2_not_null|CHECK|||||
+|api_hockey_teams_raw|106505_155659_3_not_null|CHECK|||||
+|api_tennis_fixtures|106505_557113_1_not_null|CHECK|||||
+|api_tennis_fixtures|106505_557113_3_not_null|CHECK|||||
+|api_tennis_fixtures|106505_557113_4_not_null|CHECK|||||
+|api_tennis_fixtures|api_tennis_fixtures_pkey|PRIMARY KEY|id|staging|api_tennis_fixtures|id|
+|api_tennis_fixtures|uq_tn_fx|UNIQUE|provider|staging|api_tennis_fixtures|provider_match_id|
+|api_tennis_fixtures|uq_tn_fx|UNIQUE|provider|staging|api_tennis_fixtures|provider|
+|api_tennis_fixtures|uq_tn_fx|UNIQUE|provider|staging|api_tennis_fixtures|sport_code|
+|api_tennis_fixtures|uq_tn_fx|UNIQUE|sport_code|staging|api_tennis_fixtures|provider|
+|api_tennis_fixtures|uq_tn_fx|UNIQUE|sport_code|staging|api_tennis_fixtures|sport_code|
+|api_tennis_fixtures|uq_tn_fx|UNIQUE|sport_code|staging|api_tennis_fixtures|provider_match_id|
+|api_tennis_fixtures|uq_tn_fx|UNIQUE|provider_match_id|staging|api_tennis_fixtures|provider|
+|api_tennis_fixtures|uq_tn_fx|UNIQUE|provider_match_id|staging|api_tennis_fixtures|sport_code|
+|api_tennis_fixtures|uq_tn_fx|UNIQUE|provider_match_id|staging|api_tennis_fixtures|provider_match_id|
+|api_tennis_fixtures_raw|106505_557099_1_not_null|CHECK|||||
+|api_tennis_fixtures_raw|106505_557099_3_not_null|CHECK|||||
+|api_tennis_fixtures_raw|106505_557099_4_not_null|CHECK|||||
+|api_tennis_fixtures_raw|106505_557099_6_not_null|CHECK|||||
+|api_tennis_fixtures_raw|106505_557099_7_not_null|CHECK|||||
+|api_tennis_fixtures_raw|106505_557099_8_not_null|CHECK|||||
+|api_tennis_fixtures_raw|api_tennis_fixtures_raw_pkey|PRIMARY KEY|id|staging|api_tennis_fixtures_raw|id|
+|api_tennis_leagues|106505_557074_14_not_null|CHECK|||||
+|api_tennis_leagues|106505_557074_15_not_null|CHECK|||||
+|api_tennis_leagues|106505_557074_16_not_null|CHECK|||||
+|api_tennis_leagues|106505_557074_1_not_null|CHECK|||||
+|api_tennis_leagues|106505_557074_3_not_null|CHECK|||||
+|api_tennis_leagues|106505_557074_4_not_null|CHECK|||||
+|api_tennis_leagues|106505_557074_5_not_null|CHECK|||||
+|api_tennis_leagues|106505_557074_6_not_null|CHECK|||||
+|api_tennis_leagues|106505_557074_7_not_null|CHECK|||||
+|api_tennis_leagues|api_tennis_leagues_pkey|PRIMARY KEY|id|staging|api_tennis_leagues|id|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|provider|staging|api_tennis_leagues|provider|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|provider|staging|api_tennis_leagues|season|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|provider|staging|api_tennis_leagues|provider_league_id|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|provider|staging|api_tennis_leagues|sport_code|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|sport_code|staging|api_tennis_leagues|season|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|sport_code|staging|api_tennis_leagues|provider|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|sport_code|staging|api_tennis_leagues|sport_code|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|sport_code|staging|api_tennis_leagues|provider_league_id|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|provider_league_id|staging|api_tennis_leagues|provider|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|provider_league_id|staging|api_tennis_leagues|sport_code|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|provider_league_id|staging|api_tennis_leagues|provider_league_id|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|provider_league_id|staging|api_tennis_leagues|season|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|season|staging|api_tennis_leagues|season|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|season|staging|api_tennis_leagues|sport_code|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|season|staging|api_tennis_leagues|provider_league_id|
+|api_tennis_leagues|uq_api_tennis_leagues_unique|UNIQUE|season|staging|api_tennis_leagues|provider|
+|api_tennis_leagues_raw|106505_557058_1_not_null|CHECK|||||
+|api_tennis_leagues_raw|106505_557058_3_not_null|CHECK|||||
+|api_tennis_leagues_raw|106505_557058_4_not_null|CHECK|||||
+|api_tennis_leagues_raw|106505_557058_7_not_null|CHECK|||||
+|api_tennis_leagues_raw|106505_557058_8_not_null|CHECK|||||
+|api_tennis_leagues_raw|106505_557058_9_not_null|CHECK|||||
+|api_tennis_leagues_raw|api_tennis_leagues_raw_pkey|PRIMARY KEY|id|staging|api_tennis_leagues_raw|id|
+|player_provider_map_import|106505_189308_1_not_null|CHECK|||||
+|player_provider_map_import|106505_189308_2_not_null|CHECK|||||
+|player_provider_map_import|106505_189308_3_not_null|CHECK|||||
+|players_import|106505_189299_1_not_null|CHECK|||||
+|players_import|106505_189299_2_not_null|CHECK|||||
+|players_import|106505_189299_3_not_null|CHECK|||||
+|stg_api_american_football_fixtures|106505_475185_18_not_null|CHECK|||||
+|stg_api_american_football_fixtures|106505_475185_1_not_null|CHECK|||||
+|stg_api_american_football_fixtures|106505_475185_2_not_null|CHECK|||||
+|stg_api_american_football_fixtures|106505_475185_3_not_null|CHECK|||||
+|stg_api_american_football_fixtures|106505_475185_6_not_null|CHECK|||||
+|stg_api_american_football_fixtures|stg_api_american_football_fixtures_pkey|PRIMARY KEY|id|staging|stg_api_american_football_fixtures|id|
+|stg_api_american_football_teams|106505_475172_18_not_null|CHECK|||||
+|stg_api_american_football_teams|106505_475172_1_not_null|CHECK|||||
+|stg_api_american_football_teams|106505_475172_2_not_null|CHECK|||||
+|stg_api_american_football_teams|106505_475172_3_not_null|CHECK|||||
+|stg_api_american_football_teams|106505_475172_6_not_null|CHECK|||||
+|stg_api_american_football_teams|106505_475172_7_not_null|CHECK|||||
+|stg_api_american_football_teams|stg_api_american_football_teams_pkey|PRIMARY KEY|id|staging|stg_api_american_football_teams|id|
+|stg_api_payloads|106505_221387_11_not_null|CHECK|||||
+|stg_api_payloads|106505_221387_13_not_null|CHECK|||||
+|stg_api_payloads|106505_221387_1_not_null|CHECK|||||
+|stg_api_payloads|106505_221387_2_not_null|CHECK|||||
+|stg_api_payloads|106505_221387_3_not_null|CHECK|||||
+|stg_api_payloads|106505_221387_4_not_null|CHECK|||||
+|stg_api_payloads|106505_221387_5_not_null|CHECK|||||
+|stg_api_payloads|106505_221387_8_not_null|CHECK|||||
+|stg_api_payloads|106505_221387_9_not_null|CHECK|||||
+|stg_api_payloads|stg_api_payloads_pkey|PRIMARY KEY|id|staging|stg_api_payloads|id|
+|stg_player_source_payloads|106505_270347_12_not_null|CHECK|||||
+|stg_player_source_payloads|106505_270347_13_not_null|CHECK|||||
+|stg_player_source_payloads|106505_270347_14_not_null|CHECK|||||
+|stg_player_source_payloads|106505_270347_15_not_null|CHECK|||||
+|stg_player_source_payloads|106505_270347_16_not_null|CHECK|||||
+|stg_player_source_payloads|106505_270347_1_not_null|CHECK|||||
+|stg_player_source_payloads|106505_270347_2_not_null|CHECK|||||
+|stg_player_source_payloads|106505_270347_3_not_null|CHECK|||||
+|stg_player_source_payloads|106505_270347_4_not_null|CHECK|||||
+|stg_player_source_payloads|stg_player_source_payloads_pkey|PRIMARY KEY|id|staging|stg_player_source_payloads|id|
+|stg_provider_coaches|106505_311390_1_not_null|CHECK|||||
+|stg_provider_coaches|106505_311390_26_not_null|CHECK|||||
+|stg_provider_coaches|106505_311390_2_not_null|CHECK|||||
+|stg_provider_coaches|106505_311390_3_not_null|CHECK|||||
+|stg_provider_coaches|106505_311390_4_not_null|CHECK|||||
+|stg_provider_coaches|stg_provider_coaches_pkey|PRIMARY KEY|id|staging|stg_provider_coaches|id|
+|stg_provider_events|106505_221411_11_not_null|CHECK|||||
+|stg_provider_events|106505_221411_1_not_null|CHECK|||||
+|stg_provider_events|106505_221411_2_not_null|CHECK|||||
+|stg_provider_events|106505_221411_3_not_null|CHECK|||||
+|stg_provider_events|106505_221411_4_not_null|CHECK|||||
+|stg_provider_events|stg_provider_events_pkey|PRIMARY KEY|id|staging|stg_provider_events|id|
+|stg_provider_fixtures|106505_221477_14_not_null|CHECK|||||
+|stg_provider_fixtures|106505_221477_15_not_null|CHECK|||||
+|stg_provider_fixtures|106505_221477_1_not_null|CHECK|||||
+|stg_provider_fixtures|106505_221477_2_not_null|CHECK|||||
+|stg_provider_fixtures|106505_221477_3_not_null|CHECK|||||
+|stg_provider_fixtures|106505_221477_4_not_null|CHECK|||||
+|stg_provider_fixtures|stg_provider_fixtures_pkey|PRIMARY KEY|id|staging|stg_provider_fixtures|id|
+|stg_provider_leagues|106505_221441_10_not_null|CHECK|||||
+|stg_provider_leagues|106505_221441_11_not_null|CHECK|||||
+|stg_provider_leagues|106505_221441_1_not_null|CHECK|||||
+|stg_provider_leagues|106505_221441_2_not_null|CHECK|||||
+|stg_provider_leagues|106505_221441_3_not_null|CHECK|||||
+|stg_provider_leagues|106505_221441_4_not_null|CHECK|||||
+|stg_provider_leagues|106505_221441_5_not_null|CHECK|||||
+|stg_provider_leagues|106505_221441_9_not_null|CHECK|||||
+|stg_provider_leagues|stg_provider_leagues_pkey|PRIMARY KEY|id|staging|stg_provider_leagues|id|
+|stg_provider_odds|106505_221400_11_not_null|CHECK|||||
+|stg_provider_odds|106505_221400_12_not_null|CHECK|||||
+|stg_provider_odds|106505_221400_1_not_null|CHECK|||||
+|stg_provider_odds|106505_221400_2_not_null|CHECK|||||
+|stg_provider_odds|106505_221400_3_not_null|CHECK|||||
+|stg_provider_odds|106505_221400_4_not_null|CHECK|||||
+|stg_provider_odds|106505_221400_5_not_null|CHECK|||||
+|stg_provider_odds|106505_221400_6_not_null|CHECK|||||
+|stg_provider_odds|106505_221400_7_not_null|CHECK|||||
+|stg_provider_odds|stg_provider_odds_pkey|PRIMARY KEY|id|staging|stg_provider_odds|id|
+|stg_provider_player_profiles|106505_270365_1_not_null|CHECK|||||
+|stg_provider_player_profiles|106505_270365_2_not_null|CHECK|||||
+|stg_provider_player_profiles|106505_270365_30_not_null|CHECK|||||
+|stg_provider_player_profiles|106505_270365_31_not_null|CHECK|||||
+|stg_provider_player_profiles|106505_270365_3_not_null|CHECK|||||
+|stg_provider_player_profiles|106505_270365_4_not_null|CHECK|||||
+|stg_provider_player_profiles|stg_provider_player_profiles_pkey|PRIMARY KEY|id|staging|stg_provider_player_profiles|id|
+|stg_provider_player_profiles|stg_provider_player_profiles_source_payload_id_fkey|FOREIGN KEY|source_payload_id|staging|stg_player_source_payloads|id|
+|stg_provider_player_season_stats|106505_270440_10_not_null|CHECK|||||
+|stg_provider_player_season_stats|106505_270440_12_not_null|CHECK|||||
+|stg_provider_player_season_stats|106505_270440_13_not_null|CHECK|||||
+|stg_provider_player_season_stats|106505_270440_1_not_null|CHECK|||||
+|stg_provider_player_season_stats|106505_270440_2_not_null|CHECK|||||
+|stg_provider_player_season_stats|106505_270440_3_not_null|CHECK|||||
+|stg_provider_player_season_stats|106505_270440_6_not_null|CHECK|||||
+|stg_provider_player_season_stats|106505_270440_8_not_null|CHECK|||||
+|stg_provider_player_season_stats|stg_provider_player_season_stats_pkey|PRIMARY KEY|id|staging|stg_provider_player_season_stats|id|
+|stg_provider_player_stats|106505_221431_14_not_null|CHECK|||||
+|stg_provider_player_stats|106505_221431_1_not_null|CHECK|||||
+|stg_provider_player_stats|106505_221431_2_not_null|CHECK|||||
+|stg_provider_player_stats|106505_221431_3_not_null|CHECK|||||
+|stg_provider_player_stats|106505_221431_4_not_null|CHECK|||||
+|stg_provider_player_stats|106505_221431_5_not_null|CHECK|||||
+|stg_provider_player_stats|106505_221431_6_not_null|CHECK|||||
+|stg_provider_player_stats|106505_221431_9_not_null|CHECK|||||
+|stg_provider_player_stats|stg_provider_player_stats_pkey|PRIMARY KEY|id|staging|stg_provider_player_stats|id|
+|stg_provider_players|106505_221465_11_not_null|CHECK|||||
+|stg_provider_players|106505_221465_12_not_null|CHECK|||||
+|stg_provider_players|106505_221465_13_not_null|CHECK|||||
+|stg_provider_players|106505_221465_1_not_null|CHECK|||||
+|stg_provider_players|106505_221465_2_not_null|CHECK|||||
+|stg_provider_players|106505_221465_3_not_null|CHECK|||||
+|stg_provider_players|106505_221465_4_not_null|CHECK|||||
+|stg_provider_players|106505_221465_5_not_null|CHECK|||||
+|stg_provider_players|stg_provider_players_pkey|PRIMARY KEY|id|staging|stg_provider_players|id|
+|stg_provider_team_stats|106505_221421_1_not_null|CHECK|||||
+|stg_provider_team_stats|106505_221421_2_not_null|CHECK|||||
+|stg_provider_team_stats|106505_221421_3_not_null|CHECK|||||
+|stg_provider_team_stats|106505_221421_4_not_null|CHECK|||||
+|stg_provider_team_stats|106505_221421_5_not_null|CHECK|||||
+|stg_provider_team_stats|106505_221421_6_not_null|CHECK|||||
+|stg_provider_team_stats|106505_221421_9_not_null|CHECK|||||
+|stg_provider_team_stats|stg_provider_team_stats_pkey|PRIMARY KEY|id|staging|stg_provider_team_stats|id|
+|stg_provider_teams|106505_221453_10_not_null|CHECK|||||
+|stg_provider_teams|106505_221453_11_not_null|CHECK|||||
+|stg_provider_teams|106505_221453_12_not_null|CHECK|||||
+|stg_provider_teams|106505_221453_1_not_null|CHECK|||||
+|stg_provider_teams|106505_221453_2_not_null|CHECK|||||
+|stg_provider_teams|106505_221453_3_not_null|CHECK|||||
+|stg_provider_teams|106505_221453_4_not_null|CHECK|||||
+|stg_provider_teams|106505_221453_5_not_null|CHECK|||||
+|stg_provider_teams|stg_provider_teams_pkey|PRIMARY KEY|id|staging|stg_provider_teams|id|

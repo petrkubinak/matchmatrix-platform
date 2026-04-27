@@ -1,0 +1,13 @@
+﻿{
+    "get":  "players",
+    "parameters":  {
+                       "search":  "a"
+                   },
+    "errors":  {
+                   "endpoint":  "This endpoint do not exist."
+               },
+    "results":  0,
+    "response":  [
+
+                 ]
+}
