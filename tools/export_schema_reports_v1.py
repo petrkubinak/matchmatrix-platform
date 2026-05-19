@@ -14,9 +14,9 @@ DB_CONFIG = {
 BASE_REPORTS_DIR = Path(r"C:\MatchMatrix-platform\reports")
 
 SCHEMA_CONFIG = [
-    ("ops", "přehled_sloupců_tabulek_OPS"),
-    ("staging", "přehled_sloupců_tabulek_staging"),
-    ("public", "přehled_sloupců_tabulek_public"),
+    ("ops", "prehled_sloupcu_tabulek_OPS"),
+    ("staging", "prehled_sloupcu_tabulek_staging"),
+    ("public", "prehled_sloupcu_tabulek_public"),
 ]
 
 PUBLIC_TABLE_WHITELIST = [

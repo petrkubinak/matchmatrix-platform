@@ -24,8 +24,9 @@ PROJECT_ROOT = Path(r"C:\MatchMatrix-platform")
 PYTHON_EXE = r"C:\Python314\python.exe"
 
 BATCH_RUNNER = str(PROJECT_ROOT / "ingest" / "run_unified_ingest_batch_v1.py")
-SCHEDULER_RUNNER = str(PROJECT_ROOT / "workers" / "run_ingest_cycle_v3.py")
+SCHEDULER_RUNNER = str(PROJECT_ROOT / "workers" / "run_harvest_master_v1.py")
 PLAYERS_PIPELINE_RUNNER = str(PROJECT_ROOT / "workers" / "run_players_pipeline_transitional_v1.py")
+PEOPLE_PIPELINE_V22_RUNNER = str(PROJECT_ROOT / "workers" / "run_people_pipeline_v22_from_planner.py")
 THEODDS_RUNNER = str(PROJECT_ROOT / "workers" / "run_theodds_ingest_v3.py")
 FOOTBALL_DATA_RUNNER = str(PROJECT_ROOT / "workers" / "run_football_data_ingest_v1.py")
 
@@ -64,6 +65,12 @@ FALLBACK_RUN_GROUP_OPTIONS = [
     "FB_TOP",
     "FB_API_EXPANSION",
     "FB_FD_CORE",
+    "FB_PEOPLE_TEAM_SCALE_01",
+    "FB_PEOPLE_SCALE_01",
+    "FB_PEOPLE_SCALE_02",
+    "FB_PEOPLE_SCALE_03",
+    "FB_PEOPLE_SCALE_04",
+    "AFB_PEOPLE_V2",
     "HK_TOP",
     "HK_CORE",
     "BK_TOP",
@@ -290,7 +297,7 @@ class MatchMatrixPanelV11:
         self.render_snapshot_diff({}, {})
 
         self.log_write("Panel připraven.")
-        self.log_write("V9 načten: compact + responsive + global scroll + adaptive layout.")
+        self.log_write("V11 načten: compact + responsive + PEOPLE V2.2 monitoring.")
 
     # --------------------------------------------------------
     # Styling
@@ -464,11 +471,65 @@ class MatchMatrixPanelV11:
             LIMIT 30
         """)
 
+        # PEOPLE pipeline KPI je schválně čtené přímo z ops.ingest_planner,
+        # aby panel nebyl závislý na extra view. Zobrazuje stav hráčských jobů
+        # pro API-Football / FB people scale dávky.
+        people_summary = self.safe_fetch_one_dict("""
+            SELECT
+                COUNT(*) FILTER (WHERE status = 'done') AS done_jobs,
+                COUNT(*) FILTER (WHERE status IN ('pending', 'ready')) AS pending_jobs,
+                COUNT(*) FILTER (WHERE status = 'running') AS running_jobs,
+                COUNT(*) FILTER (WHERE status IN ('failed', 'error')) AS failed_jobs,
+                COUNT(*) AS total_jobs,
+                COALESCE(SUM(attempts), 0) AS total_attempts,
+                MAX(updated_at) AS last_update
+            FROM ops.ingest_planner
+            WHERE provider = 'api_football'
+              AND sport_code = 'FB'
+              AND entity = 'players'
+              AND run_group LIKE 'FB_PEOPLE%'
+        """) or {}
+
+        people_groups = self.safe_fetch_all_dicts("""
+            SELECT
+                run_group,
+                COUNT(*) FILTER (WHERE status = 'done') AS done_jobs,
+                COUNT(*) FILTER (WHERE status IN ('pending', 'ready')) AS pending_jobs,
+                COUNT(*) FILTER (WHERE status = 'running') AS running_jobs,
+                COUNT(*) FILTER (WHERE status IN ('failed', 'error')) AS failed_jobs,
+                COUNT(*) AS total_jobs,
+                MAX(updated_at) AS last_update
+            FROM ops.ingest_planner
+            WHERE provider = 'api_football'
+              AND sport_code = 'FB'
+              AND entity = 'players'
+              AND run_group LIKE 'FB_PEOPLE%'
+            GROUP BY run_group
+            ORDER BY run_group
+        """)
+
+        people_last_run = self.safe_fetch_one_dict("""
+            SELECT
+                job_code,
+                status,
+                started_at,
+                finished_at,
+                rows_affected,
+                details
+            FROM ops.job_runs
+            WHERE job_code IN ('people_pipeline_v22_from_planner', 'people_media_cycle_v1')
+            ORDER BY started_at DESC NULLS LAST, id DESC
+            LIMIT 1
+        """) or {}
+
         return {
             "summary": summary,
             "by_sport": by_sport,
             "by_provider": by_provider,
             "top_queue": top_queue,
+            "people_summary": people_summary,
+            "people_groups": people_groups,
+            "people_last_run": people_last_run,
         }
 
     def load_enabled_target_sports_from_db(self) -> set[str]:
@@ -505,17 +566,30 @@ class MatchMatrixPanelV11:
     def load_run_groups_from_db(self, provider: str | None = None, sport: str | None = None) -> list[str]:
         sql = """
             SELECT DISTINCT run_group
-            FROM ops.ingest_targets
-            WHERE enabled = TRUE
-              AND COALESCE(BTRIM(run_group), '') <> ''
+            FROM (
+                SELECT run_group, provider, sport_code
+                FROM ops.ingest_targets
+                WHERE enabled = TRUE
+                AND COALESCE(BTRIM(run_group), '') <> ''
+
+                UNION
+
+                SELECT run_group, provider, sport_code
+                FROM ops.ingest_planner
+                WHERE COALESCE(BTRIM(run_group), '') <> ''
+            ) x
+            WHERE 1=1
         """
         params = []
+
         if provider:
             sql += "\n  AND provider = %s"
             params.append(provider)
+
         if sport:
             sql += "\n  AND sport_code = %s"
             params.append(sport)
+
         sql += "\n ORDER BY run_group"
 
         conn = self.get_connection()
@@ -536,10 +610,19 @@ class MatchMatrixPanelV11:
                 cur.execute(
                     """
                     SELECT DISTINCT run_group
-                    FROM ops.ingest_targets
-                    WHERE enabled = TRUE
-                      AND COALESCE(BTRIM(run_group), '') <> ''
-                      AND sport_code = ANY(%s)
+                    FROM (
+                        SELECT run_group, sport_code
+                        FROM ops.ingest_targets
+                        WHERE enabled = TRUE
+                        AND COALESCE(BTRIM(run_group), '') <> ''
+
+                        UNION
+
+                        SELECT run_group, sport_code
+                        FROM ops.ingest_planner
+                        WHERE COALESCE(BTRIM(run_group), '') <> ''
+                    ) x
+                    WHERE sport_code = ANY(%s)
                     ORDER BY run_group
                     """,
                     (sports,),
@@ -691,6 +774,9 @@ class MatchMatrixPanelV11:
             by_sport = dashboard.get("by_sport", [])
             by_provider = dashboard.get("by_provider", [])
             top_queue = dashboard.get("top_queue", [])
+            people_summary = dashboard.get("people_summary", {}) or {}
+            people_groups = dashboard.get("people_groups", []) or []
+            people_last_run = dashboard.get("people_last_run", {}) or {}
 
             run_now_rows = int(summary.get("run_now_rows", 0) or 0)
             validate_rows = int(summary.get("validate_rows", 0) or 0)
@@ -704,6 +790,13 @@ class MatchMatrixPanelV11:
             pct_can_run = int(float(summary.get("pct_can_run", 0) or 0))
             pct_enabled_targets = int(float(summary.get("pct_enabled_targets", 0) or 0))
 
+            people_done = int(people_summary.get("done_jobs", 0) or 0)
+            people_pending = int(people_summary.get("pending_jobs", 0) or 0)
+            people_running = int(people_summary.get("running_jobs", 0) or 0)
+            people_failed = int(people_summary.get("failed_jobs", 0) or 0)
+            people_total = int(people_summary.get("total_jobs", 0) or 0)
+            people_last_update = people_summary.get("last_update")
+
             top_sport = by_sport[0] if by_sport else {}
             top_provider = by_provider[0] if by_provider else {}
             next_item = top_queue[0] if top_queue else {}
@@ -711,7 +804,17 @@ class MatchMatrixPanelV11:
             self.card_matches.update_card(run_now_rows, "RUN NOW", GOOD if run_now_rows else MUTED)
             self.card_leagues.update_card(validate_rows, "RUN_VALIDATE", WARN if validate_rows else MUTED)
             self.card_teams.update_card(blocked_rows, "BLOCKED", BAD if blocked_rows else GOOD)
-            self.card_players.update_card(pending_total, "PENDING TOTAL", ACCENT_2)
+            people_color = GOOD if people_pending == 0 and people_failed == 0 else (BAD if people_failed else WARN)
+            people_subtitle = f"FB PEOPLE done {people_done}/{people_total} | pending {people_pending}"
+            if people_running:
+                people_subtitle += f" | running {people_running}"
+            if people_failed:
+                people_subtitle += f" | failed {people_failed}"
+            self.card_players.update_card(
+                people_done if people_total else pending_total,
+                people_subtitle if people_total else "PENDING TOTAL",
+                people_color if people_total else ACCENT_2,
+            )
 
             self.card_planner_pending.update_card(
                 f"{can_run_rows}/{total_rows}",
@@ -744,6 +847,19 @@ class MatchMatrixPanelV11:
                 f"LOCKS | next: {next_label}",
                 next_color,
             )
+
+            if hasattr(self, "card_people_perf"):
+                group_bits = []
+                for group in people_groups[-4:]:
+                    group_bits.append(
+                        f"{group.get('run_group', '-')}: {group.get('done_jobs', 0)}/{group.get('total_jobs', 0)}"
+                    )
+                last_code = people_last_run.get("job_code", "-") if people_last_run else "-"
+                self.card_people_perf.update_card(
+                    f"{people_done}/{people_total}" if people_total else "-",
+                    " | ".join(group_bits) if group_bits else f"last: {last_code}",
+                    people_color if people_total else MUTED,
+                )
 
             self.bar_db_health.update_bar(
                 pct_enabled_targets,
@@ -1162,6 +1278,13 @@ class MatchMatrixPanelV11:
 
         ttk.Button(
             action_frame,
+            text="Spustit PEOPLE V2.2",
+            style="Accent.TButton",
+            command=self.run_people_v22_thread,
+        ).pack(side="left", padx=4, pady=4)
+
+        ttk.Button(
+            action_frame,
             text="Refresh sporty + entity + OPS",
             style="Ghost.TButton",
             command=self.refresh_all,
@@ -1300,6 +1423,9 @@ class MatchMatrixPanelV11:
 
         self.bar_ops_health = ProgressBarCard(ops_wrap, "OPS HEALTH", WARN)
         self.bar_ops_health.grid(row=2, column=2, columnspan=2, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
+
+        self.card_people_perf = MetricCard(ops_wrap, "People V2.2", "-", "FB people scale", ACCENT_2)
+        self.card_people_perf.grid(row=3, column=0, columnspan=4, sticky="nsew", padx=PAD_CARD_X, pady=PAD_CARD_Y)
 
     def build_bottom_area(self, parent) -> None:
         self.bottom_container = tk.Frame(parent, bg=BG)
@@ -1977,6 +2103,10 @@ class MatchMatrixPanelV11:
         thread = threading.Thread(target=self.run_players_pipeline, daemon=True)
         thread.start()
 
+    def run_people_v22_thread(self) -> None:
+        thread = threading.Thread(target=self.run_people_v22, daemon=True)
+        thread.start()
+
     def run_scheduler(self) -> None:
         selected_sports = self.get_selected_sports()
         selected_entities = self.get_selected_entities()
@@ -1987,6 +2117,7 @@ class MatchMatrixPanelV11:
         cmd = [
             PYTHON_EXE,
             SCHEDULER_RUNNER,
+            "--layer", "core",
             "--limit", limit,
             "--timeout-sec", timeout_sec,
         ]
@@ -2036,6 +2167,65 @@ class MatchMatrixPanelV11:
             sports="-",
             entities="players",
             run_group="-",
+        )
+
+    def run_people_v22(self) -> None:
+        selected_sports = self.get_selected_sports()
+        selected_entities = self.get_selected_entities()
+        selected_run_group = self.run_group_var.get().strip()
+        limit = self.limit_var.get().strip() or "10"
+        timeout_sec = self.timeout_sec_var.get().strip() or "300"
+
+        sport = selected_sports[0] if selected_sports else "FB"
+        provider = self.resolve_provider_for_sport(sport)
+
+        # PEOPLE V2.2 zatím podporuje pouze players.
+        # Pokud uživatel vybere player_profiles/player_stats apod., panel bezpečně přepne na players,
+        # aby se nespustil worker s nepodporovanou entitou.
+        entity = "players"
+        if selected_entities and selected_entities[0] != "players":
+            self.log_write(
+                f"PEOPLE V2.2 podporuje pouze entity=players; vybráno '{selected_entities[0]}', přepínám na players."
+            )
+
+        # Run group nesmí být core ingest typu EU_top/EU_exact_v1.
+        # Pro PEOPLE button použij jen PEOPLE run_group.
+        if sport == "FB":
+            if selected_run_group.startswith("FB_PEOPLE"):
+                run_group = selected_run_group
+            else:
+                run_group = "FB_PEOPLE_SCALE_04"
+                self.log_write(
+                    f"Vybraný run_group '{selected_run_group or '-'}' není PEOPLE run_group; používám {run_group}."
+                )
+        elif sport == "AFB":
+            run_group = selected_run_group if selected_run_group.startswith("AFB_PEOPLE") else "AFB_PEOPLE_V2"
+        else:
+            self.log_write(f"PEOPLE V2.2 je teď ověřený pro FB/AFB. Vybraný sport={sport}; pokračuji opatrně.")
+            run_group = selected_run_group or f"{sport}_PEOPLE"
+
+        cmd = [
+            PYTHON_EXE,
+            SCHEDULER_RUNNER,
+            "--layer", "people",
+            "--provider", provider,
+            "--sport", sport,
+            "--entity", entity,
+            "--run-group", run_group,
+            "--limit", limit,
+            "--timeout-sec", timeout_sec,
+        ]
+
+        self.log_write("Spouštím PEOPLE pipeline V2.2:")
+        self.log_write(" ".join(cmd))
+        self.run_command_stream(
+            cmd=cmd,
+            runner_name="PEOPLE pipeline V2.2",
+            total_steps=1,
+            step_label="people v2.2 run",
+            sports=sport,
+            entities=entity,
+            run_group=run_group,
         )
 
     def run_batch_combinations(self) -> None:
@@ -2124,6 +2314,28 @@ class MatchMatrixPanelV11:
             self.refresh_ops_dashboard()
             self.mark_run_finished(return_code, start_ts)
 
+    def build_process_env(self) -> dict:
+        """Vrátí env pro spouštěné workery.
+
+        Důvod: z Windows může být v prostředí starý PGUSER/DB_DSN
+        bez práv do schema ops. Panel proto pro child procesy vždy
+        vynutí stejné DB připojení jako používá samotný panel.
+        """
+        env = os.environ.copy()
+        env["PGHOST"] = str(DB_CONFIG.get("host", "localhost"))
+        env["PGPORT"] = str(DB_CONFIG.get("port", 5432))
+        env["PGDATABASE"] = str(DB_CONFIG.get("dbname", "matchmatrix"))
+        env["PGUSER"] = str(DB_CONFIG.get("user", "matchmatrix"))
+        env["PGPASSWORD"] = str(DB_CONFIG.get("password", ""))
+        env["DB_DSN"] = (
+            f"host={env['PGHOST']} "
+            f"port={env['PGPORT']} "
+            f"dbname={env['PGDATABASE']} "
+            f"user={env['PGUSER']} "
+            f"password={env['PGPASSWORD']}"
+        )
+        return env
+
     def run_single_process(self, cmd: list[str], provider_label: str = "-") -> int:
         self.reset_provider_diagnostics()
         self.provider_diag_stats["provider"] = provider_label
@@ -2138,6 +2350,7 @@ class MatchMatrixPanelV11:
                 bufsize=1,
                 universal_newlines=True,
                 cwd=str(PROJECT_ROOT),
+                env=self.build_process_env(),
             )
 
             assert process.stdout is not None
