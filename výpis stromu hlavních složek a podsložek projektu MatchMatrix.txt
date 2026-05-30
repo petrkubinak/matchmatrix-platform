@@ -1,0 +1,1 @@
+tree C:\MatchMatrix-platform /F /A > C:\MatchMatrix-platform\reports\matchmatrix_tree.txt

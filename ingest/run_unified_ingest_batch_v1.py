@@ -82,6 +82,13 @@ def parse_args():
         help="Počet paralelních workerů. Pro začátek doporučeno 3."
     )
 
+    parser.add_argument(
+        "--season",
+        type=int,
+        default=None,
+        help="Volitelná sezóna předaná child ingestům."
+    )
+
     return parser.parse_args()
 
 
@@ -148,6 +155,7 @@ def create_job_run(conn, args) -> int:
         "limit": args.limit,
         "timeout_sec": args.timeout_sec,
         "max_workers": args.max_workers,
+        "season": args.season,
     }
 
     with conn.cursor() as cur:
@@ -343,13 +351,15 @@ def main():
     # Sekvenční režim
     if args.max_workers <= 1:
         for target_id, league_id, season in targets:
+            effective_season = args.season if args.season else season
+
             job_result = run_single(
                 target_id,
                 args.provider,
                 args.sport,
                 args.entity,
                 league_id,
-                season,
+                effective_season,
                 args.timeout_sec
             )
             stats[job_result["result"]] += 1
@@ -373,7 +383,7 @@ def main():
                 args.sport,
                 args.entity,
                 league_id,
-                season,
+                args.season if args.season else season,
                 args.timeout_sec
             )
                 for target_id, league_id, season in targets
@@ -423,6 +433,7 @@ def main():
         "limit": args.limit,
         "max_workers": args.max_workers,
         "timeout_sec": args.timeout_sec,
+        "season": args.season,
         "targets_found": total_found,
         "targets_processed": len(targets),
     }

@@ -1,0 +1,8 @@
+﻿provider,league_name,event_name,home_raw,away_raw,home_normalized,away_normalized,best_home_candidate,best_away_candidate,best_home_score,best_away_score,match_id,issue_code,attach_reason
+theodds,soccer_conmebol_copa_libertadores,Flamengo-RJ vs Cusco FC,Flamengo-RJ,Cusco FC,flamengo rj,cusco,flamengo rj,cusco,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_conmebol_copa_libertadores,Corinthians-SP vs Platense,Corinthians-SP,Platense,corinthians sp,platense,corinthians sp,platense,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_france_ligue_one,Saint Etienne vs Nice,Saint Etienne,Nice,saint etienne,nice,saint etienne,nice,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_germany_bundesliga,SC Paderborn vs VfL Wolfsburg,SC Paderborn,VfL Wolfsburg,sc paderborn,vfl wolfsburg,sc paderborn 07,vfl wolfsburg,0.8556,1.0,,NO_MATCH_ID,FALSE_PAIRING_BLACKLIST
+theodds,soccer_italy_serie_a,AC Milan vs Cagliari,AC Milan,Cagliari,milan,cagliari,milan,cagliari,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_italy_serie_a,Cremonese vs Como,Cremonese,Como,cremonese,como,cremonese,como,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_netherlands_eredivisie,Ajax vs FC Utrecht,Ajax,FC Utrecht,ajax,utrecht,ajax,utrecht,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
