@@ -1,0 +1,490 @@
+MATCHMATRIX MASTER VIZE 2030
+CO JE MATCHMATRIX
+
+MatchMatrix není zamýšlen jako další web s výsledky.
+
+Není zamýšlen jako další statistický portál.
+
+Není zamýšlen jako další tipérský web.
+
+Cílem je vytvořit:
+
+Globální sportovní ekosystém.
+
+Platformu, která propojí:
+
+sportovní databázi
+historický archiv
+amatérské soutěže
+profesionální soutěže
+média
+hráče
+trenéry
+predikce
+Ticket Engine
+AI
+sběratelské produkty
+
+do jednoho systému.
+
+HLAVNÍ FILOZOFIE
+
+Pořadí vývoje:
+
+1. Data
+
+Nejdříve vytvořit největší možnou sportovní databázi.
+
+2. Inteligence
+
+Nad daty budovat:
+
+People Layer
+Media Layer
+Match Context Layer
+Ticket Intelligence
+3. Web
+
+Web postavit až nad kvalitními daty.
+
+GLOBÁLNÍ SPORTOVNÍ ARCHIV
+
+Cíl:
+
+Stáhnout a uložit maximum dostupných historických dat.
+
+Primární období:
+
+1970 → 2025
+
+Pokud budou dostupná starší data:
+
+1900+
+
+budou postupně doplňována.
+
+HISTORICKÁ DATA
+
+Po stažení:
+
+READ ONLY
+
+Historická data se již nebudou měnit.
+
+Budou sloužit:
+
+statistiky
+analýzy
+predikce
+AI modely
+historické porovnávání
+Ticket Engine
+LIVE DATA
+
+Aktuální sezóny:
+
+2025+
+
+budou průběžně aktualizovány.
+
+Obsah:
+
+výsledky
+sestavy
+zranění
+přestupy
+články
+statistiky
+kurzy
+média
+SPORTY
+Evropa
+Fotbal
+Hokej
+Basketbal
+Volejbal
+Házená
+Florbal
+Severní Amerika
+NHL
+NBA
+NFL
+MLB
+Jižní Amerika
+Fotbal
+Basketbal
+Volejbal
+Austrálie a Nový Zéland
+Rugby
+Fotbal
+Cricket
+Asie
+Fotbal
+Cricket
+Basketbal
+Další sporty
+Tenis
+Baseball
+Rugby
+Cricket
+Šipky
+MMA
+Esport
+INFRASTRUKTURA
+PC1
+
+Role:
+
+PostgreSQL
+Redis
+Scheduler
+Planner
+OPS
+DBeaver
+VS Code
+
+Po rozšíření:
+
+64 GB RAM
+PC2
+
+Intel Core Ultra 9 285K
+
+Obsah:
+
+RTX 5070
+64 GB DDR5
+2× Samsung 990 Pro 2 TB
+MSI Z890 Tomahawk
+Noctua NH-D15 G2
+850W Gold
+
+Role:
+
+Harvest
+Historical Backfill
+People Layer
+Media Layer
+AI experimenty
+Překlady
+
+Plán:
+
+Červenec
+
+128 GB RAM
+
+Srpen
+
+8 TB NVMe
+
+PEOPLE LAYER
+
+Obsah:
+
+hráči
+trenéři
+statistiky
+profily
+zranění
+přestupy
+
+pro všechny sporty.
+
+MEDIA LAYER
+
+Obsah:
+
+články
+videa
+preview
+rozhovory
+oficiální klubové weby
+ligové weby
+MATCH CONTEXT ENGINE
+
+Nová klíčová vrstva.
+
+Proces:
+
+Zápas
+↓
+Vyhledání zdrojů
+↓
+Stažení článků
+↓
+AI analýza
+↓
+Vytažení faktů
+↓
+Uložení do databáze
+↓
+Predikce
+FAKTA K ZÁPASŮM
+
+Typy:
+
+INJURY
+KEY_PLAYER_MISSING
+COACH_CHANGE
+LINEUP_NEWS
+GOOD_FORM
+BAD_FORM
+MOTIVATION
+FATIGUE
+TRAVEL
+TRANSFER
+TICKET ENGINE
+
+Ticket Engine již existuje.
+
+Obsahuje:
+
+tickets
+ticket_blocks
+ticket_variants
+generated_tickets
+strategy catalog
+pattern statistics
+recommendation feedback
+settlements
+ml_predictions
+player_form
+team power
+TICKET LEARNING ENGINE
+
+Budoucí inteligentní vrstva.
+
+Proces:
+
+Tiket
+↓
+Výsledek
+↓
+Vyhodnocení
+↓
+Úspěšnost
+↓
+ROI
+↓
+Historie
+↓
+Nové doporučení
+
+Systém se bude učit z historie.
+
+MATCH INTELLIGENCE
+
+Nejde pouze o výsledek zápasu.
+
+Systém bude chápat:
+
+formu
+absenci hráčů
+marodku
+změny trenérů
+motivaci
+kontext zápasu
+
+a využívat je při tvorbě tiketů.
+
+AMATÉRSKÉ SOUTĚŽE
+
+Jeden z hlavních pilířů projektu.
+
+Uživatel bude moci:
+
+založit soutěž
+založit tým
+zadávat výsledky
+spravovat hráče
+spravovat statistiky
+
+Po schválení MatchMatrix:
+
+automaticky vznikne:
+
+tabulka
+forma
+rating
+statistiky
+historie
+FILOZOFIE AMATÉRSKÉHO SPORTU
+
+Stejný engine:
+
+Premier League
+↓
+MatchMatrix Engine
+↓
+Okresní přebor
+
+Pouze jiná úroveň dat.
+
+DIGITÁLNÍ KARTIČKY
+
+Budoucí prémiová funkcionalita.
+
+Hráčské karty
+
+Obsah:
+
+fotografie
+jméno
+tým
+pozice
+statistiky
+forma
+MatchMatrix rating
+Týmové karty
+
+Obsah:
+
+logo
+forma
+historie
+rating
+Karty zápasů
+
+Obsah:
+
+forma
+predikce
+Match Intelligence
+SPECIÁLNÍ EDICE
+
+Budoucí kolekce:
+
+FIFA World Cup
+UEFA EURO
+NHL Season Collection
+NBA Season Collection
+NFL Season Collection
+Legends Collection
+ALBA
+
+Budoucí produktová řada.
+
+Možnosti:
+
+digitální album
+PDF album
+tištěné album
+AMATÉRSKÉ KARTIČKY
+
+Možnost vytvořit vlastní karty:
+
+hráčů
+týmů
+soutěží
+
+včetně MatchMatrix brandingu.
+
+MONETIZACE
+FREE
+
+14 dní zdarma.
+
+SPORT PASS
+3 EUR / měsíc
+
+Obsah:
+
+výsledky
+tabulky
+statistiky
+forma
+základní predikce
+základní Ticket Engine
+CLUB PASS
+6 EUR / měsíc
+
+Obsah:
+
+správa soutěží
+editace výsledků
+správa hráčů
+správa týmů
+amatérské soutěže
+MATCHMATRIX PLUS
+9 EUR / měsíc
+
+Obsah:
+
+SPORT PASS
+
+CLUB PASS
+
+Match Intelligence
+pokročilé predikce
+pokročilý Ticket Engine
+doporučení zápasů
+MATCHMATRIX ELITE
+12 EUR / měsíc
+
+Obsah:
+
+Vše výše
+
+generování kartiček
+speciální grafiky
+exporty
+sdílení na sociálních sítích
+prémiové šablony
+AFFILIATE VRSTVA
+
+Budoucí etapa.
+
+Napojení na lokální sázkové kanceláře podle země uživatele.
+
+Budoucí scénář:
+
+Uživatel vytvoří tiket
+↓
+MatchMatrix provede analýzu
+↓
+MatchMatrix doporučí úpravy
+↓
+Export tiketu do sázkové kanceláře
+
+dle legislativních možností dané země.
+
+HLAVNÍ KONKURENČNÍ VÝHODA
+
+Největší výhodou nebude počet zápasů.
+
+Největší výhodou bude propojení:
+
+DATA
++
+PEOPLE
++
+MEDIA
++
+MATCH CONTEXT
++
+TICKET ENGINE
++
+AI
++
+AMATÉRSKÉ SOUTĚŽE
++
+DIGITÁLNÍ KARTIČKY
+
+do jednoho společného systému.
+
+DLOUHODOBÝ CÍL
+
+Vybudovat:
+
+Největší sportovní databázi
++
+Největší sportovní archiv
++
+Největší amatérskou sportovní platformu
++
+Nejchytřejší Ticket Engine
++
+Globální sportovní ekosystém
+
+který bude použitelný pro fanoušky, tipéry, amatérské kluby, profesionální kluby, soutěže i budoucí komerční partnery po celém světě. 🚀🌍⚽🏒🏀🏐🏉🏏🥇

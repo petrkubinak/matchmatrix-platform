@@ -1,0 +1,479 @@
+MATCHMATRIX MASTER ZÁPIS
+Stav projektu, infrastruktura, dlouhodobá vize a další směr
+Datum: 05.06.2026
+KDE SE PROJEKT DNES NACHÁZÍ
+
+MatchMatrix již není ve fázi nápadu.
+
+Projekt má vybudované:
+
+Datové jádro
+PostgreSQL databázi
+staging vrstvu
+public vrstvu
+merge procesy
+harvest infrastrukturu
+planner
+scheduler
+OPS monitoring
+provider health
+autonomous prvky
+
+Aktuální databáze obsahuje:
+
+120 000+ zápasů
+tisíce týmů
+tisíce hráčů
+více sportů
+historická data
+media vrstvu
+people vrstvu
+HLAVNÍ FILOZOFIE PROJEKTU
+
+Nejdříve:
+
+DATA
+
+potom:
+
+PEOPLE
+MEDIA
+OPS
+PREDICTIONS
+
+a teprve následně:
+
+WEB
+
+Cílem není vytvořit hezký web.
+
+Cílem je vytvořit:
+
+největší sportovní databázi na světě
++
+inteligentní analytickou platformu
+DLOUHODOBÝ CÍL
+
+Pokrýt:
+
+Evropa
+fotbal
+hokej
+basketbal
+volejbal
+házená
+florbal
+Severní Amerika
+NHL
+NBA
+NFL
+MLB
+Jižní Amerika
+fotbal
+basketbal
+volejbal
+Austrálie a Nový Zéland
+rugby
+fotbal
+cricket
+Asie
+fotbal
+cricket
+basketbal
+Ostatní sporty
+tenis
+baseball
+rugby
+cricket
+šipky
+MMA
+esport
+HISTORICKÁ DATA
+
+Strategie:
+
+Historie
+1970 → 2025
+
+Cíl:
+
+stáhnout jednou
+
+uložit
+
+ověřit
+
+uchovat
+
+Po uložení:
+
+READ ONLY
+
+Historická data již nežijí.
+
+Používají se pouze pro:
+
+statistiky
+predikce
+formu
+patterny
+ticket engine
+AI modely
+LIVE DATA
+
+Od současné sezóny:
+
+2025+
+
+Budou průběžně aktualizována:
+
+výsledky
+soupisky
+zranění
+články
+kurzy
+media
+statistiky
+INFRASTRUKTURA
+PC1
+
+Současný Acer Veriton
+
+Po rozšíření:
+
+64 GB RAM
+
+Role:
+
+PostgreSQL
+Redis
+Scheduler
+Planner
+OPS
+DBeaver
+VS Code
+PC2
+
+Nový server
+
+Vybraná sestava:
+
+CPU
+
+Intel Core Ultra 9 285K
+
+GPU
+
+ASUS PRIME GeForce RTX 5070 12GB
+
+MB
+
+MSI MAG Z890 TOMAHAWK WIFI
+
+RAM
+
+64 GB DDR5
+
+2×32 GB
+
+osazení:
+
+A2 + B2
+SSD
+
+2×
+
+Samsung 990 Pro 2TB
+
+Zdroj
+
+ADATA XPG CORE REACTOR II 850W
+
+Chlazení
+
+Noctua NH-D15 G2
+
+Skříň
+
+Fractal Design Pop Air Black Solid
+
+Důvod:
+
+lepší airflow než Define 7
+
+nižší teploty
+
+ověřeno výrobcem
+
+PLÁN ROZŠÍŘENÍ
+Červenec
+
++64 GB RAM
+
+Celkem:
+
+128 GB RAM
+Srpen
+
++4 TB Samsung 990 Pro
+
+Celkem:
+
+8 TB NVMe
+BUDOUCÍ INFRASTRUKTURA
+PC1
+
+Databáze
+
+PC2
+
+Harvest
+
+People
+
+Media
+
+AI
+
+PC3 (až projekt vydělá)
+
+AI server
+
+Web
+
+API
+
+Chatbot
+
+Pokročilé modely
+
+PEOPLE LAYER
+
+Priorita projektu.
+
+Cíl:
+
+hráči
+trenéři
+statistiky
+profily
+zranění
+přestupy
+
+Pro všechny podporované sporty.
+
+MEDIA LAYER
+
+Cíl:
+
+články
+videa
+preview
+rozhovory
+klubové weby
+ligové weby
+MATCH CONTEXT ENGINE
+
+Jedna z budoucích klíčových vrstev.
+
+Automaticky:
+
+Vybraný zápas
+↓
+Najít oficiální weby
+↓
+Stáhnout články
+↓
+AI analýza
+↓
+Vytažení faktů
+↓
+Uložení do DB
+↓
+Použití v predikci
+FAKTA K ZÁPASŮM
+
+Typy:
+
+INJURY
+KEY_PLAYER_MISSING
+COACH_CHANGE
+LINEUP_NEWS
+GOOD_FORM
+BAD_FORM
+MOTIVATION
+FATIGUE
+TRAVEL
+TRANSFER
+TICKET ENGINE
+
+Důležité zjištění:
+
+Ticket Engine již existuje.
+
+Není potřeba ho vytvářet od nuly.
+
+Existující části
+tickets
+ticket_blocks
+ticket_variants
+generated_tickets
+ticket_settlements
+ticket_pattern_stats
+ticket_strategy_catalog
+ticket_recommendation_feedback
+strategy ranking
+strategy recommendation
+ml_predictions
+player_form
+team power
+CO CHYBÍ
+
+Ne tabulky.
+
+Ale propojení.
+
+Propojit:
+
+Ticket Engine
++
+People Layer
++
+Media Layer
++
+Match Context Engine
+TICKET LEARNING ENGINE
+
+Budoucí inteligentní vrstva.
+
+Systém se bude učit z historie.
+
+Proces:
+
+Tiket
+↓
+Výsledek
+↓
+Vyhodnocení
+↓
+Úspěšnost
+↓
+ROI
+↓
+Historie
+↓
+Doporučení
+
+Výsledkem bude:
+
+automatické doporučování zápasů
+
+na základě:
+
+formy
+zranění
+historie
+patternů
+úspěšnosti strategií
+AMATÉRSKÉ SOUTĚŽE
+
+Jedna z největších budoucích výhod MatchMatrix.
+
+Uživatel bude moci:
+
+založit soutěž
+přidat týmy
+zadávat výsledky
+zadávat hráče
+spravovat statistiky
+
+Po schválení MatchMatrix:
+
+automaticky vznikne:
+
+tabulka
+forma
+rating
+statistiky
+historie
+FILOZOFIE AMATÉRSKÉHO SPORTU
+
+Stejný engine jako profesionální sport.
+
+Pouze méně dat.
+
+Příklad:
+
+Premier League
+↓
+MatchMatrix Engine
+↓
+Okresní přebor Ostrava
+
+Stejná logika.
+
+Jiná hloubka dat.
+
+MARKETINGOVÁ VÝHODA
+
+Nejsilnější budoucí sdělení:
+
+Od Premier League až po vaši vesnickou ligu.
+
+a
+
+Jedna platforma pro profesionální i amatérský sport.
+NEJVĚTŠÍ KONKURENČNÍ VÝHODA
+
+Ne počet zápasů.
+
+Ale propojení:
+
+DATA
++
+PEOPLE
++
+MEDIA
++
+MATCH CONTEXT
++
+TICKET ENGINE
++
+AI
++
+AMATÉRSKÉ SOUTĚŽE
+
+To je směr, kterým má MatchMatrix pokračovat.
+
+DALŠÍ PRIORITY
+1
+
+Dokončit People Layer
+
+2
+
+Dokončit Media Layer
+
+3
+
+Vybudovat Match Context Engine
+
+4
+
+Napojit Ticket Engine na Context Engine
+
+5
+
+První veřejná verze webu
+
+6
+
+Amatérské soutěže
+
+7
+
+AI doporučovací vrstva
+
+Závěr:
+
+MatchMatrix již není databázový projekt. Buduje se globální sportovní platforma, která má spojit profesionální sport, amatérské soutěže, média, statistiky, inteligentní analýzu zápasů a doporučovací Ticket Engine do jednoho systému. Cílem je postupně pokrýt co největší část světového sportu a vytvořit vlastní dlouhodobý sportovní datový archiv s historií od roku 1950 až po současnost.

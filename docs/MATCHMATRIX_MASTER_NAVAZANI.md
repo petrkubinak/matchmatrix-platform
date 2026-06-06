@@ -1,530 +1,682 @@
-MATCHMATRIX — HLAVNÍ VIZE PROJEKTU / ROADMAP 2026
-SPORTS INTELLIGENCE PLATFORM
-CO JE MATCHMATRIX
+MATCHMATRIX MASTER NAVÁZÁNÍ
+Stav projektu k 31.05.2026 – OPS Command Center, Historical Harvest a AI Orchestrace
+CO JSME DNES DOKONČILI
 
-MatchMatrix není jen:
+Během dnešní práce jsme výrazně posunuli OPS vrstvu z pouhého monitoringu směrem ke skutečnému autonomnímu řízení projektu MatchMatrix.
 
-livescore web
-tipérský web
-databáze výsledků.
+Panel již není pouze přehled spuštěných procesů.
 
-Cíl je vytvořit:
+Panel začíná rozhodovat:
 
-globální sports intelligence platform
-
-která propojí:
-
-sportovní data
-statistiky
-média
-AI analýzy
-trendy
-predikce
-ticket intelligence
-komunitní obsah
-automatizaci
-multijazyčnost
-personalization systém.
-HLAVNÍ PILÍŘE PROJEKTU
-1. SPORTOVNÍ DATABÁZE
-
-Budujeme:
-
-jednu z největších multisport databází
-canonical sport model
-multi-provider architekturu.
-
-Obsah:
-
-sporty
-ligy
-sezóny
-týmy
-zápasy
-hráči
-trenéři
-stadiony
-statistiky
-kurzy
-lineups
-injuries
-match events
-2. MULTISPORT PLATFORM
-
-Nejen fotbal.
-
-Systém je připraven pro:
-
-fotbal
-hokej
-basketbal
-tenis
-baseball
-rugby
-cricket
-volejbal
-házenou
-MMA
-americký fotbal
-esports
-další sporty.
-3. MEDIA + CONTENT VRSTVA
-
-Systém automaticky sbírá:
-
-články
-RSS feedy
-oficiální news
-videa
-highlighty
-trending témata.
-
-A propojuje je s:
-
-hráči
-týmy
-ligami
-zápasy
-
-Vzniká:
-
-sports media intelligence layer
-4. AI / ANALYTICKÁ VRSTVA
-
-Budujeme:
-
-ratingy týmů
-form modely
-momentum modely
-ML predikce
-confidence scoring
-value detection
-AI ticket intelligence.
-
-Budoucí funkce:
-
-AI souhrny
-AI trendy
-AI analýzy
-AI doporučení
-AI similarity engine
-5. TICKET INTELLIGENCE
-
-Jedna z nejdůležitějších částí.
-
-Nejsme bookmaker.
-
-Nejsme sázkovka.
-
-MatchMatrix je:
-
-poradní a analytický systém
-
-Uživatel vždy rozhoduje sám.
-
-Systém:
-
-navrhuje varianty
-ukazuje pravděpodobnosti
-počítá confidence
-hledá value
-tvoří inteligentní bloky
-porovnává historicky podobné zápasy.
-TICKET BLOKY
-
-Například:
-
-SAFE BLOCK
-VALUE BLOCK
-FORM BLOCK
-LIVE MOMENTUM BLOCK
-AI TREND BLOCK
-AI TICKET BUILDER
-
-Později:
-
-AI vytvoří návrhy tiketů
-
-podle:
-
-risk profilu
-historie uživatele
-úspěšnosti
-confidence
-formy
-trendů.
-
-Ale:
-
-konečné rozhodnutí má vždy uživatel
-6. FAN VRSTVA
-
-Budoucí unikátní část.
-
-Uživatelé budou moci:
-
-přidat amatérské soutěže
-přidat týmy
-zapisovat výsledky
-vytvářet statistiky.
-
-Po schválení:
-
-systém vytvoří:
-
-tabulky
-statistiky
-ratingy
-historii
-stránky soutěží.
-7. WEB + APLIKACE
-
-Budoucí veřejná platforma:
-
-web
-mobilní aplikace
-admin centrum
-operations center
-
-Funkce:
-
-výsledky
-statistiky
-trendy
-média
-tikety
-predikce
-personalizace
-notifikace
-premium analytika.
-8. MULTIJAZYČNOST
-
-Platforma je připravována:
-
-globálně
-
-Bude podporovat:
-
-překlady článků
-překlady týmů
-překlady hráčů
-lokalizaci feedu
-vícejazyčný obsah.
-CO UŽ JE HOTOVÉ
-Databáze
-
-Máme:
-
-robustní PostgreSQL architekturu
-ops / staging / public vrstvy
-canonical model
-provider mapping systém
-betting vrstvu
-ticket generator struktury
-media struktury
-translation struktury.
-Ingest systém
-
-Máme:
-
-planner
-scheduler
-orchestration
-runtime governance
-SAFE execution
-dependency chain
-retry governance
-lock governance
-heartbeat governance.
-Operations Center
-
-Vzniká:
-
-Sports Data Operating System
-
-Máme:
-
-Runtime Operations Center
-scheduler monitoring
-planner monitoring
-runtime alerts
-grouped alerts
-orchestration dashboard
-RUN NEXT intelligence
-SAFE_AUTONOMOUS execution.
-Media vrstva
-
-Máme:
-
-NHL
-NBA
-Bundesliga
-Premier League
-LaLiga
-UEFA
-další football media ingest.
-
-Máme:
-
-article parsing
-entity matching
-player matching
-trending engine
-media scoring.
-People vrstva
-
-Máme:
-
-players ingest
-provider maps
-statistics základ
-player matching
-player trending.
-CO TEĎ CHYSTÁME
-KVĚTEN → ČERVEN 2026
-1. Druhé výkonné PC
-
-Plán:
-
-Nový hlavní download/orchestration server:
-
-Intel Core Ultra 9
-RTX 5070
-64 GB RAM
-2x 2TB NVMe
-
-Role:
-
-masivní ingest
-orchestrations
-AI processing
-media processing
-bulk backfill
-paid provider harvesting.
-
-Starý PC:
-
-vývoj
-DB práce
-programování
-panel management.
-2. Paid API harvest
-
-Po aktivaci PRO providerů:
-
-Začne:
-
-masivní backfill
-historická data
-odds harvest
-players
-advanced stats
-coaches
-richer fixtures
-více sezon.
-3. Webová platforma
-
-Začneme:
-
-frontend architekturu
-API layer
-veřejné stránky
-detail týmů
-detail hráčů
-detail zápasů
-media feed.
-4. Ticket Intelligence expansion
-
-Budeme stavět:
-
-AI ticket scoring
-similarity engine
-ticket learning
-historical pattern engine
-risk balancing
-smart block builder.
-5. Operations Center expansion
-
-Budeme rozšiřovat:
-
-retry heatmap
-provider health
-orchestration graph
-runtime analytics
-throughput monitoring
-API usage monitoring
-self-healing orchestration.
-SMĚR PROJEKTU
-
-MatchMatrix směřuje k:
-
-SPORTS INTELLIGENCE ECOSYSTEM
-
-který spojí:
-
-sportovní data
-AI
-média
-predikce
-ticket intelligence
-analytiku
-komunitu
-automatizaci
-multijazyčnost
-
-do jedné platformy.
-
-DLOUHODOBÝ CÍL
-
-Vytvořit:
-
-jednu z nejpokročilejších sportovních intelligence platforem
-
-která:
-
-není jen livescore
-není jen tipérský web
-není jen databáze
-
-ale:
-
-inteligentní sportovní ekosystém
-
-pro uživatele po celém světě.
-
-PRACOVNÍ PRAVIDLA PRO CELÝ PROJEKT
-
-Celý projekt MatchMatrix bude dlouhodobě veden:
-
-systematicky
-číslovaně
-auditovatelně
-enterprise stylem
-KAŽDÝ NOVÝ KROK MUSÍ OBSAHOVAT
-1. ČÍSLOVÁNÍ
-
-Například:
-
-107_A
-107_B
-108_F
-108_G
-109_A
-
-a u workerů:
-
-104_G_parse_api_football_fixture_players_to_public_v1.py
-
-To umožní:
-
-přehledný vývoj
-snadné navazování
-audit projektu
-rychlou orientaci
-enterprise dokumentaci.
-2. PŘESNOU CESTU ULOŽENÍ
-
-Každý krok musí vždy obsahovat:
-
-KAM SOUBOR ULOŽIT
-
-Například:
-
-C:\MatchMatrix-platform\db\ops\
-C:\MatchMatrix-platform\workers\
-C:\MatchMatrix-platform\tools\
-C:\MatchMatrix-platform\docs\
-3. NÁZEV SOUBORU
-
-Například:
-
-108_I_create_operations_center_summary_v1.sql
-
-matchmatrix_control_panel_V17_7.py
-
-104_G_parse_api_football_fixture_players_to_public_v1.py
-4. ZÁKLADNÍ POPISY
-
-Každý nový:
-
-SQL script
-worker
-panel
-pipeline
-automation script
-orchestration vrstva
-
-musí obsahovat:
-
-CO TO JE:
-
-stručný technický popis.
-
-Například:
-
-Runtime alerts engine pro orchestration monitoring.
-K ČEMU TO JE:
-
-proč to existuje.
-
-Například:
-
-Detekce planner overloadu a unstable workerů.
-KDE TO UVIDÍME:
-
-kde se výsledek projeví.
-
-Například:
-
-ops.v_runtime_alerts_v1
-V17.7 panel
-budoucí admin web
-JAK SE TO VYUŽIJE:
-
-praktické využití.
-
-Například:
-
-runtime governance
-retry engine
-scheduler diagnostics
-AI orchestration
-PROČ JE TO DŮLEŽITÉ
-
-Projekt už není malý script projekt.
-
-MatchMatrix už začíná být:
-
-enterprise sports intelligence platform
-
-a bez:
-
-číslování
-dokumentace
-auditovatelnosti
-struktury
-standardů
-
-by se projekt později stal neudržitelný.
-
-STANDARD MATCHMATRIX
-
-Od teď bude každý nový krok obsahovat:
-
-ČÍSLO
-
-SOUBOR
-
-KAM ULOŽIT
-
+co chybí,
+co má nejvyšší prioritu,
+co má největší přínos pro celý projekt,
+jaký další worker má být spuštěn.
+111\_M – SMART CORE QUOTA QUEUE
 CO TO JE
+
+Inteligentní fronta CORE harvestu.
 
 K ČEMU TO JE
 
-KDE TO UVIDÍME
+Původní CORE harvest vybíral pouze nejvyšší pending úlohy.
 
-JAK SE TO VYUŽIJE
+To vedlo k tomu, že dlouhodobě běžel téměř výhradně fotbal.
 
-JAK SPUSTIT
+VÝSLEDEK
 
-To bude pevný standard celého projektu MatchMatrix.
+Vznikla kvótovaná fronta:
+
+Football      50 %
+Hockey        15 %
+Basketball    15 %
+Ostatní       20 %
+111\_N – MULTISPORT HISTORICAL CORE PLANNER
+CO TO JE
+
+Seed historických CORE úloh pro všechny sporty.
+
+K ČEMU TO JE
+
+Dříve byly pending úlohy téměř výhradně FB.
+
+Nyní byly vytvořeny historické pending úlohy i pro:
+
+HK
+BK
+HB
+VB
+AFB
+BSB
+CK
+RGB
+TN
+MMA
+ESP
+FH
+VÝSLEDEK
+
+Historický harvest už není pouze fotbalový.
+
+111\_O – PROVIDER AWARE API BUDGET
+CO TO JE
+
+Napojení budgetů na provider\_accounts.
+
+K ČEMU TO JE
+
+Limity se již nezadávají ručně.
+
+Systém čte:
+
+provider
+plan
+daily\_limit
+
+z:
+
+ops.provider\_accounts
+AKTUÁLNÍ STAV
+
+FREE režim:
+
+100 requestů / sport / den
+
+Budoucí PRO režim:
+
+7500 requestů / sport / den
+
+po změně provider účtu.
+
+111\_P – SPORT DAILY BUDGET MONITOR
+CO TO JE
+
+Přehled denních limitů po sportech.
+
+K ČEMU TO JE
+
+Kontrola vytížení providerů.
+
+PŘÍKLAD
+Football      0 / 100
+Hockey        0 / 100
+Basketball    0 / 100
+BUDOUCNOST
+
+Po přechodu na PRO:
+
+Football   1840 / 7500
+Hockey      420 / 7500
+Basketball  310 / 7500
+111\_Q – SPORT COMPLETION DASHBOARD
+CO TO JE
+
+Souhrnný dashboard dokončenosti sportů.
+
+Zdroj:
+
+ops.v\_sport\_completion\_dashboard\_v1
+K ČEMU TO JE
+
+Ukazuje:
+
+CORE
+PEOPLE
+MEDIA
+ODDS
+CELKOVÉ %
+PENDING
+DOPORUČENÁ AKCE
+AKTUÁLNÍ STAV
+
+Například:
+
+Football      CORE\_HARVEST      3792 pending
+Handball      CORE\_HARVEST      1266 pending
+Hockey        CORE\_HARVEST       180 pending
+Basketball    CORE\_HARVEST        54 pending
+Volleyball    CORE\_HARVEST         6 pending
+PANEL V17.11
+NOVINKY
+České KPI
+
+Přepsány názvy KPI do češtiny.
+
+Lepší čitelnost
+širší KPI karty,
+zalamování textu,
+oprava kódování logů.
+AI doporučená akce
+
+Panel doporučuje další akci podle přínosu.
+
+Manuál / Automat
+
+Příprava na plně autonomní režim.
+
+Denní limity sportů
+
+Nový dashboard využití API limitů.
+
+Projektový dashboard
+
+Panel již ukazuje stav celého projektu.
+
+AUTONOMNÍ OPS – NOVÁ FILOZOFIE
+
+Původně:
+
+Spusť další worker.
+
+Nově:
+
+Najdi nejslabší sport.
+Najdi nejslabší vrstvu.
+Najdi worker s nejvyšším přínosem.
+Doporuč akci.
+DLOUHODOBÁ VIZE AUTONOMNÍHO OPS
+111\_R – AI ACTION RECOMMENDATION ENGINE V2
+
+Cíl:
+
+Panel nebude doporučovat pouze worker.
+
+Bude doporučovat:
+
+Sport
+Vrstva
+Důvod
+Přínos
+Akce
+
+Příklad:
+
+DOPORUČENO
+
+SPORT:
+HB
+
+VRSTVA:
+CORE
+
+PŘÍNOS:
++3,4 % projektu
+
+AKCE:
+CORE\_INGEST\_V3
+111\_S – AUTONOMOUS OPS BRAIN
+
+Budoucí autonomní logika:
+
+Najdi problém
+↓
+Spusť opravu
+↓
+Vyhodnoť výsledek
+↓
+Pokud nefunguje:
+jiný worker
+jiný provider
+jiný plán
+↓
+Ulož zkušenost
+↓
+Pokračuj dál
+HISTORICKÝ HARVEST – STRATEGIE
+PRIORITA
+
+Nejdříve:
+
+historická data
+co nejvíce sportů
+co nejvíce providerů
+co nejvíce sezón
+
+Poté:
+
+aktuální sezóna
+2025/2026
+
+pro spuštění webu.
+
+CÍLOVÝ STAV
+OPS nebude pouze monitorovat.
+
+OPS bude řídit MatchMatrix.
+
+Bude rozhodovat:
+
+co chybí
+co má běžet
+co má největší přínos
+jak nejlépe využít API limity
+jak dokončit vrstvy projektu
+DALŠÍ CHAT – KONTINUACE
+
+Pokračovat od:
+
+111\_R – AI ACTION RECOMMENDATION ENGINE V2
+
+poté
+
+111\_S – AUTONOMOUS OPS BRAIN
+
+poté
+
+V17.11.03 – SPORT COMPLETION DASHBOARD V PANELU
+
+a následně
+
+historický harvest
+People vrstva
+Media vrstva
+Odds vrstva
+příprava druhého PC
+příprava webu
+
+🚀 MatchMatrix se posouvá z monitorovacího systému na autonomně řízenou datovou platformu.
+
+
+
+AKTUALIZACE 2026-05-31 → 2026-06-01
+
+AUTONOMNÍ OPS PLATFORM – STAV
+
+
+
+Byla dokončena první produkční verze autonomního OPS řízení.
+
+
+
+Hotové části:
+
+
+
+111\_R Sport Completion Dashboard
+
+111\_S Autonomous OPS Brain V1
+
+111\_S Autonomous OPS Brain V2
+
+111\_S Autonomous OPS Brain V3
+
+111\_S Autonomous OPS Brain V4
+
+
+
+Cíl:
+
+
+
+Přesunout MatchMatrix od ručně spouštěných procesů k autonomnímu řízení celé platformy.
+
+
+
+CO JE AUTONOMNÍ OPS BRAIN
+
+
+
+OPS Brain je vrstva nad plannerem.
+
+
+
+Nevykonává harvesting přímo.
+
+
+
+Vyhodnocuje:
+
+
+
+stav sportů
+
+stav providerů
+
+stav workerů
+
+stav planneru
+
+stav runtime auditů
+
+stav media vrstvy
+
+stav people vrstvy
+
+stav datových mezer
+
+
+
+a navrhuje další akce.
+
+
+
+NOVÁ FILOZOFIE PLATFORMY
+
+
+
+Dříve:
+
+
+
+Člověk
+
+&#x20; ↓
+
+Spustí skript
+
+&#x20; ↓
+
+Vyhodnotí výsledek
+
+
+
+Nově:
+
+
+
+OPS Brain
+
+&#x20; ↓
+
+Vyhodnotí situaci
+
+&#x20; ↓
+
+Navrhne akci
+
+&#x20; ↓
+
+Scheduler
+
+&#x20; ↓
+
+Worker
+
+
+
+Budoucí stav:
+
+
+
+OPS Brain
+
+&#x20; ↓
+
+Scheduler
+
+&#x20; ↓
+
+Autonomous Dispatcher
+
+&#x20; ↓
+
+Worker
+
+&#x20; ↓
+
+Audit
+
+&#x20; ↓
+
+OPS Brain
+
+
+
+Uzavřená autonomní smyčka.
+
+
+
+SPORT COMPLETION DASHBOARD
+
+
+
+Byl vytvořen nový přehled:
+
+
+
+Core readiness
+
+People readiness
+
+Media readiness
+
+Historical coverage
+
+Sport readiness score
+
+
+
+Výstup:
+
+
+
+SPORT\_READY
+
+SPORT\_NEAR\_READY
+
+SPORT\_PARTIAL
+
+DATA\_GAP
+
+
+
+Dashboard se stává hlavním ukazatelem dokončenosti sportu.
+
+
+
+AKTUÁLNÍ STAV SPORTŮ
+
+
+
+Podle posledního auditu:
+
+
+
+READY
+
+Football
+
+Hockey
+
+Basketball
+
+Handball
+
+Volleyball
+
+Rugby
+
+Cricket
+
+American Football
+
+Tennis
+
+
+
+Core vrstva potvrzena.
+
+
+
+PEOPLE
+
+
+
+Nejlépe připraveno:
+
+
+
+Football
+
+Basketball
+
+American Football
+
+
+
+Další sporty budou doplněny podle dostupnosti providerů.
+
+
+
+DŮLEŽITÉ PRAVIDLO
+
+
+
+Pokud některý provider neumí:
+
+
+
+players
+
+coaches
+
+stats
+
+odds
+
+media
+
+
+
+neznamená to blokaci sportu.
+
+
+
+Najde se jiný provider.
+
+
+
+Každá vrstva může používat jiný zdroj.
+
+
+
+Toto je základní architektonické pravidlo MatchMatrix.
+
+
+
+OPS TABULKY JSOU ZDROJ PRAVDY
+
+
+
+Definitivně potvrzeno:
+
+
+
+Textové dokumenty slouží pouze jako dokumentace.
+
+
+
+Zdroj pravdy:
+
+
+
+ops.runtime\_entity\_audit
+
+ops.sport\_completion\_audit
+
+ops.provider\_entity\_coverage
+
+ops.ingest\_planner
+
+ops.job\_runs
+
+
+
+a další OPS objekty.
+
+
+
+DALŠÍ PRIORITA
+
+111\_S V5
+
+
+
+Dokončit:
+
+
+
+lepší scoring Brainu
+
+odstranění duplicit akcí
+
+MEDIA priority engine
+
+PEOPLE priority engine
+
+health scoring providerů
+
+doporučování oprav
+
+NÁSLEDUJÍCÍ VELKÝ KROK
+
+
+
+Autonomous Dispatcher.
+
+
+
+Cíl:
+
+
+
+OPS Brain
+
+&#x20;   ↓
+
+vygeneruje akci
+
+&#x20;   ↓
+
+Dispatcher
+
+&#x20;   ↓
+
+spustí worker
+
+&#x20;   ↓
+
+worker provede ingest
+
+&#x20;   ↓
+
+audit
+
+&#x20;   ↓
+
+OPS Brain vyhodnotí výsledek
+
+
+
+První skutečně autonomní verze MatchMatrix.
+
+
+
+DLOUHODOBÝ CÍL
+
+
+
+Vybudovat plně autonomní multisport platformu:
+
+
+
+Core Layer
+
+Odds Layer
+
+People Layer
+
+Media Layer
+
+Community Layer
+
+AI Layer
+
+
+
+pro profesionální i ověřené amatérské soutěže podle dlouhodobé vize projektu.
+
+
+
+Tímto bude zítra nový chat navazovat přes aktuální MASTER a poslední dokončený krok bude 111\_S Autonomous OPS Brain V4 → pokračování V5
+
