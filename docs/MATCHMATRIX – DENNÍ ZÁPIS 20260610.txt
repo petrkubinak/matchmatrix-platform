@@ -1,0 +1,291 @@
+MATCHMATRIX – DENNÍ ZÁPIS
+
+Datum: 10.06.2026
+Fáze projektu: Příprava na PC2 Harvest Platform
+Status dne: VELMI DOBRÝ POSUN
+
+CO JSME DNES DOKONČILI
+1. PLAYER DUPLICATE PREVENTION (19_A – 19_E)
+
+Dnes jsme dokončili celý governance blok pro duplicity hráčů.
+
+Vytvořeno
+19_A Player Duplicate Prevention Audit
+19_B Candidate Detail
+19_C Merge Plan
+19_D Governance Dashboard
+19_E Review Queue
+Výsledky auditu
+Celkový stav hráčů
+public.players                 19 396
+player_provider_map            19 396
+player_external_identity          396
+Audit duplicit
+SINGLE_OK                     19 092
+SAME_PROVIDER_DUPLICATE         219
+BIRTHDATE_HOLD                   85
+Governance Dashboard
+TOTAL PLAYERS               19 396
+
+SINGLE_OK                   19 092
+MERGE_CANDIDATES               219
+HOLD_BIRTHDATE                 85
+
+CLEAN RATE                  98.43 %
+Finální status
+PLAYER_DUPLICATE_PREVENTION = CONTROLLED_HOLD
+PLAYER_IDENTITY_GOVERNANCE  = READY
+PEOPLE_LAYER                = READY_FOR_PC2
+CO TO ZNAMENÁ
+
+Před příchodem nového PC už není People Layer kritický problém.
+
+Nemáme:
+
+CRITICAL = 0
+
+Máme pouze:
+
+113 kandidátů na ruční review
+85 birthdate HOLD
+
+To nijak neblokuje další rozvoj.
+
+2. PC2 HARVEST BLUEPRINT
+
+Dnes jsme dokončili první kompletní plán velkého stahování dat.
+
+PHASE 1
+CORE HISTORY
+
+Připraveno:
+
+Football
+Basketball
+American Football
+Baseball
+Cricket
+Hockey
+Handball
+Volleyball
+Rugby
+Field Hockey
+
+Vrstva:
+
+LEAGUES
+TEAMS
+FIXTURES
+WAVE 1
+
+Nejdůležitější
+
+Football
+api_football
+football_data
+WAVE 2
+AFB
+BK
+HK
+WAVE 3
+BSB
+HB
+VB
+WAVE 4
+CK
+FH
+RGB
+3. PEOPLE HISTORY PLAN
+
+Dokončen první plán pro hráče.
+
+READY FOR PC2
+FB api_football players
+AFB api_american_football players
+PARTIAL
+BK api_sport players
+BK sportsdataio players
+CK api_cricket players
+WAIT FOR PAID
+HK sportsdataio
+BSB sportsdataio
+MMA sportsdataio
+BLOCKED
+HK players
+HB players
+VB players
+RGB players
+
+Tyto sporty budeme řešit provider research.
+
+4. MEDIA HISTORY AUDIT
+
+Dnes jsme vyhodnotili reálný stav media vrstvy.
+
+READY
+NHL
+172 článků
+169 validních
+NBA
+119 článků
+97 validních
+PARTIAL
+LaLiga
+28 článků
+Bundesliga
+26 článků
+LOW VOLUME
+UEFA
+Premier League
+NHL video
+NBA video
+
+Nutné rozšíření crawlerů.
+
+5. FOTO / MEDIA GAP ANALÝZA
+
+Poprvé jsme identifikovali největší chybějící oblast celého MatchMatrix.
+
+CRITICAL
+Player Photos
+FB Player Photos
+
+Nutné pro:
+
+Player Cards
+Player Profil
+Web
+Mobilní aplikaci
+Team Logos
+FB Team Logos
+
+Nutné pro:
+
+Týmové profily
+Zápasy
+Tabulky
+Predikce
+HIGH
+Coach Photos
+Stadium Photos
+6. PROVIDER DISCOVERY AUDIT
+
+Dnes vznikl:
+
+19_2_A Provider Discovery Audit
+Výsledek
+READY
+Players 2
+Coaches 2
+RESEARCH REQUIRED
+Players 5
+Coaches 5
+MISSING
+Photos
+Profiles
+Season Stats
+Match Stats
+Rankings
+WAIT FOR PAID
+
+Více oblastí závislých na:
+
+SportsDataIO
+Sportmonks
+RapidAPI
+další providery
+CELKOVÉ ZHODNOCENÍ DNE
+
+Dnes jsme odstranili jeden z posledních velkých governance problémů.
+
+Před týdnem jsme řešili:
+
+Team Governance
+Player Identity
+League Governance
+Provider Governance
+
+Dnes jsme uzavřeli:
+
+Player Duplicate Prevention
+
+a současně jsme vytvořili:
+
+PC2 Harvest Blueprint
+Provider Discovery Audit
+Media Gap Audit
+People Gap Audit
+CO BUDEME DĚLAT ZÍTRA
+EPIC
+19_2_B Missing Provider Matrix
+Cíl
+
+Vyrobit přesný seznam:
+
+SPORT
+ENTITY
+CO CHYBÍ
+PRIORITA
+PROVIDER
+FREE/PAID
+Zaměření
+
+Především:
+
+PLAYER PHOTOS
+TEAM LOGOS
+COACH PHOTOS
+STADIUM PHOTOS
+Výstup
+
+Chceme přesně vědět:
+
+odkud budeme stahovat
+co bude zdarma
+co bude placené
+co půjde stahovat okamžitě po spuštění PC2
+KDE CHCEME BÝT ZA TÝDEN
+
+Pokud dorazí nové PC podle plánu:
+
+INFRA
+PC2 READY
+Docker READY
+PostgreSQL READY
+Redis READY
+Git READY
+MatchMatrix READY
+HARVEST
+PHASE 1 CORE HISTORY spuštěna
+Football běží
+Basketball běží
+American Football běží
+PEOPLE
+Football Players History běží
+AFB Players History běží
+PROVIDERS
+
+Budeme mít hotovo:
+
+Missing Provider Matrix
+Photo Provider Research
+Logo Provider Research
+Media Provider Research
+AKTUÁLNÍ STAV PROJEKTU
+TEAM_DUPLICATE_PREVENTION      READY
+PLAYER_DUPLICATE_PREVENTION    CONTROLLED_HOLD
+PLAYER_IDENTITY_GOVERNANCE     READY
+
+PROVIDER_GOVERNANCE            READY
+SPORT_COMPLETION               READY
+
+CORE_HISTORY_BLUEPRINT         READY
+PEOPLE_HISTORY_BLUEPRINT       READY
+MEDIA_HISTORY_BLUEPRINT        READY
+
+PC2_HARVEST_BLUEPRINT          READY
+
+NEXT:
+19_2_B Missing Provider Matrix
+
+Dnešní výsledek: Projekt se posunul z fáze „příprava a governance“ do fáze „finální příprava na masivní historický harvest po příchodu PC2

@@ -1,0 +1,10 @@
+﻿provider,league_name,event_name,home_raw,away_raw,home_normalized,away_normalized,best_home_candidate,best_away_candidate,best_home_score,best_away_score,match_id,issue_code,attach_reason
+theodds,soccer_conmebol_copa_libertadores,Fluminense-RJ vs Independiente Rivadavia,Fluminense-RJ,Independiente Rivadavia,fluminense rj,independiente rivadavia,fluminense rj,independiente rivadavia,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_conmebol_copa_libertadores,Palmeiras-SP vs Cerro Porteño,Palmeiras-SP,Cerro Porteño,palmeiras sp,cerro porteno,palmeiras sp,cerro porteno,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_conmebol_copa_libertadores,Platense vs Coquimbo Unido,Platense,Coquimbo Unido,platense,coquimbo unido,platense,coquimbo unido,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_conmebol_copa_libertadores,Rosario Central vs Corinthians-SP,Rosario Central,Corinthians-SP,rosario central,corinthians sp,rosario central,corinthians sp,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_conmebol_copa_libertadores,Cruzeiro vs Flamengo-RJ,Cruzeiro,Flamengo-RJ,cruzeiro,flamengo rj,cruzeiro,flamengo rj,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_conmebol_copa_libertadores,Mirassol vs LDU Quito,Mirassol,LDU Quito,mirassol,ldu quito,mirassol,ldu quito,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_conmebol_copa_libertadores,Deportes Tolima vs Independiente del Valle,Deportes Tolima,Independiente del Valle,deportes tolima,independiente del valle,deportes tolima,independiente del valle,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_conmebol_copa_libertadores,Estudiantes La Plata vs Universidad Católica (CHI),Estudiantes La Plata,Universidad Católica (CHI),estudiantes la plata,universidad catolica chi,estudiantes la plata,universidad catolica chi,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
+theodds,soccer_conmebol_copa_libertadores,Rosario Central vs Corinthians-SP,Rosario Central,Corinthians-SP,rosario central,corinthians sp,rosario central,corinthians sp,1.0,1.0,,NO_MATCH_ID,EXACT_PAIR_NO_FIXTURE_FOUND
