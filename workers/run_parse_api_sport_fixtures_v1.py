@@ -14,6 +14,21 @@ DB_CONFIG = {
 def get_connection():
     return psycopg2.connect(**DB_CONFIG)
 
+conn = get_connection()
+cur = conn.cursor()
+
+cur.execute("""
+SELECT
+    current_database(),
+    current_user,
+    inet_server_addr(),
+    inet_server_port()
+""")
+
+print("DB CHECK:", cur.fetchone())
+
+cur.close()
+conn.close()
 
 def as_dict(value):
     return value if isinstance(value, dict) else {}

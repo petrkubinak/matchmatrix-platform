@@ -184,7 +184,7 @@ Write-Host "DONE | provider=$Provider | sport=$SportCode | entity=teams | league
 
 Write-Host "Spoustim PARSE TEAMS..."
 
-$pythonExe = "C:\Python314\python.exe"
+$pythonExe = (Get-Command python).Source
 $parserScript = "C:\MatchMatrix-platform\workers\run_parse_api_sport_teams_v1.py"
 
 & $pythonExe $parserScript

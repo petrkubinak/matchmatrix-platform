@@ -144,7 +144,7 @@ def main() -> None:
         error_count = 0
 
         for idx, pid in enumerate(player_ids, start=1):
-            url = f"{BASE_URL}/players?id={pid}"
+            url = f"{BASE_URL}/players?id={pid}&season=2024"
             print(f"[{idx}/{len(player_ids)}] Fetching player {pid}")
 
             try:

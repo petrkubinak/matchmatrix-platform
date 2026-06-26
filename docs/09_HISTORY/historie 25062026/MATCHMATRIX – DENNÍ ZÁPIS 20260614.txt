@@ -1,0 +1,163 @@
+# MATCHMATRIX – ZÁPIS 19_5 / PHOTO LAYER + PLAYER CONTEXT
+
+## Co jsme dnes udělali
+
+Dnes jsme posunuli MatchMatrix v oblasti **People / Media / Photo Layer**.
+
+Dokončili jsme první funkční workflow pro dohledávání a schvalování fotek hráčů:
+
+1. Vytvořen a opraven worker:
+   `workers/media/photo_asset_discovery_worker_v1.py`
+
+2. Worker umí:
+
+   * vzít hráče z `public.players`,
+   * hledat kandidáta přes Wikidata,
+   * najít obrázek přes Wikimedia Commons,
+   * uložit kandidáta do `staging.stg_player_photo_candidates`,
+   * chránit se proti duplicitám,
+   * zpomalit requesty kvůli 429 rate limitu,
+   * fungovat ve Windows bez Unicode pádu.
+
+3. V panelu V19.11 jsme dokončili:
+
+   * `SPUSTIT FB PHOTO WORKER`,
+   * `SCHVÁLIT FOTO`,
+   * `ZAMÍTNOUT FOTO`,
+   * `MERGE FOTO`,
+   * `ZOBRAZIT FOTO`,
+   * PHOTO DASHBOARD,
+   * PHOTO REVIEW kandidáty.
+
+4. Vytvořeno view:
+   `ops.v_photo_review_player_context_v1`
+
+5. Toto view ukazuje u kandidáta fotky i hráčský kontext:
+
+   * jméno,
+   * player_id,
+   * datum narození,
+   * věk,
+   * národnost,
+   * pozice,
+   * team_id,
+   * ext_source,
+   * ext_player_id,
+   * aktuální public photo_url,
+   * Wikidata ID,
+   * Commons soubor,
+   * kandidátní photo_url,
+   * stav review,
+   * rozhodovací hint.
+
+## Kam jsme se posunuli
+
+Máme první reálný konec-konec proces:
+
+Wikidata / Wikimedia
+→ photo discovery worker
+→ `staging.stg_player_photo_candidates`
+→ panel PHOTO REVIEW
+→ schválení / zamítnutí
+→ merge do `public.players.photo_url`
+
+Ověřili jsme dva kandidáty:
+
+* André Ramalho
+  Stav: APPROVED
+  Výsledek: kandidát sedí, public photo už existuje.
+
+* N. Ferguson
+  Stav: REJECTED
+  Důvod: podle hráčského kontextu jde o 25letého anglického fotbalistu, ale Wikimedia kandidát byl Neil Ferguson, tedy špatná osoba.
+
+To potvrdilo, že samotné vyhledávání fotek podle zkráceného jména nestačí.
+
+## Co jsme zjistili
+
+Hlavní problém není jen ve fotkách.
+
+Pro bezpečné schvalování fotek potřebujeme nejdříve silnější hráčské profily.
+
+U některých hráčů máme jen minimum údajů:
+
+* zkrácené jméno,
+* datum narození,
+* národnost,
+* ext_player_id.
+
+Často chybí:
+
+* celé jméno,
+* pozice,
+* tým,
+* liga,
+* sezóna,
+* výška,
+* váha,
+* týmový kontext,
+* statistiky,
+* ověřené identity odkazy.
+
+Proto musí být správné pořadí vrstev:
+
+1. hráč základ,
+2. provider mapa,
+3. detail profilu hráče,
+4. sezónní statistiky,
+5. identity odkazy,
+6. photo candidates,
+7. photo review,
+8. merge photo.
+
+## Další krok
+
+Další krok bude:
+
+## 19_5_X PLAYER DETAIL COVERAGE AUDIT
+
+Cíl:
+
+* zjistit, kolik hráčů má neúplný profil,
+* rozdělit chybějící údaje podle sportu,
+* zjistit, kde chybí celé jméno, pozice, tým, liga, výška, váha, fotka,
+* připravit enrichment frontu před dalším větším photo harvestem.
+
+Tím zabráníme chybnému přiřazování fotek u hráčů se zkráceným jménem typu:
+
+`N. Ferguson`
+
+## Kam to chceme dostat
+
+Cílový stav Photo / People Layer:
+
+* hráč má kompletní detailní kartu,
+* známe jeho tým, sport, sezónu a provider identitu,
+* fotka se dohledává až po ověření identity,
+* panel umožní zobrazit:
+
+  * hráčský profil,
+  * kandidátní fotku,
+  * aktuální public fotku,
+  * Wikidata / Wikimedia zdroj,
+  * licenci,
+  * důvěru,
+  * schválit / zamítnout / merge.
+
+Finální cíl:
+
+Photo Layer nebude jen „doplň obrázek“, ale řízený a auditovatelný enrichment systém pro webové profily hráčů, trenérů, týmů a stadionů.
+
+## Navázání příště
+
+Začít krokem:
+
+`19_5_X_create_player_detail_coverage_audit_v1.sql`
+
+Uložit do:
+
+`C:\MatchMatrix-platform\db\ops\19_5_X_create_player_detail_coverage_audit_v1.sql`
+
+Spustit v DBeaveru.
+
+Výsledek má ukázat, které údaje v `public.players` chybí a které sporty/hráči mají být zařazeni do další enrichment fronty.

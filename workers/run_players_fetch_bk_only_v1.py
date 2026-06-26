@@ -10,7 +10,13 @@ import psycopg2
 
 
 PROJECT_ROOT = Path(r"C:\MatchMatrix-platform")
-PULL_SCRIPT = PROJECT_ROOT / "ingest" / "API-Sport" / "pull_api_basketball_players.ps1"
+PULL_SCRIPT = PROJECT_ROOT / "ingest" / "API-Basketball" / "pull_api_basketball_players.ps1"
+
+print("=" * 80)
+print("BK WORKER FILE")
+print(__file__)
+print("PULL_SCRIPT =", PULL_SCRIPT)
+print("=" * 80)
 
 DB_CONFIG = {
     "host": os.getenv("POSTGRES_HOST", "localhost"),

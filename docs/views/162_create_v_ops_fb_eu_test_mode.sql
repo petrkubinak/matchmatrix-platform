@@ -1,7 +1,0 @@
-CREATE OR REPLACE VIEW ops.v_fb_eu_ingest_jobs_test_mode AS
-SELECT
-    *,
-    COALESCE(NULLIF(TRIM(season), ''), '2024') AS effective_season
-FROM ops.v_fb_eu_ingest_jobs
-WHERE entity != 'odds'
-  AND COALESCE(NULLIF(TRIM(season), ''), '2024') IN ('2022', '2023', '2024');

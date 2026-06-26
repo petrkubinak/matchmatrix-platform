@@ -463,7 +463,8 @@ $ParserScript = "C:\MatchMatrix-platform\workers\run_parse_api_sport_fixtures_v1
 if (Test-Path $ParserScript) {
     Write-Log "Spouštím parser: $ParserScript"
 
-    & "C:\Python314\python.exe" $ParserScript
+    $PythonExe = (Get-Command python).Source
+    & $PythonExe $ParserScript
 
     if ($LASTEXITCODE -ne 0) {
         throw "Parser run_parse_api_sport_fixtures_v1.py skončil s kódem $LASTEXITCODE"

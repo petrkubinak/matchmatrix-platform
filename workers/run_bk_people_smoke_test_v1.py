@@ -28,7 +28,7 @@ import requests
 from dotenv import load_dotenv
 
 
-BASE_DIR = Path(r"C:\MatchMatrix-platform")
+BASE_DIR = Path(__file__).resolve().parents[1]
 ENV_PATHS = [
     BASE_DIR / "ingest" / "API-Basketball" / ".env",
     BASE_DIR / "ingest" / ".env",

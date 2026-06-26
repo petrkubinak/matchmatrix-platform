@@ -30,7 +30,7 @@ from psycopg2.extras import RealDictCursor
 
 
 BASE_DIR = r"C:\MatchMatrix-platform"
-PYTHON_EXE = r"C:\Python314\python.exe"
+PYTHON_EXE = sys.executable
 
 UNIFIED_RUNNER = os.path.join(
     BASE_DIR,
