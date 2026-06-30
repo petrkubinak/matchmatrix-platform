@@ -1,4 +1,4 @@
-# MM-DOC-001
+# MM-DOC-100
 
 # MATCHMATRIX MASTER
 
@@ -9,7 +9,7 @@
 | Položka              | Hodnota                                   |
 | :------------------- | :---------------------------------------- |
 | Název dokumentu      | MATCHMATRIX MASTER                        |
-| Označení             | MM-DOC-001                                |
+| Označení             | MM-DOC-100                                |
 | Verze                | 1.0                      |
 | Stav                 | REVIEW                              |
 | Autor projektu       | Petr                                      |

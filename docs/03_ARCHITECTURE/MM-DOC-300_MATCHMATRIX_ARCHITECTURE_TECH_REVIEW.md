@@ -1,4 +1,4 @@
-# MM-DOC-003
+# MM-DOC-300
 
 # MATCHMATRIX ARCHITECTURE
 
@@ -9,7 +9,7 @@
 | Položka              | Hodnota                                               |
 | :------------------- | :---------------------------------------------------- |
 | Název dokumentu      | MATCHMATRIX ARCHITECTURE                              |
-| Označení             | MM-DOC-003                                            |
+| Označení             | MM-DOC-300                                            |
 | Verze                | 1.0                                  |
 | Stav                 | REVIEW                                          |
 | Autor projektu       | Petr                                                  |
@@ -1137,7 +1137,7 @@ Budou představovat stabilní základ, na kterém bude možné budovat další g
 
 # Stav dokumentu
 
-**Dokument:** MM-DOC-003 – MATCHMATRIX ARCHITECTURE
+**Dokument:** MM-DOC-300 – MATCHMATRIX ARCHITECTURE
 
 **Verze:** 0.9 – První kompletní pracovní návrh
 
@@ -1149,7 +1149,7 @@ Budou představovat stabilní základ, na kterém bude možné budovat další g
 
 Dalším dokumentem dokumentační řady bude:
 
-> **MM-DOC-004 – MATCHMATRIX DEVELOPMENT HANDBOOK**
+> **MM-DOC-800 – MATCHMATRIX DEVELOPMENT HANDBOOK**
 
 Na rozdíl od předchozích dokumentů nebude zaměřen na strategii ani architekturu. Bude představovat praktickou příručku pro vývoj MatchMatrix. Bude vycházet přímo z našich skutečných standardů: číslování skriptů, struktury složek, pravidel pro SQL, Python, PowerShell, Docker, DBeaver, Visual Studio, OPS Panel, dokumentaci i každodenní pracovní postupy.
 
@@ -1168,7 +1168,7 @@ Od tohoto dokumentu dál se dokumentace začne ještě více opírat o skutečno
 
 **Role dokumentu:** Definuje technickou architekturu platformy MatchMatrix.
 
-**Navazuje na:** MM-DOC-000, MM-DOC-001, MM-DOC-002 a standardy MM-STD-001 až MM-STD-009.
+**Navazuje na:** MM-DOC-000, MM-DOC-100, MM-DOC-200 a standardy MM-STD-001 až MM-STD-009.
 
 **Architektonické principy:** Modularita, vícevrstvá databáze, Canonical Entity Model, Governance First, Automation First, Documentation First.
 
@@ -1206,5 +1206,5 @@ Od tohoto dokumentu dál se dokumentace začne ještě více opírat o skutečno
 
 # NEXT STEP
 
-Navázat dokumentem **MM-DOC-004 – MatchMatrix Development Handbook**, který převede architektonické principy do každodenních pravidel vývoje.
+Navázat dokumentem **MM-DOC-800 – MatchMatrix Development Handbook**, který převede architektonické principy do každodenních pravidel vývoje.
 

@@ -994,7 +994,7 @@ Dodržování těchto pravidel zajišťuje, že jednotlivé části systému vzn
 
 Dalším dokumentem dokumentační řady bude:
 
-> **MM-DOC-005 – MATCHMATRIX DENNÍ ZÁPISY (TECH)**
+> **MM-DOC-900 – MATCHMATRIX DENNÍ ZÁPISY (TECH)**
 
 Tento dokument stanoví jednotný standard pro vedení denních zápisů projektu. Popíše jejich strukturu, obsah, pravidla zapisování, způsob navazování na předchozí práci i jejich využití při dlouhodobém řízení vývoje MatchMatrix. Denní zápisy budou představovat oficiální kroniku každodenního vývoje projektu a současně jeden z hlavních podkladů pro budoucí BOOK dokumentaci.
 

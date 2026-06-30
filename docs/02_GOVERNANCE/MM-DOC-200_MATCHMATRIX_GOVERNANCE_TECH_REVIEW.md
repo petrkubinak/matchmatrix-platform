@@ -1,4 +1,4 @@
-# MM-DOC-002
+# MM-DOC-200
 
 # MATCHMATRIX GOVERNANCE
 
@@ -9,7 +9,7 @@
 | Položka              | Hodnota                                           |
 | :------------------- | :------------------------------------------------ |
 | Název dokumentu      | MATCHMATRIX GOVERNANCE                            |
-| Označení             | MM-DOC-002                                        |
+| Označení             | MM-DOC-200                                        |
 | Verze                | 1.0                              |
 | Stav                 | REVIEW                                      |
 | Autor projektu       | Petr                                              |
@@ -648,19 +648,19 @@ Je úzce propojena s ostatní dokumentací projektu.
 
 Zejména s následujícími dokumenty:
 
-**MM-DOC-001 – MATCHMATRIX MASTER**
+**MM-DOC-100 – MATCHMATRIX MASTER**
 
 Popisuje strategické důvody vzniku Governance a její místo v architektuře celé platformy.
 
-**MM-DOC-003 – MATCHMATRIX ARCHITECTURE**
+**MM-DOC-300 – MATCHMATRIX ARCHITECTURE**
 
 Detailně vysvětluje technickou architekturu databáze, pipeline a jednotlivých vrstev systému, nad kterými Governance vykonává dohled.
 
-**MM-DOC-004 – MATCHMATRIX DEVELOPMENT HANDBOOK**
+**MM-DOC-800 – MATCHMATRIX DEVELOPMENT HANDBOOK**
 
 Obsahuje konkrétní pracovní postupy pro vývojáře, kteří musí pravidla Governance při své práci dodržovat.
 
-**MM-DOC-008 – MATCHMATRIX ARCHITECTURAL DECISIONS**
+**MM-DOC-903 – MATCHMATRIX ARCHITECTURAL DECISIONS**
 
 Zachycuje historické důvody jednotlivých governance rozhodnutí a jejich vývoj v průběhu projektu.
 
@@ -710,7 +710,7 @@ Stejně jako databáze představuje základ datové části systému, představu
 
 # Stav dokumentu
 
-**Dokument:** MM-DOC-002 – MATCHMATRIX GOVERNANCE
+**Dokument:** MM-DOC-200 – MATCHMATRIX GOVERNANCE
 
 **Verze:** 0.9 – První kompletní pracovní návrh
 
@@ -722,7 +722,7 @@ Stejně jako databáze představuje základ datové části systému, představu
 
 Dalším dokumentem dokumentační řady bude:
 
-> **MM-DOC-003 – MATCHMATRIX ARCHITECTURE**
+> **MM-DOC-300 – MATCHMATRIX ARCHITECTURE**
 
 Tento dokument bude představovat technické srdce celé dokumentace. Podrobně popíše architekturu databáze, jednotlivé databázové vrstvy (`staging`, `public`, `ops`, `runtime`), datové toky, ingest pipeline, merge procesy, Source Intelligence Layer, Control Panel, PC1/PC2 architekturu, automatizaci harvestu a vazby mezi všemi hlavními moduly systému. Na rozdíl od předchozích dokumentů bude vycházet přímo ze skutečné architektury MatchMatrix, kterou jsme během posledních měsíců vybudovali.
 
@@ -733,7 +733,7 @@ Tento dokument bude představovat technické srdce celé dokumentace. Podrobně 
 
 **Role dokumentu:** Definuje systém řízení pravidel, kvality a dlouhodobé udržitelnosti platformy MatchMatrix.
 
-**Navazuje na:** MM-DOC-000, MM-DOC-001, MM-STD-001 až MM-STD-009.
+**Navazuje na:** MM-DOC-000, MM-DOC-100, MM-STD-001 až MM-STD-009.
 
 ---
 
@@ -767,4 +767,4 @@ Tento dokument bude představovat technické srdce celé dokumentace. Podrobně 
 
 # NEXT STEP
 
-Navázat dokumentem MM-DOC-003 – MatchMatrix Architecture a rozpracovat technickou architekturu celé platformy.
+Navázat dokumentem MM-DOC-300 – MatchMatrix Architecture a rozpracovat technickou architekturu celé platformy.
