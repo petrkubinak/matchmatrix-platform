@@ -1,3 +1,5 @@
+cd C:\MatchMatrix-platform
+git status
 git add .
-git commit -m "%1"
+git commit -m "Popis dnešní práce"
 git push
