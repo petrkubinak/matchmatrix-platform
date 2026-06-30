@@ -2,7 +2,19 @@
 
 # SPRÁVA TERMINOLOGIE A REFERENČNÍHO SLOVNÍKU
 
-Verze: **1.0** | Stav: **REVIEW**
+---
+
+## Informace o dokumentu
+
+| Položka | Hodnota |
+|---------|---------|
+| Dokument | MM-STD-008 |
+| Název | Správa terminologie a referenčního slovníku |
+| Edice | MM-STD |
+| Verze | 1.0 |
+| Stav | REVIEW |
+
+---
 
 ## Principy
 

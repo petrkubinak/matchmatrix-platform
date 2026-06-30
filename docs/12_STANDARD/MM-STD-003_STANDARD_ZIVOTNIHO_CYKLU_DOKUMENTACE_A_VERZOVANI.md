@@ -2,6 +2,20 @@
 
 ## Aktualizace v1.1
 
+---
+
+## Informace o dokumentu
+
+| Položka | Hodnota |
+|---------|---------|
+| Dokument | MM-STD-003 |
+| Název | Standard životního cyklu dokumentace a verzování |
+| Edice | MM-STD |
+| Verze | 1.1 |
+| Stav | ACTIVE |
+
+---
+
 ### 9. Správa aktivních dokumentů
 
 Pro každý dokument projektu MatchMatrix existuje vždy pouze jedna oficiální aktivní verze.

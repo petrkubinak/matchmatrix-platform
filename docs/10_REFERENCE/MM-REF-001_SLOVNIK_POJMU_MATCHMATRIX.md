@@ -2,7 +2,19 @@
 
 # SLOVNÍK POJMŮ MATCHMATRIX
 
-Verze: **1.3**  | Stav: **ACTIVE**
+---
+
+## Informace o dokumentu
+
+| Položka | Hodnota |
+|---------|---------|
+| Dokument | MM-REF-001 |
+| Název | Slovník pojmů MatchMatrix |
+| Edice | MM-REF |
+| Verze | 1.3 |
+| Stav | ACTIVE |
+
+---
 
 | Pojem | Český význam | Definice | Kategorie | První použití | Zdroj | Stav |
 |---|---|---|---|---|---|---|
