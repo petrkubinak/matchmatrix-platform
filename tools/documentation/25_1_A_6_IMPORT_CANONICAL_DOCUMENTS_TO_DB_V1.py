@@ -1565,6 +1565,9 @@ def main() -> int:
         print("-" * 79)
         for document in manifest["documents"]:
             code = str(document["document_id"])
+            updated_before = counters.documents_updated
+            unchanged_before = counters.documents_unchanged
+
             document_pk, old_status, document_created = upsert_document(
                 connection,
                 driver,
@@ -1620,7 +1623,15 @@ def main() -> int:
                 relation_pairs.add((code, target))
 
             version_state = "INSERTED" if version_created else "SAME_SHA256"
-            document_state = "INSERTED" if document_created else "UPDATED"
+            if document_created:
+                document_state = "INSERTED"
+            elif counters.documents_updated > updated_before:
+                document_state = "UPDATED"
+            elif counters.documents_unchanged > unchanged_before:
+                document_state = "UNCHANGED"
+            else:
+                document_state = "UNCHANGED"
+
             print(
                 f"{code:<15} | DOC {document_state:<8} | VERSION {version_state:<11} | "
                 f"sections={len(parse_sections(text)) if version_created else 0}"
