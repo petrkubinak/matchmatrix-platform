@@ -11,8 +11,8 @@ K ČEMU:
 - vybere přesně 21 schválených kandidátů prvního importu,
 - ověří cestu, Document ID, verzi, stav, titul a UTF-8,
 - vypočítá SHA-256 a technické parametry zdrojového souboru,
-- označí osm starších dokumentů jako SUPERSEDED_SOURCE,
-- vyloučí dva konkrétní denní soubory jako NON_CANONICAL_OPERATIONAL_RECORD,
+- označí deset starších dokumentů jako SUPERSEDED_SOURCE,
+- vyloučí dva provozní záznamy a dvě historické šablony jako nekanonické zdroje,
 - vytvoří JSON a CSV podklad pro následný databázový importer.
 
 KDE:
@@ -39,10 +39,10 @@ from pathlib import Path
 from typing import Any
 
 
-MANIFEST_VERSION = "1.0"
+MANIFEST_VERSION = "1.1"
 EXPECTED_CANDIDATE_COUNT = 21
-EXPECTED_SUPERSEDED_COUNT = 8
-EXPECTED_EXCLUDED_COUNT = 2
+EXPECTED_SUPERSEDED_COUNT = 10
+EXPECTED_EXCLUDED_COUNT = 4
 
 
 @dataclass(frozen=True)
@@ -178,6 +178,18 @@ CANDIDATES = (
 
 SUPERSEDED = (
     SupersededSpec(
+        "docs/00_DOCUMENTATION/MM-DOC-000_MATCHMATRIX_DOCUMENTATION_FRAMEWORK.md",
+        "MM-DOC-000",
+        "docs/00_DOCUMENTATION/MM-DOC-000_MATCHMATRIX_DOCUMENTATION_FRAMEWORK_TECH_REVIEW.md",
+        "MM-DOC-000",
+    ),
+    SupersededSpec(
+        "docs/00_DOCUMENTATION/MM-DOC-000_MATCHMATRIX_DOCUMENTATION_STANDARD_TECH.md",
+        "MM-DOC-000",
+        "docs/00_DOCUMENTATION/MM-DOC-000_MATCHMATRIX_DOCUMENTATION_FRAMEWORK_TECH_REVIEW.md",
+        "MM-DOC-000",
+    ),
+    SupersededSpec(
         "docs/01_MASTER/MM-DOC-100_MATCHMATRIX_MASTER_TECH.md",
         "MM-DOC-100",
         "docs/01_MASTER/MM-DOC-100_MATCHMATRIX_MASTER_TECH_REVIEW_v1.md",
@@ -230,14 +242,24 @@ SUPERSEDED = (
 
 EXCLUDED = (
     ExcludedSpec(
-        "docs/09_HISTORY/2026-06-29_MATCHMATRIX_DENNI_ZAPIS.md",
+        "docs/99_ARCHIVE/09_HISTORY/historie 25062026/Denní zápisy/2026-06-29_MATCHMATRIX_DENNI_ZAPIS.md",
         "NON_CANONICAL_OPERATIONAL_RECORD",
         "Konkrétní denní pracovní záznam není hlavním řídicím dokumentem prvního importu.",
     ),
     ExcludedSpec(
-        "docs/09_HISTORY/2026-06-29_MATCHMATRIX_NAVAZANI_PRO_NOVY_CHAT.md",
+        "docs/99_ARCHIVE/09_HISTORY/historie 25062026/Denní zápisy/2026-06-29_MATCHMATRIX_NAVAZANI_PRO_NOVY_CHAT.md",
         "NON_CANONICAL_OPERATIONAL_RECORD",
         "Konkrétní navazovací záznam není hlavním řídicím dokumentem prvního importu.",
+    ),
+    ExcludedSpec(
+        "docs/00_DOCUMENTATION/templates/00_MATCHMATRIX_DOCUMENTATION_STANDARD_v0.9.md",
+        "NON_CANONICAL_TEMPLATE_REFERENCE",
+        "Historická šablona v0.9 je referenční podklad, nikoli samostatný kanonický dokument.",
+    ),
+    ExcludedSpec(
+        "docs/00_DOCUMENTATION/templates/MM-DOC-000_00_MATCHMATRIX_DOCUMENTATION_STANDARD_v0.9.md",
+        "NON_CANONICAL_TEMPLATE_REFERENCE",
+        "Alternativně pojmenovaná historická šablona v0.9 je referenční podklad, nikoli samostatný kanonický dokument.",
     ),
 )
 
@@ -663,6 +685,7 @@ def main() -> int:
             "canonical_candidates": "Výslovně vybraných 21 aktivních nebo REVIEW dokumentů.",
             "superseded_sources": "Starší nerevidované varianty se neimportují jako samostatné kanonické dokumenty.",
             "operational_records": "Konkrétní denní a navazovací záznamy nejsou součástí prvního kanonického importu.",
+            "template_references": "Historické šablony jsou referenční podklady a neimportují se jako samostatné dokumenty.",
         },
         "summary": {
             "configured_candidates": len(CANDIDATES),
@@ -670,7 +693,17 @@ def main() -> int:
             "candidate_blockers": blocker_count,
             "warnings": warning_count,
             "superseded_sources": len(superseded),
-            "excluded_operational_records": len(excluded),
+            "excluded_sources": len(excluded),
+            "excluded_operational_records": sum(
+                1
+                for item in excluded
+                if item.get("classification") == "NON_CANONICAL_OPERATIONAL_RECORD"
+            ),
+            "excluded_template_references": sum(
+                1
+                for item in excluded
+                if item.get("classification") == "NON_CANONICAL_TEMPLATE_REFERENCE"
+            ),
             "structural_blockers": structural_blockers,
         },
         "documents": documents,
@@ -700,7 +733,7 @@ def main() -> int:
     print(f"KANDIDÁTŮ PŘIPRAVENO         : {eligible_count}")
     print(f"BLOKÁTORŮ KANDIDÁTŮ          : {blocker_count}")
     print(f"STARŠÍCH VARIANT VYLOUČENO   : {len(superseded)}")
-    print(f"PROVOZNÍCH ZÁZNAMŮ VYLOUČENO : {len(excluded)}")
+    print(f"NEKANONICKÝCH ZDROJŮ VYLOUČENO: {len(excluded)}")
     print(f"VAROVÁNÍ                     : {warning_count}")
     print()
 
