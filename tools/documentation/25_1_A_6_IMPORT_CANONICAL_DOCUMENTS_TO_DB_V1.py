@@ -910,12 +910,38 @@ def fetch_document_by_code(
     mapping: Mapping[str, str | None],
     code: str,
 ) -> dict[str, Any] | None:
+    """
+    Načte všechny sloupce dokumentu, které importer spravuje.
+
+    Plné načtení spravovaných hodnot je nutné pro skutečně idempotentní
+    chování: nezměněný dokument se nesmí zbytečně přepisovat jen kvůli
+    sloupci updated_at.
+    """
     pk = str(mapping["pk"])
     code_column = str(mapping["code"])
-    status_column = mapping.get("current_status")
-    selected = [pk, code_column]
-    if status_column:
-        selected.append(str(status_column))
+
+    selected: list[str] = []
+    for logical_name in (
+        "pk",
+        "code",
+        "title",
+        "family",
+        "edition",
+        "current_version",
+        "current_status",
+        "source_path",
+        "source_of_truth",
+        "active",
+    ):
+        column = mapping.get(logical_name)
+        if column and str(column) not in selected:
+            selected.append(str(column))
+
+    if pk not in selected:
+        selected.insert(0, pk)
+    if code_column not in selected:
+        selected.append(code_column)
+
     sql = (
         f"SELECT {', '.join(quote_identifier(column) for column in selected)} "
         f"FROM {qualified(table.name)} WHERE {quote_identifier(code_column)} = %s"
@@ -1121,6 +1147,8 @@ def upsert_document(
     if existing and mapping.get("current_status"):
         old_status = existing.get(str(mapping["current_status"]))
 
+    # Stabilní hodnoty spravované importerem. `updated_at` se přidá pouze
+    # tehdy, když se alespoň jedna z těchto hodnot skutečně změnila.
     values = {
         str(mapping["code"]): code,
         str(mapping["title"]): document.get("title"),
@@ -1133,12 +1161,31 @@ def upsert_document(
         mapping.get("source_path"): document.get("source_path"),
         mapping.get("source_of_truth"): "HYBRID",
         mapping.get("active"): document.get("status") in {"ACTIVE", "APPROVED", "REVIEW"},
-        mapping.get("updated_at"): now,
     }
     values.update({str(key): value for key, value in optional_values.items() if key})
 
     if existing:
-        update_count = update_row(connection, table, values, str(mapping["pk"]), existing[str(mapping["pk"])])
+        changed_values = {
+            column: value
+            for column, value in values.items()
+            if column != str(mapping["pk"])
+            and existing.get(column) != value
+        }
+
+        if not changed_values:
+            counters.documents_unchanged += 1
+            return existing[str(mapping["pk"])], old_status, False
+
+        if mapping.get("updated_at"):
+            changed_values[str(mapping["updated_at"])] = now
+
+        update_count = update_row(
+            connection,
+            table,
+            changed_values,
+            str(mapping["pk"]),
+            existing[str(mapping["pk"])],
+        )
         if update_count:
             counters.documents_updated += 1
         else:
@@ -1147,6 +1194,9 @@ def upsert_document(
 
     if mapping.get("created_at"):
         values[str(mapping["created_at"])] = now
+    if mapping.get("updated_at"):
+        values[str(mapping["updated_at"])] = now
+
     document_pk = insert_row(
         connection,
         driver,
