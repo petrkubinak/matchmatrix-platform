@@ -200,4 +200,5 @@ MatchMatrix-platform/Dump/
 unmatched_theodds_*.csv
 unmatched_theodds_*.sql
 
-backups/postgres_dumps/
+backups/postgres_dumps/reports/documentation/*.csv
+reports/documentation/*.json
