@@ -1,4 +1,4 @@
-POŠLI mm# MM-DOC-004
+# MM-DOC-800
 
 # MATCHMATRIX DEVELOPMENT HANDBOOK (TECH)
 
@@ -9,10 +9,10 @@ POŠLI mm# MM-DOC-004
 | Položka              | Hodnota                                                                    |
 | :------------------- | :------------------------------------------------------------------------- |
 | Název dokumentu      | MATCHMATRIX DEVELOPMENT HANDBOOK                                           |
-| Označení             | MM-DOC-004                                                                 |
+| Označení             | MM-DOC-800                                                                 |
 | Edice                | TECH                                                                       |
-| Verze                | 1.0 (Pracovní verze)                                                       |
-| Stav                 | Rozpracováno                                                               |
+| Verze                | 1.1                                                       |
+| Stav                 | REVIEW                                                               |
 | Autor projektu       | Petr                                                                       |
 | Technická spolupráce | OpenAI ChatGPT                                                             |
 | Primární formát      | Markdown (.md)                                                             |
@@ -41,6 +41,14 @@ POŠLI mm# MM-DOC-004
 11. Workflow vývoje
 12. Kontrolní checklist
 13. Závěr
+
+---
+
+---
+
+# 0. Smysl Development Handbook
+
+Development Handbook sjednocuje každodenní pravidla vývoje platformy MatchMatrix. Jeho cílem je zajistit jednotný, dlouhodobě udržitelný vývoj připravený pro spolupráci lidí i AI.
 
 ---
 
@@ -321,198 +329,6 @@ Toto rozdělení výrazně zjednodušuje orientaci v projektu a zabraňuje přek
 Vývojové prostředí MatchMatrix bylo navrženo tak, aby jednotlivé nástroje tvořily jeden vzájemně propojený celek. Každý z nich má přesně definovanou odpovědnost a jejich společným cílem je zajistit stabilní, přehledný a dlouhodobě udržitelný vývoj platformy.
 
 V další části dokumentu bude popsána adresářová struktura projektu, standard pojmenování souborů, číslování skriptů a pravidla organizace zdrojových kódů.
-
-# 7. Struktura projektu
-
-Jedním z hlavních důvodů dlouhodobé udržitelnosti projektu MatchMatrix je důsledně dodržovaná adresářová struktura. Již od počátku vývoje bylo cílem vytvořit prostředí, ve kterém bude možné rychle nalézt libovolný skript, dokument nebo databázový objekt bez ohledu na velikost projektu.
-
-Adresářová struktura proto není pouze způsob organizace souborů.
-
-Představuje součást architektury systému.
-
-Každá složka má přesně definovaný účel a její obsah musí odpovídat tomuto určení.
-
----
-
-# 7.1 Hlavní adresáře projektu
-
-Projekt je rozdělen do několika základních částí.
-
-Každá část představuje samostatnou oblast vývoje.
-
-Typická struktura obsahuje zejména:
-
-* databázové skripty,
-* harvest workery,
-* parsery,
-* merge procesy,
-* OPS nástroje,
-* utility,
-* dokumentaci,
-* konfigurační soubory,
-* testovací nástroje.
-
-Toto rozdělení umožňuje dlouhodobě rozšiřovat projekt bez ztráty přehlednosti.
-
----
-
-# 7.2 Princip jedné odpovědnosti
-
-Každá složka obsahuje pouze soubory související s jednou oblastí.
-
-Například:
-
-* databázové skripty nejsou ukládány mezi Python workery,
-* dokumentace není ukládána mezi SQL skripty,
-* pomocné utility nejsou součástí produkčních workerů.
-
-Díky tomu lze velmi rychle určit, kam nový soubor patří.
-
-Stejně snadné je i následné vyhledávání.
-
----
-
-# 7.3 Dokumentace
-
-Veškerá dokumentace projektu je uložena ve složce **docs**.
-
-Dokumentace představuje samostatnou část projektu.
-
-Není považována za doplněk.
-
-Je součástí architektury MatchMatrix.
-
-Každý významný modul systému musí mít odpovídající dokumentaci.
-
-Stejně tak každé významné architektonické rozhodnutí musí být zaznamenáno.
-
----
-
-# 7.4 Standard adresářů
-
-Při vytváření nových adresářů platí několik jednoduchých pravidel.
-
-Adresář musí:
-
-* mít jednoznačný název,
-* obsahovat pouze související soubory,
-* zapadat do existující struktury,
-* být dlouhodobě použitelný.
-
-Nevytvářejí se složky pro jednorázové účely.
-
-Pokud některá oblast projektu vyžaduje vlastní adresář, musí být zřejmé, že bude využívána i v budoucnu.
-
----
-
-# 8. Standard názvů souborů
-
-Jednotné pojmenování souborů výrazně usnadňuje orientaci v projektu.
-
-Každý název musí být čitelný, jednoznačný a pokud možno bez potřeby otevírat samotný soubor.
-
-Název by měl již na první pohled napovědět:
-
-* účel souboru,
-* oblast projektu,
-* pořadí,
-* případně verzi.
-
----
-
-# 8.1 Číslování skriptů
-
-V průběhu vývoje vznikl jednotný systém číslování skriptů.
-
-Jeho cílem není pouze pořadí.
-
-Číslo současně označuje vývojovou etapu nebo pracovní oblast.
-
-Například:
-
-* databázové audity,
-* governance,
-* OPS,
-* denní práce,
-* Source Intelligence,
-* další specializované větve.
-
-Jednotné číslování umožňuje velmi rychle určit, do které části projektu konkrétní skript patří.
-
----
-
-# 8.2 Popisné názvy
-
-Každý soubor musí mít popisný název.
-
-Používají se názvy, které co nejlépe vystihují jeho účel.
-
-Například:
-
-* audit,
-* merge,
-* parser,
-* worker,
-* governance,
-* dashboard,
-* planner,
-* report.
-
-Naopak se nepoužívají názvy typu:
-
-* test,
-* nový,
-* finální,
-* verze2,
-* kopie.
-
-Takové názvy po několika měsících ztrácejí význam.
-
----
-
-# 8.3 Verze souborů
-
-Pokud vzniká nová významná verze souboru, je vytvářena jako nová verze.
-
-Nepřepisuje se původní soubor bez důvodu.
-
-To umožňuje:
-
-* dohledání historie,
-* porovnání změn,
-* bezpečný návrat ke starší verzi.
-
-Verzování představuje důležitou součást dlouhodobého vývoje projektu.
-
----
-
-# 8.4 Dokumenty TECH a BOOK
-
-Dokumentace projektu je rozdělena do dvou hlavních edic.
-
-**TECH**
-
-Pracovní technická dokumentace určená především pro každodenní vývoj.
-
-Obsahuje technické informace, standardy, architekturu, pracovní postupy a provozní pravidla.
-
-**BOOK**
-
-Rozšířená dokumentace zachycující historii projektu, důvody jednotlivých rozhodnutí, vývoj architektury, zkušenosti získané během vývoje a dlouhodobou vizi platformy.
-
-Obě edice se vzájemně doplňují.
-
-TECH slouží jako pracovní příručka.
-
-BOOK představuje dlouhodobou znalostní základnu projektu.
-
----
-
-# Závěr třetí části
-
-Přehledná struktura projektu a jednotné pojmenování souborů patří mezi základní předpoklady dlouhodobě udržitelného vývoje. Díky důslednému dodržování těchto pravidel lze projekt MatchMatrix rozšiřovat bez ztráty orientace i při postupném růstu na stovky skriptů, databázových objektů a dokumentů.
-
-V následující části dokumentu budou popsány standardy pro tvorbu SQL skriptů, Python aplikací, PowerShell automatizací a společná pravidla, která musí splňovat každý nový soubor vytvořený v rámci projektu MatchMatrix.
 
 # 7. Struktura projektu
 
@@ -1164,7 +980,7 @@ Dodržování těchto pravidel zajišťuje, že jednotlivé části systému vzn
 
 # Stav dokumentu
 
-**Dokument:** MM-DOC-004 – MATCHMATRIX DEVELOPMENT HANDBOOK
+**Dokument:** MM-DOC-800 – MATCHMATRIX DEVELOPMENT HANDBOOK
 
 **Edice:** TECH
 
@@ -1182,3 +998,29 @@ Dalším dokumentem dokumentační řady bude:
 
 Tento dokument stanoví jednotný standard pro vedení denních zápisů projektu. Popíše jejich strukturu, obsah, pravidla zapisování, způsob navazování na předchozí práci i jejich využití při dlouhodobém řízení vývoje MatchMatrix. Denní zápisy budou představovat oficiální kroniku každodenního vývoje projektu a současně jeden z hlavních podkladů pro budoucí BOOK dokumentaci.
 
+
+
+---
+# AI CONTEXT
+
+Role dokumentu: Hlavní technická příručka vývoje MatchMatrix.
+
+# PROJECT SNAPSHOT
+
+Připraveno pro Documentation Management System.
+
+# CURRENT STATUS
+
+- Development Standards: ACTIVE
+- SQL Standards: ACTIVE
+- Python Standards: ACTIVE
+- AI Assisted Development: DESIGN
+
+# OPEN QUESTIONS
+
+- CI/CD
+- AI Pair Programming
+
+# NEXT STEP
+
+MM-DOC-900 – MatchMatrix Daily Log.
