@@ -66,7 +66,17 @@ SUPPORTED_TYPES = {
     "GENERIC_DOCUMENT",
 }
 
-DOCUMENT_ID_RE = re.compile(r"\bMM-[A-Z]{2,10}-\d{3,4}[A-Z]?\b")
+DOCUMENT_ID_RE = re.compile(
+    r"\b(?:"
+    r"MM-DL-\d{8}"
+    r"|MM-NAV-\d{8}-\d{2}"
+    r"|MM-[A-Z]{2,10}-\d{3,4}[A-Z]?"
+    r")\b"
+)
+PLACEHOLDER_RE = re.compile(
+    r"\[(?:DOPLNIT UŽIVATELEM|DOPLNIT UZIVATELEM)[^\]]*\]",
+    re.IGNORECASE,
+)
 VERSION_RE = re.compile(r"\b\d+\.\d+\b")
 STATUS_RE = re.compile(
     r"\b(DRAFT|IN_PROGRESS|REVIEW|APPROVED|ACTIVE|DEPRECATED|ARCHIVED|CANCELLED)\b",
@@ -168,6 +178,14 @@ COMMON_RULES: tuple[Rule, ...] = (
         "Terminologie má odpovídat MM-REF-001 a nové odborné pojmy mají být vysvětleny.",
         category="TERMINOLOGY",
         manual_review=True,
+    ),
+    Rule(
+        "COMMON-PLACEHOLDERS",
+        "Nevyplněné placeholdery",
+        "MEDIUM",
+        "MM-STD-001; MM-STD-004",
+        "Kandidát připravený ke schválení nesmí obsahovat pole DOPLNIT UŽIVATELEM.",
+        category="METADATA",
     ),
 )
 
@@ -611,6 +629,53 @@ def make_finding(
     )
 
 
+
+def valid_calendar_token(value: str) -> bool:
+    try:
+        datetime.strptime(value, "%Y%m%d")
+        return True
+    except ValueError:
+        return False
+
+
+def valid_document_filename(filename: str) -> bool:
+    if " " in filename:
+        return False
+
+    path = Path(filename)
+    if path.suffix.lower() not in {".md", ".markdown", ".txt"}:
+        return False
+
+    stem = path.stem
+    if stem.upper() != stem:
+        return False
+
+    daily = re.fullmatch(
+        r"MM-DL-(\d{8})_MATCHMATRIX_DENNI_ZAPIS",
+        stem,
+    )
+    if daily:
+        return valid_calendar_token(daily.group(1))
+
+    continuation = re.fullmatch(
+        r"MM-NAV-(\d{8})-(\d{2})_MATCHMATRIX_NAVAZANI_DO_CHATU",
+        stem,
+    )
+    if continuation:
+        return (
+            valid_calendar_token(continuation.group(1))
+            and int(continuation.group(2)) >= 1
+        )
+
+    return (
+        re.fullmatch(
+            r"MM-[A-Z]{2,10}-\d{3,4}[A-Z]?_[A-Z0-9_ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]+",
+            stem,
+        )
+        is not None
+    )
+
+
 def evaluate_common(path: Path, text: str, headings: Sequence[Mapping[str, Any]]) -> list[Finding]:
     findings: list[Finding] = []
     ids = DOCUMENT_ID_RE.findall(text[:8000])
@@ -644,17 +709,33 @@ def evaluate_common(path: Path, text: str, headings: Sequence[Mapping[str, Any]]
         findings.append(make_finding(COMMON_RULES[4], "FAIL", [], "Doplnit sekci Informace o dokumentu nebo odpovídající identifikační hlavičku."))
 
     filename = path.name
-    filename_ok = (
-        " " not in filename
-        and filename.upper() == filename
-        and re.match(r"^MM-[A-Z]{2,10}-\d{3,4}[A-Z]?_[A-Z0-9_ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]+\.(?:MD|MARKDOWN|TXT)$", filename.upper()) is not None
-    )
+    filename_ok = valid_document_filename(filename)
     if filename_ok:
         findings.append(make_finding(COMMON_RULES[5], "PASS", [filename], "Bez akce."))
     else:
         findings.append(make_finding(COMMON_RULES[5], "FAIL", [filename], "Navrhnout standardizovaný název souboru začínající Document ID a používající podtržítka."))
 
     findings.append(make_finding(COMMON_RULES[6], "MANUAL_REVIEW", ["Automatický audit neumí spolehlivě posoudit význam všech odborných pojmů."], "Porovnat terminologii s MM-REF-001; později využít terminologický engine.", partial_fraction=0.5))
+
+    placeholders = PLACEHOLDER_RE.findall(text)
+    if placeholders:
+        findings.append(
+            make_finding(
+                COMMON_RULES[7],
+                "FAIL",
+                sorted(set(placeholders))[:20],
+                "Doplnit nebo schváleně odstranit všechny placeholdery před kanonickým schválením.",
+            )
+        )
+    else:
+        findings.append(
+            make_finding(
+                COMMON_RULES[7],
+                "PASS",
+                ["Nebyl nalezen žádný placeholder DOPLNIT UŽIVATELEM."],
+                "Bez akce.",
+            )
+        )
     return findings
 
 
