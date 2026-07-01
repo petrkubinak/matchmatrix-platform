@@ -20,11 +20,11 @@ K ČEMU:
 - databázi nikdy nemění.
 
 KDE:
-tools/documentation/25_1_A_7_VERIFY_DOCUMENTATION_IMPORT_V1.py
+tools/documentation/25_1_A_7_VERIFY_DOCUMENTATION_IMPORT_V2.py
 
 JAK:
 Standardní audit:
-    py -3.14 .\\tools\\documentation\\25_1_A_7_VERIFY_DOCUMENTATION_IMPORT_V1.py
+    py -3.14 .\\tools\\documentation\\25_1_A_7_VERIFY_DOCUMENTATION_IMPORT_V2.py
 
 Volitelné připojení:
     --dsn "host=localhost port=5432 dbname=matchmatrix user=postgres"
@@ -613,12 +613,6 @@ def scoped_relation_rows(
     audit_mode: str,
     manifest_ids: set[str],
 ) -> list[dict[str, Any]]:
-    """Vrátí relace patřící do rozsahu auditu.
-
-    V přírůstkovém režimu je rozsah určen zdrojovým dokumentem z manifestu.
-    Cílový dokument může být starší dokument, který již existuje v databázi
-    a proto nemusí být součástí aktuálního přírůstkového manifestu.
-    """
     if audit_mode == AUDIT_MODE_FULL:
         return [dict(row) for row in relations]
 
@@ -626,6 +620,7 @@ def scoped_relation_rows(
         dict(row)
         for row in relations
         if str(row.get("source_document_id") or "") in manifest_ids
+        and str(row.get("target_document_id") or "") in manifest_ids
     ]
 
 def document_family(document_id: str) -> str:
@@ -1289,11 +1284,6 @@ def main() -> int:
             "resolution_reason": audit_mode_reason,
             "manifest_document_count": len(known_ids),
             "database_document_count": len(database_ids),
-            "relation_target_document_count": (
-                len(database_ids)
-                if audit_mode == AUDIT_MODE_INCREMENTAL
-                else len(known_ids)
-            ),
         }
 
         print("ROZSAH AUDITU")
@@ -1303,10 +1293,6 @@ def main() -> int:
         print(f"RESOLUTION REASON  : {audit_mode_reason}")
         print(f"MANIFEST DOCUMENTS : {len(known_ids)}")
         print(f"DATABASE DOCUMENTS : {len(database_ids)}")
-        print(
-            "RELATION TARGET IDS : "
-            f"{len(database_ids) if audit_mode == AUDIT_MODE_INCREMENTAL else len(known_ids)}"
-        )
         print()
 
         if audit_mode == AUDIT_MODE_FULL:
@@ -1479,19 +1465,10 @@ def main() -> int:
                     source_texts[document_id] = source_text
                     expected_sections = parse_sections(source_text)
                     expected_section_total += len(expected_sections)
-                    # V přírůstkovém režimu mohou nové dokumenty odkazovat
-                    # na starší dokumenty, které nejsou v aktuálním manifestu,
-                    # ale již existují v databázi. Proto se cíle relací ověřují
-                    # proti celé množině databázových document_id.
-                    relation_target_ids = (
-                        database_ids
-                        if audit_mode == AUDIT_MODE_INCREMENTAL
-                        else known_ids
-                    )
                     for target_id in extract_relations(
                         source_text,
                         document_id,
-                        relation_target_ids,
+                        known_ids,
                     ):
                         expected_relations.add(
                             (document_id, target_id, "REFERENCES")
@@ -1924,97 +1901,28 @@ def main() -> int:
                 except json.JSONDecodeError:
                     details = None
 
-            counter_mismatches: dict[str, Any] = {}
-            if not isinstance(details, dict):
-                counter_mismatches["details"] = {
-                    "expected": "JSON object with import counters",
-                    "actual": details,
+            expected_counters = {
+                "documents_inserted": len(manifest_documents),
+                "versions_inserted": len(manifest_documents),
+                "sections_inserted": expected_section_total,
+                "relations_inserted": len(expected_relations),
+                "status_history_inserted": len(manifest_documents),
+            }
+            counter_mismatches = {
+                key: {
+                    "expected": expected,
+                    "actual": details.get(key)
+                    if isinstance(details, dict)
+                    else None,
                 }
-            else:
-                def counter_value(name: str) -> int | None:
-                    value = details.get(name)
-                    if isinstance(value, bool):
-                        return int(value)
-                    if isinstance(value, int):
-                        return value
-                    if isinstance(value, float) and value.is_integer():
-                        return int(value)
-                    if isinstance(value, str) and value.strip().lstrip("-").isdigit():
-                        return int(value.strip())
-                    return None
-
-                expected_documents = len(manifest_documents)
-
-                document_outcomes = [
-                    counter_value("documents_inserted"),
-                    counter_value("documents_updated"),
-                    counter_value("documents_unchanged"),
-                ]
-                if any(value is None for value in document_outcomes):
-                    counter_mismatches["document_outcomes"] = {
-                        "expected": expected_documents,
-                        "actual": document_outcomes,
-                    }
-                elif sum(value for value in document_outcomes if value is not None) != expected_documents:
-                    counter_mismatches["document_outcomes"] = {
-                        "expected": expected_documents,
-                        "actual": sum(value for value in document_outcomes if value is not None),
-                    }
-
-                version_outcomes = [
-                    counter_value("versions_inserted"),
-                    counter_value("versions_skipped_same_hash"),
-                ]
-                if any(value is None for value in version_outcomes):
-                    counter_mismatches["version_outcomes"] = {
-                        "expected": expected_documents,
-                        "actual": version_outcomes,
-                    }
-                elif sum(value for value in version_outcomes if value is not None) != expected_documents:
-                    counter_mismatches["version_outcomes"] = {
-                        "expected": expected_documents,
-                        "actual": sum(value for value in version_outcomes if value is not None),
-                    }
-
-                versions_inserted = counter_value("versions_inserted")
-                sections_inserted = counter_value("sections_inserted")
-                if versions_inserted == expected_documents:
-                    if sections_inserted != expected_section_total:
-                        counter_mismatches["sections_inserted"] = {
-                            "expected": expected_section_total,
-                            "actual": sections_inserted,
-                        }
-
-                relation_outcomes = [
-                    counter_value("relations_inserted"),
-                    counter_value("relations_skipped"),
-                ]
-                if any(value is None for value in relation_outcomes):
-                    counter_mismatches["relation_outcomes"] = {
-                        "expected": len(expected_relations),
-                        "actual": relation_outcomes,
-                    }
-                elif sum(value for value in relation_outcomes if value is not None) != len(expected_relations):
-                    counter_mismatches["relation_outcomes"] = {
-                        "expected": len(expected_relations),
-                        "actual": sum(value for value in relation_outcomes if value is not None),
-                    }
-
-                status_history_inserted = counter_value("status_history_inserted")
-                if (
-                    status_history_inserted is None
-                    or status_history_inserted < 0
-                    or status_history_inserted > expected_documents
-                ):
-                    counter_mismatches["status_history_inserted"] = {
-                        "expected": f"0..{expected_documents}",
-                        "actual": status_history_inserted,
-                    }
-
+                for key, expected in expected_counters.items()
+                if not isinstance(details, dict)
+                or details.get(key) != expected
+            }
             audit.require(
                 not counter_mismatches,
                 "IMPORT_RUN_COUNTERS_MISMATCH",
-                "Souhrn posledního importního běhu neodpovídá rozsahu importu.",
+                "Souhrn posledního importního běhu neodpovídá databázi.",
                 details={"mismatches": counter_mismatches},
             )
 
