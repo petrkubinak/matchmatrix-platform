@@ -1,0 +1,11 @@
+označení souborů - a jejich stav GitHub:
+
+M = Modified — existující sledovaný soubor byl změněn.
+A = Added — nový soubor byl přidán do Gitu a bude součástí příštího commitu.
+D = Deleted — soubor byl odstraněn.
+R = Renamed — soubor byl přejmenován nebo přesunut.
+C = Copied — Git rozpoznal vytvoření kopie existujícího souboru.
+T = Type changed — změnil se typ souboru, například běžný soubor na symlink.
+U = Unmerged — soubor má nevyřešený konflikt při merge.
+?? — nový nesledovaný soubor, který ještě nebyl přidán pomocí git add.
+!! — ignorovaný soubor podle .gitignore; zobrazí se jen při odpovídajícím nastavení příkazu.
