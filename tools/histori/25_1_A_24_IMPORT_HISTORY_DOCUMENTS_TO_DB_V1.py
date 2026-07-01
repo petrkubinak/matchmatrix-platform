@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-r"""
+"""
 MATCHMATRIX STANDARDNÍ HLAVIČKA
 
 CO:
@@ -548,7 +548,7 @@ def run_a7(
     )
     module.DOCUMENT_ID_PATTERN = DOCUMENT_ID_ANY_RE
 
-    argv = ["--mode", "incremental", "--manifest", str(manifest_path)]
+    argv = ["--manifest", str(manifest_path)]
     if dsn:
         argv.extend(["--dsn", dsn])
     return call_module_main(module, argv)
