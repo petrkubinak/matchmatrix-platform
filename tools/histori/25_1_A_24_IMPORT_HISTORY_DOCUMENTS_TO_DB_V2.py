@@ -86,9 +86,6 @@ MANIFEST_VERSION = "1.0"
 FINAL_VALIDATED = "HISTORY_DOCUMENT_IMPORT_VALIDATED"
 FINAL_DRY_RUN = "HISTORY_DOCUMENT_IMPORT_DRY_RUN_READY"
 FINAL_APPLIED = "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED"
-FINAL_APPLIED_VERIFICATION_FAILED = (
-    "HISTORY_DOCUMENT_IMPORT_APPLIED_VERIFICATION_FAILED"
-)
 FINAL_BLOCKED = "HISTORY_DOCUMENT_IMPORT_BLOCKED"
 
 DEFAULT_DOCUMENTS = (
@@ -600,8 +597,6 @@ def main() -> int:
         "started_at": started.isoformat(),
         "mode": mode,
         "project_root": str(root),
-        "a6_apply_succeeded": False,
-        "a7_verified": False,
         "final_status": "STARTING",
     }
 
@@ -704,8 +699,6 @@ def main() -> int:
                 f"A6 skončil s návratovým kódem {a6_code}."
             )
 
-        report["a6_apply_succeeded"] = bool(args.apply)
-
         if not args.apply:
             final_status = FINAL_DRY_RUN
             report["a7_executed"] = False
@@ -724,7 +717,6 @@ def main() -> int:
                 raise RuntimeError(
                     f"A7 ověření skončilo s kódem {a7_code}."
                 )
-            report["a7_verified"] = True
             final_status = FINAL_APPLIED
 
         report["final_status"] = final_status
@@ -749,13 +741,7 @@ def main() -> int:
             "message": str(exc),
             "traceback": traceback.format_exc(),
         }
-        failure_status = (
-            FINAL_APPLIED_VERIFICATION_FAILED
-            if report.get("a6_apply_succeeded")
-            and not report.get("a7_verified")
-            else FINAL_BLOCKED
-        )
-        report["final_status"] = failure_status
+        report["final_status"] = FINAL_BLOCKED
         report["finished_at"] = utc_now().isoformat()
         try:
             report_path = write_pipeline_report(root, report)
@@ -767,7 +753,7 @@ def main() -> int:
         print(f"{type(exc).__name__}: {exc}")
         if report_path:
             print(f"REPORT             : {report_path}")
-        print(f"FINAL STATUS       : {failure_status}")
+        print(f"FINAL STATUS       : {FINAL_BLOCKED}")
         return 1
 
 
