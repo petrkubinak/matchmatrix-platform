@@ -14,8 +14,6 @@ K ČEMU:
 - introspektuje skutečné tabulky, sloupce, primární a cizí klíče,
 - zapíše dokumenty, jejich verze, Markdown obsah a sekce,
 - eviduje importní běh a změny stavu,
-- při přírůstkovém importu vytváří vazby i na dokumenty již existující v databázi,
-- podporuje úplné i přírůstkové manifesty bez pevného počtu dokumentů,
 - chrání proti opakovanému importu stejného SHA-256,
 - zablokuje změnu obsahu bez navýšení verze,
 - podporuje fyzické názvy sloupců MatchMatrix jako `content_hash_sha256`,
@@ -58,12 +56,10 @@ from typing import Any, Iterable, Mapping, Sequence
 
 
 SCHEMA = "documentation"
+EXPECTED_DOCUMENTS = 21
 MANIFEST_RELATIVE_PATH = Path("reports/documentation/document_import_manifest_latest.json")
 REPORT_PREFIX = "document_database_import"
-DOCUMENT_ID_PATTERN = re.compile(
-    r"(?<![A-Z0-9])MM-[A-Z]{2,5}-\d{3,8}(?:-\d{2})?(?![A-Z0-9])",
-    re.IGNORECASE,
-)
+DOCUMENT_ID_PATTERN = re.compile(r"(?<![A-Z0-9])MM-(?:DOC|STD|REF)-\d{3,4}(?![A-Z0-9])", re.IGNORECASE)
 HEADING_PATTERN = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
 TEXT_TYPES = {"text", "varchar", "bpchar", "citext", "name"}
 INTEGER_TYPES = {"int2", "int4", "int8", "smallint", "integer", "bigint"}
@@ -510,30 +506,10 @@ def load_manifest(path: Path, root: Path) -> tuple[dict[str, Any], bytes]:
         )
 
     documents = payload.get("documents")
-    if not isinstance(documents, list) or not documents:
+    if not isinstance(documents, list) or len(documents) != EXPECTED_DOCUMENTS:
         raise ImportBlocked(
-            "Manifest musí obsahovat neprázdný seznam documents; nalezeno "
+            f"Manifest musí obsahovat {EXPECTED_DOCUMENTS} dokumentů; nalezeno "
             f"{len(documents) if isinstance(documents, list) else 'NEPLATNÝ FORMÁT'}."
-        )
-
-    document_ids = [
-        str(document.get("document_id") or "").strip().upper()
-        for document in documents
-        if isinstance(document, dict)
-    ]
-    if len(document_ids) != len(documents) or any(not value for value in document_ids):
-        raise ImportBlocked("Manifest obsahuje dokument bez platného document_id.")
-    if len(document_ids) != len(set(document_ids)):
-        raise ImportBlocked("Manifest obsahuje duplicitní document_id.")
-    invalid_document_ids = [
-        document_id
-        for document_id in document_ids
-        if DOCUMENT_ID_PATTERN.fullmatch(document_id) is None
-    ]
-    if invalid_document_ids:
-        raise ImportBlocked(
-            "Manifest obsahuje neplatné document_id: "
-            + ", ".join(invalid_document_ids)
         )
 
     for document in documents:
@@ -974,53 +950,6 @@ def fetch_document_by_code(
 
 
 
-def fetch_all_document_pks(
-    connection: Any,
-    table: TableInfo,
-    mapping: Mapping[str, str | None],
-) -> dict[str, Any]:
-    """
-    Načte Document ID a primární klíče všech dokumentů již existujících v DB.
-
-    Tato množina je referenčním cílovým rozsahem pro přírůstkové vazby.
-    Díky tomu může nový dokument odkazovat na starší dokument, který není
-    součástí aktuálního manifestu.
-    """
-    pk_column = str(mapping["pk"])
-    code_column = str(mapping["code"])
-    sql = (
-        f"SELECT {quote_identifier(pk_column)}, {quote_identifier(code_column)} "
-        f"FROM {qualified(table.name)} "
-        f"ORDER BY {quote_identifier(code_column)}"
-    )
-
-    with connection.cursor() as cursor:
-        cursor.execute(sql)
-        rows = fetch_rows(cursor)
-
-    result: dict[str, Any] = {}
-    duplicates: list[str] = []
-    for row in rows:
-        raw_code = row.get(code_column)
-        if raw_code is None or not str(raw_code).strip():
-            raise ImportBlocked(
-                f"Tabulka {SCHEMA}.{table.name} obsahuje dokument bez document_id."
-            )
-        code = str(raw_code).strip().upper()
-        if code in result:
-            duplicates.append(code)
-            continue
-        result[code] = row.get(pk_column)
-
-    if duplicates:
-        raise ImportBlocked(
-            "Databáze obsahuje duplicitní document_id: "
-            + ", ".join(sorted(set(duplicates)))
-        )
-
-    return result
-
-
 def get_check_constraint_definition(
     connection: Any,
     *,
@@ -1138,7 +1067,6 @@ def create_import_run(
     manifest_path: Path,
     manifest_hash: str,
     mode: str,
-    documents_total: int,
     git_info: Mapping[str, Any],
 ) -> Any:
     now = utc_now()
@@ -1150,7 +1078,7 @@ def create_import_run(
         mapping.get("manifest_path"): str(manifest_path.relative_to(root) if manifest_path.is_relative_to(root) else manifest_path),
         mapping.get("manifest_sha256"): manifest_hash,
         mapping.get("started_at"): now,
-        mapping.get("documents_total"): documents_total,
+        mapping.get("documents_total"): EXPECTED_DOCUMENTS,
         mapping.get("warnings"): [],
         mapping.get("details"): {
             "mode": mode,
@@ -1482,18 +1410,8 @@ def insert_relations(
         return warnings
 
     for source_code, target_code in sorted(set(relations)):
-        source_pk = document_pks.get(source_code)
-        target_pk = document_pks.get(target_code)
-
-        if source_pk is None:
-            warnings.append(f"RELATION_SOURCE_NOT_FOUND:{source_code}")
-            continue
-        if target_pk is None:
-            warnings.append(
-                f"RELATION_TARGET_NOT_FOUND:{source_code}->{target_code}"
-            )
-            continue
-
+        source_pk = document_pks[source_code]
+        target_pk = document_pks[target_code]
         relation_type_col = mapping.get("relation_type")
 
         where_parts = [
@@ -1629,7 +1547,6 @@ def main() -> int:
             manifest_path=manifest_path,
             manifest_hash=manifest_hash,
             mode=mode,
-            documents_total=len(manifest["documents"]),
             git_info=git_info,
         )
         print(f"IMPORT RUN ID      : {import_run_id}")
@@ -1640,38 +1557,14 @@ def main() -> int:
         sections_table = require_table(tables, "document_sections")
         status_table = tables["document_status_history"]
 
-        # Cílový rozsah relací tvoří všechny dokumenty již uložené v DB
-        # plus dokumenty právě importované aktuálním manifestem.
-        document_pks = fetch_all_document_pks(
-            connection,
-            documents_table,
-            mapping["documents"],
-        )
-        database_document_count_before = len(document_pks)
-        manifest_ids = {
-            str(document["document_id"]).strip().upper()
-            for document in manifest["documents"]
-        }
-        known_ids = set(document_pks) | manifest_ids
+        document_pks: dict[str, Any] = {}
         relation_pairs: set[tuple[str, str]] = set()
-
-        report["relation_scope"] = {
-            "database_documents_before_import": database_document_count_before,
-            "manifest_documents": len(manifest_ids),
-            "known_document_ids": len(known_ids),
-        }
-
-        print("ROZSAH RELACÍ")
-        print("-" * 79)
-        print(f"DOKUMENTY V DB     : {database_document_count_before}")
-        print(f"DOKUMENTY MANIFEST : {len(manifest_ids)}")
-        print(f"ZNÁMÁ CÍLOVÁ ID    : {len(known_ids)}")
-        print()
+        known_ids = {str(document["document_id"]) for document in manifest["documents"]}
 
         print("IMPORT DOKUMENTŮ")
         print("-" * 79)
         for document in manifest["documents"]:
-            code = str(document["document_id"]).strip().upper()
+            code = str(document["document_id"])
             updated_before = counters.documents_updated
             unchanged_before = counters.documents_unchanged
 
@@ -1788,7 +1681,6 @@ def main() -> int:
                 "completed_at": utc_now().isoformat(),
                 "import_run_id": import_run_id,
                 "counters": counters.as_dict(),
-                "relation_pairs_detected": len(relation_pairs),
                 "warnings": warnings,
                 "final_status": final_status,
             }
@@ -1800,7 +1692,6 @@ def main() -> int:
         print("-" * 79)
         for key, value in counters.as_dict().items():
             print(f"{key:<29}: {value}")
-        print(f"relation_pairs_detected      : {len(relation_pairs)}")
         print(f"warnings                     : {len(warnings)}")
         print(f"REPORT                       : {report_path}")
         print(f"FINAL STATUS                 : {final_status}")
@@ -1817,7 +1708,6 @@ def main() -> int:
                 "completed_at": utc_now().isoformat(),
                 "import_run_id": import_run_id,
                 "counters": counters.as_dict(),
-                "relation_pairs_detected": len(locals().get("relation_pairs", set())),
                 "warnings": warnings,
                 "error_type": type(exc).__name__,
                 "error_message": str(exc),
