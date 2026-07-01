@@ -5,8 +5,8 @@
 MATCHMATRIX STANDARDNÍ HLAVIČKA
 
 CO:
-Provádí read-only integritní audit úplného nebo přírůstkového importu
-dokumentace MatchMatrix v PostgreSQL schématu `documentation`.
+Provádí read-only integritní audit prvního kanonického importu dokumentace
+MatchMatrix v PostgreSQL schématu `documentation`.
 
 K ČEMU:
 - ověří připravenost a konzistenci importního manifestu,
@@ -20,26 +20,17 @@ K ČEMU:
 - databázi nikdy nemění.
 
 KDE:
-tools/documentation/25_1_A_7_VERIFY_DOCUMENTATION_IMPORT_V2.py
+tools/documentation/25_1_A_7_VERIFY_DOCUMENTATION_IMPORT_V1.py
 
 JAK:
 Standardní audit:
-    py -3.14 .\\tools\\documentation\\25_1_A_7_VERIFY_DOCUMENTATION_IMPORT_V2.py
+    py -3.14 .\\tools\\documentation\\25_1_A_7_VERIFY_DOCUMENTATION_IMPORT_V1.py
 
 Volitelné připojení:
     --dsn "host=localhost port=5432 dbname=matchmatrix user=postgres"
 
 Volitelný manifest:
     --manifest reports/documentation/document_import_manifest_latest.json
-
-Volitelný režim auditu:
-    --mode auto
-    --mode full
-    --mode incremental
-
-Režim `auto` zachová úplný audit, pokud manifest odpovídá celé databázi.
-Pokud databáze obsahuje více dokumentů než manifest, automaticky použije
-přírůstkový audit pouze nad dokumenty uvedenými v manifestu.
 
 Připojení lze dodat také pomocí DATABASE_URL, MATCHMATRIX_DATABASE_URL,
 PGHOST, PGPORT, PGDATABASE, PGUSER, PGPASSWORD nebo odpovídajících hodnot
@@ -72,14 +63,8 @@ MANIFEST_RELATIVE_PATH = Path(
 REPORT_PREFIX = "document_import_verification"
 EXPECTED_MANIFEST_STATUS = "DOCUMENT_IMPORT_MANIFEST_READY"
 SUCCESS_IMPORT_STATUSES = {"DONE", "DONE_WITH_WARNINGS"}
-AUDIT_MODE_FULL = "FULL_SNAPSHOT"
-AUDIT_MODE_INCREMENTAL = "INCREMENTAL_MANIFEST"
-EXPECTED_IMPORTERS = {
-    "25_1_A_6_IMPORT_CANONICAL_DOCUMENTS_TO_DB_V1.py",
-    "25_1_A_24_IMPORT_HISTORY_DOCUMENTS_TO_DB_V1.py",
-}
 DOCUMENT_ID_PATTERN = re.compile(
-    r"(?<![A-Z0-9])MM-[A-Z]{2,5}-\d{3,8}(?:-\d{2})?(?![A-Z0-9])",
+    r"(?<![A-Z0-9])MM-(?:DOC|STD|REF)-\d{3,4}(?![A-Z0-9])",
     re.IGNORECASE,
 )
 HEADING_PATTERN = re.compile(r"^(#{1,6})\s+(.+?)\s*$")
@@ -260,16 +245,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--manifest",
         help="Relativní nebo absolutní cesta k JSON manifestu.",
-    )
-    parser.add_argument(
-        "--mode",
-        choices=("auto", "full", "incremental"),
-        default="auto",
-        help=(
-            "Rozsah auditu: auto automaticky rozliší úplný snapshot "
-            "a přírůstkový manifest; full vyžaduje shodu celé DB; "
-            "incremental ověřuje pouze dokumenty manifestu."
-        ),
     )
     return parser.parse_args()
 
@@ -551,78 +526,6 @@ def load_manifest(
     return payload, data
 
 
-
-def normalize_declared_audit_mode(value: Any) -> str | None:
-    normalized = str(value or "").strip().upper().replace("-", "_")
-    if normalized in {
-        "FULL",
-        "FULL_SNAPSHOT",
-        "SNAPSHOT",
-        "COMPLETE",
-    }:
-        return AUDIT_MODE_FULL
-    if normalized in {
-        "INCREMENTAL",
-        "INCREMENTAL_MANIFEST",
-        "DELTA",
-        "PARTIAL",
-    }:
-        return AUDIT_MODE_INCREMENTAL
-    return None
-
-
-def resolve_audit_mode(
-    requested_mode: str,
-    manifest: Mapping[str, Any],
-    manifest_ids: set[str],
-    database_ids: set[str],
-) -> tuple[str, str]:
-    if requested_mode == "full":
-        return AUDIT_MODE_FULL, "explicit_cli"
-    if requested_mode == "incremental":
-        return AUDIT_MODE_INCREMENTAL, "explicit_cli"
-
-    summary = manifest.get("summary")
-    summary_mapping = summary if isinstance(summary, Mapping) else {}
-    declared_candidates = (
-        manifest.get("audit_mode"),
-        manifest.get("verification_mode"),
-        manifest.get("verification_scope"),
-        manifest.get("manifest_scope"),
-        summary_mapping.get("audit_mode"),
-        summary_mapping.get("verification_mode"),
-        summary_mapping.get("verification_scope"),
-        summary_mapping.get("manifest_scope"),
-    )
-    for candidate in declared_candidates:
-        declared_mode = normalize_declared_audit_mode(candidate)
-        if declared_mode:
-            return declared_mode, "manifest_declaration"
-
-    if database_ids == manifest_ids:
-        return AUDIT_MODE_FULL, "auto_exact_document_set"
-
-    if len(database_ids) > len(manifest_ids):
-        return AUDIT_MODE_INCREMENTAL, "auto_database_contains_history"
-
-    return AUDIT_MODE_FULL, "auto_manifest_not_smaller_than_database"
-
-
-def scoped_relation_rows(
-    relations: Sequence[Mapping[str, Any]],
-    audit_mode: str,
-    manifest_ids: set[str],
-) -> list[dict[str, Any]]:
-    if audit_mode == AUDIT_MODE_FULL:
-        return [dict(row) for row in relations]
-
-    return [
-        dict(row)
-        for row in relations
-        if str(row.get("source_document_id") or "") in manifest_ids
-        and str(row.get("target_document_id") or "") in manifest_ids
-    ]
-
 def document_family(document_id: str) -> str:
     parts = document_id.split("-")
     return parts[1] if len(parts) >= 3 else "UNKNOWN"
@@ -639,8 +542,6 @@ def default_edition(
         "DOC": "TECH",
         "STD": "STANDARD",
         "REF": "REFERENCE",
-        "DL": "HISTORY",
-        "NAV": "HISTORY",
     }.get(family, family)
 
 
@@ -1146,11 +1047,6 @@ def main() -> int:
         "git": git,
         "database": {},
         "manifest": {},
-        "audit_scope": {
-            "requested_mode": args.mode,
-            "resolved_mode": None,
-            "resolution_reason": None,
-        },
         "schema": {},
         "counts": {},
         "documents": [],
@@ -1272,64 +1168,20 @@ def main() -> int:
             str(row.get("document_id"))
             for row in documents
         }
-        audit_mode, audit_mode_reason = resolve_audit_mode(
-            args.mode,
-            manifest,
-            known_ids,
-            database_ids,
-        )
-        report["audit_scope"] = {
-            "requested_mode": args.mode,
-            "resolved_mode": audit_mode,
-            "resolution_reason": audit_mode_reason,
-            "manifest_document_count": len(known_ids),
-            "database_document_count": len(database_ids),
-        }
-
-        print("ROZSAH AUDITU")
-        print("-" * 79)
-        print(f"REQUESTED MODE     : {args.mode}")
-        print(f"RESOLVED MODE      : {audit_mode}")
-        print(f"RESOLUTION REASON  : {audit_mode_reason}")
-        print(f"MANIFEST DOCUMENTS : {len(known_ids)}")
-        print(f"DATABASE DOCUMENTS : {len(database_ids)}")
-        print()
-
-        if audit_mode == AUDIT_MODE_FULL:
-            audit.require(
-                database_ids == known_ids,
-                "DATABASE_DOCUMENT_SET_MISMATCH",
-                "Množina document_id v databázi neodpovídá úplnému manifestu.",
-                details={
-                    "audit_mode": audit_mode,
-                    "missing_in_database": sorted(known_ids - database_ids),
-                    "extra_in_database": sorted(database_ids - known_ids),
-                },
-            )
-            scope_document_ids = set(database_ids)
-        else:
-            audit.require(
-                known_ids.issubset(database_ids),
-                "INCREMENTAL_DOCUMENTS_MISSING_IN_DATABASE",
-                "Některé dokumenty přírůstkového manifestu v databázi chybí.",
-                details={
-                    "audit_mode": audit_mode,
-                    "missing_in_database": sorted(known_ids - database_ids),
-                    "ignored_database_documents": sorted(database_ids - known_ids),
-                },
-            )
-            scope_document_ids = set(known_ids)
-
-        audit_relation_rows = scoped_relation_rows(
-            relations,
-            audit_mode,
-            known_ids,
+        audit.require(
+            database_ids == known_ids,
+            "DATABASE_DOCUMENT_SET_MISMATCH",
+            "Množina document_id v databázi neodpovídá manifestu.",
+            details={
+                "missing_in_database": sorted(known_ids - database_ids),
+                "extra_in_database": sorted(database_ids - known_ids),
+            },
         )
 
         duplicate_document_ids = {
             document_id: len(rows)
             for document_id, rows in documents_by_id.items()
-            if document_id in scope_document_ids and len(rows) > 1
+            if len(rows) > 1
         }
         audit.require(
             not duplicate_document_ids,
@@ -1343,8 +1195,7 @@ def main() -> int:
         duplicate_version_labels: dict[str, list[str]] = {}
         duplicate_hashes: dict[str, list[str]] = {}
 
-        for document_id in sorted(scope_document_ids):
-            rows = documents_by_id.get(document_id, [])
+        for document_id, rows in documents_by_id.items():
             if len(rows) != 1:
                 continue
             document_pk = rows[0]["document_pk"]
@@ -1414,7 +1265,6 @@ def main() -> int:
         expected_relations: set[tuple[str, str, str]] = set()
         source_texts: dict[str, str] = {}
         expected_section_total = 0
-        actual_section_total = 0
 
         print("AUDIT DOKUMENTŮ")
         print("-" * 79)
@@ -1578,17 +1428,14 @@ def main() -> int:
                         "Aktuální verze nemá source_modified_at.",
                         document_id=document_id,
                     )
-                    imported_by = str(
-                        db_version.get("imported_by") or ""
-                    ).strip()
                     audit.require(
-                        imported_by in EXPECTED_IMPORTERS,
+                        str(db_version.get("imported_by") or "").strip()
+                        == "25_1_A_6_IMPORT_CANONICAL_DOCUMENTS_TO_DB_V1.py",
                         "VERSION_IMPORTED_BY_MISMATCH",
-                        "Aktuální verze nemá podporovanou hodnotu imported_by.",
+                        "Aktuální verze nemá očekávanou hodnotu imported_by.",
                         document_id=document_id,
                         details={
-                            "actual": imported_by,
-                            "expected_any_of": sorted(EXPECTED_IMPORTERS),
+                            "actual": db_version.get("imported_by"),
                         },
                     )
 
@@ -1715,11 +1562,10 @@ def main() -> int:
             )
             outgoing_actual = sum(
                 1
-                for relation in audit_relation_rows
+                for relation in relations
                 if relation.get("source_document_id") == document_id
                 and relation.get("relation_type") == "REFERENCES"
             )
-            actual_section_total += len(actual_sections)
 
             document_blockers = [
                 finding.code
@@ -1769,21 +1615,12 @@ def main() -> int:
             )
 
         audit.require(
-            actual_section_total == expected_section_total,
+            len(sections) == expected_section_total,
             "TOTAL_SECTION_COUNT_MISMATCH",
-            (
-                "Počet sekcí v rozsahu auditu neodpovídá "
-                "zdrojovým dokumentům manifestu."
-            ),
+            "Celkový počet sekcí neodpovídá zdrojovým dokumentům.",
             details={
-                "audit_mode": audit_mode,
                 "expected": expected_section_total,
-                "actual": actual_section_total,
-                "database_total_ignored_in_incremental": (
-                    len(sections)
-                    if audit_mode == AUDIT_MODE_INCREMENTAL
-                    else 0
-                ),
+                "actual": len(sections),
             },
         )
 
@@ -1793,7 +1630,7 @@ def main() -> int:
                 str(row.get("target_document_id") or ""),
                 str(row.get("relation_type") or ""),
             )
-            for row in audit_relation_rows
+            for row in relations
         ]
         actual_relations = set(actual_relation_rows)
         duplicate_relation_count = (
@@ -1832,20 +1669,10 @@ def main() -> int:
             "Nebyl nalezen žádný úspěšný importní běh.",
         )
 
-        scope_document_pks = {
-            row.get("document_pk")
-            for document_id in scope_document_ids
-            for row in documents_by_id.get(document_id, [])
-        }
-        audited_current_versions = [
-            row
-            for row in versions
-            if row.get("is_current") is True
-            and row.get("document_pk") in scope_document_pks
-        ]
         current_version_run_ids = {
             row.get("import_run_pk")
-            for row in audited_current_versions
+            for row in versions
+            if row.get("is_current") is True
         }
         current_version_runs = [
             runs_by_pk.get(run_id)
@@ -1874,17 +1701,12 @@ def main() -> int:
             "Některá aktuální verze pochází z neúspěšného importního běhu.",
         )
 
-        successful_audited_runs = [
-            row
-            for row in successful_runs
-            if row.get("import_run_pk") in current_version_run_ids
-        ]
         latest_successful_run = (
             max(
-                successful_audited_runs,
+                successful_runs,
                 key=lambda row: int(row.get("import_run_pk") or 0),
             )
-            if successful_audited_runs
+            if successful_runs
             else None
         )
 
@@ -1927,18 +1749,15 @@ def main() -> int:
             )
 
         report["relations"] = {
-            "audit_mode": audit_mode,
             "expected": len(expected_relations),
-            "actual_in_scope": len(actual_relation_rows),
-            "actual_database_total": len(relations),
-            "unique_actual_in_scope": len(actual_relations),
+            "actual": len(actual_relation_rows),
+            "unique_actual": len(actual_relations),
             "missing": missing_relations,
             "extra": extra_relations,
-            "duplicate_row_count_in_scope": duplicate_relation_count,
+            "duplicate_row_count": duplicate_relation_count,
         }
         report["import_runs"] = {
             "successful_run_count": len(successful_runs),
-            "successful_audited_run_count": len(successful_audited_runs),
             "current_version_run_ids": sorted(
                 run_id
                 for run_id in current_version_run_ids
@@ -1958,10 +1777,8 @@ def main() -> int:
         print()
         print("INTEGRITA VAZEB")
         print("-" * 79)
-        print(f"audit_mode                     : {audit_mode}")
         print(f"expected_relations             : {len(expected_relations)}")
-        print(f"actual_relations_in_scope      : {len(actual_relation_rows)}")
-        print(f"actual_relations_database      : {len(relations)}")
+        print(f"actual_relations               : {len(actual_relation_rows)}")
         print(f"missing_relations              : {len(missing_relations)}")
         print(f"extra_relations                : {len(extra_relations)}")
         print(f"duplicate_relation_rows        : {duplicate_relation_count}")
