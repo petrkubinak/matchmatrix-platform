@@ -120,7 +120,7 @@ CANDIDATES = (
     ),
     CandidateSpec(
         "MM-REF-001",
-        "docs/10_REFERENCE/MM-REF-001_SLOVNIK_POJMU_MATCHMATRIX.md",
+        "docs/10_REFERENCE/MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX.md",
         "SELECTED_SINGLE",
     ),
     CandidateSpec(

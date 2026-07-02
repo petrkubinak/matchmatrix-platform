@@ -39,7 +39,7 @@ Volitelná metadata:
     --working-area "Source Intelligence Layer"
 
 Explicitní slovník:
-    --glossary "C:\\MatchMatrix-platform\\docs\\...\\MM-REF-001_SLOVNIK_POJMU_MATCHMATRIX.md"
+    --glossary "C:\\MatchMatrix-platform\\docs\\...\\MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX.md"
 
 BEZPEČNOST:
 - podporuje pouze DAILY_LOG,
@@ -781,18 +781,18 @@ def discover_glossary(
 
     candidates: list[Path] = []
     direct = [
-        root / "MM-REF-001_SLOVNIK_POJMU_MATCHMATRIX.md",
-        root / "docs/MM-REF-001_SLOVNIK_POJMU_MATCHMATRIX.md",
+        root / "MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX.md",
+        root / "docs/MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX.md",
     ]
     candidates.extend(path for path in direct if path.is_file())
 
     docs = root / "docs"
     if docs.is_dir():
         candidates.extend(
-            docs.rglob("MM-REF-001_SLOVNIK_POJMU_MATCHMATRIX*.md")
+            docs.rglob("MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX*.md")
         )
     candidates.extend(
-        root.glob("MM-REF-001_SLOVNIK_POJMU_MATCHMATRIX*.md")
+        root.glob("MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX*.md")
     )
 
     unique = sorted(

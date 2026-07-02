@@ -50,7 +50,7 @@ class DocumentSpec:
 
 DOCUMENTS = (
     DocumentSpec(
-        relative_path="docs/10_REFERENCE/MM-REF-001_SLOVNIK_POJMU_MATCHMATRIX.md",
+        relative_path="docs/10_REFERENCE/MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX.md",
         document_id="MM-REF-001",
         title="Slovník pojmů MatchMatrix",
         edition="MM-REF",

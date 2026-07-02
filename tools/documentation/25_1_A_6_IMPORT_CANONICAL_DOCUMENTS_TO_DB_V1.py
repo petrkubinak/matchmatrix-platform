@@ -131,6 +131,7 @@ class ImportCounters:
     versions_skipped_same_hash: int = 0
     sections_inserted: int = 0
     relations_inserted: int = 0
+    relations_deleted: int = 0
     relations_skipped: int = 0
     status_history_inserted: int = 0
 
@@ -143,6 +144,7 @@ class ImportCounters:
             "versions_skipped_same_hash": self.versions_skipped_same_hash,
             "sections_inserted": self.sections_inserted,
             "relations_inserted": self.relations_inserted,
+            "relations_deleted": self.relations_deleted,
             "relations_skipped": self.relations_skipped,
             "status_history_inserted": self.status_history_inserted,
         }
@@ -1439,47 +1441,108 @@ def insert_status_history(
     new_status: str,
     import_run_id: Any,
     document_created: bool,
+    version_created: bool,
     counters: ImportCounters,
 ) -> None:
+    """
+    Zap??e historii, pokud posledn? z?znam neodpov?d? aktu?ln?mu
+    stavu nebo aktu?ln? verzi dokumentu.
+    """
     document_fk = mapping.get("document_fk")
+    version_fk = mapping.get("version_fk")
     new_status_col = mapping.get("new_status")
+    changed_at_col = mapping.get("changed_at")
+
     if not document_fk or not new_status_col:
         return
-    if not document_created and old_status == new_status:
-        return
+
+    select_columns = [quote_identifier(str(new_status_col))]
+    if version_fk:
+        select_columns.append(quote_identifier(str(version_fk)))
+
+    sql = (
+        f"SELECT {', '.join(select_columns)} "
+        f"FROM {qualified(table.name)} "
+        f"WHERE {quote_identifier(str(document_fk))} = %s"
+    )
+
+    if changed_at_col:
+        sql += (
+            f" ORDER BY {quote_identifier(str(changed_at_col))} "
+            f"DESC NULLS LAST"
+        )
+
+    sql += " LIMIT 1"
+
+    with connection.cursor() as cursor:
+        cursor.execute(sql, (document_pk,))
+        latest_row = cursor.fetchone()
+
+    if latest_row:
+        latest_status = latest_row[0]
+        latest_version_pk = latest_row[1] if version_fk else version_pk
+
+        if (
+            latest_status == new_status
+            and latest_version_pk == version_pk
+        ):
+            return
+
+    reason = "CANONICAL_MARKDOWN_IMPORT"
+    if latest_row and latest_row[0] == new_status:
+        reason = "CANONICAL_VERSION_ALIGNMENT"
 
     values = {
         str(document_fk): document_pk,
         str(new_status_col): new_status,
     }
     optional_values = {
-        mapping.get("version_fk"): version_pk,
+        version_fk: version_pk,
         mapping.get("old_status"): old_status,
-        mapping.get("reason"): "CANONICAL_MARKDOWN_IMPORT",
+        mapping.get("reason"): reason,
         mapping.get("import_run_fk"): import_run_id,
-        mapping.get("changed_at"): utc_now(),
+        changed_at_col: utc_now(),
     }
-    values.update({str(key): value for key, value in optional_values.items() if key})
+    values.update(
+        {
+            str(key): value
+            for key, value in optional_values.items()
+            if key
+        }
+    )
+
     insert_row(connection, driver, table, values)
     counters.status_history_inserted += 1
 
 
-def insert_relations(
+def sync_relations(
     connection: Any,
     driver: DbDriver,
     table: TableInfo,
     mapping: Mapping[str, str | None],
     relations: Iterable[tuple[str, str]],
+    source_document_ids: Iterable[str],
     document_pks: Mapping[str, Any],
     import_run_id: Any,
     counters: ImportCounters,
 ) -> list[str]:
+    """
+    Synchronizuje vazby REFERENCES pro dokumenty aktu?ln?ho manifestu.
+
+    Vazby jin?ch dokument? z?st?vaj? nedot?en?. Zastaral? vazby dokument?
+    v aktu?ln?m manifestu se odstran? a chyb?j?c? vazby se dopln?.
+    """
     warnings: list[str] = []
     source_fk = mapping.get("source_fk")
     target_fk = mapping.get("target_fk")
+    relation_type_col = mapping.get("relation_type")
+
     if not source_fk or not target_fk:
         warnings.append("RELATION_TABLE_MAPPING_INCOMPLETE")
         return warnings
+
+    resolved_relations: list[tuple[str, str, Any, Any]] = []
+    expected_pk_pairs: set[tuple[Any, Any]] = set()
 
     for source_code, target_code in sorted(set(relations)):
         source_pk = document_pks.get(source_code)
@@ -1494,22 +1557,80 @@ def insert_relations(
             )
             continue
 
-        relation_type_col = mapping.get("relation_type")
+        resolved_relations.append(
+            (source_code, target_code, source_pk, target_pk)
+        )
+        expected_pk_pairs.add((source_pk, target_pk))
+
+    source_pks = {
+        document_pks.get(str(code).strip().upper())
+        for code in source_document_ids
+    }
+    source_pks.discard(None)
+
+    existing_pairs: set[tuple[Any, Any]] = set()
+
+    if source_pks:
+        ordered_source_pks = sorted(source_pks, key=str)
+        placeholders = ", ".join(["%s"] * len(ordered_source_pks))
 
         where_parts = [
-            f"{quote_identifier(str(source_fk))} = %s",
-            f"{quote_identifier(str(target_fk))} = %s",
+            f"{quote_identifier(str(source_fk))} IN ({placeholders})"
         ]
-        params: list[Any] = [source_pk, target_pk]
+        params: list[Any] = list(ordered_source_pks)
+
         if relation_type_col:
-            where_parts.append(f"{quote_identifier(str(relation_type_col))} = %s")
+            where_parts.append(
+                f"{quote_identifier(str(relation_type_col))} = %s"
+            )
             params.append("REFERENCES")
-        sql = (
-            f"SELECT 1 FROM {qualified(table.name)} WHERE "
+
+        select_sql = (
+            f"SELECT "
+            f"{quote_identifier(str(source_fk))}, "
+            f"{quote_identifier(str(target_fk))} "
+            f"FROM {qualified(table.name)} WHERE "
             + " AND ".join(where_parts)
-            + " LIMIT 1"
         )
-        if select_one(connection, sql, params):
+
+        with connection.cursor() as cursor:
+            cursor.execute(select_sql, params)
+            existing_pairs = {
+                (row[0], row[1])
+                for row in cursor.fetchall()
+            }
+
+        stale_pairs = sorted(
+            existing_pairs - expected_pk_pairs,
+            key=lambda pair: (str(pair[0]), str(pair[1])),
+        )
+
+        for source_pk, target_pk in stale_pairs:
+            delete_parts = [
+                f"{quote_identifier(str(source_fk))} = %s",
+                f"{quote_identifier(str(target_fk))} = %s",
+            ]
+            delete_params: list[Any] = [source_pk, target_pk]
+
+            if relation_type_col:
+                delete_parts.append(
+                    f"{quote_identifier(str(relation_type_col))} = %s"
+                )
+                delete_params.append("REFERENCES")
+
+            delete_sql = (
+                f"DELETE FROM {qualified(table.name)} WHERE "
+                + " AND ".join(delete_parts)
+            )
+
+            with connection.cursor() as cursor:
+                cursor.execute(delete_sql, delete_params)
+                counters.relations_deleted += max(cursor.rowcount, 0)
+
+            existing_pairs.discard((source_pk, target_pk))
+
+    for source_code, target_code, source_pk, target_pk in resolved_relations:
+        if (source_pk, target_pk) in existing_pairs:
             counters.relations_skipped += 1
             continue
 
@@ -1519,13 +1640,22 @@ def insert_relations(
         }
         optional_values = {
             relation_type_col: "REFERENCES",
-            mapping.get("source_context"): "Automaticky detekováno z kanonického Markdown dokumentu.",
+            mapping.get("source_context"):
+                "Automaticky detekov?no z kanonick?ho Markdown dokumentu.",
             mapping.get("import_run_fk"): import_run_id,
             mapping.get("created_at"): utc_now(),
         }
-        values.update({str(key): value for key, value in optional_values.items() if key})
+        values.update(
+            {
+                str(key): value
+                for key, value in optional_values.items()
+                if key
+            }
+        )
         insert_row(connection, driver, table, values)
         counters.relations_inserted += 1
+        existing_pairs.add((source_pk, target_pk))
+
     return warnings
 
 
@@ -1723,6 +1853,7 @@ def main() -> int:
                     new_status=str(document["status"]),
                     import_run_id=import_run_id,
                     document_created=document_created,
+                    version_created=version_created,
                     counters=counters,
                 )
 
@@ -1746,12 +1877,13 @@ def main() -> int:
 
         if not args.skip_relations and tables["document_relations"].columns:
             relation_mapping = optional.get("document_relations", {})
-            relation_warnings = insert_relations(
+            relation_warnings = sync_relations(
                 connection,
                 driver,
                 tables["document_relations"],
                 relation_mapping,
                 relation_pairs,
+                manifest_ids,
                 document_pks,
                 import_run_id,
                 counters,
