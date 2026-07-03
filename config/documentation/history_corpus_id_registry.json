@@ -1,0 +1,2921 @@
+{
+  "registry_version": 2,
+  "registry_type": "MATCHMATRIX_HISTORY_CORPUS_ID_REGISTRY",
+  "created_at": "2026-07-03T19:28:19.580418+00:00",
+  "updated_at": "2026-07-03T20:02:28.791588+00:00",
+  "migration": "XLSX_SEMANTIC_CONTENT_DEDUPLICATION",
+  "source_registry_backup": "C:\\MatchMatrix-Platform\\config\\documentation\\history_corpus_id_registry.json.bak_xlsx_semantic_20260703_220227",
+  "entries_count": 288,
+  "entries": {
+    "37ec36696f36a3744e6c3f0105fae399f48924ddab1936abafa5ebab944d0871": {
+      "document_id": "MM-HIS-0001",
+      "canonical_relative_path": "1) infradocker-compose.yml.txt",
+      "source_variants": [
+        "1) infradocker-compose.yml.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0001"
+      ]
+    },
+    "8d33e6f8e4dba64bae9eafe80c029ea8e5602653d0ef1d40abe3e419125a1f7e": {
+      "document_id": "MM-HIS-0002",
+      "canonical_relative_path": "2) infradbseed_v1.sql.txt",
+      "source_variants": [
+        "2) infradbseed_v1.sql.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0002"
+      ]
+    },
+    "a43d9392e8e42075b028b12067f5093d0837fe073bb2c560a12c2c36b3aeb48e": {
+      "document_id": "MM-HIS-0003",
+      "canonical_relative_path": "2026-05-11_MEDIA_PIPELINE_MILESTONE.md",
+      "source_variants": [
+        "2026-05-11_MEDIA_PIPELINE_MILESTONE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0003"
+      ]
+    },
+    "2a154e42447c09f9b122d61a7ad7452693dc00518ae9a8208ca35efb391d0e51": {
+      "document_id": "MM-HIS-0004",
+      "canonical_relative_path": "2026-05-13_MEDIA_PIPELINE_MILESTONE.md",
+      "source_variants": [
+        "2026-05-13_MEDIA_PIPELINE_MILESTONE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0004"
+      ]
+    },
+    "45ec5188268815bc092d25550266f02ae37734cfe46077b9692425e0c4aba51e": {
+      "document_id": "MM-HIS-0005",
+      "canonical_relative_path": "2026-05-14_MEDIA_PIPELINE_MILESTONE.md",
+      "source_variants": [
+        "2026-05-14_MEDIA_PIPELINE_MILESTONE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0005"
+      ]
+    },
+    "f5dee9ef0000ab6df2a688ffed4370e70c86485142cbc19940effad09703194b": {
+      "document_id": "MM-HIS-0006",
+      "canonical_relative_path": "2026-05-15_MEDIA_PIPELINE_MILESTONE.md",
+      "source_variants": [
+        "2026-05-15_MEDIA_PIPELINE_MILESTONE.md",
+        "2026-05-16_MEDIA_PIPELINE_MILESTONE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0006"
+      ]
+    },
+    "cf08bcae87b7fac7dc1a67f29d113507ed4c8d1798abfc41d1fcfcb2d9f8f7ca": {
+      "document_id": "MM-HIS-0007",
+      "canonical_relative_path": "2026-05-17_MEDIA_PIPELINE_MILESTONE.md",
+      "source_variants": [
+        "2026-05-17_MEDIA_PIPELINE_MILESTONE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0007"
+      ]
+    },
+    "950e1a00d210fc41e21bcf1619e9b172ab96dfc152d9453cd721a56d1fe926e2": {
+      "document_id": "MM-HIS-0008",
+      "canonical_relative_path": "2026-05-18_MEDIA_PIPELINE_MILESTONE.md",
+      "source_variants": [
+        "2026-05-18_MEDIA_PIPELINE_MILESTONE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0008"
+      ]
+    },
+    "9123d0ec7be770d882e2f95adfb2867ad640a31960b13dca891779091c458ec9": {
+      "document_id": "MM-HIS-0009",
+      "canonical_relative_path": "2026-05-19_MEDIA_PIPELINE_MILESTONE.md",
+      "source_variants": [
+        "2026-05-19_MEDIA_PIPELINE_MILESTONE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0009"
+      ]
+    },
+    "bff25f29b0a612486c0c3c8727a45d17d5e61027857255ce29f19d9aef5cb4b5": {
+      "document_id": "MM-HIS-0010",
+      "canonical_relative_path": "2026-05-20_MEDIA_PIPELINE_MILESTONE.md",
+      "source_variants": [
+        "2026-05-20_MEDIA_PIPELINE_MILESTONE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0010"
+      ]
+    },
+    "2c182a39f6cdda05d47d492dff7be051b944423ee42c28b4d32da5b65272cc94": {
+      "document_id": "MM-HIS-0011",
+      "canonical_relative_path": "2026-05-21_MATCHMATRIX MASTER UPDATE — FB PEOPLE AUTOMATION (PLAYER MATCH STATS).md",
+      "source_variants": [
+        "2026-05-21_MATCHMATRIX MASTER UPDATE — FB PEOPLE AUTOMATION (PLAYER MATCH STATS).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0011"
+      ]
+    },
+    "09219e1ca4474b81952c7a14494b694efcbc7824aec81668369a51fdd1f52a38": {
+      "document_id": "MM-HIS-0012",
+      "canonical_relative_path": "2026-05-21_MATCHMATRIX – FB TEAM POWER ( AI READINESS ) PRO PROVIDER STATUS.md",
+      "source_variants": [
+        "2026-05-21_MATCHMATRIX – FB TEAM POWER ( AI READINESS ) PRO PROVIDER STATUS.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0012"
+      ]
+    },
+    "84ae640d045ef58a602b7ad0022afc57b360028792fc8e7c0a9c463d01463877": {
+      "document_id": "MM-HIS-0013",
+      "canonical_relative_path": "2026-05-23_MATCHMATRIX MASTER UPDATE — FB PEOPLE AUTOMATION (PLAYER MATCH STATS).md",
+      "source_variants": [
+        "2026-05-23_MATCHMATRIX MASTER UPDATE — FB PEOPLE AUTOMATION (PLAYER MATCH STATS).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0013"
+      ]
+    },
+    "deddc16fcd0dbfb7da1afff7c5ed155147a2753f3a20550cca95cb83ee9dd010": {
+      "document_id": "MM-HIS-0014",
+      "canonical_relative_path": "2026-05-25_MATCHMATRIX V17 ORCHESTRATION MILESTONE — ZÁPIS.md",
+      "source_variants": [
+        "2026-05-25_MATCHMATRIX V17 ORCHESTRATION MILESTONE — ZÁPIS.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0014"
+      ]
+    },
+    "684c5cf4c11b2ec2f0482d5643405a67ad7c605ddfee3860214dcc24891912a7": {
+      "document_id": "MM-HIS-0015",
+      "canonical_relative_path": "Denní zápisy/2026-06-29_MATCHMATRIX_DENNI_ZAPIS.md",
+      "source_variants": [
+        "Denní zápisy/2026-06-29_MATCHMATRIX_DENNI_ZAPIS.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0015"
+      ]
+    },
+    "4708dff6b71720ea42c2564f151531b1b5302a10eeb6e28e1afef72e0e855d9b": {
+      "document_id": "MM-HIS-0016",
+      "canonical_relative_path": "Denní zápisy/2026-06-29_MATCHMATRIX_NAVAZANI_PRO_NOVY_CHAT.md",
+      "source_variants": [
+        "Denní zápisy/2026-06-29_MATCHMATRIX_NAVAZANI_PRO_NOVY_CHAT.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0016"
+      ]
+    },
+    "617b6205f230b883721522f1f6ee9786fa035d2065f7697c4751b1ad9f96f077": {
+      "document_id": "MM-HIS-0017",
+      "canonical_relative_path": "Denní zápisy/MATCHMATRIX – DENNÍ ZÁPIS.txt",
+      "source_variants": [
+        "Denní zápisy/MATCHMATRIX – DENNÍ ZÁPIS.txt",
+        "MATCHMATRIX – NAVÁZÁNÍ DO NOVÉHO CHATU 20260625.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0017"
+      ]
+    },
+    "bc9a512b11cb3488b95ae0c213029c4e61ebb6f9be0c2e5f67e115bd5765516b": {
+      "document_id": "MM-HIS-0018",
+      "canonical_relative_path": "GitHub/Nejčastější workflow (to budeš použ.txt",
+      "source_variants": [
+        "GitHub/Nejčastější workflow (to budeš použ.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0018"
+      ]
+    },
+    "8b64406963f1e7a858a848655a6a04fb78ab1e16842f8598369dc31512cc8a19": {
+      "document_id": "MM-HIS-0019",
+      "canonical_relative_path": "GitHub/Super. Tohle je Git záchrana, ktero.txt",
+      "source_variants": [
+        "GitHub/Super. Tohle je Git záchrana, ktero.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0019"
+      ]
+    },
+    "3c1897ad0835f7704a6f54ac127a9a8ab786973815efc1ad2ce9f17ea51af968": {
+      "document_id": "MM-HIS-0020",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/115_A_MATCHMATRIX_PROJECT_STRUCTURE_GOVERNANCE.md",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/115_A_MATCHMATRIX_PROJECT_STRUCTURE_GOVERNANCE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0020"
+      ]
+    },
+    "902379d4906b3546c5af05e69d24065e4452fa5a7c5cda5636b257a44e513380": {
+      "document_id": "MM-HIS-0021",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/116_E_SECOND_PC_HARVEST_SERVER_PLAN_V1.md",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/116_E_SECOND_PC_HARVEST_SERVER_PLAN_V1.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0021"
+      ]
+    },
+    "7207d44a28be1fe151d37e14a03a1d2e069b431aa1528a6ee607cb45fa4d66d4": {
+      "document_id": "MM-HIS-0022",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/MATCHMATRIX MASTER ARCHITECTURE MAP.md",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/MATCHMATRIX MASTER ARCHITECTURE MAP.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0022"
+      ]
+    },
+    "b2d2840ab7e9c96e7cd446356a816004fdb71288f89b917ed01cd2cbe2cd4b73": {
+      "document_id": "MM-HIS-0023",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/MATCHMATRIX MASTER VIZE 2030.txt",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/MATCHMATRIX MASTER VIZE 2030.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0023"
+      ]
+    },
+    "6db80d9f0c2c2a691e79be1e58d64501866913071adcbf46f29e602d2338001d": {
+      "document_id": "MM-HIS-0024",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/MATCHMATRIX MASTER ZÁPIS.txt",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/MATCHMATRIX MASTER ZÁPIS.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0024"
+      ]
+    },
+    "4741b79917642b4926215d780aada8802e7cf5e6681491ee6ca5f13717c7e5a7": {
+      "document_id": "MM-HIS-0025",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/MATCHMATRIX PANEL MIGRATION AUDIT.md",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/MATCHMATRIX PANEL MIGRATION AUDIT.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0025"
+      ]
+    },
+    "9e93ffebca8655dd4eb380c950b5931da2241a1be80ce98ce21fd450dddfb27b": {
+      "document_id": "MM-HIS-0026",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/MATCHMATRIX ZÁPIS — PEOPLE PIPELINE.md",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/MATCHMATRIX ZÁPIS — PEOPLE PIPELINE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0026"
+      ]
+    },
+    "acccab7a887f839b99aab2ddf36ce0bfe629f1eaafffcdff053737eb8f1bb47f": {
+      "document_id": "MM-HIS-0027",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/MATCHMATRIX – RELEASE_READINESS_AUDIT_V1.md",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/MATCHMATRIX – RELEASE_READINESS_AUDIT_V1.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0027"
+      ]
+    },
+    "918673c210ba78e8be86db6e24cd2d54e8d1af1b0cc27e0cc3267afeca462dac": {
+      "document_id": "MM-HIS-0028",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/MATCHMATRIX – ZÁPIS PRO NOVÝ CHAT.md",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/MATCHMATRIX – ZÁPIS PRO NOVÝ CHAT.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0028"
+      ]
+    },
+    "b0ebf253a654d123101980c55cb454e9189f45474fbb8c991f9c57558deb6f98": {
+      "document_id": "MM-HIS-0029",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/MATCHMATRIX_V18_HARVEST_COMMAND_CENTER_PLAN.md",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/MATCHMATRIX_V18_HARVEST_COMMAND_CENTER_PLAN.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0029"
+      ]
+    },
+    "c330b4477bced11c6895d0add0c13d081420402f98553120e863c8374ffaba44": {
+      "document_id": "MM-HIS-0030",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/Ochrana proti Duplicitám týmů.md",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/Ochrana proti Duplicitám týmů.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0030"
+      ]
+    },
+    "70eacaa0ee89cb083caf4694e7f2798d005e126318ed596d54da9a22ecbc70e7": {
+      "document_id": "MM-HIS-0031",
+      "canonical_relative_path": "info o celém projektu MatchMatrix/ZÁPIS MatchMatrix.md",
+      "source_variants": [
+        "info o celém projektu MatchMatrix/ZÁPIS MatchMatrix.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0031"
+      ]
+    },
+    "28fc3e99f56da01b91b0873ee95261c6be9814ba798e9769fd04a1a08a199f37": {
+      "document_id": "MM-HIS-0032",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260216/MatchMatrix_Project_Summary.docx",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260216/MatchMatrix_Project_Summary.docx"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0032"
+      ]
+    },
+    "906002e1e6e453fe083c2024c17d89ddb234d31e519bc2e9ef75eae3243bb253": {
+      "document_id": "MM-HIS-0033",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260219/MatchMatrix - platform - vize, strategie, postup, realizace.docx",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260219/MatchMatrix - platform - vize, strategie, postup, realizace.docx"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0033"
+      ]
+    },
+    "3b0c9e9164d709747c70e804b5c6dd6ffe6f6a33f1c0b2b9aa078118f245d06b": {
+      "document_id": "MM-HIS-0034",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260221/MatchMatrix_Pipeline_Overview_COMPLETE.xlsx",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260221/MatchMatrix_Pipeline_Overview_COMPLETE.xlsx"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0034"
+      ]
+    },
+    "96fd73c4247174461d9ecd0d7aac210ab2381b8aa218b5afb14c10423474d7f8": {
+      "document_id": "MM-HIS-0035",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260223/MATCHMATRIX – API-SPORTS INTEGRATIO.txt",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260223/MATCHMATRIX – API-SPORTS INTEGRATIO.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0035"
+      ]
+    },
+    "a536738a88a8fd7da554b796f4abe1a3b4a4ac152a1dfb2ef7bc58c5c660b6b2": {
+      "document_id": "MM-HIS-0036",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260223/📌 MATCHMATRIX - 2060223.docx",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260223/📌 MATCHMATRIX - 2060223.docx"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0036"
+      ]
+    },
+    "07c72db30817e5e7196597dc22ff44f2345944297c51f3c6590ceeba4b911d3f": {
+      "document_id": "MM-HIS-0037",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260224/Ticket Matrix _ Match Matrix – Přehled Projektu A Denní Deník.pdf",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260224/Ticket Matrix _ Match Matrix – Přehled Projektu A Denní Deník.pdf"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0037"
+      ]
+    },
+    "a3cbc9e549a1345c006828f137de0e701f3c2d34c1f8e12c800d2fa4bfb1d674": {
+      "document_id": "MM-HIS-0038",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260227/leagues_202602272234.csv",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260227/leagues_202602272234.csv"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0038"
+      ]
+    },
+    "2be9786789fb2d6bb0df03d01ecad42397c40fc3bfb33d7e5de4de952f55ad45": {
+      "document_id": "MM-HIS-0039",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260227/matchmatrix - matchmatrix - public - league_team_seasons.png",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260227/matchmatrix - matchmatrix - public - league_team_seasons.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0039"
+      ]
+    },
+    "d9f5fafbd7a951d0af585225e31ce198fbafffb54d50fdeff38d9db51a29518a": {
+      "document_id": "MM-HIS-0040",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260227/světové ligy.txt",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260227/světové ligy.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0040"
+      ]
+    },
+    "cdfc1be235ac7c644030373a5bb943fedbf913508c00c462f8855ab746e1ac00": {
+      "document_id": "MM-HIS-0041",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260228/matchmatrix - matchmatrix - ops.png",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260228/matchmatrix - matchmatrix - ops.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0041"
+      ]
+    },
+    "316a48c84a60e80fd2d608a086fbe045d8194c37a285c6b3f1108cc257cd5ef7": {
+      "document_id": "MM-HIS-0042",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260228/matchmatrix - matchmatrix - public.png",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260228/matchmatrix - matchmatrix - public.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0042"
+      ]
+    },
+    "223ddd2420fdc72a09fe792e92a8845ab8b0ee515a8436c915c471da5b831e11": {
+      "document_id": "MM-HIS-0043",
+      "canonical_relative_path": "komunikace s chatGPT/02_2026/20260228/matchmatrix - matchmatrix - staging.png",
+      "source_variants": [
+        "komunikace s chatGPT/02_2026/20260228/matchmatrix - matchmatrix - staging.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0043"
+      ]
+    },
+    "640aadec8ba2af9a8897d590fb36a42810898233fcca9b849bb81115fae58494": {
+      "document_id": "MM-HIS-0044",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/# MATCHMATRIX – ZÁPIS (2026-03-23).md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/# MATCHMATRIX – ZÁPIS (2026-03-23).md",
+        "komunikace s chatGPT/03_2026/20260323/# MATCHMATRIX – ZÁPIS (2026-03-23).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0044"
+      ]
+    },
+    "5db72a560f3a45c56ceeb45d3f332330a69bcc23c51cf6835e83fbcc7676693d": {
+      "document_id": "MM-HIS-0045",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260301/denní záznamy z deníku.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260301/denní záznamy z deníku.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0045"
+      ]
+    },
+    "4f8c1e06fc46061a3357d6c144b4783dfa66251538625dbf3f3fff0e1d3140a5": {
+      "document_id": "MM-HIS-0046",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260302/2026-03-02_eu_leagues_api_football_apply.sql",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260302/2026-03-02_eu_leagues_api_football_apply.sql"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0046"
+      ]
+    },
+    "86b9c2a91848ea7c2fe8b15309a3d4c9d449ed68186fe08851318eebe93b4fdb": {
+      "document_id": "MM-HIS-0047",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260302/2026-03-02_eu_leagues_api_football_apply_FIXED.sql",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260302/2026-03-02_eu_leagues_api_football_apply_FIXED.sql"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0047"
+      ]
+    },
+    "7b4d8214cff04e44769ce7669c08daedb871dbf332f1529e016e64b014a71ca6": {
+      "document_id": "MM-HIS-0048",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260302/2026-03-02_eu_leagues_api_football_apply_FIXED2.sql",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260302/2026-03-02_eu_leagues_api_football_apply_FIXED2.sql"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0048"
+      ]
+    },
+    "cd918db9ffbc7cdfdd59a72162c8dfd538b897f7b601c92a77314e41d3b2cf1b": {
+      "document_id": "MM-HIS-0049",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260302/2026-03-02_eu_leagues_api_football_apply_FIXED4.sql",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260302/2026-03-02_eu_leagues_api_football_apply_FIXED4.sql"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0049"
+      ]
+    },
+    "f9aad15e1d5041560ab443ee58e31a05007ce9d563a3564e3edf88d813939369": {
+      "document_id": "MM-HIS-0050",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260302/EU_leagues.csv",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260302/EU_leagues.csv",
+        "komunikace s chatGPT/03_2026/20260302/Evropa do MatchMatrix.csv",
+        "komunikace s chatGPT/03_2026/20260302/Evropa do MatchMatrix.xlsx"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0050",
+        "MM-HIS-0051",
+        "MM-HIS-0052"
+      ]
+    },
+    "98b736dd0c93f81822c1e3f0982c4902816f49e383795f7312e285f6ce8981ef": {
+      "document_id": "MM-HIS-0053",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260302/Ticket Matrix _ Match Matrix – Přehled Projektu A Denní Deník.docx",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260302/Ticket Matrix _ Match Matrix – Přehled Projektu A Denní Deník.docx"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0053"
+      ]
+    },
+    "e64321a20bc42ac096761ea2656b7b3642dd6c1e3ce31972acb9d7cb25302d20": {
+      "document_id": "MM-HIS-0054",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260302/Ticket Matrix _ Match Matrix – Přehled Projektu A Denní Deník_UPDATED.docx",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260302/Ticket Matrix _ Match Matrix – Přehled Projektu A Denní Deník_UPDATED.docx"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0054"
+      ]
+    },
+    "84c85d4cf0c30730db3067baa2681018dad4f214c81d0a08ef389f3a24a2b320": {
+      "document_id": "MM-HIS-0055",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260303/22 lig TOP8.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260303/22 lig TOP8.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0055"
+      ]
+    },
+    "ed4f38304f823ccc2cbb92c3e725729470df9ad816fc438ba127d512245ccab3": {
+      "document_id": "MM-HIS-0056",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260303/EU_tymy.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260303/EU_tymy.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0056"
+      ]
+    },
+    "f0214f7c6e54143ccf298805bd6971b152404a03003d30bd7b897d8b44dfbf4c": {
+      "document_id": "MM-HIS-0057",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260303/ingest_targets.csv",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260303/ingest_targets.csv"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0057"
+      ]
+    },
+    "5cb39f5e86a5a6fd160733c5657dc9b4530461da8b108457a9d95bb7f7394046": {
+      "document_id": "MM-HIS-0058",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260303/Ticket Matrix _ Match Matrix – webovky  Copilot.docx",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260303/Ticket Matrix _ Match Matrix – webovky  Copilot.docx"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0058"
+      ]
+    },
+    "bc17efc314be389095e209161ee30100e3ecf35cef37aa6bb0626747e95390b9": {
+      "document_id": "MM-HIS-0059",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260303/Ticket Matrix _ Match Matrix – webovky  Copilot.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260303/Ticket Matrix _ Match Matrix – webovky  Copilot.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0059"
+      ]
+    },
+    "3eaa7b8bc8155d05030c558c1e890d4e2247fc7ec0c29c970dc47f6a104ec9b2": {
+      "document_id": "MM-HIS-0060",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260304/2026-03-04_api_football_backfill.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260304/2026-03-04_api_football_backfill.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0060"
+      ]
+    },
+    "9c5a8f080ee220c0191e9b2e26f1ec894b57599f1ab08b35153c58e0d1511c47": {
+      "document_id": "MM-HIS-0061",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260304/pipeline_overview.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260304/pipeline_overview.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0061"
+      ]
+    },
+    "fe0183a290fa3de1f9be255a8e5a23c0224d6f6ec1831a3a49079f0c11c5f7a7": {
+      "document_id": "MM-HIS-0062",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260305/matchmatrix - matchmatrix - ops.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260305/matchmatrix - matchmatrix - ops.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0062"
+      ]
+    },
+    "af5cf7adba9ac3325001d12de2db063a560a46d04ab8282ef513c25f2859f584": {
+      "document_id": "MM-HIS-0063",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260305/matchmatrix - matchmatrix - public.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260305/matchmatrix - matchmatrix - public.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0063"
+      ]
+    },
+    "5041760e78082b86cb412bcab234bbfde9c45ca55147b6ee8ae3d115f6f3a1ec": {
+      "document_id": "MM-HIS-0064",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260305/matchmatrix - matchmatrix - staging.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260305/matchmatrix - matchmatrix - staging.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0064"
+      ]
+    },
+    "740217ffe4c887c21ff973ed99c79fbadf6c0a7d5364b322785611fd62901ac2": {
+      "document_id": "MM-HIS-0065",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260305/matchmatrix - matchmatrix - work.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260305/matchmatrix - matchmatrix - work.png",
+        "komunikace s chatGPT/03_2026/20260307/matchmatrix - matchmatrix - work.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0065"
+      ]
+    },
+    "89c2e51ec8c110bebaf0f5f0ceb3d2cb5c3ee08b9ddaa9424788757700707d15": {
+      "document_id": "MM-HIS-0066",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260305/MatchMatrix – aktuální stav projekt.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260305/MatchMatrix – aktuální stav projekt.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0066"
+      ]
+    },
+    "efbedfb26217038d1f2ca934deac10d85a3737aff98fe2fc611cc4b3fcb8be95": {
+      "document_id": "MM-HIS-0067",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260305/mermaid-diagram (1).png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260305/mermaid-diagram (1).png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0067"
+      ]
+    },
+    "ed53c8427ef7f6d685a4f410aa56d302b1f58639fdf8164e361a9dacc559a351": {
+      "document_id": "MM-HIS-0068",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260305/mermaid-diagram.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260305/mermaid-diagram.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0068"
+      ]
+    },
+    "03858e99ba67928dd830f950e7a11bb144afdaa82ce0d0a23d3e36a36ae0bba1": {
+      "document_id": "MM-HIS-0069",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260305/TicketMatrix_Backend_Setup_2026-03-05.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260305/TicketMatrix_Backend_Setup_2026-03-05.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0069"
+      ]
+    },
+    "6c2032a773564ff6e51559e528407e06fff349bdd2962bb6e84598785e6bcba7": {
+      "document_id": "MM-HIS-0070",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260305/zjednodušené ERD.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260305/zjednodušené ERD.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0070"
+      ]
+    },
+    "891531d7cc1140214bc82bc02c4f60d2a1e4249716af30d3de058937adc0c53a": {
+      "document_id": "MM-HIS-0071",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/league_provider_map.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/league_provider_map.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0071"
+      ]
+    },
+    "2edb22b9b7aabc1cf0efea037b82c1bd3a9dae771d72178afb31a5f6d107afe6": {
+      "document_id": "MM-HIS-0072",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/MatchMatrix – mapa databáze.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/MatchMatrix – mapa databáze.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0072"
+      ]
+    },
+    "617c8d4a1ca53b75e12a7fc1f5cb26df4a2d5d913ca2362c4f4ce8903f984473": {
+      "document_id": "MM-HIS-0073",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/MatchMatrix_2_0_cilova_architektura.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/MatchMatrix_2_0_cilova_architektura.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0073"
+      ]
+    },
+    "1f4749da6f0fb075b274bd74de6c81a8c4b0ccfc2c6426b6f3ad0474e79cc622": {
+      "document_id": "MM-HIS-0074",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/matchmatrix_daily_summary_2026-03-06.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/matchmatrix_daily_summary_2026-03-06.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0074"
+      ]
+    },
+    "f225c9feaedaff2aca9fd18db3187e1c53cf4c5893bcbc8e3dfaf82763845849": {
+      "document_id": "MM-HIS-0075",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/matchmatrix_database_map_and_fill_plan.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/matchmatrix_database_map_and_fill_plan.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0075"
+      ]
+    },
+    "802f4984b1ca9ffdf95d147592946ed98a0fb90c429bb2d447d68a98c5639fde": {
+      "document_id": "MM-HIS-0076",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/matchmatrix_platform_plan.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/matchmatrix_platform_plan.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0076"
+      ]
+    },
+    "e83abc7fd9cb08b8cbbd6cb1f2073530991cc30c72a42fe04f461df0dea407a6": {
+      "document_id": "MM-HIS-0077",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/matchmatrix_project_structure_popis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/matchmatrix_project_structure_popis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0077"
+      ]
+    },
+    "a679469bd9be68f29bb23bb14cbd58bb636874c36acb2ae87f5b5ff9f916f84c": {
+      "document_id": "MM-HIS-0078",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/public.leagues.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260306 - cílová architektura V2/public.leagues.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0078"
+      ]
+    },
+    "8a2f02170c32253f8b2f507c20857a74279c85fe7eacdefaae5805d56e17d0af": {
+      "document_id": "MM-HIS-0079",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260307/2026-03-07_DAILY_STATUS_20260307_195908.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260307/2026-03-07_DAILY_STATUS_20260307_195908.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0079"
+      ]
+    },
+    "47876683be4457acdcc5727811a14519471f24678e3a494782f92072178fcf3f": {
+      "document_id": "MM-HIS-0080",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260307/2026-03-07_WEEKLY_DIAGNOSTICS_20260307_195908.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260307/2026-03-07_WEEKLY_DIAGNOSTICS_20260307_195908.txt",
+        "komunikace s chatGPT/03_2026/20260307/2026-03-07_WEEKLY_DIAGNOSTICS_20260307_200138.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0080"
+      ]
+    },
+    "8d102281e8a5bc537bcbcb8bb4cdb30808e0a295d069c084bc42b6899c2d3184": {
+      "document_id": "MM-HIS-0081",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260307/Datum 2026-03-07.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260307/Datum 2026-03-07.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0081"
+      ]
+    },
+    "3efee64bf315588691f049a7a6b90eb2d178fb02a35b2bc3afc2b44ff1825284": {
+      "document_id": "MM-HIS-0082",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260307/matchmatrix - matchmatrix - ops.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260307/matchmatrix - matchmatrix - ops.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0082"
+      ]
+    },
+    "9de2bedae2cc1c590c1ba7cc0515321e1bc5fbd5f78b2b11bd6117cea6fe0bcf": {
+      "document_id": "MM-HIS-0083",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260307/matchmatrix - matchmatrix - public.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260307/matchmatrix - matchmatrix - public.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0083"
+      ]
+    },
+    "158322b144f45f72068ed5fe368823f6f8cdeb8afc8bf439478431910e34b160": {
+      "document_id": "MM-HIS-0084",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260307/matchmatrix - matchmatrix - staging.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260307/matchmatrix - matchmatrix - staging.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0084"
+      ]
+    },
+    "00c52cc181286e04e52d7c27c2bb5e583e86511ee2130d8c879228845bd06ea2": {
+      "document_id": "MM-HIS-0085",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260307/MATCHMATRIX-PLATFORM system check.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260307/MATCHMATRIX-PLATFORM system check.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0085"
+      ]
+    },
+    "5105d0fce6a282a5893c1b598c3164f3644403abcdcd8f45c5f943e09c663522": {
+      "document_id": "MM-HIS-0086",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260307/MatchMatrix_MASTER_BLUEPRINT.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260307/MatchMatrix_MASTER_BLUEPRINT.md",
+        "MatchMatrix_MASTER_BLUEPRINT.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0086"
+      ]
+    },
+    "9444dbdaadd19c9a602a36c943b7efc8843bb8968e7520f671fb6b95657487f1": {
+      "document_id": "MM-HIS-0087",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260307/matchmatrix_next_steps_ticket_engine_zaverecny_zapis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260307/matchmatrix_next_steps_ticket_engine_zaverecny_zapis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0087"
+      ]
+    },
+    "b3a1a69941de8b38233dae0c03a04055f16b17b90ec9f2f471b9283044615b48": {
+      "document_id": "MM-HIS-0088",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260307/matchmatrix_system_overview (1).md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260307/matchmatrix_system_overview (1).md",
+        "komunikace s chatGPT/03_2026/20260307/matchmatrix_system_overview.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0088"
+      ]
+    },
+    "91e6fc84051e3ac632eb93ef76aea3d412154301f508370aef8ce9b6cb2a4e72": {
+      "document_id": "MM-HIS-0089",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260308/2026-03-08_pipeline_predictions_update.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260308/2026-03-08_pipeline_predictions_update.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0089"
+      ]
+    },
+    "f552cd24519b6eb5c01d9d0f3b0e05e094fc1dae239509856b77dc326e672038": {
+      "document_id": "MM-HIS-0090",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260308/api_raw_payloads.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260308/api_raw_payloads.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0090"
+      ]
+    },
+    "0348035316db8278af221d286a35f80683bc6a3372d0f8e9210fca1da4299136": {
+      "document_id": "MM-HIS-0091",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260309/# MatchMatrix – režimy tvorby tiket.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260309/# MatchMatrix – režimy tvorby tiket.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0091"
+      ]
+    },
+    "843b1d3d6efa801b3917c3c807fbdfa4c0b6f09cac6a6402d05ded3fe6771f1e": {
+      "document_id": "MM-HIS-0092",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260309/20260309_MatchMatrix_Vývojový_zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260309/20260309_MatchMatrix_Vývojový_zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0092"
+      ]
+    },
+    "4c9bf56fa9f0c257cf0c9c0a7cea117d535085d0d28e813243e6f03e39c2717d": {
+      "document_id": "MM-HIS-0093",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260309/matchmatrix - matchmatrix - public.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260309/matchmatrix - matchmatrix - public.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0093"
+      ]
+    },
+    "dc2251ea77b993ef0d365e81719768a18f1ea7c26f9d4c4aaec1110e5988cb7f": {
+      "document_id": "MM-HIS-0094",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260310/architekturu Ticket Engine nad ER diagramem.docx",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260310/architekturu Ticket Engine nad ER diagramem.docx"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0094"
+      ]
+    },
+    "c9789c25a0fc62c58ccbfa09ccf34e9e639d691b6948cdda45b9a66dc4746f9a": {
+      "document_id": "MM-HIS-0095",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260310/MATCHMATRIX – CELKOVÁ ARCHITEKTURA.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260310/MATCHMATRIX – CELKOVÁ ARCHITEKTURA.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0095"
+      ]
+    },
+    "829322a1985bb75504b82a9d7116444e8fcd43289a3fdc5bad13b8bec257647f": {
+      "document_id": "MM-HIS-0096",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260310/MatchMatrix – start Ticket Engine.docx",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260310/MatchMatrix – start Ticket Engine.docx"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0096"
+      ]
+    },
+    "dbdb43023ec3594317d7782a428ed2609dfeec3a55041cc5a07722788477e355": {
+      "document_id": "MM-HIS-0097",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260310/MatchMatrix_log_2026-03-10_unified_staging_bridge.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260310/MatchMatrix_log_2026-03-10_unified_staging_bridge.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0097"
+      ]
+    },
+    "a9edae8fb5baedb6ab61e74b9456490d8f27b5f651dcd41ba2bea3c1e3e14e27": {
+      "document_id": "MM-HIS-0098",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260310/PROJECT BUNDLE MatchMatrix_TiketMatrix_Gemini.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260310/PROJECT BUNDLE MatchMatrix_TiketMatrix_Gemini.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0098"
+      ]
+    },
+    "eb04fb2596bf19462c3caddbdc5bd5daf53a3f17c4f4d5a74fddb8d0c1a1532d": {
+      "document_id": "MM-HIS-0099",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260310/přehled MatchMatrix.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260310/přehled MatchMatrix.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0099"
+      ]
+    },
+    "63a14473b0b7f6cb093fe2dcc563a61b4e48321c78dd8770ee078a067181f9da": {
+      "document_id": "MM-HIS-0100",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260311/# MatchMatrix – Pipeline Stabilization.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260311/# MatchMatrix – Pipeline Stabilization.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0100"
+      ]
+    },
+    "9a26d4d5e347c9b92e8dcfb7b689217a922137c22165db5e9e40cf9f712c26dd": {
+      "document_id": "MM-HIS-0101",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260311/741_public_merge_schema_check.sql.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260311/741_public_merge_schema_check.sql.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0101"
+      ]
+    },
+    "fad620f6cb29030a05f9b9abdc13dfc01de87e2dacfaa511b777f0e7f8559547": {
+      "document_id": "MM-HIS-0102",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260311/MatchMatrix – pracovní zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260311/MatchMatrix – pracovní zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0102"
+      ]
+    },
+    "d509a916275fd7d078a949988dbcc7bd2a28ec9ed8310b80f762edf4864ea191": {
+      "document_id": "MM-HIS-0103",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260312/Dotazy 1-6.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260312/Dotazy 1-6.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0103"
+      ]
+    },
+    "2507a4d3f0ce5e1bbc3a237d663a9e253ab861adaf6e8ee3b7e382ab22694c65": {
+      "document_id": "MM-HIS-0104",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260312/MatchMatrix – pracovní zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260312/MatchMatrix – pracovní zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0104"
+      ]
+    },
+    "24a28cbb810ee1619269e7b5a4b9a87e6ae0b7155527bd16def314b7fe45bc75": {
+      "document_id": "MM-HIS-0105",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260313/035_ingest_planner_checklist.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260313/035_ingest_planner_checklist.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0105"
+      ]
+    },
+    "73042fe4285c4d4bcdf6efda2e36f6cc77cfd9b203275314f3ffb6bc8c5a7ecf": {
+      "document_id": "MM-HIS-0106",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260313/Data - ingest_targets.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260313/Data - ingest_targets.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0106"
+      ]
+    },
+    "12a269602d5a2a99dc26af362db00b6a1b9c1e45a76e3208edb1e204ebdfaa11": {
+      "document_id": "MM-HIS-0107",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260313/Data - job_runs.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260313/Data - job_runs.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0107"
+      ]
+    },
+    "67f099d2487f133950c01b7d62ca3d38accbbc2273139526fe15520b99448cd2": {
+      "document_id": "MM-HIS-0108",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260313/MatchMatrix – Ingest Architecture &.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260313/MatchMatrix – Ingest Architecture &.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0108"
+      ]
+    },
+    "d331c28dddf127125a9b8d548a6810af40ca54ed04abc328d3f19140bd2f63dd": {
+      "document_id": "MM-HIS-0109",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260313/MatchMatrix – pracovní zápis.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260313/MatchMatrix – pracovní zápis.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0109"
+      ]
+    },
+    "5b3832e4af2b4235d944ab50a97b81535e23a1e9720871424edf20af81de37e1": {
+      "document_id": "MM-HIS-0110",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260313/MatchMatrix – pracovní zápis_2.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260313/MatchMatrix – pracovní zápis_2.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0110"
+      ]
+    },
+    "5c5ec445f8c10c4ac5810e04a285b90578d7f84199d426bb7cfecde2ad65ee9f": {
+      "document_id": "MM-HIS-0111",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260314/# MatchMatrix – pracovní zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260314/# MatchMatrix – pracovní zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0111"
+      ]
+    },
+    "98b742fa3c23f77e08cf4853ee44436bf8aa2c6dfa16279df079d5211664a420": {
+      "document_id": "MM-HIS-0112",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260314/ChatGPT Image 14. 3. 2026 10_28_56.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260314/ChatGPT Image 14. 3. 2026 10_28_56.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0112"
+      ]
+    },
+    "faa3d499ea1f4007917c42b2f38b19ce64bfe25954d9fc104ba33238efa355f2": {
+      "document_id": "MM-HIS-0113",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260314/MATCHMATRIX_DATA_PIPELINE_MAP.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260314/MATCHMATRIX_DATA_PIPELINE_MAP.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0113"
+      ]
+    },
+    "a9c7b96dc6c8c4e82c4ccdc9bced1a10bdaf472ae212ce8be7500eb5a5138005": {
+      "document_id": "MM-HIS-0114",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260314/MATCHMATRIX_DATABASE_BIBLE.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260314/MATCHMATRIX_DATABASE_BIBLE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0114"
+      ]
+    },
+    "19096912c8b11ab5a112c6dc2bfc2ddd99a7c95d85dffe9bfc4fda7fdbcc6aea": {
+      "document_id": "MM-HIS-0115",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260314/MATCHMATRIX_DEVELOPER_DOCUMENTATION.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260314/MATCHMATRIX_DEVELOPER_DOCUMENTATION.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0115"
+      ]
+    },
+    "712202224ef49a3c31fe2a6fa6c32f716e27e8a7fb585abeb8dd23c9f2eeac7f": {
+      "document_id": "MM-HIS-0116",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260314/MATCHMATRIX_FULL_TECHNICAL_DESCRIPTION.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260314/MATCHMATRIX_FULL_TECHNICAL_DESCRIPTION.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0116"
+      ]
+    },
+    "691d2414005162bc10481e7ca238e2bc6325245fe122d3eae46318e1462d51d1": {
+      "document_id": "MM-HIS-0117",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260314/MATCHMATRIX_SYSTEM_ARCHITECTURE.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260314/MATCHMATRIX_SYSTEM_ARCHITECTURE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0117"
+      ]
+    },
+    "0db7ef366961db68fb2a6c9a240d0563ee58430526488c6e1d03bedf433824b5": {
+      "document_id": "MM-HIS-0118",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260315/# MatchMatrix – pracovní zápis.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260315/# MatchMatrix – pracovní zápis.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0118"
+      ]
+    },
+    "a2fe0cfce9e77ec8f368fdbd565a7b8b40a3c72f630ad00fa0a2e2fb73dcb26d": {
+      "document_id": "MM-HIS-0119",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260315/MatchMatrix – pracovní zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260315/MatchMatrix – pracovní zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0119"
+      ]
+    },
+    "c26298a9d1a23228f4c6f02bd58408316a603697704291ed9c423a41649a6345": {
+      "document_id": "MM-HIS-0120",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260315/players_pipeline_rozsireni_runbook.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260315/players_pipeline_rozsireni_runbook.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0120"
+      ]
+    },
+    "1bb79ca0c3658d5ac7850fda7c193aff6e63a4ff1021302f95acbf6cc0ec0a1b": {
+      "document_id": "MM-HIS-0121",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260316/MatchMatrix – vývojový zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260316/MatchMatrix – vývojový zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0121"
+      ]
+    },
+    "68fa0214b187b6127e426f6b22eb3eca90082afc6c537f10877e9defca107306": {
+      "document_id": "MM-HIS-0122",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260317/# MatchMatrix – pracovní zápis.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260317/# MatchMatrix – pracovní zápis.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0122"
+      ]
+    },
+    "76fe189e4718ac6ecab295808fde03812e051baa12037f1904e1fac2d4bc8d0f": {
+      "document_id": "MM-HIS-0123",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260317/zhodnocení.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260317/zhodnocení.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0123"
+      ]
+    },
+    "e1b6d27d8a7005ca9a276b7750807d58383496e10cd8263748d375d1b78b254e": {
+      "document_id": "MM-HIS-0124",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/# MatchMatrix – pracovní zápis.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/# MatchMatrix – pracovní zápis.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0124"
+      ]
+    },
+    "fb539f45dce130e67cfddf41f1a9b72452c5a382836f75c837a2936c64dee29c": {
+      "document_id": "MM-HIS-0125",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/072_export_missing_player_profile_ids.sql.csv",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/072_export_missing_player_profile_ids.sql.csv"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0125"
+      ]
+    },
+    "2b0420736f6125dd828dff65cb388a8254fb4cdd83283bd7dbe6deb09232c347": {
+      "document_id": "MM-HIS-0126",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Celková architektura MatchMatrix (z.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Celková architektura MatchMatrix (z.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0126"
+      ]
+    },
+    "067c19d2ce692012eb23ec245e58d46e2062540c0584dfa6811e8376f6195d37": {
+      "document_id": "MM-HIS-0127",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - api_budget_today.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - api_budget_today.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0127"
+      ]
+    },
+    "c80b8139bb0709740d7cfe44525f3bf129bff1f2ef4dbea9ed61bb5764289bca": {
+      "document_id": "MM-HIS-0128",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - ingest_entity_plan.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - ingest_entity_plan.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0128"
+      ]
+    },
+    "7ddbd44c2f40245bb9e2e6a78ef8953d9139dce5aec68d315103a1a78a451446": {
+      "document_id": "MM-HIS-0129",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - ingest_planner.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - ingest_planner.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0129"
+      ]
+    },
+    "c758acaaca51566c83c9dd58dcf7932cc5b82b1db5ef3d14bfccb418970c5dbd": {
+      "document_id": "MM-HIS-0130",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - ingest_planner_queue.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - ingest_planner_queue.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0130"
+      ]
+    },
+    "baaa2743176aec713729eccefa5902c624d3552f8091519acb7a76b98b0b91eb": {
+      "document_id": "MM-HIS-0131",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - player_external_identt.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - player_external_identt.txt",
+        "komunikace s chatGPT/03_2026/20260318/Data - player_season_stat.txt",
+        "komunikace s chatGPT/03_2026/20260318/Data - posledni_hraci.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0131"
+      ]
+    },
+    "bc04188151f7326688d74a5c8bb4e49ceed9e8376e2080de05edb121a10e0398": {
+      "document_id": "MM-HIS-0132",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - players.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - players.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0132"
+      ]
+    },
+    "47f45b3756d79dee175ef344045cd9b6fe4e4c39fdefefb89a64c8ad9b1b81c5": {
+      "document_id": "MM-HIS-0133",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - provider_jobs.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - provider_jobs.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0133"
+      ]
+    },
+    "aed21e74373852c6f215a192e1812dc85f965a370924bae9ec1043fde1db7c28": {
+      "document_id": "MM-HIS-0134",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - sports_import_plan.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - sports_import_plan.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0134"
+      ]
+    },
+    "f330eb74c11806baef9be670ec5fb0e6eee80305875b5f09488d2754b651727a": {
+      "document_id": "MM-HIS-0135",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - table_name.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - table_name.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0135"
+      ]
+    },
+    "661725e3ec2d02e49b4bb68473d5c6eed901472c684a66c1a3ea57015ed03ad2": {
+      "document_id": "MM-HIS-0136",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - team_provider_map.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - team_provider_map.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0136"
+      ]
+    },
+    "497f841f6ef6f3e6734a1cf2ea30c761e6469ad1d0da45c6d1602c3db5e805ba": {
+      "document_id": "MM-HIS-0137",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - teams.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - teams.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0137"
+      ]
+    },
+    "2dc4d4a54ace2dba1d271a7461636fd63d60148957d79534e842776895b9adb2": {
+      "document_id": "MM-HIS-0138",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/Data - v_job_runs_recent.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/Data - v_job_runs_recent.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0138"
+      ]
+    },
+    "2cf2aec3f9bbf1746d431dcea1b19f1644f2f3d7d9789659ec00123fbeb16b88": {
+      "document_id": "MM-HIS-0139",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/MATCHMATRIX INGEST CYCLE V3.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/MATCHMATRIX INGEST CYCLE V3.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0139"
+      ]
+    },
+    "d2facc4b67079c13b8f19a7b573a2aef2e6e1fd2c77b930fa22faff6c5474e9a": {
+      "document_id": "MM-HIS-0140",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/schema.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/schema.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0140"
+      ]
+    },
+    "1d374a6e6a5c0678863c618b3e91fea20903c7a3ea5cfd21abf0016536b574c8": {
+      "document_id": "MM-HIS-0141",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/stg_provider_fixtures.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/stg_provider_fixtures.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0141"
+      ]
+    },
+    "9bc962a7abafd3e92efdbc02c053ef47ed5e00c0b5a10653473281ad18f99d7c": {
+      "document_id": "MM-HIS-0142",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260318/stg_provider_players.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260318/stg_provider_players.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0142"
+      ]
+    },
+    "660cf7a7b273951d29163f4ce506fb81ba84f1305eba9fb74e13861b170b6a02": {
+      "document_id": "MM-HIS-0143",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260319/Ano. Teď už je vidět, že DB není po.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260319/Ano. Teď už je vidět, že DB není po.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0143"
+      ]
+    },
+    "94d25a5672f262fd6b853df5958f3279415139f681a2df645faf73717b43a432": {
+      "document_id": "MM-HIS-0144",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260319/MatchMatrix_denní zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260319/MatchMatrix_denní zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0144"
+      ]
+    },
+    "0879b448cebab0381eda4ab42dcef70da6df6cac4c657b1b75f90199afeef77e": {
+      "document_id": "MM-HIS-0145",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260319/matchmatrix_handover_2026-03-19_players_pipeline.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260319/matchmatrix_handover_2026-03-19_players_pipeline.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0145"
+      ]
+    },
+    "da35c4042fb9cb37c6333c0ef18606138812e35374654713f384ee7d16733f3f": {
+      "document_id": "MM-HIS-0146",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/Diagramy/matchmatrix - matchmatrix - ops.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/Diagramy/matchmatrix - matchmatrix - ops.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0146"
+      ]
+    },
+    "d5343372c49299bddd32da053b704ed383b43f9cc08684f5fdc46a29aa64e267": {
+      "document_id": "MM-HIS-0147",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/Diagramy/matchmatrix - matchmatrix - public.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/Diagramy/matchmatrix - matchmatrix - public.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0147"
+      ]
+    },
+    "2acaa42eab9ea658a9ad2eb53ab9094a79dc41c3df557fbde4fea4c334dfd0b5": {
+      "document_id": "MM-HIS-0148",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/Diagramy/matchmatrix - matchmatrix - staging.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/Diagramy/matchmatrix - matchmatrix - staging.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0148"
+      ]
+    },
+    "18bfc83136ae5f9644825e42b9440420457d104743123d4ef05146083eb01319": {
+      "document_id": "MM-HIS-0149",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/MatchMatrix – podrobný zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/MatchMatrix – podrobný zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0149"
+      ]
+    },
+    "9f0256a9268819c7c8d79ee5ac014f69a9961d7520bbf7bc9f4b4de2d1243225": {
+      "document_id": "MM-HIS-0150",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/MatchMatrix – pracovní zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/MatchMatrix – pracovní zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0150"
+      ]
+    },
+    "aab634d60965e3122e7cc8c014c145a4f33bfa47ae14bef1e1722af15d1477a4": {
+      "document_id": "MM-HIS-0151",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/MatchMatrix – zápis (FB_EU → football_data vrstva + audit historie).md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/MatchMatrix – zápis (FB_EU → football_data vrstva + audit historie).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0151"
+      ]
+    },
+    "d5276ee9e916335cf174a9ca37dc1e33db0395833c2317ec0bb79abe11b26c12": {
+      "document_id": "MM-HIS-0152",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/MatchMatrix – zápis (krok 147–151 m.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/MatchMatrix – zápis (krok 147–151 m.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0152"
+      ]
+    },
+    "f5196df218dce5f6f6521059a483209408ff5a9070a7bf44a0312eba533ea669": {
+      "document_id": "MM-HIS-0153",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/MatchMatrix_zapis_2026-03-20_multisport_podminka.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/MatchMatrix_zapis_2026-03-20_multisport_podminka.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0153"
+      ]
+    },
+    "30e127cabefffbc8b12f73e270ff99f0e138c4e1b8a9d29498743376ae2f4ffd": {
+      "document_id": "MM-HIS-0154",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/SQL/146_audit.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/SQL/146_audit.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0154"
+      ]
+    },
+    "f5fc11afb7771c13fa3dac40317ce0ffa714adc770546e7628b827f250043acf": {
+      "document_id": "MM-HIS-0155",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/SQL/146_audit_ops.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/SQL/146_audit_ops.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0155"
+      ]
+    },
+    "2c52085e5dfba598c8671099f698c0a3bfff6b0ca33564c7bb930dce7e405bbf": {
+      "document_id": "MM-HIS-0156",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/SQL/146_audit_ops_3.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/SQL/146_audit_ops_3.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0156"
+      ]
+    },
+    "72d7ec1f9f33a0e73082b156de8e105cc4a864e95b33f7a52c023f9020580c1d": {
+      "document_id": "MM-HIS-0157",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/SQL/146_planner.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/SQL/146_planner.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0157"
+      ]
+    },
+    "5449cdf0e4342c9f4427ff5a01fbcd6ed5df00a2e35c10fc0998aae2d4e00a0d": {
+      "document_id": "MM-HIS-0158",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/SQL/provider_sport_matrix.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/SQL/provider_sport_matrix.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0158"
+      ]
+    },
+    "b15f9fad4fe0e04d761c8e46f93c47c4d433851fe5d7b162537810bb54d5ad76": {
+      "document_id": "MM-HIS-0159",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260320/SQL/sport_entity_rules.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260320/SQL/sport_entity_rules.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0159"
+      ]
+    },
+    "bfc40f3f595365dbd701109fe6dc238a347e6669cebde35980ee23633c2a1e58": {
+      "document_id": "MM-HIS-0160",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260321/matchmatrix - matchmatrix - ops.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260321/matchmatrix - matchmatrix - ops.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0160"
+      ]
+    },
+    "fbbc8ba93055fee8ae3328dcff285cea3c1ca1b905cefc43d9edab3df8df1365": {
+      "document_id": "MM-HIS-0161",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260321/matchmatrix - matchmatrix - public.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260321/matchmatrix - matchmatrix - public.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0161"
+      ]
+    },
+    "ce9f8583474f988bf1577cfd0ca7d1bc9a792fd39422eee471e0041f176c622e": {
+      "document_id": "MM-HIS-0162",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260321/matchmatrix - matchmatrix - staging.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260321/matchmatrix - matchmatrix - staging.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0162"
+      ]
+    },
+    "4a7e06a6b6a04e0a4bb39900ab3ab7a3aeeca39eaa54ef5fc935ba5ddde7f72e": {
+      "document_id": "MM-HIS-0163",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260321/MatchMatrix – navazovací zápis.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260321/MatchMatrix – navazovací zápis.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0163"
+      ]
+    },
+    "5eec1d4f4861ff2630a26a4f32067410d5c18759384fb71ec3be685c1259afb7": {
+      "document_id": "MM-HIS-0164",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260322/MatchMatrix – navazovací zápis (Ing.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260322/MatchMatrix – navazovací zápis (Ing.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0164"
+      ]
+    },
+    "a7c7f64c9685af345f895f81edcbee51830572cc0557e3e7803febd75a3566ee": {
+      "document_id": "MM-HIS-0165",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260322/MATCHMATRIX – NAVAZOVACÍ ZÁPIS .md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260322/MATCHMATRIX – NAVAZOVACÍ ZÁPIS .md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0165"
+      ]
+    },
+    "17cac649af5bd28b4f54d9082db5e442ab95211a5848ccc9e6ce4c5ada1b4702": {
+      "document_id": "MM-HIS-0166",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260322/MATCHMATRIX – ZÁPIS (DNES).md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260322/MATCHMATRIX – ZÁPIS (DNES).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0166"
+      ]
+    },
+    "297530a37dec08389fcace1eb20bc5968e2fb40e8b9e202f3aa323a62b386429": {
+      "document_id": "MM-HIS-0167",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/229_ops.ingest_entity_plan.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/229_ops.ingest_entity_plan.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0167"
+      ]
+    },
+    "d1412b9af0388664aac48f7a468a015db42d802bc1805a8aac9b0778a23f199c": {
+      "document_id": "MM-HIS-0168",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/229_ops.ingest_entity_plan_4.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/229_ops.ingest_entity_plan_4.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0168"
+      ]
+    },
+    "0274091075b21c7eafd20686657968d9b84411278d3461c33a68ffd305c59acf": {
+      "document_id": "MM-HIS-0169",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/229_ops.ingest_targets.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/229_ops.ingest_targets.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0169"
+      ]
+    },
+    "2673e0d83fd24e4cbb8233a34c92605df599827a0f123d40f9b5a0cc33d03b12": {
+      "document_id": "MM-HIS-0170",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/229_ops.provider_jobs.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/229_ops.provider_jobs.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0170"
+      ]
+    },
+    "ddd5d36c5c08f29ac0ef7cd4fe59d3edc33f0c1f20327a83bfb749594e902050": {
+      "document_id": "MM-HIS-0171",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/Aktuální run_group rozpad v ops.ingest_entity_plan.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/Aktuální run_group rozpad v ops.ingest_entity_plan.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0171"
+      ]
+    },
+    "3171849fb488e263796f4da3b6ce79f0bfe7ff7a54c0b7b05f8eaa339bb25f99": {
+      "document_id": "MM-HIS-0172",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/Aktuální run_group rozpad v ops.ingest_targets.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/Aktuální run_group rozpad v ops.ingest_targets.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0172"
+      ]
+    },
+    "aaa105f5e6985a173949758baf029f3fdc78a53f767ce0aa8078fa17fabc02d4": {
+      "document_id": "MM-HIS-0173",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/bod 1.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/bod 1.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0173"
+      ]
+    },
+    "0480d21024f4b798f2d532400a94f39722bc0fd71bf9147d6fd6a464c55d660c": {
+      "document_id": "MM-HIS-0174",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/bod 2.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/bod 2.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0174"
+      ]
+    },
+    "8ac8dcc0486c2c435ae5333e46c54576879637ebb550ae2cf693e99ebac9d347": {
+      "document_id": "MM-HIS-0175",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/bod 3.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/bod 3.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0175"
+      ]
+    },
+    "b1530cb15d0d8b60d59aac94295c320902c741be1c8e2f509d219b8317e5f536": {
+      "document_id": "MM-HIS-0176",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/bod 4.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/bod 4.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0176"
+      ]
+    },
+    "9149c1f24800c4c46653673a0b92810a4d3f60f5479eb9b53d5382e85ba14962": {
+      "document_id": "MM-HIS-0177",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/Ingest planner.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/Ingest planner.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0177"
+      ]
+    },
+    "d4d28d0d81f676e4a0d0e3d22e187f7d378dabd600206f7803a9eaebfb649386": {
+      "document_id": "MM-HIS-0178",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/ingest_entity_plan.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/ingest_entity_plan.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0178"
+      ]
+    },
+    "4a58480b62ff598d2e4dc0ab9aac82609a7425a5eda2178388e57ee811490cbf": {
+      "document_id": "MM-HIS-0179",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/Jak teď vypadá football rozpad.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/Jak teď vypadá football rozpad.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0179"
+      ]
+    },
+    "a6f8a438b6eb8213be1a56b2e3162d9ad09f8373a50c68971ac179d91635e9c8": {
+      "document_id": "MM-HIS-0180",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/Jak vypadají hotové HK_BK cíle.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/Jak vypadají hotové HK_BK cíle.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0180"
+      ]
+    },
+    "11f89f6a8909565cfe7a58cbeef9c7931f813327b41ededb2a5258badeef49bf": {
+      "document_id": "MM-HIS-0181",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/MATCHMATRIX – ZÁPIS (2026-03-23).md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/MATCHMATRIX – ZÁPIS (2026-03-23).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0181"
+      ]
+    },
+    "65d0e0c709b3906ed463e903b70eba435d0800c1cefe11b4177225de019ee56c": {
+      "document_id": "MM-HIS-0182",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/MATCHMATRIX – ZÁPIS (API-SPORT + AP.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/MATCHMATRIX – ZÁPIS (API-SPORT + AP.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0182"
+      ]
+    },
+    "e3edf63629ac4007d0f86ba3cc35b1740515338fa5776fd55ee483e2c3a7b198": {
+      "document_id": "MM-HIS-0183",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/MATCHMATRIX – ZÁPIS (DNES).txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/MATCHMATRIX – ZÁPIS (DNES).txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0183"
+      ]
+    },
+    "ed158aece139fa025348cecdd3dd32940fe77c7ec94fcf0a055ee47532e7b3be": {
+      "document_id": "MM-HIS-0184",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/ops.ingest_entity_plan-1774298504122.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/ops.ingest_entity_plan-1774298504122.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0184"
+      ]
+    },
+    "5df06e35803d1f1312b3c8682b513deae9e3b4be0783d8ead5ae8f0fb180b8ac": {
+      "document_id": "MM-HIS-0185",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/ops.ingest_entity_plan.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/ops.ingest_entity_plan.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0185"
+      ]
+    },
+    "73f9b41e21b6c49a323e84351907518bc5b40417d67c338e2d32186699f10b98": {
+      "document_id": "MM-HIS-0186",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260323/ops.provider_jobs.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260323/ops.provider_jobs.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0186"
+      ]
+    },
+    "e811a84c28a44d535575072594a93a5ecfc68cd421a77a724dc26086bf20be07": {
+      "document_id": "MM-HIS-0187",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260324/Denní Zápis - Aktuální stav (klíč).md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260324/Denní Zápis - Aktuální stav (klíč).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0187"
+      ]
+    },
+    "4d9675c422c330e5c418ccc7ec04d3cd672e6e5e9401df8e965f2eb961c1c949": {
+      "document_id": "MM-HIS-0188",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260324/MATCHMATRIX – ZÁPIS (Volleyball + s.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260324/MATCHMATRIX – ZÁPIS (Volleyball + s.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0188"
+      ]
+    },
+    "b39b8d0a9e21286f252d5734e3ba769f21f271f4aead94795e2cb461d3859bf3": {
+      "document_id": "MM-HIS-0189",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260324/MATCHMATRIX – ZÁPIS (Volleyball).md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260324/MATCHMATRIX – ZÁPIS (Volleyball).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0189"
+      ]
+    },
+    "543a58cd41ae26ef5467b4fc615ef8ab0c4ea6e3c7bf18bf11b79e10de94591f": {
+      "document_id": "MM-HIS-0190",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260325/ingest_planer_1.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260325/ingest_planer_1.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0190"
+      ]
+    },
+    "6cb4ad92618be1b443d7b4ba32da02673af671e8a5ff8516d3b65058791c62e2": {
+      "document_id": "MM-HIS-0191",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260325/ingest_planer_2.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260325/ingest_planer_2.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0191"
+      ]
+    },
+    "32595ebfff049456d19089139a3dde464ff8b9998d4ef9e0ae9e5adbdbaab883": {
+      "document_id": "MM-HIS-0192",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260325/matchmatrix - matchmatrix - ops.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260325/matchmatrix - matchmatrix - ops.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0192"
+      ]
+    },
+    "abdf52605dc685c23706c779a26b4f9e89dadf57e914b46797c09213e63ca141": {
+      "document_id": "MM-HIS-0193",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260325/matchmatrix - matchmatrix - public.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260325/matchmatrix - matchmatrix - public.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0193"
+      ]
+    },
+    "9334f62e94888548a92a46ece67f9c91d5224016a8b7ba056062f960fa960cf1": {
+      "document_id": "MM-HIS-0194",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260325/matchmatrix - matchmatrix - staging.png",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260325/matchmatrix - matchmatrix - staging.png"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0194"
+      ]
+    },
+    "99f371ffe88f44d8bf88f08d71a56fb0c3da437c3078e247a880cf2e3260049f": {
+      "document_id": "MM-HIS-0195",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260325/MATCHMATRIX – DENNÍ ZÁPIS-večer.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260325/MATCHMATRIX – DENNÍ ZÁPIS-večer.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0195"
+      ]
+    },
+    "eb9c13a317597e9d76e060c469c595267875e481b84050a2fdffb6a3603f0766": {
+      "document_id": "MM-HIS-0196",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260325/MATCHMATRIX – DENNÍ ZÁPIS.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260325/MATCHMATRIX – DENNÍ ZÁPIS.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0196"
+      ]
+    },
+    "4637dc616fd4c09ad3ffe9665c6a75d43b017edc5a9a6ff5dc4b4b6ed00a52a3": {
+      "document_id": "MM-HIS-0197",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260325/MatchMatrix – zápis dnešního postup.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260325/MatchMatrix – zápis dnešního postup.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0197"
+      ]
+    },
+    "2804cfb855ef1bec9610b11e5c9b2b5119c99087e56045e7829f2bf5377edb30": {
+      "document_id": "MM-HIS-0198",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260325/MATCHMATRIX – ZÁPIS NA ZÍTRA.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260325/MATCHMATRIX – ZÁPIS NA ZÍTRA.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0198"
+      ]
+    },
+    "9514d678a8db37478fffb044b88fb21ff4af8c2e052c30b54c4cd3ec35dc8eee": {
+      "document_id": "MM-HIS-0199",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260326/audit_teams.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260326/audit_teams.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0199"
+      ]
+    },
+    "a2b75be98b659b3776d84e12ef2ee556ba7edcecc5f07e88efc59009ce845e9f": {
+      "document_id": "MM-HIS-0200",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260326/matches.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260326/matches.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0200"
+      ]
+    },
+    "c9df17b6c5d4c9929359599e951a929dcb314e249cf0fad5f5b426fd02d0d0ae": {
+      "document_id": "MM-HIS-0201",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260326/MATCHMATRIX – DENNÍ ZÁPIS.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260326/MATCHMATRIX – DENNÍ ZÁPIS.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0201"
+      ]
+    },
+    "a07c9185e5eb9dc51fd1071461f1036a42d0ac1245944c54f57cc9fc2f571690": {
+      "document_id": "MM-HIS-0202",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260326/MatchMatrix – podrobný zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260326/MatchMatrix – podrobný zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0202"
+      ]
+    },
+    "363ce76403e11314b63d128bb88d780aef5047b2e3d94c0e2fad399edcf8dfa6": {
+      "document_id": "MM-HIS-0203",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260326/MatchMatrix – zápis dneška.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260326/MatchMatrix – zápis dneška.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0203"
+      ]
+    },
+    "20c4ceab52ea6dd9846a4b9ba87945bd4eb9c7a666711472e1bf37f1a69bff67": {
+      "document_id": "MM-HIS-0204",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260326/Run_ID_148.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260326/Run_ID_148.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0204"
+      ]
+    },
+    "4223485d57c454f3ac17e5319efd96b9fc7f5a8eaf38daad1e595a149ec598ff": {
+      "document_id": "MM-HIS-0205",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260326/Teable_name.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260326/Teable_name.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0205"
+      ]
+    },
+    "99423b0907ebbc9e432e5921cec93adc9a6c285c74a017fcdfe7ab6405f91152": {
+      "document_id": "MM-HIS-0206",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260326/team_aliases.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260326/team_aliases.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0206"
+      ]
+    },
+    "d71666e011bc5c70f631f50f7248b2db1d5651d42e4ef9ea241d5cffc35403b7": {
+      "document_id": "MM-HIS-0207",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260326/team_provider_map.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260326/team_provider_map.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0207"
+      ]
+    },
+    "7e0bbeba83b04b91f545f906ae0e014f6e22bb390a3ced091528170d52039e8f": {
+      "document_id": "MM-HIS-0208",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260327/Klíčové oblasti hodnocení počítače.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260327/Klíčové oblasti hodnocení počítače.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0208"
+      ]
+    },
+    "bd6b3ae0bd3a1248e9264caddbdfbd8c7819de06cfecaecf086aff458dda86fa": {
+      "document_id": "MM-HIS-0209",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260328/úprava Ticket_studio_V2_23.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260328/úprava Ticket_studio_V2_23.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0209"
+      ]
+    },
+    "7e3841b3dd02e6b01ec81688bf32676d2524acccb5c01a00e1e4f5113e597c7e": {
+      "document_id": "MM-HIS-0210",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260329/467_audit_1.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260329/467_audit_1.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0210"
+      ]
+    },
+    "cd25e2face1de4550bb2499e3c514678dd147ed0c9d5633463cc732a898c68a3": {
+      "document_id": "MM-HIS-0211",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260329/audit_teams_duplicita.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260329/audit_teams_duplicita.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0211"
+      ]
+    },
+    "77f6c323b5e4c1334fb105baedc17c7f60950a786eaf752c2a496d2cfdfbcc99": {
+      "document_id": "MM-HIS-0212",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260329/MATCHMATRIX – DENNÍ ZÁPIS.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260329/MATCHMATRIX – DENNÍ ZÁPIS.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0212"
+      ]
+    },
+    "4d0cd378f63a404f95bb02340ddfb8ffbd57b319bfe7bb4676e008cba6602908": {
+      "document_id": "MM-HIS-0213",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260329/MatchMatrix — zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260329/MatchMatrix — zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0213"
+      ]
+    },
+    "2e7fce32a222878eb2ec9fb0644b521e61712951619dd1cf36445679d0ea0b5c": {
+      "document_id": "MM-HIS-0214",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260329/ticket_history_base.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260329/ticket_history_base.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0214"
+      ]
+    },
+    "0810f9d643db6ffc8c1c1cd9a21d36485c22c1d78a9f4494c5bfb4ed6c006cad": {
+      "document_id": "MM-HIS-0215",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260330/MATCHMATRIX – STAV PROJEKTU (Ticket.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260330/MATCHMATRIX – STAV PROJEKTU (Ticket.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0215"
+      ]
+    },
+    "ffd77efa952fe611a000c33c294e05dc2e41b1c7335a1146cd4407add0dcfee6": {
+      "document_id": "MM-HIS-0216",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260330/MATCHMATRIX – ZÁPIS večer.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260330/MATCHMATRIX – ZÁPIS večer.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0216"
+      ]
+    },
+    "536b02589aa39bd53603bc839d2b77fdd54f71c9612850095271cfd8e550aea6": {
+      "document_id": "MM-HIS-0217",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260331 - přehled/404_celkový_přehled_Databáze.sql",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260331 - přehled/404_celkový_přehled_Databáze.sql"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0217"
+      ]
+    },
+    "7c90cad01eeed66bc57026f9aad2b7d2032a2c5d9227f353c139ede674e61300": {
+      "document_id": "MM-HIS-0218",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260331 - přehled/405_přehled_co_je_spustitelné_.sql",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260331 - přehled/405_přehled_co_je_spustitelné_.sql"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0218"
+      ]
+    },
+    "c87eb1ea136d98b0ee7b9e9ec6b17a398b8d8ec53655b3e2146c23e64e2b5f4c": {
+      "document_id": "MM-HIS-0219",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260331 - přehled/Kontrolní checklist MatchMatrix.docx",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260331 - přehled/Kontrolní checklist MatchMatrix.docx"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0219"
+      ]
+    },
+    "341837e78f57f51ad992deb9e14b0f3d6346f1b0ea67143153932518446de2c3": {
+      "document_id": "MM-HIS-0220",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260331 - přehled/MATCHMATRIX – DEFINICE PROJEKTU.txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260331 - přehled/MATCHMATRIX – DEFINICE PROJEKTU.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0220"
+      ]
+    },
+    "a9912d657221964aaea432091055ac81b62c5caa718401732c289c04c8cc4fc6": {
+      "document_id": "MM-HIS-0221",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260331 - přehled/MatchMatrix – dnešní zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260331 - přehled/MatchMatrix – dnešní zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0221"
+      ]
+    },
+    "9be4282f9fee39ac157d81434133e3203ac7e779b69e7cb76f46b5c641e04ca8": {
+      "document_id": "MM-HIS-0222",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260331 - přehled/MATCHMATRIX – ZÁPIS (31.03.2026).txt",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260331 - přehled/MATCHMATRIX – ZÁPIS (31.03.2026).txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0222"
+      ]
+    },
+    "61cf43fea79ae02b875c8a15f9ec62c6f62ba8eb46f9c42ec444f2f000dcc35e": {
+      "document_id": "MM-HIS-0223",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260331 - přehled/MATCHMATRIX_AUDIT_MASTER.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260331 - přehled/MATCHMATRIX_AUDIT_MASTER.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0223"
+      ]
+    },
+    "ff65ec7b0e9b1af3e686691c685410bf1afaac35f3a76cce48240596c6e8309f": {
+      "document_id": "MM-HIS-0224",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/20260331 - přehled/MATCHMATRIX_AUDIT_MASTER_V2.1.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260331 - přehled/MATCHMATRIX_AUDIT_MASTER_V2.1.md",
+        "komunikace s chatGPT/03_2026/20260331 - přehled/MATCHMATRIX_AUDIT_MASTER_V2.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0224"
+      ]
+    },
+    "0028d266bfbfcb1a4b1977179c256f2b8b0bf9e932afffab3c80f5b083e8b7bd": {
+      "document_id": "MM-HIS-0225",
+      "canonical_relative_path": "komunikace s chatGPT/03_2026/spoluprace_s_ai_operacni_rezim.md",
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/spoluprace_s_ai_operacni_rezim.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0225"
+      ]
+    },
+    "b0b09724b18be3a2817c36b02012db09370de4be77d981c53ceb2b8f5ac46d77": {
+      "document_id": "MM-HIS-0226",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260401/MATCHMATRIX – plán na zítra.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260401/MATCHMATRIX – plán na zítra.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0226"
+      ]
+    },
+    "021541dfdd3eb2f0cbb49d3977e6f524dc9e9f554e4492ffd98d75c404a06f82": {
+      "document_id": "MM-HIS-0227",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260401/MATCHMATRIX – ZÁPIS (01.04.2026).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260401/MATCHMATRIX – ZÁPIS (01.04.2026).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0227"
+      ]
+    },
+    "52c4894c35e30e11149b48996d9ca362c4eb402f51a97b59985a159ac2c84ba7": {
+      "document_id": "MM-HIS-0228",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260401/MATCHMATRIX – ZÁPIS (AUTO SAFE ENGI.txt",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260401/MATCHMATRIX – ZÁPIS (AUTO SAFE ENGI.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0228"
+      ]
+    },
+    "e0e03445a6f88d154c3b88b50a8ef66f91f022f8547d3bb6c2720fc64113e149": {
+      "document_id": "MM-HIS-0229",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260402/MATCHMATRIX – STAV PROJEKTU .md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260402/MATCHMATRIX – STAV PROJEKTU .md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0229"
+      ]
+    },
+    "a6c9ee4c0141213caf5bf639bba35004cdb4ff59bcd64715997c9f6e80b7863a": {
+      "document_id": "MM-HIS-0230",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260402/MATCHMATRIX – ZÁPIS poledne.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260402/MATCHMATRIX – ZÁPIS poledne.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0230"
+      ]
+    },
+    "29692181fd992f96244b275fa6a426371d34b883ddd2574dc94c6dc81dbdeee6": {
+      "document_id": "MM-HIS-0231",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260403/MATCHMATRIX – ZÁPIS (ODDS MATCHING.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260403/MATCHMATRIX – ZÁPIS (ODDS MATCHING.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0231"
+      ]
+    },
+    "8f0b41f1db643d44ad9a26dcf2e9857a1a02aac99a5edaca49af3e70d02c132b": {
+      "document_id": "MM-HIS-0232",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260404/MATCHMATRIX – ZÁPIS (dnešní den).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260404/MATCHMATRIX – ZÁPIS (dnešní den).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0232"
+      ]
+    },
+    "5a7d9343f407f1335a35c8e14c816c9a210b1d7789194ffd02c34e0749d4bd6d": {
+      "document_id": "MM-HIS-0233",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260405/MATCHMATRIX – DENNÍ ZÁPIS.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260405/MATCHMATRIX – DENNÍ ZÁPIS.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0233"
+      ]
+    },
+    "d24754f570b10d3dc718f6d5b42d6ddca3931e980b5d1db5921109cec231c310": {
+      "document_id": "MM-HIS-0234",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260406/MATCHMATRIX – ZÁPIS (dnešek) + plán.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260406/MATCHMATRIX – ZÁPIS (dnešek) + plán.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0234"
+      ]
+    },
+    "e6baa6164e951379d0497a1896bbe2e7b63b316fa68e75f71883ce12535fed5f": {
+      "document_id": "MM-HIS-0235",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260406/MATCHMATRIX – ZÁPIS (dnešek).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260406/MATCHMATRIX – ZÁPIS (dnešek).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0235"
+      ]
+    },
+    "54dca218ab3ac08a66f7ae4d5e7e7e126ed19271653117efddc26d9b09e16b7b": {
+      "document_id": "MM-HIS-0236",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260406/MATCHMATRIX – ZÁPIS A PLÁN auditu.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260406/MATCHMATRIX – ZÁPIS A PLÁN auditu.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0236"
+      ]
+    },
+    "70e9b67a987c3b32c3a63e2265ad4405e80d1597c50a15856b39a7331614b1a3": {
+      "document_id": "MM-HIS-0237",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260406/ZÁPIS NA DNEŠEK – PŘÍPRAVA NA ZÍTŘE.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260406/ZÁPIS NA DNEŠEK – PŘÍPRAVA NA ZÍTŘE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0237"
+      ]
+    },
+    "5d598f4d31f746b3d4e345ef40cb7ae89edabc257251f96fc9819b5ceffb3913": {
+      "document_id": "MM-HIS-0238",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260407/MATCHMATRIX – ZÁPIS (2026-04-07).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260407/MATCHMATRIX – ZÁPIS (2026-04-07).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0238"
+      ]
+    },
+    "d04f4922512da9f135569ac0c89c9dcf8e1c4acab29d12432c8e8169594e72c4": {
+      "document_id": "MM-HIS-0239",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260408/MATCHMATRIX – ZÁPIS (2026-04-08).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260408/MATCHMATRIX – ZÁPIS (2026-04-08).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0239"
+      ]
+    },
+    "b531c32aa9886ed59cf6d73f49491797f13351477aea4bfed496122023225377": {
+      "document_id": "MM-HIS-0240",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260408/MATCHMATRIX – ZÁPIS (2026-04-08).txt",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260408/MATCHMATRIX – ZÁPIS (2026-04-08).txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0240"
+      ]
+    },
+    "04d30ae013cf72a893b74b86799b158af9244686348439cd0075f7d38db49fa5": {
+      "document_id": "MM-HIS-0241",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260409-audit/# 614 – CODE WORKER AUDIT CHECKLIST.txt",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260409-audit/# 614 – CODE WORKER AUDIT CHECKLIST.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0241"
+      ]
+    },
+    "3489110cf8f52fe4850a0f65c2277e4f03203c9ac41dea9b149dc755ada6c64e": {
+      "document_id": "MM-HIS-0242",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260409-audit/MATCHMATRIX – ZÁPIS (2026-04-09).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260409-audit/MATCHMATRIX – ZÁPIS (2026-04-09).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0242"
+      ]
+    },
+    "f0caef6e39aa313c9a789ae7749630a725fe7c0d3caf88839873d50ade96b547": {
+      "document_id": "MM-HIS-0243",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260410/MATCHMATRIX – DENNÍ ZÁPIS.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260410/MATCHMATRIX – DENNÍ ZÁPIS.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0243"
+      ]
+    },
+    "9ff0c97f03dcd2126e4ce2929000c5996ae717972e6a11afd5e2c00fd1597fe6": {
+      "document_id": "MM-HIS-0244",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260410/MATCHMATRIX – STAV A NAVÁZÁNÍ (VB +BK).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260410/MATCHMATRIX – STAV A NAVÁZÁNÍ (VB +BK).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0244"
+      ]
+    },
+    "d0e9f175aedc1a7136271cd097f9e6aa0e9880fdc8f531d5b892f7e557ad383d": {
+      "document_id": "MM-HIS-0245",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260412/MATCHMATRIX – ZÁPIS (DNES).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260412/MATCHMATRIX – ZÁPIS (DNES).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0245"
+      ]
+    },
+    "7340ebe311441623315ea8ce0dc3afc29ae089f54374a1ef9a6b3b371e621699": {
+      "document_id": "MM-HIS-0246",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260412/MATCHMATRIX – ZÁPIS (DNES).txt",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260412/MATCHMATRIX – ZÁPIS (DNES).txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0246"
+      ]
+    },
+    "ae9eabfa63fdbdbd83bc7c2861c5cefdcc83eebfcdd880bbdaf2f77f16aff4d5": {
+      "document_id": "MM-HIS-0247",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260412/MATCHMATRIX – ZÁPIS (dnešní stav).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260412/MATCHMATRIX – ZÁPIS (dnešní stav).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0247"
+      ]
+    },
+    "4bd831774d5d68209418508eb46ce06bcd1c562aa09ead9fc759074fc1311fbb": {
+      "document_id": "MM-HIS-0248",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260415/# MATCHMATRIX – ZÁPIS.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260415/# MATCHMATRIX – ZÁPIS.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0248"
+      ]
+    },
+    "c042ac809eed9f071d34996d80422d93fb614eca9a14c88e6e59e36d4690dc9e": {
+      "document_id": "MM-HIS-0249",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260416/FB_ingest_planner_fix_report_2026-04-16.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260416/FB_ingest_planner_fix_report_2026-04-16.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0249"
+      ]
+    },
+    "4386f7cd657a9c088967387a08756fae44b884a39a9491fc50c9ce7f43764b45": {
+      "document_id": "MM-HIS-0250",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260417/MATCHMATRIX – NAVAZUJEME.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260417/MATCHMATRIX – NAVAZUJEME.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0250"
+      ]
+    },
+    "a2dfd7699d76240b56515f1045fe0551f792112ca829d13078571d6364af4ff9": {
+      "document_id": "MM-HIS-0251",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260418/MatchMatrix - zápis.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260418/MatchMatrix - zápis.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0251"
+      ]
+    },
+    "ebdf8718fc434d8ef00918f48fe77ca86064284eb4c315aba1cee91a6117ac41": {
+      "document_id": "MM-HIS-0252",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260419/Cílová posloupnost vrstev.txt",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260419/Cílová posloupnost vrstev.txt",
+        "komunikace s chatGPT/04_2026/20260419/definice finálního harvestu model MatchMatrix.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0252"
+      ]
+    },
+    "d9def65dc0c3072cbd48c5451675554310313ff44ab05d0ee124b0fb35eef70a": {
+      "document_id": "MM-HIS-0253",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260419/MATCHMATRIX – ZÁPIS (HB FINALIZACE.md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260419/MATCHMATRIX – ZÁPIS (HB FINALIZACE.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0253"
+      ]
+    },
+    "f664f1602a76dc3e8804113a89528424cee6e8d51f3b5cfedb643ccdbd7b753c": {
+      "document_id": "MM-HIS-0254",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260420/MATCHMATRIX – ZÁPIS (dnešek).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260420/MATCHMATRIX – ZÁPIS (dnešek).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0254"
+      ]
+    },
+    "1fb12089e780be084d46c6b7bd25af19e2a05a5d18490f17084ebb888af67cdf": {
+      "document_id": "MM-HIS-0255",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260420/MATCHMATRIX – ZÁPIS (HB DOKONČENO).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260420/MATCHMATRIX – ZÁPIS (HB DOKONČENO).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0255"
+      ]
+    },
+    "bc7406578adf470d98ee09bd243bc2d84d5cfa97fb883fabc58814b1982d97cf": {
+      "document_id": "MM-HIS-0256",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260421/MATCHMATRIX – STAV A NAVÁZÁNÍ (TN).md",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260421/MATCHMATRIX – STAV A NAVÁZÁNÍ (TN).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0256"
+      ]
+    },
+    "d0280ce46aa5725d3d026ee2b5f12cf290757916a74111bb054a29cc2ad1fdd0": {
+      "document_id": "MM-HIS-0257",
+      "canonical_relative_path": "komunikace s chatGPT/04_2026/20260421/MATCHMATRIX – TENNIS (TN) PIPELINE.txt",
+      "source_variants": [
+        "komunikace s chatGPT/04_2026/20260421/MATCHMATRIX – TENNIS (TN) PIPELINE.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0257"
+      ]
+    },
+    "57b0975aaf464daa57c456fce32162a7639c9a9f124c8b09120d9646ee479558": {
+      "document_id": "MM-HIS-0258",
+      "canonical_relative_path": "MATCHMATRIX GOVERNANCE - Založení a vedení číslování každé nové sekce.md",
+      "source_variants": [
+        "MATCHMATRIX GOVERNANCE - Založení a vedení číslování každé nové sekce.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0258"
+      ]
+    },
+    "a847baadc8fb80ff977d43286fd709dd7d7f8818e40500e8e7c71615bda9d278": {
+      "document_id": "MM-HIS-0259",
+      "canonical_relative_path": "MATCHMATRIX MASTER NAVÁZÁNÍ – 20260601-1.md",
+      "source_variants": [
+        "MATCHMATRIX MASTER NAVÁZÁNÍ – 20260601-1.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0259"
+      ]
+    },
+    "5937d21bf9b65573210ab6955a5fe361acff9c75fc8e0d16a2769eca6cdd8a43": {
+      "document_id": "MM-HIS-0260",
+      "canonical_relative_path": "MATCHMATRIX MASTER NAVÁZÁNÍ – 20260601.md",
+      "source_variants": [
+        "MATCHMATRIX MASTER NAVÁZÁNÍ – 20260601.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0260"
+      ]
+    },
+    "ac62f5c9c141aef8a9975678695df470ea6b6797f0305b0259318ecfcb38faae": {
+      "document_id": "MM-HIS-0261",
+      "canonical_relative_path": "MatchMatrix – aktuální smysl projek.txt",
+      "source_variants": [
+        "MatchMatrix – aktuální smysl projek.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0261"
+      ]
+    },
+    "f1972fcdede9c451290c85bb92f2e85943d85e183b8170ee48df8d1b6998aa59": {
+      "document_id": "MM-HIS-0262",
+      "canonical_relative_path": "MATCHMATRIX – DENNÍ ZÁPIS 20260610.txt",
+      "source_variants": [
+        "MATCHMATRIX – DENNÍ ZÁPIS 20260610.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0262"
+      ]
+    },
+    "c3ddcde2937c4ee0f994e22ffb465775463a5517763430f4b00fd8a2f6964ed2": {
+      "document_id": "MM-HIS-0263",
+      "canonical_relative_path": "MATCHMATRIX – DENNÍ ZÁPIS 20260611.md",
+      "source_variants": [
+        "MATCHMATRIX – DENNÍ ZÁPIS 20260611.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0263"
+      ]
+    },
+    "86e2c6962477a7223a3981c90be8b84db1497c201a2f09c53677b2f20d7ef5cf": {
+      "document_id": "MM-HIS-0264",
+      "canonical_relative_path": "MATCHMATRIX – DENNÍ ZÁPIS 20260614.md",
+      "source_variants": [
+        "MATCHMATRIX – DENNÍ ZÁPIS 20260614.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0264"
+      ]
+    },
+    "c8e3242f668855a5e4a7f2db89388ef20972f298ccee1aa549daa2d2ab463507": {
+      "document_id": "MM-HIS-0265",
+      "canonical_relative_path": "MATCHMATRIX – DENNÍ ZÁPIS 20260614.txt",
+      "source_variants": [
+        "MATCHMATRIX – DENNÍ ZÁPIS 20260614.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0265"
+      ]
+    },
+    "57380083ae1fdc5a1df504670a1329c98c6f46160e52aa01426c9c153b8a5fa2": {
+      "document_id": "MM-HIS-0266",
+      "canonical_relative_path": "MATCHMATRIX – DENNÍ ZÁPIS-09062026.md",
+      "source_variants": [
+        "MATCHMATRIX – DENNÍ ZÁPIS-09062026.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0266"
+      ]
+    },
+    "c554e1bb0afd0e6da2acff3a4fab1c290cc1bfde714dc20019f2271e76a29f73": {
+      "document_id": "MM-HIS-0267",
+      "canonical_relative_path": "MATCHMATRIX – DENNÍ ZÁPIS-10062026.md",
+      "source_variants": [
+        "MATCHMATRIX – DENNÍ ZÁPIS-10062026.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0267"
+      ]
+    },
+    "bf9426ded9a4297db6b9329478f8791e70719fd359e039d67a92eb09e2d6b047": {
+      "document_id": "MM-HIS-0268",
+      "canonical_relative_path": "MATCHMATRIX – DENNÍ ZÁPIS.md",
+      "source_variants": [
+        "MATCHMATRIX – DENNÍ ZÁPIS.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0268"
+      ]
+    },
+    "d7517c94d6f50e152971842b9ae0288c55cca4695abd48c8f187807cad18960b": {
+      "document_id": "MM-HIS-0269",
+      "canonical_relative_path": "MATCHMATRIX – NAVÁZÁNÍ DO NOVÉHO CHATU 20260623_1.md",
+      "source_variants": [
+        "MATCHMATRIX – NAVÁZÁNÍ DO NOVÉHO CHATU 20260623_1.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0269"
+      ]
+    },
+    "7ff86a48753bbb9b5b4dadc785810f002f9558e70e43ccce7c605503bb4c1ac7": {
+      "document_id": "MM-HIS-0270",
+      "canonical_relative_path": "MATCHMATRIX – NAVÁZÁNÍ DO NOVÉHO CHATU.md",
+      "source_variants": [
+        "MATCHMATRIX – NAVÁZÁNÍ DO NOVÉHO CHATU.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0270"
+      ]
+    },
+    "f85705c54229735176a11068900803b35e1e69596c58ecacc7ab9c4b2a5d49fc": {
+      "document_id": "MM-HIS-0271",
+      "canonical_relative_path": "MATCHMATRIX – NAVÁZÁNÍ DO NOVÉHO CHATU20260623.md",
+      "source_variants": [
+        "MATCHMATRIX – NAVÁZÁNÍ DO NOVÉHO CHATU20260623.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0271"
+      ]
+    },
+    "98e6fb830d9e87cc0f1e6d2735192927b7432a27dc81029763768c65434f0e05": {
+      "document_id": "MM-HIS-0272",
+      "canonical_relative_path": "MATCHMATRIX – NAVÁZÁNÍ DO NOVÉHO.md",
+      "source_variants": [
+        "MATCHMATRIX – NAVÁZÁNÍ DO NOVÉHO.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0272"
+      ]
+    },
+    "3444cf91289bc2791809cdcefef2f2851841feebc131b05371f6b18dd769034f": {
+      "document_id": "MM-HIS-0273",
+      "canonical_relative_path": "MATCHMATRIX – PEOPLE LAYER MASTER.md",
+      "source_variants": [
+        "MATCHMATRIX – PEOPLE LAYER MASTER.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0273"
+      ]
+    },
+    "f85830303d8da4558dad4f490643568f4931276a32f2f8f99eee86ec8ba6d5cc": {
+      "document_id": "MM-HIS-0274",
+      "canonical_relative_path": "MATCHMATRIX – ZÁPIS PRÁCE- odstranění duplicitních týmů.md",
+      "source_variants": [
+        "MATCHMATRIX – ZÁPIS PRÁCE- odstranění duplicitních týmů.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0274"
+      ]
+    },
+    "2102c6c4c95c9c94b446b9b748e855e6ce2156cedd9c424b154ec269c1075417": {
+      "document_id": "MM-HIS-0275",
+      "canonical_relative_path": "MATCHMATRIX — ZÁPIS 107_A → 107_S.md",
+      "source_variants": [
+        "MATCHMATRIX — ZÁPIS 107_A → 107_S.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0275"
+      ]
+    },
+    "e6ad493acba328bcf9e6b55fb6190e14c84d8ddf43d5b6a9995bea84acd4e6e8": {
+      "document_id": "MM-HIS-0276",
+      "canonical_relative_path": "MATCHMATRIX_DENNI_ZAPISY_20260616.md",
+      "source_variants": [
+        "MATCHMATRIX_DENNI_ZAPISY_20260616.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0276"
+      ]
+    },
+    "0a037b7941b02c3d40f78931dac7b8ebbb78b3c00d8e48cd8a7c00e7194021fc": {
+      "document_id": "MM-HIS-0277",
+      "canonical_relative_path": "MATCHMATRIX_MASTER_NAVAZANI.md",
+      "source_variants": [
+        "MATCHMATRIX_MASTER_NAVAZANI.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0277"
+      ]
+    },
+    "d6545a0c10e2c4a2cdef35f9b062dff5b93b5c91322ec13c25687e2555051fb3": {
+      "document_id": "MM-HIS-0278",
+      "canonical_relative_path": "MATCHMATRIX_MASTER_NAVAZANI_20260511.md",
+      "source_variants": [
+        "MATCHMATRIX_MASTER_NAVAZANI_20260511.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0278"
+      ]
+    },
+    "2e1539246c2021ab980639127cb2134ff9e6b999e604fb89bc9d1f0e8a4493d6": {
+      "document_id": "MM-HIS-0279",
+      "canonical_relative_path": "MATCHMATRIX_MASTER_NAVAZANI_20260526 (2).md",
+      "source_variants": [
+        "MATCHMATRIX_MASTER_NAVAZANI_20260526 (2).md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0279"
+      ]
+    },
+    "396140d64171fd09a0cad33f17075703fe9f468ccea5c5d6f78aa5d1a8f2eff8": {
+      "document_id": "MM-HIS-0280",
+      "canonical_relative_path": "MATCHMATRIX_MASTER_NAVAZANI_20260526.md",
+      "source_variants": [
+        "MATCHMATRIX_MASTER_NAVAZANI_20260526.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0280"
+      ]
+    },
+    "be356a5d763cd4bc3d8ecea5ac747cecce476fd0949917fa1ec216b5c9552a86": {
+      "document_id": "MM-HIS-0281",
+      "canonical_relative_path": "MATCHMATRIX_MASTER_SOUHRN_20260616.md",
+      "source_variants": [
+        "MATCHMATRIX_MASTER_SOUHRN_20260616.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0281"
+      ]
+    },
+    "3ddb9a0f91a6d65a2078e2e8a6446a5acf137385566c3da8ee8f8a6eeb4109c4": {
+      "document_id": "MM-HIS-0282",
+      "canonical_relative_path": "PEOPLE_LAYER_MASTER_ZAPIS_2026-05-20.md",
+      "source_variants": [
+        "PEOPLE_LAYER_MASTER_ZAPIS_2026-05-20.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0282"
+      ]
+    },
+    "bb5930a53f4b9102874932b9cd667ccac768f2ba7828d61dff7656006248126b": {
+      "document_id": "MM-HIS-0283",
+      "canonical_relative_path": "PEOPLE_PROVIDER_PRIORITY_v1.md",
+      "source_variants": [
+        "PEOPLE_PROVIDER_PRIORITY_v1.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0283"
+      ]
+    },
+    "06e446208a3e08f3759a818a1ca2d834b4804468b0c1ebf5ecaea93d02f1c5e5": {
+      "document_id": "MM-HIS-0284",
+      "canonical_relative_path": "PEOPLE_PROVIDER_REALITY_MATRIX_v1.md",
+      "source_variants": [
+        "PEOPLE_PROVIDER_REALITY_MATRIX_v1.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0284"
+      ]
+    },
+    "2f0c31379ee3c7b267568243509cc67f429ebfa5a82fd9bccbfde9cc87fa2348": {
+      "document_id": "MM-HIS-0285",
+      "canonical_relative_path": "Počítač/N__vrh na PC sestavu.pdf",
+      "source_variants": [
+        "Počítač/N__vrh na PC sestavu.pdf"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0285"
+      ]
+    },
+    "d5bcff465510b201060e31c9800923a9724ce283e91cb5572b936cda1a0cf148": {
+      "document_id": "MM-HIS-0286",
+      "canonical_relative_path": "Počítač/Návrh na PC sestavu.pdf",
+      "source_variants": [
+        "Počítač/Návrh na PC sestavu.pdf"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0286"
+      ]
+    },
+    "9ea014d49056b88f49569d895ff7918e3ff119dd2223d16ba264b9895c98397a": {
+      "document_id": "MM-HIS-0287",
+      "canonical_relative_path": "příkaz PowerShell_ukázat strom souborů.txt",
+      "source_variants": [
+        "příkaz PowerShell_ukázat strom souborů.txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0287"
+      ]
+    },
+    "ee7fb8c2e9db44363a0dc3bd8c6f7fa06391a3a9cefa3456ad993311ae426136": {
+      "document_id": "MM-HIS-0288",
+      "canonical_relative_path": "README.md",
+      "source_variants": [
+        "README.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0288"
+      ]
+    },
+    "a35742328b0aaec1afd99bc9e47b83024d2162986ece96aa5b4e5d23e9cc1a4a": {
+      "document_id": "MM-HIS-0289",
+      "canonical_relative_path": "Struktura vytvořených souborů(scriptů).txt",
+      "source_variants": [
+        "Struktura vytvořených souborů(scriptů).txt"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0289"
+      ]
+    },
+    "7041a93ce08c79f06a5f59c6756c6aa0121ad4ce9becc17441ef5c3e2eb9f70d": {
+      "document_id": "MM-HIS-0290",
+      "canonical_relative_path": "Založení a vedení číslování každé nové sekce.md",
+      "source_variants": [
+        "Založení a vedení číslování každé nové sekce.md"
+      ],
+      "previous_document_ids": [
+        "MM-HIS-0290"
+      ]
+    }
+  },
+  "merged_groups": [
+    {
+      "selected_document_id": "MM-HIS-0050",
+      "previous_document_ids": [
+        "MM-HIS-0050",
+        "MM-HIS-0051",
+        "MM-HIS-0052"
+      ],
+      "source_variants": [
+        "komunikace s chatGPT/03_2026/20260302/EU_leagues.csv",
+        "komunikace s chatGPT/03_2026/20260302/Evropa do MatchMatrix.csv",
+        "komunikace s chatGPT/03_2026/20260302/Evropa do MatchMatrix.xlsx"
+      ]
+    }
+  ]
+}
