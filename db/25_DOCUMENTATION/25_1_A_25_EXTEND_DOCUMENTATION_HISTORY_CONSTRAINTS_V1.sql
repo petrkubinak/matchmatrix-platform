@@ -17,7 +17,8 @@ K ČEMU:
 - zachová stávající identifikátory dokumentace;
 - povolí denní zápisy ve formátu `MM-DL-YYYYMMDD`;
 - povolí dokumenty NAVÁZÁNÍ ve formátu `MM-NAV-YYYYMMDD-PP`;
-- povolí databázové typy dokumentů `DL` a `NAV`;
+- povolí Project Snapshot ve formátu `MM-PS-YYYYMMDD`;
+- povolí databázové typy dokumentů `DL`, `NAV` a `PS`;
 - ověří všechna existující data před i po změně;
 - umožní následný import přes A24.
 
@@ -42,10 +43,12 @@ MM-STD-007 – Identifikace a číslování dokumentů MatchMatrix
 NOVÉ IDENTIFIKÁTORY:
 - MM-DL-YYYYMMDD
 - MM-NAV-YYYYMMDD-PP
+- MM-PS-YYYYMMDD
 
 NOVÉ DOCUMENT TYPES:
 - DL
 - NAV
+- PS
 
 BEZPEČNOST:
 - migrace běží v jedné transakci;
@@ -59,7 +62,7 @@ BEZPEČNOST:
 ROLLBACK:
 Případný rollback musí obnovit původní constrainty z databázové
 dokumentace před A25. Rollback nespouštět automaticky po úspěšném importu
-MM-DL nebo MM-NAV, protože by jejich záznamy přestaly splňovat pravidla.
+MM-DL, MM-NAV nebo MM-PS, protože by jejich záznamy přestaly splňovat pravidla.
 
 VERZE:
 V1
@@ -161,6 +164,7 @@ LOCK TABLE documentation.documents
 -- Nové formáty podle MM-STD-007:
 --   MM-DL-YYYYMMDD
 --   MM-NAV-YYYYMMDD-PP
+--   MM-PS-YYYYMMDD
 -- ---------------------------------------------------------------------------
 
 DO $$
@@ -182,6 +186,7 @@ BEGIN
               document_id ~ '^MM-[A-Z]{2,10}-[0-9]{3,4}[A-Z]?$'
               OR document_id ~ '^MM-DL-[0-9]{8}$'
               OR document_id ~ '^MM-NAV-[0-9]{8}-[0-9]{2}$'
+              OR document_id ~ '^MM-PS-[0-9]{8}$'
           )
         ORDER BY document_id
         LIMIT 20
@@ -237,6 +242,7 @@ BEGIN
                   'ARCV'::text,
                   'DL'::text,
                   'NAV'::text,
+                  'PS'::text,
                   'OTHER'::text
               ]
           )
@@ -266,6 +272,7 @@ ALTER TABLE documentation.documents
         document_id ~ '^MM-[A-Z]{2,10}-[0-9]{3,4}[A-Z]?$'
         OR document_id ~ '^MM-DL-[0-9]{8}$'
         OR document_id ~ '^MM-NAV-[0-9]{8}-[0-9]{2}$'
+        OR document_id ~ '^MM-PS-[0-9]{8}$'
     )
     NOT VALID;
 
@@ -276,7 +283,7 @@ COMMENT ON CONSTRAINT ck_documentation_documents_id
     ON documentation.documents
 IS
     'MatchMatrix Document ID: původní MM-<TYPE>-NNN/NNNN, '
-    'MM-DL-YYYYMMDD a MM-NAV-YYYYMMDD-PP podle MM-STD-007.';
+    'MM-DL-YYYYMMDD, MM-NAV-YYYYMMDD-PP a MM-PS-YYYYMMDD podle MM-STD-007.';
 
 -- ---------------------------------------------------------------------------
 -- 5. ZMĚNA CONSTRAINTU PRO DOCUMENT TYPE
@@ -310,6 +317,7 @@ ALTER TABLE documentation.documents
                 'ARCV'::text,
                 'DL'::text,
                 'NAV'::text,
+                'PS'::text,
                 'OTHER'::text
             ]
         )
@@ -322,7 +330,7 @@ ALTER TABLE documentation.documents
 COMMENT ON CONSTRAINT ck_documentation_documents_type
     ON documentation.documents
 IS
-    'Povolené MatchMatrix typy dokumentů včetně DL a NAV podle MM-STD-007.';
+    'Povolené MatchMatrix typy dokumentů včetně DL, NAV a PS podle MM-STD-007.';
 
 -- ---------------------------------------------------------------------------
 -- 6. TRANSAKČNÍ POST-CHECK
@@ -390,6 +398,7 @@ SELECT
         test_document_id ~ '^MM-[A-Z]{2,10}-[0-9]{3,4}[A-Z]?$'
         OR test_document_id ~ '^MM-DL-[0-9]{8}$'
         OR test_document_id ~ '^MM-NAV-[0-9]{8}-[0-9]{2}$'
+        OR test_document_id ~ '^MM-PS-[0-9]{8}$'
     ) AS accepted
 FROM (
     VALUES
@@ -398,7 +407,8 @@ FROM (
         ('MM-STD-1000'),
         ('MM-REF-001'),
         ('MM-DL-20260630'),
-        ('MM-NAV-20260630-01')
+        ('MM-NAV-20260630-01'),
+        ('MM-PS-20260223')
 ) AS tests(test_document_id)
 ORDER BY test_document_id;
 
@@ -430,6 +440,7 @@ SELECT
             'ARCV'::text,
             'DL'::text,
             'NAV'::text,
+            'PS'::text,
             'OTHER'::text
         ]
     ) AS accepted
@@ -439,7 +450,8 @@ FROM (
         ('STD'),
         ('REF'),
         ('DL'),
-        ('NAV')
+        ('NAV'),
+        ('PS')
 ) AS tests(test_document_type)
 ORDER BY test_document_type;
 

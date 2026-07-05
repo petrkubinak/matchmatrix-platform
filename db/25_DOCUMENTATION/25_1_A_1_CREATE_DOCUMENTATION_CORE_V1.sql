@@ -156,6 +156,9 @@ CREATE TABLE IF NOT EXISTS documentation.documents (
     CONSTRAINT ck_documentation_documents_id
         CHECK (
             document_id ~ '^MM-[A-Z]{2,10}-[0-9]{3,4}[A-Z]?$'
+            OR document_id ~ '^MM-DL-[0-9]{8}$'
+            OR document_id ~ '^MM-NAV-[0-9]{8}-[0-9]{2}$'
+            OR document_id ~ '^MM-PS-[0-9]{8}$'
         ),
 
     CONSTRAINT ck_documentation_documents_type
@@ -179,6 +182,9 @@ CREATE TABLE IF NOT EXISTS documentation.documents (
                 'EXP',
                 'DRF',
                 'ARCV',
+                'DL',
+                'NAV',
+                'PS',
                 'OTHER'
             )
         ),
