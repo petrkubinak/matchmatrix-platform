@@ -39,8 +39,8 @@ from pathlib import Path
 from typing import Any
 
 
-MANIFEST_VERSION = "1.1"
-EXPECTED_CANDIDATE_COUNT = 21
+MANIFEST_VERSION = "1.2"
+EXPECTED_CANDIDATE_COUNT = 22
 EXPECTED_SUPERSEDED_COUNT = 10
 EXPECTED_EXCLUDED_COUNT = 4
 
@@ -112,6 +112,11 @@ CANDIDATES = (
         "MM-DOC-903",
         "docs/09_HISTORY/MM-DOC-903_MATCHMATRIX_ARCHITECTURAL_DECISIONS_TECH_REVIEW.md",
         "SELECTED_REVIEW",
+    ),
+    CandidateSpec(
+        "MM-PS-20260223",
+        "docs/09_HISTORY/PROJECT_SNAPSHOTS/MM-PS-20260223_MATCHMATRIX_PROJECT_SNAPSHOT_UNOR_2026.md",
+        "SELECTED_SINGLE",
     ),
     CandidateSpec(
         "MM-DOC-1000",
@@ -264,7 +269,7 @@ EXCLUDED = (
 )
 
 
-DOCUMENT_ID_PATTERN = re.compile(r"(?<![A-Z0-9])MM-(?:DOC|STD|REF)-\d{3,4}(?![A-Z0-9])", re.IGNORECASE)
+DOCUMENT_ID_PATTERN = re.compile(r"(?<![A-Z0-9-])MM-[A-Z]{2,10}-(?:[0-9]{8}(?:-[0-9]{2})?|[0-9]{3,4}[A-Z]?)(?![A-Z0-9-])", re.IGNORECASE)
 VERSION_PATTERN = re.compile(r"\b\d+(?:\.\d+){1,2}\b")
 MARKDOWN_DECORATION_PATTERN = re.compile(r"[`*_]+")
 
@@ -682,7 +687,7 @@ def main() -> int:
         "project_root": str(root),
         "source_of_truth": "HYBRID",
         "selection_policy": {
-            "canonical_candidates": "Výslovně vybraných 21 aktivních nebo REVIEW dokumentů.",
+            "canonical_candidates": "Výslovně vybraných 22 aktivních nebo REVIEW dokumentů včetně Project Snapshotu.",
             "superseded_sources": "Starší nerevidované varianty se neimportují jako samostatné kanonické dokumenty.",
             "operational_records": "Konkrétní denní a navazovací záznamy nejsou součástí prvního kanonického importu.",
             "template_references": "Historické šablony jsou referenční podklady a neimportují se jako samostatné dokumenty.",
