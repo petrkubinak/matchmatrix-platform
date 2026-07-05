@@ -102,13 +102,13 @@ EXCLUDED_DIRECTORY_NAMES = {
 
 DOCUMENT_ID_PATTERN = re.compile(
     r"(?<![A-Z0-9-])"
-    r"(MM-[A-Z]{2,10}-[0-9]{3,4}[A-Z]?)"
+    r"(MM-[A-Z]{2,10}-(?:[0-9]{8}(?:-[0-9]{2})?|[0-9]{3,4}[A-Z]?))"
     r"(?![A-Z0-9-])",
     re.IGNORECASE,
 )
 
 FILENAME_ID_PATTERN = re.compile(
-    r"^(MM-[A-Z]{2,10}-[0-9]{3,4}[A-Z]?)"
+    r"^(MM-[A-Z]{2,10}-(?:[0-9]{8}(?:-[0-9]{2})?|[0-9]{3,4}[A-Z]?))"
     r"(?:_|$)",
     re.IGNORECASE,
 )
