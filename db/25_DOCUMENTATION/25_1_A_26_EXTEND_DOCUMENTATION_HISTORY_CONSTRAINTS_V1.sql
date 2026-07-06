@@ -4,7 +4,7 @@ MATCHMATRIX STANDARDNÍ HLAVIČKA
 ===============================================================================
 
 DOCUMENT ID:
-25_1_A_25
+25_1_A_26
 
 NÁZEV:
 EXTEND DOCUMENTATION HISTORY CONSTRAINTS V1
@@ -17,18 +17,19 @@ K ČEMU:
 - zachová stávající identifikátory dokumentace;
 - povolí denní zápisy ve formátu `MM-DL-YYYYMMDD`;
 - povolí dokumenty NAVÁZÁNÍ ve formátu `MM-NAV-YYYYMMDD-PP`;
-- povolí databázové typy dokumentů `DL` a `NAV`;
+- povolí Project Snapshot ve formátu `MM-PS-YYYYMMDD`;
+- povolí databázové typy dokumentů `DL`, `NAV` a `PS`;
 - ověří všechna existující data před i po změně;
 - umožní následný import přes A24.
 
 KDE:
-C:\MatchMatrix-platform\db\migrations\
-25_1_A_25_EXTEND_DOCUMENTATION_HISTORY_CONSTRAINTS_V1.sql
+C:\MatchMatrix-platform\db\25_DOCUMENTATION\
+25_1_A_26_EXTEND_DOCUMENTATION_HISTORY_CONSTRAINTS_V1.sql
 
 JAK:
 1. Uložit tento soubor do uvedené složky.
 2. Zařadit migraci do Git:
-   git add -- "db\migrations\25_1_A_25_EXTEND_DOCUMENTATION_HISTORY_CONSTRAINTS_V1.sql"
+   git add -- "db\25_DOCUMENTATION\25_1_A_26_EXTEND_DOCUMENTATION_HISTORY_CONSTRAINTS_V1.sql"
    git commit -m "db: align documentation history constraints with MM-STD-007"
    git push origin main
 3. Spustit celý SQL soubor v DBeaveru nad databází `matchmatrix`.
@@ -42,10 +43,12 @@ MM-STD-007 – Identifikace a číslování dokumentů MatchMatrix
 NOVÉ IDENTIFIKÁTORY:
 - MM-DL-YYYYMMDD
 - MM-NAV-YYYYMMDD-PP
+- MM-PS-YYYYMMDD
 
 NOVÉ DOCUMENT TYPES:
 - DL
 - NAV
+- PS
 
 BEZPEČNOST:
 - migrace běží v jedné transakci;
@@ -58,8 +61,8 @@ BEZPEČNOST:
 
 ROLLBACK:
 Případný rollback musí obnovit původní constrainty z databázové
-dokumentace před A25. Rollback nespouštět automaticky po úspěšném importu
-MM-DL nebo MM-NAV, protože by jejich záznamy přestaly splňovat pravidla.
+dokumentace před A26. Rollback nespouštět automaticky po úspěšném importu
+MM-DL, MM-NAV nebo MM-PS, protože by jejich záznamy přestaly splňovat pravidla.
 
 VERZE:
 V1
@@ -77,7 +80,7 @@ SET LOCAL statement_timeout = '5min';
 
 -- Zabrání souběžnému spuštění stejné MatchMatrix migrace.
 SELECT pg_advisory_xact_lock(
-    hashtext('MatchMatrix:A25:documentation-history-constraints')
+    hashtext('MatchMatrix:A26:documentation-history-constraints')
 );
 
 -- ---------------------------------------------------------------------------
@@ -141,7 +144,7 @@ BEGIN
 
     IF cardinality(missing_items) > 0 THEN
         RAISE EXCEPTION
-            'A25 BLOCKED: missing database objects: %',
+            'A26 BLOCKED: missing database objects: %',
             array_to_string(missing_items, ', ');
     END IF;
 END
@@ -161,6 +164,7 @@ LOCK TABLE documentation.documents
 -- Nové formáty podle MM-STD-007:
 --   MM-DL-YYYYMMDD
 --   MM-NAV-YYYYMMDD-PP
+--   MM-PS-YYYYMMDD
 -- ---------------------------------------------------------------------------
 
 DO $$
@@ -182,6 +186,7 @@ BEGIN
               document_id ~ '^MM-[A-Z]{2,10}-[0-9]{3,4}[A-Z]?$'
               OR document_id ~ '^MM-DL-[0-9]{8}$'
               OR document_id ~ '^MM-NAV-[0-9]{8}-[0-9]{2}$'
+        OR document_id ~ '^MM-PS-[0-9]{8}$'
           )
         ORDER BY document_id
         LIMIT 20
@@ -189,7 +194,7 @@ BEGIN
 
     IF invalid_count > 0 THEN
         RAISE EXCEPTION
-            'A25 BLOCKED: % existing document_id values are invalid. Samples: %',
+            'A26 BLOCKED: % existing document_id values are invalid. Samples: %',
             invalid_count,
             coalesce(invalid_samples, '<none>');
     END IF;
@@ -237,6 +242,7 @@ BEGIN
                   'ARCV'::text,
                   'DL'::text,
                   'NAV'::text,
+                  'PS'::text,
                   'OTHER'::text
               ]
           )
@@ -246,7 +252,7 @@ BEGIN
 
     IF invalid_count > 0 THEN
         RAISE EXCEPTION
-            'A25 BLOCKED: % existing document_type values are invalid. Samples: %',
+            'A26 BLOCKED: % existing document_type values are invalid. Samples: %',
             invalid_count,
             coalesce(invalid_samples, '<none>');
     END IF;
@@ -266,6 +272,7 @@ ALTER TABLE documentation.documents
         document_id ~ '^MM-[A-Z]{2,10}-[0-9]{3,4}[A-Z]?$'
         OR document_id ~ '^MM-DL-[0-9]{8}$'
         OR document_id ~ '^MM-NAV-[0-9]{8}-[0-9]{2}$'
+        OR document_id ~ '^MM-PS-[0-9]{8}$'
     )
     NOT VALID;
 
@@ -276,7 +283,7 @@ COMMENT ON CONSTRAINT ck_documentation_documents_id
     ON documentation.documents
 IS
     'MatchMatrix Document ID: původní MM-<TYPE>-NNN/NNNN, '
-    'MM-DL-YYYYMMDD a MM-NAV-YYYYMMDD-PP podle MM-STD-007.';
+    'MM-DL-YYYYMMDD, MM-NAV-YYYYMMDD-PP a MM-PS-YYYYMMDD podle MM-STD-007.';
 
 -- ---------------------------------------------------------------------------
 -- 5. ZMĚNA CONSTRAINTU PRO DOCUMENT TYPE
@@ -310,6 +317,7 @@ ALTER TABLE documentation.documents
                 'ARCV'::text,
                 'DL'::text,
                 'NAV'::text,
+                'PS'::text,
                 'OTHER'::text
             ]
         )
@@ -322,7 +330,7 @@ ALTER TABLE documentation.documents
 COMMENT ON CONSTRAINT ck_documentation_documents_type
     ON documentation.documents
 IS
-    'Povolené MatchMatrix typy dokumentů včetně DL a NAV podle MM-STD-007.';
+    'Povolené MatchMatrix typy dokumentů včetně DL, NAV a PS podle MM-STD-007.';
 
 -- ---------------------------------------------------------------------------
 -- 6. TRANSAKČNÍ POST-CHECK
@@ -347,12 +355,12 @@ BEGIN
 
     IF id_constraint_validated IS DISTINCT FROM true THEN
         RAISE EXCEPTION
-            'A25 BLOCKED: ck_documentation_documents_id is not validated.';
+            'A26 BLOCKED: ck_documentation_documents_id is not validated.';
     END IF;
 
     IF type_constraint_validated IS DISTINCT FROM true THEN
         RAISE EXCEPTION
-            'A25 BLOCKED: ck_documentation_documents_type is not validated.';
+            'A26 BLOCKED: ck_documentation_documents_type is not validated.';
     END IF;
 END
 $$;
@@ -390,6 +398,7 @@ SELECT
         test_document_id ~ '^MM-[A-Z]{2,10}-[0-9]{3,4}[A-Z]?$'
         OR test_document_id ~ '^MM-DL-[0-9]{8}$'
         OR test_document_id ~ '^MM-NAV-[0-9]{8}-[0-9]{2}$'
+        OR test_document_id ~ '^MM-PS-[0-9]{8}$'
     ) AS accepted
 FROM (
     VALUES
@@ -398,7 +407,8 @@ FROM (
         ('MM-STD-1000'),
         ('MM-REF-001'),
         ('MM-DL-20260630'),
-        ('MM-NAV-20260630-01')
+        ('MM-NAV-20260630-01'),
+        ('MM-PS-20260331')
 ) AS tests(test_document_id)
 ORDER BY test_document_id;
 
@@ -430,6 +440,7 @@ SELECT
             'ARCV'::text,
             'DL'::text,
             'NAV'::text,
+            'PS'::text,
             'OTHER'::text
         ]
     ) AS accepted
@@ -439,7 +450,8 @@ FROM (
         ('STD'),
         ('REF'),
         ('DL'),
-        ('NAV')
+        ('NAV'),
+        ('PS')
 ) AS tests(test_document_type)
 ORDER BY test_document_type;
 
