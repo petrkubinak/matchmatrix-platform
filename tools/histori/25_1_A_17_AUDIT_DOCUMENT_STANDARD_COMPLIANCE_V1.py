@@ -14,7 +14,6 @@ K ČEMU:
 - ověří obecná metadata, identitu, verzi, stav a název souboru,
 - pro denní zápis ověří strukturu podle MM-DOC-900,
 - pro navázání ověří strukturu podle MM-DOC-901 a MM-STD-009,
-- pro Project Snapshot ověří identitu a povinné sekce podle MM-STD-009,
 - pro hlavní dokument ověří strukturu podle MM-STD-001,
 - upozorní na terminologické a ručně ověřitelné oblasti,
 - vytvoří JSON a Markdown auditní report,
@@ -34,7 +33,6 @@ Podporované typy:
 - AUTO
 - DAILY_LOG
 - CHAT_CONTINUATION
-- PROJECT_SNAPSHOT
 - MAIN_DOCUMENT
 - GENERIC_DOCUMENT
 
@@ -60,12 +58,10 @@ from typing import Any, Iterable, Mapping, Sequence
 
 
 REPORT_PREFIX = "document_compliance_audit"
-ENGINE_VERSION = "A17_STANDARD_COMPLIANCE_V1_2_PROJECT_SNAPSHOT_PRIMARY_ID"
 SUPPORTED_TYPES = {
     "AUTO",
     "DAILY_LOG",
     "CHAT_CONTINUATION",
-    "PROJECT_SNAPSHOT",
     "MAIN_DOCUMENT",
     "GENERIC_DOCUMENT",
 }
@@ -74,7 +70,6 @@ DOCUMENT_ID_RE = re.compile(
     r"\b(?:"
     r"MM-DL-\d{8}"
     r"|MM-NAV-\d{8}-\d{2}"
-    r"|MM-PS-\d{8}"
     r"|MM-[A-Z]{2,10}-\d{3,4}[A-Z]?"
     r")\b"
 )
@@ -131,7 +126,7 @@ COMMON_RULES: tuple[Rule, ...] = (
         "Jednoznačný identifikátor dokumentu",
         "HIGH",
         "MM-STD-004 §4; MM-STD-007 §3",
-        "Dokument má obsahovat jedinečný Document ID v povoleném formátu MatchMatrix.",
+        "Dokument má obsahovat jedinečný Document ID ve formátu MM-XXX-NNN.",
         category="METADATA",
     ),
     Rule(
@@ -396,74 +391,6 @@ CONTINUATION_RULES: tuple[Rule, ...] = (
 )
 
 
-PROJECT_SNAPSHOT_RULES: tuple[Rule, ...] = (
-    Rule(
-        "PS-IDENTIFICATION",
-        "Identifikace Project Snapshotu",
-        "CRITICAL",
-        "MM-STD-007; MM-STD-009 §1–2",
-        "Project Snapshot musí používat datumový identifikátor MM-PS-YYYYMMDD a odpovídající standardizovaný název souboru.",
-        category="METADATA",
-    ),
-    Rule(
-        "PS-AI-CONTEXT",
-        "AI CONTEXT",
-        "CRITICAL",
-        "MM-STD-009 §2",
-        "Project Snapshot musí obsahovat sekci AI CONTEXT.",
-        aliases=("ai context",),
-    ),
-    Rule(
-        "PS-PROJECT-SNAPSHOT",
-        "PROJECT SNAPSHOT",
-        "CRITICAL",
-        "MM-STD-009 §2",
-        "Project Snapshot musí obsahovat samostatnou sekci PROJECT SNAPSHOT.",
-        aliases=("project snapshot",),
-    ),
-    Rule(
-        "PS-DATABASE-SNAPSHOT",
-        "DATABASE SNAPSHOT",
-        "CRITICAL",
-        "MM-STD-009 §2",
-        "Project Snapshot musí obsahovat sekci DATABASE SNAPSHOT.",
-        aliases=("database snapshot",),
-    ),
-    Rule(
-        "PS-CURRENT-STATUS",
-        "CURRENT STATUS",
-        "CRITICAL",
-        "MM-STD-009 §2",
-        "Project Snapshot musí obsahovat ověřený aktuální stav projektu.",
-        aliases=("current status", "aktuální stav", "aktualni stav"),
-    ),
-    Rule(
-        "PS-OPEN-QUESTIONS",
-        "OPEN QUESTIONS",
-        "HIGH",
-        "MM-STD-009 §2",
-        "Project Snapshot musí obsahovat otevřené otázky nebo výslovné potvrzení, že žádné nejsou.",
-        aliases=("open questions", "otevřené otázky", "otevrene otazky"),
-    ),
-    Rule(
-        "PS-NEXT-STEP",
-        "NEXT STEP",
-        "CRITICAL",
-        "MM-STD-009 §2",
-        "Project Snapshot musí určit jeden první konkrétní a ověřitelný další krok.",
-        aliases=("next step", "další krok", "dalsi krok", "první další krok", "prvni dalsi krok"),
-    ),
-    Rule(
-        "PS-SOURCE-TRACEABILITY",
-        "Dohledatelnost zdrojů",
-        "HIGH",
-        "MM-STD-009 §1; MM-STD-004 §9",
-        "Historický Project Snapshot má uvádět konkrétní zdrojové dokumenty, soubory, Git commity nebo databázové důkazy.",
-        category="RELATIONS",
-    ),
-)
-
-
 MAIN_RULES: tuple[Rule, ...] = (
     Rule(
         "MAIN-INTRO",
@@ -631,7 +558,6 @@ def detect_type(path: Path, text: str, headings: Sequence[Mapping[str, Any]]) ->
 
     daily_score = 0
     continuation_score = 0
-    project_snapshot_score = 0
     main_score = 0
 
     if any(token in name for token in ("denni zapis", "daily log", "zapis prace")):
@@ -640,9 +566,6 @@ def detect_type(path: Path, text: str, headings: Sequence[Mapping[str, Any]]) ->
     if any(token in name for token in ("navazani", "navazujici", "new chat", "novy chat")):
         continuation_score += 8
         evidence.append("Název souboru odpovídá dokumentu NAVÁZÁNÍ.")
-    if re.search(r"\bmm ps \d{8}\b", name) or "project snapshot" in name:
-        project_snapshot_score += 10
-        evidence.append("Název souboru odpovídá Project Snapshotu.")
 
     for alias in ("vychozi stav", "provedene prace", "vysledky dne", "plan pokracovani"):
         if alias in heading_text:
@@ -650,7 +573,6 @@ def detect_type(path: Path, text: str, headings: Sequence[Mapping[str, Any]]) ->
     for alias in ("ai context", "project snapshot", "database snapshot", "current status", "next step"):
         if alias in heading_text:
             continuation_score += 2
-            project_snapshot_score += 2
     for alias in ("informace o dokumentu", "historie verzi", "zaver dokumentu"):
         if alias in heading_text:
             main_score += 2
@@ -659,15 +581,12 @@ def detect_type(path: Path, text: str, headings: Sequence[Mapping[str, Any]]) ->
         daily_score += 1
     if "novy chat" in normalized_text or "pracovni etapa" in normalized_text or "navazani" in normalized_text:
         continuation_score += 1
-    if "project snapshot" in normalized_text and re.search(r"\bMM-PS-\d{8}\b", text):
-        project_snapshot_score += 3
     if DOCUMENT_ID_RE.search(text) and len(headings) >= 5:
         main_score += 2
 
     scores = {
         "DAILY_LOG": daily_score,
         "CHAT_CONTINUATION": continuation_score,
-        "PROJECT_SNAPSHOT": project_snapshot_score,
         "MAIN_DOCUMENT": main_score,
     }
     detected = max(scores, key=scores.get)
@@ -747,13 +666,6 @@ def valid_document_filename(filename: str) -> bool:
             valid_calendar_token(continuation.group(1))
             and int(continuation.group(2)) >= 1
         )
-
-    project_snapshot = re.fullmatch(
-        r"MM-PS-(\d{8})_MATCHMATRIX_PROJECT_SNAPSHOT(?:_[A-Z0-9_ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]+)?",
-        stem,
-    )
-    if project_snapshot:
-        return valid_calendar_token(project_snapshot.group(1))
 
     return (
         re.fullmatch(
@@ -920,161 +832,6 @@ def evaluate_continuation(text: str, headings: Sequence[Mapping[str, Any]]) -> l
     return findings
 
 
-def evaluate_project_snapshot(
-    path: Path,
-    text: str,
-    headings: Sequence[Mapping[str, Any]],
-) -> list[Finding]:
-    findings: list[Finding] = []
-
-    filename_match = re.fullmatch(
-        r"MM-PS-(\d{8})_MATCHMATRIX_PROJECT_SNAPSHOT(?:_[A-Z0-9_ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]+)?"
-        r"\.(?:md|markdown|txt)",
-        path.name,
-        re.IGNORECASE,
-    )
-
-    # Primární identifikátor se hledá pouze v identifikačních místech:
-    # - samostatný Markdown nadpis,
-    # - metadata tabulka,
-    # - řádkové metadata typu "Document ID: MM-PS-YYYYMMDD".
-    # Ostatní MM-PS identifikátory v textu jsou řízené odkazy na jiné snapshoty
-    # a nesmějí způsobit falešný konflikt identity.
-    primary_tokens: list[str] = []
-    primary_tokens.extend(
-        re.findall(
-            r"(?mi)^\s*#{1,6}\s+(MM-PS-\d{8})\s*$",
-            text[:12000],
-        )
-    )
-    primary_tokens.extend(
-        re.findall(
-            r"(?mi)^\s*\|\s*(?:Dokument|Označení|Document ID)\s*\|\s*"
-            r"(MM-PS-\d{8})\s*\|\s*$",
-            text[:12000],
-        )
-    )
-    primary_tokens.extend(
-        re.findall(
-            r"(?mi)^\s*(?:Dokument|Označení|Document ID)\s*[:=]\s*"
-            r"(MM-PS-\d{8})\s*$",
-            text[:12000],
-        )
-    )
-
-    primary_ids = sorted(set(item.upper() for item in primary_tokens))
-    primary_dates = [item.rsplit("-", 1)[-1] for item in primary_ids]
-    valid_primary_dates = [
-        value for value in primary_dates if valid_calendar_token(value)
-    ]
-    invalid_primary_dates = [
-        value for value in primary_dates if not valid_calendar_token(value)
-    ]
-
-    all_ids = sorted(
-        set(
-            item.upper()
-            for item in re.findall(r"\bMM-PS-\d{8}\b", text)
-        )
-    )
-    reference_ids = [item for item in all_ids if item not in primary_ids]
-
-    evidence: list[str] = []
-    evidence.extend(f"Primární Document ID: {item}" for item in primary_ids)
-    evidence.extend(
-        f"Neplatné datum v primárním ID: MM-PS-{value}"
-        for value in invalid_primary_dates
-    )
-
-    filename_date: str | None = None
-    filename_valid = False
-    if filename_match:
-        filename_date = filename_match.group(1)
-        filename_valid = valid_calendar_token(filename_date)
-        evidence.append(f"Název souboru: {path.name}")
-
-    if reference_ids:
-        evidence.append(
-            "Řízené odkazy na jiné snapshoty: "
-            + ", ".join(reference_ids[:10])
-        )
-
-    identification_ok = (
-        filename_valid
-        and filename_date is not None
-        and len(valid_primary_dates) >= 1
-        and not invalid_primary_dates
-        and set(valid_primary_dates) == {filename_date}
-    )
-
-    if identification_ok:
-        findings.append(
-            make_finding(
-                PROJECT_SNAPSHOT_RULES[0],
-                "PASS",
-                evidence,
-                "Bez akce.",
-            )
-        )
-    elif primary_ids or filename_match:
-        findings.append(
-            make_finding(
-                PROJECT_SNAPSHOT_RULES[0],
-                "PARTIAL",
-                evidence or [path.name],
-                "Sjednotit primární Document ID v identifikační hlavičce, "
-                "metadatech a názvu souboru ve formátu MM-PS-YYYYMMDD. "
-                "Řízené odkazy na jiné Project Snapshoty jsou povolené.",
-            )
-        )
-    else:
-        findings.append(
-            make_finding(
-                PROJECT_SNAPSHOT_RULES[0],
-                "FAIL",
-                [path.name],
-                "Doplnit platný primární Document ID MM-PS-YYYYMMDD "
-                "do identifikační hlavičky nebo metadat a použít "
-                "standardizovaný název souboru.",
-            )
-        )
-
-    for rule in PROJECT_SNAPSHOT_RULES[1:7]:
-        findings.append(evaluate_alias_rule(rule, text, headings))
-
-    commits = GIT_COMMIT_RE.findall(text)
-    paths = re.findall(
-        r"(?:[A-Za-z]:\\[^\n`|]+|\\\\[^\n`|]+|(?:docs|db|tools|workers|reports)/[^\s`|]+)",
-        text,
-    )
-    document_ids = sorted(set(DOCUMENT_ID_RE.findall(text)))
-    trace_evidence = (
-        [f"Git: {item}" for item in commits[:5]]
-        + [f"Cesta: {item}" for item in paths[:8]]
-        + [f"Document ID: {item}" for item in document_ids[:12]]
-    )
-    if trace_evidence:
-        findings.append(
-            make_finding(
-                PROJECT_SNAPSHOT_RULES[7],
-                "PASS",
-                trace_evidence,
-                "Bez akce.",
-            )
-        )
-    else:
-        findings.append(
-            make_finding(
-                PROJECT_SNAPSHOT_RULES[7],
-                "FAIL",
-                [],
-                "Doplnit konkrétní zdrojové dokumenty, soubory, Git commity "
-                "nebo databázové důkazy.",
-            )
-        )
-
-    return findings
-
 def evaluate_main(text: str, headings: Sequence[Mapping[str, Any]]) -> list[Finding]:
     findings: list[Finding] = []
     for rule in MAIN_RULES:
@@ -1163,18 +920,6 @@ def proposed_sections(document_type: str, findings: Sequence[Finding]) -> list[s
             ("CONT-PROJECT-SNAPSHOT", "PROJECT SNAPSHOT"),
             ("CONT-DATABASE-SNAPSHOT", "DATABASE SNAPSHOT"),
             ("CONT-NEXT-STEP", "NEXT STEP"),
-        ]
-    elif document_type == "PROJECT_SNAPSHOT":
-        ordered = [
-            ("COMMON-METADATA-SECTION", "Informace o dokumentu"),
-            ("PS-IDENTIFICATION", "Identifikace Project Snapshotu"),
-            ("PS-AI-CONTEXT", "AI CONTEXT"),
-            ("PS-PROJECT-SNAPSHOT", "PROJECT SNAPSHOT"),
-            ("PS-DATABASE-SNAPSHOT", "DATABASE SNAPSHOT"),
-            ("PS-CURRENT-STATUS", "CURRENT STATUS"),
-            ("PS-OPEN-QUESTIONS", "OPEN QUESTIONS"),
-            ("PS-NEXT-STEP", "NEXT STEP"),
-            ("PS-SOURCE-TRACEABILITY", "Dohledatelnost zdrojů"),
         ]
     elif document_type == "MAIN_DOCUMENT":
         ordered = [
@@ -1291,10 +1036,6 @@ def main() -> int:
             findings.extend(evaluate_daily(text, headings))
         elif document_type == "CHAT_CONTINUATION":
             findings.extend(evaluate_continuation(text, headings))
-        elif document_type == "PROJECT_SNAPSHOT":
-            findings.extend(
-                evaluate_project_snapshot(document_path, text, headings)
-            )
         elif document_type == "MAIN_DOCUMENT":
             findings.extend(evaluate_main(text, headings))
 
@@ -1311,7 +1052,6 @@ def main() -> int:
 
         payload: dict[str, Any] = {
             "generated_at": utc_now().isoformat(),
-            "engine_version": ENGINE_VERSION,
             "project_root": str(root),
             "document_path": str(document_path),
             "document_filename": document_path.name,

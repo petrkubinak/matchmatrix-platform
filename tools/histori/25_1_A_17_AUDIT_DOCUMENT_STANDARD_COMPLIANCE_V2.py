@@ -60,7 +60,7 @@ from typing import Any, Iterable, Mapping, Sequence
 
 
 REPORT_PREFIX = "document_compliance_audit"
-ENGINE_VERSION = "A17_STANDARD_COMPLIANCE_V1_2_PROJECT_SNAPSHOT_PRIMARY_ID"
+ENGINE_VERSION = "A17_STANDARD_COMPLIANCE_V1_1_PROJECT_SNAPSHOT"
 SUPPORTED_TYPES = {
     "AUTO",
     "DAILY_LOG",
@@ -927,6 +927,7 @@ def evaluate_project_snapshot(
 ) -> list[Finding]:
     findings: list[Finding] = []
 
+    id_dates = sorted(set(re.findall(r"\bMM-PS-(\d{8})\b", text[:10000])))
     filename_match = re.fullmatch(
         r"MM-PS-(\d{8})_MATCHMATRIX_PROJECT_SNAPSHOT(?:_[A-Z0-9_ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]+)?"
         r"\.(?:md|markdown|txt)",
@@ -934,97 +935,39 @@ def evaluate_project_snapshot(
         re.IGNORECASE,
     )
 
-    # Primární identifikátor se hledá pouze v identifikačních místech:
-    # - samostatný Markdown nadpis,
-    # - metadata tabulka,
-    # - řádkové metadata typu "Document ID: MM-PS-YYYYMMDD".
-    # Ostatní MM-PS identifikátory v textu jsou řízené odkazy na jiné snapshoty
-    # a nesmějí způsobit falešný konflikt identity.
-    primary_tokens: list[str] = []
-    primary_tokens.extend(
-        re.findall(
-            r"(?mi)^\s*#{1,6}\s+(MM-PS-\d{8})\s*$",
-            text[:12000],
-        )
-    )
-    primary_tokens.extend(
-        re.findall(
-            r"(?mi)^\s*\|\s*(?:Dokument|Označení|Document ID)\s*\|\s*"
-            r"(MM-PS-\d{8})\s*\|\s*$",
-            text[:12000],
-        )
-    )
-    primary_tokens.extend(
-        re.findall(
-            r"(?mi)^\s*(?:Dokument|Označení|Document ID)\s*[:=]\s*"
-            r"(MM-PS-\d{8})\s*$",
-            text[:12000],
-        )
+    valid_id_dates = [value for value in id_dates if valid_calendar_token(value)]
+    invalid_id_dates = [value for value in id_dates if not valid_calendar_token(value)]
+    identification_evidence = (
+        [f"Document ID: MM-PS-{value}" for value in valid_id_dates]
+        + [f"Neplatné datum v ID: MM-PS-{value}" for value in invalid_id_dates]
     )
 
-    primary_ids = sorted(set(item.upper() for item in primary_tokens))
-    primary_dates = [item.rsplit("-", 1)[-1] for item in primary_ids]
-    valid_primary_dates = [
-        value for value in primary_dates if valid_calendar_token(value)
-    ]
-    invalid_primary_dates = [
-        value for value in primary_dates if not valid_calendar_token(value)
-    ]
-
-    all_ids = sorted(
-        set(
-            item.upper()
-            for item in re.findall(r"\bMM-PS-\d{8}\b", text)
-        )
-    )
-    reference_ids = [item for item in all_ids if item not in primary_ids]
-
-    evidence: list[str] = []
-    evidence.extend(f"Primární Document ID: {item}" for item in primary_ids)
-    evidence.extend(
-        f"Neplatné datum v primárním ID: MM-PS-{value}"
-        for value in invalid_primary_dates
-    )
-
-    filename_date: str | None = None
-    filename_valid = False
-    if filename_match:
+    identification_ok = False
+    if filename_match and valid_calendar_token(filename_match.group(1)):
         filename_date = filename_match.group(1)
-        filename_valid = valid_calendar_token(filename_date)
-        evidence.append(f"Název souboru: {path.name}")
-
-    if reference_ids:
-        evidence.append(
-            "Řízené odkazy na jiné snapshoty: "
-            + ", ".join(reference_ids[:10])
+        identification_evidence.append(f"Název souboru: {path.name}")
+        identification_ok = (
+            len(valid_id_dates) == 1
+            and not invalid_id_dates
+            and valid_id_dates[0] == filename_date
         )
-
-    identification_ok = (
-        filename_valid
-        and filename_date is not None
-        and len(valid_primary_dates) >= 1
-        and not invalid_primary_dates
-        and set(valid_primary_dates) == {filename_date}
-    )
 
     if identification_ok:
         findings.append(
             make_finding(
                 PROJECT_SNAPSHOT_RULES[0],
                 "PASS",
-                evidence,
+                identification_evidence,
                 "Bez akce.",
             )
         )
-    elif primary_ids or filename_match:
+    elif id_dates or filename_match:
         findings.append(
             make_finding(
                 PROJECT_SNAPSHOT_RULES[0],
                 "PARTIAL",
-                evidence or [path.name],
-                "Sjednotit primární Document ID v identifikační hlavičce, "
-                "metadatech a názvu souboru ve formátu MM-PS-YYYYMMDD. "
-                "Řízené odkazy na jiné Project Snapshoty jsou povolené.",
+                identification_evidence or [path.name],
+                "Sjednotit datum v Document ID, metadatech a názvu souboru ve formátu MM-PS-YYYYMMDD.",
             )
         )
     else:
@@ -1033,9 +976,7 @@ def evaluate_project_snapshot(
                 PROJECT_SNAPSHOT_RULES[0],
                 "FAIL",
                 [path.name],
-                "Doplnit platný primární Document ID MM-PS-YYYYMMDD "
-                "do identifikační hlavičky nebo metadat a použít "
-                "standardizovaný název souboru.",
+                "Doplnit platný Document ID MM-PS-YYYYMMDD a standardizovaný název souboru.",
             )
         )
 
@@ -1048,17 +989,17 @@ def evaluate_project_snapshot(
         text,
     )
     document_ids = sorted(set(DOCUMENT_ID_RE.findall(text)))
-    trace_evidence = (
+    evidence = (
         [f"Git: {item}" for item in commits[:5]]
         + [f"Cesta: {item}" for item in paths[:8]]
         + [f"Document ID: {item}" for item in document_ids[:12]]
     )
-    if trace_evidence:
+    if evidence:
         findings.append(
             make_finding(
                 PROJECT_SNAPSHOT_RULES[7],
                 "PASS",
-                trace_evidence,
+                evidence,
                 "Bez akce.",
             )
         )
@@ -1068,12 +1009,12 @@ def evaluate_project_snapshot(
                 PROJECT_SNAPSHOT_RULES[7],
                 "FAIL",
                 [],
-                "Doplnit konkrétní zdrojové dokumenty, soubory, Git commity "
-                "nebo databázové důkazy.",
+                "Doplnit konkrétní zdrojové dokumenty, soubory, Git commity nebo databázové důkazy.",
             )
         )
 
     return findings
+
 
 def evaluate_main(text: str, headings: Sequence[Mapping[str, Any]]) -> list[Finding]:
     findings: list[Finding] = []
