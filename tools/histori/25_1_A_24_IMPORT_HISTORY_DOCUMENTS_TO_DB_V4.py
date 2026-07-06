@@ -12,8 +12,6 @@ K ČEMU:
 - podporuje Document ID `MM-DL-YYYYMMDD`,
 - podporuje Document ID `MM-NAV-YYYYMMDD-PP`,
 - podporuje Document ID `MM-PS-YYYYMMDD`,
-- pro Project Snapshot přijímá metadata `Datum snapshotu` i `Datum`,
-- pro Project Snapshot přijímá metadata `Typ` i `Typ dokumentu`,
 - načte přesně určený denní zápis, dokument NAVÁZÁNÍ nebo Project Snapshot,
 - ověří jejich umístění, název, metadata, datum, verzi, stav a SHA-256,
 - Project Snapshot před manifestem povinně prověří read-only auditem A17,
@@ -89,7 +87,7 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 
-ENGINE_VERSION = "A24_HISTORY_DOCUMENT_DATABASE_IMPORT_V1_2_PROJECT_SNAPSHOT_METADATA_ALIASES"
+ENGINE_VERSION = "A24_HISTORY_DOCUMENT_DATABASE_IMPORT_V1_1_PROJECT_SNAPSHOT"
 MANIFEST_VERSION = "1.1"
 FINAL_VALIDATED = "HISTORY_DOCUMENT_IMPORT_VALIDATED"
 FINAL_DRY_RUN = "HISTORY_DOCUMENT_IMPORT_DRY_RUN_READY"
@@ -380,22 +378,11 @@ def inspect_document(root: Path, path: Path) -> dict[str, Any]:
     validate_filename(path.name, document_id)
     validate_location(relative_path, document_id)
 
-    if document_id.startswith("MM-PS-"):
-        metadata_date = (
-            metadata.get("Datum snapshotu")
-            or metadata.get("Datum")
-            or ""
-        ).strip()
-        metadata_date_label = "Datum snapshotu / Datum"
-    else:
-        metadata_date = metadata.get("Datum", "").strip()
-        metadata_date_label = "Datum"
-
+    metadata_date = metadata.get("Datum", "").strip()
     if metadata_date != date_value:
         raise RuntimeError(
-            f"{metadata_date_label} v metadatech neodpovídá "
-            f"Document ID {document_id}: "
-            f"{metadata_date!r} != {date_value!r}"
+            f"Datum v metadatech neodpovídá Document ID "
+            f"{document_id}: {metadata_date!r} != {date_value!r}"
         )
 
     if document_id.startswith("MM-NAV-"):
@@ -438,38 +425,12 @@ def inspect_document(root: Path, path: Path) -> dict[str, Any]:
     else:
         expected_type = "PROJECT_SNAPSHOT"
 
-    metadata_document_type = (
-        metadata.get("Typ dokumentu")
-        or metadata.get("Typ")
-        or ""
-    ).strip()
-
-    if document_id.startswith("MM-PS-"):
-        normalized_metadata_type = re.sub(
-            r"[^A-Z0-9]+",
-            "_",
-            metadata_document_type.upper(),
-        ).strip("_")
-        project_snapshot_type_ok = (
-            normalized_metadata_type == expected_type
-            or (
-                "PROJECT" in normalized_metadata_type
-                and "SNAPSHOT" in normalized_metadata_type
-            )
-        )
-        if not metadata_document_type or not project_snapshot_type_ok:
-            raise RuntimeError(
-                f"Typ Project Snapshotu neodpovídá ID {document_id}: "
-                f"{metadata_document_type!r}. Očekávána hodnota "
-                "PROJECT_SNAPSHOT nebo popis obsahující "
-                "'Project Snapshot'."
-            )
-    elif metadata_document_type and metadata_document_type != expected_type:
+    metadata_document_type = metadata.get("Typ dokumentu", "").strip()
+    if metadata_document_type and metadata_document_type != expected_type:
         raise RuntimeError(
             f"Typ dokumentu neodpovídá ID {document_id}: "
             f"{metadata_document_type!r} != {expected_type!r}"
         )
-
     document_type = expected_type
 
     return {

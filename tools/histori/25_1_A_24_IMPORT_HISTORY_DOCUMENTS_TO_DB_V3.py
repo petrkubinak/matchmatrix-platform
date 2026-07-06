@@ -11,12 +11,8 @@ MatchMatrix a bezpečně je importuje do schématu `documentation`.
 K ČEMU:
 - podporuje Document ID `MM-DL-YYYYMMDD`,
 - podporuje Document ID `MM-NAV-YYYYMMDD-PP`,
-- podporuje Document ID `MM-PS-YYYYMMDD`,
-- pro Project Snapshot přijímá metadata `Datum snapshotu` i `Datum`,
-- pro Project Snapshot přijímá metadata `Typ` i `Typ dokumentu`,
-- načte přesně určený denní zápis, dokument NAVÁZÁNÍ nebo Project Snapshot,
+- načte přesně určený denní zápis a dokument NAVÁZÁNÍ,
 - ověří jejich umístění, název, metadata, datum, verzi, stav a SHA-256,
-- Project Snapshot před manifestem povinně prověří read-only auditem A17,
 - vytvoří samostatný history import manifest,
 - použije existující produkční importer A6 bez jeho přepsání,
 - v režimu DRY_RUN provede databázovou transakci s rollbackem,
@@ -51,15 +47,11 @@ Výchozí dokumenty:
 - docs/09_HISTORY/NAVÁZÁNÍ_NA_CHAT/
   MM-NAV-20260630-01_MATCHMATRIX_NAVAZANI_DO_CHATU.md
 
-Project Snapshot se zadává explicitně:
-    --document "docs/09_HISTORY/PROJECT_SNAPSHOTS/MM-PS-YYYYMMDD_MATCHMATRIX_PROJECT_SNAPSHOT_....md"
-
 BEZPEČNOST:
 - A6 ani A7 nepřepisuje,
 - při APPLY vyžaduje čistý Git strom a existující commit,
 - při APPLY nepovolí `--allow-dirty`,
-- před importem ověří hash všech zdrojových souborů,
-- u MM-PS vyžaduje úspěšný A17 audit bez FAIL, PARTIAL, CRITICAL a HIGH,
+- před importem ověří hash obou zdrojových souborů,
 - A7 se spouští pouze po úspěšném APPLY,
 - při chybě se vrací nenulový exit code,
 - reporty se zapisují pouze do reports/documentation/.
@@ -89,8 +81,8 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 
-ENGINE_VERSION = "A24_HISTORY_DOCUMENT_DATABASE_IMPORT_V1_2_PROJECT_SNAPSHOT_METADATA_ALIASES"
-MANIFEST_VERSION = "1.1"
+ENGINE_VERSION = "A24_HISTORY_DOCUMENT_DATABASE_IMPORT_V1"
+MANIFEST_VERSION = "1.0"
 FINAL_VALIDATED = "HISTORY_DOCUMENT_IMPORT_VALIDATED"
 FINAL_DRY_RUN = "HISTORY_DOCUMENT_IMPORT_DRY_RUN_READY"
 FINAL_APPLIED = "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED"
@@ -112,20 +104,14 @@ DEFAULT_DOCUMENTS = (
 
 A6_NAME = "25_1_A_6_IMPORT_CANONICAL_DOCUMENTS_TO_DB_V1.py"
 A7_NAME = "25_1_A_7_VERIFY_DOCUMENTATION_IMPORT_V1.py"
-A17_NAME = "25_1_A_17_AUDIT_DOCUMENT_STANDARD_COMPLIANCE_V1.py"
 
 DOCUMENT_ID_RE = re.compile(
-    r"^(?:"
-    r"MM-DL-(\d{8})"
-    r"|MM-NAV-(\d{8})-(\d{2})"
-    r"|MM-PS-(\d{8})"
-    r")$"
+    r"^(?:MM-DL-(\d{8})|MM-NAV-(\d{8})-(\d{2}))$"
 )
 DOCUMENT_ID_ANY_RE = re.compile(
     r"(?<![A-Z0-9])(?:"
     r"MM-DL-\d{8}"
     r"|MM-NAV-\d{8}-\d{2}"
-    r"|MM-PS-\d{8}"
     r"|MM-(?:DOC|STD|REF)-\d{3,4}"
     r")(?![A-Z0-9])",
     re.IGNORECASE,
@@ -149,7 +135,7 @@ def project_root() -> Path:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
-            "Importuje datumové denní zápisy, NAVÁZÁNÍ a Project Snapshoty "
+            "Importuje datumové denní zápisy a NAVÁZÁNÍ "
             "do databáze MatchMatrix."
         )
     )
@@ -159,8 +145,8 @@ def parse_args() -> argparse.Namespace:
         dest="documents",
         help=(
             "Relativní nebo absolutní cesta k historii. "
-            "Lze zadat opakovaně. Podporovány jsou MM-DL, MM-NAV a MM-PS. "
-            "Bez parametru se použijí dva výchozí dokumenty 2026-06-30."
+            "Lze zadat opakovaně. Bez parametru se použijí "
+            "dva výchozí dokumenty 2026-06-30."
         ),
     )
     parser.add_argument(
@@ -282,39 +268,12 @@ def parse_calendar_token(value: str) -> datetime:
         ) from exc
 
 
-def expected_filename_description(document_id: str) -> str:
+def expected_filename(document_id: str) -> str:
     if document_id.startswith("MM-DL-"):
         return f"{document_id}_MATCHMATRIX_DENNI_ZAPIS.md"
     if document_id.startswith("MM-NAV-"):
         return f"{document_id}_MATCHMATRIX_NAVAZANI_DO_CHATU.md"
-    if document_id.startswith("MM-PS-"):
-        return (
-            f"{document_id}_MATCHMATRIX_PROJECT_SNAPSHOT.md nebo "
-            f"{document_id}_MATCHMATRIX_PROJECT_SNAPSHOT_<POPIS>.md"
-        )
     raise RuntimeError(f"Nepodporovaný Document ID: {document_id}")
-
-
-def validate_filename(filename: str, document_id: str) -> None:
-    if document_id.startswith("MM-DL-"):
-        valid = filename == f"{document_id}_MATCHMATRIX_DENNI_ZAPIS.md"
-    elif document_id.startswith("MM-NAV-"):
-        valid = filename == f"{document_id}_MATCHMATRIX_NAVAZANI_DO_CHATU.md"
-    elif document_id.startswith("MM-PS-"):
-        valid = re.fullmatch(
-            re.escape(document_id)
-            + r"_MATCHMATRIX_PROJECT_SNAPSHOT(?:_[A-Z0-9_ÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ]+)?\.md",
-            filename,
-        ) is not None
-    else:
-        valid = False
-
-    if not valid:
-        raise RuntimeError(
-            "Název souboru neodpovídá Document ID.\n"
-            f"Aktuální : {filename}\n"
-            f"Očekáván : {expected_filename_description(document_id)}"
-        )
 
 
 def validate_location(
@@ -324,12 +283,8 @@ def validate_location(
     normalized = relative_path.replace("\\", "/")
     if document_id.startswith("MM-DL-"):
         required_parent = "docs/09_HISTORY/DENNÍ_ZÁPISY/"
-    elif document_id.startswith("MM-NAV-"):
-        required_parent = "docs/09_HISTORY/NAVÁZÁNÍ_NA_CHAT/"
-    elif document_id.startswith("MM-PS-"):
-        required_parent = "docs/09_HISTORY/PROJECT_SNAPSHOTS/"
     else:
-        raise RuntimeError(f"Nepodporovaný Document ID: {document_id}")
+        required_parent = "docs/09_HISTORY/NAVÁZÁNÍ_NA_CHAT/"
     if not normalized.startswith(required_parent):
         raise RuntimeError(
             f"{document_id} je v nesprávné složce. "
@@ -369,7 +324,7 @@ def inspect_document(root: Path, path: Path) -> dict[str, Any]:
             f"{document_id!r} v {path.name}"
         )
 
-    date_token = match.group(1) or match.group(2) or match.group(4)
+    date_token = match.group(1) or match.group(2)
     date_value = parse_calendar_token(date_token).date().isoformat()
     sequence = match.group(3)
     if sequence is not None and int(sequence) < 1:
@@ -377,25 +332,20 @@ def inspect_document(root: Path, path: Path) -> dict[str, Any]:
             f"Pořadí NAVÁZÁNÍ musí být alespoň 01: {document_id}"
         )
 
-    validate_filename(path.name, document_id)
+    if path.name != expected_filename(document_id):
+        raise RuntimeError(
+            f"Název souboru neodpovídá Document ID.\n"
+            f"Aktuální : {path.name}\n"
+            f"Očekáván : {expected_filename(document_id)}"
+        )
+
     validate_location(relative_path, document_id)
 
-    if document_id.startswith("MM-PS-"):
-        metadata_date = (
-            metadata.get("Datum snapshotu")
-            or metadata.get("Datum")
-            or ""
-        ).strip()
-        metadata_date_label = "Datum snapshotu / Datum"
-    else:
-        metadata_date = metadata.get("Datum", "").strip()
-        metadata_date_label = "Datum"
-
+    metadata_date = metadata.get("Datum", "").strip()
     if metadata_date != date_value:
         raise RuntimeError(
-            f"{metadata_date_label} v metadatech neodpovídá "
-            f"Document ID {document_id}: "
-            f"{metadata_date!r} != {date_value!r}"
+            f"Datum v metadatech neodpovídá Document ID "
+            f"{document_id}: {metadata_date!r} != {date_value!r}"
         )
 
     if document_id.startswith("MM-NAV-"):
@@ -431,46 +381,17 @@ def inspect_document(root: Path, path: Path) -> dict[str, Any]:
             f"Chybí Název dokumentu: {document_id}"
         )
 
-    if document_id.startswith("MM-DL-"):
-        expected_type = "DAILY_LOG"
-    elif document_id.startswith("MM-NAV-"):
-        expected_type = "CHAT_CONTINUATION"
-    else:
-        expected_type = "PROJECT_SNAPSHOT"
-
-    metadata_document_type = (
-        metadata.get("Typ dokumentu")
-        or metadata.get("Typ")
-        or ""
-    ).strip()
-
-    if document_id.startswith("MM-PS-"):
-        normalized_metadata_type = re.sub(
-            r"[^A-Z0-9]+",
-            "_",
-            metadata_document_type.upper(),
-        ).strip("_")
-        project_snapshot_type_ok = (
-            normalized_metadata_type == expected_type
-            or (
-                "PROJECT" in normalized_metadata_type
-                and "SNAPSHOT" in normalized_metadata_type
-            )
-        )
-        if not metadata_document_type or not project_snapshot_type_ok:
-            raise RuntimeError(
-                f"Typ Project Snapshotu neodpovídá ID {document_id}: "
-                f"{metadata_document_type!r}. Očekávána hodnota "
-                "PROJECT_SNAPSHOT nebo popis obsahující "
-                "'Project Snapshot'."
-            )
-    elif metadata_document_type and metadata_document_type != expected_type:
+    document_type = metadata.get("Typ dokumentu", "").strip()
+    expected_type = (
+        "DAILY_LOG"
+        if document_id.startswith("MM-DL-")
+        else "CHAT_CONTINUATION"
+    )
+    if document_type != expected_type:
         raise RuntimeError(
             f"Typ dokumentu neodpovídá ID {document_id}: "
-            f"{metadata_document_type!r} != {expected_type!r}"
+            f"{document_type!r} != {expected_type!r}"
         )
-
-    document_type = expected_type
 
     return {
         "document_id": document_id,
@@ -497,95 +418,6 @@ def inspect_document(root: Path, path: Path) -> dict[str, Any]:
     }
 
 
-def validate_project_snapshot_with_a17(
-    root: Path,
-    path: Path,
-    document_id: str,
-) -> dict[str, Any]:
-    a17_path = root / "tools/documentation" / A17_NAME
-    if not a17_path.is_file():
-        raise FileNotFoundError(
-            f"A17 audit nebyl nalezen: {a17_path}"
-        )
-
-    output_dir = (
-        root
-        / "reports/documentation/standardization/a24_preflight"
-        / document_id
-    )
-    command = [
-        sys.executable,
-        str(a17_path),
-        "--document",
-        str(path),
-        "--document-type",
-        "PROJECT_SNAPSHOT",
-        "--output-dir",
-        str(output_dir),
-    ]
-    result = subprocess.run(
-        command,
-        cwd=root,
-        capture_output=True,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
-    )
-    if result.returncode != 0:
-        raise RuntimeError(
-            "A17 audit Project Snapshotu selhal.\n"
-            f"STDOUT:\n{result.stdout}\n"
-            f"STDERR:\n{result.stderr}"
-        )
-
-    report_path = output_dir / "document_compliance_audit_latest.json"
-    if not report_path.is_file():
-        raise RuntimeError(
-            f"A17 nevytvořil očekávaný report: {report_path}"
-        )
-    payload = json.loads(report_path.read_text(encoding="utf-8"))
-
-    result_counts = payload.get("result_counts") or {}
-    severity_counts = payload.get("severity_counts") or {}
-    blockers: list[str] = []
-    if payload.get("final_status") != "DOCUMENT_STANDARD_COMPLIANCE_AUDIT_READY":
-        blockers.append(
-            f"final_status={payload.get('final_status')!r}"
-        )
-    if payload.get("document_type") != "PROJECT_SNAPSHOT":
-        blockers.append(
-            f"document_type={payload.get('document_type')!r}"
-        )
-    if int(result_counts.get("FAIL", 0)) > 0:
-        blockers.append(f"FAIL={result_counts.get('FAIL')}")
-    if int(result_counts.get("PARTIAL", 0)) > 0:
-        blockers.append(f"PARTIAL={result_counts.get('PARTIAL')}")
-    if int(severity_counts.get("CRITICAL", 0)) > 0:
-        blockers.append(
-            f"CRITICAL={severity_counts.get('CRITICAL')}"
-        )
-    if int(severity_counts.get("HIGH", 0)) > 0:
-        blockers.append(f"HIGH={severity_counts.get('HIGH')}")
-
-    if blockers:
-        raise RuntimeError(
-            f"A17 zablokoval {document_id}: "
-            + ", ".join(blockers)
-        )
-
-    return {
-        "report_path": relative_to_root(root, report_path),
-        "engine_version": payload.get("engine_version"),
-        "compliance_score_percent": payload.get(
-            "compliance_score_percent"
-        ),
-        "compliance_status": payload.get("compliance_status"),
-        "result_counts": result_counts,
-        "severity_counts": severity_counts,
-        "final_status": payload.get("final_status"),
-    }
-
-
 def manifest_payload(
     root: Path,
     documents: Sequence[Mapping[str, Any]],
@@ -599,12 +431,11 @@ def manifest_payload(
         "source_of_truth": "HYBRID",
         "selection_policy": {
             "scope": (
-                "Datumové denní zápisy, NAVÁZÁNÍ a Project Snapshoty "
-                "uložené přímo v docs/09_HISTORY."
+                "Datumové denní zápisy a NAVÁZÁNÍ uložené přímo "
+                "v docs/09_HISTORY."
             ),
             "daily_logs": "MM-DL-YYYYMMDD",
             "chat_continuations": "MM-NAV-YYYYMMDD-PP",
-            "project_snapshots": "MM-PS-YYYYMMDD",
             "import_mode": "INCREMENTAL_HISTORY",
         },
         "summary": {
@@ -812,15 +643,6 @@ def main() -> int:
         )
         paths = [resolve_path(root, value) for value in requested]
         documents = [inspect_document(root, path) for path in paths]
-        for item, path in zip(documents, paths, strict=True):
-            if item["document_type"] == "PROJECT_SNAPSHOT":
-                item["standard_compliance"] = (
-                    validate_project_snapshot_with_a17(
-                        root,
-                        path,
-                        item["document_id"],
-                    )
-                )
 
         ids = [item["document_id"] for item in documents]
         if len(ids) != len(set(ids)):
@@ -862,7 +684,6 @@ def main() -> int:
             print("LOCATIONS          : VALID")
             print("METADATA           : VALID")
             print("CALENDAR DATES     : VALID")
-            print("PROJECT SNAPSHOT   : A17 VERIFIED WHEN PRESENT")
             print("SHA-256            : READY")
             print(f"REPORT             : {report_path}")
             print(f"FINAL STATUS       : {final_status}")
