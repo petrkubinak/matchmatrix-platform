@@ -480,12 +480,10 @@ def git_snapshot(root: Path) -> dict[str, Any]:
                 ["git", *args],
                 cwd=root,
                 text=True,
-                encoding="utf-8",
-                errors="replace",
                 capture_output=True,
                 check=True,
             )
-            return (completed.stdout or "").strip()
+            return completed.stdout.strip()
         except (FileNotFoundError, subprocess.CalledProcessError):
             return None
 
