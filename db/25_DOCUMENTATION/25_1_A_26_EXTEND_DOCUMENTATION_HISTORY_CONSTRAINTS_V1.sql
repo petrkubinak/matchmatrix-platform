@@ -4,7 +4,7 @@ MATCHMATRIX STANDARDNÍ HLAVIČKA
 ===============================================================================
 
 DOCUMENT ID:
-25_1_A_25
+25_1_A_26
 
 NÁZEV:
 EXTEND DOCUMENTATION HISTORY CONSTRAINTS V1
@@ -23,13 +23,13 @@ K ČEMU:
 - umožní následný import přes A24.
 
 KDE:
-C:\MatchMatrix-platform\db\migrations\
-25_1_A_25_EXTEND_DOCUMENTATION_HISTORY_CONSTRAINTS_V1.sql
+C:\MatchMatrix-platform\db\25_DOCUMENTATION\
+25_1_A_26_EXTEND_DOCUMENTATION_HISTORY_CONSTRAINTS_V1.sql
 
 JAK:
 1. Uložit tento soubor do uvedené složky.
 2. Zařadit migraci do Git:
-   git add -- "db\migrations\25_1_A_25_EXTEND_DOCUMENTATION_HISTORY_CONSTRAINTS_V1.sql"
+   git add -- "db\25_DOCUMENTATION\25_1_A_26_EXTEND_DOCUMENTATION_HISTORY_CONSTRAINTS_V1.sql"
    git commit -m "db: align documentation history constraints with MM-STD-007"
    git push origin main
 3. Spustit celý SQL soubor v DBeaveru nad databází `matchmatrix`.
@@ -61,7 +61,7 @@ BEZPEČNOST:
 
 ROLLBACK:
 Případný rollback musí obnovit původní constrainty z databázové
-dokumentace před A25. Rollback nespouštět automaticky po úspěšném importu
+dokumentace před A26. Rollback nespouštět automaticky po úspěšném importu
 MM-DL, MM-NAV nebo MM-PS, protože by jejich záznamy přestaly splňovat pravidla.
 
 VERZE:
@@ -80,7 +80,7 @@ SET LOCAL statement_timeout = '5min';
 
 -- Zabrání souběžnému spuštění stejné MatchMatrix migrace.
 SELECT pg_advisory_xact_lock(
-    hashtext('MatchMatrix:A25:documentation-history-constraints')
+    hashtext('MatchMatrix:A26:documentation-history-constraints')
 );
 
 -- ---------------------------------------------------------------------------
@@ -144,7 +144,7 @@ BEGIN
 
     IF cardinality(missing_items) > 0 THEN
         RAISE EXCEPTION
-            'A25 BLOCKED: missing database objects: %',
+            'A26 BLOCKED: missing database objects: %',
             array_to_string(missing_items, ', ');
     END IF;
 END
@@ -186,6 +186,7 @@ BEGIN
               document_id ~ '^MM-[A-Z]{2,10}-[0-9]{3,4}[A-Z]?$'
               OR document_id ~ '^MM-DL-[0-9]{8}$'
               OR document_id ~ '^MM-NAV-[0-9]{8}-[0-9]{2}$'
+        OR document_id ~ '^MM-PS-[0-9]{8}$'
               OR document_id ~ '^MM-PS-[0-9]{8}$'
           )
         ORDER BY document_id
@@ -194,7 +195,7 @@ BEGIN
 
     IF invalid_count > 0 THEN
         RAISE EXCEPTION
-            'A25 BLOCKED: % existing document_id values are invalid. Samples: %',
+            'A26 BLOCKED: % existing document_id values are invalid. Samples: %',
             invalid_count,
             coalesce(invalid_samples, '<none>');
     END IF;
@@ -252,7 +253,7 @@ BEGIN
 
     IF invalid_count > 0 THEN
         RAISE EXCEPTION
-            'A25 BLOCKED: % existing document_type values are invalid. Samples: %',
+            'A26 BLOCKED: % existing document_type values are invalid. Samples: %',
             invalid_count,
             coalesce(invalid_samples, '<none>');
     END IF;
@@ -355,12 +356,12 @@ BEGIN
 
     IF id_constraint_validated IS DISTINCT FROM true THEN
         RAISE EXCEPTION
-            'A25 BLOCKED: ck_documentation_documents_id is not validated.';
+            'A26 BLOCKED: ck_documentation_documents_id is not validated.';
     END IF;
 
     IF type_constraint_validated IS DISTINCT FROM true THEN
         RAISE EXCEPTION
-            'A25 BLOCKED: ck_documentation_documents_type is not validated.';
+            'A26 BLOCKED: ck_documentation_documents_type is not validated.';
     END IF;
 END
 $$;
@@ -408,7 +409,7 @@ FROM (
         ('MM-REF-001'),
         ('MM-DL-20260630'),
         ('MM-NAV-20260630-01'),
-        ('MM-PS-20260223')
+        ('MM-PS-20260331')
 ) AS tests(test_document_id)
 ORDER BY test_document_id;
 
