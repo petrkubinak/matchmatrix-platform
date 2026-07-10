@@ -18,7 +18,6 @@ K ČEMU:
 - sestaví kapitoly podle category_catalog,
 - načte existující metadata z první Markdown tabulky zdrojového dokumentu,
 - doplní standardní metadata a schvalovací checklist,
-- počítá pouze skutečné placeholdery a nezapočítává kontrolní checklist,
 - vytvoří nový Markdown kandidát, diff a úplný build report,
 - původní dokument ani databázi nemění.
 
@@ -100,7 +99,7 @@ SUPPORTED_CONTRACT_VERSIONS = {"1.0"}
 SUPPORTED_DOCUMENT_TYPES = {"DAILY_LOG", "CHAT_CONTINUATION"}
 EXPECTED_REVIEW_STATUS = "MAPPING_CONFIRMED"
 EXPECTED_FINAL_STATUS = "DOCUMENT_STANDARDIZATION_PANEL_REVIEW_CONFIRMED"
-ENGINE_VERSION = "A20_STANDARDIZED_DOCUMENT_BUILDER_V3_PLACEHOLDER_COUNT"
+ENGINE_VERSION = "A20_STANDARDIZED_DOCUMENT_BUILDER_V2_METADATA_TABLE"
 OUTPUT_CONTRACT_VERSION = "1.0"
 
 DOCUMENT_ID_RE = re.compile(r"\bMM-[A-Z]{2,10}-\d{3,8}(?:-\d{1,4})?[A-Z]?\b")
@@ -911,14 +910,7 @@ def build_markdown(
     )
 
     markdown = "\n".join(lines).rstrip() + "\n"
-
-    # Počítají se pouze skutečné nedoplněné hodnoty a prázdné kapitoly.
-    # Text kontrolního checklistu nesmí být považován za placeholder.
-    total_placeholder_count = (
-        metadata_placeholder_count
-        + content_placeholder_count
-        + len(empty_categories)
-    )
+    total_placeholder_count = markdown.count("DOPLNIT UŽIVATELEM")
 
     build_summary = {
         "document_status": document_status,

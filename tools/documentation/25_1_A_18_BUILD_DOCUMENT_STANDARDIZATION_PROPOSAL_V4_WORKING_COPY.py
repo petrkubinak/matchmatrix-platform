@@ -59,15 +59,11 @@ PODPOROVANÉ TYPY:
 - DAILY_LOG
 - CHAT_CONTINUATION
 
-V6 – DŮKAZNĚ ŘÍZENÉ SÉMANTICKÉ SMĚROVÁNÍ:
+V4 – SÉMANTICKÉ SMĚROVÁNÍ NADPISŮ:
 - rozpoznává význam běžně pojmenovaných kapitol, nejen přesné šablonové názvy,
-- dědí kategorii z nadřazené markdown kapitoly do jejích podkapitol,
 - upřednostňuje význam nadpisu před technickými výrazy uvnitř kapitoly,
-- odmítá falešné nadpisy tvořené delšími instrukčními větami,
-- směruje checkpointy, snapshoty, pravidla, rizika a pracovní pořadí podle významu,
-- rozpoznává historický korpus, uložený snapshot, související dokumenty,
-  otevřené technické body a rekonstruované závěry jako samostatné významové celky,
-- smíšený nebo obecný závěr ponechává bez nucené explicitní kategorie,
+- rozlišuje stav, dokončené práce, rozpracované kroky, rizika, pravidla,
+  databázový model, zdrojový archiv a první další krok,
 - metadata pracovní oblasti přijímá také pod názvem „Hlavní oblast“.
 
 VÝSTUP:
@@ -104,7 +100,7 @@ AUDIT_DEFAULT = Path(
 )
 OUTPUT_DEFAULT = Path("reports/documentation/standardization/proposals")
 SUPPORTED_TYPES = {"DAILY_LOG", "CHAT_CONTINUATION"}
-ENGINE_VERSION = "A18_CONTEXTUAL_MAPPING_V6_EVIDENCE_AWARE_HEADING_ROUTING"
+ENGINE_VERSION = "A18_CONTEXTUAL_MAPPING_V4_SEMANTIC_HEADING_ROUTING"
 PANEL_CONTRACT_VERSION = "1.0"
 
 DOCUMENT_ID_RE = re.compile(
@@ -562,11 +558,9 @@ HEADING_SEMANTIC_RULES: dict[str, tuple[tuple[str, tuple[str, ...]], ...]] = {
             "nasledujici poradi prace", "poradi dalsi prace",
             "dalsi poradi prace", "navazujici poradi prace",
             "navazujici kroky", "nasledujici kroky",
-            "nasledujici poradi po overeni",
         )),
         ("open_tasks", (
             "open questions", "otevrene ukoly", "otevrene otazky", "todo",
-            "otevreny technicky bod",
         )),
         ("risks", (
             "rizika a upozorneni", "rizika", "upozorneni", "blokatory",
@@ -587,16 +581,12 @@ HEADING_SEMANTIC_RULES: dict[str, tuple[tuple[str, tuple[str, ...]], ...]] = {
             "soubory skripty a prikazy", "technicke zdroje",
             "aktivni skripty", "historicke verze", "dokumenty historie",
             "zdrojovy archiv", "zdrojove soubory", "archiv zdroju",
-            "historicky korpus", "ulozeni schvaleneho snapshotu",
-            "souvisejici dokumenty",
         )),
         ("ai_context", (
             "ai context", "pravidla pro ai", "kontext pro ai",
         )),
         ("project_snapshot", (
             "project snapshot", "snapshot projektu", "projektovy snapshot",
-            "co snapshot obsahuje", "hlavni rekonstruovane zavery",
-            "rekonstruovane zavery",
         )),
         ("database_snapshot", (
             "database snapshot", "databazovy snapshot", "stav databaze",
@@ -903,17 +893,14 @@ def exact_heading_category(
         for phrase in phrases:
             normalized_phrase = normalize_heading(phrase)
             phrase_words = normalized_phrase.split()
-            candidate_words = normalized_candidate.split()
             contained_phrase = (
                 len(phrase_words) >= 2
-                and len(candidate_words) <= 10
-                and (
-                    normalized_candidate.startswith(normalized_phrase + " ")
-                    or normalized_candidate.endswith(" " + normalized_phrase)
-                )
+                and len(normalized_candidate.split()) <= 14
+                and normalized_phrase in normalized_candidate
             )
             if (
                 normalized_candidate == normalized_phrase
+                or normalized_candidate.startswith(normalized_phrase + " ")
                 or contained_phrase
             ):
                 return category
@@ -931,38 +918,6 @@ def exact_heading_category(
             return "in_progress"
         if normalized_candidate.startswith("nasledujici hlavni etapa"):
             return "in_progress"
-
-        # Obecné V5 směrování krátkých skutečných nadpisů.
-        if len(normalized_candidate.split()) <= 10:
-            if any(token in normalized_candidate for token in (
-                "checkpoint", "kontrolni bod", "overovaci bod",
-                "posledni overeny stav", "posledni validacni stav",
-            )):
-                return "current_status"
-            if any(token in normalized_candidate for token in (
-                "snapshot databaze", "databazovy snapshot",
-                "databazovy model", "model databaze",
-            )):
-                return "database_snapshot"
-            if any(token in normalized_candidate for token in (
-                "pravidla", "zasady", "rozhodnuti",
-            )):
-                return "decisions"
-            if any(token in normalized_candidate for token in (
-                "riziko", "rizika", "blokator", "upozorneni",
-                "co se nesmi", "zakaz",
-            )):
-                return "risks"
-            if any(token in normalized_candidate for token in (
-                "poradi prace", "plan prace", "navazujici kroky",
-                "nasledujici kroky",
-            )):
-                return "in_progress"
-            if any(token in normalized_candidate for token in (
-                "prvni dalsi krok", "jediny dalsi krok",
-                "bezprostredni dalsi krok",
-            )):
-                return "next_step"
 
     return None
 
@@ -1016,14 +971,8 @@ def detect_heading(
             normalized_heading.startswith(token)
             for token in ACTION_VERBS + DECISION_VERBS + PROBLEM_TOKENS
         )
-        instruction_like = bool(re.match(
-            r"^(?:a|ať|over|ověř|spust|zkontroluj|otevri|otevři|"
-            r"vyber|uloz|ulož|zkopiruj|zkopíruj|presun|přesuň)\\b",
-            heading.strip(),
-            re.IGNORECASE,
-        ))
         sentence_like = heading.endswith((".", "!", "?", ";"))
-        if category and not action_like and not instruction_like and not sentence_like:
+        if category and not action_like and not sentence_like:
             return True, heading, category, "numbered_known_heading"
 
     category = exact_heading_category(stripped, document_type)

@@ -16,9 +16,7 @@ K ČEMU:
 - automatické bloky ve stavu NOT_REQUIRED vloží podle návrhu A18,
 - vynechá pouze bloky výslovně potvrzené jako EXCLUDE_AS_NOISE,
 - sestaví kapitoly podle category_catalog,
-- načte existující metadata z první Markdown tabulky zdrojového dokumentu,
 - doplní standardní metadata a schvalovací checklist,
-- počítá pouze skutečné placeholdery a nezapočítává kontrolní checklist,
 - vytvoří nový Markdown kandidát, diff a úplný build report,
 - původní dokument ani databázi nemění.
 
@@ -100,10 +98,10 @@ SUPPORTED_CONTRACT_VERSIONS = {"1.0"}
 SUPPORTED_DOCUMENT_TYPES = {"DAILY_LOG", "CHAT_CONTINUATION"}
 EXPECTED_REVIEW_STATUS = "MAPPING_CONFIRMED"
 EXPECTED_FINAL_STATUS = "DOCUMENT_STANDARDIZATION_PANEL_REVIEW_CONFIRMED"
-ENGINE_VERSION = "A20_STANDARDIZED_DOCUMENT_BUILDER_V3_PLACEHOLDER_COUNT"
+ENGINE_VERSION = "A20_STANDARDIZED_DOCUMENT_BUILDER_V1"
 OUTPUT_CONTRACT_VERSION = "1.0"
 
-DOCUMENT_ID_RE = re.compile(r"\bMM-[A-Z]{2,10}-\d{3,8}(?:-\d{1,4})?[A-Z]?\b")
+DOCUMENT_ID_RE = re.compile(r"\bMM-[A-Z]{2,10}-\d{3,4}[A-Z]?\b")
 VERSION_RE = re.compile(r"\b(?:v|verze\s*)?(\d+\.\d+)\b", re.IGNORECASE)
 DATE_RE = re.compile(
     r"\b("
@@ -249,67 +247,6 @@ def first_match(pattern: re.Pattern[str], text: str) -> str | None:
     if match.lastindex:
         return match.group(1)
     return match.group(0)
-
-
-
-def parse_markdown_metadata_table(text: str) -> dict[str, str]:
-    """
-    Načte první dvousloupcovou Markdown tabulku metadat.
-
-    Podporuje běžné názvy polí používané v dokumentech MatchMatrix,
-    například Dokument / Document ID, Název, Verze, Datum, Autor projektu
-    a Hlavní oblast.
-    """
-    aliases = {
-        "document id": "document_id",
-        "dokument": "document_id",
-        "id dokumentu": "document_id",
-        "název": "title",
-        "nazev": "title",
-        "název dokumentu": "title",
-        "nazev dokumentu": "title",
-        "verze": "version",
-        "datum": "date",
-        "autor": "author",
-        "autor projektu": "author",
-        "pracovní oblast": "working_area",
-        "pracovni oblast": "working_area",
-        "hlavní oblast": "working_area",
-        "hlavni oblast": "working_area",
-    }
-
-    result: dict[str, str] = {}
-    in_table = False
-
-    for raw_line in text.splitlines():
-        line = raw_line.strip()
-
-        if not line.startswith("|"):
-            if in_table and result:
-                break
-            continue
-
-        cells = [cell.strip() for cell in line.strip("|").split("|")]
-        if len(cells) < 2:
-            continue
-
-        if all(set(cell) <= {"-", ":"} for cell in cells if cell):
-            in_table = True
-            continue
-
-        key_raw = re.sub(r"[*_`]", "", cells[0]).strip().casefold()
-        value = cells[1].strip().strip("`").strip()
-
-        if key_raw in {"položka", "polozka"}:
-            in_table = True
-            continue
-
-        mapped = aliases.get(key_raw)
-        if mapped and value:
-            result.setdefault(mapped, value)
-            in_table = True
-
-    return result
 
 
 def infer_source_title(text: str, source_path: Path) -> str | None:
@@ -684,24 +621,10 @@ def infer_metadata(
     source_path: Path,
     document_type: str,
 ) -> dict[str, str]:
-    table_metadata = parse_markdown_metadata_table(source_text)
-
-    source_id = (
-        table_metadata.get("document_id")
-        or first_match(DOCUMENT_ID_RE, source_text)
-    )
-    source_version = (
-        table_metadata.get("version")
-        or first_match(VERSION_RE, source_text)
-    )
-    source_date = normalize_date(
-        table_metadata.get("date")
-        or first_match(DATE_RE, source_text)
-    )
-    source_title = (
-        table_metadata.get("title")
-        or infer_source_title(source_text, source_path)
-    )
+    source_id = first_match(DOCUMENT_ID_RE, source_text)
+    source_version = first_match(VERSION_RE, source_text)
+    source_date = normalize_date(first_match(DATE_RE, source_text))
+    source_title = infer_source_title(source_text, source_path)
 
     date_value = (
         normalize_date(args.date)
@@ -718,27 +641,20 @@ def infer_metadata(
         or source_version
         or placeholder("VERZE")
     )
-    author = (
-        args.author
-        or table_metadata.get("author")
-        or placeholder("AUTOR")
-    )
+    author = args.author or placeholder("AUTOR")
     working_area = (
         args.working_area
-        or table_metadata.get("working_area")
         or placeholder("PRACOVNÍ OBLAST")
     )
 
     if args.title:
         title = args.title
-    elif source_title:
-        title = source_title
     elif document_type == "DAILY_LOG":
         title = f"MATCHMATRIX – DENNÍ ZÁPIS – {date_value}"
     elif document_type == "CHAT_CONTINUATION":
         title = f"MATCHMATRIX – NAVÁZÁNÍ – {date_value}"
     else:
-        title = source_path.stem
+        title = source_title or source_path.stem
 
     return {
         "document_id": document_id,
@@ -911,14 +827,7 @@ def build_markdown(
     )
 
     markdown = "\n".join(lines).rstrip() + "\n"
-
-    # Počítají se pouze skutečné nedoplněné hodnoty a prázdné kapitoly.
-    # Text kontrolního checklistu nesmí být považován za placeholder.
-    total_placeholder_count = (
-        metadata_placeholder_count
-        + content_placeholder_count
-        + len(empty_categories)
-    )
+    total_placeholder_count = markdown.count("DOPLNIT UŽIVATELEM")
 
     build_summary = {
         "document_status": document_status,

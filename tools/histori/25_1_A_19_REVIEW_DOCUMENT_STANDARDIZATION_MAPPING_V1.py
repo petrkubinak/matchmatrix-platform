@@ -15,7 +15,6 @@ K ČEMU:
 - umožní potvrdit navrženou kapitolu,
 - umožní přesunout blok do jiné kapitoly,
 - umožní bezpečně rozdělit blok bez ztráty textu,
-- při rozdělení umožní zvolit samostatnou cílovou kategorii pro každou část,
 - umožní označit skutečný šum k vyloučení,
 - umožní vrátit blok k ručnímu posouzení,
 - podporuje hromadné potvrzení a přesun vybraných bloků,
@@ -94,7 +93,7 @@ LATEST_REVIEW_NAME = "document_standardization_panel_review_latest.json"
 
 SUPPORTED_CONTRACT_VERSIONS = {"1.0"}
 EXPECTED_INPUT_STATUS = "DOCUMENT_STANDARDIZATION_PANEL_MAPPING_READY"
-ENGINE_VERSION = "A19_PANEL_MAPPING_REVIEW_V2_PER_PART_CATEGORY"
+ENGINE_VERSION = "A19_PANEL_MAPPING_REVIEW_V1"
 OUTPUT_CONTRACT_VERSION = "1.0"
 
 ACTION_CONFIRM = "CONFIRM"
@@ -677,172 +676,6 @@ def save_review_files(
     return paths
 
 
-class SplitPartsCategoryDialog(tk.Toplevel):
-    """
-    Druhý krok rozdělení bloku.
-
-    Každá vzniklá část dostane vlastní cílovou kategorii. Tím se zabrání
-    chybě, kdy byly všechny části automaticky uloženy do jedné kapitoly.
-    """
-
-    def __init__(
-        self,
-        parent: tk.Misc,
-        block_id: str,
-        parts: Sequence[str],
-        categories: Sequence[Category],
-        default_category: str,
-    ) -> None:
-        super().__init__(parent)
-        self.title(f"Kategorie rozdělených částí – {block_id}")
-        self.geometry("1000x700")
-        self.minsize(800, 560)
-        self.transient(parent)
-        self.grab_set()
-
-        self.parts = list(parts)
-        self.categories = list(categories)
-        self.default_category = default_category
-        self.result: list[dict[str, Any]] | None = None
-        self.category_vars: list[tk.StringVar] = []
-
-        ttk.Label(
-            self,
-            text=(
-                "Zvol samostatnou cílovou kapitolu pro každou část. "
-                "Text částí je pouze pro čtení."
-            ),
-            wraplength=940,
-        ).pack(fill="x", padx=12, pady=(12, 6))
-
-        outer = ttk.Frame(self)
-        outer.pack(fill="both", expand=True, padx=12, pady=6)
-
-        canvas = tk.Canvas(outer, highlightthickness=0)
-        scrollbar = ttk.Scrollbar(
-            outer,
-            orient="vertical",
-            command=canvas.yview,
-        )
-        content = ttk.Frame(canvas)
-
-        content.bind(
-            "<Configure>",
-            lambda _event: canvas.configure(
-                scrollregion=canvas.bbox("all")
-            ),
-        )
-        canvas_window = canvas.create_window(
-            (0, 0),
-            window=content,
-            anchor="nw",
-        )
-        canvas.bind(
-            "<Configure>",
-            lambda event: canvas.itemconfigure(
-                canvas_window,
-                width=event.width,
-            ),
-        )
-        canvas.configure(yscrollcommand=scrollbar.set)
-
-        canvas.pack(side="left", fill="both", expand=True)
-        scrollbar.pack(side="right", fill="y")
-
-        category_values = [
-            f"{category.code} — {category.label_cs}"
-            for category in self.categories
-        ]
-        default_index = next(
-            (
-                index
-                for index, category in enumerate(self.categories)
-                if category.code == self.default_category
-            ),
-            0,
-        )
-
-        for index, part in enumerate(self.parts, start=1):
-            frame = ttk.LabelFrame(
-                content,
-                text=f"Část {index}",
-            )
-            frame.pack(fill="x", padx=4, pady=6)
-
-            preview = tk.Text(
-                frame,
-                height=max(4, min(10, part.count("\n") + 3)),
-                wrap="word",
-            )
-            preview.pack(fill="x", padx=8, pady=(8, 5))
-            preview.insert("1.0", part)
-            preview.configure(state="disabled")
-
-            row = ttk.Frame(frame)
-            row.pack(fill="x", padx=8, pady=(0, 8))
-
-            ttk.Label(
-                row,
-                text="Cílová kapitola:",
-            ).pack(side="left")
-
-            variable = tk.StringVar()
-            combo = ttk.Combobox(
-                row,
-                textvariable=variable,
-                values=category_values,
-                state="readonly",
-                width=58,
-            )
-            combo.pack(side="left", padx=8)
-            if category_values:
-                combo.current(default_index)
-            self.category_vars.append(variable)
-
-        buttons = ttk.Frame(self)
-        buttons.pack(fill="x", padx=12, pady=(6, 12))
-
-        ttk.Button(
-            buttons,
-            text="Zrušit",
-            command=self.destroy,
-        ).pack(side="right")
-
-        ttk.Button(
-            buttons,
-            text="Potvrdit kategorie částí",
-            command=self._accept,
-        ).pack(side="right", padx=8)
-
-    def _accept(self) -> None:
-        result: list[dict[str, Any]] = []
-
-        for index, (part, variable) in enumerate(
-            zip(self.parts, self.category_vars),
-            start=1,
-        ):
-            selected = variable.get().split(" — ", 1)[0].strip()
-            if not selected:
-                messagebox.showerror(
-                    "Chybí kategorie",
-                    f"Část {index} nemá vybranou cílovou kapitolu.",
-                    parent=self,
-                )
-                return
-
-            result.append(
-                {
-                    "part_id": f"PART-{index:02d}",
-                    "text": part,
-                    "selected_category": selected,
-                    "status": "CONFIRMED",
-                }
-            )
-
-        self.result = result
-        self.destroy()
-
-
 class SplitDialog(tk.Toplevel):
     def __init__(
         self,
@@ -922,7 +755,7 @@ class SplitDialog(tk.Toplevel):
         ).pack(side="right")
         ttk.Button(
             buttons,
-            text="Pokračovat ke kategoriím",
+            text="Potvrdit rozdělení",
             command=self._accept,
         ).pack(side="right", padx=8)
 
@@ -950,23 +783,17 @@ class SplitDialog(tk.Toplevel):
             )
             return
 
-        category_dialog = SplitPartsCategoryDialog(
-            self,
-            "rozdělený blok",
-            raw_parts,
-            self.categories,
-            self._selected_category(),
-        )
-        self.wait_window(category_dialog)
-
-        if category_dialog.result is None:
-            return
-
-        verify_split_parts(
-            self.original_text,
-            category_dialog.result,
-        )
-        self.result = category_dialog.result
+        category = self._selected_category()
+        self.result = [
+            {
+                "part_id": f"PART-{index:02d}",
+                "text": part,
+                "selected_category": category,
+                "status": "CONFIRMED",
+            }
+            for index, part in enumerate(raw_parts, start=1)
+        ]
+        verify_split_parts(self.original_text, self.result)
         self.destroy()
 
 

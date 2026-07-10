@@ -16,8 +16,6 @@ K ČEMU:
 - pro navázání ověří strukturu podle MM-DOC-901 a MM-STD-009,
 - pro Project Snapshot ověří identitu a povinné sekce podle MM-STD-009,
 - pro hlavní dokument ověří strukturu podle MM-STD-001,
-- referenční dokumenty MM-REF rozpozná podle jejich primárního Document ID
-  a nepoužije na ně pravidla hlavních dokumentů ani Project Snapshotů,
 - upozorní na terminologické a ručně ověřitelné oblasti,
 - vytvoří JSON a Markdown auditní report,
 - původní dokument nijak nemění.
@@ -38,7 +36,6 @@ Podporované typy:
 - CHAT_CONTINUATION
 - PROJECT_SNAPSHOT
 - MAIN_DOCUMENT
-- REFERENCE_DOCUMENT
 - GENERIC_DOCUMENT
 
 VÝSTUP:
@@ -63,14 +60,13 @@ from typing import Any, Iterable, Mapping, Sequence
 
 
 REPORT_PREFIX = "document_compliance_audit"
-ENGINE_VERSION = "A17_STANDARD_COMPLIANCE_V1_3_REFERENCE_DOCUMENT_TYPE"
+ENGINE_VERSION = "A17_STANDARD_COMPLIANCE_V1_2_PROJECT_SNAPSHOT_PRIMARY_ID"
 SUPPORTED_TYPES = {
     "AUTO",
     "DAILY_LOG",
     "CHAT_CONTINUATION",
     "PROJECT_SNAPSHOT",
     "MAIN_DOCUMENT",
-    "REFERENCE_DOCUMENT",
     "GENERIC_DOCUMENT",
 }
 
@@ -633,15 +629,6 @@ def detect_type(path: Path, text: str, headings: Sequence[Mapping[str, Any]]) ->
     heading_text = " ".join(str(item["normalized"]) for item in headings)
     evidence: list[str] = []
 
-    # Identita referenčního dokumentu má přednost před obsahovou heuristikou.
-    # MM-REF-002 přirozeně obsahuje odkazy na MM-PS dokumenty a bez této
-    # priority by mohl být chybně klasifikován jako PROJECT_SNAPSHOT.
-    if re.match(r"^mm ref \d{3,4}[a-z]?\b", name):
-        return (
-            "REFERENCE_DOCUMENT",
-            ["Název souboru odpovídá referenčnímu dokumentu MM-REF."],
-        )
-
     daily_score = 0
     continuation_score = 0
     project_snapshot_score = 0
@@ -1197,13 +1184,6 @@ def proposed_sections(document_type: str, findings: Sequence[Finding]) -> list[s
             ("MAIN-CONCLUSION", "Závěr dokumentu"),
             ("MAIN-VERSION-HISTORY", "Historie verzí"),
         ]
-    elif document_type == "REFERENCE_DOCUMENT":
-        ordered = [
-            ("COMMON-METADATA-SECTION", "Informace o dokumentu"),
-            ("COMMON-DOC-ID", "Document ID"),
-            ("COMMON-VERSION", "Verze"),
-            ("COMMON-STATUS", "Stav"),
-        ]
     else:
         ordered = [
             ("COMMON-METADATA-SECTION", "Informace o dokumentu"),
@@ -1317,10 +1297,6 @@ def main() -> int:
             )
         elif document_type == "MAIN_DOCUMENT":
             findings.extend(evaluate_main(text, headings))
-        elif document_type == "REFERENCE_DOCUMENT":
-            # Referenční dokumenty jsou v této verzi ověřovány pouze společnými
-            # pravidly. Specializovaná pravidla MM-REF budou doplněna samostatně.
-            pass
 
         compliance_status, recommended_action = overall_status(findings)
         compliance_score = score(findings)

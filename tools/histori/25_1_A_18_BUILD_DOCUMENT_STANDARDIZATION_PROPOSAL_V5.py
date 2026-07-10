@@ -59,14 +59,12 @@ PODPOROVANÉ TYPY:
 - DAILY_LOG
 - CHAT_CONTINUATION
 
-V6 – DŮKAZNĚ ŘÍZENÉ SÉMANTICKÉ SMĚROVÁNÍ:
+V5 – HIERARCHICKÉ SÉMANTICKÉ SMĚROVÁNÍ:
 - rozpoznává význam běžně pojmenovaných kapitol, nejen přesné šablonové názvy,
 - dědí kategorii z nadřazené markdown kapitoly do jejích podkapitol,
 - upřednostňuje význam nadpisu před technickými výrazy uvnitř kapitoly,
 - odmítá falešné nadpisy tvořené delšími instrukčními větami,
 - směruje checkpointy, snapshoty, pravidla, rizika a pracovní pořadí podle významu,
-- rozpoznává historický korpus, uložený snapshot, související dokumenty,
-  otevřené technické body a rekonstruované závěry jako samostatné významové celky,
 - smíšený nebo obecný závěr ponechává bez nucené explicitní kategorie,
 - metadata pracovní oblasti přijímá také pod názvem „Hlavní oblast“.
 
@@ -104,7 +102,7 @@ AUDIT_DEFAULT = Path(
 )
 OUTPUT_DEFAULT = Path("reports/documentation/standardization/proposals")
 SUPPORTED_TYPES = {"DAILY_LOG", "CHAT_CONTINUATION"}
-ENGINE_VERSION = "A18_CONTEXTUAL_MAPPING_V6_EVIDENCE_AWARE_HEADING_ROUTING"
+ENGINE_VERSION = "A18_CONTEXTUAL_MAPPING_V5_HIERARCHICAL_SEMANTIC_ROUTING"
 PANEL_CONTRACT_VERSION = "1.0"
 
 DOCUMENT_ID_RE = re.compile(
@@ -562,11 +560,9 @@ HEADING_SEMANTIC_RULES: dict[str, tuple[tuple[str, tuple[str, ...]], ...]] = {
             "nasledujici poradi prace", "poradi dalsi prace",
             "dalsi poradi prace", "navazujici poradi prace",
             "navazujici kroky", "nasledujici kroky",
-            "nasledujici poradi po overeni",
         )),
         ("open_tasks", (
             "open questions", "otevrene ukoly", "otevrene otazky", "todo",
-            "otevreny technicky bod",
         )),
         ("risks", (
             "rizika a upozorneni", "rizika", "upozorneni", "blokatory",
@@ -587,16 +583,12 @@ HEADING_SEMANTIC_RULES: dict[str, tuple[tuple[str, tuple[str, ...]], ...]] = {
             "soubory skripty a prikazy", "technicke zdroje",
             "aktivni skripty", "historicke verze", "dokumenty historie",
             "zdrojovy archiv", "zdrojove soubory", "archiv zdroju",
-            "historicky korpus", "ulozeni schvaleneho snapshotu",
-            "souvisejici dokumenty",
         )),
         ("ai_context", (
             "ai context", "pravidla pro ai", "kontext pro ai",
         )),
         ("project_snapshot", (
             "project snapshot", "snapshot projektu", "projektovy snapshot",
-            "co snapshot obsahuje", "hlavni rekonstruovane zavery",
-            "rekonstruovane zavery",
         )),
         ("database_snapshot", (
             "database snapshot", "databazovy snapshot", "stav databaze",

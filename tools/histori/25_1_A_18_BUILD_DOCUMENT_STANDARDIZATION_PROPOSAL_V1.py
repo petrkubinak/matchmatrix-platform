@@ -13,8 +13,7 @@ K ČEMU:
 - načte audit A17 a původní dokument,
 - ověří SHA-256 původního dokumentu,
 - rozdělí dokument na dohledatelné zdrojové bloky,
-- upřednostňuje jednoznačné nadpisy a celé kapitoly před technickými signály uvnitř textu,
-- slučuje odstavce a kódové bloky stejné kapitoly do jednoho mapovacího celku,
+- kombinuje nadpisy, klíčová slova, technické signály, pořadí a sousední bloky,
 - u každého bloku vypočítá kandidátní kapitoly, skóre, jistotu a důvody,
 - vytvoří standardizovaný návrh bez přepsání původního souboru,
 - vytvoří unified diff,
@@ -59,17 +58,6 @@ PODPOROVANÉ TYPY:
 - DAILY_LOG
 - CHAT_CONTINUATION
 
-V6 – DŮKAZNĚ ŘÍZENÉ SÉMANTICKÉ SMĚROVÁNÍ:
-- rozpoznává význam běžně pojmenovaných kapitol, nejen přesné šablonové názvy,
-- dědí kategorii z nadřazené markdown kapitoly do jejích podkapitol,
-- upřednostňuje význam nadpisu před technickými výrazy uvnitř kapitoly,
-- odmítá falešné nadpisy tvořené delšími instrukčními větami,
-- směruje checkpointy, snapshoty, pravidla, rizika a pracovní pořadí podle významu,
-- rozpoznává historický korpus, uložený snapshot, související dokumenty,
-  otevřené technické body a rekonstruované závěry jako samostatné významové celky,
-- smíšený nebo obecný závěr ponechává bez nucené explicitní kategorie,
-- metadata pracovní oblasti přijímá také pod názvem „Hlavní oblast“.
-
 VÝSTUP:
 reports/documentation/standardization/proposals/
 - document_standardization_proposal_YYYYMMDD_HHMMSS.md
@@ -104,12 +92,10 @@ AUDIT_DEFAULT = Path(
 )
 OUTPUT_DEFAULT = Path("reports/documentation/standardization/proposals")
 SUPPORTED_TYPES = {"DAILY_LOG", "CHAT_CONTINUATION"}
-ENGINE_VERSION = "A18_CONTEXTUAL_MAPPING_V6_EVIDENCE_AWARE_HEADING_ROUTING"
+ENGINE_VERSION = "A18_CONTEXTUAL_MAPPING_V2"
 PANEL_CONTRACT_VERSION = "1.0"
 
-DOCUMENT_ID_RE = re.compile(
-    r"\bMM-[A-Z]{2,10}-(?:20\d{6}(?:-\d{1,3})?|\d{3,4}[A-Z]?)\b"
-)
+DOCUMENT_ID_RE = re.compile(r"\bMM-[A-Z]{2,10}-\d{3,4}[A-Z]?\b")
 VERSION_RE = re.compile(r"\b(?:v|verze\s*)?(\d+\.\d+)\b", re.IGNORECASE)
 DATE_RE = re.compile(
     r"\b("
@@ -119,17 +105,6 @@ DATE_RE = re.compile(
     r")\b"
 )
 HEADING_RE = re.compile(r"^\s{0,3}#{1,6}\s+(.+?)\s*$")
-MARKDOWN_HEADING_WITH_LEVEL_RE = re.compile(
-    r"^\s{0,3}(#{1,6})\s+(.+?)\s*$"
-)
-HEADING_PREFIX_RE = re.compile(
-    r"^\s*(?:"
-    r"\d{1,3}(?:\.\d{1,3})*[.)-]?|"
-    r"[A-ZÁČĎÉĚÍŇÓŘŠŤÚŮÝŽ][.)-]|"
-    r"[IVXLCDM]{1,8}[.)-]"
-    r")\s+",
-    re.IGNORECASE,
-)
 NUMBERED_HEADING_RE = re.compile(
     r"^\s*(?:"
     r"\d{1,3}(?:\.\d{1,3})*[.)-]?|"
@@ -485,136 +460,6 @@ CATEGORY_CATALOG: dict[str, list[dict[str, Any]]] = {
 }
 
 
-HEADING_SEMANTIC_RULES: dict[str, tuple[tuple[str, tuple[str, ...]], ...]] = {
-    "DAILY_LOG": (
-        ("identification", (
-            "informace o dokumentu", "identifikace", "historie verzi",
-        )),
-        ("initial_state", (
-            "vychozi stav", "stav na zacatku", "pocatecni stav",
-            "predchozi stav", "kontext dne",
-        )),
-        ("goal", (
-            "cil pracovniho dne", "cil dne", "cil prace", "priorita dne",
-        )),
-        ("work_done", (
-            "provedene prace", "co jsme udelali", "co bylo provedeno",
-            "realizovane kroky", "prubeh prace", "dokoncene prace",
-        )),
-        ("decisions", (
-            "prijata rozhodnuti", "rozhodnuti", "dohodnuta pravidla",
-        )),
-        ("problems", (
-            "problemy a jejich reseni", "problemy", "chyby a reseni",
-            "komplikace", "blokatory",
-        )),
-        ("verified_outputs", (
-            "overene vysledky", "technicke vystupy", "kontrolni vystupy",
-            "soubory a skripty", "overene soubory", "aktivni skripty",
-        )),
-        ("results", (
-            "vysledky dne", "stav na konci dne", "souhrn dne",
-            "finalni stav", "celkovy stav",
-        )),
-        ("continuation", (
-            "plan pokracovani", "dalsi prace", "co dale", "pokracovani",
-            "otevrene ukoly",
-        )),
-        ("next_step", (
-            "jeden hlavni dalsi krok", "hlavni dalsi krok",
-            "prvni dalsi krok", "next step", "presny dalsi krok",
-        )),
-        ("links", (
-            "vazby a navazani", "souvisejici dokumenty", "odkazy a vazby",
-        )),
-    ),
-    "CHAT_CONTINUATION": (
-        ("identification", (
-            "informace o dokumentu", "identifikace navazani", "identifikace",
-            "historie verzi",
-        )),
-        ("context", (
-            "ucel navazani", "nejdulezitejsi skutecnost", "vychozi kontext",
-            "predchozi chat", "na co navazuje", "kontext",
-        )),
-        ("current_status", (
-            "current status", "aktualni stav", "soucasny stav",
-            "overeny soucasny stav", "stav projektu", "kde jsme",
-            "overeny dokument", "git",
-            "aktivni soubor", "stav aktivniho souboru",
-            "posledni validacni vysledek", "validacni vysledek",
-            "posledni overeny vysledek", "posledni vysledek kontroly",
-        )),
-        ("completed", (
-            "co bylo dokonceno", "dokonceno", "hotove oblasti",
-            "provedene opravy", "dokoncene opravy", "opravy a overeni",
-            "prirustkove vazby", "prirustkove overeni",
-            "explicitni incremental rezim", "odstraneny syntaxwarning",
-            "novy stav po selhani overeni", "historie skriptu",
-            "dalsi relevantni dokoncene prace",
-            "relevantni dokoncene prace", "dalsi dokoncene prace",
-            "dokoncene prace", "overene dokoncene prace",
-        )),
-        ("in_progress", (
-            "co zustava rozpracovano", "rozpracovano", "nedokonceno",
-            "dalsi technicky krok", "nasledujici hlavni etapa",
-            "dalsi etapa", "plan pokracovani",
-            "nasledujici poradi prace", "poradi dalsi prace",
-            "dalsi poradi prace", "navazujici poradi prace",
-            "navazujici kroky", "nasledujici kroky",
-            "nasledujici poradi po overeni",
-        )),
-        ("open_tasks", (
-            "open questions", "otevrene ukoly", "otevrene otazky", "todo",
-            "otevreny technicky bod",
-        )),
-        ("risks", (
-            "rizika a upozorneni", "rizika", "upozorneni", "blokatory",
-            "co se nesmi udelat", "co se nema znovu delat",
-            "kriticky otevreny bod", "kriticky bod",
-            "bezpecnostni riziko", "bezpecnostni blokator",
-            "otevreny blokator", "kriticke upozorneni",
-        )),
-        ("decisions", (
-            "prijata rozhodnuti a platna pravidla", "prijata rozhodnuti",
-            "platna pravidla", "rozhodnuti",
-            "dulezita pravidla", "pracovni pravidla",
-            "bezpecnostni pravidla", "zavazna pravidla",
-            "pravidla dalsi prace",
-        )),
-        ("sources", (
-            "overene zdroje soubory a prikazy", "overene zdroje",
-            "soubory skripty a prikazy", "technicke zdroje",
-            "aktivni skripty", "historicke verze", "dokumenty historie",
-            "zdrojovy archiv", "zdrojove soubory", "archiv zdroju",
-            "historicky korpus", "ulozeni schvaleneho snapshotu",
-            "souvisejici dokumenty",
-        )),
-        ("ai_context", (
-            "ai context", "pravidla pro ai", "kontext pro ai",
-        )),
-        ("project_snapshot", (
-            "project snapshot", "snapshot projektu", "projektovy snapshot",
-            "co snapshot obsahuje", "hlavni rekonstruovane zavery",
-            "rekonstruovane zavery",
-        )),
-        ("database_snapshot", (
-            "database snapshot", "databazovy snapshot", "stav databaze",
-            "databaze", "databazovy model", "model databaze",
-            "databazove tabulky", "datovy model dokumentace",
-            "dokumentacni databazovy model",
-        )),
-        ("next_step", (
-            "next step", "prvni krok noveho chatu", "prvni dalsi krok",
-            "hlavni dalsi krok", "jeden hlavni dalsi krok",
-            "prvni a jediny dalsi krok", "prvni a jediny krok",
-            "jediny dalsi krok", "jediny nasledujici krok",
-            "bezprostredni dalsi krok",
-        )),
-    ),
-}
-
-
 ACTION_VERBS = (
     "udelali", "vytvorili", "opravili", "doplnili", "nastavili",
     "implementovali", "spustili", "overili", "pripravili", "zmenili",
@@ -795,48 +640,6 @@ def load_audit(path: Path) -> dict[str, Any]:
     return payload
 
 
-def clean_metadata_cell(value: str) -> str:
-    cleaned = value.strip().strip("`").strip()
-    cleaned = re.sub(r"^\*{1,2}|\*{1,2}$", "", cleaned).strip()
-    return cleaned
-
-
-def extract_metadata_table(text: str) -> dict[str, str]:
-    metadata: dict[str, str] = {}
-    for raw_line in text.splitlines():
-        line = raw_line.strip()
-        if not (line.startswith("|") and line.endswith("|")):
-            continue
-        cells = [clean_metadata_cell(cell) for cell in line.strip("|").split("|")]
-        if len(cells) < 2:
-            continue
-        key, value = cells[0], cells[1]
-        normalized_key = normalize_heading(key)
-        if not normalized_key or normalized_key in {"polozka", "field"}:
-            continue
-        if re.fullmatch(r"[-: ]+", key) or re.fullmatch(r"[-: ]+", value):
-            continue
-        if value:
-            metadata.setdefault(normalized_key, value)
-    return metadata
-
-
-def metadata_value(metadata: Mapping[str, str], *aliases: str) -> str | None:
-    for alias in aliases:
-        value = metadata.get(normalize_heading(alias))
-        if value:
-            return value
-    return None
-
-
-def count_placeholders(proposal: str) -> int:
-    patterns = (
-        r"\[DOPLNIT UŽIVATELEM[^\]]*\]",
-        r">\s*\*\*DOPLNIT UŽIVATELEM:\*\*",
-    )
-    return sum(len(re.findall(pattern, proposal)) for pattern in patterns)
-
-
 def first_title(text: str) -> str | None:
     for raw in text.splitlines():
         line = clean_line(raw)
@@ -880,91 +683,16 @@ def normalize_heading(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", " ", normalized_value).strip()
 
 
-def strip_heading_numbering(value: str) -> str:
-    candidate = value.strip().strip("# ")
-    return HEADING_PREFIX_RE.sub("", candidate, count=1).strip(" :-–—")
-
-
 def exact_heading_category(
     candidate: str,
     document_type: str,
 ) -> str | None:
-    cleaned_candidate = strip_heading_numbering(candidate)
-    normalized_candidate = normalize_heading(cleaned_candidate)
+    normalized_candidate = normalize_heading(candidate)
     aliases = {
         normalize_heading(alias): code
         for alias, code in heading_alias_map(document_type).items()
     }
-    exact = aliases.get(normalized_candidate)
-    if exact:
-        return exact
-
-    for category, phrases in HEADING_SEMANTIC_RULES[document_type]:
-        for phrase in phrases:
-            normalized_phrase = normalize_heading(phrase)
-            phrase_words = normalized_phrase.split()
-            candidate_words = normalized_candidate.split()
-            contained_phrase = (
-                len(phrase_words) >= 2
-                and len(candidate_words) <= 10
-                and (
-                    normalized_candidate.startswith(normalized_phrase + " ")
-                    or normalized_candidate.endswith(" " + normalized_phrase)
-                )
-            )
-            if (
-                normalized_candidate == normalized_phrase
-                or contained_phrase
-            ):
-                return category
-
-    if document_type == "CHAT_CONTINUATION":
-        if (
-            re.match(r"^(?:a6|a7|a24)\b", normalized_candidate)
-            and len(normalized_candidate.split()) <= 12
-            and not candidate.strip().endswith((".", "!", "?", ";"))
-        ):
-            return "completed"
-        if normalized_candidate.startswith("prvni krok"):
-            return "next_step"
-        if normalized_candidate.startswith("dalsi technicky krok"):
-            return "in_progress"
-        if normalized_candidate.startswith("nasledujici hlavni etapa"):
-            return "in_progress"
-
-        # Obecné V5 směrování krátkých skutečných nadpisů.
-        if len(normalized_candidate.split()) <= 10:
-            if any(token in normalized_candidate for token in (
-                "checkpoint", "kontrolni bod", "overovaci bod",
-                "posledni overeny stav", "posledni validacni stav",
-            )):
-                return "current_status"
-            if any(token in normalized_candidate for token in (
-                "snapshot databaze", "databazovy snapshot",
-                "databazovy model", "model databaze",
-            )):
-                return "database_snapshot"
-            if any(token in normalized_candidate for token in (
-                "pravidla", "zasady", "rozhodnuti",
-            )):
-                return "decisions"
-            if any(token in normalized_candidate for token in (
-                "riziko", "rizika", "blokator", "upozorneni",
-                "co se nesmi", "zakaz",
-            )):
-                return "risks"
-            if any(token in normalized_candidate for token in (
-                "poradi prace", "plan prace", "navazujici kroky",
-                "nasledujici kroky",
-            )):
-                return "in_progress"
-            if any(token in normalized_candidate for token in (
-                "prvni dalsi krok", "jediny dalsi krok",
-                "bezprostredni dalsi krok",
-            )):
-                return "next_step"
-
-    return None
+    return aliases.get(normalized_candidate)
 
 
 def detect_heading(
@@ -973,12 +701,6 @@ def detect_heading(
 ) -> tuple[bool, str | None, str | None, str | None]:
     stripped = clean_line(line)
     if not stripped or SEPARATOR_RE.match(stripped):
-        return False, None, None, None
-
-    # Markdown tables, table rows and list items must never be treated as headings.
-    if stripped.startswith("|") and stripped.endswith("|"):
-        return False, None, None, None
-    if BULLET_RE.match(stripped):
         return False, None, None, None
 
     normalized_heading_text = normalize_heading(stripped)
@@ -990,9 +712,9 @@ def detect_heading(
     if normalized_heading_text.startswith(document_title_prefix):
         return True, stripped.strip(" :-–—"), "identification", "document_title"
 
-    markdown = MARKDOWN_HEADING_WITH_LEVEL_RE.match(stripped)
+    markdown = HEADING_RE.match(stripped)
     if markdown:
-        heading = markdown.group(2).strip()
+        heading = markdown.group(1).strip()
         return (
             True,
             heading,
@@ -1016,25 +738,12 @@ def detect_heading(
             normalized_heading.startswith(token)
             for token in ACTION_VERBS + DECISION_VERBS + PROBLEM_TOKENS
         )
-        instruction_like = bool(re.match(
-            r"^(?:a|ať|over|ověř|spust|zkontroluj|otevri|otevři|"
-            r"vyber|uloz|ulož|zkopiruj|zkopíruj|presun|přesuň)\\b",
-            heading.strip(),
-            re.IGNORECASE,
-        ))
         sentence_like = heading.endswith((".", "!", "?", ";"))
-        if category and not action_like and not instruction_like and not sentence_like:
+        if category and not action_like and not sentence_like:
             return True, heading, category, "numbered_known_heading"
 
     category = exact_heading_category(stripped, document_type)
-    plain_sentence_like = stripped.endswith((".", ",", ";", "?", "!"))
-    if (
-        category
-        and len(stripped) <= 180
-        and len(stripped.split()) <= 14
-        and not plain_sentence_like
-        and not stripped.startswith("**")
-    ):
+    if category and len(stripped) <= 160:
         return True, stripped.strip(" :-–—"), category, "known_plain_heading"
 
     letters = [character for character in stripped if character.isalpha()]
@@ -1048,7 +757,6 @@ def detect_heading(
         and not stripped.endswith((".", ",", ";", "?", "!"))
         and not BULLET_RE.match(stripped)
         and not PATH_RE.search(stripped)
-        and "|" not in stripped
     ):
         return True, stripped.strip(" :-–—"), None, "visual_plain_heading"
 
@@ -1061,26 +769,14 @@ def split_chunks(text: str, document_type: str) -> list[dict[str, Any]]:
     active_category: str | None = None
     active_heading_method: str | None = None
     active_heading_line: int | None = None
-    active_heading_level: int | None = None
-    heading_stack: dict[int, tuple[str, str | None]] = {}
     current_lines: list[str] = []
     start_line = 1
     inside_code_fence = False
 
-    def nearest_parent_category(level: int | None = None) -> str | None:
-        candidate_levels = sorted(heading_stack, reverse=True)
-        for stack_level in candidate_levels:
-            if level is not None and stack_level >= level:
-                continue
-            category = heading_stack[stack_level][1]
-            if category:
-                return category
-        return None
-
     def flush(end_line: int) -> None:
         nonlocal current_lines, start_line
         nonlocal active_heading, active_category
-        nonlocal active_heading_method, active_heading_line, active_heading_level
+        nonlocal active_heading_method, active_heading_line
         body = "\n".join(current_lines).strip()
         if body:
             chunks.append(
@@ -1091,7 +787,6 @@ def split_chunks(text: str, document_type: str) -> list[dict[str, Any]]:
                     "section_category_hint": active_category,
                     "heading_detection_method": active_heading_method,
                     "heading_line": active_heading_line,
-                    "heading_level": active_heading_level,
                     "text": body,
                     "start_line": start_line,
                     "end_line": end_line,
@@ -1105,7 +800,6 @@ def split_chunks(text: str, document_type: str) -> list[dict[str, Any]]:
                 active_category = None
                 active_heading_method = None
                 active_heading_line = None
-                active_heading_level = None
         current_lines = []
 
     lines = text.splitlines()
@@ -1132,46 +826,16 @@ def split_chunks(text: str, document_type: str) -> list[dict[str, Any]]:
             flush(line_number - 1)
             continue
 
-        markdown = MARKDOWN_HEADING_WITH_LEVEL_RE.match(clean_line(line))
-        if markdown:
-            flush(line_number - 1)
-            level = len(markdown.group(1))
-            heading = markdown.group(2).strip()
-            direct_category = exact_heading_category(heading, document_type)
-            inherited_category = nearest_parent_category(level)
-            active_heading = heading
-            active_category = direct_category or inherited_category
-            active_heading_method = (
-                "markdown_heading"
-                if direct_category
-                else "markdown_heading_inherited"
-                if inherited_category
-                else "markdown_heading"
-            )
-            active_heading_line = line_number
-            active_heading_level = level
-            for stack_level in [value for value in heading_stack if value >= level]:
-                heading_stack.pop(stack_level, None)
-            heading_stack[level] = (heading, active_category)
-            start_line = line_number + 1
-            continue
-
         is_heading, heading, category, method = detect_heading(
             line,
             document_type,
         )
         if is_heading:
             flush(line_number - 1)
-            inherited_category = nearest_parent_category()
             active_heading = heading
-            active_category = category or inherited_category
-            active_heading_method = (
-                method
-                if category or not inherited_category
-                else f"{method}_inherited"
-            )
+            active_category = category
+            active_heading_method = method
             active_heading_line = line_number
-            active_heading_level = None
             start_line = line_number + 1
             continue
 
@@ -1186,43 +850,6 @@ def split_chunks(text: str, document_type: str) -> list[dict[str, Any]]:
 
     flush(len(lines))
     return chunks
-
-
-def coalesce_section_chunks(chunks: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
-    """Sloučí sousední fragmenty patřící pod stejný zdrojový nadpis.
-
-    A18 má mapovat logické kapitoly, ne nutit uživatele potvrzovat každý
-    odstavec, kódový blok nebo řádek tabulky samostatně.
-    """
-    merged: list[dict[str, Any]] = []
-    for raw_chunk in chunks:
-        chunk = dict(raw_chunk)
-        same_section = bool(
-            merged
-            and chunk.get("heading_line") is not None
-            and chunk.get("heading_line") == merged[-1].get("heading_line")
-            and chunk.get("heading") == merged[-1].get("heading")
-            and chunk.get("section_category_hint")
-            == merged[-1].get("section_category_hint")
-        )
-        if same_section:
-            previous = merged[-1]
-            previous["text"] = (
-                f"{str(previous['text']).rstrip()}\n\n{str(chunk['text']).lstrip()}"
-            )
-            previous["end_line"] = chunk["end_line"]
-            previous["source_character_count"] = len(str(previous["text"]))
-            previous["contains_code_fence"] = bool(
-                previous.get("contains_code_fence")
-                or chunk.get("contains_code_fence")
-            )
-            continue
-        merged.append(chunk)
-
-    for index, chunk in enumerate(merged, start=1):
-        chunk["block_id"] = f"BLK-{index:04d}"
-        chunk["index"] = index
-    return merged
 
 
 def add_score(
@@ -1259,8 +886,8 @@ def score_chunk(
             scores,
             reasons,
             str(heading_hint),
-            120.0,
-            "Obsah se nachází pod jednoznačně rozpoznaným nadpisem; nadpis má přednost před technickými signály uvnitř kapitoly.",
+            65.0,
+            "Obsah se nachází pod jednoznačně rozpoznaným nadpisem.",
         )
 
     heading = str(chunk.get("heading") or "")
@@ -1291,7 +918,7 @@ def score_chunk(
             scores,
             reasons,
             technical_category,
-            10.0,
+            18.0,
             "Blok obsahuje cestu k souboru nebo projektovému artefaktu.",
         )
     if COMMAND_RE.search(text):
@@ -1299,7 +926,7 @@ def score_chunk(
             scores,
             reasons,
             technical_category,
-            9.0,
+            16.0,
             "Blok obsahuje příkaz, SQL nebo Git operaci.",
         )
     if STATUS_TOKEN_RE.search(text):
@@ -1307,7 +934,7 @@ def score_chunk(
             scores,
             reasons,
             technical_category,
-            8.0,
+            14.0,
             "Blok obsahuje ověřitelný technický stav.",
         )
     if chunk.get("contains_code_fence"):
@@ -1315,7 +942,7 @@ def score_chunk(
             scores,
             reasons,
             technical_category,
-            10.0,
+            22.0,
             "Blok obsahuje samostatný kódový blok.",
         )
 
@@ -1471,7 +1098,7 @@ def apply_section_group_context(
                     scores,
                     reasons,
                     str(explicit_hint),
-                    35.0,
+                    20.0,
                     "Kategorie byla potvrzena kontextem stejné nadpisové sekce.",
                 )
             continue
@@ -2345,9 +1972,7 @@ def main() -> int:
                 "Spusť znovu A17 a teprve potom A18."
             )
 
-        chunks = coalesce_section_chunks(
-            split_chunks(original_text, document_type)
-        )
+        chunks = split_chunks(original_text, document_type)
         if not chunks:
             raise RuntimeError("Zdrojový dokument neobsahuje žádný mapovatelný blok.")
 
@@ -2377,38 +2002,10 @@ def main() -> int:
             key=lambda chunk: int(chunk["index"]),
         )
 
-        source_metadata = extract_metadata_table(original_text)
-        source_document_id = (
-            metadata_value(source_metadata, "Document ID", "ID dokumentu")
-            or extract_first(DOCUMENT_ID_RE, original_text)
-        )
-        source_version = (
-            metadata_value(source_metadata, "Verze", "Version")
-            or extract_first(VERSION_RE, original_text)
-        )
-        source_date = normalize_date(
-            metadata_value(source_metadata, "Datum", "Date")
-            or extract_first(DATE_RE, original_text)
-        )
-        source_title = (
-            metadata_value(source_metadata, "Název dokumentu", "Název", "Title")
-            or first_title(original_text)
-        )
-        source_author = metadata_value(
-            source_metadata,
-            "Autor",
-            "Autor projektu",
-            "Zpracoval",
-        )
-        source_working_area = metadata_value(
-            source_metadata,
-            "Pracovní oblast",
-            "Pracovní větev",
-            "Oblast projektu",
-            "Hlavní oblast",
-            "Hlavní pracovní oblast",
-            "Projektová oblast",
-        )
+        source_document_id = extract_first(DOCUMENT_ID_RE, original_text)
+        source_version = extract_first(VERSION_RE, original_text)
+        source_date = normalize_date(extract_first(DATE_RE, original_text))
+        source_title = first_title(original_text)
 
         document_id = (
             args.document_id
@@ -2425,14 +2022,9 @@ def main() -> int:
             or source_date
             or "[DOPLNIT UŽIVATELEM – DATUM]"
         )
-        author = (
-            args.author
-            or source_author
-            or "[DOPLNIT UŽIVATELEM – AUTOR]"
-        )
+        author = args.author or "[DOPLNIT UŽIVATELEM – AUTOR]"
         working_area = (
             args.working_area
-            or source_working_area
             or "[DOPLNIT UŽIVATELEM – PRACOVNÍ OBLAST]"
         )
 
@@ -2464,7 +2056,7 @@ def main() -> int:
             else build_continuation(metadata=metadata, title=title, mapped=mapped)
         ).rstrip() + "\n"
 
-        placeholder_count = count_placeholders(proposal)
+        placeholder_count = proposal.count("DOPLNIT UŽIVATELEM")
         metrics = mapping_metrics(
             chunks,
             mapped_chunks,
