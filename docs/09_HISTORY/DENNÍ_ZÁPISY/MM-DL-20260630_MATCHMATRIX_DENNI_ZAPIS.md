@@ -10,7 +10,7 @@
 | Název dokumentu | MATCHMATRIX – DENNÍ ZÁPIS – 2026-06-30 |
 | Typ dokumentu | DAILY_LOG |
 | Verze | 1.0 |
-| Stav | REVIEW |
+| Původní stav zdrojového dokumentu | REVIEW |
 | Datum | 2026-06-30 |
 | Autor | Petr Kubinák |
 | Technická spolupráce | OpenAI ChatGPT |
