@@ -101,14 +101,6 @@ V20.1.Q3 STEP 12–17:
 - schválení vytvoří kanonický dokument se stavem APPROVED,
 - kanonický A17 ověří skutečně uložený soubor,
 - Git commit přidá a commitne pouze konkrétní kanonický dokument; nikdy nepoužije git add .
-
-V20.1.Q3 STEP 18:
-- fáze 4 PUBLIKOVAT pokračuje po Git commitu bezpečným A24 VALIDATE_ONLY na PC2,
-- APPLY je povolen pouze po úspěšné validaci stejného SHA-256 dokumentu,
-- A24 APPLY na PC2 spustí A6 a následné inkrementální ověření A7,
-- panel rozlišuje VALIDATED, APPLIED_AND_VERIFIED,
-  APPLIED_VERIFICATION_FAILED a BLOCKED,
-- automatický stash ani automatický push se nepoužívá.
 """
 
 import os
@@ -120,7 +112,6 @@ import shutil
 import json
 import sys
 import base64
-import hashlib
 import re
 import unicodedata
 from pathlib import Path
@@ -1160,15 +1151,6 @@ class MatchMatrixAdminPanel(tk.Tk):
         self.documentation_workflow_canonical_a17_json = None
         self.documentation_workflow_canonical_a17_markdown = None
         self.documentation_workflow_git_commit = None
-
-        # V20.1.Q3 STEP 18 - databázová publikační část A24 -> A6 -> A7.
-        self.documentation_workflow_a24_validation_status = None
-        self.documentation_workflow_a24_validation_report = None
-        self.documentation_workflow_a24_validation_hash = None
-        self.documentation_workflow_a24_apply_status = None
-        self.documentation_workflow_a24_apply_report = None
-        self.documentation_workflow_a7_status = None
-        self.documentation_workflow_import_summary = {}
 
         self.documentation_workflow_process = None
         self.documentation_workflow_running = False
@@ -2723,40 +2705,6 @@ class MatchMatrixAdminPanel(tk.Tk):
         )
         self.documentation_workflow_findings_value.grid(
             row=4,
-            column=1,
-            columnspan=3,
-            sticky="ew",
-            padx=(0, 8),
-            pady=(2, 7)
-        )
-
-        tk.Label(
-            documentation_workflow_frame,
-            text="PUBLIKACE:",
-            bg="#100918",
-            fg=MUTED,
-            font=("Segoe UI", 8, "bold"),
-            anchor="w"
-        ).grid(
-            row=5,
-            column=0,
-            sticky="w",
-            padx=(8, 4),
-            pady=(2, 7)
-        )
-
-        self.documentation_workflow_publish_value = tk.Label(
-            documentation_workflow_frame,
-            text="PC2 | DB localhost/matchmatrix | A24 VALIDATE: ČEKÁ | APPLY: ČEKÁ | A7: ČEKÁ",
-            bg="#100918",
-            fg=MUTED,
-            font=("Segoe UI", 8, "bold"),
-            anchor="w",
-            justify="left",
-            wraplength=1050
-        )
-        self.documentation_workflow_publish_value.grid(
-            row=5,
             column=1,
             columnspan=3,
             sticky="ew",
@@ -5765,49 +5713,6 @@ Další termín: {h.get('next_target_date') or '-'}"""
                 fg=findings_color
             )
 
-        if hasattr(self, "documentation_workflow_publish_value"):
-            validate_status = (
-                self.documentation_workflow_a24_validation_status
-                or "ČEKÁ"
-            )
-            apply_status = (
-                self.documentation_workflow_a24_apply_status
-                or "ČEKÁ"
-            )
-            a7_status = self.documentation_workflow_a7_status or "ČEKÁ"
-
-            publication_text = (
-                "EXECUTION HOST: PC2 "
-                f"({DOCUMENTATION_REMOTE_HOST}) | "
-                "DB HOST: localhost na PC2 | "
-                f"DB TARGET: {DB_CONFIG.get('dbname', 'matchmatrix')} | "
-                f"A24 VALIDATE: {validate_status} | "
-                f"APPLY: {apply_status} | "
-                f"A7: {a7_status}"
-            )
-
-            publication_upper = publication_text.upper()
-            if (
-                "FAILED" in publication_upper
-                or "BLOCKED" in publication_upper
-                or "CHYBA" in publication_upper
-            ):
-                publication_color = RED
-            elif (
-                self.documentation_workflow_a24_apply_status
-                == "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED"
-            ):
-                publication_color = GREEN
-            elif self.documentation_workflow_a24_validation_status:
-                publication_color = YELLOW
-            else:
-                publication_color = MUTED
-
-            self.documentation_workflow_publish_value.config(
-                text=publication_text,
-                fg=publication_color
-            )
-
 
     def _documentation_show_phase_menu(self, event, items):
         """Zobrazí kontextovou nabídku dílčích akcí jedné fáze."""
@@ -5854,12 +5759,7 @@ Další termín: {h.get('next_target_date') or '-'}"""
         return [
             ("Spustit kanonický A17", self.documentation_run_canonical_a17),
             ("Vytvořit Git commit", self.documentation_git_commit),
-            ("---", None),
-            ("A24 – pouze validovat na PC2", self.documentation_run_a24_validate),
-            ("A24 – APPLY + A7 na PC2", self.documentation_run_a24_apply),
-            ("Otevřít poslední A24 report", self.documentation_open_a24_report),
-            ("---", None),
-            ("Otevřít poslední A17 report", self.documentation_open_a17_report),
+            ("Otevřít poslední report", self.documentation_open_a17_report),
         ]
 
 
@@ -5893,15 +5793,6 @@ Další termín: {h.get('next_target_date') or '-'}"""
         self.documentation_workflow_canonical_a17_markdown = None
 
         self.documentation_workflow_git_commit = None
-
-        self.documentation_workflow_a24_validation_status = None
-        self.documentation_workflow_a24_validation_report = None
-        self.documentation_workflow_a24_validation_hash = None
-        self.documentation_workflow_a24_apply_status = None
-        self.documentation_workflow_a24_apply_report = None
-        self.documentation_workflow_a7_status = None
-        self.documentation_workflow_import_summary = {}
-
         self.documentation_workflow_step = "ZDROJ"
         self.documentation_workflow_last_status = "NEVYBRÁN DOKUMENT"
 
@@ -5939,9 +5830,9 @@ Další termín: {h.get('next_target_date') or '-'}"""
         Po dokončeném Git commitu začne nové kliknutí vždy nový workflow
         a otevře výběr dalšího dokumentu.
         """
-        workflow_finished = (
-            self.documentation_workflow_a24_apply_status
-            == "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED"
+        workflow_finished = bool(
+            self.documentation_workflow_git_commit
+            or str(self.documentation_workflow_step or "").strip().upper() == "GIT COMMIT"
         )
 
         if workflow_finished:
@@ -6119,10 +6010,7 @@ Další termín: {h.get('next_target_date') or '-'}"""
     def documentation_phase_4_publish(self):
         """
         FÁZE 4:
-        kanonický A17 -> Git commit -> A24 VALIDATE_ONLY ->
-        potvrzený A24 APPLY -> A6 -> inkrementální A7.
-
-        Každé kliknutí provede právě jeden další chybějící krok.
+        kanonický A17 -> Git commit.
         """
         if not self.documentation_workflow_canonical_document:
             messagebox.showwarning(
@@ -6139,551 +6027,14 @@ Další termín: {h.get('next_target_date') or '-'}"""
             self.documentation_git_commit()
             return
 
-        if (
-            self.documentation_workflow_a24_validation_status
-            != "HISTORY_DOCUMENT_IMPORT_VALIDATED"
-        ):
-            self.documentation_run_a24_validate()
-            return
-
-        if (
-            self.documentation_workflow_a24_apply_status
-            != "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED"
-        ):
-            self.documentation_run_a24_apply()
-            return
-
         messagebox.showinfo(
             "Fáze 4 – hotovo",
             (
-                "Dokument byl kanonicky auditován, uložen v Git historii "
-                "a importován do dokumentační databáze na PC2.\n\n"
+                "Kanonický audit je dokončen a Git commit byl vytvořen.\n\n"
                 f"Commit: {self.documentation_workflow_git_commit}\n"
-                f"A24: {self.documentation_workflow_a24_apply_status}\n"
-                f"A7: {self.documentation_workflow_a7_status}\n\n"
                 "Push nebyl spuštěn."
             )
         )
-
-
-    def _documentation_sha256_file(self, path_value):
-        """Vrátí SHA-256 souboru bez načítání celého dokumentu do paměti."""
-        digest = hashlib.sha256()
-        with open(path_value, "rb") as handle:
-            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-                digest.update(chunk)
-        return digest.hexdigest()
-
-
-    def _documentation_extract_a24_status(self, output_text):
-        """Vybere nejpřesnější finální stav A24 z konzolového výstupu."""
-        output_upper = str(output_text or "").upper()
-        statuses = (
-            "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED",
-            "HISTORY_DOCUMENT_IMPORT_APPLIED_VERIFICATION_FAILED",
-            "HISTORY_DOCUMENT_IMPORT_VALIDATED",
-            "HISTORY_DOCUMENT_IMPORT_BLOCKED",
-        )
-        for status in statuses:
-            if status in output_upper:
-                return status
-        return None
-
-
-    def _documentation_find_latest_a24_report(self, expected_status=None):
-        """
-        Najde poslední A24 JSON report vztahující se k aktuálnímu
-        kanonickému dokumentu. Reporty vznikají na PC2, ale PC1 je čte
-        přes sdílený kořen projektu.
-        """
-        report_dir = os.path.join(
-            DOCUMENTATION_ROOT,
-            "reports",
-            "documentation"
-        )
-        if not os.path.isdir(report_dir):
-            return None
-
-        document = self.documentation_workflow_canonical_document
-        document_name = os.path.basename(document or "")
-        document_id = ""
-        try:
-            _, metadata = self._documentation_read_metadata(document)
-            document_id = str(metadata.get("document_id") or "").strip()
-        except Exception:
-            document_id = ""
-
-        candidates = sorted(
-            Path(report_dir).glob(
-                "history_document_database_pipeline_*.json"
-            ),
-            key=lambda item: item.stat().st_mtime,
-            reverse=True
-        )
-
-        for candidate in candidates[:50]:
-            try:
-                payload = json.loads(
-                    candidate.read_text(encoding="utf-8-sig")
-                )
-            except Exception:
-                continue
-
-            final_status = str(
-                payload.get("final_status") or ""
-            ).strip().upper()
-
-            if (
-                expected_status
-                and final_status
-                and final_status != str(expected_status).strip().upper()
-            ):
-                continue
-
-            serialized = json.dumps(
-                payload,
-                ensure_ascii=False
-            ).lower()
-
-            if (
-                document_name
-                and document_name.lower() in serialized
-            ):
-                return str(candidate)
-
-            if (
-                document_id
-                and document_id.lower() in serialized
-            ):
-                return str(candidate)
-
-        return None
-
-
-    def _documentation_parse_a24_summary(self, output_text, report_path=None):
-        """
-        Připraví stručný souhrn bez závislosti na jediné verzi A24/A6/A7.
-        Pokud je dostupný JSON report, zachová i jeho klíčové příznaky.
-        """
-        summary = {
-            "execution_host": "PC2",
-            "remote_host": DOCUMENTATION_REMOTE_HOST,
-            "db_host": "localhost na PC2",
-            "db_target": DB_CONFIG.get("dbname", "matchmatrix"),
-            "warnings": None,
-            "blockers": None,
-            "a6_apply_succeeded": None,
-            "a7_verified": None,
-        }
-
-        payload = {}
-        if report_path and os.path.isfile(report_path):
-            try:
-                with open(report_path, "r", encoding="utf-8-sig") as handle:
-                    payload = json.load(handle)
-            except Exception:
-                payload = {}
-
-        if isinstance(payload, dict):
-            summary["a6_apply_succeeded"] = payload.get(
-                "a6_apply_succeeded"
-            )
-            summary["a7_verified"] = payload.get("a7_verified")
-            summary["manifest_path"] = payload.get("manifest_path")
-            summary["final_status"] = payload.get("final_status")
-
-        output = str(output_text or "")
-        patterns = {
-            "warnings": (
-                r"(?im)^\s*WARNINGS?\s*[:=]\s*(\d+)\s*$",
-                r"(?im)^\s*VAROVÁNÍ\s*[:=]\s*(\d+)\s*$",
-            ),
-            "blockers": (
-                r"(?im)^\s*BLOCKERS?\s*[:=]\s*(\d+)\s*$",
-                r"(?im)^\s*BLOKÁTORY\s*[:=]\s*(\d+)\s*$",
-            ),
-        }
-        for key, key_patterns in patterns.items():
-            for pattern in key_patterns:
-                match = re.search(pattern, output)
-                if match:
-                    summary[key] = int(match.group(1))
-                    break
-
-        return summary
-
-
-    def documentation_run_a24_validate(self):
-        """
-        STEP 18A - nedestruktivní validace jednoho kanonického dokumentu.
-        Databáze se nemění.
-        """
-        document = self.documentation_workflow_canonical_document
-
-        if (
-            not document
-            or not os.path.isfile(document)
-            or not self.documentation_workflow_git_commit
-        ):
-            messagebox.showwarning(
-                "A24 – validace",
-                (
-                    "Nejprve dokonči kanonický A17 a Git commit "
-                    "konkrétního dokumentu."
-                )
-            )
-            return
-
-        current_hash = self._documentation_sha256_file(document)
-
-        self.documentation_workflow_a24_validation_status = None
-        self.documentation_workflow_a24_validation_report = None
-        self.documentation_workflow_a24_validation_hash = current_hash
-        self.documentation_workflow_a24_apply_status = None
-        self.documentation_workflow_a24_apply_report = None
-        self.documentation_workflow_a7_status = None
-        self.documentation_workflow_import_summary = {}
-        self._documentation_update_workflow_ui()
-
-        output_dir = os.path.join(
-            self.documentation_workflow_workspace,
-            "a24_validate"
-        )
-
-        self._documentation_start_remote_tool(
-            tool_key="A24",
-            arguments=[
-                "--document",
-                ("PATH", document),
-                "--validate-only",
-            ],
-            step="A24 VALIDATE_ONLY",
-            running_status="A24 VALIDATE_ONLY BĚŽÍ NA PC2",
-            finish_callback=(
-                lambda success, out, local, remote:
-                self._documentation_finish_a24_validate(
-                    success,
-                    out,
-                    local,
-                    remote,
-                    output_dir
-                )
-            )
-        )
-
-
-    def _documentation_finish_a24_validate(
-        self,
-        success,
-        output_text,
-        local_exit_code,
-        remote_exit_code,
-        output_dir
-    ):
-        self._documentation_finish_generic(
-            success=success,
-            step="A24 VALIDATE_ONLY",
-            success_status="A24 VALIDACE DOKONČENA",
-            failure_status="CHYBA A24 VALIDACE",
-            output_text=output_text,
-            output_dir=output_dir
-        )
-
-        status = self._documentation_extract_a24_status(output_text)
-        validated = (
-            success
-            and status == "HISTORY_DOCUMENT_IMPORT_VALIDATED"
-        )
-
-        self.documentation_workflow_a24_validation_status = (
-            status or "HISTORY_DOCUMENT_IMPORT_BLOCKED"
-        )
-        self.documentation_workflow_a24_validation_report = (
-            self._documentation_find_latest_a24_report(
-                expected_status=status
-            )
-        )
-        self.documentation_workflow_import_summary = (
-            self._documentation_parse_a24_summary(
-                output_text,
-                self.documentation_workflow_a24_validation_report
-            )
-        )
-
-        if validated:
-            self.documentation_workflow_last_status = (
-                "A24 VALIDATED – APPLY JE PŘIPRAVEN"
-            )
-            self._documentation_manifest_update(
-                workflow_status="A24_VALIDATED",
-                a24_validation_status=status,
-                a24_validation_report=(
-                    self.documentation_workflow_a24_validation_report
-                ),
-                a24_validation_hash=(
-                    self.documentation_workflow_a24_validation_hash
-                )
-            )
-            self._documentation_update_workflow_ui()
-            messagebox.showinfo(
-                "A24 – VALIDATE_ONLY",
-                (
-                    "Validace na PC2 proběhla úspěšně. Databáze nebyla změněna.\n\n"
-                    f"Execution host: PC2 ({DOCUMENTATION_REMOTE_HOST})\n"
-                    "DB host: localhost na PC2\n"
-                    f"DB target: {DB_CONFIG.get('dbname')}\n"
-                    f"Dokument: {self.documentation_workflow_canonical_document}\n"
-                    f"Stav: {status}\n\n"
-                    "Další kliknutí na 4 PUBLIKOVAT nabídne potvrzený APPLY."
-                )
-            )
-        else:
-            self.documentation_workflow_last_status = (
-                f"A24 VALIDACE BLOKOVÁNA: {status or 'NEZNÁMÝ STAV'}"
-            )
-            self._documentation_manifest_update(
-                workflow_status="A24_VALIDATION_BLOCKED",
-                a24_validation_status=(
-                    status or "HISTORY_DOCUMENT_IMPORT_BLOCKED"
-                )
-            )
-            self._documentation_update_workflow_ui()
-            messagebox.showerror(
-                "A24 – VALIDATE_ONLY",
-                (
-                    "Validace nebyla úspěšná. APPLY zůstává zablokován.\n\n"
-                    f"Lokální kód: {local_exit_code}\n"
-                    f"Vzdálený kód: {remote_exit_code}\n"
-                    f"Stav: {status or 'NEZNÁMÝ'}\n\n"
-                    f"{str(output_text or '')[-3500:]}"
-                )
-            )
-
-
-    def documentation_run_a24_apply(self):
-        """
-        STEP 18B - skutečný import přes A24. A24 uvnitř spustí A6 a A7.
-        APPLY se nespustí bez platné validace stejného obsahu dokumentu.
-        """
-        document = self.documentation_workflow_canonical_document
-
-        if (
-            self.documentation_workflow_a24_validation_status
-            != "HISTORY_DOCUMENT_IMPORT_VALIDATED"
-        ):
-            messagebox.showwarning(
-                "A24 – APPLY",
-                "Nejprve musí úspěšně proběhnout A24 VALIDATE_ONLY."
-            )
-            return
-
-        if not document or not os.path.isfile(document):
-            messagebox.showerror(
-                "A24 – APPLY",
-                "Kanonický dokument nebyl nalezen."
-            )
-            return
-
-        current_hash = self._documentation_sha256_file(document)
-        if (
-            not self.documentation_workflow_a24_validation_hash
-            or current_hash
-            != self.documentation_workflow_a24_validation_hash
-        ):
-            self.documentation_workflow_a24_validation_status = None
-            self.documentation_workflow_a24_apply_status = None
-            self.documentation_workflow_a7_status = None
-            self._documentation_update_workflow_ui()
-            messagebox.showerror(
-                "A24 – APPLY",
-                (
-                    "Dokument se od validace změnil. APPLY byl zablokován.\n\n"
-                    "Spusť znovu A24 VALIDATE_ONLY."
-                )
-            )
-            return
-
-        try:
-            _, metadata = self._documentation_read_metadata(document)
-            document_id = metadata.get("document_id") or Path(document).stem
-        except Exception:
-            document_id = Path(document).stem
-
-        confirmed = messagebox.askyesno(
-            "A24 – potvrdit APPLY",
-            (
-                "Bude proveden skutečný databázový import.\n\n"
-                f"Execution host: PC2 ({DOCUMENTATION_REMOTE_HOST})\n"
-                "DB host: localhost na PC2\n"
-                f"DB target: {DB_CONFIG.get('dbname')}\n"
-                f"Document ID: {document_id}\n"
-                f"Soubor: {document}\n\n"
-                "A24 spustí A6 a následně inkrementální A7.\n"
-                "Automatický stash ani push se neprovede.\n\n"
-                "Pokračovat?"
-            )
-        )
-        if not confirmed:
-            return
-
-        output_dir = os.path.join(
-            self.documentation_workflow_workspace,
-            "a24_apply"
-        )
-
-        self._documentation_start_remote_tool(
-            tool_key="A24",
-            arguments=[
-                "--document",
-                ("PATH", document),
-                "--apply",
-            ],
-            step="A24 APPLY + A6 + A7",
-            running_status="A24 APPLY BĚŽÍ NA PC2",
-            finish_callback=(
-                lambda success, out, local, remote:
-                self._documentation_finish_a24_apply(
-                    success,
-                    out,
-                    local,
-                    remote,
-                    output_dir
-                )
-            )
-        )
-
-
-    def _documentation_finish_a24_apply(
-        self,
-        success,
-        output_text,
-        local_exit_code,
-        remote_exit_code,
-        output_dir
-    ):
-        self._documentation_finish_generic(
-            success=success,
-            step="A24 APPLY + A6 + A7",
-            success_status="A24 APPLY DOKONČEN",
-            failure_status="CHYBA A24 APPLY",
-            output_text=output_text,
-            output_dir=output_dir
-        )
-
-        status = self._documentation_extract_a24_status(output_text)
-        self.documentation_workflow_a24_apply_status = (
-            status or "HISTORY_DOCUMENT_IMPORT_BLOCKED"
-        )
-        self.documentation_workflow_a24_apply_report = (
-            self._documentation_find_latest_a24_report(
-                expected_status=status
-            )
-        )
-        self.documentation_workflow_import_summary = (
-            self._documentation_parse_a24_summary(
-                output_text,
-                self.documentation_workflow_a24_apply_report
-            )
-        )
-
-        if status == "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED":
-            self.documentation_workflow_a7_status = "VERIFIED"
-            self.documentation_workflow_last_status = (
-                "DATABÁZOVÝ IMPORT A A7 OVĚŘENÍ HOTOVO"
-            )
-            workflow_status = "DATABASE_IMPORTED_AND_VERIFIED"
-            dialog = "info"
-        elif status == "HISTORY_DOCUMENT_IMPORT_APPLIED_VERIFICATION_FAILED":
-            self.documentation_workflow_a7_status = "BLOCKED"
-            self.documentation_workflow_last_status = (
-                "A6 APPLY PROBĚHL, A7 OVĚŘENÍ SELHALO"
-            )
-            workflow_status = "DATABASE_APPLIED_VERIFICATION_FAILED"
-            dialog = "error"
-        else:
-            self.documentation_workflow_a7_status = "BLOCKED"
-            self.documentation_workflow_last_status = (
-                f"DATABÁZOVÝ IMPORT BLOKOVÁN: {status or 'NEZNÁMÝ STAV'}"
-            )
-            workflow_status = "DATABASE_IMPORT_BLOCKED"
-            dialog = "error"
-
-        self._documentation_manifest_update(
-            workflow_status=workflow_status,
-            a24_apply_status=self.documentation_workflow_a24_apply_status,
-            a24_apply_report=self.documentation_workflow_a24_apply_report,
-            a7_status=self.documentation_workflow_a7_status,
-            import_summary=self.documentation_workflow_import_summary
-        )
-
-        try:
-            DB_CACHE.clear()
-            self.load_documentation_dashboard()
-        except Exception:
-            pass
-
-        self._documentation_update_workflow_ui()
-
-        summary = self.documentation_workflow_import_summary or {}
-        detail = (
-            f"Execution host: PC2 ({DOCUMENTATION_REMOTE_HOST})\n"
-            "DB host: localhost na PC2\n"
-            f"DB target: {DB_CONFIG.get('dbname')}\n"
-            f"A24 stav: {self.documentation_workflow_a24_apply_status}\n"
-            f"A7 stav: {self.documentation_workflow_a7_status}\n"
-            f"Varování: {summary.get('warnings')}\n"
-            f"Blokátory: {summary.get('blockers')}\n"
-            f"Report: {self.documentation_workflow_a24_apply_report or '-'}"
-        )
-
-        if dialog == "info":
-            messagebox.showinfo(
-                "A24 – APPLY + A7",
-                (
-                    "Dokument byl importován a integrita byla ověřena.\n\n"
-                    + detail
-                )
-            )
-        else:
-            messagebox.showerror(
-                "A24 – APPLY + A7",
-                (
-                    "Publikační databázová část není plně dokončena.\n\n"
-                    + detail
-                    + "\n\nPOSLEDNÍ VÝSTUP:\n"
-                    + str(output_text or "")[-3000:]
-                )
-            )
-
-
-    def documentation_open_a24_report(self):
-        """Otevře poslední validační nebo APPLY report A24."""
-        report_path = (
-            self.documentation_workflow_a24_apply_report
-            or self.documentation_workflow_a24_validation_report
-        )
-
-        if not report_path:
-            messagebox.showwarning(
-                "A24 – report",
-                "Zatím není dostupný žádný report A24."
-            )
-            return
-
-        if not os.path.isfile(report_path):
-            messagebox.showerror(
-                "A24 – report",
-                f"Report nebyl nalezen:\n\n{report_path}"
-            )
-            return
-
-        try:
-            os.startfile(report_path)
-        except Exception as exc:
-            messagebox.showerror(
-                "A24 – report",
-                f"Report se nepodařilo otevřít:\n\n{exc}"
-            )
 
 
     def documentation_select_source_document(self):
