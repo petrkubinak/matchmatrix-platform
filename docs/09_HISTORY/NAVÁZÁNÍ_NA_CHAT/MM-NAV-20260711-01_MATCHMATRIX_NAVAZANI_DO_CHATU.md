@@ -7,7 +7,7 @@
 | Document ID | MM-NAV-20260711-01 |
 | Název dokumentu | MatchMatrix – navázání do nového chatu – 2026-07-11 |
 | Typ dokumentu | CHAT_CONTINUATION |
-| Verze | 1.0 |
+| Verze | 1.1 |
 | Stav | APPROVED |
 | Datum | 2026-07-11 |
 | Autor | Petr |
@@ -30,7 +30,7 @@
 | Document ID | MM-NAV-20260711-01 |
 | Název dokumentu | MatchMatrix – navázání do nového chatu – 2026-07-11 |
 | Typ dokumentu | CHAT_CONTINUATION |
-| Verze | 1.0 |
+| Verze | 1.1 |
 | Stav | APPROVED |
 | Datum | 2026-07-11 |
 | Autor | Petr |
