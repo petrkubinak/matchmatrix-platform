@@ -118,13 +118,6 @@ V20.1.Q3 STEP 19:
 - před A17 panel zablokuje audit, dokud v dokumentu zůstávají nevyplněná pole {{...}},
 - stále lze vybrat a zpracovat libovolný existující Markdown dokument.
 
-V20.1.Q3 STEP 20A FIX 1:
-- Git snapshot se vždy ověřuje vůči repozitáři na PC2, nikoli podle počítače, na kterém běží panel,
-- při spuštění panelu na PC2 se používá místní repozitář C:\\MatchMatrix-platform,
-- při spuštění panelu na PC1 se Git údaje načtou vzdáleně z PC2 přes PowerShell Remoting,
-- výstup uvádí ověřený host, kořen repozitáře a počet skutečných změn na PC2,
-- při nedostupnosti PC2 se lokální stav PC1 nevydává za stav hlavního repozitáře.
-
 V20.1.Q3 STEP 20A:
 - nové dokumenty automaticky přebírají ověřitelná technická data z Git a dokumentační DB,
 - panel doplní Git větev, commit, stav pracovního stromu a synchronizaci s originem,
@@ -6159,224 +6152,58 @@ Další termín: {h.get('next_target_date') or '-'}"""
 
 
     def _documentation_collect_git_snapshot(self):
-        """
-        Vrátí ověřený Git snapshot hlavního repozitáře na PC2.
-
-        Panel může běžet na PC1 i PC2. Lokální repozitář PC1 proto nesmí být
-        použit jako zdroj PROJECT SNAPSHOT. Na hostiteli MATCHMATRIX se Git
-        čte místně; z ostatních počítačů se stejná data načtou vzdáleně z PC2.
-        """
+        """Vrátí pouze ověřené technické údaje z lokálního Git repozitáře."""
         result = {
             "branch": "NEOVĚŘENO",
             "commit": "NEOVĚŘENO",
             "subject": "NEOVĚŘENO",
             "worktree": "NEOVĚŘENO",
             "push_status": "NEOVĚŘENO",
-            "source_host": f"PC2 ({DOCUMENTATION_REMOTE_HOST})",
-            "repo_root": DOCUMENTATION_REMOTE_PROJECT_ROOT,
-            "summary": "Git stav hlavního repozitáře na PC2 se nepodařilo ověřit.",
+            "summary": "Git stav se nepodařilo ověřit.",
         }
 
-        local_computer = str(
-            os.environ.get("COMPUTERNAME") or ""
-        ).strip().upper()
+        ok_branch, branch = self._documentation_run_git(
+            ["rev-parse", "--abbrev-ref", "HEAD"]
+        )
+        ok_commit, commit_hash = self._documentation_run_git(
+            ["rev-parse", "--short=12", "HEAD"]
+        )
+        ok_subject, subject = self._documentation_run_git(
+            ["log", "-1", "--pretty=%s"]
+        )
+        ok_status, status_text = self._documentation_run_git(
+            ["status", "--short", "--branch"]
+        )
 
-        payload = None
-        error_text = ""
+        if ok_branch and branch:
+            result["branch"] = branch.splitlines()[0].strip()
+        if ok_commit and commit_hash:
+            result["commit"] = commit_hash.splitlines()[0].strip()
+        if ok_subject and subject:
+            result["subject"] = subject.splitlines()[0].strip()
 
-        if local_computer == "MATCHMATRIX":
-            ok_branch, branch = self._documentation_run_git(
-                ["rev-parse", "--abbrev-ref", "HEAD"]
+        if ok_status:
+            status_lines = [line.rstrip() for line in status_text.splitlines()]
+            branch_line = status_lines[0] if status_lines else ""
+            changes = [line for line in status_lines[1:] if line.strip()]
+            result["worktree"] = (
+                "ČISTÝ"
+                if not changes
+                else f"ZMĚNY – {len(changes)} položek"
             )
-            ok_commit, commit_hash = self._documentation_run_git(
-                ["rev-parse", "--short=12", "HEAD"]
-            )
-            ok_subject, subject = self._documentation_run_git(
-                ["log", "-1", "--pretty=%s"]
-            )
-            ok_status, status_text = self._documentation_run_git(
-                ["status", "--short", "--branch"]
-            )
-            ok_root, repo_root = self._documentation_run_git(
-                ["rev-parse", "--show-toplevel"]
-            )
 
-            if all((ok_branch, ok_commit, ok_subject, ok_status, ok_root)):
-                payload = {
-                    "computer": local_computer,
-                    "repo_root": repo_root,
-                    "branch": branch,
-                    "commit": commit_hash,
-                    "subject": subject,
-                    "status": status_text.splitlines(),
-                }
-            else:
-                error_text = (
-                    branch if not ok_branch else
-                    commit_hash if not ok_commit else
-                    subject if not ok_subject else
-                    status_text if not ok_status else
-                    repo_root
-                )
-        else:
-            try:
-                ps_host = self._documentation_powershell_literal(
-                    DOCUMENTATION_REMOTE_HOST
-                )
-                ps_project = self._documentation_powershell_literal(
-                    DOCUMENTATION_REMOTE_PROJECT_ROOT
-                )
-
-                powershell_script = f"""
-$ErrorActionPreference = "Stop"
-
-try {{
-    $GitJson = Invoke-Command -ComputerName {ps_host} -ScriptBlock {{
-        param($ProjectRoot)
-
-        $ErrorActionPreference = "Stop"
-        Set-Location -LiteralPath $ProjectRoot
-
-        $Branch = (& git rev-parse --abbrev-ref HEAD | Out-String).Trim()
-        if ($LASTEXITCODE -ne 0) {{ throw "git branch selhal" }}
-
-        $Commit = (& git rev-parse --short=12 HEAD | Out-String).Trim()
-        if ($LASTEXITCODE -ne 0) {{ throw "git commit selhal" }}
-
-        $Subject = (& git log -1 --pretty=%s | Out-String).Trim()
-        if ($LASTEXITCODE -ne 0) {{ throw "git log selhal" }}
-
-        $RepoRoot = (& git rev-parse --show-toplevel | Out-String).Trim()
-        if ($LASTEXITCODE -ne 0) {{ throw "git root selhal" }}
-
-        $Status = @(& git status --short --branch)
-        if ($LASTEXITCODE -ne 0) {{ throw "git status selhal" }}
-
-        [ordered]@{{
-            computer = $env:COMPUTERNAME
-            repo_root = $RepoRoot
-            branch = $Branch
-            commit = $Commit
-            subject = $Subject
-            status = $Status
-        }} | ConvertTo-Json -Compress -Depth 5
-    }} -ArgumentList {ps_project}
-
-    $Bytes = [System.Text.Encoding]::UTF8.GetBytes([string]$GitJson)
-    $Encoded = [Convert]::ToBase64String($Bytes)
-    Write-Output "__MM_GIT_JSON_B64__=$Encoded"
-    exit 0
-}}
-catch {{
-    Write-Error $_.Exception.Message
-    exit 1
-}}
-"""
-                encoded_command = base64.b64encode(
-                    powershell_script.encode("utf-16le")
-                ).decode("ascii")
-
-                command = [
-                    "powershell.exe",
-                    "-NoProfile",
-                    "-NonInteractive",
-                    "-ExecutionPolicy",
-                    "Bypass",
-                    "-EncodedCommand",
-                    encoded_command,
-                ]
-
-                completed = subprocess.run(
-                    command,
-                    cwd=BASE_DIR,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.STDOUT,
-                    text=False,
-                    timeout=30,
-                    creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
-                )
-
-                output_text = self._documentation_decode_process_output(
-                    completed.stdout
-                )
-
-                marker = re.search(
-                    r"__MM_GIT_JSON_B64__=([A-Za-z0-9+/=]+)",
-                    output_text
-                )
-
-                if completed.returncode == 0 and marker:
-                    decoded_json = base64.b64decode(
-                        marker.group(1)
-                    ).decode("utf-8")
-                    payload = json.loads(decoded_json)
+            if "..." in branch_line:
+                relation = branch_line.removeprefix("## ").strip()
+                if "[ahead " in relation or "[behind " in relation:
+                    result["push_status"] = relation
                 else:
-                    error_text = output_text.strip() or (
-                        f"PowerShell return code {completed.returncode}"
-                    )
-
-            except Exception as exc:
-                error_text = f"{type(exc).__name__}: {exc}"
-
-        if not payload:
-            result["summary"] = (
-                "NEOVĚŘENO – Git snapshot hlavního repozitáře na PC2 "
-                f"není dostupný: {error_text[:260]}"
-            )
-            return result
-
-        branch = str(payload.get("branch") or "").strip()
-        commit_hash = str(payload.get("commit") or "").strip()
-        subject = str(payload.get("subject") or "").strip()
-        repo_root = str(payload.get("repo_root") or "").strip()
-        source_computer = str(
-            payload.get("computer") or "MATCHMATRIX"
-        ).strip()
-
-        raw_status = payload.get("status") or []
-        if isinstance(raw_status, str):
-            status_lines = raw_status.splitlines()
-        else:
-            status_lines = [
-                str(line).rstrip()
-                for line in raw_status
-                if str(line).strip()
-            ]
-
-        branch_line = status_lines[0] if status_lines else ""
-        changes = [
-            line
-            for line in status_lines[1:]
-            if line.strip()
-        ]
-
-        result["branch"] = branch or "NEOVĚŘENO"
-        result["commit"] = commit_hash or "NEOVĚŘENO"
-        result["subject"] = subject or "NEOVĚŘENO"
-        result["repo_root"] = repo_root or DOCUMENTATION_REMOTE_PROJECT_ROOT
-        result["source_host"] = (
-            f"{source_computer} ({DOCUMENTATION_REMOTE_HOST})"
-        )
-        result["worktree"] = (
-            "ČISTÝ"
-            if not changes
-            else f"ZMĚNY – {len(changes)} položek"
-        )
-
-        if "..." in branch_line:
-            relation = branch_line.removeprefix("## ").strip()
-            if "[ahead " in relation or "[behind " in relation:
-                result["push_status"] = relation
-            else:
-                result["push_status"] = f"Synchronizováno: {relation}"
-        elif branch_line:
-            result["push_status"] = branch_line.removeprefix("## ").strip()
+                    result["push_status"] = f"Synchronizováno: {relation}"
+            elif branch_line:
+                result["push_status"] = branch_line.removeprefix("## ").strip()
 
         result["summary"] = (
-            f"PC2 {result['source_host']} | "
             f"{result['branch']} @ {result['commit']} | "
-            f"{result['worktree']} | {result['push_status']} | "
-            f"repo {result['repo_root']}"
+            f"{result['worktree']} | {result['push_status']}"
         )
         return result
 

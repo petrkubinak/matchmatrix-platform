@@ -117,21 +117,6 @@ V20.1.Q3 STEP 19:
 - základní metadata, datum, Document ID a kanonický název se vyplní automaticky,
 - před A17 panel zablokuje audit, dokud v dokumentu zůstávají nevyplněná pole {{...}},
 - stále lze vybrat a zpracovat libovolný existující Markdown dokument.
-
-V20.1.Q3 STEP 20A FIX 1:
-- Git snapshot se vždy ověřuje vůči repozitáři na PC2, nikoli podle počítače, na kterém běží panel,
-- při spuštění panelu na PC2 se používá místní repozitář C:\\MatchMatrix-platform,
-- při spuštění panelu na PC1 se Git údaje načtou vzdáleně z PC2 přes PowerShell Remoting,
-- výstup uvádí ověřený host, kořen repozitáře a počet skutečných změn na PC2,
-- při nedostupnosti PC2 se lokální stav PC1 nevydává za stav hlavního repozitáře.
-
-V20.1.Q3 STEP 20A:
-- nové dokumenty automaticky přebírají ověřitelná technická data z Git a dokumentační DB,
-- panel doplní Git větev, commit, stav pracovního stromu a synchronizaci s originem,
-- panel doplní aktuální počty dokumentů, verzí, sekcí, vazeb a importních běhů,
-- panel předvyplní technickou dohledatelnost, aktivní panel, pracovní blok a stav workflow,
-- obsahové kapitoly a projektová rozhodnutí zůstávají k ručnímu nebo řízenému doplnění,
-- vysvětlující pole {{NAZEV_PROMENNE}} se nepočítá jako skutečně nevyplněný údaj.
 """
 
 import os
@@ -6137,375 +6122,12 @@ Další termín: {h.get('next_target_date') or '-'}"""
         self._documentation_update_workflow_ui()
 
 
-    def _documentation_run_git(self, arguments):
-        """Bezpečně spustí read-only Git příkaz nad lokálním repozitářem."""
-        try:
-            completed = subprocess.run(
-                ["git", "-C", BASE_DIR, *list(arguments)],
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                timeout=15,
-                shell=False
-            )
-        except Exception as exc:
-            return False, f"{type(exc).__name__}: {exc}"
-
-        output = (completed.stdout or completed.stderr or "").strip()
-        if completed.returncode != 0:
-            return False, output or f"Git return code {completed.returncode}"
-        return True, output
-
-
-    def _documentation_collect_git_snapshot(self):
-        """
-        Vrátí ověřený Git snapshot hlavního repozitáře na PC2.
-
-        Panel může běžet na PC1 i PC2. Lokální repozitář PC1 proto nesmí být
-        použit jako zdroj PROJECT SNAPSHOT. Na hostiteli MATCHMATRIX se Git
-        čte místně; z ostatních počítačů se stejná data načtou vzdáleně z PC2.
-        """
-        result = {
-            "branch": "NEOVĚŘENO",
-            "commit": "NEOVĚŘENO",
-            "subject": "NEOVĚŘENO",
-            "worktree": "NEOVĚŘENO",
-            "push_status": "NEOVĚŘENO",
-            "source_host": f"PC2 ({DOCUMENTATION_REMOTE_HOST})",
-            "repo_root": DOCUMENTATION_REMOTE_PROJECT_ROOT,
-            "summary": "Git stav hlavního repozitáře na PC2 se nepodařilo ověřit.",
-        }
-
-        local_computer = str(
-            os.environ.get("COMPUTERNAME") or ""
-        ).strip().upper()
-
-        payload = None
-        error_text = ""
-
-        if local_computer == "MATCHMATRIX":
-            ok_branch, branch = self._documentation_run_git(
-                ["rev-parse", "--abbrev-ref", "HEAD"]
-            )
-            ok_commit, commit_hash = self._documentation_run_git(
-                ["rev-parse", "--short=12", "HEAD"]
-            )
-            ok_subject, subject = self._documentation_run_git(
-                ["log", "-1", "--pretty=%s"]
-            )
-            ok_status, status_text = self._documentation_run_git(
-                ["status", "--short", "--branch"]
-            )
-            ok_root, repo_root = self._documentation_run_git(
-                ["rev-parse", "--show-toplevel"]
-            )
-
-            if all((ok_branch, ok_commit, ok_subject, ok_status, ok_root)):
-                payload = {
-                    "computer": local_computer,
-                    "repo_root": repo_root,
-                    "branch": branch,
-                    "commit": commit_hash,
-                    "subject": subject,
-                    "status": status_text.splitlines(),
-                }
-            else:
-                error_text = (
-                    branch if not ok_branch else
-                    commit_hash if not ok_commit else
-                    subject if not ok_subject else
-                    status_text if not ok_status else
-                    repo_root
-                )
-        else:
-            try:
-                ps_host = self._documentation_powershell_literal(
-                    DOCUMENTATION_REMOTE_HOST
-                )
-                ps_project = self._documentation_powershell_literal(
-                    DOCUMENTATION_REMOTE_PROJECT_ROOT
-                )
-
-                powershell_script = f"""
-$ErrorActionPreference = "Stop"
-
-try {{
-    $GitJson = Invoke-Command -ComputerName {ps_host} -ScriptBlock {{
-        param($ProjectRoot)
-
-        $ErrorActionPreference = "Stop"
-        Set-Location -LiteralPath $ProjectRoot
-
-        $Branch = (& git rev-parse --abbrev-ref HEAD | Out-String).Trim()
-        if ($LASTEXITCODE -ne 0) {{ throw "git branch selhal" }}
-
-        $Commit = (& git rev-parse --short=12 HEAD | Out-String).Trim()
-        if ($LASTEXITCODE -ne 0) {{ throw "git commit selhal" }}
-
-        $Subject = (& git log -1 --pretty=%s | Out-String).Trim()
-        if ($LASTEXITCODE -ne 0) {{ throw "git log selhal" }}
-
-        $RepoRoot = (& git rev-parse --show-toplevel | Out-String).Trim()
-        if ($LASTEXITCODE -ne 0) {{ throw "git root selhal" }}
-
-        $Status = @(& git status --short --branch)
-        if ($LASTEXITCODE -ne 0) {{ throw "git status selhal" }}
-
-        [ordered]@{{
-            computer = $env:COMPUTERNAME
-            repo_root = $RepoRoot
-            branch = $Branch
-            commit = $Commit
-            subject = $Subject
-            status = $Status
-        }} | ConvertTo-Json -Compress -Depth 5
-    }} -ArgumentList {ps_project}
-
-    $Bytes = [System.Text.Encoding]::UTF8.GetBytes([string]$GitJson)
-    $Encoded = [Convert]::ToBase64String($Bytes)
-    Write-Output "__MM_GIT_JSON_B64__=$Encoded"
-    exit 0
-}}
-catch {{
-    Write-Error $_.Exception.Message
-    exit 1
-}}
-"""
-                encoded_command = base64.b64encode(
-                    powershell_script.encode("utf-16le")
-                ).decode("ascii")
-
-                command = [
-                    "powershell.exe",
-                    "-NoProfile",
-                    "-NonInteractive",
-                    "-ExecutionPolicy",
-                    "Bypass",
-                    "-EncodedCommand",
-                    encoded_command,
-                ]
-
-                completed = subprocess.run(
-                    command,
-                    cwd=BASE_DIR,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.STDOUT,
-                    text=False,
-                    timeout=30,
-                    creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
-                )
-
-                output_text = self._documentation_decode_process_output(
-                    completed.stdout
-                )
-
-                marker = re.search(
-                    r"__MM_GIT_JSON_B64__=([A-Za-z0-9+/=]+)",
-                    output_text
-                )
-
-                if completed.returncode == 0 and marker:
-                    decoded_json = base64.b64decode(
-                        marker.group(1)
-                    ).decode("utf-8")
-                    payload = json.loads(decoded_json)
-                else:
-                    error_text = output_text.strip() or (
-                        f"PowerShell return code {completed.returncode}"
-                    )
-
-            except Exception as exc:
-                error_text = f"{type(exc).__name__}: {exc}"
-
-        if not payload:
-            result["summary"] = (
-                "NEOVĚŘENO – Git snapshot hlavního repozitáře na PC2 "
-                f"není dostupný: {error_text[:260]}"
-            )
-            return result
-
-        branch = str(payload.get("branch") or "").strip()
-        commit_hash = str(payload.get("commit") or "").strip()
-        subject = str(payload.get("subject") or "").strip()
-        repo_root = str(payload.get("repo_root") or "").strip()
-        source_computer = str(
-            payload.get("computer") or "MATCHMATRIX"
-        ).strip()
-
-        raw_status = payload.get("status") or []
-        if isinstance(raw_status, str):
-            status_lines = raw_status.splitlines()
-        else:
-            status_lines = [
-                str(line).rstrip()
-                for line in raw_status
-                if str(line).strip()
-            ]
-
-        branch_line = status_lines[0] if status_lines else ""
-        changes = [
-            line
-            for line in status_lines[1:]
-            if line.strip()
-        ]
-
-        result["branch"] = branch or "NEOVĚŘENO"
-        result["commit"] = commit_hash or "NEOVĚŘENO"
-        result["subject"] = subject or "NEOVĚŘENO"
-        result["repo_root"] = repo_root or DOCUMENTATION_REMOTE_PROJECT_ROOT
-        result["source_host"] = (
-            f"{source_computer} ({DOCUMENTATION_REMOTE_HOST})"
-        )
-        result["worktree"] = (
-            "ČISTÝ"
-            if not changes
-            else f"ZMĚNY – {len(changes)} položek"
-        )
-
-        if "..." in branch_line:
-            relation = branch_line.removeprefix("## ").strip()
-            if "[ahead " in relation or "[behind " in relation:
-                result["push_status"] = relation
-            else:
-                result["push_status"] = f"Synchronizováno: {relation}"
-        elif branch_line:
-            result["push_status"] = branch_line.removeprefix("## ").strip()
-
-        result["summary"] = (
-            f"PC2 {result['source_host']} | "
-            f"{result['branch']} @ {result['commit']} | "
-            f"{result['worktree']} | {result['push_status']} | "
-            f"repo {result['repo_root']}"
-        )
-        return result
-
-
-    def _documentation_collect_database_snapshot(self, timestamp_iso):
-        """Načte aktuální ověřitelné počty z dokumentační databáze."""
-        snapshot = {
-            "DB_DOCUMENTS": "NEOVĚŘENO",
-            "DB_VERSIONS_TOTAL": "NEOVĚŘENO",
-            "DB_CURRENT_VERSIONS": "NEOVĚŘENO",
-            "DB_SECTIONS": "NEOVĚŘENO",
-            "DB_RELATIONS": "NEOVĚŘENO",
-            "DB_STATUS_HISTORY": "NEOVĚŘENO",
-            "DB_IMPORT_RUNS": "NEOVĚŘENO",
-            "DB_SNAPSHOT_CREATED_AT": timestamp_iso,
-            "DB_EXECUTION_HOST": (
-                f"PC2 ({DOCUMENTATION_REMOTE_HOST})"
-            ),
-            "DB_HOST": f"{DB_CONFIG.get('host')}:{DB_CONFIG.get('port')}",
-            "DB_TARGET": str(DB_CONFIG.get("dbname") or "NEOVĚŘENO"),
-            "DB_VERIFICATION_SOURCE": (
-                "documentation.documents, documentation.document_versions, "
-                "documentation.document_sections, documentation.document_relations, "
-                "documentation.document_status_history, documentation.import_runs"
-            ),
-        }
-
-        rows = db_query("""
-            SELECT
-                (SELECT COUNT(*) FROM documentation.documents) AS documents,
-                (SELECT COUNT(*) FROM documentation.document_versions) AS versions_total,
-                (
-                    SELECT COUNT(*)
-                    FROM documentation.document_versions
-                    WHERE is_current = true
-                ) AS current_versions,
-                (SELECT COUNT(*) FROM documentation.document_sections) AS sections,
-                (SELECT COUNT(*) FROM documentation.document_relations) AS relations,
-                (
-                    SELECT COUNT(*)
-                    FROM documentation.document_status_history
-                ) AS status_history,
-                (SELECT COUNT(*) FROM documentation.import_runs) AS import_runs;
-        """)
-
-        if rows and "CHYBA" not in rows[0]:
-            row = rows[0]
-            snapshot.update({
-                "DB_DOCUMENTS": str(row.get("documents", 0)),
-                "DB_VERSIONS_TOTAL": str(row.get("versions_total", 0)),
-                "DB_CURRENT_VERSIONS": str(row.get("current_versions", 0)),
-                "DB_SECTIONS": str(row.get("sections", 0)),
-                "DB_RELATIONS": str(row.get("relations", 0)),
-                "DB_STATUS_HISTORY": str(row.get("status_history", 0)),
-                "DB_IMPORT_RUNS": str(row.get("import_runs", 0)),
-            })
-        elif rows and "CHYBA" in rows[0]:
-            snapshot["DB_VERIFICATION_SOURCE"] = (
-                "NEOVĚŘENO – " + str(rows[0].get("CHYBA"))[:300]
-            )
-
-        snapshot["database_summary"] = (
-            f"dokumenty {snapshot['DB_DOCUMENTS']} | "
-            f"verze {snapshot['DB_VERSIONS_TOTAL']} | "
-            f"aktuální {snapshot['DB_CURRENT_VERSIONS']} | "
-            f"sekce {snapshot['DB_SECTIONS']} | "
-            f"vazby {snapshot['DB_RELATIONS']} | "
-            f"importní běhy {snapshot['DB_IMPORT_RUNS']}"
-        )
-        return snapshot
-
-
-    def _documentation_build_technical_replacements(
-        self,
-        *,
-        work_area,
-        filename,
-        workspace_path,
-        timestamp_iso
-    ):
-        """Sestaví technická pole, která lze doplnit bez obsahového odhadu."""
-        git_snapshot = self._documentation_collect_git_snapshot()
-        db_snapshot = self._documentation_collect_database_snapshot(
-            timestamp_iso
-        )
-
-        replacements = dict(db_snapshot)
-        replacements.pop("database_summary", None)
-        replacements.update({
-            "GIT_BRANCH": git_snapshot["branch"],
-            "GIT_COMMIT": git_snapshot["commit"],
-            "GIT_WORKTREE_STATUS": git_snapshot["worktree"],
-            "GIT_PUSH_STATUS": git_snapshot["push_status"],
-            "WORKSPACE_PATH": workspace_path,
-            "A17_STATUS": "ČEKÁ – DOSUD NESPUŠTĚNO PRO TENTO DOKUMENT",
-            "A24_STATUS": "ČEKÁ – DOSUD NESPUŠTĚNO PRO TENTO DOKUMENT",
-            "A7_STATUS": "ČEKÁ – DOSUD NESPUŠTĚNO PRO TENTO DOKUMENT",
-            "SNAPSHOT_AKTIVNI_PRACOVNI_BLOK": work_area,
-            "SNAPSHOT_AKTIVNI_PANEL": (
-                "tools/matchmatrix_control_panel_V20_1_Q3_"
-                "DOCUMENTATION_WORKFLOW.py"
-            ),
-            "SNAPSHOT_POSLEDNI_VYSLEDEK": (
-                f"Poslední Git commit {git_snapshot['commit']}: "
-                f"{git_snapshot['subject']}"
-            ),
-            "SNAPSHOT_GIT_STAV": git_snapshot["summary"],
-            "SNAPSHOT_DOKUMENTACNI_WORKFLOW": (
-                "Q3 STEP 20A – nový dokument z oficiální šablony; "
-                "čeká na doplnění obsahu a A17"
-            ),
-            "SNAPSHOT_DATABAZOVY_STAV": db_snapshot["database_summary"],
-            "SNAPSHOT_NEJVETSI_OTEVRENY_UKOL": (
-                "Doplnit zbývající obsahová pole dokumentu a spustit A17."
-            ),
-            "SNAPSHOT_NASLEDUJICI_BLOK": (
-                "Doplnění obsahu → A17 → řízené schválení a publikace."
-            ),
-        })
-        return replacements, git_snapshot, db_snapshot
-
-
     def _documentation_create_from_template(self, document_type):
         """
         Vytvoří nový pracovní dokument z oficiální šablony.
 
         Automaticky doplní identitu, datum, verzi, stav, kanonický název,
-        základní vazby, pracovní oblast, Git údaje, technickou dohledatelnost
-        a aktuální snapshot dokumentační databáze. Obsahová pole zůstávají
+        základní vazby a pracovní oblast. Obsahová pole zůstávají
         k doplnění uživatelem a před A17 jsou technicky kontrolována.
         """
         if self.documentation_workflow_running:
@@ -6602,8 +6224,6 @@ catch {{
         )
 
         try:
-            # Workspace musí existovat před sestavením dokumentu, protože jeho
-            # cesta se zapisuje přímo do technické dohledatelnosti šablony.
             if document_type == "DAILY_LOG":
                 document_id = f"MM-DL-{date_compact}"
                 filename = f"{document_id}_MATCHMATRIX_DENNI_ZAPIS.md"
@@ -6687,20 +6307,6 @@ catch {{
                     f"Nepodporovaný typ dokumentu: {document_type}"
                 )
 
-            workspace_path, source_dir = (
-                self._documentation_allocate_workspace(filename)
-            )
-
-            technical_replacements, git_snapshot, db_snapshot = (
-                self._documentation_build_technical_replacements(
-                    work_area=work_area,
-                    filename=filename,
-                    workspace_path=workspace_path,
-                    timestamp_iso=timestamp_iso
-                )
-            )
-            replacements.update(technical_replacements)
-
             template_body = self._documentation_extract_template_body(
                 template_path
             )
@@ -6712,6 +6318,9 @@ catch {{
                     str(field_value)
                 )
 
+            workspace_path, source_dir = (
+                self._documentation_allocate_workspace(filename)
+            )
             source_snapshot = os.path.join(source_dir, filename)
             Path(source_snapshot).write_text(
                 generated_text,
@@ -6724,8 +6333,8 @@ catch {{
                 "documentation_workflow_manifest.json"
             )
             manifest_payload = {
-                "contract_version": "1.2",
-                "panel_version": "V20.1.Q3_STEP_20A",
+                "contract_version": "1.1",
+                "panel_version": "V20.1.Q3_STEP_19",
                 "selected_at": now_value.isoformat(),
                 "creation_mode": "OFFICIAL_TEMPLATE",
                 "template_source": template_path,
@@ -6735,12 +6344,7 @@ catch {{
                 "source_original": template_path,
                 "source_snapshot": source_snapshot,
                 "workspace": workspace_path,
-                "workflow_status": "TEMPLATE_DRAFT_CREATED_WITH_TECHNICAL_PREFILL",
-                "technical_prefill": {
-                    "git": git_snapshot,
-                    "database": db_snapshot,
-                    "filled_fields": sorted(technical_replacements.keys()),
-                },
+                "workflow_status": "TEMPLATE_DRAFT_CREATED",
             }
 
             with open(
@@ -6760,7 +6364,7 @@ catch {{
                 source_snapshot=source_snapshot,
                 manifest_path=manifest_path,
                 source_original=template_path,
-                status_text="ŠABLONA PŘEDVYPLNĚNA – DOPLŇ OBSAH"
+                status_text="ŠABLONA VYTVOŘENA – DOPLŇ DOKUMENT"
             )
 
             unresolved = self._documentation_unresolved_template_fields(
@@ -6783,12 +6387,9 @@ catch {{
                     f"Document ID: {document_id}\n"
                     f"Šablona: {template_path}\n"
                     f"Pracovní dokument: {source_snapshot}\n"
-                    f"Technicky předvyplněná pole: {len(technical_replacements)}\n"
-                    f"Nevyplněná obsahová pole: {len(unresolved)}\n"
-                    f"Git: {git_snapshot['summary']}\n"
-                    f"DB: {db_snapshot['database_summary']}\n\n"
+                    f"Nevyplněná obsahová pole: {len(unresolved)}\n\n"
                     f"{open_note}\n\n"
-                    "Doplň zbývající pole {{NAZEV_POLE}}. Potom znovu klikni "
+                    "Doplň všechna pole {{NAZEV_POLE}}. Potom znovu klikni "
                     "na 1 VYBRAT A ANALYZOVAT a panel spustí A17."
                 )
             )
@@ -6816,14 +6417,14 @@ catch {{
         except Exception:
             return []
 
-        fields = set(
-            re.findall(
-                r"\{\{([A-Z0-9_]+)\}\}",
-                text_value
+        return sorted(
+            set(
+                re.findall(
+                    r"\{\{([A-Z0-9_]+)\}\}",
+                    text_value
+                )
             )
         )
-        fields.discard("NAZEV_PROMENNE")
-        return sorted(fields)
 
 
     def documentation_open_working_document(self):
