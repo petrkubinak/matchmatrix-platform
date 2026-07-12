@@ -9,7 +9,7 @@
 | Typ dokumentu | CHAT_CONTINUATION |
 | Verze | 1.0 |
 | Stav | APPROVED |
-| Datum pracovního dne | 2026-07-11 |
+| Datum | 2026-07-11 |
 | Datum a čas uzavření | 2026-07-12T01:00:58+02:00 |
 | Autor | Petr |
 | Technická spolupráce | OpenAI ChatGPT |
