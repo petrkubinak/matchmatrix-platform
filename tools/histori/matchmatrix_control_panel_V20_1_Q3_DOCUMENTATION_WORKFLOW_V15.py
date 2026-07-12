@@ -118,13 +118,6 @@ V20.1.Q3 STEP 19:
 - před A17 panel zablokuje audit, dokud v dokumentu zůstávají nevyplněná pole {{...}},
 - stále lze vybrat a zpracovat libovolný existující Markdown dokument.
 
-V20.1.Q3 STEP 20C:
-- poslední databázový snapshot PŘED / NYNÍ / Δ se ukládá trvale mimo dočasný workspace,
-- sekce STAV DOKUMENTAČNÍ DATABÁZE zobrazuje tři řádky: PŘED POSLEDNÍM IMPORTEM, NYNÍ a Δ POSLEDNÍHO IMPORTU,
-- přehled zůstává dostupný i po restartu panelu,
-- panel uvádí také poslední Document ID, verzi a čas importu,
-- živý řádek NYNÍ se vždy načítá přímo z dokumentační databáze.
-
 V20.1.Q3 STEP 20B:
 - před A24 APPLY uloží ověřený snapshot dokumentační databáze,
 - po A24 APPLY a A7 načte nový snapshot a automaticky vypočítá rozdíl,
@@ -204,28 +197,6 @@ DOCUMENTATION_WORKSPACE_ROOT = os.path.join(
     "documentation",
     "standardization",
     "panel_workspaces"
-)
-
-# V20.1.Q3 STEP 20C - TRVALÝ POSLEDNÍ DB SNAPSHOT
-# CO:
-# - Stabilní JSON a Markdown soubor s posledním úspěšným databázovým nárůstem.
-# K ČEMU:
-# - Přehled PŘED / NYNÍ / DELTA zůstane dostupný i po restartu panelu.
-# KDE:
-# - Sdílené reporty na PC2 mimo dočasný workspace konkrétního dokumentu.
-DOCUMENTATION_DB_GROWTH_DIR = os.path.join(
-    DOCUMENTATION_ROOT,
-    "reports",
-    "documentation",
-    "database_growth"
-)
-DOCUMENTATION_DB_GROWTH_LATEST_JSON = os.path.join(
-    DOCUMENTATION_DB_GROWTH_DIR,
-    "documentation_database_growth_latest.json"
-)
-DOCUMENTATION_DB_GROWTH_LATEST_MARKDOWN = os.path.join(
-    DOCUMENTATION_DB_GROWTH_DIR,
-    "documentation_database_growth_latest.md"
 )
 
 # V20.1.Q3 STEP 19 - OFICIÁLNÍ ŠABLONY NOVÝCH DOKUMENTŮ
@@ -483,18 +454,6 @@ COLUMN_LABELS = {
     "payload_json": "Payload JSON",
     "created_at": "Vytvořeno",
     "updated_at": "Upraveno",
-    "snapshot_state": "Stav snapshotu",
-    "documents": "Dokumenty",
-    "current_versions": "Aktuální verze",
-    "versions_total": "Verze celkem",
-    "sections": "Sekce",
-    "relations": "Vazby",
-    "status_history": "Historie stavů",
-    "import_runs": "Importní běhy",
-    "active_documents": "Aktivní dokumenty",
-    "snapshot_document_id": "Poslední dokument",
-    "snapshot_version": "Verze",
-    "snapshot_time": "Čas snapshotu",
     "fetched_at": "Staženo",
     "last_payload_at": "Poslední payload",
     "generated_at": "Vygenerováno",
@@ -1272,7 +1231,6 @@ class MatchMatrixAdminPanel(tk.Tk):
         self.documentation_workflow_db_snapshot_delta = {}
         self.documentation_workflow_db_growth_report = None
         self.documentation_workflow_db_growth_markdown = None
-        self.documentation_latest_db_growth_payload = None
 
         self.documentation_workflow_process = None
         self.documentation_workflow_running = False
@@ -5973,21 +5931,8 @@ Další termín: {h.get('next_target_date') or '-'}"""
                 )
                 growth_color = YELLOW
             else:
-                latest_payload = self._documentation_load_latest_database_growth()
-                latest_growth = (latest_payload or {}).get("growth", {})
-                if latest_growth.get("metrics"):
-                    latest_document = (latest_payload or {}).get("document_id") or "-"
-                    latest_version = (latest_payload or {}).get("version") or "-"
-                    growth_text = (
-                        f"POSLEDNÍ IMPORT {latest_document} v{latest_version} | "
-                        + self._documentation_format_database_growth(
-                            latest_growth, multiline=False
-                        )
-                    )
-                    growth_color = GREEN
-                else:
-                    growth_text = "ČEKÁ NA A24 APPLY"
-                    growth_color = MUTED
+                growth_text = "ČEKÁ NA A24 APPLY"
+                growth_color = MUTED
 
             self.documentation_workflow_db_growth_value.config(
                 text=growth_text,
@@ -6700,190 +6645,15 @@ catch {{
         return separator.join(parts)
 
 
-    def _documentation_atomic_write_utf8(self, path, content):
-        """Zapíše UTF-8 soubor přes dočasnou kopii a atomické nahrazení."""
-        target = os.path.abspath(path)
-        os.makedirs(os.path.dirname(target), exist_ok=True)
-        temporary = f"{target}.{os.getpid()}.tmp"
-        try:
-            with open(temporary, "w", encoding="utf-8", newline="\n") as handle:
-                handle.write(content)
-            os.replace(temporary, target)
-        finally:
-            if os.path.exists(temporary):
-                try:
-                    os.remove(temporary)
-                except OSError:
-                    pass
-
-
-    def _documentation_persist_latest_database_growth(
-        self,
-        payload,
-        markdown_text
-    ):
-        """Uloží poslední DB nárůst do stabilního reportu mimo workspace."""
-        json_text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
-        self._documentation_atomic_write_utf8(
-            DOCUMENTATION_DB_GROWTH_LATEST_JSON,
-            json_text
-        )
-        self._documentation_atomic_write_utf8(
-            DOCUMENTATION_DB_GROWTH_LATEST_MARKDOWN,
-            markdown_text
-        )
-        self.documentation_latest_db_growth_payload = payload
-
-
-    def _documentation_load_latest_database_growth(self, force=False):
-        """Načte poslední trvalý DB nárůst; při chybě vrátí None."""
-        cached = getattr(self, "documentation_latest_db_growth_payload", None)
-        if cached is not None and not force:
-            return cached or None
-
-        payload = None
-        try:
-            with open(
-                DOCUMENTATION_DB_GROWTH_LATEST_JSON,
-                "r",
-                encoding="utf-8"
-            ) as handle:
-                candidate = json.load(handle)
-            if (
-                isinstance(candidate, dict)
-                and isinstance(candidate.get("growth"), dict)
-                and isinstance(candidate["growth"].get("metrics"), dict)
-            ):
-                payload = candidate
-        except (OSError, ValueError, TypeError):
-            payload = None
-
-        self.documentation_latest_db_growth_payload = payload or {}
-        return payload
-
-
-    def _documentation_live_database_row_to_snapshot(self, row, timestamp_iso):
-        """Převede živý SQL souhrn na formát používaný DB snapshoty."""
-        row = row if isinstance(row, dict) else {}
-        return {
-            "DB_DOCUMENTS": str(row.get("documents", "NEOVĚŘENO")),
-            "DB_VERSIONS_TOTAL": str(
-                row.get("versions_total", "NEOVĚŘENO")
-            ),
-            "DB_CURRENT_VERSIONS": str(
-                row.get("current_versions", "NEOVĚŘENO")
-            ),
-            "DB_SECTIONS": str(row.get("sections", "NEOVĚŘENO")),
-            "DB_RELATIONS": str(row.get("relations", "NEOVĚŘENO")),
-            "DB_STATUS_HISTORY": str(
-                row.get("status_history", "NEOVĚŘENO")
-            ),
-            "DB_IMPORT_RUNS": str(row.get("import_runs", "NEOVĚŘENO")),
-            "DB_ACTIVE_DOCUMENTS": str(
-                row.get("active_documents", "NEOVĚŘENO")
-            ),
-            "DB_SNAPSHOT_CREATED_AT": timestamp_iso,
-        }
-
-
-    def _documentation_database_dashboard_rows(self, live_rows):
-        """Sestaví trvalé řádky PŘED / NYNÍ / DELTA pro DB dashboard."""
-        now_iso = datetime.now().astimezone().isoformat(timespec="seconds")
-        live_row = {}
-        if live_rows and isinstance(live_rows[0], dict):
-            live_row = live_rows[0]
-
-        live_snapshot = self._documentation_live_database_row_to_snapshot(
-            live_row,
-            now_iso
-        )
-        payload = self._documentation_load_latest_database_growth(force=True)
-        growth = payload.get("growth", {}) if payload else {}
-        metrics = growth.get("metrics", {}) if isinstance(growth, dict) else {}
-
-        document_id = str((payload or {}).get("document_id") or "-")
-        version = str((payload or {}).get("version") or "-")
-        imported_at = str(
-            (payload or {}).get("imported_at")
-            or growth.get("created_at")
-            or "-"
-        )
-
-        before_row = {
-            "snapshot_state": "PŘED POSLEDNÍM IMPORTEM",
-            "snapshot_document_id": document_id,
-            "snapshot_version": version,
-            "snapshot_time": str(growth.get("before_created_at") or "-"),
-        }
-        now_row = {
-            "snapshot_state": "NYNÍ",
-            "snapshot_document_id": document_id,
-            "snapshot_version": version,
-            "snapshot_time": now_iso,
-        }
-        delta_row = {
-            "snapshot_state": "Δ POSLEDNÍHO IMPORTU",
-            "snapshot_document_id": document_id,
-            "snapshot_version": version,
-            "snapshot_time": imported_at,
-        }
-
-        for metric_key, _, snapshot_key in (
-            self._documentation_database_metric_definitions()
-        ):
-            metric = metrics.get(metric_key, {}) if metrics else {}
-            before_value = metric.get("before")
-            delta_value = metric.get("delta")
-            live_value = self._documentation_database_count(
-                live_snapshot,
-                snapshot_key
-            )
-
-            before_row[metric_key] = (
-                before_value if before_value is not None else "-"
-            )
-            now_row[metric_key] = (
-                live_value if live_value is not None else "-"
-            )
-            delta_row[metric_key] = (
-                f"{delta_value:+d}"
-                if isinstance(delta_value, int)
-                else "-"
-            )
-
-        if not payload:
-            before_row["snapshot_document_id"] = "ČEKÁ NA PRVNÍ IMPORT STEP 20C"
-            delta_row["snapshot_document_id"] = "ČEKÁ NA PRVNÍ IMPORT STEP 20C"
-
-        return [before_row, now_row, delta_row]
-
-
     def _documentation_write_database_growth_report(self, output_dir):
-        """Uloží STEP 20C snapshot do workspace i trvalého latest reportu."""
+        """Uloží STEP 20B snapshot a nárůst do JSON i Markdown reportu."""
         if not self.documentation_workflow_db_snapshot_delta:
             return None, None
 
         os.makedirs(output_dir, exist_ok=True)
-        document_id = None
-        version = None
-        title = None
-        try:
-            _, metadata = self._documentation_read_metadata(
-                self.documentation_workflow_canonical_document
-            )
-            document_id = metadata.get("document_id")
-            version = metadata.get("version")
-            title = metadata.get("title") or metadata.get("name")
-        except Exception:
-            pass
-
         payload = {
-            "engine_version": "Q3_STEP20C_DATABASE_GROWTH_V2",
+            "engine_version": "Q3_STEP20B_DATABASE_GROWTH_V1",
             "document": self.documentation_workflow_canonical_document,
-            "document_id": document_id,
-            "version": version,
-            "title": title,
-            "imported_at": datetime.now().astimezone().isoformat(),
             "a24_apply_status": self.documentation_workflow_a24_apply_status,
             "a7_status": self.documentation_workflow_a7_status,
             "before": self.documentation_workflow_db_snapshot_before_apply,
@@ -6931,14 +6701,8 @@ catch {{
                 f"{delta_text} |"
             )
 
-        markdown_text = "\n".join(markdown_lines) + "\n"
-        with open(markdown_path, "w", encoding="utf-8", newline="\n") as handle:
-            handle.write(markdown_text)
-
-        self._documentation_persist_latest_database_growth(
-            payload,
-            markdown_text
-        )
+        with open(markdown_path, "w", encoding="utf-8") as handle:
+            handle.write("\n".join(markdown_lines) + "\n")
 
         self.documentation_workflow_db_growth_report = json_path
         self.documentation_workflow_db_growth_markdown = markdown_path
@@ -6950,16 +6714,6 @@ catch {{
         report_path = (
             self.documentation_workflow_db_growth_markdown
             or self.documentation_workflow_db_growth_report
-            or (
-                DOCUMENTATION_DB_GROWTH_LATEST_MARKDOWN
-                if os.path.isfile(DOCUMENTATION_DB_GROWTH_LATEST_MARKDOWN)
-                else None
-            )
-            or (
-                DOCUMENTATION_DB_GROWTH_LATEST_JSON
-                if os.path.isfile(DOCUMENTATION_DB_GROWTH_LATEST_JSON)
-                else None
-            )
         )
         if not report_path or not os.path.isfile(report_path):
             messagebox.showwarning(
@@ -11195,10 +10949,9 @@ CÍLOVÁ KAPITOLA / SEKCE:
         LIMIT 100;
         """
 
-        summary_rows = db_query(summary_sql)
         self.populate_tree(
             self.documentation_kpi_tree,
-            self._documentation_database_dashboard_rows(summary_rows)
+            db_query(summary_sql)
         )
         self.populate_tree(
             self.documentation_documents_tree,
