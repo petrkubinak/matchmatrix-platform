@@ -16,6 +16,7 @@
 | Charakter dokumentu | Historický projektový checkpoint |
 | Edice | HISTORY / MM-DOC TECH |
 | Verze | 0.9 |
+| Stav | APPROVED |
 | Původní stav zdrojového dokumentu | REVIEW |
 | Datum snapshotu | 2026-06-30 |
 | Rekonstruované období | 2026-06-01 až 2026-06-30 |
