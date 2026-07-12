@@ -118,13 +118,6 @@ V20.1.Q3 STEP 19:
 - před A17 panel zablokuje audit, dokud v dokumentu zůstávají nevyplněná pole {{...}},
 - stále lze vybrat a zpracovat libovolný existující Markdown dokument.
 
-V20.1.Q3 STEP 20B:
-- před A24 APPLY uloží ověřený snapshot dokumentační databáze,
-- po A24 APPLY a A7 načte nový snapshot a automaticky vypočítá rozdíl,
-- panel zobrazuje PŘED, PO a Δ pro dokumenty, verze, aktuální verze, sekce, vazby, historii stavů, importní běhy a aktivní dokumenty,
-- databázový nárůst se ukládá do JSON a Markdown reportu ve workspace,
-- dialog po importu uvádí přesné počty a rozdíl, nikoli pouze obecný stav importu.
-
 V20.1.Q3 STEP 20A FIX 1:
 - Git snapshot se vždy ověřuje vůči repozitáři na PC2, nikoli podle počítače, na kterém běží panel,
 - při spuštění panelu na PC2 se používá místní repozitář C:\\MatchMatrix-platform,
@@ -1224,13 +1217,6 @@ class MatchMatrixAdminPanel(tk.Tk):
         self.documentation_workflow_a24_apply_report = None
         self.documentation_workflow_a7_status = None
         self.documentation_workflow_import_summary = {}
-
-        # V20.1.Q3 STEP 20B - databázový snapshot PŘED / PO / DELTA.
-        self.documentation_workflow_db_snapshot_before_apply = None
-        self.documentation_workflow_db_snapshot_after_apply = None
-        self.documentation_workflow_db_snapshot_delta = {}
-        self.documentation_workflow_db_growth_report = None
-        self.documentation_workflow_db_growth_markdown = None
 
         self.documentation_workflow_process = None
         self.documentation_workflow_running = False
@@ -2819,40 +2805,6 @@ class MatchMatrixAdminPanel(tk.Tk):
         )
         self.documentation_workflow_publish_value.grid(
             row=5,
-            column=1,
-            columnspan=3,
-            sticky="ew",
-            padx=(0, 8),
-            pady=(2, 7)
-        )
-
-        tk.Label(
-            documentation_workflow_frame,
-            text="DB STAV / NÁRŮST:",
-            bg="#100918",
-            fg=MUTED,
-            font=("Segoe UI", 8, "bold"),
-            anchor="w"
-        ).grid(
-            row=6,
-            column=0,
-            sticky="nw",
-            padx=(8, 4),
-            pady=(2, 7)
-        )
-
-        self.documentation_workflow_db_growth_value = tk.Label(
-            documentation_workflow_frame,
-            text="ČEKÁ NA A24 APPLY",
-            bg="#100918",
-            fg=MUTED,
-            font=("Segoe UI", 8, "bold"),
-            anchor="w",
-            justify="left",
-            wraplength=1050
-        )
-        self.documentation_workflow_db_growth_value.grid(
-            row=6,
             column=1,
             columnspan=3,
             sticky="ew",
@@ -5904,41 +5856,6 @@ Další termín: {h.get('next_target_date') or '-'}"""
                 fg=publication_color
             )
 
-        if hasattr(self, "documentation_workflow_db_growth_value"):
-            growth = getattr(
-                self, "documentation_workflow_db_snapshot_delta", {}
-            ) or {}
-            before_snapshot = getattr(
-                self, "documentation_workflow_db_snapshot_before_apply", None
-            )
-
-            if growth.get("metrics"):
-                growth_text = self._documentation_format_database_growth(
-                    growth, multiline=False
-                )
-                growth_color = (
-                    GREEN
-                    if self.documentation_workflow_a7_status == "VERIFIED"
-                    else YELLOW
-                )
-            elif before_snapshot:
-                growth_text = (
-                    "PŘED IMPORTEM | "
-                    + self._documentation_format_database_snapshot(
-                        before_snapshot
-                    )
-                    + " | PO / Δ: ČEKÁ"
-                )
-                growth_color = YELLOW
-            else:
-                growth_text = "ČEKÁ NA A24 APPLY"
-                growth_color = MUTED
-
-            self.documentation_workflow_db_growth_value.config(
-                text=growth_text,
-                fg=growth_color
-            )
-
 
 
     def documentation_choose_source_action(self):
@@ -6474,7 +6391,6 @@ catch {{
             "DB_RELATIONS": "NEOVĚŘENO",
             "DB_STATUS_HISTORY": "NEOVĚŘENO",
             "DB_IMPORT_RUNS": "NEOVĚŘENO",
-            "DB_ACTIVE_DOCUMENTS": "NEOVĚŘENO",
             "DB_SNAPSHOT_CREATED_AT": timestamp_iso,
             "DB_EXECUTION_HOST": (
                 f"PC2 ({DOCUMENTATION_REMOTE_HOST})"
@@ -6503,12 +6419,7 @@ catch {{
                     SELECT COUNT(*)
                     FROM documentation.document_status_history
                 ) AS status_history,
-                (SELECT COUNT(*) FROM documentation.import_runs) AS import_runs,
-                (
-                    SELECT COUNT(*)
-                    FROM documentation.documents
-                    WHERE COALESCE(is_active, false) = true
-                ) AS active_documents;
+                (SELECT COUNT(*) FROM documentation.import_runs) AS import_runs;
         """)
 
         if rows and "CHYBA" not in rows[0]:
@@ -6521,7 +6432,6 @@ catch {{
                 "DB_RELATIONS": str(row.get("relations", 0)),
                 "DB_STATUS_HISTORY": str(row.get("status_history", 0)),
                 "DB_IMPORT_RUNS": str(row.get("import_runs", 0)),
-                "DB_ACTIVE_DOCUMENTS": str(row.get("active_documents", 0)),
             })
         elif rows and "CHYBA" in rows[0]:
             snapshot["DB_VERIFICATION_SOURCE"] = (
@@ -6534,194 +6444,9 @@ catch {{
             f"aktuální {snapshot['DB_CURRENT_VERSIONS']} | "
             f"sekce {snapshot['DB_SECTIONS']} | "
             f"vazby {snapshot['DB_RELATIONS']} | "
-            f"historie stavů {snapshot['DB_STATUS_HISTORY']} | "
-            f"importní běhy {snapshot['DB_IMPORT_RUNS']} | "
-            f"aktivní {snapshot['DB_ACTIVE_DOCUMENTS']}"
+            f"importní běhy {snapshot['DB_IMPORT_RUNS']}"
         )
         return snapshot
-
-
-    def _documentation_database_metric_definitions(self):
-        """Vrátí stabilní pořadí a popisky metrik pro STEP 20B."""
-        return (
-            ("documents", "Dokumenty", "DB_DOCUMENTS"),
-            ("versions_total", "Verze celkem", "DB_VERSIONS_TOTAL"),
-            ("current_versions", "Aktuální verze", "DB_CURRENT_VERSIONS"),
-            ("sections", "Sekce", "DB_SECTIONS"),
-            ("relations", "Vazby", "DB_RELATIONS"),
-            ("status_history", "Historie stavů", "DB_STATUS_HISTORY"),
-            ("import_runs", "Importní běhy", "DB_IMPORT_RUNS"),
-            ("active_documents", "Aktivní dokumenty", "DB_ACTIVE_DOCUMENTS"),
-        )
-
-
-    def _documentation_database_count(self, snapshot, key):
-        """Bezpečně převede textovou hodnotu snapshotu na celé číslo."""
-        if not isinstance(snapshot, dict):
-            return None
-        value = snapshot.get(key)
-        try:
-            return int(str(value).replace(" ", "").strip())
-        except (TypeError, ValueError):
-            return None
-
-
-    def _documentation_calculate_database_delta(self, before, after):
-        """Vypočítá přesný PŘED / PO / DELTA snapshot dokumentační DB."""
-        metrics = {}
-        for metric_key, label, snapshot_key in (
-            self._documentation_database_metric_definitions()
-        ):
-            before_value = self._documentation_database_count(
-                before, snapshot_key
-            )
-            after_value = self._documentation_database_count(
-                after, snapshot_key
-            )
-            delta_value = None
-            if before_value is not None and after_value is not None:
-                delta_value = after_value - before_value
-            metrics[metric_key] = {
-                "label": label,
-                "snapshot_key": snapshot_key,
-                "before": before_value,
-                "after": after_value,
-                "delta": delta_value,
-            }
-
-        return {
-            "created_at": datetime.now().astimezone().isoformat(),
-            "before_created_at": (before or {}).get(
-                "DB_SNAPSHOT_CREATED_AT"
-            ),
-            "after_created_at": (after or {}).get(
-                "DB_SNAPSHOT_CREATED_AT"
-            ),
-            "execution_host": (after or before or {}).get(
-                "DB_EXECUTION_HOST"
-            ),
-            "db_host": (after or before or {}).get("DB_HOST"),
-            "db_target": (after or before or {}).get("DB_TARGET"),
-            "metrics": metrics,
-        }
-
-
-    def _documentation_format_database_snapshot(self, snapshot):
-        """Zformátuje jeden databázový snapshot do čitelného řádku."""
-        parts = []
-        for _, label, snapshot_key in (
-            self._documentation_database_metric_definitions()
-        ):
-            value = self._documentation_database_count(snapshot, snapshot_key)
-            parts.append(f"{label}: {value if value is not None else '-'}")
-        return " | ".join(parts)
-
-
-    def _documentation_format_database_growth(self, growth, multiline=False):
-        """Zformátuje databázový nárůst pro panel a výsledný dialog."""
-        if not isinstance(growth, dict) or not growth.get("metrics"):
-            return "ČEKÁ NA A24 APPLY"
-
-        parts = []
-        for metric in growth["metrics"].values():
-            before_value = metric.get("before")
-            after_value = metric.get("after")
-            delta_value = metric.get("delta")
-            if (
-                before_value is None
-                or after_value is None
-                or delta_value is None
-            ):
-                value_text = f"{metric.get('label')}: NEOVĚŘENO"
-            else:
-                delta_text = f"{delta_value:+d}"
-                value_text = (
-                    f"{metric.get('label')}: "
-                    f"{before_value} → {after_value} ({delta_text})"
-                )
-            parts.append(value_text)
-
-        separator = "\n" if multiline else " | "
-        return separator.join(parts)
-
-
-    def _documentation_write_database_growth_report(self, output_dir):
-        """Uloží STEP 20B snapshot a nárůst do JSON i Markdown reportu."""
-        if not self.documentation_workflow_db_snapshot_delta:
-            return None, None
-
-        os.makedirs(output_dir, exist_ok=True)
-        payload = {
-            "engine_version": "Q3_STEP20B_DATABASE_GROWTH_V1",
-            "document": self.documentation_workflow_canonical_document,
-            "a24_apply_status": self.documentation_workflow_a24_apply_status,
-            "a7_status": self.documentation_workflow_a7_status,
-            "before": self.documentation_workflow_db_snapshot_before_apply,
-            "after": self.documentation_workflow_db_snapshot_after_apply,
-            "growth": self.documentation_workflow_db_snapshot_delta,
-        }
-
-        json_path = os.path.join(
-            output_dir, "database_growth_snapshot.json"
-        )
-        markdown_path = os.path.join(
-            output_dir, "database_growth_snapshot.md"
-        )
-
-        with open(json_path, "w", encoding="utf-8") as handle:
-            json.dump(payload, handle, ensure_ascii=False, indent=2)
-
-        markdown_lines = [
-            "# MatchMatrix – databázový stav a nárůst po A24",
-            "",
-            f"- Vytvořeno: `{self.documentation_workflow_db_snapshot_delta.get('created_at')}`",
-            f"- Dokument: `{self.documentation_workflow_canonical_document or '-'}`",
-            f"- A24: `{self.documentation_workflow_a24_apply_status or '-'}`",
-            f"- A7: `{self.documentation_workflow_a7_status or '-'}`",
-            f"- DB: `{self.documentation_workflow_db_snapshot_delta.get('db_host')}` / `{self.documentation_workflow_db_snapshot_delta.get('db_target')}`",
-            "",
-            "| Ukazatel | Před | Po | Rozdíl |",
-            "|---|---:|---:|---:|",
-        ]
-        for metric in self.documentation_workflow_db_snapshot_delta[
-            "metrics"
-        ].values():
-            before_value = metric.get("before")
-            after_value = metric.get("after")
-            delta_value = metric.get("delta")
-            delta_text = (
-                f"{delta_value:+d}"
-                if isinstance(delta_value, int)
-                else "NEOVĚŘENO"
-            )
-            markdown_lines.append(
-                f"| {metric.get('label')} | "
-                f"{before_value if before_value is not None else 'NEOVĚŘENO'} | "
-                f"{after_value if after_value is not None else 'NEOVĚŘENO'} | "
-                f"{delta_text} |"
-            )
-
-        with open(markdown_path, "w", encoding="utf-8") as handle:
-            handle.write("\n".join(markdown_lines) + "\n")
-
-        self.documentation_workflow_db_growth_report = json_path
-        self.documentation_workflow_db_growth_markdown = markdown_path
-        return json_path, markdown_path
-
-
-    def documentation_open_database_growth_report(self):
-        """Otevře poslední Markdown report databázového nárůstu."""
-        report_path = (
-            self.documentation_workflow_db_growth_markdown
-            or self.documentation_workflow_db_growth_report
-        )
-        if not report_path or not os.path.isfile(report_path):
-            messagebox.showwarning(
-                "DB stav / nárůst",
-                "Zatím není dostupný report databázového nárůstu."
-            )
-            return
-        os.startfile(report_path)
 
 
     def _documentation_build_technical_replacements(
@@ -7186,10 +6911,6 @@ catch {{
             ("A24 – pouze validovat na PC2", self.documentation_run_a24_validate),
             ("A24 – APPLY + A7 na PC2", self.documentation_run_a24_apply),
             ("Otevřít poslední A24 report", self.documentation_open_a24_report),
-            (
-                "Otevřít DB stav a nárůst",
-                self.documentation_open_database_growth_report
-            ),
             ("---", None),
             ("Otevřít poslední A17 report", self.documentation_open_a17_report),
         ]
@@ -7234,11 +6955,6 @@ catch {{
         self.documentation_workflow_a24_apply_report = None
         self.documentation_workflow_a7_status = None
         self.documentation_workflow_import_summary = {}
-        self.documentation_workflow_db_snapshot_before_apply = None
-        self.documentation_workflow_db_snapshot_after_apply = None
-        self.documentation_workflow_db_snapshot_delta = {}
-        self.documentation_workflow_db_growth_report = None
-        self.documentation_workflow_db_growth_markdown = None
 
         self.documentation_workflow_step = "ZDROJ"
         self.documentation_workflow_last_status = "NEVYBRÁN DOKUMENT"
@@ -7681,11 +7397,6 @@ catch {{
         self.documentation_workflow_a24_apply_report = None
         self.documentation_workflow_a7_status = None
         self.documentation_workflow_import_summary = {}
-        self.documentation_workflow_db_snapshot_before_apply = None
-        self.documentation_workflow_db_snapshot_after_apply = None
-        self.documentation_workflow_db_snapshot_delta = {}
-        self.documentation_workflow_db_growth_report = None
-        self.documentation_workflow_db_growth_markdown = None
         self._documentation_update_workflow_ui()
 
         output_dir = os.path.join(
@@ -7869,35 +7580,6 @@ catch {{
         if not confirmed:
             return
 
-        # STEP 20B: zachytit skutečný stav DB těsně před APPLY.
-        try:
-            DB_CACHE.clear()
-            self.documentation_workflow_db_snapshot_before_apply = (
-                self._documentation_collect_database_snapshot(
-                    datetime.now().astimezone().isoformat()
-                )
-            )
-            self.documentation_workflow_db_snapshot_after_apply = None
-            self.documentation_workflow_db_snapshot_delta = {}
-            self.documentation_workflow_db_growth_report = None
-            self.documentation_workflow_db_growth_markdown = None
-            self._documentation_manifest_update(
-                db_snapshot_before=(
-                    self.documentation_workflow_db_snapshot_before_apply
-                )
-            )
-            self._documentation_update_workflow_ui()
-        except Exception as exc:
-            self.documentation_workflow_db_snapshot_before_apply = {
-                "DB_SNAPSHOT_CREATED_AT": (
-                    datetime.now().astimezone().isoformat()
-                ),
-                "DB_VERIFICATION_SOURCE": (
-                    f"NEOVĚŘENO – {type(exc).__name__}: {exc}"
-                ),
-            }
-            self._documentation_update_workflow_ui()
-
         output_dir = os.path.join(
             self.documentation_workflow_workspace,
             "a24_apply"
@@ -7958,32 +7640,6 @@ catch {{
             )
         )
 
-        # STEP 20B: po dokončení A24/A7 načíst čerstvý stav DB a rozdíl.
-        try:
-            DB_CACHE.clear()
-            self.documentation_workflow_db_snapshot_after_apply = (
-                self._documentation_collect_database_snapshot(
-                    datetime.now().astimezone().isoformat()
-                )
-            )
-            self.documentation_workflow_db_snapshot_delta = (
-                self._documentation_calculate_database_delta(
-                    self.documentation_workflow_db_snapshot_before_apply,
-                    self.documentation_workflow_db_snapshot_after_apply
-                )
-            )
-            self._documentation_write_database_growth_report(output_dir)
-        except Exception as exc:
-            self.documentation_workflow_db_snapshot_after_apply = {
-                "DB_SNAPSHOT_CREATED_AT": (
-                    datetime.now().astimezone().isoformat()
-                ),
-                "DB_VERIFICATION_SOURCE": (
-                    f"NEOVĚŘENO – {type(exc).__name__}: {exc}"
-                ),
-            }
-            self.documentation_workflow_db_snapshot_delta = {}
-
         if status == "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED":
             self.documentation_workflow_a7_status = "VERIFIED"
             self.documentation_workflow_last_status = (
@@ -8011,20 +7667,7 @@ catch {{
             a24_apply_status=self.documentation_workflow_a24_apply_status,
             a24_apply_report=self.documentation_workflow_a24_apply_report,
             a7_status=self.documentation_workflow_a7_status,
-            import_summary=self.documentation_workflow_import_summary,
-            db_snapshot_before=(
-                self.documentation_workflow_db_snapshot_before_apply
-            ),
-            db_snapshot_after=(
-                self.documentation_workflow_db_snapshot_after_apply
-            ),
-            db_snapshot_delta=(
-                self.documentation_workflow_db_snapshot_delta
-            ),
-            db_growth_report=self.documentation_workflow_db_growth_report,
-            db_growth_markdown=(
-                self.documentation_workflow_db_growth_markdown
-            )
+            import_summary=self.documentation_workflow_import_summary
         )
 
         try:
@@ -8036,10 +7679,6 @@ catch {{
         self._documentation_update_workflow_ui()
 
         summary = self.documentation_workflow_import_summary or {}
-        growth_detail = self._documentation_format_database_growth(
-            self.documentation_workflow_db_snapshot_delta,
-            multiline=True
-        )
         detail = (
             f"Execution host: PC2 ({DOCUMENTATION_REMOTE_HOST})\n"
             "DB host: localhost na PC2\n"
@@ -8047,12 +7686,8 @@ catch {{
             f"A24 stav: {self.documentation_workflow_a24_apply_status}\n"
             f"A7 stav: {self.documentation_workflow_a7_status}\n"
             f"Varování: {summary.get('warnings')}\n"
-            f"Blokátory: {summary.get('blockers')}\n\n"
-            "DB STAV PŘED → PO (ROZDÍL):\n"
-            f"{growth_detail}\n\n"
-            f"A24 report: {self.documentation_workflow_a24_apply_report or '-'}\n"
-            f"DB růst JSON: {self.documentation_workflow_db_growth_report or '-'}\n"
-            f"DB růst MD: {self.documentation_workflow_db_growth_markdown or '-'}"
+            f"Blokátory: {summary.get('blockers')}\n"
+            f"Report: {self.documentation_workflow_a24_apply_report or '-'}"
         )
 
         if dialog == "info":
