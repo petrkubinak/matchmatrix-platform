@@ -125,13 +125,6 @@ V20.1.Q3 STEP 20C:
 - panel uvádí také poslední Document ID, verzi a čas importu,
 - živý řádek NYNÍ se vždy načítá přímo z dokumentační databáze.
 
-V20.1.Q3 STEP 21A:
-- opravuje načítání verze dokumentu z metadat Markdown souboru,
-- doplňuje verzi do trvalého JSON snapshotu posledního importu,
-- starší STEP 20C snapshot bez verze automaticky doplní z documentation.documents,
-- řádky PŘED / NYNÍ / Δ i horní souhrn POSLEDNÍ IMPORT zobrazují skutečnou verzi,
-- oprava nevyžaduje opakovaný import již publikovaného dokumentu.
-
 V20.1.Q3 STEP 20B:
 - před A24 APPLY uloží ověřený snapshot dokumentační databáze,
 - po A24 APPLY a A7 načte nový snapshot a automaticky vypočítá rozdíl,
@@ -6742,82 +6735,11 @@ catch {{
         self.documentation_latest_db_growth_payload = payload
 
 
-    def _documentation_resolve_document_version(
-        self,
-        document_id,
-        candidate_version=None
-    ):
-        """Vrátí ověřenou verzi dokumentu pro STEP 21A.
-
-        Priorita zdrojů:
-        1. verze uložená v dokumentu nebo snapshotu,
-        2. current_version_label v documentation.documents.
-        """
-        version_text = str(candidate_version or "").strip()
-        if version_text.casefold() not in {
-            "", "-", "none", "null", "neověřeno"
-        }:
-            return version_text
-
-        document_id_text = str(document_id or "").strip()
-        if document_id_text.casefold() in {
-            "", "-", "none", "null", "neověřeno"
-        }:
-            return None
-
-        safe_document_id = document_id_text.replace("'", "''")
-        rows = db_query(f"""
-            SELECT current_version_label
-            FROM documentation.documents
-            WHERE document_id = '{safe_document_id}'
-            LIMIT 1;
-        """)
-        if rows and isinstance(rows[0], dict) and "CHYBA" not in rows[0]:
-            resolved = str(
-                rows[0].get("current_version_label") or ""
-            ).strip()
-            if resolved:
-                return resolved
-        return None
-
-
-    def _documentation_enrich_database_growth_payload(self, payload):
-        """Doplní chybějící verzi do staršího STEP 20C payloadu."""
-        if not isinstance(payload, dict):
-            return payload, False
-
-        current_version = payload.get("version")
-        resolved_version = self._documentation_resolve_document_version(
-            payload.get("document_id"),
-            current_version
-        )
-        if not resolved_version:
-            return payload, False
-
-        current_text = str(current_version or "").strip()
-        if current_text == resolved_version:
-            return payload, False
-
-        enriched = dict(payload)
-        enriched["version"] = resolved_version
-        enriched["version_source"] = (
-            "documentation.documents.current_version_label"
-        )
-        enriched["version_backfilled_at"] = (
-            datetime.now().astimezone().isoformat()
-        )
-        return enriched, True
-
-
     def _documentation_load_latest_database_growth(self, force=False):
-        """Načte poslední trvalý DB nárůst a doplní chybějící verzi."""
+        """Načte poslední trvalý DB nárůst; při chybě vrátí None."""
         cached = getattr(self, "documentation_latest_db_growth_payload", None)
         if cached is not None and not force:
-            enriched, _ = self._documentation_enrich_database_growth_payload(
-                cached or None
-            )
-            self.documentation_latest_db_growth_payload = enriched or {}
-            return enriched or None
+            return cached or None
 
         payload = None
         try:
@@ -6835,22 +6757,6 @@ catch {{
                 payload = candidate
         except (OSError, ValueError, TypeError):
             payload = None
-
-        payload, version_backfilled = (
-            self._documentation_enrich_database_growth_payload(payload)
-        )
-
-        # STEP 21A: jednorázově opraví i již existující latest JSON,
-        # aby verze zůstala dostupná po dalších restartech panelu.
-        if payload and version_backfilled:
-            try:
-                self._documentation_atomic_write_utf8(
-                    DOCUMENTATION_DB_GROWTH_LATEST_JSON,
-                    json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
-                )
-            except OSError:
-                # Zobrazení zůstane funkční i při dočasně read-only UNC cestě.
-                pass
 
         self.documentation_latest_db_growth_payload = payload or {}
         return payload
@@ -6971,13 +6877,8 @@ catch {{
         except Exception:
             pass
 
-        version = self._documentation_resolve_document_version(
-            document_id,
-            version
-        )
-
         payload = {
-            "engine_version": "Q3_STEP21A_DATABASE_GROWTH_V3",
+            "engine_version": "Q3_STEP20C_DATABASE_GROWTH_V2",
             "document": self.documentation_workflow_canonical_document,
             "document_id": document_id,
             "version": version,
@@ -7005,8 +6906,6 @@ catch {{
             "",
             f"- Vytvořeno: `{self.documentation_workflow_db_snapshot_delta.get('created_at')}`",
             f"- Dokument: `{self.documentation_workflow_canonical_document or '-'}`",
-            f"- Document ID: `{document_id or '-'}`",
-            f"- Verze: `{version or '-'}`",
             f"- A24: `{self.documentation_workflow_a24_apply_status or '-'}`",
             f"- A7: `{self.documentation_workflow_a7_status or '-'}`",
             f"- DB: `{self.documentation_workflow_db_snapshot_delta.get('db_host')}` / `{self.documentation_workflow_db_snapshot_delta.get('db_target')}`",
@@ -10087,41 +9986,17 @@ catch {{
         messagebox.showerror("A17 – audit selhal", (output_text or "")[-3500:])
 
     def _documentation_read_metadata(self, path_value):
-        """Načte základní metadata z první odpovídající Markdown tabulky.
-
-        STEP 21A:
-        - verze je řízené metadata stejně jako Document ID a stav,
-        - podporuje současné i starší názvy řádku s verzí,
-        - první nalezená hodnota zůstává zdrojem pravdy.
-        """
         text_value = Path(path_value).read_text(encoding="utf-8-sig")
         fields = {}
-        aliases = {
-            "document id": "document_id",
-            "dokument": "document_id",
-            "typ dokumentu": "document_type",
-            "typ": "document_type",
-            "název dokumentu": "title",
-            "název": "title",
-            "stav": "status",
-            "verze": "version",
-            "verze dokumentu": "version",
-            "verze návrhu": "version",
-            "aktuální verze": "version",
-            "version": "version",
-        }
+        aliases = {"document id": "document_id", "dokument": "document_id", "typ dokumentu": "document_type", "typ": "document_type", "název dokumentu": "title", "název": "title", "stav": "status"}
         for line in text_value.splitlines():
-            match = re.match(
-                r"^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|$",
-                line
-            )
+            match = re.match(r"^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|$", line)
             if not match:
                 continue
             key = match.group(1).strip().casefold()
             value = match.group(2).strip().strip("`")
-            target_key = aliases.get(key)
-            if target_key and target_key not in fields:
-                fields[target_key] = value
+            if key in aliases and aliases[key] not in fields:
+                fields[aliases[key]] = value
         return text_value, fields
 
     def documentation_approve_and_save_canonical(self):
