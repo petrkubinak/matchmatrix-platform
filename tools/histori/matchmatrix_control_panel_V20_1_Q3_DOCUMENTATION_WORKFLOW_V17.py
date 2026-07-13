@@ -132,19 +132,6 @@ V20.1.Q3 STEP 21A:
 - řádky PŘED / NYNÍ / Δ i horní souhrn POSLEDNÍ IMPORT zobrazují skutečnou verzi,
 - oprava nevyžaduje opakovaný import již publikovaného dokumentu.
 
-V20.1.Q3 STEP 22:
-- kanonické uložení již není omezené na DAILY_LOG, CHAT_CONTINUATION a PROJECT_SNAPSHOT,
-- směrování používá primárně Document ID a oficiální prefixy MM-STD-007,
-- podporuje všechny současné oblasti MM-DOC, MM-MST, MM-GOV, MM-ARC, MM-DB,
-  MM-PRV, MM-LAY, MM-OPS, MM-DEV, MM-HIS, MM-REF, MM-VIS, MM-STD,
-  MM-TPL, MM-EXP, MM-DRF a MM-ARCV,
-- podporuje také datumové dokumenty MM-DL, MM-NAV a MM-PS,
-- budoucí prefix lze bezpečně směrovat přes metadata Cílové umístění bez dalšího zásahu do panelu,
-- aktualizace další verze stejného Document ID zachová existující kanonický název souboru,
-- panel blokuje dvě aktivní kanonické kopie stejného Document ID,
-- schválení vždy vytvoří samostatné metadata Stav = APPROVED a zachová původní stav,
-- A18 již panelově neomezuje pouze na DL/NAV; předá všechny typy podporované A17.
-
 V20.1.Q3 STEP 20B:
 - před A24 APPLY uloží ověřený snapshot dokumentační databáze,
 - po A24 APPLY a A7 načte nový snapshot a automaticky vypočítá rozdíl,
@@ -272,46 +259,6 @@ DOCUMENTATION_TEMPLATES = {
         "MM-TPL-002_SABLONA_DENNIHO_ZAPISU.md"
     ),
 }
-
-# V20.1.Q3 STEP 22 - UNIVERZÁLNÍ KANONICKÉ SMĚROVÁNÍ
-# CO:
-# - Jediný registr vazby Document ID prefix -> aktivní dokumentační složka.
-# K ČEMU:
-# - Schválení není vázané na textový název typu dokumentu.
-# - Nová verze existujícího dokumentu se uloží ke stejnému Document ID.
-# - Budoucí prefixy lze doplnit jedním řádkem nebo metadatem Cílové umístění.
-# KDE:
-# - docs podle MM-STD-007 a speciální historické řady DL/NAV/PS.
-DOCUMENTATION_CANONICAL_PREFIX_DIRS = {
-    "MM-DOC": ("docs", "00_DOCUMENTATION"),
-    "MM-MST": ("docs", "01_MASTER"),
-    "MM-GOV": ("docs", "02_GOVERNANCE"),
-    "MM-ARC": ("docs", "03_ARCHITECTURE"),
-    "MM-DB": ("docs", "04_DATABASE"),
-    "MM-PRV": ("docs", "05_PROVIDERS"),
-    "MM-LAY": ("docs", "06_LAYERS"),
-    "MM-OPS": ("docs", "07_OPERATOR"),
-    "MM-DEV": ("docs", "08_DEVELOPMENT"),
-    "MM-HIS": ("docs", "09_HISTORY"),
-    "MM-REF": ("docs", "10_REFERENCE"),
-    "MM-VIS": ("docs", "11_VISUAL"),
-    "MM-STD": ("docs", "12_STANDARD"),
-    "MM-TPL": ("docs", "13_TEMPLATES"),
-    "MM-EXP": ("docs", "14_EXPORT"),
-    "MM-DRF": ("docs", "15_DRAFT"),
-    "MM-ARCV": ("docs", "99_ARCHIVE"),
-}
-
-DOCUMENTATION_CANONICAL_SPECIAL_PREFIX_DIRS = {
-    "MM-DL": ("docs", "09_HISTORY", "DENNÍ_ZÁPISY"),
-    "MM-NAV": ("docs", "09_HISTORY", "NAVÁZÁNÍ_NA_CHAT"),
-    "MM-PS": ("docs", "09_HISTORY", "PROJECT_SNAPSHOTS"),
-}
-
-DOCUMENTATION_CANONICAL_ID_RE = re.compile(
-    r"^(?:MM-DL-\d{8}|MM-NAV-\d{8}-\d{2}|MM-PS-\d{8}|MM-[A-Z]{2,10}-\d{3,4}[A-Z]?)$",
-    re.IGNORECASE,
-)
 
 DOCUMENTATION_SCRIPTS = {
     "A17": os.path.join(
@@ -9282,22 +9229,17 @@ catch {{
             audit_payload.get("document_type") or ""
         ).strip().upper()
 
-        # STEP 22: panel neblokuje typy, které již rozpoznává A17.
-        # Skutečnou schopnost standardizace ověřuje samotný A18 kontrakt.
         supported_types = {
             "DAILY_LOG",
             "CHAT_CONTINUATION",
-            "PROJECT_SNAPSHOT",
-            "MAIN_DOCUMENT",
-            "REFERENCE_DOCUMENT",
-            "GENERIC_DOCUMENT",
         }
 
         if document_type not in supported_types:
             messagebox.showinfo(
                 "A18 – návrh opravy",
                 (
-                    "Typ dokumentu není mezi typy řízenými A17/A18.\n\n"
+                    "A18 nyní podporuje pouze denní zápisy a dokumenty "
+                    "NAVÁZÁNÍ.\n\n"
                     f"Detekovaný typ: {document_type or '-'}\n\n"
                     "Zdrojový dokument nebyl změněn."
                 )
@@ -10144,267 +10086,6 @@ catch {{
                 return
         messagebox.showerror("A17 – audit selhal", (output_text or "")[-3500:])
 
-    def _documentation_normalize_document_id(self, value):
-        """STEP 22 - ověří a normalizuje primární Document ID."""
-        document_id = str(value or "").strip().strip("`").upper()
-        if not DOCUMENTATION_CANONICAL_ID_RE.fullmatch(document_id):
-            raise RuntimeError(
-                "Document ID nemá podporovaný formát MatchMatrix: "
-                f"{document_id or '-'}"
-            )
-        return document_id
-
-
-    def _documentation_document_prefix(self, document_id):
-        """Vrátí směrovací prefix včetně speciálních řad DL/NAV/PS."""
-        normalized_id = self._documentation_normalize_document_id(document_id)
-        for special_prefix in DOCUMENTATION_CANONICAL_SPECIAL_PREFIX_DIRS:
-            if normalized_id.startswith(special_prefix + "-"):
-                return special_prefix
-        parts = normalized_id.split("-")
-        if len(parts) < 3:
-            raise RuntimeError(f"Nelze určit prefix Document ID: {normalized_id}")
-        return "-".join(parts[:2])
-
-
-    def _documentation_is_path_under(self, child, parent):
-        """Bezpečná kontrola, že cesta leží uvnitř povoleného kořene."""
-        try:
-            child_norm = os.path.normcase(os.path.abspath(os.path.normpath(child)))
-            parent_norm = os.path.normcase(os.path.abspath(os.path.normpath(parent)))
-            return os.path.commonpath([child_norm, parent_norm]) == parent_norm
-        except (ValueError, OSError):
-            return False
-
-
-    def _documentation_target_from_metadata(self, metadata, document_id):
-        """Převede metadata Cílové umístění na bezpečnou složku pod docs."""
-        raw_value = str((metadata or {}).get("target_location") or "").strip().strip("`")
-        if not raw_value:
-            return None, None
-
-        normalized_value = raw_value.replace("/", os.sep).replace("\\", os.sep)
-        candidate = None
-
-        for root_value in (
-            DOCUMENTATION_ROOT,
-            DOCUMENTATION_REMOTE_PROJECT_ROOT,
-            BASE_DIR,
-        ):
-            root_norm = os.path.normpath(root_value)
-            value_norm = os.path.normpath(normalized_value)
-            if os.path.normcase(value_norm).startswith(os.path.normcase(root_norm) + os.sep):
-                relative = value_norm[len(root_norm):].lstrip("\\/")
-                candidate = os.path.join(DOCUMENTATION_ROOT, relative)
-                break
-
-        if candidate is None:
-            lowered = normalized_value.casefold()
-            docs_token = "docs" + os.sep
-            if lowered == "docs":
-                candidate = os.path.join(DOCUMENTATION_ROOT, "docs")
-            elif lowered.startswith(docs_token.casefold()):
-                candidate = os.path.join(DOCUMENTATION_ROOT, normalized_value)
-            else:
-                return None, None
-
-        candidate = os.path.normpath(candidate)
-        filename_hint = None
-        if os.path.splitext(candidate)[1].lower() in {".md", ".markdown", ".txt"}:
-            filename_hint = os.path.basename(candidate)
-            candidate = os.path.dirname(candidate)
-
-        docs_root = os.path.join(DOCUMENTATION_ROOT, "docs")
-        if not self._documentation_is_path_under(candidate, docs_root):
-            raise RuntimeError(
-                "Metadata Cílové umístění míří mimo povolený kořen docs: "
-                f"{raw_value}"
-            )
-
-        if filename_hint and not filename_hint.upper().startswith(document_id.upper()):
-            filename_hint = None
-
-        return candidate, filename_hint
-
-
-    def _documentation_existing_canonical_files(self, target_dir, document_id):
-        """Najde všechny aktivní Markdown soubory stejného Document ID v cíli."""
-        if not os.path.isdir(target_dir):
-            return []
-        result = []
-        wanted = document_id.upper()
-        for item in Path(target_dir).glob("*.md"):
-            upper_name = item.name.upper()
-            if upper_name == f"{wanted}.MD" or upper_name.startswith(wanted + "_"):
-                result.append(str(item))
-        return sorted(set(result), key=lambda value: value.casefold())
-
-
-    def _documentation_canonical_target(self, document_id, metadata):
-        """Určí kanonickou složku pouze z identity nebo bezpečných metadat."""
-        normalized_id = self._documentation_normalize_document_id(document_id)
-        prefix = self._documentation_document_prefix(normalized_id)
-
-        route_parts = DOCUMENTATION_CANONICAL_SPECIAL_PREFIX_DIRS.get(prefix)
-        if route_parts is None:
-            route_parts = DOCUMENTATION_CANONICAL_PREFIX_DIRS.get(prefix)
-
-        if route_parts:
-            return os.path.join(DOCUMENTATION_ROOT, *route_parts), prefix, "PREFIX_REGISTRY", None
-
-        metadata_dir, filename_hint = self._documentation_target_from_metadata(
-            metadata,
-            normalized_id,
-        )
-        if metadata_dir:
-            return metadata_dir, prefix, "DOCUMENT_METADATA", filename_hint
-
-        source_original = getattr(
-            self,
-            "documentation_workflow_source_original",
-            None,
-        )
-        docs_root = os.path.join(DOCUMENTATION_ROOT, "docs")
-        if source_original and self._documentation_is_path_under(source_original, docs_root):
-            return os.path.dirname(source_original), prefix, "EXISTING_SOURCE_LOCATION", os.path.basename(source_original)
-
-        raise RuntimeError(
-            "Pro prefix "
-            f"{prefix!r} není definována kanonická složka. "
-            "Doplň prefix do DOCUMENTATION_CANONICAL_PREFIX_DIRS nebo do metadat "
-            "uveď bezpečné Cílové umístění pod docs."
-        )
-
-
-    def _documentation_title_filename_part(self, title):
-        """Vytvoří bezpečnou velkou část názvu souboru z názvu dokumentu."""
-        value = self._documentation_workspace_slug(title or "DOKUMENT")
-        return value[:140].strip("_") or "DOKUMENT"
-
-
-    def _documentation_canonical_filename(
-        self,
-        document_id,
-        metadata,
-        candidate,
-        target_dir,
-        filename_hint=None,
-    ):
-        """Určí stabilní název a zachová název existující verze stejného ID."""
-        normalized_id = self._documentation_normalize_document_id(document_id)
-        prefix = self._documentation_document_prefix(normalized_id)
-
-        existing_files = self._documentation_existing_canonical_files(
-            target_dir,
-            normalized_id,
-        )
-        if len(existing_files) > 1:
-            raise RuntimeError(
-                "V cílové složce existuje více aktivních souborů stejného "
-                f"Document ID {normalized_id}:\n\n"
-                + "\n".join(existing_files)
-                + "\n\nNejprve odstraň duplicitu do 99_ARCHIVE."
-            )
-        if existing_files:
-            return os.path.basename(existing_files[0]), existing_files[0]
-
-        if prefix == "MM-DL":
-            return f"{normalized_id}_MATCHMATRIX_DENNI_ZAPIS.md", None
-        if prefix == "MM-NAV":
-            return f"{normalized_id}_MATCHMATRIX_NAVAZANI_DO_CHATU.md", None
-
-        path_candidates = [
-            filename_hint,
-            os.path.basename(getattr(self, "documentation_workflow_source_original", "") or ""),
-            os.path.basename(candidate or ""),
-        ]
-        for name in path_candidates:
-            if not name:
-                continue
-            stem, extension = os.path.splitext(name)
-            if (
-                extension.lower() == ".md"
-                and (
-                    stem.upper() == normalized_id
-                    or stem.upper().startswith(normalized_id + "_")
-                )
-            ):
-                return name, None
-
-        if prefix == "MM-PS":
-            return f"{normalized_id}_MATCHMATRIX_PROJECT_SNAPSHOT.md", None
-
-        title_part = self._documentation_title_filename_part(
-            (metadata or {}).get("title")
-        )
-        return f"{normalized_id}_{title_part}.md", None
-
-
-    def _documentation_approved_text(self, text_value):
-        """Nastaví jeden aktuální stav APPROVED a zachová původní stav."""
-        newline = "\r\n" if "\r\n" in text_value else "\n"
-        status_pattern = re.compile(
-            r"(?m)^\|\s*Stav\s*\|\s*([^|]+?)\s*\|\s*$"
-        )
-        status_matches = list(status_pattern.finditer(text_value))
-        original_pattern = re.compile(
-            r"(?m)^\|\s*Původní stav zdrojového dokumentu\s*\|"
-        )
-
-        if len(status_matches) > 1:
-            raise RuntimeError(
-                "Dokument obsahuje více aktuálních řádků metadata Stav. "
-                "Před schválením je sjednoť."
-            )
-
-        if status_matches:
-            match = status_matches[0]
-            previous_status = match.group(1).strip()
-            replacement = "| Stav | APPROVED |"
-            if (
-                previous_status.upper() != "APPROVED"
-                and not original_pattern.search(text_value)
-            ):
-                replacement += (
-                    newline
-                    + "| Původní stav zdrojového dokumentu | "
-                    + previous_status
-                    + " |"
-                )
-            return (
-                text_value[:match.start()]
-                + replacement
-                + text_value[match.end():]
-            )
-
-        approved_line = "| Stav | APPROVED |"
-        original_match = original_pattern.search(text_value)
-        if original_match:
-            return (
-                text_value[:original_match.start()]
-                + approved_line
-                + newline
-                + text_value[original_match.start():]
-            )
-
-        version_pattern = re.compile(
-            r"(?m)^\|\s*(?:Verze|Verze dokumentu|Verze návrhu|Aktuální verze)\s*\|[^\n]*$"
-        )
-        version_match = version_pattern.search(text_value)
-        if version_match:
-            return (
-                text_value[:version_match.end()]
-                + newline
-                + approved_line
-                + text_value[version_match.end():]
-            )
-
-        raise RuntimeError(
-            "Dokument neobsahuje metadata Stav ani Verze, za které lze bezpečně "
-            "vložit Stav = APPROVED."
-        )
-
-
     def _documentation_read_metadata(self, path_value):
         """Načte základní metadata z první odpovídající Markdown tabulky.
 
@@ -10428,14 +10109,6 @@ catch {{
             "verze návrhu": "version",
             "aktuální verze": "version",
             "version": "version",
-            "cílové umístění": "target_location",
-            "cilove umisteni": "target_location",
-            "doporučené umístění": "target_location",
-            "doporucene umisteni": "target_location",
-            "umístění": "target_location",
-            "umisteni": "target_location",
-            "kanonické umístění": "target_location",
-            "kanonicke umisteni": "target_location",
         }
         for line in text_value.splitlines():
             match = re.match(
@@ -10452,19 +10125,10 @@ catch {{
         return text_value, fields
 
     def documentation_approve_and_save_canonical(self):
-        """STEP 22 - univerzální schválení a kanonické uložení všech řízených ID."""
         candidate = self.documentation_workflow_a20_candidate
         report_path = self.documentation_workflow_final_a17_json
-        if (
-            not candidate
-            or not os.path.isfile(candidate)
-            or not report_path
-            or not os.path.isfile(report_path)
-        ):
-            messagebox.showwarning(
-                "Schválení dokumentu",
-                "Nejprve vytvoř kandidát, doplň jej a spusť FINÁLNÍ A17."
-            )
+        if not candidate or not os.path.isfile(candidate) or not report_path or not os.path.isfile(report_path):
+            messagebox.showwarning("Schválení dokumentu", "Nejprve vytvoř kandidát, doplň jej a spusť FINÁLNÍ A17.")
             return
 
         unresolved_fields = self._documentation_unresolved_template_fields(
@@ -10487,6 +10151,10 @@ catch {{
                 report = json.load(handle)
             findings = report.get("findings") or []
 
+            # Pracovní kandidát A20 má záměrně technický název
+            # document_standardized_candidate_latest.md. Proto smí finální
+            # audit kandidáta obsahovat pouze očekávaný FAIL COMMON-FILENAME.
+            # Všechny ostatní FAIL/PARTIAL nálezy schválení stále blokují.
             candidate_basename = os.path.basename(candidate).lower()
             allowed_working_filename = (
                 candidate_basename
@@ -10521,68 +10189,85 @@ catch {{
                 )
 
             text_value, metadata = self._documentation_read_metadata(candidate)
-            if re.search(
-                r"^>\s*\*\*DOPLNIT UŽIVATELEM",
-                text_value,
-                re.MULTILINE,
-            ):
-                raise RuntimeError(
-                    "Kandidát stále obsahuje skutečný placeholder "
-                    "DOPLNIT UŽIVATELEM."
-                )
-
-            document_id = self._documentation_normalize_document_id(
-                metadata.get("document_id")
-            )
-            document_type = " ".join(
-                str(
-                    metadata.get("document_type")
-                    or report.get("document_type")
-                    or "ŘÍZENÝ DOKUMENT"
-                )
-                .strip()
-                .upper()
-                .split()
-            )
-            version = str(metadata.get("version") or "-").strip()
-
-            target_dir, prefix, route_source, filename_hint = (
-                self._documentation_canonical_target(
-                    document_id,
-                    metadata,
-                )
-            )
-            filename, existing_path = self._documentation_canonical_filename(
-                document_id=document_id,
-                metadata=metadata,
-                candidate=candidate,
-                target_dir=target_dir,
-                filename_hint=filename_hint,
-            )
-            canonical_path = existing_path or os.path.join(target_dir, filename)
-
-            confirmation = (
-                f"Potvrzuješ finální obsah a terminologii dokumentu {document_id}?\n\n"
-                f"Typ: {document_type}\n"
-                f"Verze: {version}\n"
-                f"Prefix: {prefix}\n"
-                f"Směrování: {route_source}\n"
-                f"Cíl: {canonical_path}\n\n"
-                "Dokument bude uložen se stavem APPROVED."
-            )
-            if not messagebox.askyesno("Schválení dokumentu", confirmation):
+            if re.search(r"^>\s*\*\*DOPLNIT UŽIVATELEM", text_value, re.MULTILINE):
+                raise RuntimeError("Kandidát stále obsahuje skutečný placeholder DOPLNIT UŽIVATELEM.")
+            document_id = metadata.get("document_id")
+            document_type = metadata.get("document_type")
+            if isinstance(document_type, str):
+                document_type = " ".join(document_type.strip().upper().split())
+            if not document_id or not document_type:
+                raise RuntimeError("Nelze načíst Document ID nebo Typ dokumentu z metadat.")
+            if not messagebox.askyesno("Schválení dokumentu", f"Potvrzuješ finální obsah a terminologii dokumentu {document_id}?\n\nDokument bude uložen jako APPROVED do kanonické složky."):
                 return
-
-            approved_text = self._documentation_approved_text(text_value)
-            approved_dir = os.path.join(
-                self.documentation_workflow_workspace,
-                "approved",
+            approved_text = re.sub(
+                r"(?m)^\| Stav \| DRAFT[^|]*\|$",
+                "| Stav | APPROVED |",
+                text_value
             )
+            approved_text = re.sub(r"(?m)^\| Stav \| REVIEW \|$", "| Původní stav zdrojového dokumentu | REVIEW |", approved_text)
+            if document_type == "CHAT_CONTINUATION":
+                target_dir = os.path.join(
+                    DOCUMENTATION_ROOT,
+                    "docs",
+                    "09_HISTORY",
+                    "NAVÁZÁNÍ_NA_CHAT"
+                )
+                filename = f"{document_id}_MATCHMATRIX_NAVAZANI_DO_CHATU.md"
+
+            elif document_type == "DAILY_LOG":
+                target_dir = os.path.join(
+                    DOCUMENTATION_ROOT,
+                    "docs",
+                    "09_HISTORY",
+                    "DENNÍ_ZÁPISY"
+                )
+                filename = f"{document_id}_MATCHMATRIX_DENNI_ZAPIS.md"
+
+            elif document_type in {
+                "PROJECT_SNAPSHOT",
+                "PROJECT SNAPSHOT",
+                "PROJECT SNAPSHOT / HISTORICKÝ PROJEKTOVÝ CHECKPOINT",
+                "PROJECT_SNAPSHOT / HISTORICKÝ PROJEKTOVÝ CHECKPOINT",
+            }:
+                target_dir = os.path.join(
+                    DOCUMENTATION_ROOT,
+                    "docs",
+                    "09_HISTORY",
+                    "PROJECT_SNAPSHOTS"
+                )
+
+                # U Project Snapshotu zachovej již standardizovaný název
+                # pracovního zdroje, protože obsahuje období/checkpoint.
+                source_filename = os.path.basename(candidate)
+                source_stem, source_ext = os.path.splitext(source_filename)
+
+                if (
+                    source_ext.lower() == ".md"
+                    and source_stem.upper().startswith(
+                        f"{document_id}_".upper()
+                    )
+                ):
+                    filename = source_filename
+                else:
+                    filename = (
+                        f"{document_id}_MATCHMATRIX_PROJECT_SNAPSHOT.md"
+                    )
+
+            else:
+                raise RuntimeError(
+                    f"Kanonické uložení typu {document_type!r} "
+                    "zatím panel nepodporuje."
+                )
+            approved_dir = os.path.join(self.documentation_workflow_workspace, "approved")
             os.makedirs(approved_dir, exist_ok=True)
             approved_path = os.path.join(approved_dir, filename)
             os.makedirs(target_dir, exist_ok=True)
+            canonical_path = os.path.join(target_dir, filename)
             encoded = approved_text.encode("utf-8")
 
+            # Pokud již existuje aktivní kanonický dokument stejné identity,
+            # nesmí být přepsán bez výslovného potvrzení. Předchozí obsah se
+            # bezpečně uloží do auditní kopie uvnitř aktuálního workspace.
             if os.path.exists(canonical_path):
                 existing_bytes = Path(canonical_path).read_bytes()
 
@@ -10592,9 +10277,7 @@ catch {{
                         (
                             "Kanonický dokument stejného Document ID již existuje "
                             "s jiným obsahem.\n\n"
-                            f"Document ID: {document_id}\n"
-                            f"Nová verze: {version}\n"
-                            f"Soubor: {canonical_path}\n\n"
+                            f"{canonical_path}\n\n"
                             "Předchozí obsah bude uložen jako auditní kopie do "
                             "aktuálního workspace a aktivní kanonický soubor bude "
                             "nahrazen schválenou verzí.\n\n"
@@ -10609,20 +10292,20 @@ catch {{
 
                     previous_dir = os.path.join(
                         self.documentation_workflow_workspace,
-                        "previous_canonical",
+                        "previous_canonical"
                     )
                     os.makedirs(previous_dir, exist_ok=True)
 
                     backup_stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                     previous_path = os.path.join(
                         previous_dir,
-                        f"{Path(filename).stem}_BEFORE_{backup_stamp}.md",
+                        f"{Path(filename).stem}_BEFORE_{backup_stamp}.md"
                     )
                     Path(previous_path).write_bytes(existing_bytes)
 
                     self._documentation_manifest_update(
                         previous_canonical=previous_path,
-                        canonical_replaced=True,
+                        canonical_replaced=True
                     )
 
             Path(canonical_path).write_bytes(encoded)
@@ -10631,35 +10314,13 @@ catch {{
             self.documentation_workflow_canonical_document = canonical_path
             self.documentation_workflow_document = canonical_path
             self.documentation_workflow_step = "KANONICKÉ ULOŽENÍ"
-            self.documentation_workflow_last_status = (
-                f"{document_id} V{version} APPROVED A ULOŽEN"
-            )
+            self.documentation_workflow_last_status = "DOKUMENT APPROVED A ULOŽEN"
             self.documentation_workflow_last_output = canonical_path
-            self._documentation_manifest_update(
-                workflow_status="CANONICAL_SAVED",
-                approved_candidate=approved_path,
-                canonical_document=canonical_path,
-                canonical_document_id=document_id,
-                canonical_document_type=document_type,
-                canonical_version=version,
-                canonical_prefix=prefix,
-                canonical_route_source=route_source,
-                canonical_target_directory=target_dir,
-            )
+            self._documentation_manifest_update(workflow_status="CANONICAL_SAVED", approved_candidate=approved_path, canonical_document=canonical_path)
             self._documentation_update_workflow_ui()
-            messagebox.showinfo(
-                "Schválení dokumentu",
-                (
-                    "Kanonický dokument byl uložen.\n\n"
-                    f"Document ID: {document_id}\n"
-                    f"Verze: {version}\n"
-                    f"Cesta: {canonical_path}\n\n"
-                    "Nyní spusť KANONICKÝ A17."
-                )
-            )
+            messagebox.showinfo("Schválení dokumentu", f"Kanonický dokument byl uložen:\n\n{canonical_path}\n\nNyní spusť KANONICKÝ A17.")
         except Exception as exc:
             messagebox.showerror("Schválení dokumentu", str(exc))
-
 
     def documentation_run_canonical_a17(self):
         document = self.documentation_workflow_canonical_document

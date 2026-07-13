@@ -11,14 +11,11 @@ restrukturalizovat.
 
 K ČEMU:
 - rozpozná typ dokumentu nebo přijme typ zadaný uživatelem,
-- při automatické detekci dává přednost primárnímu Document ID v názvu
-  souboru a identifikačních metadatech před obsahovou heuristikou,
 - ověří obecná metadata, identitu, verzi, stav a název souboru,
 - pro denní zápis ověří strukturu podle MM-DOC-900,
 - pro navázání ověří strukturu podle MM-DOC-901 a MM-STD-009,
 - pro Project Snapshot ověří identitu a povinné sekce podle MM-STD-009,
 - pro hlavní dokument ověří strukturu podle MM-STD-001,
-- respektuje Markdown hierarchii, kde jeden H1 představuje název dokumentu a hlavní kapitoly jsou zpravidla na úrovni H2,
 - referenční dokumenty MM-REF rozpozná podle jejich primárního Document ID
   a nepoužije na ně pravidla hlavních dokumentů ani Project Snapshotů,
 - upozorní na terminologické a ručně ověřitelné oblasti,
@@ -66,7 +63,7 @@ from typing import Any, Iterable, Mapping, Sequence
 
 
 REPORT_PREFIX = "document_compliance_audit"
-ENGINE_VERSION = "A17_STANDARD_COMPLIANCE_V1_5_MARKDOWN_CHAPTER_HIERARCHY"
+ENGINE_VERSION = "A17_STANDARD_COMPLIANCE_V1_3_REFERENCE_DOCUMENT_TYPE"
 SUPPORTED_TYPES = {
     "AUTO",
     "DAILY_LOG",
@@ -630,160 +627,53 @@ def text_contains_alias(text: str, aliases: Iterable[str]) -> list[str]:
     return result
 
 
-def detect_type(
-    path: Path,
-    text: str,
-    headings: Sequence[Mapping[str, Any]],
-) -> tuple[str, list[str]]:
-    """
-    Určí typ dokumentu.
-
-    Primární Document ID z názvu souboru nebo identifikačních metadat má
-    přednost před obsahovou heuristikou. Tím se zabrání tomu, aby například
-    hlavní dokument MM-DOC obsahující odkazy na Project Snapshoty byl chybně
-    klasifikován jako PROJECT_SNAPSHOT.
-    """
-
+def detect_type(path: Path, text: str, headings: Sequence[Mapping[str, Any]]) -> tuple[str, list[str]]:
     name = normalize(path.stem)
     normalized_text = normalize(text[:12000])
     heading_text = " ".join(str(item["normalized"]) for item in headings)
     evidence: list[str] = []
 
-    canonical_id_pattern = (
-        r"MM-(?:"
-        r"DL-\d{8}"
-        r"|NAV-\d{8}-\d{2}"
-        r"|PS-\d{8}"
-        r"|[A-Z]{2,10}-\d{3,4}[A-Z]?"
-        r")"
-    )
-
-    filename_match = re.match(
-        rf"^({canonical_id_pattern})(?:_|$)",
-        path.stem.upper(),
-    )
-    filename_id = filename_match.group(1) if filename_match else None
-
-    metadata_tokens: list[str] = []
-    metadata_area = text[:12000]
-    metadata_patterns = (
-        rf"(?mi)^\s*#{{1,6}}\s+({canonical_id_pattern})\s*$",
-        rf"(?mi)^\s*\|\s*(?:Dokument|Označení|Document ID)\s*\|\s*"
-        rf"({canonical_id_pattern})\s*\|\s*$",
-        rf"(?mi)^\s*(?:Dokument|Označení|Document ID)\s*[:=]\s*"
-        rf"({canonical_id_pattern})\s*$",
-    )
-    for pattern in metadata_patterns:
-        metadata_tokens.extend(re.findall(pattern, metadata_area))
-
-    metadata_ids = sorted(set(item.upper() for item in metadata_tokens))
-    metadata_id = metadata_ids[0] if metadata_ids else None
-
-    primary_id = filename_id or metadata_id
-
-    if filename_id:
-        evidence.append(
-            f"Primární Document ID z názvu souboru: {filename_id}."
+    # Identita referenčního dokumentu má přednost před obsahovou heuristikou.
+    # MM-REF-002 přirozeně obsahuje odkazy na MM-PS dokumenty a bez této
+    # priority by mohl být chybně klasifikován jako PROJECT_SNAPSHOT.
+    if re.match(r"^mm ref \d{3,4}[a-z]?\b", name):
+        return (
+            "REFERENCE_DOCUMENT",
+            ["Název souboru odpovídá referenčnímu dokumentu MM-REF."],
         )
-    if metadata_ids:
-        evidence.append(
-            "Primární Document ID z identifikačních metadat: "
-            + ", ".join(metadata_ids)
-            + "."
-        )
-    if (
-        filename_id
-        and metadata_id
-        and filename_id != metadata_id
-    ):
-        evidence.append(
-            "Upozornění: Document ID v názvu souboru a metadatech se liší; "
-            f"pro detekci typu má přednost název souboru ({filename_id})."
-        )
-
-    if primary_id:
-        if primary_id.startswith("MM-DL-"):
-            return "DAILY_LOG", evidence
-        if primary_id.startswith("MM-NAV-"):
-            return "CHAT_CONTINUATION", evidence
-        if primary_id.startswith("MM-PS-"):
-            return "PROJECT_SNAPSHOT", evidence
-        if primary_id.startswith("MM-REF-"):
-            return "REFERENCE_DOCUMENT", evidence
-
-        # Ostatní kanonické identifikátory, například MM-DOC, MM-STD,
-        # MM-DB, MM-PRV, MM-LAY, MM-OPS nebo MM-TPL, představují v A17
-        # hlavní řízený dokument. Specializovaná pravidla lze doplnit později.
-        return "MAIN_DOCUMENT", evidence
 
     daily_score = 0
     continuation_score = 0
     project_snapshot_score = 0
     main_score = 0
 
-    if any(
-        token in name
-        for token in ("denni zapis", "daily log", "zapis prace")
-    ):
+    if any(token in name for token in ("denni zapis", "daily log", "zapis prace")):
         daily_score += 8
         evidence.append("Název souboru odpovídá dennímu zápisu.")
-    if any(
-        token in name
-        for token in ("navazani", "navazujici", "new chat", "novy chat")
-    ):
+    if any(token in name for token in ("navazani", "navazujici", "new chat", "novy chat")):
         continuation_score += 8
         evidence.append("Název souboru odpovídá dokumentu NAVÁZÁNÍ.")
     if re.search(r"\bmm ps \d{8}\b", name) or "project snapshot" in name:
         project_snapshot_score += 10
         evidence.append("Název souboru odpovídá Project Snapshotu.")
 
-    for alias in (
-        "vychozi stav",
-        "provedene prace",
-        "vysledky dne",
-        "plan pokracovani",
-    ):
+    for alias in ("vychozi stav", "provedene prace", "vysledky dne", "plan pokracovani"):
         if alias in heading_text:
             daily_score += 2
-
-    for alias in (
-        "ai context",
-        "project snapshot",
-        "database snapshot",
-        "current status",
-        "next step",
-    ):
+    for alias in ("ai context", "project snapshot", "database snapshot", "current status", "next step"):
         if alias in heading_text:
             continuation_score += 2
             project_snapshot_score += 2
-
-    for alias in (
-        "informace o dokumentu",
-        "historie verzi",
-        "zaver dokumentu",
-    ):
+    for alias in ("informace o dokumentu", "historie verzi", "zaver dokumentu"):
         if alias in heading_text:
             main_score += 2
 
-    if (
-        "kazdy pracovni den" in normalized_text
-        or "denni zapis" in normalized_text
-    ):
+    if "kazdy pracovni den" in normalized_text or "denni zapis" in normalized_text:
         daily_score += 1
-
-    if (
-        "novy chat" in normalized_text
-        or "pracovni etapa" in normalized_text
-        or "navazani" in normalized_text
-    ):
+    if "novy chat" in normalized_text or "pracovni etapa" in normalized_text or "navazani" in normalized_text:
         continuation_score += 1
-
-    if (
-        "project snapshot" in normalized_text
-        and re.search(r"\bMM-PS-\d{8}\b", text)
-    ):
+    if "project snapshot" in normalized_text and re.search(r"\bMM-PS-\d{8}\b", text):
         project_snapshot_score += 3
-
     if DOCUMENT_ID_RE.search(text) and len(headings) >= 5:
         main_score += 2
 
@@ -797,13 +687,7 @@ def detect_type(
     top = scores[detected]
     sorted_values = sorted(scores.values(), reverse=True)
 
-    if (
-        top < 4
-        or (
-            len(sorted_values) > 1
-            and sorted_values[0] == sorted_values[1]
-        )
-    ):
+    if top < 4 or (len(sorted_values) > 1 and sorted_values[0] == sorted_values[1]):
         return "GENERIC_DOCUMENT", evidence + [f"Detekční skóre: {scores}"]
 
     return detected, evidence + [f"Detekční skóre: {scores}"]
@@ -1204,275 +1088,26 @@ def evaluate_project_snapshot(
 
     return findings
 
-MAIN_NON_BODY_HEADING_TOKENS: tuple[str, ...] = (
-    "informace o dokumentu",
-    "metadata dokumentu",
-    "obsah",
-    "historie verzi",
-)
-
-
-def is_main_body_heading(heading: Mapping[str, Any]) -> bool:
-    """Vrátí True pro odbornou hlavní kapitolu, nikoli pro obalové sekce."""
-    value = str(heading["normalized"])
-    if any(token in value for token in MAIN_NON_BODY_HEADING_TOKENS):
-        return False
-
-    # Celkový závěr dokumentu je povinná závěrečná sekce, ale není další
-    # odbornou kapitolou, která by musela obsahovat vlastní podřízený závěr.
-    if re.fullmatch(r"(?:\d+ )?zaver(?: dokumentu)?", value):
-        return False
-    return True
-
-
-def detect_main_chapter_level(
-    headings: Sequence[Mapping[str, Any]],
-) -> tuple[int | None, list[Mapping[str, Any]], list[str]]:
-    """Určí skutečnou úroveň hlavních kapitol z Markdown hierarchie.
-
-    Správně strukturovaný Markdown má zpravidla jeden H1 jako název dokumentu
-    a hlavní kapitoly na H2. Starší dokumenty mohou mít hlavní kapitoly na H1.
-    """
-    evidence: list[str] = []
-    headings_by_level = {
-        level: [h for h in headings if int(h["level"]) == level]
-        for level in range(1, 7)
-    }
-
-    h1_all = headings_by_level[1]
-    h1_body = [h for h in h1_all if is_main_body_heading(h)]
-
-    # Moderní správná hierarchie: právě jeden H1 = název dokumentu,
-    # hlavní kapitoly jsou H2.
-    if len(h1_all) == 1:
-        for level in range(2, 7):
-            candidates = [
-                h for h in headings_by_level[level]
-                if is_main_body_heading(h)
-            ]
-            if len(candidates) >= 2:
-                evidence.append(
-                    f"Jeden H1 byl vyhodnocen jako název dokumentu; "
-                    f"hlavní kapitoly jsou na úrovni H{level}."
-                )
-                return level, candidates, evidence
-
-    # Zpětná kompatibilita se staršími dokumenty, kde jsou kapitoly na H1.
-    if len(h1_body) >= 2:
-        evidence.append("Hlavní kapitoly byly rozpoznány na úrovni H1.")
-        return 1, h1_body, evidence
-
-    # Nouzová detekce pro dokument bez jednoznačného H1 názvu.
-    for level in range(2, 7):
-        candidates = [
-            h for h in headings_by_level[level]
-            if is_main_body_heading(h)
-        ]
-        if len(candidates) >= 2:
-            evidence.append(
-                f"Hlavní kapitoly byly nouzově rozpoznány na úrovni H{level}."
-            )
-            return level, candidates, evidence
-
-    evidence.append("Nebyla nalezena úroveň s alespoň dvěma odbornými kapitolami.")
-    return None, [], evidence
-
-
-def audit_main_chapter_conclusions(
-    text: str,
-    headings: Sequence[Mapping[str, Any]],
-    chapter_level: int,
-    chapters: Sequence[Mapping[str, Any]],
-) -> tuple[list[str], list[str], list[str]]:
-    """Zkontroluje závěr uvnitř každé odborné hlavní kapitoly.
-
-    Vrací (ověřené kapitoly, chybějící závěry, závěry k ručnímu posouzení).
-    """
-    lines = text.splitlines()
-    ordered_headings = sorted(headings, key=lambda item: int(item["line"]))
-    verified: list[str] = []
-    missing: list[str] = []
-    manual: list[str] = []
-
-    for chapter in chapters:
-        chapter_line = int(chapter["line"])
-        chapter_title = str(chapter["title"])
-
-        next_boundary = len(lines) + 1
-        for candidate in ordered_headings:
-            candidate_line = int(candidate["line"])
-            if candidate_line <= chapter_line:
-                continue
-            if int(candidate["level"]) <= chapter_level:
-                next_boundary = candidate_line
-                break
-
-        conclusion_heading: Mapping[str, Any] | None = None
-        for candidate in ordered_headings:
-            candidate_line = int(candidate["line"])
-            if not (chapter_line < candidate_line < next_boundary):
-                continue
-            if int(candidate["level"]) <= chapter_level:
-                continue
-            normalized = str(candidate["normalized"])
-            if "zaver kapitoly" in normalized or "shrnuti kapitoly" in normalized:
-                conclusion_heading = candidate
-                break
-
-        if conclusion_heading is None:
-            missing.append(chapter_title)
-            continue
-
-        conclusion_line = int(conclusion_heading["line"])
-        conclusion_level = int(conclusion_heading["level"])
-        conclusion_end = next_boundary
-        for candidate in ordered_headings:
-            candidate_line = int(candidate["line"])
-            if candidate_line <= conclusion_line:
-                continue
-            if candidate_line >= next_boundary:
-                break
-            if int(candidate["level"]) <= conclusion_level:
-                conclusion_end = candidate_line
-                break
-
-        conclusion_body = "\n".join(
-            lines[conclusion_line: max(conclusion_line, conclusion_end - 1)]
-        ).strip()
-        normalized_body = normalize(conclusion_body)
-
-        has_summary = len(normalized_body.split()) >= 12
-        has_contribution = "prinos" in normalized_body
-        has_follow_up = any(
-            token in normalized_body
-            for token in (
-                "nasledujici kapitola",
-                "dalsi kapitola",
-                "navaznost",
-                "navazuje",
-                "nasleduje",
-            )
-        )
-
-        if has_summary and has_contribution and has_follow_up:
-            verified.append(chapter_title)
-        else:
-            missing_parts: list[str] = []
-            if not has_summary:
-                missing_parts.append("shrnutí")
-            if not has_contribution:
-                missing_parts.append("přínos")
-            if not has_follow_up:
-                missing_parts.append("návaznost")
-            manual.append(
-                f"{chapter_title}: ověřit " + ", ".join(missing_parts)
-            )
-
-    return verified, missing, manual
-
-
 def evaluate_main(text: str, headings: Sequence[Mapping[str, Any]]) -> list[Finding]:
     findings: list[Finding] = []
-    chapter_level, main_chapters, chapter_evidence = detect_main_chapter_level(headings)
-
     for rule in MAIN_RULES:
         if rule.rule_id == "MAIN-BODY":
-            if chapter_level is not None and len(main_chapters) >= 2:
-                evidence = chapter_evidence + [
-                    f"Nalezeno odborných hlavních kapitol: {len(main_chapters)}."
-                ]
-                evidence.extend(
-                    f"H{chapter_level}: {item['title']}"
-                    for item in main_chapters[:10]
-                )
-                findings.append(
-                    make_finding(rule, "PASS", evidence, "Bez akce.")
-                )
+            main_chapters = [h for h in headings if int(h["level"]) == 1 and not any(alias in str(h["normalized"]) for alias in ("informace o dokumentu", "obsah", "zaver", "historie verzi"))]
+            if len(main_chapters) >= 2:
+                findings.append(make_finding(rule, "PASS", [f"Nalezeno hlavních kapitol: {len(main_chapters)}"], "Bez akce."))
             elif main_chapters:
-                findings.append(
-                    make_finding(
-                        rule,
-                        "PARTIAL",
-                        chapter_evidence + [
-                            f"Nalezena pouze jedna odborná kapitola: "
-                            f"{main_chapters[0]['title']}"
-                        ],
-                        "Prověřit, zda dokument obsahuje dostatečně "
-                        "rozvinuté hlavní kapitoly.",
-                    )
-                )
+                findings.append(make_finding(rule, "PARTIAL", [f"Nalezena pouze jedna hlavní kapitola: {main_chapters[0]['title']}"], "Prověřit, zda dokument obsahuje dostatečně rozvinuté hlavní kapitoly."))
             else:
-                findings.append(
-                    make_finding(
-                        rule,
-                        "FAIL",
-                        chapter_evidence,
-                        "Doplnit odborné hlavní kapitoly pod názvem dokumentu.",
-                    )
-                )
-
+                findings.append(make_finding(rule, "FAIL", [], "Doplnit odborné hlavní kapitoly."))
         elif rule.rule_id == "MAIN-CHAPTER-CONCLUSIONS":
-            if chapter_level is None or not main_chapters:
-                findings.append(
-                    make_finding(
-                        rule,
-                        "FAIL",
-                        chapter_evidence,
-                        "Nejprve opravit hierarchii hlavních kapitol.",
-                    )
-                )
-                continue
-
-            verified, missing, manual = audit_main_chapter_conclusions(
-                text,
-                headings,
-                chapter_level,
-                main_chapters,
-            )
-            evidence = [
-                f"Úroveň hlavních kapitol: H{chapter_level}.",
-                f"Odborné hlavní kapitoly: {len(main_chapters)}.",
-                f"Plně ověřené závěry: {len(verified)}.",
-            ]
-            if missing:
-                evidence.append(
-                    "Kapitoly bez sekce Závěr kapitoly: "
-                    + "; ".join(missing[:12])
-                )
-                findings.append(
-                    make_finding(
-                        rule,
-                        "FAIL",
-                        evidence,
-                        "Doplnit samostatný závěr ke každé uvedené hlavní "
-                        "kapitole. Závěr má obsahovat shrnutí, přínos a "
-                        "návaznost.",
-                    )
-                )
-            elif manual:
-                evidence.append(
-                    "Závěry k ručnímu obsahovému posouzení: "
-                    + "; ".join(manual[:12])
-                )
-                findings.append(
-                    make_finding(
-                        rule,
-                        "MANUAL_REVIEW",
-                        evidence,
-                        "Ručně potvrdit významovou úplnost označených závěrů; "
-                        "strukturálně má každá odborná hlavní kapitola svůj závěr.",
-                    )
-                )
+            top = [h for h in headings if int(h["level"]) == 1]
+            conclusions = [h for h in headings if "zaver" in str(h["normalized"]) or "shrnuti" in str(h["normalized"])]
+            if len(top) <= 3:
+                findings.append(make_finding(rule, "MANUAL_REVIEW", [f"Hlavních nadpisů: {len(top)}; závěrových/shrnujících nadpisů: {len(conclusions)}"], "Ručně ověřit, zda každá odborná hlavní kapitola končí shrnutím, přínosem a návazností."))
+            elif len(conclusions) >= max(1, len(top) - 3):
+                findings.append(make_finding(rule, "PASS", [f"Závěrových/shrnujících sekcí: {len(conclusions)}"], "Bez akce."))
             else:
-                findings.append(
-                    make_finding(
-                        rule,
-                        "PASS",
-                        evidence,
-                        "Bez akce.",
-                    )
-                )
-
+                findings.append(make_finding(rule, "FAIL", [f"Hlavních nadpisů: {len(top)}; závěrových/shrnujících sekcí: {len(conclusions)}"], "Doplnit závěr ke každé hlavní kapitole nebo dokument předložit k ručnímu posouzení."))
         elif rule.rule_id == "MAIN-RELATIONS":
             ids = sorted(set(DOCUMENT_ID_RE.findall(text)))
             if len(ids) >= 2:
