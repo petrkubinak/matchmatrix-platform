@@ -48,19 +48,12 @@ from typing import Any, Iterable
 
 
 SCRIPT_ID = "25_1_A_32_BUILD_HISTORY_RECONSTRUCTION_WORKING_REPORT_V1"
-SCRIPT_VERSION = "1.1"
+SCRIPT_VERSION = "1.0"
 
 REMOTE_ROOT = Path(r"\\192.168.3.119\matchmatrix")
 LOCAL_ROOT = Path(r"C:\MatchMatrix-Platform")
 
 READY_SOURCE_STATUS = "HISTORY_RECONSTRUCTION_SOURCE_BLOCK_READY"
-
-BINARY_ATTACHMENT_FORMATS = {
-    "png", "jpg", "jpeg", "gif", "bmp", "webp", "tif", "tiff", "svg"
-}
-BINARY_METADATA_WARNING = "BINARY_ATTACHMENT_METADATA_ONLY"
-REEXTRACTED_PDF_HASH_STATUS = "REEXTRACTED_PDF_TEXT"
-LEGACY_PDF_WARNING = "PDF_TEXT_EXTRACTION_DEPENDENCY_MISSING"
 
 DOMAIN_RULES: dict[str, tuple[str, ...]] = {
     "CORE": (
@@ -279,142 +272,6 @@ def normalize_text(value: Any) -> str:
     )
 
 
-def normalized_warning_list(
-    value: Any,
-    document_id: str,
-    field_name: str,
-) -> list[str]:
-    """
-    Normalizuje seznam varování z A31.
-
-    Nové řízené větve vyžadují skutečný seznam. Tím se zabrání tomu,
-    aby obecný text nebo nečekaná struktura omylem prošly validací.
-    """
-    if value is None:
-        return []
-    if not isinstance(value, list):
-        raise RuntimeError(
-            f"{document_id}: {field_name} není seznam."
-        )
-    return [str(item or "").strip() for item in value]
-
-
-def verified_hash_pair_matches(item: dict[str, Any]) -> bool:
-    """
-    Ověří, že A31 skutečně porovnal původní bajty i exportní text
-    proti hodnotám převzatým z A30.
-    """
-    expected_raw = str(
-        item.get("raw_file_sha256") or ""
-    ).strip().lower()
-    verified_raw = str(
-        item.get("source_raw_sha256_verified") or ""
-    ).strip().lower()
-    expected_text = str(
-        item.get("export_text_sha256") or ""
-    ).strip().lower()
-    verified_text = str(
-        item.get("source_text_sha256_verified") or ""
-    ).strip().lower()
-
-    return bool(
-        expected_raw
-        and verified_raw
-        and expected_text
-        and verified_text
-        and expected_raw == verified_raw
-        and expected_text == verified_text
-    )
-
-
-def is_verified_reextracted_pdf(
-    item: dict[str, Any],
-    manifest: dict[str, Any],
-    document_id: str,
-) -> bool:
-    """
-    Povolí pouze PDF, jehož starší manifest obsahoval metadata-only stav,
-    ale A30/A31 následně bezpečně vytěžily a hashově ověřily skutečný text.
-    """
-    review_status = str(
-        item.get("review_status") or ""
-    ).strip()
-    hash_status = str(
-        item.get("hash_status") or ""
-    ).strip()
-    actual_format = str(
-        item.get("source_format_verified")
-        or item.get("detected_format_actual")
-        or manifest.get("detected_format")
-        or ""
-    ).lower().strip()
-    extraction_warnings = normalized_warning_list(
-        item.get("source_extraction_warnings_verified"),
-        document_id,
-        "source_extraction_warnings_verified",
-    )
-    manifest_warnings = str(
-        manifest.get("warnings") or ""
-    ).upper()
-
-    return bool(
-        review_status == "READY"
-        and hash_status == REEXTRACTED_PDF_HASH_STATUS
-        and actual_format == "pdf"
-        and extraction_warnings == []
-        and LEGACY_PDF_WARNING in manifest_warnings
-        and bool(item.get("source_content_loaded"))
-        and verified_hash_pair_matches(item)
-    )
-
-
-def is_verified_binary_metadata_only(
-    item: dict[str, Any],
-    manifest: dict[str, Any],
-    document_id: str,
-) -> bool:
-    """
-    Povolí pouze obrázkovou přílohu, kterou A30/A31 záměrně vedou
-    jako metadata-only placeholder bez OCR.
-    """
-    review_status = str(
-        item.get("review_status") or ""
-    ).strip()
-    hash_status = str(
-        item.get("hash_status") or ""
-    ).strip()
-    actual_format = str(
-        item.get("source_format_verified")
-        or item.get("detected_format_actual")
-        or manifest.get("detected_format")
-        or ""
-    ).lower().strip()
-    extraction_warnings = normalized_warning_list(
-        item.get("source_extraction_warnings_verified"),
-        document_id,
-        "source_extraction_warnings_verified",
-    )
-    extraction_metadata = item.get(
-        "source_extraction_metadata_verified"
-    ) or {}
-
-    if not isinstance(extraction_metadata, dict):
-        raise RuntimeError(
-            f"{document_id}: source_extraction_metadata_verified "
-            "není objekt."
-        )
-
-    return bool(
-        review_status == "READY_WITH_WARNINGS"
-        and hash_status == "MATCH"
-        and actual_format in BINARY_ATTACHMENT_FORMATS
-        and extraction_warnings == [BINARY_METADATA_WARNING]
-        and bool(extraction_metadata.get("binary_attachment"))
-        and bool(item.get("source_content_loaded"))
-        and verified_hash_pair_matches(item)
-    )
-
-
 def compact_line(value: str, limit: int = 240) -> str:
     value = re.sub(r"\s+", " ", value).strip()
     if len(value) <= limit:
@@ -598,42 +455,14 @@ def validate_and_merge(
                     f"{seen_ids[document_id]} a {path}."
                 )
 
-            review_status = str(
-                item.get("review_status") or ""
-            ).strip()
-            hash_status = str(
-                item.get("hash_status") or ""
-            ).strip()
-
-            # Původní princip A32 zůstává beze změny.
-            original_ready_document = (
-                review_status == "READY"
-                and hash_status == "MATCH"
-            )
-
-            # Nové větve jsou přesně omezené na stavy ověřené A30/A31.
-            verified_reextracted_pdf = is_verified_reextracted_pdf(
-                item,
-                manifest,
-                document_id,
-            )
-            verified_binary_metadata = is_verified_binary_metadata_only(
-                item,
-                manifest,
-                document_id,
-            )
-
-            if not (
-                original_ready_document
-                or verified_reextracted_pdf
-                or verified_binary_metadata
-            ):
+            if str(item.get("review_status") or "").strip() != "READY":
                 raise RuntimeError(
-                    f"{document_id}: nepovolená kombinace ověření "
-                    f"(review_status={review_status or 'NEURČENO'}, "
-                    f"hash_status={hash_status or 'NEURČENO'})."
+                    f"{document_id}: review_status není READY."
                 )
-
+            if str(item.get("hash_status") or "").strip() != "MATCH":
+                raise RuntimeError(
+                    f"{document_id}: hash_status není MATCH."
+                )
             if not bool(item.get("source_content_loaded")):
                 raise RuntimeError(
                     f"{document_id}: obsah nebyl načten a ověřen A31."

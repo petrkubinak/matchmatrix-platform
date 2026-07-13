@@ -29,8 +29,6 @@ JAK:
 - Další dokumenty vybere podle recommended_month.
 - TIMELESS_REFERENCE a DATE_UNRESOLVED nezařazuje.
 - Ověřuje integritu stejnou normalizací jako A25: CRLF/CR → LF, strip a jeden koncový LF.
-- DOCX, XLSX a PDF vytěžuje stejnou logikou jako A25.
-- Obrazové a jiné binární přílohy eviduje metadata-only bez OCR.
 - Raw SHA-256 původního souboru eviduje samostatně pouze pro audit.
 - Nic v archivu, manifestu, klasifikační mapě ani databázi neupravuje.
 """
@@ -43,33 +41,19 @@ import hashlib
 import json
 import re
 import sys
-import zipfile
-import xml.etree.ElementTree as ET
 from collections import Counter
 from datetime import datetime
-from io import BytesIO
 from pathlib import Path
 from typing import Any
 
 
 SCRIPT_ID = "25_1_A_30_EXPORT_COMPLETE_CLASSIFIED_HISTORY_MONTH_CORPUS_V1"
-SCRIPT_VERSION = "1.3"
+SCRIPT_VERSION = "1.2"
 
 REMOTE_ROOT = Path(r"\\192.168.3.119\matchmatrix")
 LOCAL_ROOT = Path(r"C:\MatchMatrix-Platform")
 
-SUPPORTED_TEXT_FORMATS = {"md", "txt", "sql", "csv"}
-STRUCTURED_FORMATS = {"docx", "xlsx", "pdf"}
-BINARY_ATTACHMENT_FORMATS = {
-    "png", "jpg", "jpeg", "gif", "bmp", "webp", "tif", "tiff", "svg"
-}
-SUPPORTED_FORMATS = (
-    SUPPORTED_TEXT_FORMATS
-    | STRUCTURED_FORMATS
-    | BINARY_ATTACHMENT_FORMATS
-)
-OOXML_XLSX_MARKER = "xl/workbook.xml"
-OOXML_DOCX_MARKER = "word/document.xml"
+SUPPORTED_FORMATS = {"md", "txt", "sql", "csv"}
 INCLUDED_CLASSIFICATIONS = {
     "EXPLICIT_DATE",
     "INFERRED_DATE",
@@ -313,241 +297,6 @@ def decode(raw: bytes) -> tuple[str, str]:
     )
 
 
-def is_zip_with_marker(data: bytes, marker: str) -> bool:
-    try:
-        with zipfile.ZipFile(BytesIO(data)) as archive:
-            return marker in archive.namelist()
-    except zipfile.BadZipFile:
-        return False
-
-
-def markdown_cell(value: Any) -> str:
-    if value is None:
-        return ""
-    text = str(value)
-    return text.replace("|", r"\|").replace("\r", " ").replace("\n", "<br>")
-
-
-def extract_xlsx(
-    data: bytes,
-    filename: str,
-) -> tuple[str, dict[str, Any], list[str]]:
-    warnings: list[str] = []
-    try:
-        from openpyxl import load_workbook
-    except ImportError as exc:
-        raise RuntimeError(
-            "Pro čtení XLSX chybí openpyxl. "
-            "Nainstaluj: py -3.14 -m pip install openpyxl"
-        ) from exc
-
-    workbook = load_workbook(
-        BytesIO(data),
-        read_only=True,
-        data_only=False,
-    )
-    # Text je záměrně shodný s A25 kvůli content_sha256 v manifestu.
-    parts = ["# Tabulkov? dokument", ""]
-    sheet_metadata: list[dict[str, Any]] = []
-
-    try:
-        for worksheet in workbook.worksheets:
-            rows = [
-                tuple(row)
-                for row in worksheet.iter_rows(values_only=True)
-                if any(value not in (None, "") for value in row)
-            ]
-
-            width = max((len(row) for row in rows), default=0)
-            sheet_metadata.append(
-                {
-                    "title": worksheet.title,
-                    "rows": len(rows),
-                    "columns": width,
-                }
-            )
-
-            parts.extend([f"## List: {worksheet.title}", ""])
-
-            if not rows:
-                parts.extend(["_Prázdný list._", ""])
-                continue
-
-            for index, row in enumerate(rows, start=1):
-                values = [markdown_cell(value) for value in row]
-                parts.append(f"{index:06d}\t" + "\t".join(values))
-            parts.append("")
-    finally:
-        workbook.close()
-
-    metadata = {"worksheets": sheet_metadata}
-    return normalize_manifest_text("\n".join(parts)), metadata, warnings
-
-
-def extract_docx(
-    data: bytes,
-    filename: str,
-) -> tuple[str, dict[str, Any], list[str]]:
-    warnings: list[str] = []
-    namespace = {
-        "w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
-    }
-
-    with zipfile.ZipFile(BytesIO(data)) as archive:
-        xml_data = archive.read(OOXML_DOCX_MARKER)
-
-    root = ET.fromstring(xml_data)
-    body = root.find("w:body", namespace)
-    parts = [f"# {filename}", ""]
-    paragraph_count = 0
-    table_count = 0
-
-    if body is not None:
-        for child in list(body):
-            tag = child.tag.rsplit("}", 1)[-1]
-
-            if tag == "p":
-                texts = [
-                    node.text or ""
-                    for node in child.findall(".//w:t", namespace)
-                ]
-                paragraph = "".join(texts).strip()
-                if paragraph:
-                    parts.append(paragraph)
-                    parts.append("")
-                    paragraph_count += 1
-
-            elif tag == "tbl":
-                table_count += 1
-                parts.extend([f"## Tabulka {table_count}", ""])
-                for row_index, row in enumerate(
-                    child.findall(".//w:tr", namespace),
-                    start=1,
-                ):
-                    cells = []
-                    for cell in row.findall("./w:tc", namespace):
-                        texts = [
-                            node.text or ""
-                            for node in cell.findall(".//w:t", namespace)
-                        ]
-                        cells.append(
-                            markdown_cell("".join(texts).strip())
-                        )
-                    parts.append(
-                        f"{row_index:06d}\t" + "\t".join(cells)
-                    )
-                parts.append("")
-
-    metadata = {
-        "paragraph_count": paragraph_count,
-        "table_count": table_count,
-    }
-    return normalize_manifest_text("\n".join(parts)), metadata, warnings
-
-
-def extract_pdf(
-    data: bytes,
-    filename: str,
-) -> tuple[str, dict[str, Any], list[str]]:
-    warnings: list[str] = []
-    try:
-        from pypdf import PdfReader
-    except ImportError:
-        warnings.append("PDF_TEXT_EXTRACTION_DEPENDENCY_MISSING")
-        content = normalize_manifest_text(
-            f"# {filename}\n\n"
-            "_PDF byl evidován, ale text zatím nebyl vytěžen. "
-            "Pro úplnou extrakci nainstaluj balíček pypdf._\n"
-        )
-        return content, {"page_count": None}, warnings
-
-    reader = PdfReader(BytesIO(data))
-    parts = [f"# {filename}", ""]
-    for page_number, page in enumerate(reader.pages, start=1):
-        parts.extend([f"## Strana {page_number}", ""])
-        text = page.extract_text() or ""
-        parts.extend(
-            [text.strip() or "_Bez vytěžitelného textu._", ""]
-        )
-
-    return (
-        normalize_manifest_text("\n".join(parts)),
-        {"page_count": len(reader.pages)},
-        warnings,
-    )
-
-
-def extract_binary_placeholder(
-    filename: str,
-    extension: str,
-    size_bytes: int,
-) -> tuple[str, dict[str, Any], list[str]]:
-    warning = "BINARY_ATTACHMENT_METADATA_ONLY"
-    content = normalize_manifest_text(
-        f"# Binární příloha: {filename}\n\n"
-        f"- Formát: `{extension or 'bez přípony'}`\n"
-        f"- Velikost: `{size_bytes}` B\n"
-        "- Obsah nebyl v této importní vlně automaticky vytěžen.\n"
-    )
-    return content, {"binary_attachment": True}, [warning]
-
-
-def extract_source_content(
-    raw: bytes,
-    source_path: Path,
-    manifest_format: str,
-) -> tuple[str, str, str, dict[str, Any], list[str]]:
-    extension = source_path.suffix.lower()
-    extension_format = extension.lstrip(".")
-    actual_format = manifest_format or extension_format or "binary"
-
-    if is_zip_with_marker(raw, OOXML_XLSX_MARKER):
-        actual_format = "xlsx"
-        content, metadata, warnings = extract_xlsx(
-            raw,
-            source_path.name,
-        )
-        return content, actual_format, "OOXML/XLSX", metadata, warnings
-
-    if is_zip_with_marker(raw, OOXML_DOCX_MARKER):
-        actual_format = "docx"
-        content, metadata, warnings = extract_docx(
-            raw,
-            source_path.name,
-        )
-        return content, actual_format, "OOXML/DOCX", metadata, warnings
-
-    if manifest_format == "pdf" or extension == ".pdf":
-        actual_format = "pdf"
-        content, metadata, warnings = extract_pdf(
-            raw,
-            source_path.name,
-        )
-        return content, actual_format, "PDF", metadata, warnings
-
-    if (
-        manifest_format in SUPPORTED_TEXT_FORMATS
-        or extension_format in SUPPORTED_TEXT_FORMATS
-    ):
-        decoded_text, encoding = decode(raw)
-        content = normalize_manifest_text(decoded_text)
-        metadata = {"text_encoding": encoding}
-        actual_format = manifest_format or extension_format or "text"
-        return content, actual_format, encoding, metadata, []
-
-    content, metadata, warnings = extract_binary_placeholder(
-        source_path.name,
-        extension,
-        len(raw),
-    )
-    actual_format = manifest_format or extension_format or "binary"
-
-    if actual_format not in BINARY_ATTACHMENT_FORMATS:
-        warnings.append("UNSUPPORTED_EXTENSION_METADATA_ONLY")
-
-    return content, actual_format, "BINARY", metadata, warnings
-
-
 def load_sources(
     selected: list[dict[str, Any]],
     source_root: Path,
@@ -557,7 +306,6 @@ def load_sources(
 
     for item in selected:
         row = item["manifest"]
-        document_id = str(row.get("document_id") or "").strip()
         source_path = (
             source_root
             / Path(str(row.get("canonical_relative_path") or ""))
@@ -568,63 +316,38 @@ def load_sources(
             "resolved_path": str(source_path),
             "content": "",
             "encoding_used": "",
-            "detected_format_actual": "",
-            "extraction_metadata": {},
-            "extraction_warnings": [],
             "raw_file_sha256": "",
             "export_text_sha256": "",
             "hash_status": "",
             "review_status": "READY",
         }
 
-        manifest_format = str(
+        detected_format = str(
             row.get("detected_format") or ""
         ).lower().strip()
+
+        if detected_format not in SUPPORTED_FORMATS:
+            current["review_status"] = "UNSUPPORTED_FORMAT"
+            warnings.append(
+                f"{row.get('document_id')}: "
+                f"nepodporovaný formát {detected_format}."
+            )
+            exported.append(current)
+            continue
 
         if not source_path.is_file():
             current["review_status"] = "SOURCE_NOT_FOUND"
             warnings.append(
-                f"{document_id}: zdroj nenalezen."
+                f"{row.get('document_id')}: zdroj nenalezen."
             )
             exported.append(current)
             continue
 
         raw = source_path.read_bytes()
+        decoded_text, encoding = decode(raw)
+        manifest_text = normalize_manifest_text(decoded_text)
+
         raw_file_hash = hashlib.sha256(raw).hexdigest()
-
-        try:
-            (
-                manifest_text,
-                actual_format,
-                encoding,
-                extraction_metadata,
-                extraction_warnings,
-            ) = extract_source_content(
-                raw,
-                source_path,
-                manifest_format,
-            )
-        except Exception as exc:
-            current.update(
-                {
-                    "raw_file_sha256": raw_file_hash,
-                    "detected_format_actual": (
-                        manifest_format
-                        or source_path.suffix.lower().lstrip(".")
-                    ),
-                    "review_status": "EXTRACTION_FAILED",
-                    "extraction_warnings": [
-                        f"{type(exc).__name__}: {exc}"
-                    ],
-                }
-            )
-            warnings.append(
-                f"{document_id}: extrakce selhala – "
-                f"{type(exc).__name__}: {exc}"
-            )
-            exported.append(current)
-            continue
-
         export_text_hash = hashlib.sha256(
             manifest_text.encode("utf-8")
         ).hexdigest()
@@ -633,54 +356,24 @@ def load_sources(
             row.get("content_sha256") or ""
         ).strip().lower()
 
-        manifest_warning_text = str(
-            row.get("warnings") or ""
-        ).upper()
-
         if not manifest_hash:
             hash_status = "MANIFEST_HASH_EMPTY"
         elif export_text_hash.lower() == manifest_hash:
             hash_status = "MATCH"
-        elif (
-            actual_format == "pdf"
-            and "PDF_TEXT_EXTRACTION_DEPENDENCY_MISSING"
-            in manifest_warning_text
-            and "PDF_TEXT_EXTRACTION_DEPENDENCY_MISSING"
-            not in extraction_warnings
-        ):
-            hash_status = "REEXTRACTED_PDF_TEXT"
-            warnings.append(
-                f"{document_id}: PDF byl nově textově vytěžen; "
-                "exportní SHA-256 se proto liší od staršího "
-                "metadata-only manifestu."
-            )
         else:
             hash_status = "DIFFERENT"
             warnings.append(
-                f"{document_id}: normalizovaný exportní SHA-256 "
-                "se liší od manifestu."
-            )
-
-        for extraction_warning in extraction_warnings:
-            warnings.append(
-                f"{document_id}: {extraction_warning}."
+                f"{row.get('document_id')}: "
+                "normalizovaný textový SHA-256 se liší od manifestu."
             )
 
         current.update(
             {
                 "content": manifest_text,
                 "encoding_used": encoding,
-                "detected_format_actual": actual_format,
-                "extraction_metadata": extraction_metadata,
-                "extraction_warnings": extraction_warnings,
                 "raw_file_sha256": raw_file_hash,
                 "export_text_sha256": export_text_hash,
                 "hash_status": hash_status,
-                "review_status": (
-                    "READY"
-                    if not extraction_warnings
-                    else "READY_WITH_WARNINGS"
-                ),
             }
         )
         exported.append(current)
@@ -792,10 +485,7 @@ def markdown(
                 f"| Review poznámka | {esc(item['review_note'])} |",
                 f"| Relativní cesta | `{row.get('canonical_relative_path', '')}` |",
                 f"| Skutečná cesta | `{item.get('resolved_path', '')}` |",
-                f"| Formát v manifestu | {esc(row.get('detected_format'))} |",
-                f"| Skutečně načtený formát | {esc(item.get('detected_format_actual'))} |",
-                f"| Extrakční varování | {esc('; '.join(item.get('extraction_warnings') or []))} |",
-                f"| Extrakční metadata | {esc(json.dumps(item.get('extraction_metadata') or {}, ensure_ascii=False))} |",
+                f"| Formát | {esc(row.get('detected_format'))} |",
                 f"| Varianty | {esc(row.get('variant_count'))} |",
                 f"| Sekce | {esc(row.get('section_count'))} |",
                 f"| Stav načtení | {esc(item['review_status'])} |",
@@ -858,14 +548,8 @@ def index_rows(exported: list[dict[str, Any]]) -> list[dict[str, str]]:
                 "related_document_id": str(
                     item.get("related_document_id") or ""
                 ),
-                "detected_format_actual": str(
-                    item.get("detected_format_actual") or ""
-                ),
                 "review_status": str(
                     item.get("review_status") or ""
-                ),
-                "extraction_warnings": "; ".join(
-                    item.get("extraction_warnings") or []
                 ),
                 "hash_status": str(
                     item.get("hash_status") or ""
