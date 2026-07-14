@@ -145,14 +145,6 @@ V20.1.Q3 STEP 22:
 - schválení vždy vytvoří samostatné metadata Stav = APPROVED a zachová původní stav,
 - A18 již panelově neomezuje pouze na DL/NAV; předá všechny typy podporované A17.
 
-V20.1.Q3 STEP 23:
-- přidává samostatný blok DATABÁZOVÁ DOKUMENTACE – READ-ONLY AUDIT A33,
-- A33 se spouští na PC2 proti localhost:5432 v transakci READ ONLY / REPEATABLE READ,
-- panel nabízí ověření připojení, úplný audit, otevření posledního reportu a výstupní složky,
-- zobrazuje poslední FINAL STATUS, čas auditu, počty schémat, objektů, tabulek, views a varování,
-- čte pouze reporty z reports/documentation/database_audit a databázi nikdy nemění,
-- A33 je samostatný zdrojový audit pro MM-DB-001 a MM-DB-002, nikoli krok A17–A24 nad vybraným dokumentem.
-
 V20.1.Q3 STEP 20B:
 - před A24 APPLY uloží ověřený snapshot dokumentační databáze,
 - po A24 APPLY a A7 načte nový snapshot a automaticky vypočítá rozdíl,
@@ -353,10 +345,6 @@ DOCUMENTATION_SCRIPTS = {
     "A24": os.path.join(
         DOCUMENTATION_TOOL_DIR,
         "25_1_A_24_IMPORT_HISTORY_DOCUMENTS_TO_DB_V1.py"
-    ),
-    "A33": os.path.join(
-        DOCUMENTATION_TOOL_DIR,
-        "25_1_A_33_EXPORT_DATABASE_STRUCTURE_AUDIT_V1.py"
     ),
     "A6": os.path.join(
         DOCUMENTATION_TOOL_DIR,
@@ -1350,15 +1338,6 @@ class MatchMatrixAdminPanel(tk.Tk):
         self.documentation_workflow_running = False
         self.documentation_workflow_started_at = None
         self.documentation_workflow_finished_at = None
-
-        # V20.1.Q3 STEP 23 - samostatný read-only audit databázové struktury A33.
-        self.documentation_a33_process = None
-        self.documentation_a33_running = False
-        self.documentation_a33_last_status = "AUDIT ZATÍM NEPROBĚHL"
-        self.documentation_a33_last_output = None
-        self.documentation_a33_last_report = None
-        self.documentation_a33_last_payload = None
-        self.documentation_a33_buttons = []
 
         self.setup_style()
         self.build_ui()
@@ -2567,11 +2546,10 @@ class MatchMatrixAdminPanel(tk.Tk):
         tab_documentation.columnconfigure(0, weight=1)
         tab_documentation.columnconfigure(1, weight=1)
         tab_documentation.rowconfigure(1, weight=0)
-        tab_documentation.rowconfigure(2, weight=0)
-        tab_documentation.rowconfigure(3, weight=2)
+        tab_documentation.rowconfigure(2, weight=2)
+        tab_documentation.rowconfigure(3, weight=1)
         tab_documentation.rowconfigure(4, weight=1)
         tab_documentation.rowconfigure(5, weight=1)
-        tab_documentation.rowconfigure(6, weight=1)
 
         documentation_button_bar = tk.Frame(tab_documentation, bg=BG)
         documentation_button_bar.grid(
@@ -2986,169 +2964,6 @@ class MatchMatrixAdminPanel(tk.Tk):
 
         self._documentation_update_workflow_ui()
 
-        # V20.1.Q3 STEP 23 - DATABÁZOVÁ DOKUMENTACE / READ-ONLY AUDIT A33
-        # CO:
-        # - Samostatný audit skutečné struktury PostgreSQL na PC2.
-        # K ČEMU:
-        # - Vytváří ověřené JSON/CSV/Markdown podklady pro MM-DB-001 a MM-DB-002.
-        # KDE:
-        # - Mezi řízeným workflow dokumentu a terminologickou částí.
-        # JAK:
-        # - Vždy na PC2, localhost:5432, READ ONLY + REPEATABLE READ.
-        database_audit_frame = tk.Frame(
-            tab_documentation,
-            bg="#0d1118",
-            highlightbackground="#31536b",
-            highlightthickness=1
-        )
-        database_audit_frame.grid(
-            row=2,
-            column=0,
-            columnspan=2,
-            sticky="ew",
-            padx=4,
-            pady=4
-        )
-        database_audit_frame.columnconfigure(1, weight=1)
-        database_audit_frame.columnconfigure(3, weight=1)
-
-        tk.Label(
-            database_audit_frame,
-            text="🗄 DATABÁZOVÁ DOKUMENTACE – READ-ONLY AUDIT A33",
-            bg="#0d1118",
-            fg="#9bd7ff",
-            font=("Segoe UI", 10, "bold"),
-            anchor="w"
-        ).grid(
-            row=0,
-            column=0,
-            columnspan=4,
-            sticky="ew",
-            padx=8,
-            pady=(6, 3)
-        )
-
-        database_audit_actions = tk.Frame(
-            database_audit_frame,
-            bg="#0d1118"
-        )
-        database_audit_actions.grid(
-            row=1,
-            column=0,
-            columnspan=4,
-            sticky="ew",
-            padx=6,
-            pady=(0, 4)
-        )
-
-        def add_a33_button(label, color, command):
-            button = tk.Button(
-                database_audit_actions,
-                text=label,
-                bg=color,
-                fg="white",
-                activebackground=color,
-                activeforeground="white",
-                relief="flat",
-                bd=0,
-                font=("Segoe UI", 8, "bold"),
-                cursor="hand2",
-                command=command,
-                padx=8,
-                pady=4
-            )
-            button.pack(side="left", fill="x", expand=True, padx=4)
-            self.documentation_a33_buttons.append(button)
-            return button
-
-        add_a33_button(
-            "✓ OVĚŘIT PŘIPOJENÍ",
-            "#3b5870",
-            self.documentation_a33_validate_connection
-        )
-        add_a33_button(
-            "▶ SPUSTIT ÚPLNÝ AUDIT",
-            "#0f6a42",
-            self.documentation_a33_run_full_audit
-        )
-        add_a33_button(
-            "📄 OTEVŘÍT POSLEDNÍ REPORT",
-            "#4c2c83",
-            self.documentation_a33_open_latest_report
-        )
-        add_a33_button(
-            "📂 OTEVŘÍT VÝSTUPY",
-            "#0f5f63",
-            self.documentation_a33_open_output_folder
-        )
-
-        tk.Label(
-            database_audit_frame,
-            text="STAV:",
-            bg="#0d1118",
-            fg=MUTED,
-            font=("Segoe UI", 8, "bold"),
-            anchor="w"
-        ).grid(row=2, column=0, sticky="w", padx=(8, 4), pady=2)
-
-        self.documentation_a33_status_value = tk.Label(
-            database_audit_frame,
-            text="AUDIT ZATÍM NEPROBĚHL",
-            bg="#0d1118",
-            fg=YELLOW,
-            font=("Segoe UI", 8, "bold"),
-            anchor="w"
-        )
-        self.documentation_a33_status_value.grid(
-            row=2, column=1, sticky="ew", padx=(0, 8), pady=2
-        )
-
-        tk.Label(
-            database_audit_frame,
-            text="POSLEDNÍ BĚH:",
-            bg="#0d1118",
-            fg=MUTED,
-            font=("Segoe UI", 8, "bold"),
-            anchor="w"
-        ).grid(row=2, column=2, sticky="w", padx=(8, 4), pady=2)
-
-        self.documentation_a33_time_value = tk.Label(
-            database_audit_frame,
-            text="-",
-            bg="#0d1118",
-            fg="#c5d9e8",
-            font=("Segoe UI", 8),
-            anchor="w"
-        )
-        self.documentation_a33_time_value.grid(
-            row=2, column=3, sticky="ew", padx=(0, 8), pady=2
-        )
-
-        tk.Label(
-            database_audit_frame,
-            text="SOUHRN:",
-            bg="#0d1118",
-            fg=MUTED,
-            font=("Segoe UI", 8, "bold"),
-            anchor="nw"
-        ).grid(row=3, column=0, sticky="nw", padx=(8, 4), pady=(2, 6))
-
-        self.documentation_a33_summary_value = tk.Label(
-            database_audit_frame,
-            text="Schémata - | Objekty - | Tabulky - | Views - | Varování -",
-            bg="#0d1118",
-            fg="#c5d9e8",
-            font=("Segoe UI", 8, "bold"),
-            anchor="w",
-            justify="left",
-            wraplength=1450
-        )
-        self.documentation_a33_summary_value.grid(
-            row=3, column=1, columnspan=3, sticky="ew", padx=(0, 8), pady=(2, 6)
-        )
-
-        self._documentation_update_a33_ui()
-
         # V20.1.Q2 - KLIKACÍ SLOVNÍK A VÝKLADOVÝ REJSTŘÍK
         glossary_frame = tk.Frame(
             tab_documentation,
@@ -3157,7 +2972,7 @@ class MatchMatrixAdminPanel(tk.Tk):
             highlightthickness=1
         )
         glossary_frame.grid(
-            row=3,
+            row=2,
             column=0,
             columnspan=2,
             sticky="nsew",
@@ -3312,7 +3127,7 @@ class MatchMatrixAdminPanel(tk.Tk):
         self.documentation_kpi_tree = self.create_section(
             tab_documentation,
             "📚 STAV DOKUMENTAČNÍ DATABÁZE",
-            4,
+            3,
             0,
             2
         )
@@ -3320,28 +3135,28 @@ class MatchMatrixAdminPanel(tk.Tk):
         self.documentation_documents_tree = self.create_section(
             tab_documentation,
             "📄 AKTUÁLNÍ DOKUMENTY",
-            5,
+            4,
             0
         )
 
         self.documentation_import_runs_tree = self.create_section(
             tab_documentation,
             "⏱ POSLEDNÍ IMPORTNÍ BĚHY",
-            5,
+            4,
             1
         )
 
         self.documentation_relations_tree = self.create_section(
             tab_documentation,
             "🔗 VAZBY DOKUMENTŮ",
-            6,
+            5,
             0
         )
 
         self.documentation_history_tree = self.create_section(
             tab_documentation,
             "🧾 HISTORIE STAVŮ",
-            6,
+            5,
             1
         )
 
@@ -11300,423 +11115,6 @@ catch {{
         ).pack(side="right")
 
 
-    # =========================================================
-    # V20.1.Q3 STEP 23 - A33 DATABASE STRUCTURE AUDIT
-    # =========================================================
-
-    def _documentation_a33_output_relative_dir(self):
-        return os.path.join(
-            "reports",
-            "documentation",
-            "database_audit"
-        )
-
-    def _documentation_a33_output_dir(self):
-        return os.path.join(
-            DOCUMENTATION_ROOT,
-            self._documentation_a33_output_relative_dir()
-        )
-
-    def _documentation_a33_latest_json_path(self):
-        return os.path.join(
-            self._documentation_a33_output_dir(),
-            "database_structure_audit_latest.json"
-        )
-
-    def _documentation_a33_latest_markdown_path(self):
-        return os.path.join(
-            self._documentation_a33_output_dir(),
-            "database_structure_audit_latest.md"
-        )
-
-    def _documentation_update_a33_ui(self):
-        """Aktualizuje kompaktní A33 panel bez přístupu do databáze."""
-        if not hasattr(self, "documentation_a33_status_value"):
-            return
-
-        payload = self.documentation_a33_last_payload or {}
-        summary = payload.get("summary") or {}
-        warnings = (
-            (payload.get("datasets") or {}).get("warnings")
-            or []
-        )
-        severity_counts = {
-            "HIGH": 0,
-            "MEDIUM": 0,
-            "INFO": 0,
-        }
-        for item in warnings:
-            severity = str((item or {}).get("severity") or "").upper()
-            if severity in severity_counts:
-                severity_counts[severity] += 1
-
-        status = str(
-            self.documentation_a33_last_status
-            or payload.get("final_status")
-            or "AUDIT ZATÍM NEPROBĚHL"
-        )
-        generated_at = str(
-            payload.get("generated_at")
-            or payload.get("finished_at")
-            or "-"
-        )
-
-        if self.documentation_a33_running:
-            status_color = YELLOW
-            button_state = "disabled"
-        elif status == "DATABASE_STRUCTURE_AUDIT_EXPORTED":
-            status_color = GREEN
-            button_state = "normal"
-        elif status == "DATABASE_STRUCTURE_CONNECTION_VERIFIED":
-            status_color = GREEN
-            button_state = "normal"
-        elif "CHYBA" in status or "BLOCKED" in status or "FAILED" in status:
-            status_color = RED
-            button_state = "normal"
-        else:
-            status_color = YELLOW
-            button_state = "normal"
-
-        self.documentation_a33_status_value.config(
-            text=status,
-            fg=status_color
-        )
-        self.documentation_a33_time_value.config(text=generated_at)
-
-        if summary:
-            self.documentation_a33_summary_value.config(
-                text=(
-                    f"Schémata {summary.get('schemas', 0)} | "
-                    f"Objekty {summary.get('objects', 0)} | "
-                    f"Tabulky {summary.get('tables', 0)} | "
-                    f"Views {summary.get('views', 0)} | "
-                    f"Sloupce {summary.get('columns', 0)} | "
-                    f"Constraints {summary.get('constraints', 0)} | "
-                    f"Indexy {summary.get('indexes', 0)} | "
-                    f"Varování {summary.get('warnings', len(warnings))} "
-                    f"(HIGH {severity_counts['HIGH']} / "
-                    f"MEDIUM {severity_counts['MEDIUM']} / "
-                    f"INFO {severity_counts['INFO']})"
-                ),
-                fg=(RED if severity_counts["HIGH"] else "#c5d9e8")
-            )
-        else:
-            self.documentation_a33_summary_value.config(
-                text="Schémata - | Objekty - | Tabulky - | Views - | Varování -",
-                fg="#c5d9e8"
-            )
-
-        for button in getattr(self, "documentation_a33_buttons", []):
-            try:
-                button.config(state=button_state)
-            except Exception:
-                pass
-
-    def load_documentation_database_audit_status(self):
-        """Načte poslední A33 JSON report ze sdíleného PC2 repozitáře."""
-        latest_json = self._documentation_a33_latest_json_path()
-        latest_md = self._documentation_a33_latest_markdown_path()
-
-        if not os.path.isfile(latest_json):
-            if not self.documentation_a33_running:
-                self.documentation_a33_last_status = "AUDIT ZATÍM NEPROBĚHL"
-                self.documentation_a33_last_payload = None
-                self.documentation_a33_last_report = None
-            self._documentation_update_a33_ui()
-            return None
-
-        try:
-            with open(latest_json, "r", encoding="utf-8-sig") as handle:
-                payload = json.load(handle)
-            if not isinstance(payload, dict):
-                raise RuntimeError("A33 latest JSON není objekt.")
-
-            self.documentation_a33_last_payload = payload
-            self.documentation_a33_last_status = str(
-                payload.get("final_status")
-                or "A33 REPORT BEZ FINAL STATUS"
-            )
-            self.documentation_a33_last_report = (
-                latest_md if os.path.isfile(latest_md) else None
-            )
-            self.documentation_a33_last_output = latest_json
-            self._documentation_update_a33_ui()
-            return payload
-        except Exception as exc:
-            self.documentation_a33_last_status = "CHYBA ČTENÍ A33 REPORTU"
-            self.documentation_a33_last_output = str(exc)
-            self._documentation_update_a33_ui()
-            return None
-
-    def documentation_a33_validate_connection(self):
-        """Ověří PC2 PostgreSQL připojení a read-only transakci."""
-        self._documentation_start_a33(validate_only=True)
-
-    def documentation_a33_run_full_audit(self):
-        """Spustí úplný A33 audit na PC2 v režimu READ_ONLY."""
-        confirmed = messagebox.askyesno(
-            "A33 – úplný databázový audit",
-            (
-                "Spustit úplný read-only audit databázové struktury na PC2?\n\n"
-                "Databáze: localhost:5432 / matchmatrix\n"
-                "Režim: READ ONLY + REPEATABLE READ\n"
-                "Databáze nebude změněna."
-            )
-        )
-        if not confirmed:
-            return
-        self._documentation_start_a33(validate_only=False)
-
-    def documentation_a33_open_latest_report(self):
-        """Otevře poslední čitelný Markdown report A33."""
-        relative_path = os.path.join(
-            self._documentation_a33_output_relative_dir(),
-            "database_structure_audit_latest.md"
-        )
-        self.open_matchmatrix_path(relative_path)
-
-    def documentation_a33_open_output_folder(self):
-        """Otevře složku všech JSON/CSV/Markdown výstupů A33."""
-        self.open_matchmatrix_path(
-            self._documentation_a33_output_relative_dir()
-        )
-
-    def _documentation_start_a33(self, *, validate_only):
-        """Spustí A33 na PC2 bez blokování Tkinter GUI."""
-        if self.documentation_a33_running:
-            messagebox.showwarning(
-                "A33 – databázový audit",
-                "Audit A33 právě běží."
-            )
-            return False
-        if self.documentation_workflow_running:
-            messagebox.showwarning(
-                "A33 – databázový audit",
-                "Nejprve dokonči právě běžící krok dokumentačního workflow."
-            )
-            return False
-
-        tool_path = DOCUMENTATION_SCRIPTS.get("A33")
-        if not tool_path or not os.path.isfile(tool_path):
-            messagebox.showerror(
-                "A33 – databázový audit",
-                f"Skript A33 nebyl nalezen:\n\n{tool_path}"
-            )
-            return False
-
-        self.documentation_a33_running = True
-        self.documentation_a33_last_status = (
-            "A33 OVĚŘUJE PŘIPOJENÍ NA PC2"
-            if validate_only
-            else "A33 BĚŽÍ NA PC2 – READ ONLY"
-        )
-        self.documentation_a33_last_output = None
-        self._documentation_update_a33_ui()
-
-        def worker():
-            try:
-                remote_tool = self._documentation_to_remote_pc2_path(tool_path)
-                remote_args = (
-                    ["--validate-connection-only"]
-                    if validate_only
-                    else []
-                )
-                ps_host = self._documentation_powershell_literal(
-                    DOCUMENTATION_REMOTE_HOST
-                )
-                ps_python = self._documentation_powershell_literal(
-                    DOCUMENTATION_PYTHON_EXE
-                )
-                ps_tool = self._documentation_powershell_literal(remote_tool)
-                ps_project = self._documentation_powershell_literal(
-                    DOCUMENTATION_REMOTE_PROJECT_ROOT
-                )
-                ps_args = "@(" + ",".join(
-                    self._documentation_powershell_literal(value)
-                    for value in remote_args
-                ) + ")"
-                powershell_script = (
-                    '$ErrorActionPreference = "Stop"\n'
-                    'try {\n'
-                    f'    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{\n'
-                    '        param($PythonExe, $ToolScript, $ProjectRoot, $ToolArgs)\n'
-                    '        $ErrorActionPreference = "Stop"\n'
-                    '        if ($null -eq $ToolArgs) { $ToolArgs = @() } else { $ToolArgs = @($ToolArgs) }\n'
-                    '        Set-Location -LiteralPath $ProjectRoot\n'
-                    '        & $PythonExe $ToolScript @ToolArgs\n'
-                    '        $ToolExitCode = $LASTEXITCODE\n'
-                    '        Write-Output "__MM_A33_EXIT_CODE__=$ToolExitCode"\n'
-                    '        if ($ToolExitCode -ne 0) { throw "A33 skoncil kodem $ToolExitCode" }\n'
-                    f'    }} -ArgumentList {ps_python}, {ps_tool}, {ps_project}, {ps_args}\n'
-                    '    exit 0\n'
-                    '}\n'
-                    'catch {\n'
-                    '    Write-Error $_.Exception.Message\n'
-                    '    exit 1\n'
-                    '}\n'
-                )
-                encoded = base64.b64encode(
-                    powershell_script.encode("utf-16le")
-                ).decode("ascii")
-                command = [
-                    "powershell.exe",
-                    "-NoProfile",
-                    "-NonInteractive",
-                    "-ExecutionPolicy",
-                    "Bypass",
-                    "-EncodedCommand",
-                    encoded,
-                ]
-                creation_flags = getattr(
-                    subprocess,
-                    "CREATE_NO_WINDOW",
-                    0
-                )
-                process = subprocess.Popen(
-                    command,
-                    cwd=BASE_DIR,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.STDOUT,
-                    text=False,
-                    creationflags=creation_flags,
-                )
-                self.documentation_a33_process = process
-                raw_output, _ = process.communicate()
-                output_text = self._documentation_decode_process_output(
-                    raw_output
-                )
-                marker = re.search(
-                    r"__MM_A33_EXIT_CODE__=(-?\d+)",
-                    output_text
-                )
-                remote_code = int(marker.group(1)) if marker else None
-                success = (
-                    process.returncode == 0
-                    and remote_code == 0
-                )
-                self.after(
-                    0,
-                    lambda: self._documentation_finish_a33(
-                        success=success,
-                        output_text=output_text,
-                        local_code=process.returncode,
-                        remote_code=remote_code,
-                        validate_only=validate_only,
-                    )
-                )
-            except Exception as exc:
-                self.after(
-                    0,
-                    lambda error=exc: self._documentation_finish_a33(
-                        success=False,
-                        output_text=str(error),
-                        local_code=-1,
-                        remote_code=None,
-                        validate_only=validate_only,
-                    )
-                )
-
-        threading.Thread(target=worker, daemon=True).start()
-        return True
-
-    def _documentation_finish_a33(
-        self,
-        *,
-        success,
-        output_text,
-        local_code,
-        remote_code,
-        validate_only,
-    ):
-        """Dokončí A33 běh, uloží stdout a obnoví panelový stav."""
-        self.documentation_a33_running = False
-        self.documentation_a33_process = None
-
-        output_dir = self._documentation_a33_output_dir()
-        stdout_path = None
-        try:
-            os.makedirs(output_dir, exist_ok=True)
-            stdout_path = os.path.join(
-                output_dir,
-                "a33_panel_stdout_latest.txt"
-            )
-            with open(stdout_path, "w", encoding="utf-8") as handle:
-                handle.write(output_text or "")
-        except Exception:
-            stdout_path = None
-
-        self.documentation_a33_last_output = stdout_path or output_text
-
-        if success and validate_only:
-            status_match = re.search(
-                r"FINAL STATUS\s*:\s*([^\r\n]+)",
-                output_text or ""
-            )
-            self.documentation_a33_last_status = (
-                status_match.group(1).strip()
-                if status_match
-                else "DATABASE_STRUCTURE_CONNECTION_VERIFIED"
-            )
-            self._documentation_update_a33_ui()
-            messagebox.showinfo(
-                "A33 – připojení ověřeno",
-                (
-                    "Připojení k PostgreSQL na PC2 bylo ověřeno.\n\n"
-                    "Databáze: localhost:5432 / matchmatrix\n"
-                    "Transakce: READ ONLY\n"
-                    "Izolace: REPEATABLE READ\n\n"
-                    f"Stav: {self.documentation_a33_last_status}"
-                )
-            )
-            return
-
-        if success:
-            payload = self.load_documentation_database_audit_status()
-            if not payload:
-                success = False
-                output_text = (
-                    (output_text or "")
-                    + "\nA33 skončil bez čitelného latest JSON reportu."
-                )
-            else:
-                summary = payload.get("summary") or {}
-                warnings = (
-                    (payload.get("datasets") or {}).get("warnings")
-                    or []
-                )
-                severity = {"HIGH": 0, "MEDIUM": 0, "INFO": 0}
-                for item in warnings:
-                    key = str((item or {}).get("severity") or "").upper()
-                    if key in severity:
-                        severity[key] += 1
-                messagebox.showinfo(
-                    "A33 – audit dokončen",
-                    (
-                        "Read-only audit databázové struktury byl exportován.\n\n"
-                        f"Schémata: {summary.get('schemas', 0)}\n"
-                        f"Objekty: {summary.get('objects', 0)}\n"
-                        f"Tabulky: {summary.get('tables', 0)}\n"
-                        f"Views: {summary.get('views', 0)}\n"
-                        f"Varování: {summary.get('warnings', len(warnings))}\n"
-                        f"HIGH: {severity['HIGH']} | MEDIUM: {severity['MEDIUM']} | INFO: {severity['INFO']}\n\n"
-                        f"Report:\n{self.documentation_a33_last_report or self._documentation_a33_latest_markdown_path()}\n\n"
-                        "Databáze nebyla změněna."
-                    )
-                )
-                return
-
-        self.documentation_a33_last_status = "DATABASE_STRUCTURE_AUDIT_BLOCKED"
-        self._documentation_update_a33_ui()
-        messagebox.showerror(
-            "A33 – audit selhal",
-            (
-                f"Lokální kód: {local_code}\n"
-                f"Vzdálený kód: {remote_code}\n"
-                "Stav: DATABASE_STRUCTURE_AUDIT_BLOCKED\n\n"
-                + (output_text or "Bez výstupu")[-8000:]
-            )
-        )
-
     def open_matchmatrix_path(self, relative_path):
         """
         V20.1.Q - Otevře soubor nebo složku uvnitř projektu MatchMatrix.
@@ -12282,7 +11680,6 @@ CÍLOVÁ KAPITOLA / SEKCE:
             self.documentation_history_tree,
             db_query(history_sql)
         )
-        self.load_documentation_database_audit_status()
         self.load_glossary_reference()
 
     def load_project_progress_from_db(self):
