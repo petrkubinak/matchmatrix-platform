@@ -63,12 +63,6 @@ PODPOROVANÉ TYPY:
 - REFERENCE_DOCUMENT
 - GENERIC_DOCUMENT
 
-V8 – SAMOSTATNÉ KONTROLNÍ BLOKY STRUKTURÁLNÍCH OPRAV:
-- změna samotného nadpisu dostává vlastní syntetický kontrolní blok,
-- strukturální oprava se nikdy nepřipojí k nesouvisejícím metadatům nebo sousední kapitole,
-- nevyřešený nález dostává vlastní ruční kontrolní blok,
-- zdrojové mapování a metriky pokrytí zůstávají oddělené od kontrolních bloků oprav.
-
 V7 – UNIVERZÁLNÍ STRUKTURNĚ ŠETRNÁ STANDARDIZACE:
 - zachovává existující logickou strukturu hlavních, referenčních a obecných dokumentů,
 - používá cílené opravy pouze pro nálezy, které lze bezpečně odvodit z dokumentu,
@@ -127,7 +121,7 @@ GENERIC_TYPES = {
     "GENERIC_DOCUMENT",
 }
 SUPPORTED_TYPES = {"DAILY_LOG", "CHAT_CONTINUATION", *GENERIC_TYPES}
-ENGINE_VERSION = "A18_CONTEXTUAL_MAPPING_V8_STRUCTURAL_FIX_REVIEW_BLOCKS"
+ENGINE_VERSION = "A18_CONTEXTUAL_MAPPING_V7_UNIVERSAL_STRUCTURE_PRESERVING"
 PANEL_CONTRACT_VERSION = "1.0"
 
 DOCUMENT_ID_RE = re.compile(
@@ -1966,19 +1960,9 @@ def mapping_metrics(
         int(chunk.get("source_character_count") or len(str(chunk.get("text") or "")))
         for chunk in source_chunks
     )
-    source_mapped_chunks = [
-        chunk
-        for chunk in mapped_chunks
-        if not bool(chunk.get("synthetic_structural_review"))
-    ]
-    structural_review_chunks = [
-        chunk
-        for chunk in mapped_chunks
-        if bool(chunk.get("synthetic_structural_review"))
-    ]
     mapped_characters = sum(
         int(chunk.get("source_character_count") or len(str(chunk.get("text") or "")))
-        for chunk in source_mapped_chunks
+        for chunk in mapped_chunks
     )
 
     coverage = (
@@ -1988,7 +1972,7 @@ def mapping_metrics(
     )
     confidence_counts = Counter(
         str(chunk["classification_confidence"])
-        for chunk in source_mapped_chunks
+        for chunk in mapped_chunks
     )
     manual_percent = (
         round(len(manual_queue) * 100.0 / len(mapped_chunks), 2)
@@ -2007,12 +1991,8 @@ def mapping_metrics(
 
     return {
         "source_chunks_count": len(source_chunks),
-        "mapped_chunks_count": len(source_mapped_chunks),
-        "structural_review_chunks_count": len(structural_review_chunks),
-        "unmapped_chunks_count": max(
-            0,
-            len(source_chunks) - len(source_mapped_chunks),
-        ),
+        "mapped_chunks_count": len(mapped_chunks),
+        "unmapped_chunks_count": max(0, len(source_chunks) - len(mapped_chunks)),
         "source_characters": total_characters,
         "mapped_characters": mapped_characters,
         "character_mapping_coverage_percent": coverage,
@@ -2419,177 +2399,10 @@ def build_structure_preserving_proposal(
     return proposal.rstrip() + "\n", applied, unresolved
 
 
-def _next_review_block_identity(
-    mapped_chunks: Sequence[Mapping[str, Any]],
-) -> tuple[str, int]:
-    indexes = [
-        int(item.get("index") or 0)
-        for item in mapped_chunks
-        if str(item.get("index") or "").isdigit()
-        or isinstance(item.get("index"), int)
-    ]
-    next_index = max(indexes, default=0) + 1
-    return f"BLK-{next_index:04d}", next_index
-
-
-def _structural_fix_category(
-    fix: Mapping[str, Any],
-    document_type: str,
-) -> str:
-    rule_id = str(fix.get("rule_id") or "").strip().upper()
-    preferred = {
-        "MAIN-INTRO": "introduction",
-        "MAIN-VERSION-HISTORY": "version_history",
-    }.get(rule_id, "body")
-    available = {
-        str(item["code"])
-        for item in category_items(document_type)
-    }
-    return preferred if preferred in available else next(iter(available), "body")
-
-
-def _make_structural_fix_review_chunk(
-    fix: Mapping[str, Any],
-    mapped_chunks: Sequence[Mapping[str, Any]],
-    document_type: str,
-) -> dict[str, Any]:
-    block_id, index = _next_review_block_identity(mapped_chunks)
-    category = _structural_fix_category(fix, document_type)
-    catalog = category_by_code(document_type)
-    category_label = str(catalog.get(category, {}).get("label_cs") or category)
-    line_number = int(fix.get("line_number") or 0)
-    before = str(fix.get("before") or "(nová strukturální část)")
-    after = str(fix.get("after") or "")
-    clean_heading = re.sub(r"^\s*#{1,6}\s+", "", after or before).strip()
-
-    alternatives: list[dict[str, Any]] = [
-        {
-            "category": category,
-            "label_cs": category_label,
-            "category_label_cs": category_label,
-            "score": 100.0,
-            "reasons": [
-                str(
-                    fix.get("reason")
-                    or "Cílená strukturální oprava vytvořená z nálezu A17."
-                )
-            ],
-        }
-    ]
-    for fallback in ("body", "metadata", "context"):
-        if fallback == category or fallback not in catalog:
-            continue
-        fallback_label = str(catalog[fallback]["label_cs"])
-        alternatives.append(
-            {
-                "category": fallback,
-                "label_cs": fallback_label,
-                "category_label_cs": fallback_label,
-                "score": 0.0,
-                "reasons": [],
-            }
-        )
-        if len(alternatives) >= 4:
-            break
-
-    return {
-        "block_id": block_id,
-        "index": index,
-        "heading": clean_heading or None,
-        "section_category_hint": category,
-        "heading_detection_method": "synthetic_structural_fix",
-        "heading_line": line_number or None,
-        "heading_level": 2,
-        "text": before,
-        "start_line": line_number,
-        "end_line": line_number,
-        # Tento blok nereprezentuje další zdrojový obsah; nesmí zvýšit coverage.
-        "source_character_count": 0,
-        "is_list_item": False,
-        "contains_code_fence": False,
-        "synthetic_structural_review": True,
-        "structural_fix": dict(fix),
-        "proposed_category": category,
-        "proposed_category_label_cs": category_label,
-        "classification_score": 100.0,
-        "classification_margin": 100.0,
-        "classification_confidence": "HIGH",
-        "classification_method": "synthetic_structural_fix_review",
-        "classification_reasons": [
-            str(
-                fix.get("reason")
-                or "Potvrdit cílenou strukturální opravu."
-            ),
-            f"Před: {fix.get('before')}",
-            f"Po: {fix.get('after')}",
-        ],
-        "category_alternatives": alternatives,
-        "needs_manual_review": True,
-        "review_priority": "MEDIUM",
-        "recommended_panel_action": "CONFIRM_OR_MOVE",
-    }
-
-
-def _make_unresolved_finding_review_chunk(
-    finding: Mapping[str, Any],
-    mapped_chunks: Sequence[Mapping[str, Any]],
-    document_type: str,
-) -> dict[str, Any]:
-    block_id, index = _next_review_block_identity(mapped_chunks)
-    catalog = category_by_code(document_type)
-    category = "body" if "body" in catalog else next(iter(catalog))
-    label = str(catalog[category]["label_cs"])
-    rule_id = str(finding.get("rule_id") or "UNRESOLVED")
-    recommendation = str(
-        finding.get("recommendation")
-        or finding.get("description")
-        or "Ruční oprava"
-    )
-    return {
-        "block_id": block_id,
-        "index": index,
-        "heading": f"Nevyřešený nález {rule_id}",
-        "section_category_hint": category,
-        "heading_detection_method": "synthetic_unresolved_finding",
-        "heading_line": None,
-        "heading_level": None,
-        "text": recommendation,
-        "start_line": 0,
-        "end_line": 0,
-        "source_character_count": 0,
-        "is_list_item": False,
-        "contains_code_fence": False,
-        "synthetic_structural_review": True,
-        "unresolved_finding": dict(finding),
-        "proposed_category": category,
-        "proposed_category_label_cs": label,
-        "classification_score": 0.0,
-        "classification_margin": 0.0,
-        "classification_confidence": "LOW",
-        "classification_method": "synthetic_unresolved_finding_review",
-        "classification_reasons": [
-            f"{rule_id}: {recommendation}"
-        ],
-        "category_alternatives": [
-            {
-                "category": category,
-                "label_cs": label,
-                "category_label_cs": label,
-                "score": 0.0,
-                "reasons": [recommendation],
-            }
-        ],
-        "needs_manual_review": True,
-        "review_priority": "HIGH",
-        "recommended_panel_action": "RETURN_TO_MANUAL_REVIEW",
-    }
-
-
 def prepare_generic_mapping_for_review(
     mapped_chunks: list[dict[str, Any]],
     applied_fixes: Sequence[Mapping[str, Any]],
     unresolved_findings: Sequence[Mapping[str, Any]],
-    document_type: str,
 ) -> list[dict[str, Any]]:
     for chunk in mapped_chunks:
         chunk["classification_score"] = 100.0
@@ -2607,28 +2420,20 @@ def prepare_generic_mapping_for_review(
 
     for fix in applied_fixes:
         line_number = int(fix.get("line_number") or 0)
-
-        # Strukturální oprava se smí připojit pouze k bloku, jehož vlastní
-        # nadpis začíná přesně na upravovaném řádku. Rozsah sousedního textu
-        # ani první blok dokumentu nejsou bezpečné náhradní cíle.
         target = next(
             (
                 chunk
                 for chunk in mapped_chunks
-                if line_number > 0
-                and int(chunk.get("heading_line") or 0) == line_number
+                if int(chunk.get("heading_line") or 0) == line_number
+                or (
+                    int(chunk.get("start_line") or 0)
+                    <= line_number
+                    <= int(chunk.get("end_line") or 0)
+                )
             ),
-            None,
+            mapped_chunks[0] if mapped_chunks else None,
         )
-
-        if target is None:
-            target = _make_structural_fix_review_chunk(
-                fix,
-                mapped_chunks,
-                document_type,
-            )
-            mapped_chunks.append(target)
-        else:
+        if target and target not in review_targets:
             target["needs_manual_review"] = True
             target["review_priority"] = "MEDIUM"
             target["recommended_panel_action"] = "CONFIRM_OR_MOVE"
@@ -2637,19 +2442,22 @@ def prepare_generic_mapping_for_review(
                 f"Před: {fix.get('before')}",
                 f"Po: {fix.get('after')}",
             ]
-            target["structural_fix"] = dict(fix)
-
-        if target not in review_targets:
             review_targets.append(target)
 
-    for finding in unresolved_findings:
-        target = _make_unresolved_finding_review_chunk(
-            finding,
-            mapped_chunks,
-            document_type,
-        )
-        mapped_chunks.append(target)
-        review_targets.append(target)
+    if unresolved_findings and mapped_chunks:
+        target = mapped_chunks[0]
+        if target not in review_targets:
+            review_targets.append(target)
+        target["needs_manual_review"] = True
+        target["review_priority"] = "HIGH"
+        target["recommended_panel_action"] = "RETURN_TO_MANUAL_REVIEW"
+        target["classification_reasons"] = [
+            (
+                f"{item.get('rule_id')}: "
+                f"{item.get('recommendation') or item.get('description') or 'Ruční oprava'}"
+            )
+            for item in unresolved_findings
+        ]
 
     return review_targets
 
@@ -3177,7 +2985,6 @@ def main() -> int:
                 mapped_chunks,
                 applied_fixes,
                 unresolved_findings,
-                document_type,
             )
         elif document_type == "DAILY_LOG":
             proposal = build_daily(

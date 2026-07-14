@@ -65,13 +65,13 @@ PODPOROVANÉ TYPY:
 - REFERENCE_DOCUMENT
 - GENERIC_DOCUMENT
 
-V5 – ODOLNÉ PÁROVÁNÍ STRUKTURÁLNÍCH OPRAV:
-- zachovává univerzální režim V4 pro všechny typy dokumentů,
-- bezpečně slučuje pouze přesné duplicitní záznamy applied_fixes,
-- páruje syntetický blok A19 s opravou A18 podle řádku, textu a důkazů,
-- toleruje rozdíly konců řádků a okrajových mezer v JSON kontraktu,
-- při nejednoznačném konfliktu build nadále bezpečně zablokuje,
-- samotná aplikace opravy znovu ověří původní zdrojový text a SHA-256.
+V4 – UNIVERZÁLNÍ STRUCTURE-PRESERVING BUILD:
+- denní zápisy a NAV zůstávají sestavovány podle potvrzených kategorií,
+- hlavní, snapshotové, referenční a obecné dokumenty nejsou přeskládány,
+- u těchto dokumentů se použijí pouze opravy potvrzené v A19,
+- syntetické kontrolní bloky se nikdy nevkládají jako běžný obsah,
+- nepodporovaný přesun, rozdělení nebo vyloučení původní sekce build zablokuje,
+- kandidát zachová celý původní obsah a změní pouze potvrzené strukturální body.
 
 VÝSTUP:
 reports/documentation/standardization/final_candidates/
@@ -122,7 +122,7 @@ SUPPORTED_DOCUMENT_TYPES = {
 }
 EXPECTED_REVIEW_STATUS = "MAPPING_CONFIRMED"
 EXPECTED_FINAL_STATUS = "DOCUMENT_STANDARDIZATION_PANEL_REVIEW_CONFIRMED"
-ENGINE_VERSION = "A20_STANDARDIZED_DOCUMENT_BUILDER_V6_SYNTHETIC_FIX_RECOVERY"
+ENGINE_VERSION = "A20_STANDARDIZED_DOCUMENT_BUILDER_V4_UNIVERSAL_STRUCTURE_PRESERVING"
 OUTPUT_CONTRACT_VERSION = "1.0"
 
 DOCUMENT_ID_RE = re.compile(r"\bMM-[A-Z]{2,10}-\d{3,8}(?:-\d{1,4})?[A-Z]?\b")
@@ -719,170 +719,12 @@ def _block_decision(item: Mapping[str, Any]) -> tuple[str, str]:
     )
 
 
-def _normalize_structural_text(value: Any) -> str:
-    """Normalizuje pouze technické rozdíly kontraktu, nikoli význam textu."""
-    text = str(value or "").replace("\r\n", "\n").replace("\r", "\n")
-    return "\n".join(line.rstrip() for line in text.split("\n")).strip()
-
-
-def _fix_identity(fix: Mapping[str, Any]) -> tuple[Any, ...]:
+def _fix_identity(fix: Mapping[str, Any]) -> tuple[int, str, str]:
     return (
-        str(fix.get("rule_id") or "").strip().upper(),
-        str(fix.get("action") or "").strip().upper(),
         int(fix.get("line_number") or 0),
-        _normalize_structural_text(fix.get("before")),
-        _normalize_structural_text(fix.get("after")),
-        bool(fix.get("requires_review", True)),
+        str(fix.get("before") or ""),
+        str(fix.get("action") or ""),
     )
-
-
-def _deduplicate_structural_fixes(
-    fixes: Sequence[Mapping[str, Any]],
-) -> tuple[list[Mapping[str, Any]], int]:
-    """Sloučí jen obsahově totožné opravy; konfliktní opravy zachová."""
-    unique: list[Mapping[str, Any]] = []
-    seen: set[tuple[Any, ...]] = set()
-    duplicates = 0
-    for fix in fixes:
-        identity = _fix_identity(fix)
-        if identity in seen:
-            duplicates += 1
-            continue
-        seen.add(identity)
-        unique.append(fix)
-    return unique, duplicates
-
-
-def _proposal_evidence_text(item: Mapping[str, Any]) -> str:
-    proposal = item.get("proposal")
-    if not isinstance(proposal, dict):
-        return ""
-    reasons = proposal.get("reasons") or []
-    if not isinstance(reasons, list):
-        reasons = [reasons]
-    return _normalize_structural_text("\n".join(str(value) for value in reasons))
-
-
-def _structural_fix_from_review_block(
-    item: Mapping[str, Any],
-) -> dict[str, Any]:
-    """Obnoví jednoznačnou strukturální opravu přímo z bloku A19.
-
-    A18 V8 ukládá samostatný syntetický kontrolní blok i tehdy, když
-    A19 při kopírování kontraktu nepřenese top-level applied_fixes.
-    Oprava se smí obnovit jen z explicitního Před/Po důkazu nebo z
-    kombinace původního Markdown nadpisu a navrženého source.heading.
-    """
-    block_id = str(item.get("block_id") or "").strip()
-    source = item.get("source")
-    proposal = item.get("proposal")
-    if not isinstance(source, dict) or not isinstance(proposal, dict):
-        raise RuntimeError(
-            f"Strukturální blok {block_id!r} nemá source/proposal."
-        )
-
-    line_number = int(source.get("start_line") or 0)
-    before = _normalize_structural_text(source.get("text"))
-    proposed_heading = _normalize_structural_text(source.get("heading"))
-
-    reasons = proposal.get("reasons") or []
-    if not isinstance(reasons, list):
-        reasons = [reasons]
-
-    evidence_before = ""
-    evidence_after = ""
-    for raw_reason in reasons:
-        reason = str(raw_reason).strip()
-        match_before = re.match(r"^\s*Před:\s*(.+?)\s*$", reason, re.IGNORECASE)
-        if match_before:
-            evidence_before = _normalize_structural_text(match_before.group(1))
-        match_after = re.match(r"^\s*Po:\s*(.+?)\s*$", reason, re.IGNORECASE)
-        if match_after:
-            evidence_after = _normalize_structural_text(match_after.group(1))
-
-    if evidence_before:
-        if before and before != evidence_before:
-            raise RuntimeError(
-                f"Strukturální blok {block_id!r}: zdrojový text se liší "
-                "od explicitního důkazu Před."
-            )
-        before = evidence_before
-
-    after = evidence_after
-    if not after and proposed_heading:
-        heading_match = re.match(r"^\s*(#{1,6})\s+.+$", before)
-        if heading_match:
-            after = f"{heading_match.group(1)} {proposed_heading}"
-
-    if not before or not after:
-        raise RuntimeError(
-            f"Strukturální blok {block_id!r} neobsahuje jednoznačné "
-            "hodnoty Před a Po."
-        )
-    if before == after:
-        raise RuntimeError(
-            f"Strukturální blok {block_id!r} neobsahuje skutečnou změnu."
-        )
-    if line_number <= 0:
-        raise RuntimeError(
-            f"Strukturální blok {block_id!r} nemá platný řádek změny."
-        )
-
-    category = str(proposal.get("category") or "").strip()
-    return {
-        "rule_id": (
-            "MAIN-INTRO"
-            if category == "introduction"
-            else "A18-STRUCTURAL-PATCH"
-        ),
-        "action": "REPLACE_EXACT_LINE",
-        "line_number": line_number,
-        "before": before,
-        "after": after,
-        "requires_review": True,
-        "reason": (
-            "Oprava byla bezpečně obnovena z potvrzeného syntetického "
-            f"kontrolního bloku A19 {block_id}."
-        ),
-        "recovered_from_review_block": block_id,
-    }
-
-
-def _supplement_missing_structural_fixes(
-    blocks: Sequence[Mapping[str, Any]],
-    fixes: Sequence[Mapping[str, Any]],
-) -> tuple[list[Mapping[str, Any]], int]:
-    """Doplní chybějící applied_fixes z explicitních syntetických bloků."""
-    supplemented = [dict(fix) for fix in fixes]
-    existing = {
-        (
-            int(fix.get("line_number") or 0),
-            _normalize_structural_text(fix.get("before")),
-            _normalize_structural_text(fix.get("after")),
-        )
-        for fix in supplemented
-    }
-    recovered = 0
-
-    for item in blocks:
-        if not isinstance(item, dict):
-            continue
-        if _block_method(item) != "synthetic_structural_fix_review":
-            continue
-
-        fix = _structural_fix_from_review_block(item)
-        identity = (
-            int(fix.get("line_number") or 0),
-            _normalize_structural_text(fix.get("before")),
-            _normalize_structural_text(fix.get("after")),
-        )
-        if identity in existing:
-            continue
-        supplemented.append(fix)
-        existing.add(identity)
-        recovered += 1
-
-    return supplemented, recovered
 
 
 def _match_structural_fix(
@@ -897,69 +739,33 @@ def _match_structural_fix(
         )
 
     start_line = int(source.get("start_line") or 0)
-    source_text = _normalize_structural_text(source.get("text"))
-    source_heading = _normalize_structural_text(source.get("heading"))
-    evidence = _proposal_evidence_text(item)
+    source_text = str(source.get("text") or "")
+    candidates: list[tuple[int, Mapping[str, Any]]] = []
 
-    scored: list[tuple[int, int, Mapping[str, Any]]] = []
     for index, fix in enumerate(fixes):
         if index in used_indexes:
             continue
-
         line_number = int(fix.get("line_number") or 0)
-        before = _normalize_structural_text(fix.get("before"))
-        after = _normalize_structural_text(fix.get("after"))
-        after_heading = re.sub(r"^\s*#{1,6}\s+", "", after).strip()
-        score = 0
+        before = str(fix.get("before") or "")
+        if line_number == start_line and before == source_text:
+            candidates.append((index, fix))
 
-        if start_line > 0 and line_number == start_line:
-            score += 100
-        if source_text and before and source_text == before:
-            score += 90
-        if source_heading and after_heading and source_heading == after_heading:
-            score += 50
-        if before and before in evidence:
-            score += 40
-        if after and after in evidence:
-            score += 40
+    if not candidates:
+        for index, fix in enumerate(fixes):
+            if index in used_indexes:
+                continue
+            before = str(fix.get("before") or "")
+            if before and before == source_text:
+                candidates.append((index, fix))
 
-        # Nově přidávané strukturální části nemají hodnotu before.
-        if not before and source_text == "(nová strukturální část)":
-            score += 30
+    if len(candidates) != 1:
+        raise RuntimeError(
+            f"Strukturální blok {item.get('block_id')!r} nelze "
+            "jednoznačně spojit s applied_fixes A18."
+        )
 
-        if score > 0:
-            scored.append((score, index, fix))
+    return candidates[0]
 
-    if scored:
-        scored.sort(key=lambda row: row[0], reverse=True)
-        best_score = scored[0][0]
-        best = [row for row in scored if row[0] == best_score]
-        if len(best) == 1:
-            _, index, fix = best[0]
-            return index, fix
-
-        # Totožné duplicity mají být odstraněny před voláním této funkce.
-        identities = {_fix_identity(row[2]) for row in best}
-        if len(identities) == 1:
-            _, index, fix = best[0]
-            return index, fix
-
-    remaining = [
-        (index, fix)
-        for index, fix in enumerate(fixes)
-        if index not in used_indexes
-    ]
-    if len(remaining) == 1:
-        # Bezpečnost zajišťuje následná aplikace opravy, která znovu ověří
-        # line_number/before přímo proti zdrojovému dokumentu.
-        return remaining[0]
-
-    raise RuntimeError(
-        f"Strukturální blok {item.get('block_id')!r} nelze "
-        "jednoznačně spojit s applied_fixes A18. "
-        f"Nepoužité opravy: {len(remaining)}; "
-        f"řádek bloku: {start_line}."
-    )
 
 def validate_structure_preserving_review(
     payload: Mapping[str, Any],
@@ -972,21 +778,11 @@ def validate_structure_preserving_review(
     if not isinstance(raw_fixes, list):
         raise RuntimeError("Revize A19 má neplatné applied_fixes.")
 
-    fixes_raw_validated: list[Mapping[str, Any]] = []
+    fixes: list[Mapping[str, Any]] = []
     for fix in raw_fixes:
         if not isinstance(fix, dict):
             raise RuntimeError("Neplatná položka applied_fixes.")
-        fixes_raw_validated.append(fix)
-
-    fixes_with_recovery, recovered_fixes_count = (
-        _supplement_missing_structural_fixes(
-            blocks,
-            fixes_raw_validated,
-        )
-    )
-    fixes, duplicate_fixes_collapsed = _deduplicate_structural_fixes(
-        fixes_with_recovery
-    )
+        fixes.append(fix)
 
     raw_unresolved = payload.get("unresolved_findings") or []
     if not isinstance(raw_unresolved, list):
@@ -1108,8 +904,6 @@ def validate_structure_preserving_review(
         "synthetic_review_blocks": synthetic_blocks,
         "accepted_fixes": accepted_fixes,
         "accepted_fixes_count": len(accepted_fixes),
-        "duplicate_fixes_collapsed": duplicate_fixes_collapsed,
-        "recovered_fixes_count": recovered_fixes_count,
         "skipped_fixes": skipped_fixes,
         "skipped_fixes_count": len(skipped_fixes),
         "unresolved_findings_count": unresolved_count,

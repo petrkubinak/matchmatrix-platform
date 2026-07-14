@@ -58,23 +58,6 @@ BEZPEČNOST:
 PODPOROVANÉ TYPY:
 - DAILY_LOG
 - CHAT_CONTINUATION
-- PROJECT_SNAPSHOT
-- MAIN_DOCUMENT
-- REFERENCE_DOCUMENT
-- GENERIC_DOCUMENT
-
-V8 – SAMOSTATNÉ KONTROLNÍ BLOKY STRUKTURÁLNÍCH OPRAV:
-- změna samotného nadpisu dostává vlastní syntetický kontrolní blok,
-- strukturální oprava se nikdy nepřipojí k nesouvisejícím metadatům nebo sousední kapitole,
-- nevyřešený nález dostává vlastní ruční kontrolní blok,
-- zdrojové mapování a metriky pokrytí zůstávají oddělené od kontrolních bloků oprav.
-
-V7 – UNIVERZÁLNÍ STRUKTURNĚ ŠETRNÁ STANDARDIZACE:
-- zachovává existující logickou strukturu hlavních, referenčních a obecných dokumentů,
-- používá cílené opravy pouze pro nálezy, které lze bezpečně odvodit z dokumentu,
-- neznámé nebo obsahově neodvoditelné opravy ponechává k ručnímu rozhodnutí,
-- do kontraktu zapisuje režim návrhu, seznam aplikovaných oprav a nevyřešených nálezů,
-- připravuje univerzální panelový kontrakt pro A19 a navazující builder A20.
 
 V6 – DŮKAZNĚ ŘÍZENÉ SÉMANTICKÉ SMĚROVÁNÍ:
 - rozpoznává význam běžně pojmenovaných kapitol, nejen přesné šablonové názvy,
@@ -120,14 +103,8 @@ AUDIT_DEFAULT = Path(
     "reports/documentation/standardization/document_compliance_audit_latest.json"
 )
 OUTPUT_DEFAULT = Path("reports/documentation/standardization/proposals")
-GENERIC_TYPES = {
-    "PROJECT_SNAPSHOT",
-    "MAIN_DOCUMENT",
-    "REFERENCE_DOCUMENT",
-    "GENERIC_DOCUMENT",
-}
-SUPPORTED_TYPES = {"DAILY_LOG", "CHAT_CONTINUATION", *GENERIC_TYPES}
-ENGINE_VERSION = "A18_CONTEXTUAL_MAPPING_V8_STRUCTURAL_FIX_REVIEW_BLOCKS"
+SUPPORTED_TYPES = {"DAILY_LOG", "CHAT_CONTINUATION"}
+ENGINE_VERSION = "A18_CONTEXTUAL_MAPPING_V6_EVIDENCE_AWARE_HEADING_ROUTING"
 PANEL_CONTRACT_VERSION = "1.0"
 
 DOCUMENT_ID_RE = re.compile(
@@ -508,188 +485,6 @@ CATEGORY_CATALOG: dict[str, list[dict[str, Any]]] = {
 }
 
 
-_GENERIC_CATEGORY_TEMPLATE: list[dict[str, Any]] = [
-    {
-        "code": "metadata",
-        "order": 1,
-        "label_cs": "Informace o dokumentu",
-        "heading_aliases": (
-            "informace o dokumentu", "metadata", "identifikace dokumentu",
-        ),
-        "keywords": (
-            "document id", "dokument", "nazev dokumentu", "verze", "stav",
-            "datum", "autor", "edice", "cilove umisteni",
-        ),
-    },
-    {
-        "code": "context",
-        "order": 2,
-        "label_cs": "Výchozí kontext",
-        "heading_aliases": (
-            "vychozi kontext", "kontext", "pozadi dokumentu",
-        ),
-        "keywords": (
-            "vychozi kontext", "kontext", "predchozi stav", "pozadi",
-        ),
-    },
-    {
-        "code": "introduction",
-        "order": 3,
-        "label_cs": "Úvod",
-        "heading_aliases": (
-            "uvod", "uvod a ucel", "ucel dokumentu", "ucel a rozsah",
-            "poslani dokumentu", "vychozi kontext",
-        ),
-        "keywords": (
-            "ucel dokumentu", "tento dokument", "rozsah platnosti",
-            "poslani", "vymezuje", "stanovuje",
-        ),
-    },
-    {
-        "code": "body",
-        "order": 4,
-        "label_cs": "Hlavní odborný obsah",
-        "heading_aliases": (
-            "hlavni obsah", "odborna cast", "architektura", "pravidla",
-            "proces", "katalog", "model", "implementace",
-        ),
-        "keywords": (
-            "architektura", "pravidlo", "proces", "model", "katalog",
-            "implementace", "vrstva", "objekt", "system",
-        ),
-    },
-    {
-        "code": "current_status",
-        "order": 5,
-        "label_cs": "Současný stav",
-        "heading_aliases": (
-            "soucasny stav", "aktualni stav", "current status",
-            "stav dokumentacniho systemu", "stav projektu",
-        ),
-        "keywords": (
-            "soucasny stav", "aktualni stav", "implementovano", "chybi",
-            "verified", "active", "planned",
-        ),
-    },
-    {
-        "code": "completed",
-        "order": 6,
-        "label_cs": "Dokončené práce",
-        "heading_aliases": (
-            "co bylo dokonceno", "dokonceno", "provedene prace",
-        ),
-        "keywords": (
-            "dokonceno", "provedeno", "vytvoreno", "overeno",
-        ),
-    },
-    {
-        "code": "in_progress",
-        "order": 7,
-        "label_cs": "Rozpracované oblasti",
-        "heading_aliases": (
-            "rozpracovano", "plan", "dalsi rozvoj", "roadmapa",
-        ),
-        "keywords": (
-            "rozpracovano", "planovano", "dalsi rozvoj", "bude vytvoreno",
-        ),
-    },
-    {
-        "code": "decisions",
-        "order": 8,
-        "label_cs": "Rozhodnutí a pravidla",
-        "heading_aliases": (
-            "rozhodnuti", "pravidla", "zasady", "povinna pravidla",
-        ),
-        "keywords": (
-            "rozhodnuti", "pravidlo", "musi", "nesmi", "plati",
-        ),
-    },
-    {
-        "code": "risks",
-        "order": 9,
-        "label_cs": "Rizika a upozornění",
-        "heading_aliases": (
-            "rizika", "rizika a upozorneni", "blokatory", "omezeni",
-        ),
-        "keywords": (
-            "riziko", "upozorneni", "blokator", "omezeni", "kriticke",
-        ),
-    },
-    {
-        "code": "open_tasks",
-        "order": 10,
-        "label_cs": "Otevřené otázky a úkoly",
-        "heading_aliases": (
-            "otevrene otazky", "open questions", "otevrene ukoly",
-        ),
-        "keywords": (
-            "otevrena otazka", "k vyreseni", "chybi rozhodnout",
-        ),
-    },
-    {
-        "code": "sources",
-        "order": 11,
-        "label_cs": "Zdroje a dohledatelnost",
-        "heading_aliases": (
-            "overene zdroje", "zdroje", "odkazy", "dohledatelnost",
-        ),
-        "keywords": (
-            "zdroj", "git commit", "soubor", "report", "odkaz", "sha-256",
-        ),
-    },
-    {
-        "code": "relations",
-        "order": 12,
-        "label_cs": "Související dokumenty",
-        "heading_aliases": (
-            "souvisejici dokumenty", "navaznosti", "vazby dokumentu",
-        ),
-        "keywords": (
-            "souvisejici dokument", "navazuje na", "nadrazeny dokument",
-        ),
-    },
-    {
-        "code": "conclusion",
-        "order": 13,
-        "label_cs": "Závěr",
-        "heading_aliases": (
-            "zaver", "celkovy zaver", "shrnuti a zaver",
-        ),
-        "keywords": (
-            "zaver", "shrnuti", "prinos", "navaznost",
-        ),
-    },
-    {
-        "code": "next_step",
-        "order": 14,
-        "label_cs": "Další krok",
-        "heading_aliases": (
-            "dalsi krok", "next step", "bezprostredni dalsi krok",
-        ),
-        "keywords": (
-            "dalsi krok", "nasleduje", "bude vytvoren",
-        ),
-    },
-    {
-        "code": "version_history",
-        "order": 15,
-        "label_cs": "Historie verzí",
-        "heading_aliases": (
-            "historie verzi", "version history", "zmenovy zaznam",
-        ),
-        "keywords": (
-            "verze", "datum", "stav", "popis",
-        ),
-    },
-]
-
-for _generic_document_type in GENERIC_TYPES:
-    CATEGORY_CATALOG[_generic_document_type] = [
-        dict(item)
-        for item in _GENERIC_CATEGORY_TEMPLATE
-    ]
-
-
 HEADING_SEMANTIC_RULES: dict[str, tuple[tuple[str, tuple[str, ...]], ...]] = {
     "DAILY_LOG": (
         ("identification", (
@@ -818,58 +613,6 @@ HEADING_SEMANTIC_RULES: dict[str, tuple[tuple[str, tuple[str, ...]], ...]] = {
         )),
     ),
 }
-
-
-_GENERIC_HEADING_RULES: tuple[tuple[str, tuple[str, ...]], ...] = (
-    ("metadata", (
-        "informace o dokumentu", "metadata", "identifikace dokumentu",
-    )),
-    ("context", (
-        "vychozi kontext", "kontext", "pozadi dokumentu",
-    )),
-    ("introduction", (
-        "uvod", "uvod a ucel", "ucel dokumentu", "ucel a rozsah",
-        "poslani dokumentu", "vychozi kontext",
-    )),
-    ("current_status", (
-        "soucasny stav", "aktualni stav", "current status",
-        "stav dokumentacniho systemu", "stav projektu",
-    )),
-    ("completed", (
-        "co bylo dokonceno", "dokonceno", "provedene prace",
-    )),
-    ("in_progress", (
-        "rozpracovano", "plan databazove dokumentace", "plan dokumentace",
-        "dalsi rozvoj", "roadmapa",
-    )),
-    ("decisions", (
-        "rozhodnuti", "pravidla", "zasady", "povinna pravidla",
-    )),
-    ("risks", (
-        "rizika", "rizika a upozorneni", "blokatory", "omezeni",
-    )),
-    ("open_tasks", (
-        "otevrene otazky", "open questions", "otevrene ukoly",
-    )),
-    ("sources", (
-        "overene zdroje", "zdroje", "odkazy", "dohledatelnost",
-    )),
-    ("relations", (
-        "souvisejici dokumenty", "navaznosti", "vazby dokumentu",
-    )),
-    ("conclusion", (
-        "zaver", "celkovy zaver", "shrnuti a zaver",
-    )),
-    ("next_step", (
-        "dalsi krok", "next step", "bezprostredni dalsi krok",
-    )),
-    ("version_history", (
-        "historie verzi", "version history", "zmenovy zaznam",
-    )),
-)
-
-for _generic_document_type in GENERIC_TYPES:
-    HEADING_SEMANTIC_RULES[_generic_document_type] = _GENERIC_HEADING_RULES
 
 
 ACTION_VERBS = (
@@ -1966,19 +1709,9 @@ def mapping_metrics(
         int(chunk.get("source_character_count") or len(str(chunk.get("text") or "")))
         for chunk in source_chunks
     )
-    source_mapped_chunks = [
-        chunk
-        for chunk in mapped_chunks
-        if not bool(chunk.get("synthetic_structural_review"))
-    ]
-    structural_review_chunks = [
-        chunk
-        for chunk in mapped_chunks
-        if bool(chunk.get("synthetic_structural_review"))
-    ]
     mapped_characters = sum(
         int(chunk.get("source_character_count") or len(str(chunk.get("text") or "")))
-        for chunk in source_mapped_chunks
+        for chunk in mapped_chunks
     )
 
     coverage = (
@@ -1988,7 +1721,7 @@ def mapping_metrics(
     )
     confidence_counts = Counter(
         str(chunk["classification_confidence"])
-        for chunk in source_mapped_chunks
+        for chunk in mapped_chunks
     )
     manual_percent = (
         round(len(manual_queue) * 100.0 / len(mapped_chunks), 2)
@@ -2007,12 +1740,8 @@ def mapping_metrics(
 
     return {
         "source_chunks_count": len(source_chunks),
-        "mapped_chunks_count": len(source_mapped_chunks),
-        "structural_review_chunks_count": len(structural_review_chunks),
-        "unmapped_chunks_count": max(
-            0,
-            len(source_chunks) - len(source_mapped_chunks),
-        ),
+        "mapped_chunks_count": len(mapped_chunks),
+        "unmapped_chunks_count": max(0, len(source_chunks) - len(mapped_chunks)),
         "source_characters": total_characters,
         "mapped_characters": mapped_characters,
         "character_mapping_coverage_percent": coverage,
@@ -2243,430 +1972,6 @@ def build_continuation(
 - [ ] Byl zkontrolován finální diff.
 - [ ] Bylo rozhodnuto o vytvoření nové kanonické verze.
 """
-
-
-def actionable_findings(audit: Mapping[str, Any]) -> list[dict[str, Any]]:
-    return [
-        dict(item)
-        for item in list(audit.get("findings") or [])
-        if isinstance(item, Mapping)
-        and str(item.get("result") or "").strip().upper()
-        in {"FAIL", "PARTIAL"}
-    ]
-
-
-def _metadata_section_end(lines: Sequence[str]) -> int | None:
-    start: int | None = None
-    for index, line in enumerate(lines):
-        match = MARKDOWN_HEADING_WITH_LEVEL_RE.match(line.strip())
-        if match and normalize_heading(match.group(2)) == "informace o dokumentu":
-            start = index
-            continue
-        if start is not None and index > start:
-            match = MARKDOWN_HEADING_WITH_LEVEL_RE.match(line.strip())
-            if match and len(match.group(1)) <= 2:
-                return index
-    return None
-
-
-def _first_main_h2_index(lines: Sequence[str]) -> int | None:
-    metadata_end = _metadata_section_end(lines)
-    start = metadata_end if metadata_end is not None else 0
-    for index in range(start, len(lines)):
-        match = re.match(r"^##\s+(.+?)\s*$", lines[index])
-        if not match:
-            continue
-        if normalize_heading(match.group(1)) == "informace o dokumentu":
-            continue
-        return index
-    return None
-
-
-def _add_intro_to_heading(heading: str) -> str:
-    prefix_match = re.match(
-        r"^(\s*\d{1,3}(?:\.\d{1,3})*[.)]?\s+)(.+)$",
-        heading,
-    )
-    if prefix_match:
-        prefix, body = prefix_match.groups()
-        return f"{prefix}Úvod – {body.strip()}"
-    return f"Úvod – {heading.strip()}"
-
-
-def _apply_main_intro_fix(text: str) -> tuple[str, dict[str, Any] | None]:
-    lines = text.splitlines()
-    index = _first_main_h2_index(lines)
-    if index is None:
-        return text, None
-
-    match = re.match(r"^(##\s+)(.+?)\s*$", lines[index])
-    if not match:
-        return text, None
-
-    old_heading = match.group(2)
-    if "uvod" in normalize_heading(old_heading).split():
-        return text, {
-            "rule_id": "MAIN-INTRO",
-            "action": "ALREADY_PRESENT",
-            "line_number": index + 1,
-            "before": lines[index],
-            "after": lines[index],
-            "requires_review": False,
-        }
-
-    new_heading = _add_intro_to_heading(old_heading)
-    before = lines[index]
-    after = f"{match.group(1)}{new_heading}"
-    lines[index] = after
-    return "\n".join(lines) + ("\n" if text.endswith("\n") else ""), {
-        "rule_id": "MAIN-INTRO",
-        "action": "RENAME_FIRST_MAIN_HEADING",
-        "line_number": index + 1,
-        "before": before,
-        "after": after,
-        "requires_review": True,
-        "reason": (
-            "První odborná kapitola byla významově zachována a její nadpis "
-            "byl doplněn o explicitní výraz Úvod."
-        ),
-    }
-
-
-def _append_version_history_from_metadata(
-    text: str,
-    metadata: Mapping[str, str],
-) -> tuple[str, dict[str, Any] | None]:
-    version = metadata_value(metadata, "Verze", "Version")
-    date_value = metadata_value(metadata, "Datum", "Date")
-    status = metadata_value(metadata, "Stav", "Status")
-    if not version or not date_value or not status:
-        return text, None
-
-    addition = (
-        "\n\n## Historie verzí\n\n"
-        "| Verze | Datum | Stav | Popis |\n"
-        "|---|---:|---|---|\n"
-        f"| {version} | {date_value} | {status} | "
-        "Výchozí řízená verze převzatá z metadat dokumentu. |\n"
-    )
-    stripped = text.rstrip()
-    end_marker = re.search(
-        r"(?m)^\*Konec dokumentu[^\n]*\*\s*$",
-        stripped,
-    )
-    if end_marker:
-        proposal = (
-            stripped[:end_marker.start()].rstrip()
-            + addition
-            + "\n"
-            + stripped[end_marker.start():].lstrip()
-            + "\n"
-        )
-    else:
-        proposal = stripped + addition
-    return proposal, {
-        "rule_id": "MAIN-VERSION-HISTORY",
-        "action": "APPEND_VERSION_HISTORY_FROM_METADATA",
-        "before": None,
-        "after": addition.strip(),
-        "requires_review": True,
-        "reason": (
-            "Řádek historie byl vytvořen pouze z existujících metadat "
-            "Verze, Datum a Stav."
-        ),
-    }
-
-
-def build_structure_preserving_proposal(
-    *,
-    original_text: str,
-    audit: Mapping[str, Any],
-    document_type: str,
-    source_metadata: Mapping[str, str],
-) -> tuple[str, list[dict[str, Any]], list[dict[str, Any]]]:
-    proposal = original_text
-    applied: list[dict[str, Any]] = []
-    unresolved: list[dict[str, Any]] = []
-
-    for finding in actionable_findings(audit):
-        rule_id = str(finding.get("rule_id") or "").strip().upper()
-
-        if rule_id == "MAIN-INTRO" and document_type == "MAIN_DOCUMENT":
-            proposal, fix = _apply_main_intro_fix(proposal)
-            if fix:
-                applied.append(fix)
-            else:
-                unresolved.append(finding)
-            continue
-
-        if (
-            rule_id == "MAIN-VERSION-HISTORY"
-            and document_type == "MAIN_DOCUMENT"
-        ):
-            proposal, fix = _append_version_history_from_metadata(
-                proposal,
-                source_metadata,
-            )
-            if fix:
-                applied.append(fix)
-            else:
-                unresolved.append(finding)
-            continue
-
-        # Obsahově závislé opravy se nesmí vymýšlet.
-        unresolved.append(finding)
-
-    return proposal.rstrip() + "\n", applied, unresolved
-
-
-def _next_review_block_identity(
-    mapped_chunks: Sequence[Mapping[str, Any]],
-) -> tuple[str, int]:
-    indexes = [
-        int(item.get("index") or 0)
-        for item in mapped_chunks
-        if str(item.get("index") or "").isdigit()
-        or isinstance(item.get("index"), int)
-    ]
-    next_index = max(indexes, default=0) + 1
-    return f"BLK-{next_index:04d}", next_index
-
-
-def _structural_fix_category(
-    fix: Mapping[str, Any],
-    document_type: str,
-) -> str:
-    rule_id = str(fix.get("rule_id") or "").strip().upper()
-    preferred = {
-        "MAIN-INTRO": "introduction",
-        "MAIN-VERSION-HISTORY": "version_history",
-    }.get(rule_id, "body")
-    available = {
-        str(item["code"])
-        for item in category_items(document_type)
-    }
-    return preferred if preferred in available else next(iter(available), "body")
-
-
-def _make_structural_fix_review_chunk(
-    fix: Mapping[str, Any],
-    mapped_chunks: Sequence[Mapping[str, Any]],
-    document_type: str,
-) -> dict[str, Any]:
-    block_id, index = _next_review_block_identity(mapped_chunks)
-    category = _structural_fix_category(fix, document_type)
-    catalog = category_by_code(document_type)
-    category_label = str(catalog.get(category, {}).get("label_cs") or category)
-    line_number = int(fix.get("line_number") or 0)
-    before = str(fix.get("before") or "(nová strukturální část)")
-    after = str(fix.get("after") or "")
-    clean_heading = re.sub(r"^\s*#{1,6}\s+", "", after or before).strip()
-
-    alternatives: list[dict[str, Any]] = [
-        {
-            "category": category,
-            "label_cs": category_label,
-            "category_label_cs": category_label,
-            "score": 100.0,
-            "reasons": [
-                str(
-                    fix.get("reason")
-                    or "Cílená strukturální oprava vytvořená z nálezu A17."
-                )
-            ],
-        }
-    ]
-    for fallback in ("body", "metadata", "context"):
-        if fallback == category or fallback not in catalog:
-            continue
-        fallback_label = str(catalog[fallback]["label_cs"])
-        alternatives.append(
-            {
-                "category": fallback,
-                "label_cs": fallback_label,
-                "category_label_cs": fallback_label,
-                "score": 0.0,
-                "reasons": [],
-            }
-        )
-        if len(alternatives) >= 4:
-            break
-
-    return {
-        "block_id": block_id,
-        "index": index,
-        "heading": clean_heading or None,
-        "section_category_hint": category,
-        "heading_detection_method": "synthetic_structural_fix",
-        "heading_line": line_number or None,
-        "heading_level": 2,
-        "text": before,
-        "start_line": line_number,
-        "end_line": line_number,
-        # Tento blok nereprezentuje další zdrojový obsah; nesmí zvýšit coverage.
-        "source_character_count": 0,
-        "is_list_item": False,
-        "contains_code_fence": False,
-        "synthetic_structural_review": True,
-        "structural_fix": dict(fix),
-        "proposed_category": category,
-        "proposed_category_label_cs": category_label,
-        "classification_score": 100.0,
-        "classification_margin": 100.0,
-        "classification_confidence": "HIGH",
-        "classification_method": "synthetic_structural_fix_review",
-        "classification_reasons": [
-            str(
-                fix.get("reason")
-                or "Potvrdit cílenou strukturální opravu."
-            ),
-            f"Před: {fix.get('before')}",
-            f"Po: {fix.get('after')}",
-        ],
-        "category_alternatives": alternatives,
-        "needs_manual_review": True,
-        "review_priority": "MEDIUM",
-        "recommended_panel_action": "CONFIRM_OR_MOVE",
-    }
-
-
-def _make_unresolved_finding_review_chunk(
-    finding: Mapping[str, Any],
-    mapped_chunks: Sequence[Mapping[str, Any]],
-    document_type: str,
-) -> dict[str, Any]:
-    block_id, index = _next_review_block_identity(mapped_chunks)
-    catalog = category_by_code(document_type)
-    category = "body" if "body" in catalog else next(iter(catalog))
-    label = str(catalog[category]["label_cs"])
-    rule_id = str(finding.get("rule_id") or "UNRESOLVED")
-    recommendation = str(
-        finding.get("recommendation")
-        or finding.get("description")
-        or "Ruční oprava"
-    )
-    return {
-        "block_id": block_id,
-        "index": index,
-        "heading": f"Nevyřešený nález {rule_id}",
-        "section_category_hint": category,
-        "heading_detection_method": "synthetic_unresolved_finding",
-        "heading_line": None,
-        "heading_level": None,
-        "text": recommendation,
-        "start_line": 0,
-        "end_line": 0,
-        "source_character_count": 0,
-        "is_list_item": False,
-        "contains_code_fence": False,
-        "synthetic_structural_review": True,
-        "unresolved_finding": dict(finding),
-        "proposed_category": category,
-        "proposed_category_label_cs": label,
-        "classification_score": 0.0,
-        "classification_margin": 0.0,
-        "classification_confidence": "LOW",
-        "classification_method": "synthetic_unresolved_finding_review",
-        "classification_reasons": [
-            f"{rule_id}: {recommendation}"
-        ],
-        "category_alternatives": [
-            {
-                "category": category,
-                "label_cs": label,
-                "category_label_cs": label,
-                "score": 0.0,
-                "reasons": [recommendation],
-            }
-        ],
-        "needs_manual_review": True,
-        "review_priority": "HIGH",
-        "recommended_panel_action": "RETURN_TO_MANUAL_REVIEW",
-    }
-
-
-def prepare_generic_mapping_for_review(
-    mapped_chunks: list[dict[str, Any]],
-    applied_fixes: Sequence[Mapping[str, Any]],
-    unresolved_findings: Sequence[Mapping[str, Any]],
-    document_type: str,
-) -> list[dict[str, Any]]:
-    for chunk in mapped_chunks:
-        chunk["classification_score"] = 100.0
-        chunk["classification_margin"] = 100.0
-        chunk["classification_confidence"] = "HIGH"
-        chunk["classification_method"] = "structure_preserving_source_section"
-        chunk["classification_reasons"] = [
-            "Zdrojová sekce je zachována beze změny obsahu."
-        ]
-        chunk["needs_manual_review"] = False
-        chunk["review_priority"] = "LOW"
-        chunk["recommended_panel_action"] = "AUTO_ACCEPTABLE"
-
-    review_targets: list[dict[str, Any]] = []
-
-    for fix in applied_fixes:
-        line_number = int(fix.get("line_number") or 0)
-
-        # Strukturální oprava se smí připojit pouze k bloku, jehož vlastní
-        # nadpis začíná přesně na upravovaném řádku. Rozsah sousedního textu
-        # ani první blok dokumentu nejsou bezpečné náhradní cíle.
-        target = next(
-            (
-                chunk
-                for chunk in mapped_chunks
-                if line_number > 0
-                and int(chunk.get("heading_line") or 0) == line_number
-            ),
-            None,
-        )
-
-        if target is None:
-            target = _make_structural_fix_review_chunk(
-                fix,
-                mapped_chunks,
-                document_type,
-            )
-            mapped_chunks.append(target)
-        else:
-            target["needs_manual_review"] = True
-            target["review_priority"] = "MEDIUM"
-            target["recommended_panel_action"] = "CONFIRM_OR_MOVE"
-            target["classification_reasons"] = [
-                str(fix.get("reason") or "Potvrdit cílenou strukturální opravu."),
-                f"Před: {fix.get('before')}",
-                f"Po: {fix.get('after')}",
-            ]
-            target["structural_fix"] = dict(fix)
-
-        if target not in review_targets:
-            review_targets.append(target)
-
-    for finding in unresolved_findings:
-        target = _make_unresolved_finding_review_chunk(
-            finding,
-            mapped_chunks,
-            document_type,
-        )
-        mapped_chunks.append(target)
-        review_targets.append(target)
-
-    return review_targets
-
-
-def build_generic(
-    *,
-    original_text: str,
-    audit: Mapping[str, Any],
-    document_type: str,
-    source_metadata: Mapping[str, str],
-) -> tuple[str, list[dict[str, Any]], list[dict[str, Any]]]:
-    return build_structure_preserving_proposal(
-        original_text=original_text,
-        audit=audit,
-        document_type=document_type,
-        source_metadata=source_metadata,
-    )
 
 
 def category_catalog_payload(document_type: str) -> list[dict[str, Any]]:
@@ -2950,10 +2255,6 @@ def write_outputs(
 
     paths["proposal"].write_text(proposal, encoding="utf-8")
     paths["diff"].write_text(diff, encoding="utf-8")
-    proposal_hash = sha256_bytes(proposal.encode("utf-8"))
-
-    mapping["proposal_hash_sha256"] = proposal_hash
-    panel_payload["proposal_hash_sha256"] = proposal_hash
 
     mapping.update(
         {
@@ -3141,12 +2442,8 @@ def main() -> int:
             title = source_title
         elif document_type == "DAILY_LOG":
             title = f"MATCHMATRIX – DENNÍ ZÁPIS – {date_value}"
-        elif document_type == "CHAT_CONTINUATION":
-            title = f"MATCHMATRIX – NAVÁZÁNÍ – {date_value}"
-        elif document_type == "PROJECT_SNAPSHOT":
-            title = f"MATCHMATRIX – PROJECT SNAPSHOT – {date_value}"
         else:
-            title = f"MATCHMATRIX – ŘÍZENÝ DOKUMENT – {date_value}"
+            title = f"MATCHMATRIX – NAVÁZÁNÍ – {date_value}"
 
         metadata = metadata_table(
             document_id=document_id,
@@ -3161,36 +2458,11 @@ def main() -> int:
             document_type=document_type,
         )
 
-        applied_fixes: list[dict[str, Any]] = []
-        unresolved_findings: list[dict[str, Any]] = []
-        proposal_mode = "TEMPLATE_REBUILD"
-
-        if document_type in GENERIC_TYPES:
-            proposal_mode = "STRUCTURE_PRESERVING_PATCH"
-            proposal, applied_fixes, unresolved_findings = build_generic(
-                original_text=original_text,
-                audit=audit,
-                document_type=document_type,
-                source_metadata=source_metadata,
-            )
-            manual_queue = prepare_generic_mapping_for_review(
-                mapped_chunks,
-                applied_fixes,
-                unresolved_findings,
-                document_type,
-            )
-        elif document_type == "DAILY_LOG":
-            proposal = build_daily(
-                metadata=metadata,
-                title=title,
-                mapped=mapped,
-            ).rstrip() + "\n"
-        else:
-            proposal = build_continuation(
-                metadata=metadata,
-                title=title,
-                mapped=mapped,
-            ).rstrip() + "\n"
+        proposal = (
+            build_daily(metadata=metadata, title=title, mapped=mapped)
+            if document_type == "DAILY_LOG"
+            else build_continuation(metadata=metadata, title=title, mapped=mapped)
+        ).rstrip() + "\n"
 
         placeholder_count = count_placeholders(proposal)
         metrics = mapping_metrics(
@@ -3213,9 +2485,6 @@ def main() -> int:
             "generated_at": utc_now().isoformat(),
             "project_root": str(root),
             "classification_engine_version": ENGINE_VERSION,
-            "proposal_mode": proposal_mode,
-            "applied_fixes": applied_fixes,
-            "unresolved_findings": unresolved_findings,
             "audit_path": str(audit_path),
             "source_document_path": str(source_path),
             "source_hash_sha256": current_hash,
@@ -3245,9 +2514,6 @@ def main() -> int:
             "contract_version": PANEL_CONTRACT_VERSION,
             "generated_at": utc_now().isoformat(),
             "classification_engine_version": ENGINE_VERSION,
-            "proposal_mode": proposal_mode,
-            "applied_fixes": applied_fixes,
-            "unresolved_findings": unresolved_findings,
             "source_document_path": str(source_path),
             "source_hash_sha256": current_hash,
             "document_type": document_type,
@@ -3304,9 +2570,6 @@ def main() -> int:
         print("-" * 79)
         print(f"DOCUMENT           : {source_path}")
         print(f"DOCUMENT TYPE      : {document_type}")
-        print(f"PROPOSAL MODE      : {proposal_mode}")
-        print(f"APPLIED FIXES      : {len(applied_fixes)}")
-        print(f"UNRESOLVED FINDINGS: {len(unresolved_findings)}")
         print("SHA-256 VERIFIED  : True")
         print(f"A17 SCORE          : {audit.get('compliance_score_percent')} %")
         print(f"A17 STATUS         : {audit.get('compliance_status')}")
