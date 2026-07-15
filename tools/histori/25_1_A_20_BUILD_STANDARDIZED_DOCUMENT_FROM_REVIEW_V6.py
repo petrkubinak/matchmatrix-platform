@@ -73,14 +73,6 @@ V5 – ODOLNÉ PÁROVÁNÍ STRUKTURÁLNÍCH OPRAV:
 - při nejednoznačném konfliktu build nadále bezpečně zablokuje,
 - samotná aplikace opravy znovu ověří původní zdrojový text a SHA-256.
 
-V7 – OBNOVA NEVYŘEŠENÝCH NÁLEZŮ Z BLOKŮ A19:
-- respektuje rozhodnutí EXCLUDED / EXCLUDE_AS_NOISE u syntetických nálezů,
-- nepovažuje chybějící top-level unresolved_findings v A19 za neuzavřený nález,
-- počet a stav nevyřešených nálezů odvozuje z finálních syntetických bloků A19,
-- volitelný top-level seznam používá pouze ke kontrolnímu porovnání identit,
-- při skutečně chybějícím nebo nepotvrzeném rozhodnutí build nadále blokuje,
-- zdrojový dokument ani databázi nemění.
-
 VÝSTUP:
 reports/documentation/standardization/final_candidates/
 - document_standardized_candidate_YYYYMMDD_HHMMSS.md
@@ -130,7 +122,7 @@ SUPPORTED_DOCUMENT_TYPES = {
 }
 EXPECTED_REVIEW_STATUS = "MAPPING_CONFIRMED"
 EXPECTED_FINAL_STATUS = "DOCUMENT_STANDARDIZATION_PANEL_REVIEW_CONFIRMED"
-ENGINE_VERSION = "A20_STANDARDIZED_DOCUMENT_BUILDER_V7_UNRESOLVED_REVIEW_RECOVERY"
+ENGINE_VERSION = "A20_STANDARDIZED_DOCUMENT_BUILDER_V6_SYNTHETIC_FIX_RECOVERY"
 OUTPUT_CONTRACT_VERSION = "1.0"
 
 DOCUMENT_ID_RE = re.compile(r"\bMM-[A-Z]{2,10}-\d{3,8}(?:-\d{1,4})?[A-Z]?\b")
@@ -733,73 +725,6 @@ def _normalize_structural_text(value: Any) -> str:
     return "\n".join(line.rstrip() for line in text.split("\n")).strip()
 
 
-
-def _unresolved_raw_identity(
-    finding: Mapping[str, Any],
-) -> tuple[str, str]:
-    """Vrátí stabilní identitu nevyřešeného nálezu z kontraktu A18."""
-    rule_id = str(
-        finding.get("rule_id")
-        or finding.get("code")
-        or "UNRESOLVED"
-    ).strip().upper()
-    recommendation = str(
-        finding.get("recommendation")
-        or finding.get("description")
-        or finding.get("message")
-        or "Ruční oprava"
-    )
-    return rule_id, _normalize_structural_text(recommendation)
-
-
-def _unresolved_review_identity(
-    item: Mapping[str, Any],
-) -> tuple[str, str]:
-    """Obnoví identitu nevyřešeného nálezu z finálního bloku A19."""
-    block_id = str(item.get("block_id") or "").strip()
-    source = item.get("source")
-    proposal = item.get("proposal")
-    if not isinstance(source, dict) or not isinstance(proposal, dict):
-        raise RuntimeError(
-            f"Syntetický blok {block_id!r} nemá source/proposal."
-        )
-
-    heading = _normalize_structural_text(source.get("heading"))
-    recommendation = _normalize_structural_text(source.get("text"))
-    match = re.match(
-        r"^\s*Nevyřešený\s+nález\s+(.+?)\s*$",
-        heading,
-        re.IGNORECASE,
-    )
-    rule_id = match.group(1).strip().upper() if match else ""
-
-    if not rule_id:
-        reasons = proposal.get("reasons") or []
-        if not isinstance(reasons, list):
-            reasons = [reasons]
-        for raw_reason in reasons:
-            reason = _normalize_structural_text(raw_reason)
-            reason_match = re.match(r"^([^:]+):\s*(.+)$", reason)
-            if reason_match:
-                rule_id = reason_match.group(1).strip().upper()
-                if not recommendation:
-                    recommendation = _normalize_structural_text(
-                        reason_match.group(2)
-                    )
-                break
-
-    if not rule_id:
-        raise RuntimeError(
-            f"Syntetický blok {block_id!r} neobsahuje identitu nálezu."
-        )
-    if not recommendation:
-        raise RuntimeError(
-            f"Syntetický blok {block_id!r} neobsahuje text nálezu."
-        )
-
-    return rule_id, recommendation
-
-
 def _fix_identity(fix: Mapping[str, Any]) -> tuple[Any, ...]:
     return (
         str(fix.get("rule_id") or "").strip().upper(),
@@ -1063,20 +988,8 @@ def validate_structure_preserving_review(
         fixes_with_recovery
     )
 
-    raw_unresolved_value = payload.get("unresolved_findings")
-    if raw_unresolved_value is None:
-        raw_unresolved: list[Mapping[str, Any]] = []
-        raw_unresolved_present = False
-    elif isinstance(raw_unresolved_value, list):
-        raw_unresolved = []
-        for finding in raw_unresolved_value:
-            if not isinstance(finding, dict):
-                raise RuntimeError(
-                    "Revize A19 má neplatnou položku unresolved_findings."
-                )
-            raw_unresolved.append(finding)
-        raw_unresolved_present = True
-    else:
+    raw_unresolved = payload.get("unresolved_findings") or []
+    if not isinstance(raw_unresolved, list):
         raise RuntimeError("Revize A19 má neplatné unresolved_findings.")
 
     seen_blocks: set[str] = set()
@@ -1084,9 +997,6 @@ def validate_structure_preserving_review(
     accepted_fixes: list[dict[str, Any]] = []
     skipped_fixes: list[dict[str, Any]] = []
     unresolved_excluded = 0
-    unresolved_review_blocks = 0
-    unresolved_review_identities: list[tuple[str, str]] = []
-    unresolved_excluded_identities: list[tuple[str, str]] = []
     regular_blocks = 0
     synthetic_blocks = 0
 
@@ -1139,14 +1049,8 @@ def validate_structure_preserving_review(
 
         if method == "synthetic_unresolved_finding_review":
             synthetic_blocks += 1
-            unresolved_review_blocks += 1
-            unresolved_identity = _unresolved_review_identity(item)
-            unresolved_review_identities.append(unresolved_identity)
             if status == STATUS_EXCLUDED and action == ACTION_EXCLUDE:
                 unresolved_excluded += 1
-                unresolved_excluded_identities.append(
-                    unresolved_identity
-                )
                 continue
             raise RuntimeError(
                 f"Blok {block_id} představuje obsahově nevyřešený nález. "
@@ -1188,47 +1092,12 @@ def validate_structure_preserving_review(
             f"{_fix_identity(fix)!r}."
         )
 
-    # Finální syntetické bloky A19 jsou autoritativním zdrojem
-    # uživatelských rozhodnutí. A19 V2 nemusí do výsledného kontraktu
-    # přenést top-level unresolved_findings z A18.
-    unresolved_count = unresolved_review_blocks
+    unresolved_count = len(raw_unresolved)
     if unresolved_count != unresolved_excluded:
         raise RuntimeError(
             "Revize obsahuje nevyřešené nálezy, které nebyly všechny "
             "výslovně vyloučeny jako nerelevantní."
         )
-
-    raw_unresolved_identities = {
-        _unresolved_raw_identity(finding)
-        for finding in raw_unresolved
-    }
-    review_unresolved_identities = set(unresolved_review_identities)
-    if (
-        raw_unresolved_present
-        and raw_unresolved_identities != review_unresolved_identities
-    ):
-        missing_in_review = sorted(
-            raw_unresolved_identities - review_unresolved_identities
-        )
-        missing_in_top_level = sorted(
-            review_unresolved_identities - raw_unresolved_identities
-        )
-        raise RuntimeError(
-            "Top-level unresolved_findings a syntetické bloky A19 "
-            "nepopisují stejnou množinu nálezů. "
-            f"Chybí v revizních blocích: {missing_in_review!r}; "
-            f"chybí v top-level seznamu: {missing_in_top_level!r}."
-        )
-
-    if set(unresolved_excluded_identities) != review_unresolved_identities:
-        raise RuntimeError(
-            "Ne všechny syntetické nevyřešené nálezy byly v A19 "
-            "výslovně vyloučeny jako nerelevantní."
-        )
-
-    unresolved_recovered_from_review_blocks = (
-        not raw_unresolved_present and unresolved_count > 0
-    )
 
     return {
         "proposal_mode": str(
@@ -1245,10 +1114,6 @@ def validate_structure_preserving_review(
         "skipped_fixes_count": len(skipped_fixes),
         "unresolved_findings_count": unresolved_count,
         "unresolved_findings_excluded": unresolved_excluded,
-        "unresolved_findings_top_level_present": raw_unresolved_present,
-        "unresolved_findings_recovered_from_review_blocks": (
-            unresolved_recovered_from_review_blocks
-        ),
         "structure_preserving_review_verified": True,
     }
 
