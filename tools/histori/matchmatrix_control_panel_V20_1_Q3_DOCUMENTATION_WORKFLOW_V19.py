@@ -110,12 +110,6 @@ V20.1.Q3 STEP 18:
   APPLIED_VERIFICATION_FAILED a BLOCKED,
 - automatický stash ani automatický push se nepoužívá.
 
-V20.1.Q3 STEP 24:
-- zkracuje název auditní kopie předchozího kanonického dokumentu,
-- používá formát <Document ID>_BEFORE_<timestamp>.md,
-- odstraňuje chybu Windows/UNC MAX_PATH u dokumentů s dlouhým kanonickým názvem,
-- zachovává původní obsah v podsložce previous_canonical.
-
 V20.1.Q3 STEP 19:
 - fáze 1 umí vytvořit nový DAILY_LOG nebo CHAT_CONTINUATION z oficiální šablony,
 - používá MM-TPL-001 a MM-TPL-002 z docs/13_TEMPLATES na PC2,
@@ -10807,7 +10801,7 @@ catch {{
                     backup_stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
                     previous_path = os.path.join(
                         previous_dir,
-                        f"{document_id}_BEFORE_{backup_stamp}.md",
+                        f"{Path(filename).stem}_BEFORE_{backup_stamp}.md",
                     )
                     Path(previous_path).write_bytes(existing_bytes)
 
