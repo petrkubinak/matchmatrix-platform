@@ -2,22 +2,22 @@
 
 ## Informace o dokumentu
 
-| Položka | Hodnota |
-|---|---|
-| Document ID | MM-NAV-20260716-01 |
-| Název dokumentu | MatchMatrix – navázání do nového chatu – 2026-07-16 |
-| Typ dokumentu | CHAT_CONTINUATION |
-| Verze | 1.0 |
+| Položka               | Hodnota                                                                                |
+|-----------------------|----------------------------------------------------------------------------------------|
+| Document ID           | MM-NAV-20260716-01                                                                     |
+| Název dokumentu       | MatchMatrix – navázání do nového chatu – 2026-07-16                                    |
+| Typ dokumentu         | CHAT_CONTINUATION                                                                      |
+| Verze                 | 1.0                                                                                    |
 | Stav | APPROVED |
-| Původní stav zdrojového dokumentu | DRAFT – NEEDS_USER_APPROVAL |
-| Datum uzavření pracovní etapy | 2026-07-16 |
-| Autor | Petr |
-| Technická spolupráce | OpenAI ChatGPT |
-| Pracovní oblast | Terminologické workflow A23, české popisky panelu a oprava návrhů MM-REF |
-| Primární formát | Markdown (.md) |
-| Kanonické umístění | `docs/09_HISTORY/NAVÁZÁNÍ_NA_CHAT/MM-NAV-20260716-01_MATCHMATRIX_NAVAZANI_DO_CHATU.md` |
-| Zdrojový denní zápis | `MM-DL-20260716_MATCHMATRIX_DENNI_ZAPIS.md` |
-| Předchozí navázání | `MM-NAV-20260714-01` |
+| Původní stav zdrojového dokumentu | DRAFT – NEEDS_USER_APPROVAL                                                |
+| Datum      | 2026-07-16 |
+| Autor                 | Petr                                                                                   |
+| Technická spolupráce  | OpenAI ChatGPT                                                                         |
+| Pracovní oblast       | Terminologické workflow A23, české popisky panelu a oprava návrhů MM-REF               |
+| Primární formát       | Markdown (.md)                                                                         |
+| Kanonické umístění    | `docs/09_HISTORY/NAVÁZÁNÍ_NA_CHAT/MM-NAV-20260716-01_MATCHMATRIX_NAVAZANI_DO_CHATU.md` |
+| Zdrojový denní zápis  | `MM-DL-20260716_MATCHMATRIX_DENNI_ZAPIS.md`                                            |
+| Předchozí navázání    | `MM-NAV-20260714-01`                                                                   |
 
 ---
 
