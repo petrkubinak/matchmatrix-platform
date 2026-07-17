@@ -10845,140 +10845,20 @@ catch {{
         return f"{normalized_id}_{title_part}.md", None
 
 
-    def _documentation_metadata_table_bounds(self, text_value):
-        """
-        Najde skutečnou tabulku „Informace o dokumentu“.
-
-        Metadata se nesmí hledat v celém dokumentu, protože odborné tabulky
-        mohou legitimně obsahovat řádky nebo hlavičky jako:
-
-            | Stav | Význam |
-
-        Za metadata je považována pouze souvislá Markdown tabulka, která
-        obsahuje identitu dokumentu a více řízených metadat.
-        """
-        lines = text_value.splitlines(keepends=True)
-        offsets = []
-        position = 0
-        for line in lines:
-            offsets.append(position)
-            position += len(line)
-
-        metadata_keys = {
-            "dokument",
-            "označení",
-            "oznaceni",
-            "document id",
-            "název dokumentu",
-            "nazev dokumentu",
-            "název",
-            "nazev",
-            "typ dokumentu",
-            "typ",
-            "dokumentační oblast",
-            "dokumentacni oblast",
-            "edice",
-            "verze",
-            "verze dokumentu",
-            "verze návrhu",
-            "verze navrhu",
-            "aktuální verze",
-            "aktualni verze",
-            "version",
-            "stav",
-            "datum",
-            "autor",
-            "autor projektu",
-            "technická spolupráce",
-            "technicka spoluprace",
-            "primární formát",
-            "primarni format",
-            "cílové umístění",
-            "cilove umisteni",
-            "nahrazuje",
-            "navazuje na",
-            "související dokumenty",
-            "souvisejici dokumenty",
-            "referenční standardy",
-            "referencni standardy",
-            "původní stav zdrojového dokumentu",
-            "puvodni stav zdrojoveho dokumentu",
-        }
-        identity_keys = {
-            "dokument",
-            "označení",
-            "oznaceni",
-            "document id",
-        }
-
-        best = None
-        index = 0
-        while index < len(lines):
-            if not lines[index].lstrip().startswith("|"):
-                index += 1
-                continue
-
-            block_start = index
-            while index < len(lines) and lines[index].lstrip().startswith("|"):
-                index += 1
-            block_end = index
-
-            found_keys = set()
-            for line in lines[block_start:block_end]:
-                match = re.match(
-                    r"^\s*\|\s*([^|]+?)\s*\|\s*([^|]*?)\s*\|\s*$",
-                    line.rstrip("\r\n"),
-                )
-                if not match:
-                    continue
-                key = match.group(1).strip().casefold()
-                if key in metadata_keys:
-                    found_keys.add(key)
-
-            has_identity = bool(found_keys & identity_keys)
-            score = len(found_keys)
-            if has_identity and score >= 4:
-                char_start = offsets[block_start]
-                char_end = (
-                    offsets[block_end]
-                    if block_end < len(offsets)
-                    else len(text_value)
-                )
-                candidate = (score, char_start, char_end)
-                if best is None or candidate[0] > best[0]:
-                    best = candidate
-
-        if best is None:
-            raise RuntimeError(
-                "Nebyla nalezena jednoznačná tabulka metadat dokumentu."
-            )
-
-        return best[1], best[2]
-
-
     def _documentation_approved_text(self, text_value):
-        """
-        Nastaví jeden aktuální stav APPROVED pouze v tabulce metadat.
-
-        Odborné tabulky s názvem sloupce „Stav“ zůstávají nedotčené.
-        """
+        """Nastaví jeden aktuální stav APPROVED a zachová původní stav."""
         newline = "\r\n" if "\r\n" in text_value else "\n"
-        metadata_start, metadata_end = (
-            self._documentation_metadata_table_bounds(text_value)
-        )
-        metadata_block = text_value[metadata_start:metadata_end]
-
         status_pattern = re.compile(
             r"(?m)^\|\s*Stav\s*\|\s*([^|]+?)\s*\|\s*$"
         )
-        status_matches = list(status_pattern.finditer(metadata_block))
+        status_matches = list(status_pattern.finditer(text_value))
         original_pattern = re.compile(
             r"(?m)^\|\s*Původní stav zdrojového dokumentu\s*\|"
         )
 
         if len(status_matches) > 1:
             raise RuntimeError(
-                "Tabulka metadat obsahuje více aktuálních řádků Stav. "
+                "Dokument obsahuje více aktuálních řádků metadata Stav. "
                 "Před schválením je sjednoť."
             )
 
@@ -10988,7 +10868,7 @@ catch {{
             replacement = "| Stav | APPROVED |"
             if (
                 previous_status.upper() != "APPROVED"
-                and not original_pattern.search(metadata_block)
+                and not original_pattern.search(text_value)
             ):
                 replacement += (
                     newline
@@ -10996,89 +10876,62 @@ catch {{
                     + previous_status
                     + " |"
                 )
-
-            approved_metadata = (
-                metadata_block[:match.start()]
-                + replacement
-                + metadata_block[match.end():]
-            )
             return (
-                text_value[:metadata_start]
-                + approved_metadata
-                + text_value[metadata_end:]
+                text_value[:match.start()]
+                + replacement
+                + text_value[match.end():]
             )
 
         approved_line = "| Stav | APPROVED |"
-        original_match = original_pattern.search(metadata_block)
+        original_match = original_pattern.search(text_value)
         if original_match:
-            approved_metadata = (
-                metadata_block[:original_match.start()]
+            return (
+                text_value[:original_match.start()]
                 + approved_line
                 + newline
-                + metadata_block[original_match.start():]
-            )
-            return (
-                text_value[:metadata_start]
-                + approved_metadata
-                + text_value[metadata_end:]
+                + text_value[original_match.start():]
             )
 
         version_pattern = re.compile(
-            r"(?m)^\|\s*(?:Verze|Verze dokumentu|Verze návrhu|"
-            r"Aktuální verze)\s*\|[^\n]*$"
+            r"(?m)^\|\s*(?:Verze|Verze dokumentu|Verze návrhu|Aktuální verze)\s*\|[^\n]*$"
         )
-        version_match = version_pattern.search(metadata_block)
+        version_match = version_pattern.search(text_value)
         if version_match:
-            approved_metadata = (
-                metadata_block[:version_match.end()]
+            return (
+                text_value[:version_match.end()]
                 + newline
                 + approved_line
-                + metadata_block[version_match.end():]
-            )
-            return (
-                text_value[:metadata_start]
-                + approved_metadata
-                + text_value[metadata_end:]
+                + text_value[version_match.end():]
             )
 
         raise RuntimeError(
-            "Tabulka metadat neobsahuje Stav ani Verze, za které lze "
-            "bezpečně vložit Stav = APPROVED."
+            "Dokument neobsahuje metadata Stav ani Verze, za které lze bezpečně "
+            "vložit Stav = APPROVED."
         )
 
 
     def _documentation_read_metadata(self, path_value):
-        """
-        Načte základní metadata pouze ze skutečné identifikační tabulky.
+        """Načte základní metadata z první odpovídající Markdown tabulky.
 
-        Odborné tabulky v dalších kapitolách nemohou přepsat ani doplnit
-        řízená metadata dokumentu.
+        STEP 21A:
+        - verze je řízené metadata stejně jako Document ID a stav,
+        - podporuje současné i starší názvy řádku s verzí,
+        - první nalezená hodnota zůstává zdrojem pravdy.
         """
         text_value = Path(path_value).read_text(encoding="utf-8-sig")
-        metadata_start, metadata_end = (
-            self._documentation_metadata_table_bounds(text_value)
-        )
-        metadata_block = text_value[metadata_start:metadata_end]
-
         fields = {}
         aliases = {
             "document id": "document_id",
             "dokument": "document_id",
-            "označení": "document_id",
-            "oznaceni": "document_id",
             "typ dokumentu": "document_type",
             "typ": "document_type",
             "název dokumentu": "title",
-            "nazev dokumentu": "title",
             "název": "title",
-            "nazev": "title",
             "stav": "status",
             "verze": "version",
             "verze dokumentu": "version",
             "verze návrhu": "version",
-            "verze navrhu": "version",
             "aktuální verze": "version",
-            "aktualni verze": "version",
             "version": "version",
             "cílové umístění": "target_location",
             "cilove umisteni": "target_location",
@@ -11089,10 +10942,10 @@ catch {{
             "kanonické umístění": "target_location",
             "kanonicke umisteni": "target_location",
         }
-        for line in metadata_block.splitlines():
+        for line in text_value.splitlines():
             match = re.match(
                 r"^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|$",
-                line,
+                line
             )
             if not match:
                 continue
@@ -11101,9 +10954,7 @@ catch {{
             target_key = aliases.get(key)
             if target_key and target_key not in fields:
                 fields[target_key] = value
-
         return text_value, fields
-
 
     def documentation_approve_and_save_canonical(self):
         """STEP 22 - univerzální schválení a kanonické uložení všech řízených ID."""

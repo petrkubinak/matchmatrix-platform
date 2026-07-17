@@ -19,7 +19,6 @@ K ČEMU:
 - pro Project Snapshot ověří identitu a povinné sekce podle MM-STD-009,
 - pro hlavní dokument ověří strukturu podle MM-STD-001,
 - respektuje Markdown hierarchii, kde jeden H1 představuje název dokumentu a hlavní kapitoly jsou zpravidla na úrovni H2,
-- u starších dokumentů s více H1 rozpoznává jako hlavní kapitoly pouze číslované H1 a ignoruje titulní H1 s Document ID a názvem dokumentu,
 - referenční dokumenty MM-REF rozpozná podle jejich primárního Document ID
   a nepoužije na ně pravidla hlavních dokumentů ani Project Snapshotů,
 - upozorní na terminologické a ručně ověřitelné oblasti,
@@ -67,7 +66,7 @@ from typing import Any, Iterable, Mapping, Sequence
 
 
 REPORT_PREFIX = "document_compliance_audit"
-ENGINE_VERSION = "A17_STANDARD_COMPLIANCE_V1_6_NUMBERED_MAIN_CHAPTERS"
+ENGINE_VERSION = "A17_STANDARD_COMPLIANCE_V1_5_MARKDOWN_CHAPTER_HIERARCHY"
 SUPPORTED_TYPES = {
     "AUTO",
     "DAILY_LOG",
@@ -1213,27 +1212,14 @@ MAIN_NON_BODY_HEADING_TOKENS: tuple[str, ...] = (
 )
 
 
-def is_numbered_main_heading(heading: Mapping[str, Any]) -> bool:
-    """
-    Vrátí True pouze pro číslovaný hlavní nadpis, například:
-
-    - # 1. Úvod
-    - # 12. Aktuální stav
-    - ## 3.2 Technická integrace
-
-    Nečíslované titulní H1, například `# MM-PRV-001` nebo
-    `# PROVIDEROVÝ EKOSYSTÉM MATCHMATRIX`, nejsou odborné kapitoly.
-    """
-    title = str(heading.get("title") or "").strip()
-    return re.match(r"^\d+(?:\.\d+)*\.?\s+\S", title) is not None
-
-
 def is_main_body_heading(heading: Mapping[str, Any]) -> bool:
     """Vrátí True pro odbornou hlavní kapitolu, nikoli pro obalové sekce."""
     value = str(heading["normalized"])
     if any(token in value for token in MAIN_NON_BODY_HEADING_TOKENS):
         return False
 
+    # Celkový závěr dokumentu je povinná závěrečná sekce, ale není další
+    # odbornou kapitolou, která by musela obsahovat vlastní podřízený závěr.
     if re.fullmatch(r"(?:\d+ )?zaver(?: dokumentu)?", value):
         return False
     return True
@@ -1242,16 +1228,10 @@ def is_main_body_heading(heading: Mapping[str, Any]) -> bool:
 def detect_main_chapter_level(
     headings: Sequence[Mapping[str, Any]],
 ) -> tuple[int | None, list[Mapping[str, Any]], list[str]]:
-    """
-    Určí skutečnou úroveň hlavních kapitol z Markdown hierarchie.
+    """Určí skutečnou úroveň hlavních kapitol z Markdown hierarchie.
 
-    Preferované pořadí:
-    1. číslované odborné kapitoly na stejné úrovni,
-    2. moderní struktura s jedním titulním H1 a kapitolami na H2,
-    3. zpětně kompatibilní nouzová detekce.
-
-    Tím se zabrání tomu, aby titulní řádky jako `# MM-PRV-001` a
-    `# PROVIDEROVÝ EKOSYSTÉM MATCHMATRIX` byly chybně počítány jako kapitoly.
+    Správně strukturovaný Markdown má zpravidla jeden H1 jako název dokumentu
+    a hlavní kapitoly na H2. Starší dokumenty mohou mít hlavní kapitoly na H1.
     """
     evidence: list[str] = []
     headings_by_level = {
@@ -1259,41 +1239,15 @@ def detect_main_chapter_level(
         for level in range(1, 7)
     }
 
-    for level in range(1, 7):
-        numbered_candidates = [
-            h
-            for h in headings_by_level[level]
-            if is_main_body_heading(h) and is_numbered_main_heading(h)
-        ]
-        if len(numbered_candidates) >= 2:
-            ignored_unnumbered = [
-                h
-                for h in headings_by_level[level]
-                if is_main_body_heading(h)
-                and not is_numbered_main_heading(h)
-            ]
-            evidence.append(
-                f"Hlavní kapitoly byly rozpoznány jako číslované nadpisy "
-                f"na úrovni H{level}."
-            )
-            if ignored_unnumbered:
-                evidence.append(
-                    "Ignorované nečíslované titulní nadpisy: "
-                    + "; ".join(
-                        str(item["title"])
-                        for item in ignored_unnumbered[:10]
-                    )
-                    + "."
-                )
-            return level, numbered_candidates, evidence
-
     h1_all = headings_by_level[1]
+    h1_body = [h for h in h1_all if is_main_body_heading(h)]
 
+    # Moderní správná hierarchie: právě jeden H1 = název dokumentu,
+    # hlavní kapitoly jsou H2.
     if len(h1_all) == 1:
         for level in range(2, 7):
             candidates = [
-                h
-                for h in headings_by_level[level]
+                h for h in headings_by_level[level]
                 if is_main_body_heading(h)
             ]
             if len(candidates) >= 2:
@@ -1303,21 +1257,15 @@ def detect_main_chapter_level(
                 )
                 return level, candidates, evidence
 
-    h1_body = [
-        h for h in h1_all
-        if is_main_body_heading(h)
-    ]
+    # Zpětná kompatibilita se staršími dokumenty, kde jsou kapitoly na H1.
     if len(h1_body) >= 2:
-        evidence.append(
-            "Hlavní kapitoly byly nouzově rozpoznány na úrovni H1; "
-            "dokument nepoužívá jednoznačné číslování kapitol."
-        )
+        evidence.append("Hlavní kapitoly byly rozpoznány na úrovni H1.")
         return 1, h1_body, evidence
 
+    # Nouzová detekce pro dokument bez jednoznačného H1 názvu.
     for level in range(2, 7):
         candidates = [
-            h
-            for h in headings_by_level[level]
+            h for h in headings_by_level[level]
             if is_main_body_heading(h)
         ]
         if len(candidates) >= 2:
@@ -1326,9 +1274,7 @@ def detect_main_chapter_level(
             )
             return level, candidates, evidence
 
-    evidence.append(
-        "Nebyla nalezena úroveň s alespoň dvěma odbornými kapitolami."
-    )
+    evidence.append("Nebyla nalezena úroveň s alespoň dvěma odbornými kapitolami.")
     return None, [], evidence
 
 
@@ -1483,7 +1429,7 @@ def evaluate_main(text: str, headings: Sequence[Mapping[str, Any]]) -> list[Find
                 chapter_level,
                 main_chapters,
             )
-            evidence = chapter_evidence + [
+            evidence = [
                 f"Úroveň hlavních kapitol: H{chapter_level}.",
                 f"Odborné hlavní kapitoly: {len(main_chapters)}.",
                 f"Plně ověřené závěry: {len(verified)}.",
