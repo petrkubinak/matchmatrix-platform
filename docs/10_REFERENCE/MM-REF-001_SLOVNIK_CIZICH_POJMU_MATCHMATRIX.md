@@ -11,12 +11,13 @@
 | Dokument | MM-REF-001 |
 | Název | Slovník cizích pojmů MatchMatrix |
 | Edice | MM-REF |
-| Verze | 1.5 |
-| Stav | REVIEW |
+| Verze | 1.6 |
+| Stav | APPROVED |
+| Původní stav zdrojového dokumentu | DRAFT – NEEDS_USER_APPROVAL |
 | Autor projektu | Petr Kubinák |
 | Technická spolupráce | OpenAI ChatGPT |
 | Primární formát | Markdown (`.md`) |
-| Nahrazuje | MM-REF-001 v1.4 po schválení |
+| Nahrazuje | MM-REF-001 v1.5 po schválení |
 | Navazuje na | MM-REF-002 |
 | Referenční standardy | MM-STD-006, MM-STD-008 |
 
@@ -33,7 +34,7 @@ Dokument obsahuje pouze:
 
 Podrobné definice, zdrojové dokumenty, cílové kapitoly a klikací navigace jsou vedeny výhradně v `MM-REF-002`.
 
-Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květen 2026. Pojmy, které již ve slovníku existovaly, nebyly vloženy duplicitně.
+Verze 1.6 doplňuje 15 databázových a technických pojmů ze zdroje `MM-DB-003`. Pojmy, které již ve slovníku existovaly, nebyly vloženy duplicitně.
 
 ---
 
@@ -71,7 +72,9 @@ Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květe
 | Canonical Matching | Kanonické párování |
 | CDN-ready | Připraveno pro distribuční síť obsahu |
 | Chat Continuation | navázání do nového chatu |
+| Check constraint | Kontrolní omezení |
 | Clean Rebuild | Čisté znovuvybudování |
+| Collation | Pravidla řazení textu |
 | Commit | potvrzení změny |
 | Competition Risk | Riziko záměny soutěže |
 | Completion Audit | Audit dokončenosti |
@@ -86,11 +89,14 @@ Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květe
 | Dashboard | řídicí přehled |
 | Data Contract | Datový kontrakt |
 | Data Core | Datové jádro |
+| Data dictionary | Datový slovník |
 | Data Gap | datová mezera |
+| Data type | Datový typ |
 | Database Governance | řízení databáze |
 | Database Snapshot | snímek databáze |
 | Date Conflict | Rozpor v datu |
 | Decay | Časový útlum |
+| Default value | Výchozí hodnota |
 | Dependency Graph | Graf závislostí |
 | Dependency-aware Execution | Spouštění se znalostí závislostí |
 | Deprecated | zastaralý |
@@ -117,11 +123,13 @@ Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květe
 | Feature Dataset | Datová sada příznaků |
 | Feed | Datový nebo obsahový kanál |
 | Fixed Pick | Pevný výběr |
+| Foreign key | Cizí klíč |
 | Form | Aktuální forma |
 | Free Plan | Bezplatný tarif |
 | Frontend-ready | Připraveno pro frontend |
 | Full Snapshot | úplný snímek |
 | Fuzzy Matching | Přibližné párování |
+| Generated column | Generovaný sloupec |
 | Governance | řízení systému |
 | Harvest | sběr dat |
 | Harvest Governance | řízení sběru dat |
@@ -129,6 +137,7 @@ Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květe
 | Head-to-Head (H2H) | Vzájemné zápasy |
 | Health Monitoring | sledování provozního stavu |
 | Healthcheck | Kontrola provozního zdraví |
+| Identity column | Identitní sloupec |
 | Import | načtení / zavedení dat |
 | Import Manifest | importní manifest |
 | Import Run | importní běh |
@@ -158,6 +167,7 @@ Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květe
 | Nearest Match | Nejbližší odpovídající zápas |
 | Next Step | další krok |
 | NO_MATCH_ID | Chybějící identifikátor zápasu |
+| Nullable | Povolující hodnotu NULL |
 | Odds | Sázkové kurzy |
 | Odds Layer | vrstva kurzů |
 | Open Questions | otevřené otázky |
@@ -165,6 +175,7 @@ Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květe
 | OPS | provozní vrstva |
 | OPS Governance | řízení provozní vrstvy |
 | Orchestration Confirmed | Orchestrace potvrzena |
+| Ordinal position | Pořadí sloupce |
 | Paid Plan | Placený tarif |
 | Parser | převodník dat |
 | Parser Binding | Vazba parseru |
@@ -181,7 +192,9 @@ Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květe
 | Player Match Statistics | Statistiky hráče v zápase |
 | Player Season Statistics | Sezonní statistiky hráče |
 | Post-import Verification | ověření po importu |
+| Precision | Přesnost |
 | Prediction Pipeline | Predikční pipeline |
+| Primary key | Primární klíč |
 | Priority Queue | Prioritní fronta |
 | Product Core | Produktové jádro |
 | Production-ready | Připraveno pro produkční provoz |
@@ -223,6 +236,7 @@ Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květe
 | Safe Autonomous | Bezpečný autonomní režim |
 | Safe Linker | Bezpečný propojovací nástroj |
 | Same-sport Duplicate | Duplicita v rámci sportu |
+| Scale | Desetinný rozsah |
 | Scheduler | Plánovač spuštění |
 | Scheduler Candidate | Kandidát plánovače |
 | Script Governance | řízení skriptů |
@@ -250,6 +264,8 @@ Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květe
 | Total Odd | Celkový kurz |
 | Trending | Trendovost |
 | Unified Staging | Jednotná staging vrstva |
+| Unique constraint | Omezení jedinečnosti |
+| User-defined type | Uživatelsky definovaný datový typ |
 | Value Analysis | Hodnotová analýza |
 | Worker | pracovní proces |
 | Worker Lock | Zámek workeru |
@@ -257,17 +273,16 @@ Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květe
 
 ---
 
-# 3. Souhrn verze 1.5
+# 3. Souhrn verze 1.6
 
 | Položka | Hodnota |
 |---|---:|
 | Původní panelové pojmy | 80 |
-| Nové pojmy ze snapshotů | 133 |
-| Celkový počet pojmů | 213 |
+| Pojmy ze snapshotů ve verzi 1.5 | 133 |
+| Nové pojmy z MM-DB-003 ve verzi 1.6 | 15 |
+| Celkový počet pojmů | 228 |
 | Duplicitní pojmy | nevkládány |
 | Podrobné výklady | MM-REF-002 |
-
----
 
 # 4. Historie verzí
 
@@ -276,6 +291,7 @@ Verze 1.5 doplňuje terminologii z Project Snapshotů za březen, duben a květe
 | 1.0 | 2026 | První vydání překladového slovníku. |
 | 1.1–1.4 | 2026 | Postupné doplňování dokumentační a technické terminologie. |
 | 1.5 | 2026-07-09 | Doplněny pojmy z Project Snapshotů za březen, duben a květen 2026 a obnovena panelová dvoudokumentová struktura MM-REF-001 + MM-REF-002. |
+| 1.6 | 2026-07-17 | Doplněno 15 terminologických kandidátů ze zdroje MM-DB-003. |
 
 ---
 
