@@ -22,7 +22,7 @@ JAK:
 - Zápis do MM-REF-001 a MM-REF-002 bude samostatný schvalovaný krok.
 
 ENGINE:
-- A23_TERMINOLOGY_WORKFLOW_V5_CANONICAL_STRUCTURE_PROPOSAL_BUILDER
+- A23_TERMINOLOGY_WORKFLOW_V3_PROPOSAL_BUILDER
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ from pathlib import Path
 from typing import Any
 
 
-ENGINE_VERSION = "A23_TERMINOLOGY_WORKFLOW_V5_CANONICAL_STRUCTURE_PROPOSAL_BUILDER"
+ENGINE_VERSION = "A23_TERMINOLOGY_WORKFLOW_V4_STRUCTURE_AWARE_PROPOSAL_BUILDER"
 FINAL_STATUS_OK = "TERMINOLOGY_CANDIDATES_REVIEWED"
 FINAL_STATUS_EMPTY = "NO_EXPLICIT_TERMINOLOGY_CANDIDATES"
 
@@ -316,157 +316,26 @@ def _find_heading_index(lines: list[str], heading_pattern: str, start: int = 0) 
     return None
 
 
-
-def _replace_version_paragraph(text: str, new_paragraph: str) -> str:
-    """
-    Nahradí první odstavcový popis začínající slovem „Verze X.Y“.
-    Pokud takový odstavec neexistuje, vloží nový popis před další hlavní kapitolu.
-    """
-    pattern = re.compile(
-        r"(?ms)^Verze\s+\d+\.\d+\s+.*?(?=\n\s*\n)",
-        flags=re.IGNORECASE,
-    )
-    match = pattern.search(text)
-    if match:
-        return text[:match.start()] + new_paragraph.strip() + text[match.end():]
-
-    purpose_match = re.search(
-        r"(?im)^#\s*1\.\s*Účel\s*$",
+def _update_mm_ref_001_summary(text: str, total_count: int, added_count: int, version: str) -> str:
+    text = re.sub(
+        r"(?im)^#\s*3\.\s*Souhrn verze\s+[^\n]+$",
+        f"# 3. Souhrn verze {version}",
         text,
+        count=1,
     )
-    if not purpose_match:
-        return text
-
-    next_heading = re.search(
-        r"(?im)^#\s*2\.",
-        text[purpose_match.end():],
-    )
-    insert_at = purpose_match.end() + (next_heading.start() if next_heading else len(text))
-    prefix = text[:insert_at].rstrip()
-    suffix = text[insert_at:].lstrip("\n")
-    return prefix + "\n\n" + new_paragraph.strip() + "\n\n" + suffix
-
-
-def _set_proposal_metadata_context(
-    text: str,
-    document_id: str,
-    previous_version: str,
-) -> str:
-    text = _replace_metadata_value(
+    text = re.sub(
+        r"(?im)(^\|\s*Nové pojmy[^|]*\|\s*)\d+(\s*\|)",
+        lambda m: f"{m.group(1)}{added_count}{m.group(2)}",
         text,
-        "Nahrazuje",
-        f"{document_id} v{previous_version} po schválení",
+        count=1,
+    )
+    text = re.sub(
+        r"(?im)(^\|\s*Celkový počet pojmů\s*\|\s*)\d+(\s*\|)",
+        lambda m: f"{m.group(1)}{total_count}{m.group(2)}",
+        text,
+        count=1,
     )
     return text
-
-
-def _replace_summary_section(
-    text: str,
-    heading_pattern: str,
-    new_heading: str,
-    rows: list[tuple[str, str]],
-) -> str:
-    lines = text.splitlines()
-    heading_index = _find_heading_index(lines, heading_pattern)
-    if heading_index is None:
-        raise ValueError(f"Dokument neobsahuje očekávanou souhrnnou sekci: {new_heading}")
-
-    section_end = len(lines)
-    for index in range(heading_index + 1, len(lines)):
-        if re.match(r"^#\s+", lines[index].strip()):
-            section_end = index
-            break
-
-    block = [
-        new_heading,
-        "",
-        "| Položka | Hodnota |",
-        "|---|---:|",
-    ]
-    block.extend(
-        f"| {_escape_md_cell(label)} | {_escape_md_cell(value)} |"
-        for label, value in rows
-    )
-    block.append("")
-
-    lines[heading_index:section_end] = block
-    return "\n".join(lines).rstrip() + "\n"
-
-
-def _read_summary_rows(
-    text: str,
-    heading_pattern: str,
-) -> list[tuple[str, str]]:
-    lines = text.splitlines()
-    heading_index = _find_heading_index(lines, heading_pattern)
-    if heading_index is None:
-        return []
-
-    section_end = len(lines)
-    for index in range(heading_index + 1, len(lines)):
-        if re.match(r"^#\s+", lines[index].strip()):
-            section_end = index
-            break
-
-    rows: list[tuple[str, str]] = []
-    table_found = False
-    for index in range(heading_index + 1, section_end):
-        cells = split_markdown_row(lines[index])
-        if len(cells) < 2:
-            continue
-        if is_separator_row(cells):
-            table_found = True
-            continue
-        if normalize_term(cells[0]) == "položka":
-            table_found = True
-            continue
-        if table_found:
-            rows.append((cells[0].strip(), cells[1].strip()))
-    return rows
-
-
-def _update_mm_ref_001_summary(
-    text: str,
-    total_count: int,
-    added_count: int,
-    previous_version: str,
-    version: str,
-    source_id: str,
-) -> str:
-    old_rows = _read_summary_rows(
-        text,
-        r"^#\s*3\.\s*Souhrn verze\s+[^\n]+$",
-    )
-
-    preserved: list[tuple[str, str]] = []
-    trailing: list[tuple[str, str]] = []
-
-    for label, value in old_rows:
-        key = normalize_term(label)
-        if key == "celkový počet pojmů":
-            continue
-        if key.startswith("nové pojmy z ") and source_id.casefold() in key:
-            continue
-        if key == "nové pojmy ze snapshotů":
-            preserved.append((f"Pojmy ze snapshotů ve verzi {previous_version}", value))
-            continue
-        if key in {"duplicitní pojmy", "podrobné výklady"}:
-            trailing.append((label, value))
-            continue
-        preserved.append((label, value))
-
-    preserved.append(
-        (f"Nové pojmy z {source_id} ve verzi {version}", str(added_count))
-    )
-    preserved.append(("Celkový počet pojmů", str(total_count)))
-    preserved.extend(trailing)
-
-    return _replace_summary_section(
-        text,
-        r"^#\s*3\.\s*Souhrn verze\s+[^\n]+$",
-        f"# 3. Souhrn verze {version}",
-        preserved,
-    )
 
 
 def _append_history_row(text: str, version: str, description: str) -> str:
@@ -536,6 +405,7 @@ def _append_history_row(text: str, version: str, description: str) -> str:
     today = datetime.now().astimezone().date().isoformat()
     new_row = f"| {version} | {today} | {_escape_md_cell(description)} |"
 
+    # Opakovaný běh aktualizuje stejnou verzi místo vytvoření duplicity.
     scan_end = section_end if section_end <= len(lines) else len(lines)
     for index in range(table_header + 2, scan_end):
         cells = split_markdown_row(lines[index])
@@ -623,301 +493,101 @@ def _unique_anchor(base: str, used: set[str]) -> str:
     return candidate
 
 
-def _mm_ref_002_index_bounds(lines: list[str]) -> tuple[int, int]:
-    header = None
+def _insert_before_final_conclusion(text: str, block: str) -> str:
+    lines = text.splitlines()
+    conclusion_index = None
     for index, line in enumerate(lines):
-        cells = split_markdown_row(line)
-        if len(cells) >= 5:
-            normalized = [normalize_term(cell) for cell in cells[:5]]
-            if normalized in (
-                ["cizí výraz", "český překlad", "výklad", "zdrojový dokument", "cílová kapitola"],
-                ["cizi vyraz", "cesky preklad", "vyklad", "zdrojovy dokument", "cilova kapitola"],
-            ):
-                header = index
-                break
-    if header is None:
-        raise ValueError("MM-REF-002 neobsahuje hlavní klikací rejstřík.")
-
-    end = header + 2
-    while end < len(lines):
-        cells = split_markdown_row(lines[end])
-        if len(cells) < 5 or lines[end].lstrip().startswith("#"):
-            break
-        end += 1
-    return header, end
+        if re.match(r"^#\s+Závěr\s*$", line.strip(), flags=re.IGNORECASE):
+            conclusion_index = index
+    if conclusion_index is None:
+        return text.rstrip() + "\n\n" + block.strip() + "\n"
+    lines[conclusion_index:conclusion_index] = ["", block.strip(), "", "---", ""]
+    return "\n".join(lines).rstrip() + "\n"
 
 
-def _parse_mm_ref_002_index(text: str) -> dict[str, dict[str, str]]:
-    lines = text.splitlines()
-    header, end = _mm_ref_002_index_bounds(lines)
-    result: dict[str, dict[str, str]] = {}
-
-    for line in lines[header + 2:end]:
-        cells = split_markdown_row(line)
-        if len(cells) < 5 or is_separator_row(cells):
-            continue
-        foreign, czech, link, source, chapter = [cell.strip() for cell in cells[:5]]
-        anchor_match = re.search(r"\(#([^)]+)\)", link)
-        anchor = anchor_match.group(1) if anchor_match else ""
-        if foreign:
-            result[normalize_term(foreign)] = {
-                "foreign": foreign,
-                "czech": czech,
-                "anchor": anchor,
-                "source": source,
-                "chapter": chapter,
-            }
-    return result
-
-
-def _mm_ref_002_detail_bounds(lines: list[str]) -> tuple[int, int]:
-    heading = _find_heading_index(lines, r"^#\s*3\.\s*Výklady pojmů\s*$")
-    if heading is None:
-        raise ValueError("MM-REF-002 neobsahuje sekci Výklady pojmů.")
-
-    end = len(lines)
-    for index in range(heading + 1, len(lines)):
-        if re.match(r"^#\s+", lines[index].strip()):
-            end = index
-            break
-    return heading, end
-
-
-def _parse_mm_ref_002_detail_blocks(
-    text: str,
-) -> tuple[list[dict[str, str]], int, int]:
-    lines = text.splitlines()
-    heading, end = _mm_ref_002_detail_bounds(lines)
-    body = "\n".join(lines[heading + 1:end]).strip()
-    segments = re.split(r"\n\s*---\s*\n", body)
-
-    blocks: list[dict[str, str]] = []
-    for segment in segments:
-        segment = segment.strip()
-        if not segment:
-            continue
-        anchor_match = re.search(r'<a\s+id="([^"]+)"\s*></a>', segment, flags=re.IGNORECASE)
-        heading_match = re.search(r"(?m)^##\s+3\.\d+\s+(.+?)\s*$", segment)
-        if not anchor_match or not heading_match:
-            raise ValueError("MM-REF-002 obsahuje neočekávaný blok ve výkladech pojmů.")
-        blocks.append(
-            {
-                "foreign": heading_match.group(1).strip(),
-                "anchor": anchor_match.group(1).strip(),
-                "body": segment,
-            }
-        )
-    return blocks, heading, end
-
-
-def _build_mm_ref_002_detail_block(
-    number: int,
-    foreign: str,
-    czech: str,
-    explanation: str,
-    source_id: str,
-    target_chapter: str,
-    anchor: str,
-) -> str:
-    return "\n".join(
-        [
-            f'<a id="{anchor}"></a>',
-            "",
-            f"## 3.{number} {foreign}",
-            "",
-            f"**Český překlad:** {czech}",
-            "",
-            f"**Vysvětlení:** {explanation or 'Výklad musí být doplněn před schválením.'}",
-            "",
-            f"**Zdrojový dokument:** `{source_id}`",
-            "",
-            f"**Cílová kapitola nebo sekce:** {target_chapter}",
-            "",
-            "**Funkce v panelu:**",
-            "",
-            "- zobrazit tento výklad,",
-            "- otevřít odpovídající kapitolu,",
-            "- otevřít celý zdrojový dokument.",
-            "",
-            "[Zpět na rejstřík](#2-klikaci-rejstrik)",
-        ]
-    )
-
-
-def _renumber_mm_ref_002_block(block: str, number: int) -> str:
-    return re.sub(
-        r"(?m)^##\s+3\.\d+\s+",
-        f"## 3.{number} ",
-        block,
-        count=1,
-    )
-
-
-def _insert_mm_ref_002(
+def _append_mm_ref_002(
     text: str,
     selected: list[dict[str, Any]],
     source_id: str,
-) -> tuple[str, int, int]:
-    index_entries = _parse_mm_ref_002_index(text)
-    detail_blocks, _, _ = _parse_mm_ref_002_detail_blocks(text)
-
-    existing_detail_terms = {
-        normalize_term(block["foreign"]): block
-        for block in detail_blocks
-    }
-    used_anchors = {block["anchor"] for block in detail_blocks}
-    used_anchors.update(
-        entry["anchor"] for entry in index_entries.values() if entry["anchor"]
-    )
-
+) -> tuple[str, int]:
+    known = parse_explanation_terms(text)
     candidates = [
         item for item in selected
         if "MM-REF-002" in str(item.get("target_document") or "")
-        and normalize_term(item.get("foreign", "")) not in existing_detail_terms
+        and normalize_term(item.get("foreign", "")) not in known
+    ]
+    if not candidates:
+        return text, 0
+
+    used_anchors = set(re.findall(r'<a\s+id="([^"]+)"', text, flags=re.IGNORECASE))
+    today = datetime.now().astimezone().date().isoformat()
+    parts = [
+        f"## Návrh doplnění pojmů ze zdroje {source_id}",
+        "",
+        f"**Datum návrhu:** {today}  ",
+        "**Stav kapitoly:** DRAFT – NEEDS_USER_APPROVAL",
+        "",
+        "### Klikací rejstřík nových pojmů",
+        "",
+        "| Cizí výraz | Český překlad | Odkaz |",
+        "|---|---|---|",
     ]
 
-    prepared: list[dict[str, str]] = []
-    for item in sorted(candidates, key=lambda value: normalize_term(value.get("foreign", ""))):
+    prepared: list[tuple[dict[str, Any], str]] = []
+    for item in sorted(candidates, key=lambda x: normalize_term(x.get("foreign", ""))):
+        foreign = str(item.get("foreign") or "").strip()
+        anchor = _unique_anchor(_slugify_anchor(foreign), used_anchors)
+        prepared.append((item, anchor))
+        parts.append(
+            f"| {_escape_md_cell(foreign)} | {_escape_md_cell(item.get('czech', ''))} | "
+            f"[Přejít na výklad](#{anchor}) |"
+        )
+
+    for item, anchor in prepared:
         foreign = str(item.get("foreign") or "").strip()
         czech = str(item.get("czech") or "").strip()
         explanation = str(item.get("explanation") or "").strip()
-        target_chapter = str(
-            item.get("source_chapter")
-            or item.get("chapter")
-            or "Terminologičtí kandidáti"
-        ).strip()
-        anchor = _unique_anchor(
-            f"term-{_slugify_anchor(foreign)}",
-            used_anchors,
-        )
-        prepared.append(
-            {
-                "foreign": foreign,
-                "czech": czech,
-                "explanation": explanation,
-                "target_chapter": target_chapter,
-                "anchor": anchor,
-            }
-        )
+        target_chapter = str(item.get("source_chapter") or item.get("chapter") or "Terminologičtí kandidáti").strip()
+        parts += [
+            "",
+            f'<a id="{anchor}"></a>',
+            f"### {foreign}",
+            "",
+            "| Položka | Hodnota |",
+            "|---|---|",
+            f"| Cizí výraz | {_escape_md_cell(foreign)} |",
+            f"| Doporučený český překlad | {_escape_md_cell(czech)} |",
+            f"| Zdrojový dokument | `{_escape_md_cell(source_id)}` |",
+            f"| Zdrojová kapitola | {_escape_md_cell(target_chapter)} |",
+            "| Governance stav | NÁVRH K UŽIVATELSKÉMU SCHVÁLENÍ |",
+            "",
+            "#### Význam a použití",
+            "",
+            explanation or "Výklad musí být doplněn před schválením.",
+        ]
 
-    if not prepared:
-        return text, 0, len(detail_blocks)
-
-    for item in prepared:
-        index_entries[normalize_term(item["foreign"])] = {
-            "foreign": item["foreign"],
-            "czech": item["czech"],
-            "anchor": item["anchor"],
-            "source": source_id,
-            "chapter": item["target_chapter"],
-        }
-
-    lines = text.splitlines()
-    index_header, index_end = _mm_ref_002_index_bounds(lines)
-    sorted_index = sorted(
-        index_entries.values(),
-        key=lambda entry: normalize_term(entry["foreign"]),
-    )
-    index_rows = [
-        f"| {_escape_md_cell(entry['foreign'])} | {_escape_md_cell(entry['czech'])} | "
-        f"[Otevřít výklad](#{entry['anchor']}) | "
-        f"{_escape_md_cell(entry['source'])} | {_escape_md_cell(entry['chapter'])} |"
-        for entry in sorted_index
+    parts += [
+        "",
+        "### Závěr kapitoly",
+        "",
+        "Kapitola obsahuje návrhy nových výkladů. Přínosem je řízené doplnění terminologie bez přepsání schválených záznamů. Návaznost pokračuje uživatelským schválením a samostatným A17.",
     ]
-    lines[index_header + 2:index_end] = index_rows
-    text = "\n".join(lines).rstrip() + "\n"
+    return _insert_before_final_conclusion(text, "\n".join(parts)), len(candidates)
 
-    detail_blocks, _, _ = _parse_mm_ref_002_detail_blocks(text)
-    combined: list[tuple[str, str]] = [
-        (block["foreign"], block["body"])
-        for block in detail_blocks
-    ]
-    combined.extend(
-        (
-            item["foreign"],
-            _build_mm_ref_002_detail_block(
-                0,
-                item["foreign"],
-                item["czech"],
-                item["explanation"],
-                source_id,
-                item["target_chapter"],
-                item["anchor"],
-            ),
+
+def _update_generic_count(text: str, labels: tuple[str, ...], increment: int) -> str:
+    if increment <= 0:
+        return text
+    for label in labels:
+        pattern = re.compile(
+            rf"(^\|\s*{re.escape(label)}\s*\|\s*)(\d+)(\s*\|)",
+            flags=re.IGNORECASE | re.MULTILINE,
         )
-        for item in prepared
-    )
-    combined.sort(key=lambda pair: normalize_term(pair[0]))
-
-    rebuilt_blocks = [
-        _renumber_mm_ref_002_block(block, number)
-        for number, (_, block) in enumerate(combined, start=1)
-    ]
-
-    lines = text.splitlines()
-    detail_heading, detail_end = _mm_ref_002_detail_bounds(lines)
-    detail_section = [""]
-    for block in rebuilt_blocks:
-        detail_section.extend([block, "", "---", ""])
-    lines[detail_heading + 1:detail_end] = detail_section
-    result = "\n".join(lines).rstrip() + "\n"
-
-    return result, len(prepared), len(combined)
-
-
-def _update_mm_ref_002_summary(
-    text: str,
-    total_count: int,
-    added_count: int,
-    previous_version: str,
-    version: str,
-    source_id: str,
-) -> str:
-    old_rows = _read_summary_rows(
-        text,
-        r"^#\s*6\.\s*Souhrn verze\s+[^\n]+$",
-    )
-
-    preserved: list[tuple[str, str]] = []
-    trailing: list[tuple[str, str]] = []
-
-    for label, value in old_rows:
-        key = normalize_term(label)
-        if key == "celkový počet výkladů":
-            continue
-        if key.startswith("nové výklady z ") and source_id.casefold() in key:
-            continue
-        if key == "nové výklady ze snapshotů":
-            preserved.append((f"Výklady ze snapshotů ve verzi {previous_version}", value))
-            continue
-        if key == "zdrojové snapshoty":
-            trailing.append((label, value))
-            continue
-        preserved.append((label, value))
-
-    preserved.append(
-        (f"Nové výklady z {source_id} ve verzi {version}", str(added_count))
-    )
-    preserved.append(("Celkový počet výkladů", str(total_count)))
-    preserved.extend(trailing)
-
-    return _replace_summary_section(
-        text,
-        r"^#\s*6\.\s*Souhrn verze\s+[^\n]+$",
-        f"# 6. Souhrn verze {version}",
-        preserved,
-    )
-
-
-def _update_final_conclusion_version(
-    text: str,
-    document_id: str,
-    version: str,
-) -> str:
-    pattern = re.compile(
-        rf"(?im)^({re.escape(document_id)}\s+v)\d+\.\d+",
-    )
-    return pattern.sub(rf"\g<1>{version}", text)
+        match = pattern.search(text)
+        if match:
+            new_value = int(match.group(2)) + increment
+            return text[:match.start()] + match.group(1) + str(new_value) + match.group(3) + text[match.end():]
+    return text
 
 
 def build_proposals(
@@ -934,91 +604,40 @@ def build_proposals(
 
     source_id = extract_document_id(read_text(source)) or source.stem
 
-    canonical_translation = read_text(translation_path)
-    translation_previous_version = _read_metadata_value(canonical_translation, "Verze")
-    if not translation_previous_version:
-        raise ValueError("MM-REF-001 neobsahuje platnou verzi.")
-
     translation_text, added_translation, total_translation = _insert_mm_ref_001(
-        canonical_translation,
+        read_text(translation_path),
         selected,
     )
     translation_text, translation_version = _bump_version(translation_text)
     translation_text = _draft_status(translation_text)
-    translation_text = _set_proposal_metadata_context(
-        translation_text,
-        "MM-REF-001",
-        translation_previous_version,
-    )
-    translation_text = _replace_version_paragraph(
-        translation_text,
-        (
-            f"Verze {translation_version} doplňuje {added_translation} databázových "
-            f"a technických pojmů ze zdroje `{source_id}`. Pojmy, které již ve "
-            "slovníku existovaly, nebyly vloženy duplicitně."
-        ),
-    )
     translation_text = _update_mm_ref_001_summary(
         translation_text,
         total_count=total_translation,
         added_count=added_translation,
-        previous_version=translation_previous_version,
         version=translation_version,
-        source_id=source_id,
     )
     translation_text = _append_history_row(
         translation_text,
         translation_version,
         f"Doplněno {added_translation} terminologických kandidátů ze zdroje {source_id}.",
     )
-    translation_text = _update_final_conclusion_version(
-        translation_text,
-        "MM-REF-001",
-        translation_version,
-    )
 
-    canonical_explanation = read_text(explanation_path)
-    explanation_previous_version = _read_metadata_value(canonical_explanation, "Verze")
-    if not explanation_previous_version:
-        raise ValueError("MM-REF-002 neobsahuje platnou verzi.")
-
-    explanation_text, added_explanations, total_explanations = _insert_mm_ref_002(
-        canonical_explanation,
+    explanation_text, added_explanations = _append_mm_ref_002(
+        read_text(explanation_path),
         selected,
         source_id,
     )
     explanation_text, explanation_version = _bump_version(explanation_text)
     explanation_text = _draft_status(explanation_text)
-    explanation_text = _set_proposal_metadata_context(
+    explanation_text = _update_generic_count(
         explanation_text,
-        "MM-REF-002",
-        explanation_previous_version,
-    )
-    explanation_text = _replace_version_paragraph(
-        explanation_text,
-        (
-            f"Verze {explanation_version} doplňuje {added_explanations} výkladových "
-            f"položek ze zdroje `{source_id}`. Nové pojmy jsou zařazeny do hlavního "
-            "klikacího rejstříku i do hlavní číslované sekce výkladů."
-        ),
-    )
-    explanation_text = _update_mm_ref_002_summary(
-        explanation_text,
-        total_count=total_explanations,
-        added_count=added_explanations,
-        previous_version=explanation_previous_version,
-        version=explanation_version,
-        source_id=source_id,
+        ("Celkový počet výkladů", "Počet výkladů", "Celkový počet pojmů"),
+        added_explanations,
     )
     explanation_text = _append_history_row(
         explanation_text,
         explanation_version,
         f"Doplněno {added_explanations} výkladových položek ze zdroje {source_id}.",
-    )
-    explanation_text = _update_final_conclusion_version(
-        explanation_text,
-        "MM-REF-002",
-        explanation_version,
     )
 
     proposal_dir = output_dir / "proposals"
@@ -1037,9 +656,7 @@ def build_proposals(
         "source_document_id": source_id,
         "selected_count": len(selected),
         "translation_added_count": added_translation,
-        "translation_total_count": total_translation,
         "explanation_added_count": added_explanations,
-        "explanation_total_count": total_explanations,
         "translation_candidate": str(translation_output),
         "translation_candidate_version": translation_version,
         "translation_candidate_sha256": sha256_path(translation_output),
@@ -1062,10 +679,8 @@ def build_proposals(
                 "",
                 f"- Zdroj: `{source_id}`",
                 f"- Vybraných kandidátů: **{len(selected)}**",
-                f"- Nové překlady MM-REF-001: **{added_translation}**",
-                f"- Celkem překladů MM-REF-001: **{total_translation}**",
-                f"- Nové výklady MM-REF-002: **{added_explanations}**",
-                f"- Celkem výkladů MM-REF-002: **{total_explanations}**",
+                f"- Do MM-REF-001 skutečně doplněno: **{added_translation}**",
+                f"- Do MM-REF-002 skutečně doplněno: **{added_explanations}**",
                 f"- MM-REF-001: `{translation_version}`",
                 f"- MM-REF-002: `{explanation_version}`",
                 "",

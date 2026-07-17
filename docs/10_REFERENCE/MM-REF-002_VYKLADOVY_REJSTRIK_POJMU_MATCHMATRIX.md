@@ -11,13 +11,13 @@
 | Dokument | MM-REF-002 |
 | Název | Výkladový rejstřík pojmů MatchMatrix |
 | Edice | MM-REF |
-| Verze | 1.1 |
-| Stav | REVIEW |
+| Verze | 1.2 |
+| Stav | DRAFT – NEEDS_USER_APPROVAL |
 | Autor projektu | Petr Kubinák |
 | Technická spolupráce | OpenAI ChatGPT |
 | Primární formát | Markdown (`.md`) |
 | Navazuje na | MM-REF-001 |
-| Nahrazuje | MM-REF-002 v1.0 po schválení |
+| Nahrazuje | MM-REF-002 v1.1 po schválení |
 | Referenční standardy | MM-STD-006, MM-STD-008 |
 
 ---
@@ -26,7 +26,7 @@
 
 MM-REF-002 uchovává podrobné vysvětlení cizích a technických výrazů, které jsou v MM-REF-001 vedeny pouze jako překladový slovník.
 
-Verze 1.1 doplňuje výklady, zdrojové dokumenty a cílové kapitoly pro pojmy převzaté z Project Snapshotů za březen, duben a květen 2026.
+Verze 1.2 doplňuje 9 výkladových položek ze zdroje `MM-DB-003`. Nové pojmy jsou zařazeny do hlavního klikacího rejstříku i do hlavní číslované sekce výkladů.
 
 Po kliknutí na pojem má panel zobrazit:
 
@@ -73,7 +73,9 @@ Po kliknutí na pojem má panel zobrazit:
 | Canonical Matching | Kanonické párování | [Otevřít výklad](#term-canonical-matching) | MM-PS-20260430 | PROJECT SNAPSHOT |
 | CDN-ready | Připraveno pro distribuční síť obsahu | [Otevřít výklad](#term-cdn-ready) | MM-PS-20260531 | PROJECT SNAPSHOT |
 | Chat Continuation | navázání do nového chatu | [Otevřít výklad](#term-chat-continuation) | MM-STD-009 | Chat Continuation |
+| Check constraint | Kontrolní omezení | [Otevřít výklad](#term-check-constraint) | MM-DB-003 | Terminologičtí kandidáti |
 | Clean Rebuild | Čisté znovuvybudování | [Otevřít výklad](#term-clean-rebuild) | MM-PS-20260430 | PROJECT SNAPSHOT |
+| Collation | Pravidla řazení textu | [Otevřít výklad](#term-collation) | MM-DB-003 | Terminologičtí kandidáti |
 | Commit | potvrzení změny | [Otevřít výklad](#term-commit) | MM-DOC-800 | Vývojové a provozní postupy |
 | Competition Risk | Riziko záměny soutěže | [Otevřít výklad](#term-competition-risk) | MM-PS-20260430 | PROJECT SNAPSHOT |
 | Completion Audit | Audit dokončenosti | [Otevřít výklad](#term-completion-audit) | MM-PS-20260430 | PROJECT SNAPSHOT |
@@ -88,6 +90,7 @@ Po kliknutí na pojem má panel zobrazit:
 | Dashboard | řídicí přehled | [Otevřít výklad](#term-dashboard) | MM-DOC-800 | Vývojové a provozní postupy |
 | Data Contract | Datový kontrakt | [Otevřít výklad](#term-data-contract) | MM-PS-20260430 | PROJECT SNAPSHOT |
 | Data Core | Datové jádro | [Otevřít výklad](#term-data-core) | MM-PS-20260331 | PROJECT SNAPSHOT |
+| Data dictionary | Datový slovník | [Otevřít výklad](#term-data-dictionary) | MM-DB-003 | Terminologičtí kandidáti |
 | Data Gap | datová mezera | [Otevřít výklad](#term-data-gap) | MM-DOC-100 | Aktuální stav a chybějící oblasti |
 | Database Governance | řízení databáze | [Otevřít výklad](#term-database-governance) | MM-DOC-200 | Governance a audit |
 | Database Snapshot | snímek databáze | [Otevřít výklad](#term-database-snapshot) | MM-STD-009 | Database Snapshot |
@@ -119,11 +122,13 @@ Po kliknutí na pojem má panel zobrazit:
 | Feature Dataset | Datová sada příznaků | [Otevřít výklad](#term-feature-dataset) | MM-PS-20260331 | PROJECT SNAPSHOT |
 | Feed | Datový nebo obsahový kanál | [Otevřít výklad](#term-feed) | MM-PS-20260531 | PROJECT SNAPSHOT |
 | Fixed Pick | Pevný výběr | [Otevřít výklad](#term-fixed-pick) | MM-PS-20260331 | PROJECT SNAPSHOT |
+| Foreign key | Cizí klíč | [Otevřít výklad](#term-foreign-key) | MM-DB-003 | Terminologičtí kandidáti |
 | Form | Aktuální forma | [Otevřít výklad](#term-form) | MM-PS-20260331 | PROJECT SNAPSHOT |
 | Free Plan | Bezplatný tarif | [Otevřít výklad](#term-free-plan) | MM-PS-20260331 | PROJECT SNAPSHOT |
 | Frontend-ready | Připraveno pro frontend | [Otevřít výklad](#term-frontend-ready) | MM-PS-20260531 | PROJECT SNAPSHOT |
 | Full Snapshot | úplný snímek | [Otevřít výklad](#term-full-snapshot) | MM-DOC-000 | Dokumentační workflow a import |
 | Fuzzy Matching | Přibližné párování | [Otevřít výklad](#term-fuzzy-matching) | MM-PS-20260430 | PROJECT SNAPSHOT |
+| Generated column | Generovaný sloupec | [Otevřít výklad](#term-generated-column) | MM-DB-003 | Terminologičtí kandidáti |
 | Governance | řízení systému | [Otevřít výklad](#term-governance) | MM-DOC-200 | Governance a audit |
 | Harvest | sběr dat | [Otevřít výklad](#term-harvest) | MM-DOC-300 | Architektura a datový tok |
 | Harvest Governance | řízení sběru dat | [Otevřít výklad](#term-harvest-governance) | MM-DOC-200 | Governance a audit |
@@ -131,6 +136,7 @@ Po kliknutí na pojem má panel zobrazit:
 | Head-to-Head (H2H) | Vzájemné zápasy | [Otevřít výklad](#term-head-to-head-h2h) | MM-PS-20260331 | PROJECT SNAPSHOT |
 | Health Monitoring | sledování provozního stavu | [Otevřít výklad](#term-health-monitoring) | MM-DOC-800 | Vývojové a provozní postupy |
 | Healthcheck | Kontrola provozního zdraví | [Otevřít výklad](#term-healthcheck) | MM-PS-20260430 | PROJECT SNAPSHOT |
+| Identity column | Identitní sloupec | [Otevřít výklad](#term-identity-column) | MM-DB-003 | Terminologičtí kandidáti |
 | Import | načtení / zavedení dat | [Otevřít výklad](#term-import) | MM-DOC-000 | Dokumentační workflow a import |
 | Import Manifest | importní manifest | [Otevřít výklad](#term-import-manifest) | MM-DOC-000 | Dokumentační workflow a import |
 | Import Run | importní běh | [Otevřít výklad](#term-import-run) | MM-DOC-000 | Dokumentační workflow a import |
@@ -184,6 +190,7 @@ Po kliknutí na pojem má panel zobrazit:
 | Player Season Statistics | Sezonní statistiky hráče | [Otevřít výklad](#term-player-season-statistics) | MM-PS-20260531 | PROJECT SNAPSHOT |
 | Post-import Verification | ověření po importu | [Otevřít výklad](#term-post-import-verification) | MM-DOC-000 | Dokumentační workflow a import |
 | Prediction Pipeline | Predikční pipeline | [Otevřít výklad](#term-prediction-pipeline) | MM-PS-20260331 | PROJECT SNAPSHOT |
+| Primary key | Primární klíč | [Otevřít výklad](#term-primary-key) | MM-DB-003 | Terminologičtí kandidáti |
 | Priority Queue | Prioritní fronta | [Otevřít výklad](#term-priority-queue) | MM-PS-20260531 | PROJECT SNAPSHOT |
 | Product Core | Produktové jádro | [Otevřít výklad](#term-product-core) | MM-PS-20260331 | PROJECT SNAPSHOT |
 | Production-ready | Připraveno pro produkční provoz | [Otevřít výklad](#term-production-ready) | MM-PS-20260331 | PROJECT SNAPSHOT |
@@ -252,6 +259,8 @@ Po kliknutí na pojem má panel zobrazit:
 | Total Odd | Celkový kurz | [Otevřít výklad](#term-total-odd) | MM-PS-20260331 | PROJECT SNAPSHOT |
 | Trending | Trendovost | [Otevřít výklad](#term-trending) | MM-PS-20260531 | PROJECT SNAPSHOT |
 | Unified Staging | Jednotná staging vrstva | [Otevřít výklad](#term-unified-staging) | MM-PS-20260331 | PROJECT SNAPSHOT |
+| Unique constraint | Omezení jedinečnosti | [Otevřít výklad](#term-unique-constraint) | MM-DB-003 | Terminologičtí kandidáti |
+| User-defined type | Uživatelsky definovaný datový typ | [Otevřít výklad](#term-user-defined-type) | MM-DB-003 | Terminologičtí kandidáti |
 | Value Analysis | Hodnotová analýza | [Otevřít výklad](#term-value-analysis) | MM-PS-20260331 | PROJECT SNAPSHOT |
 | Worker | pracovní proces | [Otevřít výklad](#term-worker) | MM-DOC-800 | Vývojové a provozní postupy |
 | Worker Lock | Zámek workeru | [Otevřít výklad](#term-worker-lock) | MM-PS-20260331 | PROJECT SNAPSHOT |
@@ -891,8 +900,30 @@ Po kliknutí na pojem má panel zobrazit:
 
 ---
 
+<a id="term-check-constraint"></a>
+
+## 3.31 Check constraint
+
+**Český překlad:** Kontrolní omezení
+
+**Vysvětlení:** Databázové pravidlo ověřující logickou podmínku.
+
+**Zdrojový dokument:** `MM-DB-003`
+
+**Cílová kapitola nebo sekce:** Terminologičtí kandidáti
+
+**Funkce v panelu:**
+
+- zobrazit tento výklad,
+- otevřít odpovídající kapitolu,
+- otevřít celý zdrojový dokument.
+
+[Zpět na rejstřík](#2-klikaci-rejstrik)
+
+---
+
 <a id="term-clean-rebuild"></a>
-## 3.31 Clean Rebuild
+## 3.32 Clean Rebuild
 
 **Český překlad:** Čisté znovuvybudování
 
@@ -912,8 +943,30 @@ Po kliknutí na pojem má panel zobrazit:
 
 ---
 
+<a id="term-collation"></a>
+
+## 3.33 Collation
+
+**Český překlad:** Pravidla řazení textu
+
+**Vysvětlení:** Pravidla porovnávání a řazení textových hodnot.
+
+**Zdrojový dokument:** `MM-DB-003`
+
+**Cílová kapitola nebo sekce:** Terminologičtí kandidáti
+
+**Funkce v panelu:**
+
+- zobrazit tento výklad,
+- otevřít odpovídající kapitolu,
+- otevřít celý zdrojový dokument.
+
+[Zpět na rejstřík](#2-klikaci-rejstrik)
+
+---
+
 <a id="term-commit"></a>
-## 3.32 Commit
+## 3.34 Commit
 
 **Český překlad:** potvrzení změny
 
@@ -934,7 +987,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-competition-risk"></a>
-## 3.33 Competition Risk
+## 3.35 Competition Risk
 
 **Český překlad:** Riziko záměny soutěže
 
@@ -955,7 +1008,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-completion-audit"></a>
-## 3.34 Completion Audit
+## 3.36 Completion Audit
 
 **Český překlad:** Audit dokončenosti
 
@@ -976,7 +1029,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-contradicted"></a>
-## 3.35 Contradicted
+## 3.37 Contradicted
 
 **Český překlad:** Rozporné
 
@@ -997,7 +1050,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-control-panel"></a>
-## 3.36 Control Panel
+## 3.38 Control Panel
 
 **Český překlad:** Řídicí panel
 
@@ -1018,7 +1071,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-controlled-reset"></a>
-## 3.37 Controlled Reset
+## 3.39 Controlled Reset
 
 **Český překlad:** Řízený reset
 
@@ -1039,7 +1092,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-core-layer"></a>
-## 3.38 Core Layer
+## 3.40 Core Layer
 
 **Český překlad:** základní datová vrstva
 
@@ -1060,7 +1113,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-coverage"></a>
-## 3.39 Coverage
+## 3.41 Coverage
 
 **Český překlad:** Datové pokrytí
 
@@ -1081,7 +1134,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-coverage-status"></a>
-## 3.40 Coverage Status
+## 3.42 Coverage Status
 
 **Český překlad:** Stav datového pokrytí
 
@@ -1102,7 +1155,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-cross-sport-collision"></a>
-## 3.41 Cross-sport Collision
+## 3.43 Cross-sport Collision
 
 **Český překlad:** Kolize mezi sporty
 
@@ -1123,7 +1176,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-current-status"></a>
-## 3.42 Current Status
+## 3.44 Current Status
 
 **Český překlad:** aktuální stav
 
@@ -1144,7 +1197,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-dashboard"></a>
-## 3.43 Dashboard
+## 3.45 Dashboard
 
 **Český překlad:** řídicí přehled
 
@@ -1165,7 +1218,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-data-contract"></a>
-## 3.44 Data Contract
+## 3.46 Data Contract
 
 **Český překlad:** Datový kontrakt
 
@@ -1186,7 +1239,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-data-core"></a>
-## 3.45 Data Core
+## 3.47 Data Core
 
 **Český překlad:** Datové jádro
 
@@ -1206,8 +1259,30 @@ Po kliknutí na pojem má panel zobrazit:
 
 ---
 
+<a id="term-data-dictionary"></a>
+
+## 3.48 Data dictionary
+
+**Český překlad:** Datový slovník
+
+**Vysvětlení:** Řízený katalog tabulek, sloupců, typů a významu dat.
+
+**Zdrojový dokument:** `MM-DB-003`
+
+**Cílová kapitola nebo sekce:** Terminologičtí kandidáti
+
+**Funkce v panelu:**
+
+- zobrazit tento výklad,
+- otevřít odpovídající kapitolu,
+- otevřít celý zdrojový dokument.
+
+[Zpět na rejstřík](#2-klikaci-rejstrik)
+
+---
+
 <a id="term-data-gap"></a>
-## 3.46 Data Gap
+## 3.49 Data Gap
 
 **Český překlad:** datová mezera
 
@@ -1228,7 +1303,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-database-governance"></a>
-## 3.47 Database Governance
+## 3.50 Database Governance
 
 **Český překlad:** řízení databáze
 
@@ -1249,7 +1324,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-database-snapshot"></a>
-## 3.48 Database Snapshot
+## 3.51 Database Snapshot
 
 **Český překlad:** snímek databáze
 
@@ -1270,7 +1345,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-date-conflict"></a>
-## 3.49 Date Conflict
+## 3.52 Date Conflict
 
 **Český překlad:** Rozpor v datu
 
@@ -1291,7 +1366,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-decay"></a>
-## 3.50 Decay
+## 3.53 Decay
 
 **Český překlad:** Časový útlum
 
@@ -1312,7 +1387,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-dependency-graph"></a>
-## 3.51 Dependency Graph
+## 3.54 Dependency Graph
 
 **Český překlad:** Graf závislostí
 
@@ -1333,7 +1408,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-dependency-aware-execution"></a>
-## 3.52 Dependency-aware Execution
+## 3.55 Dependency-aware Execution
 
 **Český překlad:** Spouštění se znalostí závislostí
 
@@ -1354,7 +1429,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-deprecated"></a>
-## 3.53 Deprecated
+## 3.56 Deprecated
 
 **Český překlad:** zastaralý
 
@@ -1375,7 +1450,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-discovery-candidate"></a>
-## 3.54 Discovery Candidate
+## 3.57 Discovery Candidate
 
 **Český překlad:** Kandidát objeveného zdroje
 
@@ -1396,7 +1471,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-discovery-based-scope"></a>
-## 3.55 Discovery-based Scope
+## 3.58 Discovery-based Scope
 
 **Český překlad:** Rozsah řízený objevováním zdrojů
 
@@ -1417,7 +1492,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-document-id"></a>
-## 3.56 Document ID
+## 3.59 Document ID
 
 **Český překlad:** identifikátor dokumentu
 
@@ -1438,7 +1513,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-document-relation"></a>
-## 3.57 Document Relation
+## 3.60 Document Relation
 
 **Český překlad:** vazba dokumentů
 
@@ -1459,7 +1534,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-document-section"></a>
-## 3.58 Document Section
+## 3.61 Document Section
 
 **Český překlad:** sekce dokumentu
 
@@ -1480,7 +1555,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-documentation-framework"></a>
-## 3.59 Documentation Framework
+## 3.62 Documentation Framework
 
 **Český překlad:** rámec dokumentace
 
@@ -1501,7 +1576,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-documentation-management-system"></a>
-## 3.60 Documentation Management System
+## 3.63 Documentation Management System
 
 **Český překlad:** systém správy dokumentace
 
@@ -1522,7 +1597,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-documentation-platform"></a>
-## 3.61 Documentation Platform
+## 3.64 Documentation Platform
 
 **Český překlad:** dokumentační platforma
 
@@ -1543,7 +1618,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-downstream-refresh"></a>
-## 3.62 Downstream Refresh
+## 3.65 Downstream Refresh
 
 **Český překlad:** Obnovení navazujících vrstev
 
@@ -1564,7 +1639,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-dry-run"></a>
-## 3.63 Dry Run
+## 3.66 Dry Run
 
 **Český překlad:** zkušební běh bez zápisu
 
@@ -1585,7 +1660,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-end-to-end-confirmed"></a>
-## 3.64 End-to-End Confirmed
+## 3.67 End-to-End Confirmed
 
 **Český překlad:** Potvrzeno od začátku do konce
 
@@ -1606,7 +1681,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-endpoint"></a>
-## 3.65 Endpoint
+## 3.68 Endpoint
 
 **Český překlad:** Koncový bod API
 
@@ -1627,7 +1702,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-entity-governance"></a>
-## 3.66 Entity Governance
+## 3.69 Entity Governance
 
 **Český překlad:** řízení entit
 
@@ -1648,7 +1723,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-entity-matching"></a>
-## 3.67 Entity Matching
+## 3.70 Entity Matching
 
 **Český překlad:** Párování entit
 
@@ -1669,7 +1744,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-entity-plan"></a>
-## 3.68 Entity Plan
+## 3.71 Entity Plan
 
 **Český překlad:** Plán entit
 
@@ -1690,7 +1765,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-expanded-variant"></a>
-## 3.69 Expanded Variant
+## 3.72 Expanded Variant
 
 **Český překlad:** Rozšířená varianta
 
@@ -1711,7 +1786,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-expected-value-ev"></a>
-## 3.70 Expected Value (EV)
+## 3.73 Expected Value (EV)
 
 **Český překlad:** Očekávaná hodnota
 
@@ -1732,7 +1807,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-fallback"></a>
-## 3.71 Fallback
+## 3.74 Fallback
 
 **Český překlad:** záložní řešení
 
@@ -1753,7 +1828,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-false-positive"></a>
-## 3.72 False Positive
+## 3.75 False Positive
 
 **Český překlad:** Falešně kladný výsledek
 
@@ -1774,7 +1849,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-false-positive-risk"></a>
-## 3.73 False Positive Risk
+## 3.76 False Positive Risk
 
 **Český překlad:** Riziko falešné shody
 
@@ -1795,7 +1870,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-feature-dataset"></a>
-## 3.74 Feature Dataset
+## 3.77 Feature Dataset
 
 **Český překlad:** Datová sada příznaků
 
@@ -1816,7 +1891,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-feed"></a>
-## 3.75 Feed
+## 3.78 Feed
 
 **Český překlad:** Datový nebo obsahový kanál
 
@@ -1837,7 +1912,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-fixed-pick"></a>
-## 3.76 Fixed Pick
+## 3.79 Fixed Pick
 
 **Český překlad:** Pevný výběr
 
@@ -1857,8 +1932,30 @@ Po kliknutí na pojem má panel zobrazit:
 
 ---
 
+<a id="term-foreign-key"></a>
+
+## 3.80 Foreign key
+
+**Český překlad:** Cizí klíč
+
+**Vysvětlení:** Integritní vazba na klíč jiného objektu.
+
+**Zdrojový dokument:** `MM-DB-003`
+
+**Cílová kapitola nebo sekce:** Terminologičtí kandidáti
+
+**Funkce v panelu:**
+
+- zobrazit tento výklad,
+- otevřít odpovídající kapitolu,
+- otevřít celý zdrojový dokument.
+
+[Zpět na rejstřík](#2-klikaci-rejstrik)
+
+---
+
 <a id="term-form"></a>
-## 3.77 Form
+## 3.81 Form
 
 **Český překlad:** Aktuální forma
 
@@ -1879,7 +1976,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-free-plan"></a>
-## 3.78 Free Plan
+## 3.82 Free Plan
 
 **Český překlad:** Bezplatný tarif
 
@@ -1900,7 +1997,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-frontend-ready"></a>
-## 3.79 Frontend-ready
+## 3.83 Frontend-ready
 
 **Český překlad:** Připraveno pro frontend
 
@@ -1921,7 +2018,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-full-snapshot"></a>
-## 3.80 Full Snapshot
+## 3.84 Full Snapshot
 
 **Český překlad:** úplný snímek
 
@@ -1942,7 +2039,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-fuzzy-matching"></a>
-## 3.81 Fuzzy Matching
+## 3.85 Fuzzy Matching
 
 **Český překlad:** Přibližné párování
 
@@ -1962,8 +2059,30 @@ Po kliknutí na pojem má panel zobrazit:
 
 ---
 
+<a id="term-generated-column"></a>
+
+## 3.86 Generated column
+
+**Český překlad:** Generovaný sloupec
+
+**Vysvětlení:** Sloupec odvozený databází z generačního výrazu.
+
+**Zdrojový dokument:** `MM-DB-003`
+
+**Cílová kapitola nebo sekce:** Terminologičtí kandidáti
+
+**Funkce v panelu:**
+
+- zobrazit tento výklad,
+- otevřít odpovídající kapitolu,
+- otevřít celý zdrojový dokument.
+
+[Zpět na rejstřík](#2-klikaci-rejstrik)
+
+---
+
 <a id="term-governance"></a>
-## 3.82 Governance
+## 3.87 Governance
 
 **Český překlad:** řízení systému
 
@@ -1984,7 +2103,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-harvest"></a>
-## 3.83 Harvest
+## 3.88 Harvest
 
 **Český překlad:** sběr dat
 
@@ -2005,7 +2124,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-harvest-governance"></a>
-## 3.84 Harvest Governance
+## 3.89 Harvest Governance
 
 **Český překlad:** řízení sběru dat
 
@@ -2026,7 +2145,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-harvest-planner"></a>
-## 3.85 Harvest Planner
+## 3.90 Harvest Planner
 
 **Český překlad:** plánovač sběru dat
 
@@ -2047,7 +2166,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-head-to-head-h2h"></a>
-## 3.86 Head-to-Head (H2H)
+## 3.91 Head-to-Head (H2H)
 
 **Český překlad:** Vzájemné zápasy
 
@@ -2068,7 +2187,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-health-monitoring"></a>
-## 3.87 Health Monitoring
+## 3.92 Health Monitoring
 
 **Český překlad:** sledování provozního stavu
 
@@ -2089,7 +2208,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-healthcheck"></a>
-## 3.88 Healthcheck
+## 3.93 Healthcheck
 
 **Český překlad:** Kontrola provozního zdraví
 
@@ -2109,8 +2228,30 @@ Po kliknutí na pojem má panel zobrazit:
 
 ---
 
+<a id="term-identity-column"></a>
+
+## 3.94 Identity column
+
+**Český překlad:** Identitní sloupec
+
+**Vysvětlení:** Sloupec, jehož hodnotu generuje databáze podle identity pravidel.
+
+**Zdrojový dokument:** `MM-DB-003`
+
+**Cílová kapitola nebo sekce:** Terminologičtí kandidáti
+
+**Funkce v panelu:**
+
+- zobrazit tento výklad,
+- otevřít odpovídající kapitolu,
+- otevřít celý zdrojový dokument.
+
+[Zpět na rejstřík](#2-klikaci-rejstrik)
+
+---
+
 <a id="term-import"></a>
-## 3.89 Import
+## 3.95 Import
 
 **Český překlad:** načtení / zavedení dat
 
@@ -2131,7 +2272,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-import-manifest"></a>
-## 3.90 Import Manifest
+## 3.96 Import Manifest
 
 **Český překlad:** importní manifest
 
@@ -2152,7 +2293,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-import-run"></a>
-## 3.91 Import Run
+## 3.97 Import Run
 
 **Český překlad:** importní běh
 
@@ -2173,7 +2314,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-importer"></a>
-## 3.92 Importer
+## 3.98 Importer
 
 **Český překlad:** importní nástroj
 
@@ -2194,7 +2335,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-incremental-import"></a>
-## 3.93 Incremental Import
+## 3.99 Incremental Import
 
 **Český překlad:** přírůstkový import
 
@@ -2215,7 +2356,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-incremental-manifest"></a>
-## 3.94 Incremental Manifest
+## 3.100 Incremental Manifest
 
 **Český překlad:** přírůstkový manifest
 
@@ -2236,7 +2377,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-ingest-cycle"></a>
-## 3.95 Ingest Cycle
+## 3.101 Ingest Cycle
 
 **Český překlad:** Ingestní cyklus
 
@@ -2257,7 +2398,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-knowledge-base"></a>
-## 3.96 Knowledge Base
+## 3.102 Knowledge Base
 
 **Český překlad:** znalostní báze
 
@@ -2278,7 +2419,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-layer"></a>
-## 3.97 Layer
+## 3.103 Layer
 
 **Český překlad:** vrstva
 
@@ -2299,7 +2440,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-layer-architecture"></a>
-## 3.98 Layer Architecture
+## 3.104 Layer Architecture
 
 **Český překlad:** vrstevná architektura
 
@@ -2320,7 +2461,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-league-discovery"></a>
-## 3.99 League Discovery
+## 3.105 League Discovery
 
 **Český překlad:** Objevování soutěží
 
@@ -2341,7 +2482,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-learning-loop"></a>
-## 3.100 Learning Loop
+## 3.106 Learning Loop
 
 **Český překlad:** Učící smyčka
 
@@ -2362,7 +2503,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-legacy"></a>
-## 3.101 Legacy
+## 3.107 Legacy
 
 **Český překlad:** Historická nebo přechodová část
 
@@ -2383,7 +2524,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-live-feed"></a>
-## 3.102 Live Feed
+## 3.108 Live Feed
 
 **Český překlad:** Živý datový kanál
 
@@ -2404,7 +2545,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-manifest"></a>
-## 3.103 Manifest
+## 3.109 Manifest
 
 **Český překlad:** strukturovaný seznam
 
@@ -2425,7 +2566,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-mapping-edge"></a>
-## 3.104 Mapping Edge
+## 3.110 Mapping Edge
 
 **Český překlad:** Hraniční případ mapování
 
@@ -2446,7 +2587,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-mapping-gap"></a>
-## 3.105 Mapping Gap
+## 3.111 Mapping Gap
 
 **Český překlad:** Mezera v mapování
 
@@ -2467,7 +2608,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-market"></a>
-## 3.106 Market
+## 3.112 Market
 
 **Český překlad:** Sázkový trh
 
@@ -2488,7 +2629,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-master-document"></a>
-## 3.107 Master Document
+## 3.113 Master Document
 
 **Český překlad:** hlavní sloučený dokument
 
@@ -2509,7 +2650,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-match-linking"></a>
-## 3.108 Match Linking
+## 3.114 Match Linking
 
 **Český překlad:** Napojení zápasu
 
@@ -2530,7 +2671,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-match-rating"></a>
-## 3.109 Match Rating
+## 3.115 Match Rating
 
 **Český překlad:** Hodnocení zápasu
 
@@ -2551,7 +2692,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-media-layer"></a>
-## 3.110 Media Layer
+## 3.116 Media Layer
 
 **Český překlad:** mediální vrstva
 
@@ -2572,7 +2713,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-merge"></a>
-## 3.111 Merge
+## 3.117 Merge
 
 **Český překlad:** sloučení
 
@@ -2593,7 +2734,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-merge-engine"></a>
-## 3.112 Merge Engine
+## 3.118 Merge Engine
 
 **Český překlad:** slučovací modul
 
@@ -2614,7 +2755,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-metadata"></a>
-## 3.113 Metadata
+## 3.119 Metadata
 
 **Český překlad:** popisná data
 
@@ -2635,7 +2776,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-multi-provider"></a>
-## 3.114 Multi-provider
+## 3.120 Multi-provider
 
 **Český překlad:** Víceproviderový model
 
@@ -2656,7 +2797,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-nearest-match"></a>
-## 3.115 Nearest Match
+## 3.121 Nearest Match
 
 **Český překlad:** Nejbližší odpovídající zápas
 
@@ -2677,7 +2818,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-next-step"></a>
-## 3.116 Next Step
+## 3.122 Next Step
 
 **Český překlad:** další krok
 
@@ -2698,7 +2839,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-no-match-id"></a>
-## 3.117 NO_MATCH_ID
+## 3.123 NO_MATCH_ID
 
 **Český překlad:** Chybějící identifikátor zápasu
 
@@ -2719,7 +2860,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-odds"></a>
-## 3.118 Odds
+## 3.124 Odds
 
 **Český překlad:** Sázkové kurzy
 
@@ -2740,7 +2881,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-odds-layer"></a>
-## 3.119 Odds Layer
+## 3.125 Odds Layer
 
 **Český překlad:** vrstva kurzů
 
@@ -2761,7 +2902,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-open-questions"></a>
-## 3.120 Open Questions
+## 3.126 Open Questions
 
 **Český překlad:** otevřené otázky
 
@@ -2782,7 +2923,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-operations-center"></a>
-## 3.121 Operations Center
+## 3.127 Operations Center
 
 **Český překlad:** Provozní řídicí centrum
 
@@ -2803,7 +2944,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-ops"></a>
-## 3.122 OPS
+## 3.128 OPS
 
 **Český překlad:** provozní vrstva
 
@@ -2824,7 +2965,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-ops-governance"></a>
-## 3.123 OPS Governance
+## 3.129 OPS Governance
 
 **Český překlad:** řízení provozní vrstvy
 
@@ -2845,7 +2986,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-orchestration-confirmed"></a>
-## 3.124 Orchestration Confirmed
+## 3.130 Orchestration Confirmed
 
 **Český překlad:** Orchestrace potvrzena
 
@@ -2866,7 +3007,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-paid-plan"></a>
-## 3.125 Paid Plan
+## 3.131 Paid Plan
 
 **Český překlad:** Placený tarif
 
@@ -2887,7 +3028,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-parser"></a>
-## 3.126 Parser
+## 3.132 Parser
 
 **Český překlad:** převodník dat
 
@@ -2908,7 +3049,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-parser-binding"></a>
-## 3.127 Parser Binding
+## 3.133 Parser Binding
 
 **Český překlad:** Vazba parseru
 
@@ -2929,7 +3070,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-parser-pipeline"></a>
-## 3.128 Parser Pipeline
+## 3.134 Parser Pipeline
 
 **Český překlad:** řetězec převodu dat
 
@@ -2950,7 +3091,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-partial"></a>
-## 3.129 Partial
+## 3.135 Partial
 
 **Český překlad:** Částečné
 
@@ -2971,7 +3112,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-participant-identity"></a>
-## 3.130 Participant Identity
+## 3.136 Participant Identity
 
 **Český překlad:** Identita účastníka
 
@@ -2992,7 +3133,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-pattern"></a>
-## 3.131 Pattern
+## 3.137 Pattern
 
 **Český překlad:** Vzor
 
@@ -3013,7 +3154,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-pending-guard"></a>
-## 3.132 Pending Guard
+## 3.138 Pending Guard
 
 **Český překlad:** Ochrana čekající fronty
 
@@ -3034,7 +3175,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-people-layer"></a>
-## 3.133 People Layer
+## 3.139 People Layer
 
 **Český překlad:** vrstva osob
 
@@ -3055,7 +3196,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-pipeline"></a>
-## 3.134 Pipeline
+## 3.140 Pipeline
 
 **Český překlad:** zpracovatelský řetězec
 
@@ -3076,7 +3217,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-placeholder-team"></a>
-## 3.135 Placeholder Team
+## 3.141 Placeholder Team
 
 **Český překlad:** Dočasný zástupný tým
 
@@ -3097,7 +3238,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-planner-job"></a>
-## 3.136 Planner Job
+## 3.142 Planner Job
 
 **Český překlad:** Úloha plánovače
 
@@ -3118,7 +3259,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-planner-driven-ingest"></a>
-## 3.137 Planner-driven Ingest
+## 3.143 Planner-driven Ingest
 
 **Český překlad:** Ingest řízený plánovačem
 
@@ -3139,7 +3280,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-player-match-statistics"></a>
-## 3.138 Player Match Statistics
+## 3.144 Player Match Statistics
 
 **Český překlad:** Statistiky hráče v zápase
 
@@ -3160,7 +3301,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-player-season-statistics"></a>
-## 3.139 Player Season Statistics
+## 3.145 Player Season Statistics
 
 **Český překlad:** Sezonní statistiky hráče
 
@@ -3181,7 +3322,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-post-import-verification"></a>
-## 3.140 Post-import Verification
+## 3.146 Post-import Verification
 
 **Český překlad:** ověření po importu
 
@@ -3202,7 +3343,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-prediction-pipeline"></a>
-## 3.141 Prediction Pipeline
+## 3.147 Prediction Pipeline
 
 **Český překlad:** Predikční pipeline
 
@@ -3222,8 +3363,30 @@ Po kliknutí na pojem má panel zobrazit:
 
 ---
 
+<a id="term-primary-key"></a>
+
+## 3.148 Primary key
+
+**Český překlad:** Primární klíč
+
+**Vysvětlení:** Jedinečný identifikátor řádku tabulky.
+
+**Zdrojový dokument:** `MM-DB-003`
+
+**Cílová kapitola nebo sekce:** Terminologičtí kandidáti
+
+**Funkce v panelu:**
+
+- zobrazit tento výklad,
+- otevřít odpovídající kapitolu,
+- otevřít celý zdrojový dokument.
+
+[Zpět na rejstřík](#2-klikaci-rejstrik)
+
+---
+
 <a id="term-priority-queue"></a>
-## 3.142 Priority Queue
+## 3.149 Priority Queue
 
 **Český překlad:** Prioritní fronta
 
@@ -3244,7 +3407,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-product-core"></a>
-## 3.143 Product Core
+## 3.150 Product Core
 
 **Český překlad:** Produktové jádro
 
@@ -3265,7 +3428,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-production-ready"></a>
-## 3.144 Production-ready
+## 3.151 Production-ready
 
 **Český překlad:** Připraveno pro produkční provoz
 
@@ -3286,7 +3449,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-project-snapshot"></a>
-## 3.145 Project Snapshot
+## 3.152 Project Snapshot
 
 **Český překlad:** snímek projektu
 
@@ -3307,7 +3470,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-provider"></a>
-## 3.146 Provider
+## 3.153 Provider
 
 **Český překlad:** poskytovatel dat
 
@@ -3328,7 +3491,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-provider-architecture"></a>
-## 3.147 Provider Architecture
+## 3.154 Provider Architecture
 
 **Český překlad:** architektura poskytovatelů dat
 
@@ -3349,7 +3512,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-provider-coverage"></a>
-## 3.148 Provider Coverage
+## 3.155 Provider Coverage
 
 **Český překlad:** Pokrytí providera
 
@@ -3370,7 +3533,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-provider-governance"></a>
-## 3.149 Provider Governance
+## 3.156 Provider Governance
 
 **Český překlad:** řízení poskytovatelů dat
 
@@ -3391,7 +3554,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-provider-health-monitoring"></a>
-## 3.150 Provider Health Monitoring
+## 3.157 Provider Health Monitoring
 
 **Český překlad:** sledování stavu poskytovatelů dat
 
@@ -3412,7 +3575,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-provider-map"></a>
-## 3.151 Provider Map
+## 3.158 Provider Map
 
 **Český překlad:** Mapa providera
 
@@ -3433,7 +3596,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-provider-routing"></a>
-## 3.152 Provider Routing
+## 3.159 Provider Routing
 
 **Český překlad:** Směrování providerů
 
@@ -3454,7 +3617,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-provider-by-entity"></a>
-## 3.153 Provider-by-Entity
+## 3.160 Provider-by-Entity
 
 **Český překlad:** Provider podle entity
 
@@ -3475,7 +3638,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-provider-normalized-staging"></a>
-## 3.154 Provider-normalized Staging
+## 3.161 Provider-normalized Staging
 
 **Český překlad:** Providerově normalizovaná staging vrstva
 
@@ -3496,7 +3659,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-public"></a>
-## 3.155 Public
+## 3.162 Public
 
 **Český překlad:** veřejná vrstva
 
@@ -3517,7 +3680,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-pull"></a>
-## 3.156 Pull
+## 3.163 Pull
 
 **Český překlad:** stažení dat
 
@@ -3538,7 +3701,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-push"></a>
-## 3.157 Push
+## 3.164 Push
 
 **Český překlad:** odeslání změn
 
@@ -3559,7 +3722,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-quality-audit"></a>
-## 3.158 Quality Audit
+## 3.165 Quality Audit
 
 **Český překlad:** Audit kvality
 
@@ -3580,7 +3743,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-queue"></a>
-## 3.159 Queue
+## 3.166 Queue
 
 **Český překlad:** Fronta úloh
 
@@ -3601,7 +3764,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-rate-limiting"></a>
-## 3.160 Rate Limiting
+## 3.167 Rate Limiting
 
 **Český překlad:** Omezování frekvence požadavků
 
@@ -3622,7 +3785,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-raw"></a>
-## 3.161 Raw
+## 3.168 Raw
 
 **Český překlad:** surová data
 
@@ -3643,7 +3806,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-raw-payload"></a>
-## 3.162 RAW Payload
+## 3.169 RAW Payload
 
 **Český překlad:** Surový datový obsah
 
@@ -3664,7 +3827,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-readiness"></a>
-## 3.163 Readiness
+## 3.170 Readiness
 
 **Český překlad:** Připravenost
 
@@ -3685,7 +3848,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-readiness-scoring"></a>
-## 3.164 Readiness Scoring
+## 3.171 Readiness Scoring
 
 **Český překlad:** Skórování připravenosti
 
@@ -3706,7 +3869,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-reason-code"></a>
-## 3.165 Reason Code
+## 3.172 Reason Code
 
 **Český překlad:** Kód důvodu
 
@@ -3727,7 +3890,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-recommendation-engine"></a>
-## 3.166 Recommendation Engine
+## 3.173 Recommendation Engine
 
 **Český překlad:** Doporučovací engine
 
@@ -3748,7 +3911,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-request-budget"></a>
-## 3.167 Request Budget
+## 3.174 Request Budget
 
 **Český překlad:** Rozpočet požadavků
 
@@ -3769,7 +3932,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-retry"></a>
-## 3.168 Retry
+## 3.175 Retry
 
 **Český překlad:** opakovaný pokus
 
@@ -3790,7 +3953,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-return-on-investment-roi"></a>
-## 3.169 Return on Investment (ROI)
+## 3.176 Return on Investment (ROI)
 
 **Český překlad:** Návratnost investice
 
@@ -3811,7 +3974,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-review"></a>
-## 3.170 Review
+## 3.177 Review
 
 **Český překlad:** kontrola / posouzení
 
@@ -3832,7 +3995,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-risk-score"></a>
-## 3.171 Risk Score
+## 3.178 Risk Score
 
 **Český překlad:** Skóre rizika
 
@@ -3853,7 +4016,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-rollback"></a>
-## 3.172 Rollback
+## 3.179 Rollback
 
 **Český překlad:** vrácení změny
 
@@ -3874,7 +4037,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-run-group"></a>
-## 3.173 Run Group
+## 3.180 Run Group
 
 **Český překlad:** Skupina běhu
 
@@ -3895,7 +4058,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-runner"></a>
-## 3.174 Runner
+## 3.181 Runner
 
 **Český překlad:** Spouštěcí komponenta
 
@@ -3916,7 +4079,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-runtime"></a>
-## 3.175 Runtime
+## 3.182 Runtime
 
 **Český překlad:** běhové prostředí
 
@@ -3937,7 +4100,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-runtime-alert"></a>
-## 3.176 Runtime Alert
+## 3.183 Runtime Alert
 
 **Český překlad:** Běhové upozornění
 
@@ -3958,7 +4121,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-runtime-audit"></a>
-## 3.177 Runtime Audit
+## 3.184 Runtime Audit
 
 **Český překlad:** Běhový audit
 
@@ -3979,7 +4142,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-runtime-readiness"></a>
-## 3.178 Runtime Readiness
+## 3.185 Runtime Readiness
 
 **Český překlad:** Běhová připravenost
 
@@ -4000,7 +4163,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-runtime-tested"></a>
-## 3.179 Runtime Tested
+## 3.186 Runtime Tested
 
 **Český překlad:** Běhově otestováno
 
@@ -4021,7 +4184,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-safe-autonomous"></a>
-## 3.180 Safe Autonomous
+## 3.187 Safe Autonomous
 
 **Český překlad:** Bezpečný autonomní režim
 
@@ -4042,7 +4205,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-safe-linker"></a>
-## 3.181 Safe Linker
+## 3.188 Safe Linker
 
 **Český překlad:** Bezpečný propojovací nástroj
 
@@ -4063,7 +4226,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-same-sport-duplicate"></a>
-## 3.182 Same-sport Duplicate
+## 3.189 Same-sport Duplicate
 
 **Český překlad:** Duplicita v rámci sportu
 
@@ -4084,7 +4247,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-scheduler"></a>
-## 3.183 Scheduler
+## 3.190 Scheduler
 
 **Český překlad:** Plánovač spuštění
 
@@ -4105,7 +4268,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-scheduler-candidate"></a>
-## 3.184 Scheduler Candidate
+## 3.191 Scheduler Candidate
 
 **Český překlad:** Kandidát plánovače
 
@@ -4126,7 +4289,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-script-governance"></a>
-## 3.185 Script Governance
+## 3.192 Script Governance
 
 **Český překlad:** řízení skriptů
 
@@ -4147,7 +4310,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-settlement"></a>
-## 3.186 Settlement
+## 3.193 Settlement
 
 **Český překlad:** Vyhodnocení tiketu
 
@@ -4168,7 +4331,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-smoke-test"></a>
-## 3.187 Smoke Test
+## 3.194 Smoke Test
 
 **Český překlad:** Rychlý ověřovací test
 
@@ -4189,7 +4352,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-source-discovery"></a>
-## 3.188 Source Discovery
+## 3.195 Source Discovery
 
 **Český překlad:** Objevování zdrojů
 
@@ -4210,7 +4373,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-source-gap"></a>
-## 3.189 Source Gap
+## 3.196 Source Gap
 
 **Český překlad:** Mezera ve zdrojových datech
 
@@ -4231,7 +4394,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-source-governance"></a>
-## 3.190 Source Governance
+## 3.197 Source Governance
 
 **Český překlad:** řízení zdrojů
 
@@ -4252,7 +4415,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-source-intelligence-layer"></a>
-## 3.191 Source Intelligence Layer
+## 3.198 Source Intelligence Layer
 
 **Český překlad:** vrstva inteligence zdrojů
 
@@ -4273,7 +4436,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-source-of-truth"></a>
-## 3.192 Source of Truth
+## 3.199 Source of Truth
 
 **Český překlad:** Zdroj pravdy
 
@@ -4294,7 +4457,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-staging"></a>
-## 3.193 Staging
+## 3.200 Staging
 
 **Český překlad:** přípravná databázová vrstva
 
@@ -4315,7 +4478,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-staging-confirmed"></a>
-## 3.194 Staging Confirmed
+## 3.201 Staging Confirmed
 
 **Český překlad:** Staging potvrzen
 
@@ -4336,7 +4499,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-stake"></a>
-## 3.195 Stake
+## 3.202 Stake
 
 **Český překlad:** Vklad
 
@@ -4357,7 +4520,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-standings"></a>
-## 3.196 Standings
+## 3.203 Standings
 
 **Český překlad:** Tabulka soutěže
 
@@ -4378,7 +4541,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-status"></a>
-## 3.197 Status
+## 3.204 Status
 
 **Český překlad:** stav
 
@@ -4399,7 +4562,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-strategic-design"></a>
-## 3.198 Strategic Design
+## 3.205 Strategic Design
 
 **Český překlad:** Strategický návrh
 
@@ -4420,7 +4583,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-superseded"></a>
-## 3.199 Superseded
+## 3.206 Superseded
 
 **Český překlad:** Nahrazeno novější verzí
 
@@ -4441,7 +4604,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-team-power"></a>
-## 3.200 Team Power
+## 3.207 Team Power
 
 **Český překlad:** Síla týmu
 
@@ -4462,7 +4625,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-team-rating"></a>
-## 3.201 Team Rating
+## 3.208 Team Rating
 
 **Český překlad:** Hodnocení týmu
 
@@ -4483,7 +4646,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-tech-ready"></a>
-## 3.202 Tech Ready
+## 3.209 Tech Ready
 
 **Český překlad:** Technicky připraveno
 
@@ -4504,7 +4667,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-ticket-block"></a>
-## 3.203 Ticket Block
+## 3.210 Ticket Block
 
 **Český překlad:** Blok tiketu
 
@@ -4525,7 +4688,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-ticket-engine"></a>
-## 3.204 Ticket Engine
+## 3.211 Ticket Engine
 
 **Český překlad:** Engine tvorby tiketů
 
@@ -4546,7 +4709,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-ticket-studio"></a>
-## 3.205 Ticket Studio
+## 3.212 Ticket Studio
 
 **Český překlad:** Studio pro tvorbu tiketů
 
@@ -4567,7 +4730,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-ticket-variant"></a>
-## 3.206 Ticket Variant
+## 3.213 Ticket Variant
 
 **Český překlad:** Varianta tiketu
 
@@ -4588,7 +4751,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-total-odd"></a>
-## 3.207 Total Odd
+## 3.214 Total Odd
 
 **Český překlad:** Celkový kurz
 
@@ -4609,7 +4772,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-trending"></a>
-## 3.208 Trending
+## 3.215 Trending
 
 **Český překlad:** Trendovost
 
@@ -4630,7 +4793,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-unified-staging"></a>
-## 3.209 Unified Staging
+## 3.216 Unified Staging
 
 **Český překlad:** Jednotná staging vrstva
 
@@ -4650,8 +4813,52 @@ Po kliknutí na pojem má panel zobrazit:
 
 ---
 
+<a id="term-unique-constraint"></a>
+
+## 3.217 Unique constraint
+
+**Český překlad:** Omezení jedinečnosti
+
+**Vysvětlení:** Pravidlo zakazující duplicitní kombinaci hodnot.
+
+**Zdrojový dokument:** `MM-DB-003`
+
+**Cílová kapitola nebo sekce:** Terminologičtí kandidáti
+
+**Funkce v panelu:**
+
+- zobrazit tento výklad,
+- otevřít odpovídající kapitolu,
+- otevřít celý zdrojový dokument.
+
+[Zpět na rejstřík](#2-klikaci-rejstrik)
+
+---
+
+<a id="term-user-defined-type"></a>
+
+## 3.218 User-defined type
+
+**Český překlad:** Uživatelsky definovaný datový typ
+
+**Vysvětlení:** Datový typ vytvořený mimo vestavěné typy PostgreSQL.
+
+**Zdrojový dokument:** `MM-DB-003`
+
+**Cílová kapitola nebo sekce:** Terminologičtí kandidáti
+
+**Funkce v panelu:**
+
+- zobrazit tento výklad,
+- otevřít odpovídající kapitolu,
+- otevřít celý zdrojový dokument.
+
+[Zpět na rejstřík](#2-klikaci-rejstrik)
+
+---
+
 <a id="term-value-analysis"></a>
-## 3.210 Value Analysis
+## 3.219 Value Analysis
 
 **Český překlad:** Hodnotová analýza
 
@@ -4672,7 +4879,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-worker"></a>
-## 3.211 Worker
+## 3.220 Worker
 
 **Český překlad:** pracovní proces
 
@@ -4693,7 +4900,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-worker-lock"></a>
-## 3.212 Worker Lock
+## 3.221 Worker Lock
 
 **Český překlad:** Zámek workeru
 
@@ -4714,7 +4921,7 @@ Po kliknutí na pojem má panel zobrazit:
 ---
 
 <a id="term-workflow"></a>
-## 3.213 Workflow
+## 3.222 Workflow
 
 **Český překlad:** pracovní postup
 
@@ -4731,6 +4938,8 @@ Po kliknutí na pojem má panel zobrazit:
 - otevřít celý zdrojový dokument.
 
 [Zpět na rejstřík](#2-klikaci-rejstrik)
+
+---
 
 ---
 
@@ -4753,16 +4962,15 @@ Pokud cílová kapitola není nalezena, panel nabídne otevření celého dokume
 
 ---
 
-# 6. Souhrn verze 1.1
+# 6. Souhrn verze 1.2
 
 | Položka | Hodnota |
 |---|---:|
 | Původní výklady | 80 |
-| Nové výklady ze snapshotů | 133 |
-| Celkový počet výkladů | 213 |
+| Výklady ze snapshotů ve verzi 1.1 | 133 |
+| Nové výklady z MM-DB-003 ve verzi 1.2 | 9 |
+| Celkový počet výkladů | 222 |
 | Zdrojové snapshoty | MM-PS-20260331, MM-PS-20260430, MM-PS-20260531 |
-
----
 
 # 7. Historie verzí
 
@@ -4770,9 +4978,10 @@ Pokud cílová kapitola není nalezena, panel nabídne otevření celého dokume
 |---|---|---|
 | 1.0 | 2026-07-02 | První výkladový rejstřík s 80 pojmy. |
 | 1.1 | 2026-07-09 | Doplněny výklady, zdroje a navigace pro pojmy z Project Snapshotů za březen, duben a květen 2026. |
+| 1.2 | 2026-07-17 | Doplněno 9 výkladových položek ze zdroje MM-DB-003. |
 
 ---
 
 # Závěr
 
-MM-REF-002 v1.1 poskytuje panelu MatchMatrix úplný výkladový protějšek k překladovému slovníku MM-REF-001.
+MM-REF-002 v1.2 poskytuje panelu MatchMatrix úplný výkladový protějšek k překladovému slovníku MM-REF-001.

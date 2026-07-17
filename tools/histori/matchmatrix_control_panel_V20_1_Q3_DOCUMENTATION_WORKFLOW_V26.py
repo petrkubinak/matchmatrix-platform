@@ -146,12 +146,7 @@ V20.1.Q3 STEP 26:
 - návrhy se ukládají pouze do a23/proposals a nemění kanonické soubory, Git ani databázi.
 
 V20.1.Q3 STEP 25:
-- STEP 28 mění A23 na automatické doplňování pracovních slovníků:
-  jednoznačné NOVÉ pojmy se bez dialogu zapíší do MM-REF-001 a MM-REF-002,
-  EXISTUJE se přeskočí a pouze REVIEW/KONFLIKT se zobrazí uživateli,
-- interní proposal soubory zůstávají zachovány jako auditní mezivýstup,
-- Git ani dokumentační databáze se automatickým doplněním nemění,
-- přidává bezpečný terminologický krok A23,
+- přidává bezpečný read-only terminologický krok A23,
 - A23 čte explicitní tabulku kandidátů ve vybraném dokumentu,
 - porovnává kandidáty s MM-REF-001 a MM-REF-002,
 - klasifikuje NOVÝ / EXISTUJE / REVIEW / KONFLIKT,
@@ -236,7 +231,6 @@ import threading
 import subprocess
 import shlex
 import shutil
-import socket
 import json
 import sys
 import base64
@@ -3545,7 +3539,7 @@ class MatchMatrixAdminPanel(tk.Tk):
         )
         self.make_button(
             glossary_actions,
-            "🧪 A23 DOPLNIT SLOVNÍKY",
+            "🧪 A23 NÁVRH POJMŮ",
             "#9a5b13",
             self.documentation_run_a23
         )
@@ -7994,7 +7988,7 @@ catch {{
             ("Zobrazit A17 nálezy", self.documentation_show_a17_findings),
             ("Otevřít A17 report", self.documentation_open_a17_report),
             ("---", None),
-            ("A23 – zkontrolovat a doplnit slovníky", self.documentation_run_a23),
+            ("A23 – navrhnout terminologické kandidáty", self.documentation_run_a23),
             ("A23 – zobrazit kandidáty", self.documentation_show_a23_candidates),
             ("A23 – otevřít report", self.documentation_open_a23_report),
         ]
@@ -9123,56 +9117,20 @@ catch {{
         )
 
 
-    def _documentation_running_on_pc2(self):
-        """Vrátí True, pokud panel skutečně běží na PC2."""
-        addresses = set()
-        try:
-            for address in socket.gethostbyname_ex(socket.gethostname())[2]:
-                if address:
-                    addresses.add(address)
-        except Exception:
-            pass
-
-        try:
-            probe = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            try:
-                probe.connect((DOCUMENTATION_REMOTE_HOST, 9))
-                local_address = probe.getsockname()[0]
-                if local_address:
-                    addresses.add(local_address)
-            finally:
-                probe.close()
-        except Exception:
-            pass
-
-        return DOCUMENTATION_REMOTE_HOST in addresses
-
-
     def _documentation_to_pc1_unc_path(self, remote_path):
         """
-        STEP 30:
-        Vrátí cestu dostupnou na aktuálním hostiteli.
-
-        - Na PC2 ponechá lokální C:\\MatchMatrix-platform cestu, pokud existuje.
-        - Na PC1 převede vzdálenou cestu na UNC share.
+        STEP 26 FIX 2:
+        Převede cestu vrácenou A23 na PC2 na UNC cestu použitelnou panelem na PC1.
         """
         if not remote_path:
             return remote_path
 
         normalized = os.path.normpath(str(remote_path))
-        if self._documentation_running_on_pc2() and os.path.exists(normalized):
-            return normalized
-
         remote_root = os.path.normpath(DOCUMENTATION_REMOTE_PROJECT_ROOT)
-        unc_root = os.path.normpath(DOCUMENTATION_ROOT)
+        unc_root = os.path.normpath(DOCUMENTATION_PROJECT_ROOT)
 
         try:
-            normalized_case = os.path.normcase(normalized)
-            remote_case = os.path.normcase(remote_root)
-            if (
-                normalized_case == remote_case
-                or normalized_case.startswith(remote_case + os.sep)
-            ):
+            if normalized.lower().startswith(remote_root.lower()):
                 relative = os.path.relpath(normalized, remote_root)
                 return os.path.normpath(os.path.join(unc_root, relative))
         except Exception:
@@ -12077,9 +12035,7 @@ catch {{
 
     def documentation_run_a23(self):
         """
-        V20.1.Q3 STEP 28 - zkontroluje terminologii a automaticky doplní
-        jednoznačné nové pojmy do pracovních verzí MM-REF-001/MM-REF-002.
-        Uživateli se zobrazí pouze položky REVIEW nebo KONFLIKT.
+        V20.1.Q3 STEP 25 - spustí read-only A23 nad aktivním pracovním dokumentem.
         """
         if self.documentation_workflow_running:
             messagebox.showwarning(
@@ -12114,7 +12070,7 @@ catch {{
 
         self.documentation_workflow_running = True
         self.documentation_workflow_step = "A23 TERMINOLOGIE"
-        self.documentation_workflow_last_status = "A23 KONTROLUJE A DOPLŇUJE SLOVNÍKY"
+        self.documentation_workflow_last_status = "A23 BĚŽÍ NA PC2 – READ ONLY"
         self.documentation_workflow_a23_report_json = None
         self.documentation_workflow_a23_report_markdown = None
         self.documentation_workflow_a23_candidates = []
@@ -12287,62 +12243,22 @@ catch {{
             self.documentation_workflow_a23_candidates = list(
                 payload.get("candidates") or []
             )
-            # STEP 30: A23 PC2 PATH + REPORT FIX
-# - report načítán lokálně na PC2 nebo přes UNC na PC1
-# - po doběhu čekání 30 s na viditelnost souboru
-# - payload předán bez druhého čtení reportu
-# - opraven chybný DOCUMENTATION_PROJECT_ROOT
-#
-# STEP 29: A23 REPORT WATCHDOG
-# - návrhový JSON ukončí čekání na visící PowerShell Remoting
-# - pracovní slovníky se následně aplikují bez dialogu
-#
-# STEP 28:
-            # Bez dialogu se automaticky zpracují pouze jednoznačné NOVÉ pojmy.
-            # REVIEW a KONFLIKT musí zůstat k ručnímu rozhodnutí.
             self.documentation_workflow_a23_selected_keys = {
                 str(item.get("normalized_term") or "").strip()
                 for item in self.documentation_workflow_a23_candidates
-                if str(item.get("status") or "").strip().upper() == "NEW"
+                if item.get("selected_for_update")
             }
             summary = payload.get("summary") or {}
-            new_count = int(summary.get("new", 0) or 0)
-            review_count = int(summary.get("review", 0) or 0)
-            conflict_count = int(summary.get("conflict", 0) or 0)
-            exists_count = int(summary.get("exists", 0) or 0)
-
             self.documentation_workflow_last_status = (
-                "A23 KONTROLA HOTOVA – "
-                f"NOVÝ {new_count} | EXISTUJE {exists_count} | "
-                f"K POSOUZENÍ {review_count + conflict_count}"
+                "A23 HOTOVO – "
+                f"NOVÝ {summary.get('new', 0)} | "
+                f"EXISTUJE {summary.get('exists', 0)} | "
+                f"REVIEW {summary.get('review', 0)} | "
+                f"KONFLIKT {summary.get('conflict', 0)}"
             )
-            self.documentation_workflow_step = "A23 AUTOMATICKÉ DOPLNĚNÍ"
+            self.documentation_workflow_step = "A23 DOKONČEN"
             self._documentation_update_workflow_ui()
-
-            attention_count = review_count + conflict_count
-            if attention_count > 0:
-                # Bezpečné NOVÉ položky zůstávají předvybrané na pozadí.
-                # Uživatel vidí jen REVIEW/KONFLIKT a jedním uložením se
-                # všechny schválené položky zapíší do stejné verze slovníků.
-                self.documentation_workflow_step = "A23 ČEKÁ NA POSOUZENÍ"
-                self.documentation_workflow_last_status = (
-                    "A23 – "
-                    f"{new_count} JEDNOZNAČNÝCH PŘIPRAVENO | "
-                    f"{attention_count} K POSOUZENÍ"
-                )
-                self._documentation_update_workflow_ui()
-                self.documentation_show_a23_candidates(only_attention=True)
-            elif new_count > 0 and self.documentation_workflow_a23_selected_keys:
-                self.documentation_build_a23_proposals(
-                    automatic=True,
-                    show_attention_after=False,
-                )
-            else:
-                self.documentation_workflow_step = "A23 BEZE ZMĚNY"
-                self.documentation_workflow_last_status = (
-                    f"A23 HOTOVO – VŠECH {exists_count} POJMŮ JIŽ EXISTUJE"
-                )
-                self._documentation_update_workflow_ui()
+            self.documentation_show_a23_candidates()
         else:
             self.documentation_workflow_last_status = "A23 CHYBA"
             self.documentation_workflow_step = "A23 SELHAL"
@@ -12356,16 +12272,10 @@ catch {{
             )
 
 
-    def documentation_show_a23_candidates(self, only_attention=False):
+    def documentation_show_a23_candidates(self):
         candidates = list(
             getattr(self, "documentation_workflow_a23_candidates", []) or []
         )
-        if only_attention:
-            candidates = [
-                item for item in candidates
-                if str(item.get("status") or "").strip().upper()
-                in {"REVIEW", "CONFLICT"}
-            ]
         if not candidates:
             messagebox.showinfo(
                 "A23 – kandidáti",
@@ -12380,7 +12290,7 @@ catch {{
 
         tk.Label(
             win,
-            text="A23 – POJMY K RUČNÍMU POSOUZENÍ",
+            text="A23 – NÁVRH NOVÝCH A ZMĚNĚNÝCH POJMŮ",
             bg=BG,
             fg=PINK,
             font=("Segoe UI", 16, "bold"),
@@ -12390,8 +12300,8 @@ catch {{
         tk.Label(
             win,
             text=(
-                "Jednoznačné nové pojmy se doplňují automaticky. "
-                "Toto okno se zobrazuje pouze u nejasných překladů nebo konfliktů."
+                "POUZE PRO ČTENÍ: žádný pojem nebyl zapsán do MM-REF-001 ani MM-REF-002. "
+                "NOVÝ a REVIEW budou později předloženy ke schválení."
             ),
             bg=BG,
             fg="#cdb7df",
@@ -12490,7 +12400,7 @@ catch {{
         actions = tk.Frame(win, bg=BG)
         actions.pack(fill="x", padx=10, pady=(0, 10))
         self.make_button(actions, "✓ PŘEPNOUT VÝBĚR", "#3b2555", toggle_selected)
-        self.make_button(actions, "✓ ULOŽIT VYBRANÉ POJMY DO SLOVNÍKŮ", "#9a5b13", lambda: self.documentation_build_a23_proposals(automatic=False))
+        self.make_button(actions, "📝 VYTVOŘIT NÁVRHY MM-REF-001 + MM-REF-002", "#9a5b13", self.documentation_build_a23_proposals)
         self.make_button(
             actions,
             "📄 OTEVŘÍT A23 REPORT",
@@ -12499,432 +12409,117 @@ catch {{
         )
         self.make_button(
             actions,
-            "📝 OTEVŘÍT PRACOVNÍ MM-REF-001",
+            "📝 OTEVŘÍT NÁVRH MM-REF-001",
             "#0f6a42",
             self.documentation_open_a23_translation_proposal
         )
         self.make_button(
             actions,
-            "📘 OTEVŘÍT PRACOVNÍ MM-REF-002",
+            "📘 OTEVŘÍT NÁVRH MM-REF-002",
             "#0f5f63",
             self.documentation_open_a23_explanation_proposal
         )
 
 
-    def documentation_build_a23_proposals(
-        self,
-        automatic=False,
-        show_attention_after=False,
-    ):
-        selected_keys = set(
-            getattr(self, "documentation_workflow_a23_selected_keys", set()) or set()
-        )
-        selected = [
-            item
-            for item in (self.documentation_workflow_a23_candidates or [])
-            if str(item.get("normalized_term") or "").strip() in selected_keys
-        ]
-        if automatic:
-            selected = [
-                item for item in selected
-                if str(item.get("status") or "").strip().upper() == "NEW"
-            ]
+    def documentation_build_a23_proposals(self):
+        selected_keys=set(getattr(self,"documentation_workflow_a23_selected_keys",set()) or set())
+        selected=[item for item in (self.documentation_workflow_a23_candidates or []) if str(item.get("normalized_term") or "").strip() in selected_keys]
         if not selected:
-            if not automatic:
-                messagebox.showwarning(
-                    "A23 – slovníky",
-                    "Není vybrán žádný pojem k uložení.",
-                )
+            messagebox.showwarning("A23 – návrhy","Není vybrán žádný kandidát.")
             return
-
-        self.documentation_workflow_a23_auto_apply = bool(automatic)
-        self.documentation_workflow_a23_show_attention_after = bool(
-            show_attention_after
-        )
+        if not messagebox.askyesno("A23 – vytvořit návrhy",f"Vytvořit pracovní návrhy z {len(selected)} pojmů?\n\nKanonické soubory, Git ani databáze se nezmění."):
+            return
         a23_dir=os.path.join(self.documentation_workflow_workspace,"a23"); os.makedirs(a23_dir,exist_ok=True)
         selection_path=os.path.join(a23_dir,"terminology_selected_candidates.json")
         with open(selection_path,"w",encoding="utf-8") as h:
             json.dump({"generated_at":datetime.now().astimezone().isoformat(),"selected_candidates":selected},h,ensure_ascii=False,indent=2)
         self.documentation_workflow_running=True
-        self.documentation_workflow_step="A23 DOPLŇUJE SLOVNÍKY"
-        self.documentation_workflow_last_status=f"A23 DOPLŇUJE {len(selected)} POJMŮ DO MM-REF-001/MM-REF-002"
+        self.documentation_workflow_step="A23 NÁVRHY SLOVNÍKŮ"
+        self.documentation_workflow_last_status=f"A23 VYTVÁŘÍ NÁVRHY Z {len(selected)} POJMŮ"
         self._documentation_update_workflow_ui()
         threading.Thread(target=self._documentation_build_a23_proposals_worker,args=(selection_path,),daemon=True).start()
 
     def _documentation_build_a23_proposals_worker(self,selection_path):
-        """
-        STEP 30:
-        A23 je dokončen pouze tehdy, když je načten platný JSON report.
-        Report se hledá přes lokální cestu PC2 i přes UNC cestu a po skončení
-        PowerShellu se ještě čeká na jeho zpřístupnění.
-        """
-        p = None
-        output_text = ""
-        local_exit = -1
-        remote_exit = None
-        report_payload = None
-
         try:
-            remote_workspace = self._documentation_to_remote_pc2_path(
-                self.documentation_workflow_workspace
-            )
-            remote_summary = os.path.join(
-                remote_workspace,
-                "a23",
-                "proposals",
-                "terminology_proposals_latest.json",
-            )
-            unc_summary = os.path.join(
+            vals=[DOCUMENTATION_REMOTE_HOST,DOCUMENTATION_PYTHON_EXE,self._documentation_to_remote_pc2_path(DOCUMENTATION_SCRIPTS["A23"]),self._documentation_to_remote_pc2_path(self.documentation_workflow_document),self._documentation_to_remote_pc2_path(GLOSSARY_TRANSLATION_PATH),self._documentation_to_remote_pc2_path(GLOSSARY_EXPLANATION_PATH),self._documentation_to_remote_pc2_path(self.documentation_workflow_workspace),self._documentation_to_remote_pc2_path(selection_path),DOCUMENTATION_REMOTE_PROJECT_ROOT]
+            q=[self._documentation_powershell_literal(v) for v in vals]
+            ps=f"""$ErrorActionPreference=\"Stop\"\n$ProgressPreference=\"SilentlyContinue\"\ntry {{ Invoke-Command -ComputerName {q[0]} -ScriptBlock {{ param($PythonExe,$Script,$Doc,$Ref1,$Ref2,$Workspace,$Selection,$Root) $ProgressPreference="SilentlyContinue"; Set-Location -LiteralPath $Root; & $PythonExe $Script --document $Doc --translation-glossary $Ref1 --explanation-glossary $Ref2 --output-dir (Join-Path $Workspace \"a23\") --mode build-proposals --selection-json $Selection; $c=$LASTEXITCODE; Write-Output \"__MM_A23_PROPOSAL_EXIT_CODE__=$c\"; if($c -ne 0){{throw \"A23 proposal builder selhal: $c\"}} }} -ArgumentList {", ".join(q[1:])}; exit 0 }} catch {{ Write-Error $_.Exception.Message; exit 1 }}"""
+            enc=base64.b64encode(ps.encode("utf-16le")).decode("ascii")
+            p=subprocess.Popen(["powershell.exe","-NoProfile","-NonInteractive","-ExecutionPolicy","Bypass","-EncodedCommand",enc],cwd=BASE_DIR,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=False,creationflags=getattr(subprocess,"CREATE_NO_WINDOW",0))
+            self.documentation_workflow_process=p; raw,_=p.communicate(); out=self._documentation_decode_process_output(raw)
+            m=re.search(r"__MM_A23_PROPOSAL_EXIT_CODE__=(-?\\d+)",out)
+            remote=int(m.group(1)) if m else None
+
+            # STEP 26 FIX:
+            # PowerShell Remoting může připojit CLIXML progress stream a skrýt marker.
+            # Za rozhodující důkaz úspěchu proto považujeme ověřený JSON report,
+            # který A23 zapisuje až po dokončení obou návrhů.
+            local_summary=os.path.join(
                 self.documentation_workflow_workspace,
                 "a23",
                 "proposals",
                 "terminology_proposals_latest.json",
             )
-
-            def load_valid_report():
-                candidates = []
-                source_candidates = (
-                    (remote_summary, unc_summary)
-                    if self._documentation_running_on_pc2()
-                    else (unc_summary,)
-                )
-                for candidate in source_candidates:
-                    normalized_candidate = os.path.normpath(candidate)
-                    if normalized_candidate not in candidates:
-                        candidates.append(normalized_candidate)
-
-                for candidate in candidates:
-                    try:
-                        if not os.path.isfile(candidate):
-                            continue
-                        with open(candidate, "r", encoding="utf-8-sig") as handle:
-                            payload = json.load(handle)
-                        valid = (
-                            payload.get("final_status")
-                            == "TERMINOLOGY_GLOSSARY_PROPOSALS_CREATED"
-                            and payload.get("canonical_files_modified") is False
-                            and payload.get("database_modified") is False
-                            and payload.get("git_modified") is False
-                            and bool(payload.get("translation_candidate"))
-                            and bool(payload.get("explanation_candidate"))
-                        )
-                        if valid:
-                            return payload
-                    except Exception:
-                        continue
-                return None
-
-            # Při opakování stejného workspace nesmí být použit starý report.
-            old_summaries = (
-                (remote_summary, unc_summary)
-                if self._documentation_running_on_pc2()
-                else (unc_summary,)
-            )
-            for old_summary in old_summaries:
-                try:
-                    if os.path.isfile(old_summary):
-                        os.remove(old_summary)
-                except Exception:
-                    pass
-
-            vals = [
-                DOCUMENTATION_REMOTE_HOST,
-                DOCUMENTATION_PYTHON_EXE,
-                self._documentation_to_remote_pc2_path(DOCUMENTATION_SCRIPTS["A23"]),
-                self._documentation_to_remote_pc2_path(self.documentation_workflow_document),
-                self._documentation_to_remote_pc2_path(GLOSSARY_TRANSLATION_PATH),
-                self._documentation_to_remote_pc2_path(GLOSSARY_EXPLANATION_PATH),
-                remote_workspace,
-                self._documentation_to_remote_pc2_path(selection_path),
-                DOCUMENTATION_REMOTE_PROJECT_ROOT,
-            ]
-            q = [self._documentation_powershell_literal(v) for v in vals]
-            ps = f"""$ErrorActionPreference="Stop"
-$ProgressPreference="SilentlyContinue"
-try {{
-    Invoke-Command -ComputerName {q[0]} -ScriptBlock {{
-        param($PythonExe,$Script,$Doc,$Ref1,$Ref2,$Workspace,$Selection,$Root)
-        $ProgressPreference="SilentlyContinue"
-        Set-Location -LiteralPath $Root
-        & $PythonExe $Script --document $Doc --translation-glossary $Ref1 --explanation-glossary $Ref2 --output-dir (Join-Path $Workspace "a23") --mode build-proposals --selection-json $Selection
-        $c=$LASTEXITCODE
-        Write-Output "__MM_A23_PROPOSAL_EXIT_CODE__=$c"
-        if($c -ne 0){{throw "A23 proposal builder selhal: $c"}}
-    }} -ArgumentList {", ".join(q[1:])}
-    exit 0
-}} catch {{
-    Write-Error $_.Exception.Message
-    exit 1
-}}"""
-
-            enc = base64.b64encode(ps.encode("utf-16le")).decode("ascii")
-            p = subprocess.Popen(
-                [
-                    "powershell.exe",
-                    "-NoProfile",
-                    "-NonInteractive",
-                    "-ExecutionPolicy",
-                    "Bypass",
-                    "-EncodedCommand",
-                    enc,
-                ],
-                cwd=BASE_DIR,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                text=False,
-                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
-            )
-            self.documentation_workflow_process = p
-
-            deadline = time.time() + 180.0
-            while time.time() < deadline:
-                report_payload = load_valid_report()
-                if report_payload:
-                    if p.poll() is None:
-                        try:
-                            p.terminate()
-                            p.wait(timeout=3)
-                        except Exception:
-                            try:
-                                p.kill()
-                            except Exception:
-                                pass
-                    break
-
-                if p.poll() is not None:
-                    break
-                time.sleep(0.25)
-
-            if p.poll() is None:
-                try:
-                    p.terminate()
-                    p.wait(timeout=3)
-                except Exception:
-                    try:
-                        p.kill()
-                    except Exception:
-                        pass
-
+            report_ok=False
             try:
-                raw, _ = p.communicate(timeout=5)
+                if os.path.isfile(local_summary):
+                    with open(local_summary,"r",encoding="utf-8-sig") as h:
+                        check_payload=json.load(h)
+                    report_ok=(
+                        check_payload.get("final_status")
+                        == "TERMINOLOGY_GLOSSARY_PROPOSALS_CREATED"
+                        and check_payload.get("canonical_files_modified") is False
+                        and check_payload.get("database_modified") is False
+                        and check_payload.get("git_modified") is False
+                    )
             except Exception:
-                raw = b""
+                report_ok=False
 
-            output_text = self._documentation_decode_process_output(raw)
-            local_exit = p.returncode if p.returncode is not None else -1
-            marker = re.search(
-                r"__MM_A23_PROPOSAL_EXIT_CODE__=(-?\d+)",
-                output_text,
+            success=(
+                (p.returncode==0 and remote==0)
+                or (p.returncode==0 and report_ok)
             )
-            remote_exit = int(marker.group(1)) if marker else None
-
-            # PowerShell může skončit dříve, než je soubor viditelný přes SMB.
-            if report_payload is None and local_exit == 0 and remote_exit == 0:
-                visibility_deadline = time.time() + 30.0
-                while time.time() < visibility_deadline:
-                    report_payload = load_valid_report()
-                    if report_payload:
-                        break
-                    time.sleep(0.25)
-
-            self.documentation_workflow_a23_report_payload = report_payload
-            success = report_payload is not None
-
-            if not success and local_exit == 0 and remote_exit == 0:
-                output_text = (output_text or "") + (
-                    "\nA23 doběhl bez chyby, ale platný JSON report nebyl "
-                    "nalezen ani přes lokální cestu PC2 ani přes UNC cestu."
-                )
-
             self.after(
                 0,
-                lambda: self._documentation_finish_a23_proposals(
+                lambda:self._documentation_finish_a23_proposals(
                     success,
-                    output_text,
-                    local_exit,
-                    remote_exit,
-                ),
+                    out,
+                    p.returncode,
+                    remote,
+                )
             )
-
         except Exception as exc:
-            if p is not None and p.poll() is None:
-                try:
-                    p.kill()
-                except Exception:
-                    pass
-
-            self.documentation_workflow_a23_report_payload = None
-            self.after(
-                0,
-                lambda e=exc: self._documentation_finish_a23_proposals(
-                    False,
-                    str(e),
-                    -1,
-                    None,
-                ),
-            )
-
-    def _sha256_file(self, path):
-        digest = hashlib.sha256()
-        with open(path, "rb") as handle:
-            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-                digest.update(chunk)
-        return digest.hexdigest()
-
-
-    def _documentation_apply_a23_proposals_to_working_glossaries(self, payload):
-        """
-        STEP 30:
-        Ověří návrhy a atomicky nahradí pracovní MM-REF-001 a MM-REF-002.
-        Na PC2 používá lokální projektové cesty; na PC1 použije UNC cesty.
-        """
-        translation_source = self._documentation_to_pc1_unc_path(
-            payload.get("translation_candidate")
-        )
-        explanation_source = self._documentation_to_pc1_unc_path(
-            payload.get("explanation_candidate")
-        )
-
-        translation_target = GLOSSARY_TRANSLATION_PATH
-        explanation_target = GLOSSARY_EXPLANATION_PATH
-
-        pairs = [
-            (
-                translation_source,
-                translation_target,
-                payload.get("translation_candidate_sha256"),
-                "MM-REF-001",
-            ),
-            (
-                explanation_source,
-                explanation_target,
-                payload.get("explanation_candidate_sha256"),
-                "MM-REF-002",
-            ),
-        ]
-
-        backup_dir = os.path.join(
-            os.path.dirname(translation_source),
-            "canonical_before",
-        )
-        os.makedirs(backup_dir, exist_ok=True)
-
-        staged = []
-        for source, target, expected_sha, label in pairs:
-            if not source or not os.path.isfile(source):
-                raise FileNotFoundError(
-                    f"{label}: pracovní soubor nebyl nalezen: {source}"
-                )
-            if not target or not os.path.isfile(target):
-                raise FileNotFoundError(
-                    f"{label}: cílový slovník nebyl nalezen: {target}"
-                )
-
-            actual_source_sha = self._sha256_file(source)
-            if expected_sha and actual_source_sha.upper() != str(expected_sha).upper():
-                raise RuntimeError(
-                    f"{label}: SHA-256 pracovního souboru neodpovídá reportu."
-                )
-
-            shutil.copy2(
-                target,
-                os.path.join(backup_dir, os.path.basename(target)),
-            )
-
-            temp_target = target + ".a23.tmp"
-            shutil.copy2(source, temp_target)
-            copied_sha = self._sha256_file(temp_target)
-            if copied_sha.upper() != actual_source_sha.upper():
-                try:
-                    os.remove(temp_target)
-                except Exception:
-                    pass
-                raise RuntimeError(f"{label}: ověření kopie selhalo.")
-            staged.append((temp_target, target))
-
-        for temp_target, target in staged:
-            os.replace(temp_target, target)
-
-        self.load_glossary_reference()
-
+            self.after(0,lambda e=exc:self._documentation_finish_a23_proposals(False,str(e),-1,None))
 
     def _documentation_finish_a23_proposals(self,success,output_text,local_exit,remote_exit):
-        self.documentation_workflow_running = False
-        self.documentation_workflow_process = None
-
-        payload = getattr(
-            self,
-            "documentation_workflow_a23_report_payload",
-            None,
-        ) or {}
-        self.documentation_workflow_a23_report_payload = None
-
-        if success and not payload:
-            success = False
-            output_text = (output_text or "") + (
-                "\nREPORT ERROR: A23 payload nebyl předán dokončovacímu kroku."
-            )
-
+        self.documentation_workflow_running=False; self.documentation_workflow_process=None
+        pdir=os.path.join(self.documentation_workflow_workspace,"a23","proposals")
+        summary=os.path.join(pdir,"terminology_proposals_latest.json")
+        payload={}
         if success:
-            self.documentation_workflow_a23_translation_proposal = (
-                self._documentation_to_pc1_unc_path(
-                    payload.get("translation_candidate")
-                )
-            )
-            self.documentation_workflow_a23_explanation_proposal = (
-                self._documentation_to_pc1_unc_path(
-                    payload.get("explanation_candidate")
-                )
-            )
-
             try:
-                self._documentation_apply_a23_proposals_to_working_glossaries(
-                    payload
-                )
+                with open(summary,"r",encoding="utf-8-sig") as h: payload=json.load(h)
             except Exception as exc:
-                success = False
-                output_text = (output_text or "") + (
-                    f"\nAPPLY TO WORKING GLOSSARIES ERROR: {exc}"
-                )
-
+                success=False; output_text=(output_text or "")+f"\nREPORT ERROR: {exc}"
         if success:
-            added_translation = int(
-                payload.get("translation_added_count", 0) or 0
-            )
-            added_explanation = int(
-                payload.get("explanation_added_count", 0) or 0
-            )
-            self.documentation_workflow_step = "A23 SLOVNÍKY DOPLNĚNY"
-            self.documentation_workflow_last_status = (
-                "A23 AUTOMATICKY DOPLNĚNO – "
-                f"MM-REF-001 +{added_translation} | "
-                f"MM-REF-002 +{added_explanation} | "
-                "GIT/DB ČEKÁ"
-            )
+            self.documentation_workflow_a23_translation_proposal=self._documentation_to_pc1_unc_path(payload.get("translation_candidate"))
+            self.documentation_workflow_a23_explanation_proposal=self._documentation_to_pc1_unc_path(payload.get("explanation_candidate"))
+            self.documentation_workflow_step="A23 NÁVRHY HOTOVY"
+            self.documentation_workflow_last_status=f"A23 NÁVRHY HOTOVY – MM-REF-001 {payload.get('translation_candidate_version','-')} | MM-REF-002 {payload.get('explanation_candidate_version','-')}"
             self._documentation_update_workflow_ui()
-
-            if getattr(
-                self,
-                "documentation_workflow_a23_show_attention_after",
-                False,
-            ):
-                self.documentation_show_a23_candidates(only_attention=True)
+            messagebox.showinfo(
+                "A23 – návrhy hotovy",
+                f"Vybrané pojmy: {payload.get('selected_count',0)}\n"
+                f"MM-REF-001: {payload.get('translation_candidate_version','-')}\n"
+                f"MM-REF-002: {payload.get('explanation_candidate_version','-')}\n\n"
+                "Kanonické soubory, Git ani databáze nebyly změněny.\n\n"
+                f"Návrh MM-REF-001:\n{self.documentation_workflow_a23_translation_proposal}\n\n"
+                f"Návrh MM-REF-002:\n{self.documentation_workflow_a23_explanation_proposal}"
+            )
+            self.documentation_open_a23_translation_proposal()
         else:
-            self.documentation_workflow_step = "A23 DOPLNĚNÍ SELHALO"
-            self.documentation_workflow_last_status = (
-                "A23 DOPLNĚNÍ SLOVNÍKŮ – CHYBA"
-            )
-            self._documentation_update_workflow_ui()
-            messagebox.showerror(
-                "A23 – slovníky",
-                (
-                    "Slovníky se nepodařilo doplnit.\n\n"
-                    f"Lokální kód: {local_exit}\n"
-                    f"Vzdálený kód: {remote_exit}\n\n"
-                    f"{output_text[-5000:]}"
-                ),
-            )
-
+            self.documentation_workflow_step="A23 NÁVRHY SELHALY"; self.documentation_workflow_last_status="A23 PROPOSAL BUILDER CHYBA"; self._documentation_update_workflow_ui()
+            messagebox.showerror("A23 – návrhy",f"Návrhy se nepodařilo vytvořit.\n\nLokální kód: {local_exit}\nVzdálený kód: {remote_exit}\n\n{output_text[-5000:]}")
 
     def _documentation_discover_a23_proposal(self, proposal_name):
         """
@@ -13101,9 +12696,7 @@ try {{
 
     def load_glossary_reference(self):
         """
-        V20.1.Q3 STEP 30:
-        Spojí překladový slovník MM-REF-001 s výklady MM-REF-002.
-        Kanonickým zdrojem zůstává sdílené úložiště PC2.
+        V20.1.Q2 - spojí překladový slovník MM-REF-001 s výklady MM-REF-002.
         """
         try:
             translation_text = self._read_utf8_text(GLOSSARY_TRANSLATION_PATH)
@@ -13139,7 +12732,6 @@ try {{
             key=lambda item: item.get("foreign", "").casefold()
         )
         self.filter_glossary_terms()
-
 
     def filter_glossary_terms(self):
         if not hasattr(self, "glossary_tree"):

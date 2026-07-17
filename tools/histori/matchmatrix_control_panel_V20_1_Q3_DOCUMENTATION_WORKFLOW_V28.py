@@ -236,7 +236,6 @@ import threading
 import subprocess
 import shlex
 import shutil
-import socket
 import json
 import sys
 import base64
@@ -9123,56 +9122,20 @@ catch {{
         )
 
 
-    def _documentation_running_on_pc2(self):
-        """Vrátí True, pokud panel skutečně běží na PC2."""
-        addresses = set()
-        try:
-            for address in socket.gethostbyname_ex(socket.gethostname())[2]:
-                if address:
-                    addresses.add(address)
-        except Exception:
-            pass
-
-        try:
-            probe = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            try:
-                probe.connect((DOCUMENTATION_REMOTE_HOST, 9))
-                local_address = probe.getsockname()[0]
-                if local_address:
-                    addresses.add(local_address)
-            finally:
-                probe.close()
-        except Exception:
-            pass
-
-        return DOCUMENTATION_REMOTE_HOST in addresses
-
-
     def _documentation_to_pc1_unc_path(self, remote_path):
         """
-        STEP 30:
-        Vrátí cestu dostupnou na aktuálním hostiteli.
-
-        - Na PC2 ponechá lokální C:\\MatchMatrix-platform cestu, pokud existuje.
-        - Na PC1 převede vzdálenou cestu na UNC share.
+        STEP 26 FIX 2:
+        Převede cestu vrácenou A23 na PC2 na UNC cestu použitelnou panelem na PC1.
         """
         if not remote_path:
             return remote_path
 
         normalized = os.path.normpath(str(remote_path))
-        if self._documentation_running_on_pc2() and os.path.exists(normalized):
-            return normalized
-
         remote_root = os.path.normpath(DOCUMENTATION_REMOTE_PROJECT_ROOT)
-        unc_root = os.path.normpath(DOCUMENTATION_ROOT)
+        unc_root = os.path.normpath(DOCUMENTATION_PROJECT_ROOT)
 
         try:
-            normalized_case = os.path.normcase(normalized)
-            remote_case = os.path.normcase(remote_root)
-            if (
-                normalized_case == remote_case
-                or normalized_case.startswith(remote_case + os.sep)
-            ):
+            if normalized.lower().startswith(remote_root.lower()):
                 relative = os.path.relpath(normalized, remote_root)
                 return os.path.normpath(os.path.join(unc_root, relative))
         except Exception:
@@ -12287,13 +12250,7 @@ catch {{
             self.documentation_workflow_a23_candidates = list(
                 payload.get("candidates") or []
             )
-            # STEP 30: A23 PC2 PATH + REPORT FIX
-# - report načítán lokálně na PC2 nebo přes UNC na PC1
-# - po doběhu čekání 30 s na viditelnost souboru
-# - payload předán bez druhého čtení reportu
-# - opraven chybný DOCUMENTATION_PROJECT_ROOT
-#
-# STEP 29: A23 REPORT WATCHDOG
+            # STEP 29: A23 REPORT WATCHDOG
 # - návrhový JSON ukončí čekání na visící PowerShell Remoting
 # - pracovní slovníky se následně aplikují bez dialogu
 #
@@ -12553,79 +12510,34 @@ catch {{
 
     def _documentation_build_a23_proposals_worker(self,selection_path):
         """
-        STEP 30:
-        A23 je dokončen pouze tehdy, když je načten platný JSON report.
-        Report se hledá přes lokální cestu PC2 i přes UNC cestu a po skončení
-        PowerShellu se ještě čeká na jeho zpřístupnění.
+        STEP 29:
+        A23 proposal builder je spuštěn přes PowerShell Remoting, ale panel
+        nečeká neomezeně na ukončení remotingového procesu.
+
+        Rozhodujícím důkazem dokončení je platný JSON report, který A23
+        zapisuje až po vytvoření obou návrhů. Jakmile je report ověřen,
+        případný visící PowerShell proces je bezpečně ukončen a panel
+        pokračuje aplikací pracovních slovníků.
         """
         p = None
         output_text = ""
         local_exit = -1
         remote_exit = None
-        report_payload = None
 
         try:
-            remote_workspace = self._documentation_to_remote_pc2_path(
-                self.documentation_workflow_workspace
-            )
-            remote_summary = os.path.join(
-                remote_workspace,
-                "a23",
-                "proposals",
-                "terminology_proposals_latest.json",
-            )
-            unc_summary = os.path.join(
+            local_summary = os.path.join(
                 self.documentation_workflow_workspace,
                 "a23",
                 "proposals",
                 "terminology_proposals_latest.json",
             )
 
-            def load_valid_report():
-                candidates = []
-                source_candidates = (
-                    (remote_summary, unc_summary)
-                    if self._documentation_running_on_pc2()
-                    else (unc_summary,)
-                )
-                for candidate in source_candidates:
-                    normalized_candidate = os.path.normpath(candidate)
-                    if normalized_candidate not in candidates:
-                        candidates.append(normalized_candidate)
-
-                for candidate in candidates:
-                    try:
-                        if not os.path.isfile(candidate):
-                            continue
-                        with open(candidate, "r", encoding="utf-8-sig") as handle:
-                            payload = json.load(handle)
-                        valid = (
-                            payload.get("final_status")
-                            == "TERMINOLOGY_GLOSSARY_PROPOSALS_CREATED"
-                            and payload.get("canonical_files_modified") is False
-                            and payload.get("database_modified") is False
-                            and payload.get("git_modified") is False
-                            and bool(payload.get("translation_candidate"))
-                            and bool(payload.get("explanation_candidate"))
-                        )
-                        if valid:
-                            return payload
-                    except Exception:
-                        continue
-                return None
-
-            # Při opakování stejného workspace nesmí být použit starý report.
-            old_summaries = (
-                (remote_summary, unc_summary)
-                if self._documentation_running_on_pc2()
-                else (unc_summary,)
-            )
-            for old_summary in old_summaries:
-                try:
-                    if os.path.isfile(old_summary):
-                        os.remove(old_summary)
-                except Exception:
-                    pass
+            # Starý report nesmí být zaměněn za výsledek nového běhu.
+            try:
+                if os.path.isfile(local_summary):
+                    os.remove(local_summary)
+            except Exception:
+                pass
 
             vals = [
                 DOCUMENTATION_REMOTE_HOST,
@@ -12634,7 +12546,7 @@ catch {{
                 self._documentation_to_remote_pc2_path(self.documentation_workflow_document),
                 self._documentation_to_remote_pc2_path(GLOSSARY_TRANSLATION_PATH),
                 self._documentation_to_remote_pc2_path(GLOSSARY_EXPLANATION_PATH),
-                remote_workspace,
+                self._documentation_to_remote_pc2_path(self.documentation_workflow_workspace),
                 self._documentation_to_remote_pc2_path(selection_path),
                 DOCUMENTATION_REMOTE_PROJECT_ROOT,
             ]
@@ -12676,23 +12588,42 @@ try {{
             )
             self.documentation_workflow_process = p
 
+            report_ok = False
             deadline = time.time() + 180.0
-            while time.time() < deadline:
-                report_payload = load_valid_report()
-                if report_payload:
-                    if p.poll() is None:
-                        try:
-                            p.terminate()
-                            p.wait(timeout=3)
-                        except Exception:
-                            try:
-                                p.kill()
-                            except Exception:
-                                pass
-                    break
 
+            while time.time() < deadline:
                 if p.poll() is not None:
                     break
+
+                try:
+                    if os.path.isfile(local_summary):
+                        with open(local_summary, "r", encoding="utf-8-sig") as handle:
+                            check_payload = json.load(handle)
+
+                        report_ok = (
+                            check_payload.get("final_status")
+                            == "TERMINOLOGY_GLOSSARY_PROPOSALS_CREATED"
+                            and check_payload.get("canonical_files_modified") is False
+                            and check_payload.get("database_modified") is False
+                            and check_payload.get("git_modified") is False
+                            and bool(check_payload.get("translation_candidate"))
+                            and bool(check_payload.get("explanation_candidate"))
+                        )
+                except Exception:
+                    report_ok = False
+
+                if report_ok:
+                    # Návrhy jsou hotové. Remotingový obal již nesmí držet panel.
+                    try:
+                        p.terminate()
+                        p.wait(timeout=3)
+                    except Exception:
+                        try:
+                            p.kill()
+                        except Exception:
+                            pass
+                    break
+
                 time.sleep(0.25)
 
             if p.poll() is None:
@@ -12712,29 +12643,35 @@ try {{
 
             output_text = self._documentation_decode_process_output(raw)
             local_exit = p.returncode if p.returncode is not None else -1
+
             marker = re.search(
                 r"__MM_A23_PROPOSAL_EXIT_CODE__=(-?\d+)",
                 output_text,
             )
             remote_exit = int(marker.group(1)) if marker else None
 
-            # PowerShell může skončit dříve, než je soubor viditelný přes SMB.
-            if report_payload is None and local_exit == 0 and remote_exit == 0:
-                visibility_deadline = time.time() + 30.0
-                while time.time() < visibility_deadline:
-                    report_payload = load_valid_report()
-                    if report_payload:
-                        break
-                    time.sleep(0.25)
+            # Finální kontrola reportu po ukončení procesu.
+            try:
+                if os.path.isfile(local_summary):
+                    with open(local_summary, "r", encoding="utf-8-sig") as handle:
+                        check_payload = json.load(handle)
 
-            self.documentation_workflow_a23_report_payload = report_payload
-            success = report_payload is not None
+                    report_ok = (
+                        check_payload.get("final_status")
+                        == "TERMINOLOGY_GLOSSARY_PROPOSALS_CREATED"
+                        and check_payload.get("canonical_files_modified") is False
+                        and check_payload.get("database_modified") is False
+                        and check_payload.get("git_modified") is False
+                        and bool(check_payload.get("translation_candidate"))
+                        and bool(check_payload.get("explanation_candidate"))
+                    )
+            except Exception:
+                report_ok = False
 
-            if not success and local_exit == 0 and remote_exit == 0:
-                output_text = (output_text or "") + (
-                    "\nA23 doběhl bez chyby, ale platný JSON report nebyl "
-                    "nalezen ani přes lokální cestu PC2 ani přes UNC cestu."
-                )
+            success = report_ok or (
+                local_exit == 0
+                and remote_exit == 0
+            )
 
             self.after(
                 0,
@@ -12753,7 +12690,6 @@ try {{
                 except Exception:
                     pass
 
-            self.documentation_workflow_a23_report_payload = None
             self.after(
                 0,
                 lambda e=exc: self._documentation_finish_a23_proposals(
@@ -12774,9 +12710,10 @@ try {{
 
     def _documentation_apply_a23_proposals_to_working_glossaries(self, payload):
         """
-        STEP 30:
-        Ověří návrhy a atomicky nahradí pracovní MM-REF-001 a MM-REF-002.
-        Na PC2 používá lokální projektové cesty; na PC1 použije UNC cesty.
+        STEP 28:
+        Interní proposal soubory jsou nejprve ověřeny a potom atomicky
+        nahrazují pracovní kanonické Markdown soubory MM-REF-001/MM-REF-002.
+        Git ani dokumentační databáze se tímto krokem nemění.
         """
         translation_source = self._documentation_to_pc1_unc_path(
             payload.get("translation_candidate")
@@ -12785,26 +12722,25 @@ try {{
             payload.get("explanation_candidate")
         )
 
-        translation_target = GLOSSARY_TRANSLATION_PATH
-        explanation_target = GLOSSARY_EXPLANATION_PATH
-
         pairs = [
             (
                 translation_source,
-                translation_target,
+                GLOSSARY_TRANSLATION_PATH,
                 payload.get("translation_candidate_sha256"),
                 "MM-REF-001",
             ),
             (
                 explanation_source,
-                explanation_target,
+                GLOSSARY_EXPLANATION_PATH,
                 payload.get("explanation_candidate_sha256"),
                 "MM-REF-002",
             ),
         ]
 
         backup_dir = os.path.join(
-            os.path.dirname(translation_source),
+            self.documentation_workflow_workspace,
+            "a23",
+            "proposals",
             "canonical_before",
         )
         os.makedirs(backup_dir, exist_ok=True)
@@ -12812,13 +12748,7 @@ try {{
         staged = []
         for source, target, expected_sha, label in pairs:
             if not source or not os.path.isfile(source):
-                raise FileNotFoundError(
-                    f"{label}: pracovní soubor nebyl nalezen: {source}"
-                )
-            if not target or not os.path.isfile(target):
-                raise FileNotFoundError(
-                    f"{label}: cílový slovník nebyl nalezen: {target}"
-                )
+                raise FileNotFoundError(f"{label}: pracovní soubor nebyl nalezen: {source}")
 
             actual_source_sha = self._sha256_file(source)
             if expected_sha and actual_source_sha.upper() != str(expected_sha).upper():
@@ -12826,10 +12756,11 @@ try {{
                     f"{label}: SHA-256 pracovního souboru neodpovídá reportu."
                 )
 
-            shutil.copy2(
-                target,
-                os.path.join(backup_dir, os.path.basename(target)),
-            )
+            if os.path.isfile(target):
+                shutil.copy2(
+                    target,
+                    os.path.join(backup_dir, os.path.basename(target)),
+                )
 
             temp_target = target + ".a23.tmp"
             shutil.copy2(source, temp_target)
@@ -12845,26 +12776,22 @@ try {{
         for temp_target, target in staged:
             os.replace(temp_target, target)
 
-        self.load_glossary_reference()
+        try:
+            self.load_glossary_reference()
+        except Exception:
+            pass
 
 
     def _documentation_finish_a23_proposals(self,success,output_text,local_exit,remote_exit):
-        self.documentation_workflow_running = False
-        self.documentation_workflow_process = None
-
-        payload = getattr(
-            self,
-            "documentation_workflow_a23_report_payload",
-            None,
-        ) or {}
-        self.documentation_workflow_a23_report_payload = None
-
-        if success and not payload:
-            success = False
-            output_text = (output_text or "") + (
-                "\nREPORT ERROR: A23 payload nebyl předán dokončovacímu kroku."
-            )
-
+        self.documentation_workflow_running=False; self.documentation_workflow_process=None
+        pdir=os.path.join(self.documentation_workflow_workspace,"a23","proposals")
+        summary=os.path.join(pdir,"terminology_proposals_latest.json")
+        payload={}
+        if success:
+            try:
+                with open(summary,"r",encoding="utf-8-sig") as h: payload=json.load(h)
+            except Exception as exc:
+                success=False; output_text=(output_text or "")+f"\nREPORT ERROR: {exc}"
         if success:
             self.documentation_workflow_a23_translation_proposal = (
                 self._documentation_to_pc1_unc_path(
@@ -12910,21 +12837,8 @@ try {{
             ):
                 self.documentation_show_a23_candidates(only_attention=True)
         else:
-            self.documentation_workflow_step = "A23 DOPLNĚNÍ SELHALO"
-            self.documentation_workflow_last_status = (
-                "A23 DOPLNĚNÍ SLOVNÍKŮ – CHYBA"
-            )
-            self._documentation_update_workflow_ui()
-            messagebox.showerror(
-                "A23 – slovníky",
-                (
-                    "Slovníky se nepodařilo doplnit.\n\n"
-                    f"Lokální kód: {local_exit}\n"
-                    f"Vzdálený kód: {remote_exit}\n\n"
-                    f"{output_text[-5000:]}"
-                ),
-            )
-
+            self.documentation_workflow_step="A23 DOPLNĚNÍ SELHALO"; self.documentation_workflow_last_status="A23 DOPLNĚNÍ SLOVNÍKŮ – CHYBA"; self._documentation_update_workflow_ui()
+            messagebox.showerror("A23 – slovníky",f"Slovníky se nepodařilo doplnit.\n\nLokální kód: {local_exit}\nVzdálený kód: {remote_exit}\n\n{output_text[-5000:]}")
 
     def _documentation_discover_a23_proposal(self, proposal_name):
         """
@@ -13101,9 +13015,7 @@ try {{
 
     def load_glossary_reference(self):
         """
-        V20.1.Q3 STEP 30:
-        Spojí překladový slovník MM-REF-001 s výklady MM-REF-002.
-        Kanonickým zdrojem zůstává sdílené úložiště PC2.
+        V20.1.Q2 - spojí překladový slovník MM-REF-001 s výklady MM-REF-002.
         """
         try:
             translation_text = self._read_utf8_text(GLOSSARY_TRANSLATION_PATH)
@@ -13139,7 +13051,6 @@ try {{
             key=lambda item: item.get("foreign", "").casefold()
         )
         self.filter_glossary_terms()
-
 
     def filter_glossary_terms(self):
         if not hasattr(self, "glossary_tree"):
