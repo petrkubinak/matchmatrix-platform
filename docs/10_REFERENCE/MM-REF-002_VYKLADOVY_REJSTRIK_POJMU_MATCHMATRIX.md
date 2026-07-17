@@ -12,7 +12,8 @@
 | Název | Výkladový rejstřík pojmů MatchMatrix |
 | Edice | MM-REF |
 | Verze | 1.2 |
-| Stav | DRAFT – NEEDS_USER_APPROVAL |
+| Stav | APPROVED |
+| Původní stav zdrojového dokumentu | DRAFT – NEEDS_USER_APPROVAL |
 | Autor projektu | Petr Kubinák |
 | Technická spolupráce | OpenAI ChatGPT |
 | Primární formát | Markdown (`.md`) |
