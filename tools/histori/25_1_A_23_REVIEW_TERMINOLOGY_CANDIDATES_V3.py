@@ -22,7 +22,7 @@ JAK:
 - Zápis do MM-REF-001 a MM-REF-002 bude samostatný schvalovaný krok.
 
 ENGINE:
-- A23_TERMINOLOGY_WORKFLOW_V3_PROPOSAL_BUILDER
+- A23_TERMINOLOGY_CANDIDATE_REVIEW_V2_READ_ONLY
 """
 
 from __future__ import annotations
@@ -37,7 +37,7 @@ from pathlib import Path
 from typing import Any
 
 
-ENGINE_VERSION = "A23_TERMINOLOGY_WORKFLOW_V3_PROPOSAL_BUILDER"
+ENGINE_VERSION = "A23_TERMINOLOGY_CANDIDATE_REVIEW_V2_READ_ONLY"
 FINAL_STATUS_OK = "TERMINOLOGY_CANDIDATES_REVIEWED"
 FINAL_STATUS_EMPTY = "NO_EXPLICIT_TERMINOLOGY_CANDIDATES"
 
@@ -266,97 +266,18 @@ def extract_document_id(text: str) -> str | None:
     return None
 
 
-
-def _bump_version(text):
-    pat=r'(^\\|\\s*Verze\\s*\\|\\s*)(\\d+)\\.(\\d+)(\\s*\\|)'
-    m=re.search(pat,text,flags=re.I|re.M)
-    if not m:
-        return text,'NÁVRH'
-    version=f"{int(m.group(2))}.{int(m.group(3))+1}"
-    return text[:m.start()]+m.group(1)+version+m.group(4)+text[m.end():],version
-
-
-def _draft_status(text):
-    return re.sub(r'(^\\|\\s*Stav\\s*\\|\\s*)([^|]+?)(\\s*\\|)',r'\\1DRAFT – NEEDS_USER_APPROVAL\\3',text,count=1,flags=re.I|re.M)
-
-
-def _insert_mm_ref_001(text, selected):
-    lines=text.splitlines(); header=None
-    for i,line in enumerate(lines):
-        cells=split_markdown_row(line)
-        if len(cells)>=2 and [normalize_term(c) for c in cells[:2]] in (["cizí výraz","český překlad"],["cizi vyraz","cesky preklad"]):
-            header=i; break
-    if header is None:
-        raise ValueError('MM-REF-001 neobsahuje tabulku Cizí výraz / Český překlad.')
-    end=header+2
-    while end<len(lines) and not re.match(r'^\\s*#{1,2}\\s+',lines[end]): end+=1
-    while end>0 and not lines[end-1].strip(): end-=1
-    existing=parse_translation_glossary(text); rows=[]
-    for item in sorted(selected,key=lambda x: normalize_term(x.get('foreign',''))):
-        foreign=str(item.get('foreign') or '').strip(); czech=str(item.get('czech') or '').strip()
-        if foreign and czech and normalize_term(foreign) not in existing:
-            rows.append(f"| {foreign.replace('|',r'\\|')} | {czech.replace('|',r'\\|')} |")
-    lines[end:end]=rows+([''] if rows else [])
-    return '\\n'.join(lines).rstrip()+'\\n'
-
-
-def _append_mm_ref_002(text, selected, source_id):
-    known=parse_explanation_terms(text); selected=[x for x in selected if 'MM-REF-002' in str(x.get('target_document') or '') and normalize_term(x.get('foreign','')) not in known]
-    if not selected: return text
-    parts=['','---','',f'## Návrh doplnění pojmů ze zdroje {source_id}','',f'**Datum návrhu:** {datetime.now().astimezone().date().isoformat()}  ','**Stav kapitoly:** DRAFT – NEEDS_USER_APPROVAL','']
-    for item in sorted(selected,key=lambda x: normalize_term(x.get('foreign',''))):
-        f=str(item.get('foreign') or '').strip(); c=str(item.get('czech') or '').strip(); e=str(item.get('explanation') or '').strip()
-        parts += [f'### {f}','','| Položka | Hodnota |','|---|---|',f'| Cizí výraz | {f} |',f'| Doporučený český překlad | {c} |',f'| Zdrojový dokument | {source_id} |',f'| Výklad | {e} |','| Governance stav | NÁVRH K UŽIVATELSKÉMU SCHVÁLENÍ |','','#### Význam a použití','',e or 'Výklad musí být doplněn před schválením.','','#### Zdroj a návaznost','',f'Pojem byl navržen při terminologické kontrole dokumentu `{source_id}`.','']
-    parts += ['### Závěr kapitoly','','Kapitola obsahuje návrhy nových výkladů. Přínosem je řízené doplnění terminologie bez přepsání schválených záznamů. Návaznost pokračuje uživatelským schválením a samostatným A17.','']
-    return text.rstrip()+'\\n'+'\\n'.join(parts)
-
-
-def build_proposals(source, translation_path, explanation_path, output_dir, selection_path):
-    selection=json.loads(read_text(selection_path)); selected=list(selection.get('selected_candidates') or [])
-    if not selected: raise ValueError('Nebyl vybrán žádný kandidát.')
-    source_id=extract_document_id(read_text(source)) or source.stem
-    t=_insert_mm_ref_001(read_text(translation_path),selected); t,tver=_bump_version(t); t=_draft_status(t)
-    e=_append_mm_ref_002(read_text(explanation_path),selected,source_id); e,ever=_bump_version(e); e=_draft_status(e)
-    pdir=output_dir/'proposals'; pdir.mkdir(parents=True,exist_ok=True)
-    tout=pdir/'MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX_PROPOSAL.md'; eout=pdir/'MM-REF-002_VYKLADOVY_REJSTRIK_POJMU_MATCHMATRIX_PROPOSAL.md'
-    tout.write_text(t,encoding='utf-8'); eout.write_text(e,encoding='utf-8')
-    payload={'engine_version':ENGINE_VERSION,'generated_at':datetime.now().astimezone().isoformat(),'final_status':'TERMINOLOGY_GLOSSARY_PROPOSALS_CREATED','source_document_id':source_id,'selected_count':len(selected),'translation_candidate':str(tout),'translation_candidate_version':tver,'translation_candidate_sha256':sha256_path(tout),'explanation_candidate':str(eout),'explanation_candidate_version':ever,'explanation_candidate_sha256':sha256_path(eout),'canonical_files_modified':False,'database_modified':False,'git_modified':False}
-    (pdir/'terminology_proposals_latest.json').write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding='utf-8')
-    (pdir/'terminology_proposals_latest.md').write_text(f"# A23 – Návrhy aktualizace slovníků\\n\\n- Zdroj: `{source_id}`\\n- Vybraných kandidátů: **{len(selected)}**\\n- MM-REF-001: `{tver}`\\n- MM-REF-002: `{ever}`\\n\\nKanonické soubory, Git ani databáze nebyly změněny.\\n\\nFINAL STATUS: TERMINOLOGY_GLOSSARY_PROPOSALS_CREATED\\n",encoding='utf-8')
-    return payload
-
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--document", required=True)
     parser.add_argument("--translation-glossary", required=True)
     parser.add_argument("--explanation-glossary", required=True)
     parser.add_argument("--output-dir", required=True)
-    parser.add_argument("--mode", choices=["analyze", "build-proposals"], default="analyze")
-    parser.add_argument("--selection-json")
     args = parser.parse_args()
 
     source = Path(args.document).resolve()
     translation_path = Path(args.translation_glossary).resolve()
     explanation_path = Path(args.explanation_glossary).resolve()
     output_dir = Path(args.output_dir).resolve()
-
-    if args.mode == "build-proposals":
-        if not args.selection_json:
-            raise ValueError("--selection-json je povinný pro build-proposals.")
-        selection_path = Path(args.selection_json).resolve()
-        for path in (source, translation_path, explanation_path, selection_path):
-            if not path.is_file():
-                raise FileNotFoundError(f"Soubor nebyl nalezen: {path}")
-        output_dir.mkdir(parents=True, exist_ok=True)
-        payload = build_proposals(source, translation_path, explanation_path, output_dir, selection_path)
-        print(f"SELECTED_COUNT={payload['selected_count']}")
-        print(f"TRANSLATION_PROPOSAL={payload['translation_candidate']}")
-        print(f"EXPLANATION_PROPOSAL={payload['explanation_candidate']}")
-        print("CANONICAL_FILES_MODIFIED=False")
-        print("DATABASE_MODIFIED=False")
-        print("GIT_MODIFIED=False")
-        print("FINAL STATUS: TERMINOLOGY_GLOSSARY_PROPOSALS_CREATED")
-        return 0
 
     for path in (source, translation_path, explanation_path):
         if not path.is_file():

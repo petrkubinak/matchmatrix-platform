@@ -117,12 +117,6 @@ V20.1.Q3 STEP 27:
 - A23 zobrazuje NOVÝ / EXISTUJE / KE KONTROLE / KONFLIKT česky,
 - neznámé názvy sloupců dostanou bezpečný český uživatelský popisek.
 
-V20.1.Q3 STEP 27 FIX 1:
-- překládá výsledky, závažnosti a kategorie nálezů A17,
-- překládá stav workflow, publikační hostitele a kroky A24,
-- překládá stav a souhrn databázového auditu A33,
-- technické identifikátory pravidel, souborů a databázových polí zůstávají zachovány.
-
 V20.1.Q3 STEP 26 FIX 3:
 - tlačítka návrhů už nejsou závislá na dočasné runtime proměnné,
 - proposal se dohledá přímo v aktuálním workspace,
@@ -1278,68 +1272,6 @@ def cz_status(value):
     key = text.upper()
 
     return STATUS_LABELS.get(key, text)
-
-
-# V20.1.Q3 STEP 27 FIX 1 - sjednocený český převod dokumentačních stavů.
-DOCUMENTATION_VALUE_LABELS = {
-    "PASS": "SPLNĚNO",
-    "FAIL": "NESPLNĚNO",
-    "PARTIAL": "ČÁSTEČNĚ SPLNĚNO",
-    "MANUAL_REVIEW": "RUČNÍ KONTROLA",
-    "MANUAL_REVIEW_REQUIRED": "VYŽADUJE RUČNÍ KONTROLU",
-    "CRITICAL": "KRITICKÁ",
-    "HIGH": "VYSOKÁ",
-    "MEDIUM": "STŘEDNÍ",
-    "LOW": "NÍZKÁ",
-    "INFO": "INFORMAČNÍ",
-    "STRUCTURE": "STRUKTURA",
-    "TERMINOLOGY": "TERMINOLOGIE",
-    "CONTENT": "OBSAH",
-    "METADATA": "METADATA",
-    "LINKS": "VAZBY",
-    "PENDING": "ČEKÁ",
-    "ALL": "VŠE",
-    "RESTRUCTURE_REQUIRED": "VYŽADUJE PŘESTRUKTUROVÁNÍ",
-    "DATABASE_STRUCTURE_AUDIT_EXPORTED": "AUDIT STRUKTURY DATABÁZE VYEXPORTOVÁN",
-    "DATABASE_STRUCTURE_CONNECTION_VERIFIED": "PŘIPOJENÍ K DATABÁZI OVĚŘENO",
-    "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED": "IMPORT PROVEDEN A OVĚŘEN",
-    "HISTORY_DOCUMENT_IMPORT_VALIDATED": "IMPORT OVĚŘEN",
-    "VERIFIED": "OVĚŘENO",
-    "VALIDATED": "OVĚŘENO",
-    "APPLIED": "PROVEDENO",
-    "BLOCKED": "ZABLOKOVÁNO",
-    "FAILED": "CHYBA",
-}
-
-def cz_documentation_value(value):
-    """Překládá pouze prezentační hodnotu; interní kód zůstává beze změny."""
-    if value is None:
-        return ""
-    raw = str(value)
-    key = raw.strip().upper()
-    if key in DOCUMENTATION_VALUE_LABELS:
-        return DOCUMENTATION_VALUE_LABELS[key]
-    if key in STATUS_LABELS:
-        return STATUS_LABELS[key]
-
-    # Složené technické stavy převádíme po částech, ale identifikátory souborů
-    # a pravidel tímto způsobem neměníme.
-    translated = raw
-    replacements = (
-        ("RESTRUCTURE_REQUIRED", "VYŽADUJE PŘESTRUKTUROVÁNÍ"),
-        ("MANUAL_REVIEW_REQUIRED", "VYŽADUJE RUČNÍ KONTROLU"),
-        ("MANUAL_REVIEW", "RUČNÍ KONTROLA"),
-        ("APPLIED_AND_VERIFIED", "PROVEDENO A OVĚŘENO"),
-        ("VALIDATE_ONLY", "POUZE OVĚŘENÍ"),
-        ("VALIDATED", "OVĚŘENO"),
-        ("VERIFIED", "OVĚŘENO"),
-        ("FAILED", "CHYBA"),
-        ("BLOCKED", "ZABLOKOVÁNO"),
-        ("PENDING", "ČEKÁ"),
-    )
-    for source, target in replacements:
-        translated = re.sub(re.escape(source), target, translated, flags=re.IGNORECASE)
-    return translated
 
 def cz_column(column_name):
     """
@@ -3247,7 +3179,7 @@ class MatchMatrixAdminPanel(tk.Tk):
 
         tk.Label(
             database_audit_frame,
-            text="🗄 DATABÁZOVÁ DOKUMENTACE – AUDIT POUZE PRO ČTENÍ A33",
+            text="🗄 DATABÁZOVÁ DOKUMENTACE – READ-ONLY AUDIT A33",
             bg="#0d1118",
             fg="#9bd7ff",
             font=("Segoe UI", 10, "bold"),
@@ -3368,7 +3300,7 @@ class MatchMatrixAdminPanel(tk.Tk):
 
         self.documentation_a33_summary_value = tk.Label(
             database_audit_frame,
-            text="Schémata - | Objekty - | Tabulky - | Pohledy - | Varování -",
+            text="Schémata - | Objekty - | Tabulky - | Views - | Varování -",
             bg="#0d1118",
             fg="#c5d9e8",
             font=("Segoe UI", 8, "bold"),
@@ -6327,7 +6259,7 @@ Další termín: {h.get('next_target_date') or '-'}"""
                 status_color = YELLOW
 
             self.documentation_workflow_status_value.config(
-                text=cz_documentation_value(status_text),
+                text=status_text,
                 fg=status_color
             )
 
@@ -6372,7 +6304,7 @@ Další termín: {h.get('next_target_date') or '-'}"""
                     )
                     if result_count:
                         result_parts.append(
-                            f"{cz_documentation_value(result_name)}: {result_count}"
+                            f"{result_name}: {result_count}"
                         )
 
                 findings_text = f"K ŘEŠENÍ: {len(problem_findings)}"
@@ -6405,13 +6337,13 @@ Další termín: {h.get('next_target_date') or '-'}"""
             a7_status = self.documentation_workflow_a7_status or "ČEKÁ"
 
             publication_text = (
-                "HOSTITEL SPUŠTĚNÍ: PC2 "
+                "EXECUTION HOST: PC2 "
                 f"({DOCUMENTATION_REMOTE_HOST}) | "
-                "HOSTITEL DB: localhost na PC2 | "
-                f"CÍLOVÁ DB: {DB_CONFIG.get('dbname', 'matchmatrix')} | "
-                f"A24 OVĚŘENÍ: {cz_documentation_value(validate_status)} | "
-                f"PROVEDENÍ: {cz_documentation_value(apply_status)} | "
-                f"A7: {cz_documentation_value(a7_status)}"
+                "DB HOST: localhost na PC2 | "
+                f"DB TARGET: {DB_CONFIG.get('dbname', 'matchmatrix')} | "
+                f"A24 VALIDATE: {validate_status} | "
+                f"APPLY: {apply_status} | "
+                f"A7: {a7_status}"
             )
 
             publication_upper = publication_text.upper()
@@ -11467,9 +11399,9 @@ catch {{
                 iid=str(finding_index),
                 values=(
                     finding.get("rule_id", "-"),
-                    cz_documentation_value(finding.get("result", "-")),
-                    cz_documentation_value(finding.get("severity", "-")),
-                    cz_documentation_value(finding.get("category", "-")),
+                    finding.get("result", "-"),
+                    finding.get("severity", "-"),
+                    finding.get("category", "-"),
                     finding.get("title", "-")
                 )
             )
@@ -11496,9 +11428,9 @@ catch {{
             detail_lines = [
                 f"PRAVIDLO: {finding.get('rule_id', '-')}",
                 f"NÁZEV: {finding.get('title', '-')}",
-                f"VÝSLEDEK: {cz_documentation_value(finding.get('result', '-'))}",
-                f"ZÁVAŽNOST: {cz_documentation_value(finding.get('severity', '-'))}",
-                f"KATEGORIE: {cz_documentation_value(finding.get('category', '-'))}",
+                f"VÝSLEDEK: {finding.get('result', '-')}",
+                f"ZÁVAŽNOST: {finding.get('severity', '-')}",
+                f"KATEGORIE: {finding.get('category', '-')}",
                 f"STANDARD: {finding.get('standard', '-')}",
                 "",
                 "POPIS:",
@@ -11531,8 +11463,8 @@ catch {{
             detail_text.insert(
                 "1.0",
                 (
-                    "Audit neobsahuje žádný nález typu NESPLNĚNO, "
-                    "ČÁSTEČNĚ SPLNĚNO nebo RUČNÍ KONTROLA.\n\n"
+                    "Audit neobsahuje žádný nález typu FAIL, "
+                    "PARTIAL nebo MANUAL_REVIEW.\n\n"
                     "Úplný výsledek je dostupný v reportu A17."
                 )
             )
@@ -11656,7 +11588,7 @@ catch {{
             button_state = "normal"
 
         self.documentation_a33_status_value.config(
-            text=cz_documentation_value(status),
+            text=status,
             fg=status_color
         )
         self.documentation_a33_time_value.config(text=generated_at)
@@ -11667,20 +11599,20 @@ catch {{
                     f"Schémata {summary.get('schemas', 0)} | "
                     f"Objekty {summary.get('objects', 0)} | "
                     f"Tabulky {summary.get('tables', 0)} | "
-                    f"Pohledy {summary.get('views', 0)} | "
+                    f"Views {summary.get('views', 0)} | "
                     f"Sloupce {summary.get('columns', 0)} | "
-                    f"Omezení {summary.get('constraints', 0)} | "
+                    f"Constraints {summary.get('constraints', 0)} | "
                     f"Indexy {summary.get('indexes', 0)} | "
                     f"Varování {summary.get('warnings', len(warnings))} "
-                    f"(VYSOKÁ {severity_counts['HIGH']} / "
-                    f"STŘEDNÍ {severity_counts['MEDIUM']} / "
-                    f"INFORMAČNÍ {severity_counts['INFO']})"
+                    f"(HIGH {severity_counts['HIGH']} / "
+                    f"MEDIUM {severity_counts['MEDIUM']} / "
+                    f"INFO {severity_counts['INFO']})"
                 ),
                 fg=(RED if severity_counts["HIGH"] else "#c5d9e8")
             )
         else:
             self.documentation_a33_summary_value.config(
-                text="Schémata - | Objekty - | Tabulky - | Pohledy - | Varování -",
+                text="Schémata - | Objekty - | Tabulky - | Views - | Varování -",
                 fg="#c5d9e8"
             )
 

@@ -110,31 +110,6 @@ V20.1.Q3 STEP 18:
   APPLIED_VERIFICATION_FAILED a BLOCKED,
 - automatický stash ani automatický push se nepoužívá.
 
-V20.1.Q3 STEP 27:
-- dokumenty zachovávají originální technické a cizojazyčné názvy,
-- dokumentační panel zobrazuje české názvy sloupců a stavů,
-- interní názvy databázových polí se nemění,
-- A23 zobrazuje NOVÝ / EXISTUJE / KE KONTROLE / KONFLIKT česky,
-- neznámé názvy sloupců dostanou bezpečný český uživatelský popisek.
-
-V20.1.Q3 STEP 27 FIX 1:
-- překládá výsledky, závažnosti a kategorie nálezů A17,
-- překládá stav workflow, publikační hostitele a kroky A24,
-- překládá stav a souhrn databázového auditu A33,
-- technické identifikátory pravidel, souborů a databázových polí zůstávají zachovány.
-
-V20.1.Q3 STEP 26 FIX 3:
-- tlačítka návrhů už nejsou závislá na dočasné runtime proměnné,
-- proposal se dohledá přímo v aktuálním workspace,
-- fallback vyhledá nejnovější odpovídající proposal pouze pod panel_workspaces,
-- opravuje stav, kdy byla cesta v tlačítku prázdná i po úspěšném vytvoření návrhů.
-
-V20.1.Q3 STEP 26 FIX 2:
-- převádí proposal cesty z PC2 na UNC cesty použitelné na PC1,
-- po dokončení automaticky otevře skutečný pracovní návrh MM-REF-001,
-- tlačítka A23 otevírají pracovní návrhy, nikoli kanonické slovníky,
-- potvrzovací okno ukazuje přesné cesty obou návrhů.
-
 V20.1.Q3 STEP 26 FIX 1:
 - potlačuje PowerShell progress stream při vzdáleném A23 proposal běhu,
 - při chybějícím vzdáleném exit markeru ověřuje skutečný JSON výstup,
@@ -788,74 +763,6 @@ COLUMN_LABELS = {
 
 
 # =========================================================
-# V20.1.Q3 STEP 27 - ČESKÉ POPISKY DOKUMENTAČNÍHO PANELU
-# =========================================================
-COLUMN_LABELS.update({
-    "document_id": "ID dokumentu",
-    "name": "Název",
-    "document_name": "Název dokumentu",
-    "document_type": "Typ dokumentu",
-    "edition": "Edice",
-    "version": "Verze",
-    "version_label": "Označení verze",
-    "current_version_label": "Aktuální verze",
-    "current_status": "Aktuální stav",
-    "source_of_truth": "Zdroj pravdy",
-    "import_run_pk": "ID importního běhu",
-    "import_status": "Stav importu",
-    "source_root": "Zdrojová cesta",
-    "source_path": "Zdrojová cesta",
-    "source_file": "Zdrojový soubor",
-    "source_document_id": "Zdrojový dokument",
-    "target_document_id": "Cílový dokument",
-    "relation_type": "Typ vazby",
-    "previous_status": "Předchozí stav",
-    "new_status": "Nový stav",
-    "change_reason": "Důvod změny",
-    "changed_at": "Změněno",
-    "approved_at": "Schváleno",
-    "approved_by": "Schválil",
-    "section_count": "Počet sekcí",
-    "relation_count": "Počet vazeb",
-    "version_count": "Počet verzí",
-    "is_current": "Aktuální",
-    "is_active": "Aktivní",
-    "document_count": "Počet dokumentů",
-    "active_document_count": "Aktivní dokumenty",
-    "foreign_term": "Cizí výraz",
-    "czech_translation": "Český překlad",
-    "source_chapter": "Zdrojová kapitola",
-    "target_chapter": "Cílová kapitola",
-    "explanation": "Výklad",
-    "candidate_status": "Stav kandidáta",
-    "selected": "Vybrat",
-})
-
-STATUS_LABELS.update({
-    "APPROVED": "SCHVÁLENO",
-    "DRAFT": "NÁVRH",
-    "NEEDS_USER_APPROVAL": "ČEKÁ NA SCHVÁLENÍ UŽIVATELEM",
-    "DRAFT – NEEDS_USER_APPROVAL": "NÁVRH – ČEKÁ NA SCHVÁLENÍ",
-    "MANUAL_REVIEW_REQUIRED": "VYŽADUJE RUČNÍ KONTROLU",
-    "MANUAL_REVIEW": "RUČNÍ KONTROLA",
-    "VALIDATED": "OVĚŘENO",
-    "VERIFIED": "OVĚŘENO",
-    "APPLIED": "PROVEDENO",
-    "ACTIVE": "AKTIVNÍ",
-    "INACTIVE": "NEAKTIVNÍ",
-    "HYBRID": "KOMBINOVANÝ ZDROJ",
-    "DATABASE": "DATABÁZE",
-    "MARKDOWN": "MARKDOWN DOKUMENT",
-    "CANONICAL_MARKDOWN": "KANONICKÝ MARKDOWN",
-    "NEW": "NOVÝ",
-    "EXISTS": "EXISTUJE",
-    "CONFLICT": "KONFLIKT",
-    "REVIEW": "KE KONTROLE",
-})
-
-
-
-# =========================================================
 # V18.2 - DOPLNĚNÉ ČESKÉ POPISKY PRO NOVÉ GOVERNANCE / V18 VIEW
 # =========================================================
 COLUMN_LABELS.update({
@@ -1279,116 +1186,8 @@ def cz_status(value):
 
     return STATUS_LABELS.get(key, text)
 
-
-# V20.1.Q3 STEP 27 FIX 1 - sjednocený český převod dokumentačních stavů.
-DOCUMENTATION_VALUE_LABELS = {
-    "PASS": "SPLNĚNO",
-    "FAIL": "NESPLNĚNO",
-    "PARTIAL": "ČÁSTEČNĚ SPLNĚNO",
-    "MANUAL_REVIEW": "RUČNÍ KONTROLA",
-    "MANUAL_REVIEW_REQUIRED": "VYŽADUJE RUČNÍ KONTROLU",
-    "CRITICAL": "KRITICKÁ",
-    "HIGH": "VYSOKÁ",
-    "MEDIUM": "STŘEDNÍ",
-    "LOW": "NÍZKÁ",
-    "INFO": "INFORMAČNÍ",
-    "STRUCTURE": "STRUKTURA",
-    "TERMINOLOGY": "TERMINOLOGIE",
-    "CONTENT": "OBSAH",
-    "METADATA": "METADATA",
-    "LINKS": "VAZBY",
-    "PENDING": "ČEKÁ",
-    "ALL": "VŠE",
-    "RESTRUCTURE_REQUIRED": "VYŽADUJE PŘESTRUKTUROVÁNÍ",
-    "DATABASE_STRUCTURE_AUDIT_EXPORTED": "AUDIT STRUKTURY DATABÁZE VYEXPORTOVÁN",
-    "DATABASE_STRUCTURE_CONNECTION_VERIFIED": "PŘIPOJENÍ K DATABÁZI OVĚŘENO",
-    "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED": "IMPORT PROVEDEN A OVĚŘEN",
-    "HISTORY_DOCUMENT_IMPORT_VALIDATED": "IMPORT OVĚŘEN",
-    "VERIFIED": "OVĚŘENO",
-    "VALIDATED": "OVĚŘENO",
-    "APPLIED": "PROVEDENO",
-    "BLOCKED": "ZABLOKOVÁNO",
-    "FAILED": "CHYBA",
-}
-
-def cz_documentation_value(value):
-    """Překládá pouze prezentační hodnotu; interní kód zůstává beze změny."""
-    if value is None:
-        return ""
-    raw = str(value)
-    key = raw.strip().upper()
-    if key in DOCUMENTATION_VALUE_LABELS:
-        return DOCUMENTATION_VALUE_LABELS[key]
-    if key in STATUS_LABELS:
-        return STATUS_LABELS[key]
-
-    # Složené technické stavy převádíme po částech, ale identifikátory souborů
-    # a pravidel tímto způsobem neměníme.
-    translated = raw
-    replacements = (
-        ("RESTRUCTURE_REQUIRED", "VYŽADUJE PŘESTRUKTUROVÁNÍ"),
-        ("MANUAL_REVIEW_REQUIRED", "VYŽADUJE RUČNÍ KONTROLU"),
-        ("MANUAL_REVIEW", "RUČNÍ KONTROLA"),
-        ("APPLIED_AND_VERIFIED", "PROVEDENO A OVĚŘENO"),
-        ("VALIDATE_ONLY", "POUZE OVĚŘENÍ"),
-        ("VALIDATED", "OVĚŘENO"),
-        ("VERIFIED", "OVĚŘENO"),
-        ("FAILED", "CHYBA"),
-        ("BLOCKED", "ZABLOKOVÁNO"),
-        ("PENDING", "ČEKÁ"),
-    )
-    for source, target in replacements:
-        translated = re.sub(re.escape(source), target, translated, flags=re.IGNORECASE)
-    return translated
-
 def cz_column(column_name):
-    """
-    Zobrazuje v panelu český uživatelský popisek.
-    Databázový název sloupce zůstává interně beze změny.
-    """
-    raw = str(column_name or "")
-    if raw in COLUMN_LABELS:
-        return COLUMN_LABELS[raw]
-
-    token_map = {
-        "id": "ID",
-        "document": "dokument",
-        "documents": "dokumenty",
-        "type": "typ",
-        "name": "název",
-        "status": "stav",
-        "current": "aktuální",
-        "previous": "předchozí",
-        "new": "nový",
-        "source": "zdroj",
-        "target": "cíl",
-        "relation": "vazba",
-        "version": "verze",
-        "label": "označení",
-        "count": "počet",
-        "created": "vytvořeno",
-        "updated": "upraveno",
-        "changed": "změněno",
-        "started": "zahájeno",
-        "finished": "dokončeno",
-        "at": "",
-        "by": "kým",
-        "reason": "důvod",
-        "root": "kořenová cesta",
-        "path": "cesta",
-        "file": "soubor",
-        "run": "běh",
-        "import": "import",
-        "active": "aktivní",
-        "section": "sekce",
-        "edition": "edice",
-        "truth": "pravda",
-        "of": "",
-    }
-    parts = [part for part in raw.lower().split("_") if part]
-    translated = [token_map.get(part, part) for part in parts]
-    label = " ".join(part for part in translated if part).strip()
-    return label[:1].upper() + label[1:] if label else raw
+    return COLUMN_LABELS.get(str(column_name), str(column_name))
 
 
 # =========================================================
@@ -3247,7 +3046,7 @@ class MatchMatrixAdminPanel(tk.Tk):
 
         tk.Label(
             database_audit_frame,
-            text="🗄 DATABÁZOVÁ DOKUMENTACE – AUDIT POUZE PRO ČTENÍ A33",
+            text="🗄 DATABÁZOVÁ DOKUMENTACE – READ-ONLY AUDIT A33",
             bg="#0d1118",
             fg="#9bd7ff",
             font=("Segoe UI", 10, "bold"),
@@ -3368,7 +3167,7 @@ class MatchMatrixAdminPanel(tk.Tk):
 
         self.documentation_a33_summary_value = tk.Label(
             database_audit_frame,
-            text="Schémata - | Objekty - | Tabulky - | Pohledy - | Varování -",
+            text="Schémata - | Objekty - | Tabulky - | Views - | Varování -",
             bg="#0d1118",
             fg="#c5d9e8",
             font=("Segoe UI", 8, "bold"),
@@ -6327,7 +6126,7 @@ Další termín: {h.get('next_target_date') or '-'}"""
                 status_color = YELLOW
 
             self.documentation_workflow_status_value.config(
-                text=cz_documentation_value(status_text),
+                text=status_text,
                 fg=status_color
             )
 
@@ -6372,7 +6171,7 @@ Další termín: {h.get('next_target_date') or '-'}"""
                     )
                     if result_count:
                         result_parts.append(
-                            f"{cz_documentation_value(result_name)}: {result_count}"
+                            f"{result_name}: {result_count}"
                         )
 
                 findings_text = f"K ŘEŠENÍ: {len(problem_findings)}"
@@ -6405,13 +6204,13 @@ Další termín: {h.get('next_target_date') or '-'}"""
             a7_status = self.documentation_workflow_a7_status or "ČEKÁ"
 
             publication_text = (
-                "HOSTITEL SPUŠTĚNÍ: PC2 "
+                "EXECUTION HOST: PC2 "
                 f"({DOCUMENTATION_REMOTE_HOST}) | "
-                "HOSTITEL DB: localhost na PC2 | "
-                f"CÍLOVÁ DB: {DB_CONFIG.get('dbname', 'matchmatrix')} | "
-                f"A24 OVĚŘENÍ: {cz_documentation_value(validate_status)} | "
-                f"PROVEDENÍ: {cz_documentation_value(apply_status)} | "
-                f"A7: {cz_documentation_value(a7_status)}"
+                "DB HOST: localhost na PC2 | "
+                f"DB TARGET: {DB_CONFIG.get('dbname', 'matchmatrix')} | "
+                f"A24 VALIDATE: {validate_status} | "
+                f"APPLY: {apply_status} | "
+                f"A7: {a7_status}"
             )
 
             publication_upper = publication_text.upper()
@@ -9117,28 +8916,6 @@ catch {{
         )
 
 
-    def _documentation_to_pc1_unc_path(self, remote_path):
-        """
-        STEP 26 FIX 2:
-        Převede cestu vrácenou A23 na PC2 na UNC cestu použitelnou panelem na PC1.
-        """
-        if not remote_path:
-            return remote_path
-
-        normalized = os.path.normpath(str(remote_path))
-        remote_root = os.path.normpath(DOCUMENTATION_REMOTE_PROJECT_ROOT)
-        unc_root = os.path.normpath(DOCUMENTATION_PROJECT_ROOT)
-
-        try:
-            if normalized.lower().startswith(remote_root.lower()):
-                relative = os.path.relpath(normalized, remote_root)
-                return os.path.normpath(os.path.join(unc_root, relative))
-        except Exception:
-            pass
-
-        return normalized
-
-
     def _documentation_to_remote_pc2_path(self, path_value):
         """
         V20.1.Q3 - převede cestu dostupnou z PC1 na lokální cestu PC2.
@@ -11467,9 +11244,9 @@ catch {{
                 iid=str(finding_index),
                 values=(
                     finding.get("rule_id", "-"),
-                    cz_documentation_value(finding.get("result", "-")),
-                    cz_documentation_value(finding.get("severity", "-")),
-                    cz_documentation_value(finding.get("category", "-")),
+                    finding.get("result", "-"),
+                    finding.get("severity", "-"),
+                    finding.get("category", "-"),
                     finding.get("title", "-")
                 )
             )
@@ -11496,9 +11273,9 @@ catch {{
             detail_lines = [
                 f"PRAVIDLO: {finding.get('rule_id', '-')}",
                 f"NÁZEV: {finding.get('title', '-')}",
-                f"VÝSLEDEK: {cz_documentation_value(finding.get('result', '-'))}",
-                f"ZÁVAŽNOST: {cz_documentation_value(finding.get('severity', '-'))}",
-                f"KATEGORIE: {cz_documentation_value(finding.get('category', '-'))}",
+                f"VÝSLEDEK: {finding.get('result', '-')}",
+                f"ZÁVAŽNOST: {finding.get('severity', '-')}",
+                f"KATEGORIE: {finding.get('category', '-')}",
                 f"STANDARD: {finding.get('standard', '-')}",
                 "",
                 "POPIS:",
@@ -11531,8 +11308,8 @@ catch {{
             detail_text.insert(
                 "1.0",
                 (
-                    "Audit neobsahuje žádný nález typu NESPLNĚNO, "
-                    "ČÁSTEČNĚ SPLNĚNO nebo RUČNÍ KONTROLA.\n\n"
+                    "Audit neobsahuje žádný nález typu FAIL, "
+                    "PARTIAL nebo MANUAL_REVIEW.\n\n"
                     "Úplný výsledek je dostupný v reportu A17."
                 )
             )
@@ -11656,7 +11433,7 @@ catch {{
             button_state = "normal"
 
         self.documentation_a33_status_value.config(
-            text=cz_documentation_value(status),
+            text=status,
             fg=status_color
         )
         self.documentation_a33_time_value.config(text=generated_at)
@@ -11667,20 +11444,20 @@ catch {{
                     f"Schémata {summary.get('schemas', 0)} | "
                     f"Objekty {summary.get('objects', 0)} | "
                     f"Tabulky {summary.get('tables', 0)} | "
-                    f"Pohledy {summary.get('views', 0)} | "
+                    f"Views {summary.get('views', 0)} | "
                     f"Sloupce {summary.get('columns', 0)} | "
-                    f"Omezení {summary.get('constraints', 0)} | "
+                    f"Constraints {summary.get('constraints', 0)} | "
                     f"Indexy {summary.get('indexes', 0)} | "
                     f"Varování {summary.get('warnings', len(warnings))} "
-                    f"(VYSOKÁ {severity_counts['HIGH']} / "
-                    f"STŘEDNÍ {severity_counts['MEDIUM']} / "
-                    f"INFORMAČNÍ {severity_counts['INFO']})"
+                    f"(HIGH {severity_counts['HIGH']} / "
+                    f"MEDIUM {severity_counts['MEDIUM']} / "
+                    f"INFO {severity_counts['INFO']})"
                 ),
                 fg=(RED if severity_counts["HIGH"] else "#c5d9e8")
             )
         else:
             self.documentation_a33_summary_value.config(
-                text="Schémata - | Objekty - | Tabulky - | Pohledy - | Varování -",
+                text="Schémata - | Objekty - | Tabulky - | Views - | Varování -",
                 fg="#c5d9e8"
             )
 
@@ -12300,7 +12077,7 @@ catch {{
         tk.Label(
             win,
             text=(
-                "POUZE PRO ČTENÍ: žádný pojem nebyl zapsán do MM-REF-001 ani MM-REF-002. "
+                "READ ONLY: žádný pojem nebyl zapsán do MM-REF-001 ani MM-REF-002. "
                 "NOVÝ a REVIEW budou později předloženy ke schválení."
             ),
             bg=BG,
@@ -12363,7 +12140,7 @@ catch {{
                 iid=f"a23_{index}",
                 values=(
                     "ANO" if str(item.get("normalized_term") or "").strip() in self.documentation_workflow_a23_selected_keys else "NE",
-                    cz_status(item.get("status", "")),
+                    item.get("status", ""),
                     item.get("foreign", ""),
                     item.get("czech", ""),
                     item.get("existing_translation", ""),
@@ -12409,15 +12186,27 @@ catch {{
         )
         self.make_button(
             actions,
-            "📝 OTEVŘÍT NÁVRH MM-REF-001",
+            "📖 OTEVŘÍT MM-REF-001",
             "#0f6a42",
-            self.documentation_open_a23_translation_proposal
+            lambda: self.open_matchmatrix_path(
+                os.path.join(
+                    "docs",
+                    "10_REFERENCE",
+                    "MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX.md"
+                )
+            )
         )
         self.make_button(
             actions,
-            "📘 OTEVŘÍT NÁVRH MM-REF-002",
+            "📘 OTEVŘÍT MM-REF-002",
             "#0f5f63",
-            self.documentation_open_a23_explanation_proposal
+            lambda: self.open_matchmatrix_path(
+                os.path.join(
+                    "docs",
+                    "10_REFERENCE",
+                    "MM-REF-002_VYKLADOVY_REJSTRIK_POJMU_MATCHMATRIX.md"
+                )
+            )
         )
 
 
@@ -12502,120 +12291,16 @@ catch {{
             except Exception as exc:
                 success=False; output_text=(output_text or "")+f"\nREPORT ERROR: {exc}"
         if success:
-            self.documentation_workflow_a23_translation_proposal=self._documentation_to_pc1_unc_path(payload.get("translation_candidate"))
-            self.documentation_workflow_a23_explanation_proposal=self._documentation_to_pc1_unc_path(payload.get("explanation_candidate"))
+            self.documentation_workflow_a23_translation_proposal=payload.get("translation_candidate")
+            self.documentation_workflow_a23_explanation_proposal=payload.get("explanation_candidate")
             self.documentation_workflow_step="A23 NÁVRHY HOTOVY"
             self.documentation_workflow_last_status=f"A23 NÁVRHY HOTOVY – MM-REF-001 {payload.get('translation_candidate_version','-')} | MM-REF-002 {payload.get('explanation_candidate_version','-')}"
             self._documentation_update_workflow_ui()
-            messagebox.showinfo(
-                "A23 – návrhy hotovy",
-                f"Vybrané pojmy: {payload.get('selected_count',0)}\n"
-                f"MM-REF-001: {payload.get('translation_candidate_version','-')}\n"
-                f"MM-REF-002: {payload.get('explanation_candidate_version','-')}\n\n"
-                "Kanonické soubory, Git ani databáze nebyly změněny.\n\n"
-                f"Návrh MM-REF-001:\n{self.documentation_workflow_a23_translation_proposal}\n\n"
-                f"Návrh MM-REF-002:\n{self.documentation_workflow_a23_explanation_proposal}"
-            )
-            self.documentation_open_a23_translation_proposal()
+            messagebox.showinfo("A23 – návrhy hotovy",f"Vybrané pojmy: {payload.get('selected_count',0)}\nMM-REF-001: {payload.get('translation_candidate_version','-')}\nMM-REF-002: {payload.get('explanation_candidate_version','-')}\n\nKanonické soubory, Git ani databáze nebyly změněny.")
+            os.startfile(self.documentation_workflow_a23_translation_proposal)
         else:
             self.documentation_workflow_step="A23 NÁVRHY SELHALY"; self.documentation_workflow_last_status="A23 PROPOSAL BUILDER CHYBA"; self._documentation_update_workflow_ui()
             messagebox.showerror("A23 – návrhy",f"Návrhy se nepodařilo vytvořit.\n\nLokální kód: {local_exit}\nVzdálený kód: {remote_exit}\n\n{output_text[-5000:]}")
-
-    def _documentation_discover_a23_proposal(self, proposal_name):
-        """
-        STEP 26 FIX 3:
-        Dohledá proposal přímo v aktuálním workspace, i když se cesta
-        neuložila do runtime proměnné po dokončení background threadu.
-        """
-        candidates = []
-
-        workspace = getattr(self, "documentation_workflow_workspace", None)
-        if workspace:
-            candidates.append(
-                os.path.join(
-                    workspace,
-                    "a23",
-                    "proposals",
-                    proposal_name,
-                )
-            )
-
-        stored = None
-        if "MM-REF-001" in proposal_name:
-            stored = getattr(
-                self,
-                "documentation_workflow_a23_translation_proposal",
-                None,
-            )
-        elif "MM-REF-002" in proposal_name:
-            stored = getattr(
-                self,
-                "documentation_workflow_a23_explanation_proposal",
-                None,
-            )
-        if stored:
-            candidates.insert(0, stored)
-
-        for candidate in candidates:
-            if candidate and os.path.isfile(candidate):
-                return os.path.normpath(candidate)
-
-        root = DOCUMENTATION_WORKSPACE_ROOT
-        try:
-            matches = []
-            for dirpath, _, filenames in os.walk(root):
-                if proposal_name in filenames:
-                    matches.append(os.path.join(dirpath, proposal_name))
-            if matches:
-                matches.sort(key=lambda path: os.path.getmtime(path), reverse=True)
-                return os.path.normpath(matches[0])
-        except Exception:
-            pass
-
-        return None
-
-
-    def documentation_open_a23_translation_proposal(self):
-        path = self._documentation_discover_a23_proposal(
-            "MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX_PROPOSAL.md"
-        )
-        if path:
-            self.documentation_workflow_a23_translation_proposal = path
-        if not path:
-            messagebox.showwarning(
-                "A23 – návrh MM-REF-001",
-                "Pracovní návrh MM-REF-001 nebyl nalezen ani v aktuálním workspace."
-            )
-            return
-        try:
-            os.startfile(path)
-        except Exception as exc:
-            messagebox.showerror(
-                "A23 – návrh MM-REF-001",
-                f"Soubor se nepodařilo otevřít:\n\n{exc}\n\nCesta:\n{path}"
-            )
-
-
-    def documentation_open_a23_explanation_proposal(self):
-        path = self._documentation_discover_a23_proposal(
-            "MM-REF-002_VYKLADOVY_REJSTRIK_POJMU_MATCHMATRIX_PROPOSAL.md"
-        )
-        if path:
-            self.documentation_workflow_a23_explanation_proposal = path
-        if not path:
-            messagebox.showwarning(
-                "A23 – návrh MM-REF-002",
-                "Pracovní návrh MM-REF-002 nebyl nalezen ani v aktuálním workspace."
-            )
-            return
-        try:
-            os.startfile(path)
-        except Exception as exc:
-            messagebox.showerror(
-                "A23 – návrh MM-REF-002",
-                f"Soubor se nepodařilo otevřít:\n\n{exc}\n\nCesta:\n{path}"
-            )
-
 
     def documentation_open_a23_report(self):
         report = getattr(
@@ -18473,8 +18158,7 @@ CO UDĚLAT:
         if col_low in (
             "run_status", "status", "current_state", "execution_readiness_status",
             "result_status", "kpi_status", "panel_status", "readiness_status",
-            "task_status", "parse_status", "current_status",
-            "previous_status", "new_status", "import_status", "source_of_truth"
+            "task_status", "parse_status"
         ):
             short_map = {
                 "READY_TO_RUN": "PŘIPRAVENO",
