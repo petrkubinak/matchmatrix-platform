@@ -2252,6 +2252,8 @@ Přínosem kapitoly je vytvoření jednoznačné závěrečné kontroly struktur
 
 Po splnění uvedených kritérií může dokument pokračovat do kontroly terminologie A23, uživatelského schválení, Git commitu a následného databázového importu přes A24 a A7.
 
+Na tuto kapitolu navazuje kapitola 23 – Historie verzí, která zaznamenává vznik a další vývoj dokumentu.
+
 ---
 
 # 23. Historie verzí
