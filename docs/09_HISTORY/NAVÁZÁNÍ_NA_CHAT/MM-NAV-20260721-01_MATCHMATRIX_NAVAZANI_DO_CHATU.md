@@ -8,7 +8,8 @@
 | Název dokumentu | MatchMatrix – navázání do nového chatu – 2026-07-21 |
 | Typ dokumentu | CHAT_CONTINUATION |
 | Verze | 1.0 |
-| Stav | DRAFT – NEEDS_USER_APPROVAL |
+| Stav | APPROVED |
+| Původní stav zdrojového dokumentu | DRAFT – NEEDS_USER_APPROVAL |
 | Datum | 2026-07-21 |
 | Autor | Petr |
 | Technická spolupráce | OpenAI ChatGPT |
@@ -32,7 +33,7 @@
 | Zdrojový denní zápis | `MM-DL-20260721` |
 | Aktivní oblast | `docs/05_PROVIDERS/` |
 | Poslední dokončený dokument | `MM-PRV-008` |
-| Bezprostřední další krok | Push commitu `9136726` |
+| Bezprostřední další krok | Push commitu `9aa4182` s denním zápisem a navázáním |
 | Doporučená další etapa | Implementační plán Provider Registry a Provider Matrix |
 
 ---
@@ -73,9 +74,10 @@ Všechny dokumenty `MM-PRV-001` až `MM-PRV-008` jsou kanonicky vytvořené a im
 ```text
 Repozitář: C:\MatchMatrix-platform
 Větev: main
-Lokální HEAD: 9136726c6fe9f41993941359b05bcb3ab1210b5b
-Poslední potvrzený remote commit: 057e9c7
-Push MM-PRV-008: DOSUD NESPUŠTĚN
+Lokální HEAD: 9aa4182
+Poslední potvrzený remote commit: 9136726
+Push MM-PRV-008: DOKONČEN
+Push denního zápisu a navázání: ČEKÁ
 ```
 
 Důležité dnešní commity:
@@ -85,6 +87,7 @@ f2ef4c1  Add daily log and chat continuation for 2026-07-18
 98f7c67  Fix chapter conclusion in MM-PRV-006
 057e9c7  MM-PRV-007
 9136726  MM-PRV-008
+9aa4182  Add daily log and chat continuation for 2026-07-21
 ```
 
 Potvrzené push přechody:
@@ -92,9 +95,10 @@ Potvrzené push přechody:
 ```text
 75dd437..98f7c67  main -> main
 98f7c67..057e9c7  main -> main
+057e9c7..9136726  main -> main
 ```
 
-Commit `9136726` je lokální a čeká na push.
+Commit `9136726` byl úspěšně pushnut na `origin/main`. Lokální commit `9aa4182` s denním zápisem a navázáním čeká na push.
 
 ## 3.2 Dokumentační databáze
 
@@ -138,7 +142,7 @@ C:\MatchMatrix-platform\tools\matchmatrix_control_panel_V20_1_Q3_DOCUMENTATION_W
 
 ---
 
-# 4. Dokončené práce
+# 4. Co bylo dokončeno
 
 ## 4.1 MM-PRV-006
 
@@ -204,35 +208,39 @@ Dokument `MM-PRV-008_DATOVY_MODEL_PROVIDER_REGISTRY_A_PROVIDER_MATRIX.md` byl:
 - schválen,
 - commitnut jako `9136726`,
 - importován přes A24,
-- ověřen přes A7.
+- ověřen přes A7,
+- pushnut na GitHub.
 
 Dokument je cílový návrh databázového registru a českého panelu. Není zatím implementací.
 
 ---
 
-# 5. Rozpracované práce
+# 5. Co zůstává rozpracováno
 
 V panelovém workflow není rozpracovaný neschválený providerový dokument.
 
-Otevřený zůstal pouze Git push:
+Dokument `MM-PRV-008` je kompletně uzavřen v Gitu, na GitHubu i v dokumentační databázi.
+
+Rozpracovaný zůstává pouze závěrečný Git krok pro historické dokumenty:
 
 ```text
-git push origin main
+MM-DL-20260721_MATCHMATRIX_DENNI_ZAPIS.md
+MM-NAV-20260721-01_MATCHMATRIX_NAVAZANI_DO_CHATU.md
 ```
 
-pro commit:
+Oba soubory jsou zahrnuty v lokálním commitu:
 
 ```text
-9136726c6fe9f41993941359b05bcb3ab1210b5b
+9aa4182  Add daily log and chat continuation for 2026-07-21
 ```
 
-Po dokončení push bude dokumentační část `MM-PRV-008` zcela uzavřena.
+Zbývá commit odeslat příkazem `git push origin main` a následně ověřit čistý pracovní strom.
 
 ---
 
 # 6. Otevřené úkoly
 
-1. Pushnout commit `9136726` na GitHub.
+1. Pushnout commit `9aa4182` na GitHub.
 2. Ověřit úspěšný přechod vzdálené větve `main`.
 3. Ověřit čistý pracovní strom.
 4. Rozhodnout o zahájení implementační etapy Provider Registry.
@@ -304,6 +312,7 @@ f2ef4c1
 98f7c67
 057e9c7
 9136726
+9aa4182
 ```
 
 ## 9.3 Aktivní nástroje
@@ -323,7 +332,7 @@ tools/documentation/25_1_A_7_VERIFY_DOCUMENTATION_IMPORT_V1.py
 
 Při pokračování musí AI:
 
-1. Začít kontrolou, zda byl push commitu `9136726` dokončen.
+1. Začít kontrolou, zda byl push commitu `9aa4182` dokončen.
 2. Pokud push dokončen nebyl, poslat pouze příkaz `git push origin main`.
 3. Po push případně ověřit `git status --short`.
 4. Neopakovat obecné kapitoly již popsané v `MM-PRV-001` až `MM-PRV-008`.
@@ -347,9 +356,9 @@ Při pokračování musí AI:
 | Dokumentační etapa | Provider Registry a Provider Matrix |
 | Dokončené dokumenty | MM-PRV-001 až MM-PRV-008 |
 | Git branch | main |
-| Lokální commit | 9136726c6fe9f41993941359b05bcb3ab1210b5b |
-| Remote commit | 057e9c7 |
-| Push posledního commitu | ČEKÁ |
+| Lokální commit | `9aa4182` |
+| Remote commit | `9136726` |
+| Push posledního commitu | ČEKÁ – denní zápis a navázání |
 | Dokumentační DB | 344 dokumentů |
 | Verze | 350 |
 | Sekce | 6 542 |
@@ -389,7 +398,7 @@ Aktivní dokumenty: 343 → 344
 
 # 13. Doporučená další dokumentační a implementační etapa
 
-Po push commitu `9136726` je vhodné rozhodnout mezi dvěma cestami:
+Po push commitu `9aa4182` je vhodné rozhodnout mezi dvěma cestami:
 
 ## Varianta A – samostatný implementační plán
 
@@ -447,7 +456,7 @@ git push origin main
 Tím se odešle commit:
 
 ```text
-9136726c6fe9f41993941359b05bcb3ab1210b5b
+9aa4182  Add daily log and chat continuation for 2026-07-21
 ```
 
 ---
@@ -477,7 +486,7 @@ Database:
 localhost:5432 / matchmatrix
 
 Local HEAD:
-9136726c6fe9f41993941359b05bcb3ab1210b5b
+9aa4182
 ```
 
 ---
@@ -486,7 +495,7 @@ Local HEAD:
 
 | Verze | Datum | Stav | Popis |
 |---|---|---|---|
-| 1.0 | 2026-07-21 | DRAFT – NEEDS_USER_APPROVAL | Navázání po dokončení MM-PRV-006 až MM-PRV-008, včetně oprav A17, Git commitů, A23, A24, A7 a databázového snapshotu. |
+| 1.0 | 2026-07-21 | DRAFT – NEEDS_USER_APPROVAL | Navázání po dokončení MM-PRV-006 až MM-PRV-008; doplněny povinné sekce „Co bylo dokončeno“ a „Co zůstává rozpracováno“ a aktualizován Git stav po push commitu 9136726. |
 
 ---
 
@@ -496,4 +505,4 @@ Providerová dokumentace MatchMatrix je dokončena do úrovně `MM-PRV-008`.
 
 Právní řízení, referenční katalog a cílový datový model Provider Registry byly vytvořeny, auditovány a importovány. Dokumentační databáze obsahuje 344 dokumentů, 350 verzí, 6 542 sekcí a 393 vazeb. Poslední import byl ověřen přes A24 a A7 bez varování a blokátorů.
 
-Bezprostředním prvním krokem nového chatu je push commitu `9136726`. Poté má projekt přejít od dokumentačního návrhu k read-only auditu skutečného stavu a k přípravě řízeného implementačního plánu Provider Registry a Provider Matrix.
+Bezprostředním prvním krokem nového chatu je push commitu `9aa4182` s denním zápisem a navázáním. Poté má projekt přejít od dokumentačního návrhu k read-only auditu skutečného stavu a k přípravě řízeného implementačního plánu Provider Registry a Provider Matrix.
