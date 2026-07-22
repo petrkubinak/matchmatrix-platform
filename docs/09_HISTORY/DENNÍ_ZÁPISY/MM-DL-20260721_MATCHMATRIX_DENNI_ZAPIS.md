@@ -8,7 +8,8 @@
 | Název dokumentu | MatchMatrix – denní zápis – 2026-07-21 |
 | Typ dokumentu | DAILY_LOG |
 | Verze | 1.0 |
-| Stav | DRAFT – NEEDS_USER_APPROVAL |
+| Stav | APPROVED |
+| Původní stav zdrojového dokumentu | DRAFT – NEEDS_USER_APPROVAL |
 | Datum | 2026-07-21 |
 | Autor | Petr |
 | Technická spolupráce | OpenAI ChatGPT |
