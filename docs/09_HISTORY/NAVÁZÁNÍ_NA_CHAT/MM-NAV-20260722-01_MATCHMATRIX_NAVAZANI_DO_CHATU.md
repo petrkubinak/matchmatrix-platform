@@ -8,7 +8,8 @@
 | Název dokumentu | MatchMatrix – navázání do nového chatu – 2026-07-22 |
 | Typ dokumentu | CHAT_CONTINUATION |
 | Verze | 1.1 |
-| Stav | DRAFT – NEEDS_USER_APPROVAL |
+| Stav | APPROVED |
+| Původní stav zdrojového dokumentu | DRAFT – NEEDS_USER_APPROVAL |
 | Datum | 2026-07-22 |
 | Autor | Petr |
 | Technická spolupráce | OpenAI ChatGPT |
