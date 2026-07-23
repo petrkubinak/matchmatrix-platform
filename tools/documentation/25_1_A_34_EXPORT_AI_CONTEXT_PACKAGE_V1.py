@@ -1,12 +1,13 @@
 """
-MATCHMATRIX – A34 EXPORT AI CONTEXT PACKAGE V1
+MATCHMATRIX – A34 EXPORT AI CONTEXT PACKAGE V1.2
 ==============================================
 
 CO TO JE:
 - Read-only exportní nástroj pro vytvoření jednotného kontextového balíčku
   MatchMatrix určeného pro pokračování práce v novém chatu.
-- Balíček spojuje poslední NAV, denní zápis, projektový snapshot, Git stav,
-  stav dokumentační databáze, A33 audit a datový přehled aktivního sportu.
+- Balíček spojuje poslední NAV, denní zápis, všechny dostupné měsíční
+  projektové snapshoty, Git stav, stav dokumentační databáze, A33 audit
+  a datový přehled aktivního sportu.
 
 K ČEMU TO JE:
 - Uživatel nemusí při každém novém chatu ručně hledat několik dokumentů
@@ -27,9 +28,10 @@ JAK:
 3. Volitelně spustí A33 pouze pro čtení.
 4. Načte dokumentační databázový snapshot.
 5. Načte stav všech sportů a aktivního sportu.
-6. Vyhledá poslední MM-NAV, MM-DL a MM-PS.
-7. Vytvoří hlavní Markdown, JSON podklady, manifest SHA-256 a ZIP.
-8. Aktualizuje soubory *_LATEST.*.
+6. Vyhledá poslední MM-NAV a MM-DL a všechny dostupné MM-PS.
+7. Seřadí projektové snapshoty chronologicky a zkontroluje pokrytí uzavřených měsíců.
+8. Vytvoří hlavní Markdown, JSON podklady, manifest SHA-256 a ZIP.
+9. Aktualizuje soubory *_LATEST.*.
 
 BEZPEČNOST:
 - Skript neprovádí INSERT, UPDATE, DELETE, DDL ani COMMIT do databáze.
@@ -40,7 +42,7 @@ BEZPEČNOST:
 - Skript nepoužívá git add, commit, push, stash ani reset.
 
 ENGINE_VERSION:
-A34_AI_CONTEXT_PACKAGE_V1_0
+A34_AI_CONTEXT_PACKAGE_V1_2
 """
 
 from __future__ import annotations
@@ -70,7 +72,7 @@ except ImportError as exc:
     ) from exc
 
 
-ENGINE_VERSION = "A34_AI_CONTEXT_PACKAGE_V1_0"
+ENGINE_VERSION = "A34_AI_CONTEXT_PACKAGE_V1_2"
 FINAL_STATUS_CREATED = "AI_CONTEXT_PACKAGE_CREATED"
 FINAL_STATUS_VALIDATED = "AI_CONTEXT_PACKAGE_VALIDATED"
 FINAL_STATUS_BLOCKED = "AI_CONTEXT_PACKAGE_BLOCKED"
@@ -78,6 +80,10 @@ FINAL_STATUS_BLOCKED = "AI_CONTEXT_PACKAGE_BLOCKED"
 DEFAULT_SPORT_CODE = "FB"
 DEFAULT_SPORT_NAME = "Fotbal"
 DEFAULT_ACTIVE_AREA = "Fotbal – referenční sport, provideři a datová matice"
+DEFAULT_NEXT_STEP = (
+    "Vytvořit úplnou fotbalovou datovou a providerovou matici "
+    "sport × soutěž × sezona × entita × časové období × účel × zdroj."
+)
 
 GENERATED_GIT_PATH_PREFIXES = (
     "reports/documentation/ai_context_package/",
@@ -697,6 +703,271 @@ def collect_all_sports_snapshot(conn) -> dict[str, Any]:
     return payload
 
 
+
+def _quote_identifier(value: str) -> str:
+    """Bezpečné uvozovkování identifikátoru načteného z information_schema."""
+    if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", value or ""):
+        raise ValueError(f"Neplatný SQL identifikátor: {value!r}")
+    return '"' + value.replace('"', '""') + '"'
+
+
+def _table_columns(conn, schema: str, table: str) -> set[str]:
+    result = query_rows(
+        conn,
+        f"columns_{schema}_{table}",
+        """
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_schema = %s
+          AND table_name = %s
+        ORDER BY ordinal_position;
+        """,
+        (schema, table),
+    )
+    if not result.ok:
+        return set()
+    return {
+        str(row.get("column_name"))
+        for row in result.rows
+        if row.get("column_name")
+    }
+
+
+def _sport_aliases(sport_code: str, sport_name: str) -> list[str]:
+    aliases: dict[str, tuple[str, ...]] = {
+        "FB": ("FB", "FOOTBALL", "SOCCER", "FOTBAL"),
+        "HK": ("HK", "HOCKEY", "ICE_HOCKEY", "HOKEJ"),
+        "BK": ("BK", "BASKETBALL", "BASKETBAL"),
+        "BSB": ("BSB", "BASEBALL"),
+        "TN": ("TN", "TENNIS", "TENIS"),
+        "CK": ("CK", "CRICKET", "KRIKET"),
+        "MMA": ("MMA",),
+        "AFB": ("AFB", "AMERICAN_FOOTBALL"),
+        "HB": ("HB", "HANDBALL", "HAZENA", "HÁZENÁ"),
+        "VB": ("VB", "VOLLEYBALL", "VOLEJBAL"),
+        "FH": ("FH", "FLOORBALL", "FLORBAL"),
+        "DRT": ("DRT", "DARTS", "SIPKY", "ŠIPKY"),
+        "ESP": ("ESP", "ESPORTS"),
+        "RUG": ("RUG", "RUGBY"),
+    }
+    values = list(aliases.get(sport_code.upper(), (sport_code.upper(),)))
+    values.append(sport_name)
+    unique: list[str] = []
+    for value in values:
+        normalized = str(value).strip().upper()
+        if normalized and normalized not in unique:
+            unique.append(normalized)
+    return unique
+
+
+def _count_public_table_for_sport(
+    conn,
+    *,
+    table: str,
+    query_name: str,
+    sport_code: str,
+    sport_name: str,
+) -> QueryResult:
+    """
+    Počítá řádky podle skutečné struktury tabulky.
+
+    Podporuje:
+    - přímý sport_code / sport / sport_key / sport_name,
+    - FK sport_id nebo sports_id na public.sports,
+    - různé názvy PK a kódu v public.sports.
+    """
+    entity_columns = _table_columns(conn, "public", table)
+    if not entity_columns:
+        return QueryResult(
+            name=query_name,
+            ok=False,
+            rows=[],
+            error=f"Tabulka public.{table} nebyla nalezena nebo nemá sloupce.",
+        )
+
+    aliases = _sport_aliases(sport_code, sport_name)
+    direct_candidates = (
+        "sport_code",
+        "sport",
+        "sport_key",
+        "sport_name",
+        "sport_slug",
+    )
+    for column in direct_candidates:
+        if column in entity_columns:
+            q_table = _quote_identifier(table)
+            q_column = _quote_identifier(column)
+            return query_rows(
+                conn,
+                query_name,
+                f"""
+                SELECT COUNT(*) AS row_count
+                FROM public.{q_table} AS entity
+                WHERE UPPER(CAST(entity.{q_column} AS text)) = ANY(%s);
+                """,
+                (aliases,),
+            )
+
+    entity_fk = next(
+        (candidate for candidate in ("sport_id", "sports_id") if candidate in entity_columns),
+        None,
+    )
+    if entity_fk:
+        sports_columns = _table_columns(conn, "public", "sports")
+        sports_pk = next(
+            (
+                candidate
+                for candidate in ("sport_id", "sports_id", "id")
+                if candidate in sports_columns
+            ),
+            None,
+        )
+        sports_code = next(
+            (
+                candidate
+                for candidate in (
+                    "sport_code",
+                    "code",
+                    "sport_key",
+                    "slug",
+                    "name",
+                    "sport_name",
+                )
+                if candidate in sports_columns
+            ),
+            None,
+        )
+        if sports_pk and sports_code:
+            q_table = _quote_identifier(table)
+            q_entity_fk = _quote_identifier(entity_fk)
+            q_sports_pk = _quote_identifier(sports_pk)
+            q_sports_code = _quote_identifier(sports_code)
+            return query_rows(
+                conn,
+                query_name,
+                f"""
+                SELECT COUNT(*) AS row_count
+                FROM public.{q_table} AS entity
+                JOIN public.sports AS sport
+                  ON sport.{q_sports_pk} = entity.{q_entity_fk}
+                WHERE UPPER(CAST(sport.{q_sports_code} AS text)) = ANY(%s);
+                """,
+                (aliases,),
+            )
+
+    # Některé canonical entity nemají sport přímo, ale pouze vazbu na tým
+    # nebo soutěž. Použijeme bezpečný jednonásobný join na rodičovskou entitu.
+    relation_candidates = (
+        ("leagues", ("league_id",), ("league_id", "id")),
+        (
+            "teams",
+            ("team_id", "current_team_id", "club_id"),
+            ("team_id", "id"),
+        ),
+    )
+    for relation_table, entity_fk_candidates, relation_pk_candidates in relation_candidates:
+        entity_relation_fk = next(
+            (candidate for candidate in entity_fk_candidates if candidate in entity_columns),
+            None,
+        )
+        if not entity_relation_fk:
+            continue
+
+        relation_columns = _table_columns(conn, "public", relation_table)
+        relation_pk = next(
+            (candidate for candidate in relation_pk_candidates if candidate in relation_columns),
+            None,
+        )
+        if not relation_pk:
+            continue
+
+        relation_direct = next(
+            (candidate for candidate in direct_candidates if candidate in relation_columns),
+            None,
+        )
+        q_table = _quote_identifier(table)
+        q_entity_fk = _quote_identifier(entity_relation_fk)
+        q_relation_table = _quote_identifier(relation_table)
+        q_relation_pk = _quote_identifier(relation_pk)
+
+        if relation_direct:
+            q_relation_direct = _quote_identifier(relation_direct)
+            return query_rows(
+                conn,
+                query_name,
+                f"""
+                SELECT COUNT(*) AS row_count
+                FROM public.{q_table} AS entity
+                JOIN public.{q_relation_table} AS parent
+                  ON parent.{q_relation_pk} = entity.{q_entity_fk}
+                WHERE UPPER(CAST(parent.{q_relation_direct} AS text)) = ANY(%s);
+                """,
+                (aliases,),
+            )
+
+        relation_sport_fk = next(
+            (
+                candidate
+                for candidate in ("sport_id", "sports_id")
+                if candidate in relation_columns
+            ),
+            None,
+        )
+        if relation_sport_fk:
+            sports_columns = _table_columns(conn, "public", "sports")
+            sports_pk = next(
+                (
+                    candidate
+                    for candidate in ("sport_id", "sports_id", "id")
+                    if candidate in sports_columns
+                ),
+                None,
+            )
+            sports_code = next(
+                (
+                    candidate
+                    for candidate in (
+                        "sport_code",
+                        "code",
+                        "sport_key",
+                        "slug",
+                        "name",
+                        "sport_name",
+                    )
+                    if candidate in sports_columns
+                ),
+                None,
+            )
+            if sports_pk and sports_code:
+                q_relation_sport_fk = _quote_identifier(relation_sport_fk)
+                q_sports_pk = _quote_identifier(sports_pk)
+                q_sports_code = _quote_identifier(sports_code)
+                return query_rows(
+                    conn,
+                    query_name,
+                    f"""
+                    SELECT COUNT(*) AS row_count
+                    FROM public.{q_table} AS entity
+                    JOIN public.{q_relation_table} AS parent
+                      ON parent.{q_relation_pk} = entity.{q_entity_fk}
+                    JOIN public.sports AS sport
+                      ON sport.{q_sports_pk} = parent.{q_relation_sport_fk}
+                    WHERE UPPER(CAST(sport.{q_sports_code} AS text)) = ANY(%s);
+                    """,
+                    (aliases,),
+                )
+
+    return QueryResult(
+        name=query_name,
+        ok=False,
+        rows=[],
+        error=(
+            f"Nelze určit vazbu public.{table} na sport. "
+            f"Dostupné sloupce: {', '.join(sorted(entity_columns))}"
+        ),
+    )
+
+
 def collect_active_sport_snapshot(
     conn,
     *,
@@ -704,140 +975,103 @@ def collect_active_sport_snapshot(
     sport_name: str,
 ) -> dict[str, Any]:
     code = sport_code.strip().upper()
+    aliases = _sport_aliases(code, sport_name)
 
-    queries = (
+    base_queries = (
         (
             "sport_definition",
             """
             SELECT *
             FROM public.sports
-            WHERE UPPER(sport_code) = %s
+            WHERE UPPER(CAST(sport_code AS text)) = ANY(%s)
             LIMIT 1;
             """,
-            (code,),
+            (aliases,),
         ),
         (
             "sport_completion",
             """
             SELECT *
             FROM ops.v_sport_completion_dashboard_v2
-            WHERE UPPER(sport_code) = %s
+            WHERE UPPER(CAST(sport_code AS text)) = ANY(%s)
             LIMIT 1;
             """,
-            (code,),
+            (aliases,),
         ),
         (
             "provider_entity_coverage",
             """
             SELECT *
             FROM ops.provider_entity_coverage
-            WHERE UPPER(sport_code) = %s
+            WHERE UPPER(CAST(sport_code AS text)) = ANY(%s)
             ORDER BY provider, entity_type;
             """,
-            (code,),
+            (aliases,),
         ),
         (
             "ingest_entity_plan",
             """
             SELECT *
             FROM ops.ingest_entity_plan
-            WHERE UPPER(sport_code) = %s
+            WHERE UPPER(CAST(sport_code AS text)) = ANY(%s)
             ORDER BY provider, entity_type;
             """,
-            (code,),
+            (aliases,),
         ),
         (
             "provider_worker_registry",
             """
             SELECT *
             FROM ops.provider_worker_registry
-            WHERE UPPER(sport_code) = %s
+            WHERE UPPER(CAST(sport_code AS text)) = ANY(%s)
             ORDER BY provider, entity_type;
             """,
-            (code,),
+            (aliases,),
         ),
         (
             "provider_sport_matrix",
             """
             SELECT *
             FROM ops.provider_sport_matrix
-            WHERE UPPER(sport_code) = %s
+            WHERE UPPER(CAST(sport_code AS text)) = ANY(%s)
             ORDER BY provider;
             """,
-            (code,),
-        ),
-        (
-            "public_leagues_count",
-            """
-            SELECT COUNT(*) AS row_count
-            FROM public.leagues AS entity
-            JOIN public.sports AS sport
-              ON sport.sport_id = entity.sport_id
-            WHERE UPPER(sport.sport_code) = %s;
-            """,
-            (code,),
-        ),
-        (
-            "public_teams_count",
-            """
-            SELECT COUNT(*) AS row_count
-            FROM public.teams AS entity
-            JOIN public.sports AS sport
-              ON sport.sport_id = entity.sport_id
-            WHERE UPPER(sport.sport_code) = %s;
-            """,
-            (code,),
-        ),
-        (
-            "public_matches_count",
-            """
-            SELECT COUNT(*) AS row_count
-            FROM public.matches AS entity
-            JOIN public.sports AS sport
-              ON sport.sport_id = entity.sport_id
-            WHERE UPPER(sport.sport_code) = %s;
-            """,
-            (code,),
-        ),
-        (
-            "public_players_count",
-            """
-            SELECT COUNT(*) AS row_count
-            FROM public.players AS entity
-            JOIN public.sports AS sport
-              ON sport.sport_id = entity.sport_id
-            WHERE UPPER(sport.sport_code) = %s;
-            """,
-            (code,),
-        ),
-        (
-            "public_coaches_count",
-            """
-            SELECT COUNT(*) AS row_count
-            FROM public.coaches AS entity
-            JOIN public.sports AS sport
-              ON sport.sport_id = entity.sport_id
-            WHERE UPPER(sport.sport_code) = %s;
-            """,
-            (code,),
+            (aliases,),
         ),
     )
 
     payload: dict[str, Any] = {
         "sport_code": code,
         "sport_name": sport_name,
+        "sport_aliases": aliases,
         "collected_at": iso_now(),
         "transaction_mode": "READ ONLY / REPEATABLE READ / ROLLBACK",
         "queries": {},
     }
 
-    for name, sql, params in queries:
+    for name, sql, params in base_queries:
         payload["queries"][name] = result_payload(
             query_rows(conn, name, sql, params)
         )
 
-    return payload
+    for table, query_name in (
+        ("leagues", "public_leagues_count"),
+        ("teams", "public_teams_count"),
+        ("matches", "public_matches_count"),
+        ("players", "public_players_count"),
+        ("coaches", "public_coaches_count"),
+    ):
+        payload["queries"][query_name] = result_payload(
+            _count_public_table_for_sport(
+                conn,
+                table=table,
+                query_name=query_name,
+                sport_code=code,
+                sport_name=sport_name,
+            )
+        )
 
+    return payload
 
 def run_a33(project_root: Path) -> dict[str, Any]:
     script = (
@@ -873,6 +1107,7 @@ def run_a33(project_root: Path) -> dict[str, Any]:
     return result
 
 
+
 def latest_file(directory: Path, pattern: str) -> Path | None:
     if not directory.is_dir():
         return None
@@ -888,23 +1123,196 @@ def latest_file(directory: Path, pattern: str) -> Path | None:
     )
 
 
+def _latest_controlled_document(
+    directory: Path,
+    pattern: str,
+    id_pattern: re.Pattern[str],
+) -> Path | None:
+    """
+    Řízené dokumenty vybírá podle data v Document ID, nikoli podle mtime.
+
+    Nově zkopírovaný starý snapshot proto nepřebije novější projektový stav.
+    """
+    if not directory.is_dir():
+        return None
+
+    candidates: list[tuple[tuple[int, int, int, str], Path]] = []
+    for path in directory.glob(pattern):
+        if not path.is_file():
+            continue
+        match = id_pattern.search(path.name)
+        if not match:
+            continue
+        date_value = int(match.group("date"))
+        sequence = int(match.groupdict().get("sequence") or 0)
+        candidates.append(
+            (
+                (
+                    date_value,
+                    sequence,
+                    path.stat().st_mtime_ns,
+                    path.name.lower(),
+                ),
+                path,
+            )
+        )
+
+    if not candidates:
+        return latest_file(directory, pattern)
+    return max(candidates, key=lambda item: item[0])[1]
+
+
 def find_latest_documents(project_root: Path) -> dict[str, Path | None]:
     history = project_root / "docs" / "09_HISTORY"
     return {
-        "latest_nav": latest_file(
+        "latest_nav": _latest_controlled_document(
             history / "NAVÁZÁNÍ_NA_CHAT",
             "MM-NAV-*.md",
+            re.compile(
+                r"MM-NAV-(?P<date>\d{8})-(?P<sequence>\d{2})",
+                re.IGNORECASE,
+            ),
         ),
-        "latest_daily_log": latest_file(
+        "latest_daily_log": _latest_controlled_document(
             history / "DENNÍ_ZÁPISY",
             "MM-DL-*.md",
+            re.compile(r"MM-DL-(?P<date>\d{8})", re.IGNORECASE),
         ),
-        "latest_project_snapshot": latest_file(
+        "latest_project_snapshot": _latest_controlled_document(
             history / "PROJECT_SNAPSHOTS",
             "MM-PS-*.md",
+            re.compile(r"MM-PS-(?P<date>\d{8})", re.IGNORECASE),
         ),
     }
 
+
+
+def project_snapshot_id_from_path(path: Path) -> str | None:
+    match = re.search(r"(MM-PS-(?P<date>\d{8}))", path.name, re.IGNORECASE)
+    return match.group(1).upper() if match else None
+
+
+def project_snapshot_date_from_path(path: Path) -> datetime | None:
+    match = re.search(r"MM-PS-(?P<date>\d{8})", path.name, re.IGNORECASE)
+    if not match:
+        return None
+    try:
+        return datetime.strptime(match.group("date"), "%Y%m%d")
+    except ValueError:
+        return None
+
+
+def find_all_project_snapshots(project_root: Path) -> list[Path]:
+    """
+    Vrátí všechny řízené MM-PS snapshoty z kanonické složky.
+
+    Snapshoty jsou deduplikovány podle Document ID a seřazeny od nejstaršího
+    k nejnovějšímu. Nový červencový, srpnový a další měsíční snapshot se tak
+    do příštího balíčku zahrne automaticky bez změny skriptu.
+    """
+    directory = (
+        project_root
+        / "docs"
+        / "09_HISTORY"
+        / "PROJECT_SNAPSHOTS"
+    )
+    if not directory.is_dir():
+        return []
+
+    by_document_id: dict[str, Path] = {}
+    for path in directory.glob("MM-PS-*.md"):
+        if not path.is_file():
+            continue
+        document_id = project_snapshot_id_from_path(path)
+        snapshot_date = project_snapshot_date_from_path(path)
+        if not document_id or snapshot_date is None:
+            continue
+        current = by_document_id.get(document_id)
+        if current is None or (
+            path.stat().st_mtime_ns,
+            path.name.lower(),
+        ) > (
+            current.stat().st_mtime_ns,
+            current.name.lower(),
+        ):
+            by_document_id[document_id] = path
+
+    return sorted(
+        by_document_id.values(),
+        key=lambda path: (
+            project_snapshot_date_from_path(path) or datetime.min,
+            path.name.lower(),
+        ),
+    )
+
+
+def _month_index(value: datetime) -> int:
+    return value.year * 12 + value.month - 1
+
+
+def _month_from_index(value: int) -> tuple[int, int]:
+    return value // 12, value % 12 + 1
+
+
+def project_snapshot_month_coverage(
+    snapshots: Sequence[Path],
+    *,
+    now: datetime | None = None,
+) -> dict[str, Any]:
+    """
+    Zkontroluje kontinuitu uzavřených měsíců od prvního snapshotu.
+
+    Aktuální probíhající měsíc není považován za chybějící. Například v
+    červenci se očekávají uzavřené měsíce nejvýše do června; červencový
+    snapshot se po vytvoření automaticky přidá, ale do konce července není
+    blokující podmínkou.
+    """
+    now = now or local_now()
+    dated = [
+        (path, project_snapshot_date_from_path(path))
+        for path in snapshots
+    ]
+    dated = [(path, date) for path, date in dated if date is not None]
+    present_months = sorted({date.strftime("%Y-%m") for _, date in dated})
+
+    if not dated:
+        return {
+            "present_months": [],
+            "missing_closed_months": [],
+            "first_month": None,
+            "last_month": None,
+            "current_month": now.strftime("%Y-%m"),
+        }
+
+    first_date = min(date for _, date in dated)
+    last_closed_index = _month_index(now) - 1
+    first_index = _month_index(first_date)
+    present = {_month_index(date) for _, date in dated}
+    missing: list[str] = []
+    if first_index <= last_closed_index:
+        for index in range(first_index, last_closed_index + 1):
+            if index not in present:
+                year, month = _month_from_index(index)
+                missing.append(f"{year:04d}-{month:02d}")
+
+    return {
+        "present_months": present_months,
+        "missing_closed_months": missing,
+        "first_month": min(present_months) if present_months else None,
+        "last_month": max(present_months) if present_months else None,
+        "current_month": now.strftime("%Y-%m"),
+    }
+
+
+def document_id_from_path(path: Path | None) -> str | None:
+    if path is None:
+        return None
+    match = re.search(
+        r"(MM-(?:NAV-\d{8}-\d{2}|DL-\d{8}|PS-\d{8}))",
+        path.name,
+        re.IGNORECASE,
+    )
+    return match.group(1).upper() if match else None
 
 def sport_audit_slug(sport_code: str, sport_name: str) -> str:
     explicit = {
@@ -983,6 +1391,7 @@ def copy_selected_sources(
     project_root: Path,
     package_dir: Path,
     documents: Mapping[str, Path | None],
+    project_snapshots: Sequence[Path],
     related_reports: Sequence[Path],
 ) -> tuple[dict[str, Any], int]:
     copied: dict[str, Any] = {}
@@ -1008,6 +1417,30 @@ def copy_selected_sources(
             "package_path": safe_relative(target, package_dir),
             "sha256": sha256_file(target),
         }
+
+    snapshot_items: list[dict[str, Any]] = []
+    snapshots_target_dir = docs_dir / "project_snapshots"
+    for source in project_snapshots:
+        target = snapshots_target_dir / source.name
+        redactions += copy_text_scrubbed(source, target)
+        snapshot_date = project_snapshot_date_from_path(source)
+        snapshot_items.append({
+            "document_id": project_snapshot_id_from_path(source),
+            "snapshot_date": (
+                snapshot_date.strftime("%Y-%m-%d")
+                if snapshot_date is not None
+                else None
+            ),
+            "month": (
+                snapshot_date.strftime("%Y-%m")
+                if snapshot_date is not None
+                else None
+            ),
+            "source": safe_relative(source, project_root),
+            "package_path": safe_relative(target, package_dir),
+            "sha256": sha256_file(target),
+        })
+    copied["project_snapshots"] = snapshot_items
 
     copied_reports: list[dict[str, Any]] = []
     used_names: set[str] = set()
@@ -1085,6 +1518,260 @@ def read_package_document(package_dir: Path, logical_name: str) -> str | None:
     return path.read_text(encoding="utf-8", errors="replace").strip()
 
 
+def read_report_excerpt(
+    package_dir: Path,
+    filename: str,
+    *,
+    max_chars: int = 24000,
+) -> str | None:
+    path = package_dir / "reports" / filename
+    if not path.is_file():
+        return None
+    text = path.read_text(encoding="utf-8-sig", errors="replace").strip()
+    if len(text) <= max_chars:
+        return text
+    excerpt = text[:max_chars]
+    if "\n" in excerpt:
+        excerpt = excerpt.rsplit("\n", 1)[0]
+    return excerpt.rstrip() + "\n\n_…zkráceno; úplný A33 report je v ZIP balíčku._"
+
+
+
+def query_rows_list(
+    payload: Mapping[str, Any],
+    query_name: str,
+) -> list[Mapping[str, Any]]:
+    queries = payload.get("queries")
+    if not isinstance(queries, Mapping):
+        return []
+    query = queries.get(query_name)
+    if not isinstance(query, Mapping) or not query.get("ok"):
+        return []
+    rows = query.get("rows")
+    if not isinstance(rows, list):
+        return []
+    return [row for row in rows if isinstance(row, Mapping)]
+
+
+def query_failure(
+    payload: Mapping[str, Any],
+    query_name: str,
+) -> str | None:
+    queries = payload.get("queries")
+    if not isinstance(queries, Mapping):
+        return "Snapshot nemá sekci queries."
+    query = queries.get(query_name)
+    if not isinstance(query, Mapping):
+        return "Dotaz ve snapshotu chybí."
+    if query.get("ok"):
+        return None
+    return str(query.get("error") or "Neznámá chyba dotazu.")
+
+
+def markdown_table_from_rows(
+    rows: Sequence[Mapping[str, Any]],
+    preferred_columns: Sequence[str],
+    *,
+    max_rows: int = 50,
+) -> str:
+    if not rows:
+        return "_Údaj není dostupný._"
+
+    columns = [
+        column
+        for column in preferred_columns
+        if any(column in row for row in rows)
+    ]
+    if not columns:
+        columns = list(rows[0].keys())[:8]
+
+    lines = [
+        "| " + " | ".join(columns) + " |",
+        "|" + "|".join("---" for _ in columns) + "|",
+    ]
+    for row in list(rows)[:max_rows]:
+        values: list[str] = []
+        for column in columns:
+            value = row.get(column, "")
+            if isinstance(value, (dict, list)):
+                rendered = json.dumps(value, ensure_ascii=False, default=json_default)
+            else:
+                rendered = str(value)
+            rendered = rendered.replace("|", "\\|").replace("\n", " ")
+            if len(rendered) > 180:
+                rendered = rendered[:177] + "..."
+            values.append(rendered)
+        lines.append("| " + " | ".join(values) + " |")
+
+    if len(rows) > max_rows:
+        lines.append(
+            f"\n_Zobrazeno {max_rows} z {len(rows)} řádků; úplný stav je v JSON snapshotu._"
+        )
+    return "\n".join(lines)
+
+
+def selected_document_status_table(
+    documentation_snapshot: Mapping[str, Any],
+) -> str:
+    selected = documentation_snapshot.get("selected_documents")
+    if not isinstance(selected, Mapping) or not selected.get("ok"):
+        return "_Aktuální stav vybraných dokumentů v DB nebyl načten._"
+    rows = selected.get("rows")
+    if not isinstance(rows, list):
+        return "_Aktuální stav vybraných dokumentů v DB nebyl načten._"
+    return markdown_table_from_rows(
+        [row for row in rows if isinstance(row, Mapping)],
+        (
+            "document_id",
+            "current_version_label",
+            "current_status",
+            "is_active",
+            "updated_at",
+        ),
+        max_rows=60,
+    )
+
+
+def build_all_sports_markdown(snapshot: Mapping[str, Any]) -> str:
+    completion = query_rows_list(snapshot, "sport_completion_dashboard")
+    if completion:
+        return markdown_table_from_rows(
+            completion,
+            (
+                "sport_code",
+                "sport_name",
+                "core_pct",
+                "people_pct",
+                "media_pct",
+                "odds_pct",
+                "total_pct",
+                "sport_readiness",
+                "recommended_focus",
+            ),
+            max_rows=30,
+        )
+
+    sports = query_rows_list(snapshot, "sports")
+    return markdown_table_from_rows(
+        sports,
+        ("sport_code", "sport_name", "name", "is_active", "created_at"),
+        max_rows=30,
+    )
+
+
+def build_provider_counts_markdown(snapshot: Mapping[str, Any]) -> str:
+    mapping = {
+        "Kanoničtí provideři": "canonical_providers_count",
+        "Sportovní matice": "provider_sport_matrix_count",
+        "Detailní coverage": "provider_entity_coverage_count",
+        "Ingest plány": "ingest_entity_plan_count",
+        "Worker registry": "provider_worker_registry_count",
+        "Provider účty": "provider_accounts_count",
+    }
+    values: dict[str, Any] = {}
+    for label, query_name in mapping.items():
+        row = query_first_row(snapshot, query_name)
+        values[label] = row.get("row_count", "NEOVĚŘENO")
+    return markdown_table_from_mapping(values)
+
+
+def build_active_coverage_markdown(snapshot: Mapping[str, Any]) -> str:
+    rows = query_rows_list(snapshot, "provider_entity_coverage")
+    return markdown_table_from_rows(
+        rows,
+        (
+            "provider",
+            "entity_type",
+            "coverage_status",
+            "enabled",
+            "is_primary_source",
+            "provider_priority",
+            "note",
+        ),
+        max_rows=40,
+    )
+
+
+
+def build_project_snapshot_timeline(
+    copied_sources: Mapping[str, Any],
+    documentation_snapshot: Mapping[str, Any],
+) -> str:
+    items = copied_sources.get("project_snapshots")
+    if not isinstance(items, list) or not items:
+        return "_Nebyl nalezen žádný projektový snapshot._"
+
+    status_map: dict[str, Mapping[str, Any]] = {}
+    selected = documentation_snapshot.get("selected_documents")
+    if isinstance(selected, Mapping) and selected.get("ok"):
+        rows = selected.get("rows")
+        if isinstance(rows, list):
+            for row in rows:
+                if not isinstance(row, Mapping):
+                    continue
+                document_id = str(row.get("document_id") or "").upper()
+                if document_id:
+                    status_map[document_id] = row
+
+    timeline_rows: list[dict[str, Any]] = []
+    for item in items:
+        if not isinstance(item, Mapping):
+            continue
+        document_id = str(item.get("document_id") or "").upper()
+        db_row = status_map.get(document_id, {})
+        timeline_rows.append({
+            "month": item.get("month"),
+            "document_id": document_id,
+            "snapshot_date": item.get("snapshot_date"),
+            "db_version": db_row.get("current_version_label", "NEOVĚŘENO"),
+            "db_status": db_row.get("current_status", "NEOVĚŘENO"),
+            "package_path": item.get("package_path"),
+        })
+
+    return markdown_table_from_rows(
+        timeline_rows,
+        (
+            "month",
+            "document_id",
+            "snapshot_date",
+            "db_version",
+            "db_status",
+            "package_path",
+        ),
+        max_rows=60,
+    )
+
+
+def read_project_snapshot_appendices(
+    package_dir: Path,
+    copied_sources: Mapping[str, Any],
+) -> list[tuple[str, str, str]]:
+    items = copied_sources.get("project_snapshots")
+    if not isinstance(items, list):
+        return []
+
+    appendices: list[tuple[str, str, str]] = []
+    for item in items:
+        if not isinstance(item, Mapping):
+            continue
+        package_path = item.get("package_path")
+        if not package_path:
+            continue
+        path = package_dir / str(package_path)
+        if not path.is_file():
+            continue
+        document_id = str(item.get("document_id") or path.stem)
+        month = str(item.get("month") or "neznámý měsíc")
+        content = path.read_text(
+            encoding="utf-8-sig",
+            errors="replace",
+        ).strip()
+        if content:
+            marker = re.sub(r"[^A-Z0-9_]+", "_", document_id.upper())
+            appendices.append((f"Projektový snapshot {month} – {document_id}", marker, content))
+    return appendices
+
+
 def build_main_markdown(
     *,
     package_id: str,
@@ -1093,6 +1780,7 @@ def build_main_markdown(
     sport_code: str,
     sport_name: str,
     active_area: str,
+    next_step: str,
     git_snapshot: Mapping[str, Any],
     db_descriptor: Mapping[str, Any],
     documentation_snapshot: Mapping[str, Any],
@@ -1105,23 +1793,21 @@ def build_main_markdown(
 ) -> str:
     doc_summary = extract_summary_row(documentation_snapshot)
 
-    sport_counts = {
-        "Soutěže": query_first_row(
-            active_sport_snapshot, "public_leagues_count"
-        ).get("row_count", "NEOVĚŘENO"),
-        "Týmy": query_first_row(
-            active_sport_snapshot, "public_teams_count"
-        ).get("row_count", "NEOVĚŘENO"),
-        "Zápasy": query_first_row(
-            active_sport_snapshot, "public_matches_count"
-        ).get("row_count", "NEOVĚŘENO"),
-        "Hráči": query_first_row(
-            active_sport_snapshot, "public_players_count"
-        ).get("row_count", "NEOVĚŘENO"),
-        "Trenéři": query_first_row(
-            active_sport_snapshot, "public_coaches_count"
-        ).get("row_count", "NEOVĚŘENO"),
-    }
+    sport_counts: dict[str, Any] = {}
+    for label, query_name in (
+        ("Soutěže", "public_leagues_count"),
+        ("Týmy", "public_teams_count"),
+        ("Zápasy", "public_matches_count"),
+        ("Hráči", "public_players_count"),
+        ("Trenéři", "public_coaches_count"),
+    ):
+        row = query_first_row(active_sport_snapshot, query_name)
+        error = query_failure(active_sport_snapshot, query_name)
+        sport_counts[label] = (
+            row.get("row_count")
+            if row and row.get("row_count") is not None
+            else f"NEOVĚŘENO – {error or 'bez výsledku'}"
+        )
 
     git_table = {
         "Větev": git_snapshot.get("branch"),
@@ -1167,6 +1853,15 @@ def build_main_markdown(
         else:
             source_lines.append(f"- **{key}:** NENALEZEN")
 
+    project_snapshot_items = copied_sources.get("project_snapshots")
+    if isinstance(project_snapshot_items, list):
+        for item in project_snapshot_items:
+            if isinstance(item, Mapping):
+                source_lines.append(
+                    f"- **project_snapshot {item.get('month')}:** "
+                    f"`{item.get('source')}` → `{item.get('package_path')}`"
+                )
+
     related = copied_sources.get("related_reports")
     if isinstance(related, list):
         for item in related:
@@ -1178,21 +1873,25 @@ def build_main_markdown(
 
     nav_text = read_package_document(package_dir, "latest_nav")
     daily_text = read_package_document(package_dir, "latest_daily_log")
-    snapshot_text = read_package_document(
-        package_dir,
-        "latest_project_snapshot",
-    )
-
     appendices: list[str] = []
-    for label, marker, content in (
+    appendix_sources: list[tuple[str, str, str | None]] = [
         ("Poslední navázání do chatu", "LATEST_NAV", nav_text),
         ("Poslední denní zápis", "LATEST_DAILY_LOG", daily_text),
-        ("Poslední projektový snapshot", "LATEST_PROJECT_SNAPSHOT", snapshot_text),
-    ):
+    ]
+    appendix_sources.extend(
+        read_project_snapshot_appendices(package_dir, copied_sources)
+    )
+
+    for label, marker, content in appendix_sources:
         if content:
             appendices.append(
                 f"""
 # Příloha – {label}
+
+> **Pravidlo aktuálnosti:** Tato příloha zachycuje stav v okamžiku svého
+> vytvoření. Při rozporu mají přednost aktuální kapitoly tohoto A34 balíčku.
+> Projektové snapshoty jsou seřazeny chronologicky a používají se jako
+> důkazní historie vývoje, nikoli jako náhrada aktuálního provozního stavu.
 
 <!-- BEGIN {marker} -->
 
@@ -1207,6 +1906,29 @@ def build_main_markdown(
         if a33_run
         else "V tomto běhu nebyl A33 znovu spuštěn; byly použity poslední dostupné výstupy."
     )
+
+    all_sports_table = build_all_sports_markdown(all_sports_snapshot)
+    provider_counts_table = build_provider_counts_markdown(all_sports_snapshot)
+    active_coverage_table = build_active_coverage_markdown(active_sport_snapshot)
+    selected_docs_table = selected_document_status_table(documentation_snapshot)
+    project_snapshot_timeline = build_project_snapshot_timeline(
+        copied_sources,
+        documentation_snapshot,
+    )
+    snapshot_coverage = copied_sources.get("project_snapshot_coverage")
+    if not isinstance(snapshot_coverage, Mapping):
+        snapshot_coverage = {}
+    snapshot_coverage_table = markdown_table_from_mapping({
+        "První pokrytý měsíc": snapshot_coverage.get("first_month"),
+        "Poslední pokrytý měsíc": snapshot_coverage.get("last_month"),
+        "Aktuální měsíc": snapshot_coverage.get("current_month"),
+        "Pokryté měsíce": ", ".join(snapshot_coverage.get("present_months") or []) or "ŽÁDNÉ",
+        "Chybějící uzavřené měsíce": ", ".join(snapshot_coverage.get("missing_closed_months") or []) or "ŽÁDNÉ",
+    })
+    a33_excerpt = read_report_excerpt(
+        package_dir,
+        "database_structure_audit_latest.md",
+    ) or "_Souhrnný A33 Markdown report nebyl v balíčku nalezen._"
 
     markdown = f"""
 # MatchMatrix – AI CONTEXT PACKAGE
@@ -1228,32 +1950,33 @@ def build_main_markdown(
 
 ---
 
-## 2. Pokyn pro AI
+## 2. Pravidla aktuálnosti pro AI
 
 Tento soubor je řízený kontextový balíček projektu MatchMatrix.
 
-Při pokračování práce:
-
-1. používej poslední NAV jako bezprostřední stav a místo navázání,
-2. projektový snapshot používej jako širší dlouhodobý kontext,
-3. databázové snapshoty považuj za stav platný pro uvedený Git commit,
-4. nevyvozuj, že návrhové databázové objekty již existují,
-5. nerozšiřuj databázi bez schválené dokumentace, validace a rollbacku,
-6. postupuj po jednom jasném technickém kroku,
-7. zachovej technické kódy dohledatelné a panelové názvy v češtině,
-8. při nejasnosti mezi dokumentací a databázovým auditem výslovně popiš rozdíl,
-9. nevkládej do dokumentace ani výstupů hesla, tokeny nebo API klíče,
-10. aktivní referenční sport je nyní **{sport_name} ({sport_code})**.
+1. **Kapitoly 1–12 jsou aktuální stav vytvořený A34 a mají přednost.**
+2. Přílohy NAV, DAILY_LOG a PROJECT_SNAPSHOT jsou důkazní kontext k datu
+   svého vzniku; jejich starší Git, DB nebo úkolový stav nesmí přepsat A34.
+3. NAV používej pro rozhodnutí, důvody a otevřené odborné otázky, nikoli pro
+   stav, který již byl později dokončen.
+4. Databázové snapshoty považuj za stav platný pro uvedený Git commit.
+5. Nevyvozuj, že návrhové databázové objekty již existují.
+6. Nerozšiřuj databázi bez schválené dokumentace, validace a rollbacku.
+7. Postupuj po jednom jasném technickém kroku.
+8. Zachovej technické kódy dohledatelné a panelové názvy v češtině.
+9. Při nejasnosti mezi dokumentací a databázovým auditem výslovně popiš rozdíl.
+10. Nevkládej do dokumentace ani výstupů hesla, tokeny nebo API klíče.
+11. Aktivní referenční sport je **{sport_name} ({sport_code})**.
 
 ---
 
-## 3. Git snapshot
+## 3. Git snapshot – aktuální zdroj pravdy
 
 {markdown_table_from_mapping(git_table)}
 
 ---
 
-## 4. Dokumentační databáze
+## 4. Dokumentační databáze – aktuální zdroj pravdy
 
 Zdroj připojení:
 
@@ -1263,19 +1986,34 @@ Zdroj připojení:
 
 {markdown_table_from_mapping(doc_summary, doc_labels)}
 
+### Stav dokumentů vložených do balíčku
+
+{selected_docs_table}
+
 ---
 
 ## 5. A33 – audit struktury databáze
 
 {a33_text}
 
-Poslední čitelné A33 soubory jsou přiloženy v podsložce `reports/`.
-A33 je zdroj strukturálního přehledu; obsahovou úplnost jednotlivých sportů
-popisují samostatné datové snapshoty.
+Poslední A33 soubory jsou přiloženy v podsložce `reports/`. A33 popisuje
+strukturu databáze; obsahovou úplnost sportů popisují následující snapshoty.
+
+### 5.1 Souhrnný výstup posledního A33
+
+{a33_excerpt}
 
 ---
 
 ## 6. Stav všech sportů
+
+### 6.1 Připravenost sportů
+
+{all_sports_table}
+
+### 6.2 Centrální providerové objekty
+
+{provider_counts_table}
 
 Úplný strojově čitelný stav je v:
 
@@ -1287,7 +2025,13 @@ snapshots/all_sports_data_snapshot.json
 
 ## 7. Aktivní sport – {sport_name} ({sport_code})
 
+### 7.1 Hlavní počty public vrstvy
+
 {markdown_table_from_mapping(sport_counts)}
+
+### 7.2 Provider × entita × provozní stav
+
+{active_coverage_table}
 
 Úplný strojově čitelný stav je v:
 
@@ -1297,33 +2041,52 @@ snapshots/active_sport_snapshot.json
 
 ---
 
-## 8. Ověřené zdroje balíčku
+## 8. Historická osa projektových snapshotů
+
+A34 zahrnuje všechny dostupné řízené `MM-PS` snapshoty z kanonické složky.
+Každý další měsíční snapshot se do budoucího balíčku přidá automaticky.
+Aktuální probíhající měsíc není do svého uzavření považován za chybějící.
+
+### 8.1 Kontrola měsíčního pokrytí
+
+{snapshot_coverage_table}
+
+### 8.2 Chronologický index
+
+{project_snapshot_timeline}
+
+Úplné znění všech snapshotů je součástí příloh tohoto Markdownu a současně
+v samostatných souborech pod `documents/project_snapshots/`.
+
+---
+
+## 9. Ověřené zdroje balíčku
 
 {chr(10).join(source_lines)}
 
 ---
 
-## 9. Upozornění a omezení
+## 10. Upozornění a omezení
 
 {warning_lines}
 
 ---
 
-## 10. Doporučený první krok v novém chatu
+## 11. Jediný doporučený další krok
 
-Nejprve přečíst přílohu **Poslední navázání do chatu** a potvrdit,
-že Git commit a databázový snapshot odpovídají aktuálnímu stavu.
-Potom pokračovat jediným krokem uvedeným v NAV.
+{next_step}
 
 ---
 
-## 11. Technické soubory balíčku
+## 12. Technické soubory balíčku
 
 ```text
 MATCHMATRIX_AI_CONTEXT_PACKAGE.md
 documents/latest_nav.md
 documents/latest_daily_log.md
 documents/latest_project_snapshot.md
+documents/project_snapshots/MM-PS-*.md
+snapshots/project_snapshot_history.json
 snapshots/git_snapshot.json
 snapshots/documentation_database_snapshot.json
 snapshots/all_sports_data_snapshot.json
@@ -1339,7 +2102,6 @@ package_manifest.json
 
     clean, _ = scrub_text(markdown)
     return clean.rstrip() + "\n"
-
 
 def build_manifest(
     *,
@@ -1421,9 +2183,12 @@ def create_package(args: argparse.Namespace) -> dict[str, Any]:
     sport_code = args.sport_code.strip().upper()
     sport_name = args.sport_name.strip()
     active_area = args.active_area.strip()
+    next_step = args.next_step.strip()
 
     git_snapshot = collect_git_snapshot(project_root)
     latest_documents = find_latest_documents(project_root)
+    project_snapshots = find_all_project_snapshots(project_root)
+    project_snapshot_coverage = project_snapshot_month_coverage(project_snapshots)
     blockers = validate_required_inputs(
         git_snapshot=git_snapshot,
         latest_documents=latest_documents,
@@ -1442,6 +2207,36 @@ def create_package(args: argparse.Namespace) -> dict[str, Any]:
     try:
         conn = connect_read_only(db_config)
         documentation_snapshot = collect_documentation_database_snapshot(conn)
+        selected_document_ids = [
+            document_id
+            for document_id in (
+                document_id_from_path(latest_documents.get("latest_nav")),
+                document_id_from_path(latest_documents.get("latest_daily_log")),
+                *(
+                    project_snapshot_id_from_path(path)
+                    for path in project_snapshots
+                ),
+            )
+            if document_id
+        ]
+        documentation_snapshot["selected_documents"] = result_payload(
+            query_rows(
+                conn,
+                "selected_documents",
+                """
+                SELECT
+                    document_id,
+                    current_version_label,
+                    current_status,
+                    is_active,
+                    updated_at
+                FROM documentation.documents
+                WHERE document_id = ANY(%s)
+                ORDER BY document_id;
+                """,
+                (selected_document_ids,),
+            )
+        )
         all_sports_snapshot = collect_all_sports_snapshot(conn)
         active_sport_snapshot = collect_active_sport_snapshot(
             conn,
@@ -1457,10 +2252,18 @@ def create_package(args: argparse.Namespace) -> dict[str, Any]:
 
     warnings: list[str] = []
 
-    if latest_documents.get("latest_project_snapshot") is None:
+    if not project_snapshots:
         warnings.append(
-            "Nebyl nalezen MM-PS projektový snapshot. "
-            "Balíček je použitelný, ale postrádá širší dlouhodobý snapshot."
+            "Nebyl nalezen žádný MM-PS projektový snapshot. "
+            "Balíček je použitelný, ale postrádá dlouhodobou historii projektu."
+        )
+    missing_closed_months = project_snapshot_coverage.get(
+        "missing_closed_months"
+    ) or []
+    if missing_closed_months:
+        warnings.append(
+            "V historické ose chybí uzavřené měsíce: "
+            + ", ".join(str(value) for value in missing_closed_months)
         )
 
     if git_snapshot.get("ahead") not in (None, 0):
@@ -1471,6 +2274,22 @@ def create_package(args: argparse.Namespace) -> dict[str, Any]:
         warnings.append(
             f"Lokální větev je za upstreamem o {git_snapshot.get('behind')} commitů."
         )
+
+    for snapshot_name, snapshot in (
+        ("all_sports", all_sports_snapshot),
+        ("active_sport", active_sport_snapshot),
+    ):
+        queries = snapshot.get("queries") if isinstance(snapshot, Mapping) else None
+        if not isinstance(queries, Mapping):
+            warnings.append(f"Snapshot {snapshot_name} nemá sekci queries.")
+            continue
+        for query_name, query_payload in queries.items():
+            if not isinstance(query_payload, Mapping) or query_payload.get("ok"):
+                continue
+            warnings.append(
+                f"{snapshot_name}.{query_name}: "
+                f"{query_payload.get('error') or 'neznámá chyba'}"
+            )
 
     # Povinné dotazy nesmí selhat.
     doc_summary = documentation_snapshot.get("summary")
@@ -1496,6 +2315,8 @@ def create_package(args: argparse.Namespace) -> dict[str, Any]:
                 key: str(value) if value else None
                 for key, value in latest_documents.items()
             },
+            "project_snapshots": [str(path) for path in project_snapshots],
+            "project_snapshot_coverage": project_snapshot_coverage,
             "warnings": warnings,
         }
 
@@ -1541,6 +2362,30 @@ def create_package(args: argparse.Namespace) -> dict[str, Any]:
             "recorded_at": iso_now(),
         },
     )
+    write_json(
+        snapshots_dir / "project_snapshot_history.json",
+        {
+            "generated_at": iso_now(),
+            "coverage": project_snapshot_coverage,
+            "snapshots": [
+                {
+                    "document_id": project_snapshot_id_from_path(path),
+                    "snapshot_date": (
+                        project_snapshot_date_from_path(path).strftime("%Y-%m-%d")
+                        if project_snapshot_date_from_path(path) is not None
+                        else None
+                    ),
+                    "month": (
+                        project_snapshot_date_from_path(path).strftime("%Y-%m")
+                        if project_snapshot_date_from_path(path) is not None
+                        else None
+                    ),
+                    "source": safe_relative(path, project_root),
+                }
+                for path in project_snapshots
+            ],
+        },
+    )
 
     related_reports = collect_related_report_files(
         project_root,
@@ -1551,8 +2396,10 @@ def create_package(args: argparse.Namespace) -> dict[str, Any]:
         project_root,
         package_dir,
         latest_documents,
+        project_snapshots,
         related_reports,
     )
+    copied_sources["project_snapshot_coverage"] = project_snapshot_coverage
 
     main_markdown = build_main_markdown(
         package_id=package_id,
@@ -1561,6 +2408,7 @@ def create_package(args: argparse.Namespace) -> dict[str, Any]:
         sport_code=sport_code,
         sport_name=sport_name,
         active_area=active_area,
+        next_step=next_step,
         git_snapshot=git_snapshot,
         db_descriptor=db_descriptor,
         documentation_snapshot=documentation_snapshot,
@@ -1644,6 +2492,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--active-area",
         default=DEFAULT_ACTIVE_AREA,
         help="Aktuální pracovní oblast pro hlavní Markdown.",
+    )
+    parser.add_argument(
+        "--next-step",
+        default=DEFAULT_NEXT_STEP,
+        help="Jediný doporučený další krok zobrazený v hlavním Markdownu.",
     )
     parser.add_argument(
         "--skip-a33",
