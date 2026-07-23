@@ -15,6 +15,7 @@
 | Typ | Project Snapshot / historický projektový checkpoint |
 | Edice | MM-DOC TECH |
 | Verze | 0.9 |
+| Stav | APPROVED |
 | Původní stav zdrojového dokumentu | REVIEW |
 | Datum snapshotu | 2026-04-30 |
 | Rekonstruované období | 2026-04-01 až 2026-04-30 |
