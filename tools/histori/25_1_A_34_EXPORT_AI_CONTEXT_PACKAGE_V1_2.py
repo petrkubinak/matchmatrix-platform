@@ -1,5 +1,5 @@
 """
-MATCHMATRIX – A34 EXPORT AI CONTEXT PACKAGE V1.3
+MATCHMATRIX – A34 EXPORT AI CONTEXT PACKAGE V1.2
 ==============================================
 
 CO TO JE:
@@ -30,9 +30,7 @@ JAK:
 5. Načte stav všech sportů a aktivního sportu.
 6. Vyhledá poslední MM-NAV a MM-DL a všechny dostupné MM-PS.
 7. Seřadí projektové snapshoty chronologicky a zkontroluje pokrytí uzavřených měsíců.
-8. Normalizuje skutečné DB sloupce `code`/`name` a `entity` na výstupní aliasy
-   `sport_code`/`sport_name` a `entity_type`, aby balíček odpovídal reálnému schématu.
-9. Vytvoří hlavní Markdown, JSON podklady, manifest SHA-256 a ZIP.
+8. Vytvoří hlavní Markdown, JSON podklady, manifest SHA-256 a ZIP.
 9. Aktualizuje soubory *_LATEST.*.
 
 BEZPEČNOST:
@@ -44,7 +42,7 @@ BEZPEČNOST:
 - Skript nepoužívá git add, commit, push, stash ani reset.
 
 ENGINE_VERSION:
-A34_AI_CONTEXT_PACKAGE_V1_3
+A34_AI_CONTEXT_PACKAGE_V1_2
 """
 
 from __future__ import annotations
@@ -74,7 +72,7 @@ except ImportError as exc:
     ) from exc
 
 
-ENGINE_VERSION = "A34_AI_CONTEXT_PACKAGE_V1_3"
+ENGINE_VERSION = "A34_AI_CONTEXT_PACKAGE_V1_2"
 FINAL_STATUS_CREATED = "AI_CONTEXT_PACKAGE_CREATED"
 FINAL_STATUS_VALIDATED = "AI_CONTEXT_PACKAGE_VALIDATED"
 FINAL_STATUS_BLOCKED = "AI_CONTEXT_PACKAGE_BLOCKED"
@@ -622,12 +620,9 @@ def collect_all_sports_snapshot(conn) -> dict[str, Any]:
         (
             "sports",
             """
-            SELECT
-                s.*,
-                s.code AS sport_code,
-                s.name AS sport_name
-            FROM public.sports AS s
-            ORDER BY s.code;
+            SELECT *
+            FROM public.sports
+            ORDER BY sport_code;
             """,
             None,
         ),
@@ -986,17 +981,12 @@ def collect_active_sport_snapshot(
         (
             "sport_definition",
             """
-            SELECT
-                s.*,
-                s.code AS sport_code,
-                s.name AS sport_name
-            FROM public.sports AS s
-            WHERE UPPER(CAST(s.code AS text)) = ANY(%s)
-               OR UPPER(CAST(s.sport_key AS text)) = ANY(%s)
-               OR UPPER(CAST(s.name AS text)) = ANY(%s)
+            SELECT *
+            FROM public.sports
+            WHERE UPPER(CAST(sport_code AS text)) = ANY(%s)
             LIMIT 1;
             """,
-            (aliases, aliases, aliases),
+            (aliases,),
         ),
         (
             "sport_completion",
@@ -1011,36 +1001,30 @@ def collect_active_sport_snapshot(
         (
             "provider_entity_coverage",
             """
-            SELECT
-                c.*,
-                c.entity AS entity_type
-            FROM ops.provider_entity_coverage AS c
-            WHERE UPPER(CAST(c.sport_code AS text)) = ANY(%s)
-            ORDER BY c.provider, c.entity;
+            SELECT *
+            FROM ops.provider_entity_coverage
+            WHERE UPPER(CAST(sport_code AS text)) = ANY(%s)
+            ORDER BY provider, entity_type;
             """,
             (aliases,),
         ),
         (
             "ingest_entity_plan",
             """
-            SELECT
-                p.*,
-                p.entity AS entity_type
-            FROM ops.ingest_entity_plan AS p
-            WHERE UPPER(CAST(p.sport_code AS text)) = ANY(%s)
-            ORDER BY p.provider, p.entity;
+            SELECT *
+            FROM ops.ingest_entity_plan
+            WHERE UPPER(CAST(sport_code AS text)) = ANY(%s)
+            ORDER BY provider, entity_type;
             """,
             (aliases,),
         ),
         (
             "provider_worker_registry",
             """
-            SELECT
-                w.*,
-                w.entity AS entity_type
-            FROM ops.provider_worker_registry AS w
-            WHERE UPPER(CAST(w.sport_code AS text)) = ANY(%s)
-            ORDER BY w.provider, w.entity;
+            SELECT *
+            FROM ops.provider_worker_registry
+            WHERE UPPER(CAST(sport_code AS text)) = ANY(%s)
+            ORDER BY provider, entity_type;
             """,
             (aliases,),
         ),
