@@ -199,15 +199,6 @@ V20.1.Q3 STEP 22:
 - schválení vždy vytvoří samostatné metadata Stav = APPROVED a zachová původní stav,
 - A18 již panelově neomezuje pouze na DL/NAV; předá všechny typy podporované A17.
 
-V20.1.Q3 STEP 30:
-- rozděluje přeplněnou záložku DOKUMENTACE do čtyř samostatných českých stránek,
-- PRACOVNÍ POSTUP obsahuje pouze řízený workflow A17 až A24,
-- AUDITY A AI KONTEXT obsahuje A33 a A34,
-- PŘEKLADY A VÝKLADY obsahuje klikací slovník a A23,
-- DATABÁZOVÝ PŘEHLED obsahuje stav DB, dokumenty, importy, vazby a historii,
-- horní rychlé odkazy zůstávají stále dostupné,
-- jednotlivé stránky využívají celou výšku panelu a nic se již netlačí pod spodní okraj.
-
 V20.1.Q3 STEP 29:
 - přidává samostatný panel AI KONTEXT PRO NOVÝ CHAT – A34,
 - umožňuje ověřit podklady bez vytvoření balíčku,
@@ -2839,15 +2830,14 @@ class MatchMatrixAdminPanel(tk.Tk):
         # K ČEMU TO JE:
         # - Operátor vidí stav dokumentů, verzí, sekcí, vazeb a importů bez DBeaveru.
         # - Základ pro budoucí několikaklikový dokumentační workflow.
-        # V20.1.Q3 STEP 30 - DOKUMENTACE JE ROZDĚLENA DO SAMOSTATNÝCH STRÁNEK.
-        # Každá stránka používá celou dostupnou výšku; uživatel již nemusí
-        # hledat workflow, audity, slovník a databázové tabulky v jednom
-        # dlouhém, vertikálně přeplněném pohledu.
         tab_documentation.columnconfigure(0, weight=1)
         tab_documentation.columnconfigure(1, weight=1)
-        tab_documentation.rowconfigure(0, weight=0)
         tab_documentation.rowconfigure(1, weight=0)
-        tab_documentation.rowconfigure(2, weight=1)
+        tab_documentation.rowconfigure(2, weight=0)
+        tab_documentation.rowconfigure(3, weight=2)
+        tab_documentation.rowconfigure(4, weight=1)
+        tab_documentation.rowconfigure(5, weight=1)
+        tab_documentation.rowconfigure(6, weight=1)
 
         documentation_button_bar = tk.Frame(tab_documentation, bg=BG)
         documentation_button_bar.grid(
@@ -2920,93 +2910,6 @@ class MatchMatrixAdminPanel(tk.Tk):
             )
         )
 
-        # ---------------------------------------------------------
-        # V20.1.Q3 STEP 30 - VNITŘNÍ STRÁNKY ZÁLOŽKY DOKUMENTACE
-        # ---------------------------------------------------------
-        documentation_page_bar = tk.Frame(
-            tab_documentation,
-            bg="#100918",
-            highlightbackground=CARD_BORDER,
-            highlightthickness=1
-        )
-        documentation_page_bar.grid(
-            row=1,
-            column=0,
-            columnspan=2,
-            sticky="ew",
-            padx=4,
-            pady=(0, 4)
-        )
-
-        documentation_pages_host = tk.Frame(tab_documentation, bg=BG)
-        documentation_pages_host.grid(
-            row=2,
-            column=0,
-            columnspan=2,
-            sticky="nsew",
-            padx=0,
-            pady=0
-        )
-
-        documentation_page_workflow = tk.Frame(documentation_pages_host, bg=BG)
-        documentation_page_audit_ai = tk.Frame(documentation_pages_host, bg=BG)
-        documentation_page_glossary = tk.Frame(documentation_pages_host, bg=BG)
-        documentation_page_database = tk.Frame(documentation_pages_host, bg=BG)
-
-        self.documentation_pages = {
-            "WORKFLOW": documentation_page_workflow,
-            "AUDIT_AI": documentation_page_audit_ai,
-            "GLOSSARY": documentation_page_glossary,
-            "DATABASE": documentation_page_database,
-        }
-        self.documentation_page_buttons = {}
-        self.documentation_current_page = None
-
-        for page_frame in self.documentation_pages.values():
-            page_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
-
-        documentation_page_workflow.columnconfigure(0, weight=1)
-        documentation_page_workflow.columnconfigure(1, weight=1)
-        documentation_page_workflow.rowconfigure(0, weight=1)
-
-        documentation_page_audit_ai.columnconfigure(0, weight=1)
-        documentation_page_audit_ai.columnconfigure(1, weight=1)
-        documentation_page_audit_ai.rowconfigure(0, weight=1)
-
-        documentation_page_glossary.columnconfigure(0, weight=1)
-        documentation_page_glossary.columnconfigure(1, weight=1)
-        documentation_page_glossary.rowconfigure(0, weight=1)
-
-        documentation_page_database.columnconfigure(0, weight=1)
-        documentation_page_database.columnconfigure(1, weight=1)
-        documentation_page_database.rowconfigure(0, weight=1)
-        documentation_page_database.rowconfigure(1, weight=2)
-        documentation_page_database.rowconfigure(2, weight=2)
-
-        def add_documentation_page_button(page_key, label):
-            button = tk.Button(
-                documentation_page_bar,
-                text=label,
-                bg="#23142f",
-                fg="#cdb7df",
-                activebackground="#6d45b8",
-                activeforeground="white",
-                relief="flat",
-                bd=0,
-                font=("Segoe UI", 9, "bold"),
-                cursor="hand2",
-                command=lambda key=page_key: self.show_documentation_page(key),
-                padx=10,
-                pady=7
-            )
-            button.pack(side="left", fill="x", expand=True, padx=3, pady=3)
-            self.documentation_page_buttons[page_key] = button
-
-        add_documentation_page_button("WORKFLOW", "1  PRACOVNÍ POSTUP")
-        add_documentation_page_button("AUDIT_AI", "2  AUDITY A AI KONTEXT")
-        add_documentation_page_button("GLOSSARY", "3  PŘEKLADY A VÝKLADY")
-        add_documentation_page_button("DATABASE", "4  DATABÁZOVÝ PŘEHLED")
-
         # V20.1.Q3 - ŘÍZENÝ DOKUMENTAČNÍ WORKFLOW
         # CO:
         # - Výběr jednoho zdrojového Markdown dokumentu.
@@ -3017,16 +2920,16 @@ class MatchMatrixAdminPanel(tk.Tk):
         # JAK:
         # - Tlačítko VYBRAT DOKUMENT vytvoří pracovní kopii a manifest.
         documentation_workflow_frame = tk.Frame(
-            documentation_page_workflow,
+            tab_documentation,
             bg="#100918",
             highlightbackground=CARD_BORDER,
             highlightthickness=1
         )
         documentation_workflow_frame.grid(
-            row=0,
+            row=1,
             column=0,
             columnspan=2,
-            sticky="nsew",
+            sticky="ew",
             padx=4,
             pady=4
         )
@@ -3359,16 +3262,16 @@ class MatchMatrixAdminPanel(tk.Tk):
         # JAK:
         # - Vždy na PC2, localhost:5432, READ ONLY + REPEATABLE READ.
         database_audit_frame = tk.Frame(
-            documentation_page_audit_ai,
+            tab_documentation,
             bg="#0d1118",
             highlightbackground="#31536b",
             highlightthickness=1
         )
         database_audit_frame.grid(
-            row=0,
+            row=2,
             column=0,
             columnspan=2,
-            sticky="nsew",
+            sticky="ew",
             padx=4,
             pady=4
         )
@@ -3670,13 +3573,13 @@ class MatchMatrixAdminPanel(tk.Tk):
 
         # V20.1.Q2 - KLIKACÍ SLOVNÍK A VÝKLADOVÝ REJSTŘÍK
         glossary_frame = tk.Frame(
-            documentation_page_glossary,
+            tab_documentation,
             bg=PANEL_2,
             highlightbackground=CARD_BORDER,
             highlightthickness=1
         )
         glossary_frame.grid(
-            row=0,
+            row=3,
             column=0,
             columnspan=2,
             sticky="nsew",
@@ -3841,43 +3744,40 @@ class MatchMatrixAdminPanel(tk.Tk):
         self.glossary_selected_entry = None
 
         self.documentation_kpi_tree = self.create_section(
-            documentation_page_database,
+            tab_documentation,
             "📚 STAV DOKUMENTAČNÍ DATABÁZE",
-            0,
+            4,
             0,
             2
         )
 
         self.documentation_documents_tree = self.create_section(
-            documentation_page_database,
+            tab_documentation,
             "📄 AKTUÁLNÍ DOKUMENTY",
-            1,
+            5,
             0
         )
 
         self.documentation_import_runs_tree = self.create_section(
-            documentation_page_database,
+            tab_documentation,
             "⏱ POSLEDNÍ IMPORTNÍ BĚHY",
-            1,
+            5,
             1
         )
 
         self.documentation_relations_tree = self.create_section(
-            documentation_page_database,
+            tab_documentation,
             "🔗 VAZBY DOKUMENTŮ",
-            2,
+            6,
             0
         )
 
         self.documentation_history_tree = self.create_section(
-            documentation_page_database,
+            tab_documentation,
             "🧾 HISTORIE STAVŮ",
-            2,
+            6,
             1
         )
-
-        # Výchozí stránka při otevření záložky DOKUMENTACE.
-        self.show_documentation_page("WORKFLOW")
 
         # =========================================================
         # V19.4: DENNÍ PRÁCE / PC2 COMMAND CENTER
@@ -21450,42 +21350,6 @@ Další SQL vrstva bude frontu čistit také podle opakovaných empty/no-data v�
         except Exception:
             pass
 
-    def show_documentation_page(self, page_key):
-        """Přepne vnitřní stránku záložky DOKUMENTACE."""
-
-        pages = getattr(self, "documentation_pages", {})
-        buttons = getattr(self, "documentation_page_buttons", {})
-
-        if page_key not in pages:
-            return
-
-        for frame in pages.values():
-            try:
-                frame.lower()
-            except Exception:
-                pass
-
-        pages[page_key].lift()
-        self.documentation_current_page = page_key
-
-        for key, button in buttons.items():
-            selected = key == page_key
-            try:
-                button.configure(
-                    bg="#6d45b8" if selected else "#23142f",
-                    fg="white" if selected else "#cdb7df",
-                    activebackground="#6d45b8" if selected else "#3b2555"
-                )
-            except Exception:
-                pass
-
-        # Při otevření databázového přehledu načteme čerstvý stav.
-        if page_key == "DATABASE":
-            try:
-                self.load_documentation_dashboard()
-            except Exception:
-                pass
-
     def show_tab(self, name):
 
         # V19: velký horní dashboard se zobrazuje pouze v PŘEHLED.
@@ -21560,9 +21424,6 @@ Další SQL vrstva bude frontu čistit také podle opakovaných empty/no-data v�
 
         if name == "DOCUMENTATION":
             self.load_documentation_dashboard()
-            self.show_documentation_page(
-                getattr(self, "documentation_current_page", None) or "WORKFLOW"
-            )
 
         if name == "PC2 COMMAND":
             # V19.11: načti denní práci až po překreslení UI, aby Windows neoznačil panel jako Neodpovídá.

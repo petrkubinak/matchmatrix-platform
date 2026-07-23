@@ -199,24 +199,6 @@ V20.1.Q3 STEP 22:
 - schválení vždy vytvoří samostatné metadata Stav = APPROVED a zachová původní stav,
 - A18 již panelově neomezuje pouze na DL/NAV; předá všechny typy podporované A17.
 
-V20.1.Q3 STEP 30:
-- rozděluje přeplněnou záložku DOKUMENTACE do čtyř samostatných českých stránek,
-- PRACOVNÍ POSTUP obsahuje pouze řízený workflow A17 až A24,
-- AUDITY A AI KONTEXT obsahuje A33 a A34,
-- PŘEKLADY A VÝKLADY obsahuje klikací slovník a A23,
-- DATABÁZOVÝ PŘEHLED obsahuje stav DB, dokumenty, importy, vazby a historii,
-- horní rychlé odkazy zůstávají stále dostupné,
-- jednotlivé stránky využívají celou výšku panelu a nic se již netlačí pod spodní okraj.
-
-V20.1.Q3 STEP 29:
-- přidává samostatný panel AI KONTEXT PRO NOVÝ CHAT – A34,
-- umožňuje ověřit podklady bez vytvoření balíčku,
-- vytváří aktuální AI Context Package na PC2 v režimu READ ONLY,
-- zobrazuje poslední Package ID, počet souborů, sport, varování a čas vytvoření,
-- otevírá poslední Markdown, ZIP a výstupní složku,
-- A34 automaticky spouští A33, čte Git, dokumentační DB a řízené Project Snapshoty,
-- databázi nemění a citlivé hodnoty do balíčku nevkládá.
-
 V20.1.Q3 STEP 23:
 - přidává samostatný blok DATABÁZOVÁ DOKUMENTACE – READ-ONLY AUDIT A33,
 - A33 se spouští na PC2 proti localhost:5432 v transakci READ ONLY / REPEATABLE READ,
@@ -430,10 +412,6 @@ DOCUMENTATION_SCRIPTS = {
     "A33": os.path.join(
         DOCUMENTATION_TOOL_DIR,
         "25_1_A_33_EXPORT_DATABASE_STRUCTURE_AUDIT_V1.py"
-    ),
-    "A34": os.path.join(
-        DOCUMENTATION_TOOL_DIR,
-        "25_1_A_34_EXPORT_AI_CONTEXT_PACKAGE_V1.py"
     ),
     "A6": os.path.join(
         DOCUMENTATION_TOOL_DIR,
@@ -1330,9 +1308,6 @@ DOCUMENTATION_VALUE_LABELS = {
     "RESTRUCTURE_REQUIRED": "VYŽADUJE PŘESTRUKTUROVÁNÍ",
     "DATABASE_STRUCTURE_AUDIT_EXPORTED": "AUDIT STRUKTURY DATABÁZE VYEXPORTOVÁN",
     "DATABASE_STRUCTURE_CONNECTION_VERIFIED": "PŘIPOJENÍ K DATABÁZI OVĚŘENO",
-    "AI_CONTEXT_PACKAGE_CREATED": "AI KONTEXTOVÝ BALÍČEK VYTVOŘEN",
-    "AI_CONTEXT_PACKAGE_VALIDATED": "PODKLADY AI KONTEXTU OVĚŘENY",
-    "AI_CONTEXT_PACKAGE_BLOCKED": "VYTVOŘENÍ AI KONTEXTU ZABLOKOVÁNO",
     "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED": "IMPORT PROVEDEN A OVĚŘEN",
     "HISTORY_DOCUMENT_IMPORT_VALIDATED": "IMPORT OVĚŘEN",
     "VERIFIED": "OVĚŘENO",
@@ -1623,17 +1598,6 @@ class MatchMatrixAdminPanel(tk.Tk):
         self.documentation_a33_last_report = None
         self.documentation_a33_last_payload = None
         self.documentation_a33_buttons = []
-
-        # V20.1.Q3 STEP 29 - řízený AI Context Package A34.
-        self.documentation_a34_process = None
-        self.documentation_a34_running = False
-        self.documentation_a34_last_status = "BALÍČEK ZATÍM NEVYTVOŘEN"
-        self.documentation_a34_last_output = None
-        self.documentation_a34_last_payload = None
-        self.documentation_a34_last_manifest = None
-        self.documentation_a34_last_markdown = None
-        self.documentation_a34_last_zip = None
-        self.documentation_a34_buttons = []
 
         self.setup_style()
         self.build_ui()
@@ -2839,15 +2803,14 @@ class MatchMatrixAdminPanel(tk.Tk):
         # K ČEMU TO JE:
         # - Operátor vidí stav dokumentů, verzí, sekcí, vazeb a importů bez DBeaveru.
         # - Základ pro budoucí několikaklikový dokumentační workflow.
-        # V20.1.Q3 STEP 30 - DOKUMENTACE JE ROZDĚLENA DO SAMOSTATNÝCH STRÁNEK.
-        # Každá stránka používá celou dostupnou výšku; uživatel již nemusí
-        # hledat workflow, audity, slovník a databázové tabulky v jednom
-        # dlouhém, vertikálně přeplněném pohledu.
         tab_documentation.columnconfigure(0, weight=1)
         tab_documentation.columnconfigure(1, weight=1)
-        tab_documentation.rowconfigure(0, weight=0)
         tab_documentation.rowconfigure(1, weight=0)
-        tab_documentation.rowconfigure(2, weight=1)
+        tab_documentation.rowconfigure(2, weight=0)
+        tab_documentation.rowconfigure(3, weight=2)
+        tab_documentation.rowconfigure(4, weight=1)
+        tab_documentation.rowconfigure(5, weight=1)
+        tab_documentation.rowconfigure(6, weight=1)
 
         documentation_button_bar = tk.Frame(tab_documentation, bg=BG)
         documentation_button_bar.grid(
@@ -2920,93 +2883,6 @@ class MatchMatrixAdminPanel(tk.Tk):
             )
         )
 
-        # ---------------------------------------------------------
-        # V20.1.Q3 STEP 30 - VNITŘNÍ STRÁNKY ZÁLOŽKY DOKUMENTACE
-        # ---------------------------------------------------------
-        documentation_page_bar = tk.Frame(
-            tab_documentation,
-            bg="#100918",
-            highlightbackground=CARD_BORDER,
-            highlightthickness=1
-        )
-        documentation_page_bar.grid(
-            row=1,
-            column=0,
-            columnspan=2,
-            sticky="ew",
-            padx=4,
-            pady=(0, 4)
-        )
-
-        documentation_pages_host = tk.Frame(tab_documentation, bg=BG)
-        documentation_pages_host.grid(
-            row=2,
-            column=0,
-            columnspan=2,
-            sticky="nsew",
-            padx=0,
-            pady=0
-        )
-
-        documentation_page_workflow = tk.Frame(documentation_pages_host, bg=BG)
-        documentation_page_audit_ai = tk.Frame(documentation_pages_host, bg=BG)
-        documentation_page_glossary = tk.Frame(documentation_pages_host, bg=BG)
-        documentation_page_database = tk.Frame(documentation_pages_host, bg=BG)
-
-        self.documentation_pages = {
-            "WORKFLOW": documentation_page_workflow,
-            "AUDIT_AI": documentation_page_audit_ai,
-            "GLOSSARY": documentation_page_glossary,
-            "DATABASE": documentation_page_database,
-        }
-        self.documentation_page_buttons = {}
-        self.documentation_current_page = None
-
-        for page_frame in self.documentation_pages.values():
-            page_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
-
-        documentation_page_workflow.columnconfigure(0, weight=1)
-        documentation_page_workflow.columnconfigure(1, weight=1)
-        documentation_page_workflow.rowconfigure(0, weight=1)
-
-        documentation_page_audit_ai.columnconfigure(0, weight=1)
-        documentation_page_audit_ai.columnconfigure(1, weight=1)
-        documentation_page_audit_ai.rowconfigure(0, weight=1)
-
-        documentation_page_glossary.columnconfigure(0, weight=1)
-        documentation_page_glossary.columnconfigure(1, weight=1)
-        documentation_page_glossary.rowconfigure(0, weight=1)
-
-        documentation_page_database.columnconfigure(0, weight=1)
-        documentation_page_database.columnconfigure(1, weight=1)
-        documentation_page_database.rowconfigure(0, weight=1)
-        documentation_page_database.rowconfigure(1, weight=2)
-        documentation_page_database.rowconfigure(2, weight=2)
-
-        def add_documentation_page_button(page_key, label):
-            button = tk.Button(
-                documentation_page_bar,
-                text=label,
-                bg="#23142f",
-                fg="#cdb7df",
-                activebackground="#6d45b8",
-                activeforeground="white",
-                relief="flat",
-                bd=0,
-                font=("Segoe UI", 9, "bold"),
-                cursor="hand2",
-                command=lambda key=page_key: self.show_documentation_page(key),
-                padx=10,
-                pady=7
-            )
-            button.pack(side="left", fill="x", expand=True, padx=3, pady=3)
-            self.documentation_page_buttons[page_key] = button
-
-        add_documentation_page_button("WORKFLOW", "1  PRACOVNÍ POSTUP")
-        add_documentation_page_button("AUDIT_AI", "2  AUDITY A AI KONTEXT")
-        add_documentation_page_button("GLOSSARY", "3  PŘEKLADY A VÝKLADY")
-        add_documentation_page_button("DATABASE", "4  DATABÁZOVÝ PŘEHLED")
-
         # V20.1.Q3 - ŘÍZENÝ DOKUMENTAČNÍ WORKFLOW
         # CO:
         # - Výběr jednoho zdrojového Markdown dokumentu.
@@ -3017,16 +2893,16 @@ class MatchMatrixAdminPanel(tk.Tk):
         # JAK:
         # - Tlačítko VYBRAT DOKUMENT vytvoří pracovní kopii a manifest.
         documentation_workflow_frame = tk.Frame(
-            documentation_page_workflow,
+            tab_documentation,
             bg="#100918",
             highlightbackground=CARD_BORDER,
             highlightthickness=1
         )
         documentation_workflow_frame.grid(
-            row=0,
+            row=1,
             column=0,
             columnspan=2,
-            sticky="nsew",
+            sticky="ew",
             padx=4,
             pady=4
         )
@@ -3359,16 +3235,16 @@ class MatchMatrixAdminPanel(tk.Tk):
         # JAK:
         # - Vždy na PC2, localhost:5432, READ ONLY + REPEATABLE READ.
         database_audit_frame = tk.Frame(
-            documentation_page_audit_ai,
+            tab_documentation,
             bg="#0d1118",
             highlightbackground="#31536b",
             highlightthickness=1
         )
         database_audit_frame.grid(
-            row=0,
+            row=2,
             column=0,
             columnspan=2,
-            sticky="nsew",
+            sticky="ew",
             padx=4,
             pady=4
         )
@@ -3512,171 +3388,15 @@ class MatchMatrixAdminPanel(tk.Tk):
 
         self._documentation_update_a33_ui()
 
-        # V20.1.Q3 STEP 29 - AI KONTEXT PRO NOVÝ CHAT / A34
-        tk.Frame(
-            database_audit_frame,
-            bg="#31536b",
-            height=1
-        ).grid(
-            row=4,
-            column=0,
-            columnspan=4,
-            sticky="ew",
-            padx=8,
-            pady=(2, 4)
-        )
-
-        tk.Label(
-            database_audit_frame,
-            text="🤖 AI KONTEXT PRO NOVÝ CHAT – A34",
-            bg="#0d1118",
-            fg="#d8b4fe",
-            font=("Segoe UI", 10, "bold"),
-            anchor="w"
-        ).grid(
-            row=5,
-            column=0,
-            columnspan=4,
-            sticky="ew",
-            padx=8,
-            pady=(2, 3)
-        )
-
-        ai_context_actions = tk.Frame(
-            database_audit_frame,
-            bg="#0d1118"
-        )
-        ai_context_actions.grid(
-            row=6,
-            column=0,
-            columnspan=4,
-            sticky="ew",
-            padx=6,
-            pady=(0, 4)
-        )
-
-        def add_a34_button(label, color, command):
-            button = tk.Button(
-                ai_context_actions,
-                text=label,
-                bg=color,
-                fg="white",
-                activebackground=color,
-                activeforeground="white",
-                relief="flat",
-                bd=0,
-                font=("Segoe UI", 8, "bold"),
-                cursor="hand2",
-                command=command,
-                padx=8,
-                pady=4
-            )
-            button.pack(side="left", fill="x", expand=True, padx=3)
-            self.documentation_a34_buttons.append(button)
-            return button
-
-        add_a34_button(
-            "✓ OVĚŘIT PODKLADY",
-            "#3b5870",
-            self.documentation_a34_validate_inputs
-        )
-        add_a34_button(
-            "▶ VYTVOŘIT BALÍČEK",
-            "#0f6a42",
-            self.documentation_a34_create_package
-        )
-        add_a34_button(
-            "📄 OTEVŘÍT MARKDOWN",
-            "#4c2c83",
-            self.documentation_a34_open_latest_markdown
-        )
-        add_a34_button(
-            "📦 OTEVŘÍT ZIP",
-            "#6d45b8",
-            self.documentation_a34_open_latest_zip
-        )
-        add_a34_button(
-            "📂 OTEVŘÍT VÝSTUPY",
-            "#0f5f63",
-            self.documentation_a34_open_output_folder
-        )
-
-        tk.Label(
-            database_audit_frame,
-            text="STAV A34:",
-            bg="#0d1118",
-            fg=MUTED,
-            font=("Segoe UI", 8, "bold"),
-            anchor="w"
-        ).grid(row=7, column=0, sticky="w", padx=(8, 4), pady=2)
-
-        self.documentation_a34_status_value = tk.Label(
-            database_audit_frame,
-            text="BALÍČEK ZATÍM NEVYTVOŘEN",
-            bg="#0d1118",
-            fg=YELLOW,
-            font=("Segoe UI", 8, "bold"),
-            anchor="w"
-        )
-        self.documentation_a34_status_value.grid(
-            row=7, column=1, sticky="ew", padx=(0, 8), pady=2
-        )
-
-        tk.Label(
-            database_audit_frame,
-            text="POSLEDNÍ BALÍČEK:",
-            bg="#0d1118",
-            fg=MUTED,
-            font=("Segoe UI", 8, "bold"),
-            anchor="w"
-        ).grid(row=7, column=2, sticky="w", padx=(8, 4), pady=2)
-
-        self.documentation_a34_time_value = tk.Label(
-            database_audit_frame,
-            text="-",
-            bg="#0d1118",
-            fg="#c5d9e8",
-            font=("Segoe UI", 8),
-            anchor="w"
-        )
-        self.documentation_a34_time_value.grid(
-            row=7, column=3, sticky="ew", padx=(0, 8), pady=2
-        )
-
-        tk.Label(
-            database_audit_frame,
-            text="SOUHRN A34:",
-            bg="#0d1118",
-            fg=MUTED,
-            font=("Segoe UI", 8, "bold"),
-            anchor="nw"
-        ).grid(row=8, column=0, sticky="nw", padx=(8, 4), pady=(2, 6))
-
-        self.documentation_a34_summary_value = tk.Label(
-            database_audit_frame,
-            text="Package ID - | Soubory - | Varování - | Sport -",
-            bg="#0d1118",
-            fg="#c5d9e8",
-            font=("Segoe UI", 8, "bold"),
-            anchor="w",
-            justify="left",
-            wraplength=1450
-        )
-        self.documentation_a34_summary_value.grid(
-            row=8, column=1, columnspan=3, sticky="ew", padx=(0, 8), pady=(2, 6)
-        )
-
-        self._documentation_update_a34_ui()
-
         # V20.1.Q2 - KLIKACÍ SLOVNÍK A VÝKLADOVÝ REJSTŘÍK
         glossary_frame = tk.Frame(
-            documentation_page_glossary,
+            tab_documentation,
             bg=PANEL_2,
             highlightbackground=CARD_BORDER,
             highlightthickness=1
         )
         glossary_frame.grid(
-            row=0,
+            row=3,
             column=0,
             columnspan=2,
             sticky="nsew",
@@ -3841,43 +3561,40 @@ class MatchMatrixAdminPanel(tk.Tk):
         self.glossary_selected_entry = None
 
         self.documentation_kpi_tree = self.create_section(
-            documentation_page_database,
+            tab_documentation,
             "📚 STAV DOKUMENTAČNÍ DATABÁZE",
-            0,
+            4,
             0,
             2
         )
 
         self.documentation_documents_tree = self.create_section(
-            documentation_page_database,
+            tab_documentation,
             "📄 AKTUÁLNÍ DOKUMENTY",
-            1,
+            5,
             0
         )
 
         self.documentation_import_runs_tree = self.create_section(
-            documentation_page_database,
+            tab_documentation,
             "⏱ POSLEDNÍ IMPORTNÍ BĚHY",
-            1,
+            5,
             1
         )
 
         self.documentation_relations_tree = self.create_section(
-            documentation_page_database,
+            tab_documentation,
             "🔗 VAZBY DOKUMENTŮ",
-            2,
+            6,
             0
         )
 
         self.documentation_history_tree = self.create_section(
-            documentation_page_database,
+            tab_documentation,
             "🧾 HISTORIE STAVŮ",
-            2,
+            6,
             1
         )
-
-        # Výchozí stránka při otevření záložky DOKUMENTACE.
-        self.show_documentation_page("WORKFLOW")
 
         # =========================================================
         # V19.4: DENNÍ PRÁCE / PC2 COMMAND CENTER
@@ -12053,442 +11770,6 @@ catch {{
 
 
     # =========================================================
-    # V20.1.Q3 STEP 29 - A34 AI CONTEXT PACKAGE
-    # =========================================================
-
-    def _documentation_a34_output_relative_dir(self):
-        return os.path.join(
-            "reports",
-            "documentation",
-            "ai_context_package"
-        )
-
-    def _documentation_a34_output_dir(self):
-        return os.path.join(
-            DOCUMENTATION_ROOT,
-            self._documentation_a34_output_relative_dir()
-        )
-
-    def _documentation_a34_latest_manifest_path(self):
-        return os.path.join(
-            self._documentation_a34_output_dir(),
-            "MATCHMATRIX_AI_CONTEXT_PACKAGE_LATEST_MANIFEST.json"
-        )
-
-    def _documentation_a34_latest_markdown_path(self):
-        return os.path.join(
-            self._documentation_a34_output_dir(),
-            "MATCHMATRIX_AI_CONTEXT_PACKAGE_LATEST.md"
-        )
-
-    def _documentation_a34_latest_zip_path(self):
-        return os.path.join(
-            self._documentation_a34_output_dir(),
-            "MATCHMATRIX_AI_CONTEXT_PACKAGE_LATEST.zip"
-        )
-
-    def _documentation_update_a34_ui(self):
-        """Aktualizuje kompaktní panel A34 bez přístupu do databáze."""
-        if not hasattr(self, "documentation_a34_status_value"):
-            return
-
-        payload = self.documentation_a34_last_payload or {}
-        status = str(
-            self.documentation_a34_last_status
-            or payload.get("final_status")
-            or "BALÍČEK ZATÍM NEVYTVOŘEN"
-        )
-        created_at = str(payload.get("created_at") or "-")
-        warnings = payload.get("warnings") or []
-
-        if self.documentation_a34_running:
-            status_color = YELLOW
-            button_state = "disabled"
-        elif status in (
-            "AI_CONTEXT_PACKAGE_CREATED",
-            "AI_CONTEXT_PACKAGE_VALIDATED",
-        ):
-            status_color = GREEN
-            button_state = "normal"
-        elif "CHYBA" in status or "BLOCKED" in status or "FAILED" in status:
-            status_color = RED
-            button_state = "normal"
-        else:
-            status_color = YELLOW
-            button_state = "normal"
-
-        self.documentation_a34_status_value.config(
-            text=cz_documentation_value(status),
-            fg=status_color
-        )
-        self.documentation_a34_time_value.config(text=created_at)
-
-        if payload:
-            package_id = payload.get("package_id") or "-"
-            file_count = payload.get("file_count")
-            if file_count is None:
-                file_count = "-"
-            sport_code = payload.get("sport_code") or "-"
-            sport_name = payload.get("sport_name") or "-"
-            self.documentation_a34_summary_value.config(
-                text=(
-                    f"Package ID {package_id} | "
-                    f"Soubory {file_count} | "
-                    f"Varování {len(warnings)} | "
-                    f"Sport {sport_code} – {sport_name}"
-                ),
-                fg=(RED if warnings else "#c5d9e8")
-            )
-        elif status == "AI_CONTEXT_PACKAGE_VALIDATED":
-            self.documentation_a34_summary_value.config(
-                text="Podklady, Git a databázové mapování byly úspěšně ověřeny.",
-                fg=GREEN
-            )
-        else:
-            self.documentation_a34_summary_value.config(
-                text="Package ID - | Soubory - | Varování - | Sport -",
-                fg="#c5d9e8"
-            )
-
-        for button in getattr(self, "documentation_a34_buttons", []):
-            try:
-                button.config(state=button_state)
-            except Exception:
-                pass
-
-    def load_documentation_ai_context_package_status(self):
-        """Načte poslední A34 manifest ze sdíleného PC2 repozitáře."""
-        latest_manifest = self._documentation_a34_latest_manifest_path()
-        latest_md = self._documentation_a34_latest_markdown_path()
-        latest_zip = self._documentation_a34_latest_zip_path()
-
-        if not os.path.isfile(latest_manifest):
-            if not self.documentation_a34_running:
-                self.documentation_a34_last_status = "BALÍČEK ZATÍM NEVYTVOŘEN"
-                self.documentation_a34_last_payload = None
-                self.documentation_a34_last_manifest = None
-                self.documentation_a34_last_markdown = None
-                self.documentation_a34_last_zip = None
-            self._documentation_update_a34_ui()
-            return None
-
-        try:
-            with open(latest_manifest, "r", encoding="utf-8-sig") as handle:
-                payload = json.load(handle)
-            if not isinstance(payload, dict):
-                raise RuntimeError("A34 latest manifest není objekt.")
-
-            self.documentation_a34_last_payload = payload
-            self.documentation_a34_last_status = str(
-                payload.get("final_status")
-                or "A34 MANIFEST BEZ FINAL STATUS"
-            )
-            self.documentation_a34_last_manifest = latest_manifest
-            self.documentation_a34_last_markdown = (
-                latest_md if os.path.isfile(latest_md) else None
-            )
-            self.documentation_a34_last_zip = (
-                latest_zip if os.path.isfile(latest_zip) else None
-            )
-            self.documentation_a34_last_output = latest_manifest
-            self._documentation_update_a34_ui()
-            return payload
-        except Exception as exc:
-            self.documentation_a34_last_status = "CHYBA ČTENÍ A34 MANIFESTU"
-            self.documentation_a34_last_output = str(exc)
-            self._documentation_update_a34_ui()
-            return None
-
-    def documentation_a34_validate_inputs(self):
-        """Ověří A34 podklady bez vytvoření nového balíčku."""
-        self._documentation_start_a34(validate_only=True)
-
-    def documentation_a34_create_package(self):
-        """Vytvoří nový AI Context Package na PC2."""
-        confirmed = messagebox.askyesno(
-            "A34 – vytvořit AI kontextový balíček",
-            (
-                "Vytvořit nový řízený AI Context Package na PC2?\n\n"
-                "A34 nejprve spustí read-only audit A33, ověří Git, "
-                "dokumentační databázi a Project Snapshoty.\n"
-                "Databáze nebude změněna.\n\n"
-                "Výstupem bude Markdown, ZIP a manifest."
-            )
-        )
-        if not confirmed:
-            return
-        self._documentation_start_a34(validate_only=False)
-
-    def documentation_a34_open_latest_markdown(self):
-        """Otevře poslední hlavní Markdown A34."""
-        relative_path = os.path.join(
-            self._documentation_a34_output_relative_dir(),
-            "MATCHMATRIX_AI_CONTEXT_PACKAGE_LATEST.md"
-        )
-        self.open_matchmatrix_path(relative_path)
-
-    def documentation_a34_open_latest_zip(self):
-        """Otevře poslední ZIP balíček A34."""
-        relative_path = os.path.join(
-            self._documentation_a34_output_relative_dir(),
-            "MATCHMATRIX_AI_CONTEXT_PACKAGE_LATEST.zip"
-        )
-        self.open_matchmatrix_path(relative_path)
-
-    def documentation_a34_open_output_folder(self):
-        """Otevře složku všech A34 balíčků a latest souborů."""
-        self.open_matchmatrix_path(
-            self._documentation_a34_output_relative_dir()
-        )
-
-    def _documentation_start_a34(self, *, validate_only):
-        """Spustí A34 na PC2 bez blokování Tkinter GUI."""
-        if self.documentation_a34_running:
-            messagebox.showwarning(
-                "A34 – AI kontextový balíček",
-                "A34 právě běží."
-            )
-            return False
-        if self.documentation_a33_running:
-            messagebox.showwarning(
-                "A34 – AI kontextový balíček",
-                "Nejprve dokonči právě běžící audit A33."
-            )
-            return False
-        if self.documentation_workflow_running:
-            messagebox.showwarning(
-                "A34 – AI kontextový balíček",
-                "Nejprve dokonči právě běžící krok dokumentačního workflow."
-            )
-            return False
-
-        tool_path = DOCUMENTATION_SCRIPTS.get("A34")
-        if not tool_path or not os.path.isfile(tool_path):
-            messagebox.showerror(
-                "A34 – AI kontextový balíček",
-                f"Skript A34 nebyl nalezen:\n\n{tool_path}"
-            )
-            return False
-
-        self.documentation_a34_running = True
-        self.documentation_a34_last_status = (
-            "A34 OVĚŘUJE PODKLADY NA PC2"
-            if validate_only
-            else "A34 VYTVÁŘÍ AI KONTEXTOVÝ BALÍČEK NA PC2"
-        )
-        self.documentation_a34_last_output = None
-        self._documentation_update_a34_ui()
-
-        def worker():
-            try:
-                remote_tool = self._documentation_to_remote_pc2_path(tool_path)
-                remote_args = ["--validate-only"] if validate_only else []
-                ps_host = self._documentation_powershell_literal(
-                    DOCUMENTATION_REMOTE_HOST
-                )
-                ps_python = self._documentation_powershell_literal(
-                    DOCUMENTATION_PYTHON_EXE
-                )
-                ps_tool = self._documentation_powershell_literal(remote_tool)
-                ps_project = self._documentation_powershell_literal(
-                    DOCUMENTATION_REMOTE_PROJECT_ROOT
-                )
-                ps_args = "@(" + ",".join(
-                    self._documentation_powershell_literal(value)
-                    for value in remote_args
-                ) + ")"
-                powershell_script = (
-                    '$ErrorActionPreference = "Stop"\n'
-                    'try {\n'
-                    f'    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{\n'
-                    '        param($PythonExe, $ToolScript, $ProjectRoot, $ToolArgs)\n'
-                    '        $ErrorActionPreference = "Stop"\n'
-                    '        $ProgressPreference = "SilentlyContinue"\n'
-                    '        if ($null -eq $ToolArgs) { $ToolArgs = @() } else { $ToolArgs = @($ToolArgs) }\n'
-                    '        Set-Location -LiteralPath $ProjectRoot\n'
-                    '        & $PythonExe $ToolScript @ToolArgs\n'
-                    '        $ToolExitCode = $LASTEXITCODE\n'
-                    '        Write-Output "__MM_A34_EXIT_CODE__=$ToolExitCode"\n'
-                    '        if ($ToolExitCode -ne 0) { throw "A34 skoncil kodem $ToolExitCode" }\n'
-                    f'    }} -ArgumentList {ps_python}, {ps_tool}, {ps_project}, {ps_args}\n'
-                    '    exit 0\n'
-                    '}\n'
-                    'catch {\n'
-                    '    Write-Error $_.Exception.Message\n'
-                    '    exit 1\n'
-                    '}\n'
-                )
-                encoded = base64.b64encode(
-                    powershell_script.encode("utf-16le")
-                ).decode("ascii")
-                command = [
-                    "powershell.exe",
-                    "-NoProfile",
-                    "-NonInteractive",
-                    "-ExecutionPolicy",
-                    "Bypass",
-                    "-EncodedCommand",
-                    encoded,
-                ]
-                creation_flags = getattr(
-                    subprocess,
-                    "CREATE_NO_WINDOW",
-                    0
-                )
-                process = subprocess.Popen(
-                    command,
-                    cwd=BASE_DIR,
-                    stdout=subprocess.PIPE,
-                    stderr=subprocess.STDOUT,
-                    text=False,
-                    creationflags=creation_flags,
-                )
-                self.documentation_a34_process = process
-                raw_output, _ = process.communicate()
-                output_text = self._documentation_decode_process_output(
-                    raw_output
-                )
-                marker = re.search(
-                    r"__MM_A34_EXIT_CODE__=(-?\d+)",
-                    output_text
-                )
-                remote_code = int(marker.group(1)) if marker else None
-                status_match = re.search(
-                    r"__MM_A34_FINAL_STATUS__=([^\r\n]+)",
-                    output_text
-                )
-                final_status = (
-                    status_match.group(1).strip()
-                    if status_match
-                    else None
-                )
-                success = (
-                    process.returncode == 0
-                    and remote_code == 0
-                    and final_status in (
-                        "AI_CONTEXT_PACKAGE_CREATED",
-                        "AI_CONTEXT_PACKAGE_VALIDATED",
-                    )
-                )
-                self.after(
-                    0,
-                    lambda: self._documentation_finish_a34(
-                        success=success,
-                        output_text=output_text,
-                        local_code=process.returncode,
-                        remote_code=remote_code,
-                        final_status=final_status,
-                        validate_only=validate_only,
-                    )
-                )
-            except Exception as exc:
-                self.after(
-                    0,
-                    lambda error=exc: self._documentation_finish_a34(
-                        success=False,
-                        output_text=str(error),
-                        local_code=-1,
-                        remote_code=None,
-                        final_status=None,
-                        validate_only=validate_only,
-                    )
-                )
-
-        threading.Thread(target=worker, daemon=True).start()
-        return True
-
-    def _documentation_finish_a34(
-        self,
-        *,
-        success,
-        output_text,
-        local_code,
-        remote_code,
-        final_status,
-        validate_only,
-    ):
-        """Dokončí A34 běh, uloží stdout a obnoví panelový stav."""
-        self.documentation_a34_running = False
-        self.documentation_a34_process = None
-
-        output_dir = self._documentation_a34_output_dir()
-        stdout_path = None
-        try:
-            os.makedirs(output_dir, exist_ok=True)
-            stdout_path = os.path.join(
-                output_dir,
-                "a34_panel_stdout_latest.txt"
-            )
-            with open(stdout_path, "w", encoding="utf-8") as handle:
-                handle.write(output_text or "")
-        except Exception:
-            stdout_path = None
-
-        self.documentation_a34_last_output = stdout_path or output_text
-        self.documentation_a34_last_status = (
-            final_status
-            or (
-                "AI_CONTEXT_PACKAGE_BLOCKED"
-                if not success
-                else "AI_CONTEXT_PACKAGE_VALIDATED"
-            )
-        )
-
-        if success and validate_only:
-            self.documentation_a34_last_payload = None
-            self._documentation_update_a34_ui()
-            messagebox.showinfo(
-                "A34 – podklady ověřeny",
-                (
-                    "Podklady pro AI Context Package byly úspěšně ověřeny.\n\n"
-                    "Git, dokumentační databáze, sportovní snapshoty a "
-                    "měsíční Project Snapshoty jsou čitelné.\n"
-                    "Databáze nebyla změněna.\n\n"
-                    f"Stav: {self.documentation_a34_last_status}"
-                )
-            )
-            return
-
-        if success:
-            payload = self.load_documentation_ai_context_package_status()
-            self.load_documentation_database_audit_status()
-            if not payload:
-                success = False
-                output_text = (
-                    (output_text or "")
-                    + "\nA34 skončil bez čitelného latest manifestu."
-                )
-            else:
-                warnings = payload.get("warnings") or []
-                messagebox.showinfo(
-                    "A34 – balíček vytvořen",
-                    (
-                        "AI Context Package byl úspěšně vytvořen.\n\n"
-                        f"Package ID: {payload.get('package_id') or '-'}\n"
-                        f"Soubory: {payload.get('file_count', '-')}\n"
-                        f"Varování: {len(warnings)}\n"
-                        f"Sport: {payload.get('sport_code') or '-'} – "
-                        f"{payload.get('sport_name') or '-'}\n\n"
-                        f"Markdown:\n{self.documentation_a34_last_markdown or '-'}\n\n"
-                        f"ZIP:\n{self.documentation_a34_last_zip or '-'}\n\n"
-                        "Databáze nebyla změněna."
-                    )
-                )
-                return
-
-        self.documentation_a34_last_status = "AI_CONTEXT_PACKAGE_BLOCKED"
-        self._documentation_update_a34_ui()
-        messagebox.showerror(
-            "A34 – vytvoření balíčku selhalo",
-            (
-                f"Lokální kód: {local_code}\n"
-                f"Vzdálený kód: {remote_code}\n"
-                "Stav: AI_CONTEXT_PACKAGE_BLOCKED\n\n"
-                + (output_text or "Bez výstupu")[-8000:]
-            )
-        )
-
-    # =========================================================
     # V20.1.Q3 STEP 23 - A33 DATABASE STRUCTURE AUDIT
     # =========================================================
 
@@ -14443,7 +13724,6 @@ CÍLOVÁ KAPITOLA / SEKCE:
             db_query(history_sql)
         )
         self.load_documentation_database_audit_status()
-        self.load_documentation_ai_context_package_status()
         self.load_glossary_reference()
 
     def load_project_progress_from_db(self):
@@ -21450,42 +20730,6 @@ Další SQL vrstva bude frontu čistit také podle opakovaných empty/no-data v�
         except Exception:
             pass
 
-    def show_documentation_page(self, page_key):
-        """Přepne vnitřní stránku záložky DOKUMENTACE."""
-
-        pages = getattr(self, "documentation_pages", {})
-        buttons = getattr(self, "documentation_page_buttons", {})
-
-        if page_key not in pages:
-            return
-
-        for frame in pages.values():
-            try:
-                frame.lower()
-            except Exception:
-                pass
-
-        pages[page_key].lift()
-        self.documentation_current_page = page_key
-
-        for key, button in buttons.items():
-            selected = key == page_key
-            try:
-                button.configure(
-                    bg="#6d45b8" if selected else "#23142f",
-                    fg="white" if selected else "#cdb7df",
-                    activebackground="#6d45b8" if selected else "#3b2555"
-                )
-            except Exception:
-                pass
-
-        # Při otevření databázového přehledu načteme čerstvý stav.
-        if page_key == "DATABASE":
-            try:
-                self.load_documentation_dashboard()
-            except Exception:
-                pass
-
     def show_tab(self, name):
 
         # V19: velký horní dashboard se zobrazuje pouze v PŘEHLED.
@@ -21560,9 +20804,6 @@ Další SQL vrstva bude frontu čistit také podle opakovaných empty/no-data v�
 
         if name == "DOCUMENTATION":
             self.load_documentation_dashboard()
-            self.show_documentation_page(
-                getattr(self, "documentation_current_page", None) or "WORKFLOW"
-            )
 
         if name == "PC2 COMMAND":
             # V19.11: načti denní práci až po překreslení UI, aby Windows neoznačil panel jako Neodpovídá.
