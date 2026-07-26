@@ -7,10 +7,11 @@
 | Document ID | MM-NAV-20260726-01 |
 | Název dokumentu | MatchMatrix – navázání do nového chatu – 2026-07-26 |
 | Typ dokumentu | CHAT_CONTINUATION |
-| Verze | 1.0 |
+| Verze | 1.1 |
 | Stav | APPROVED |
 | Původní stav zdrojového dokumentu | DRAFT – NEEDS_USER_APPROVAL |
 | Datum | 2026-07-26 |
+| Datum poslední aktualizace | 2026-07-26 |
 | Autor | Petr |
 | Technická spolupráce | OpenAI ChatGPT |
 | Pracovní oblast | Fotbal, kanonická zápasová identita a belgická historická migrace |
@@ -35,25 +36,195 @@
 | Zdrojový denní zápis | `MM-DL-20260726` |
 | Databáze | PostgreSQL `matchmatrix` |
 | Poslední dokončená technická etapa | Sloučení 930 belgických překryvů a finální read-only audit |
-| Git stav | V tomto chatu nebyl znovu ověřen |
-| První následný krok | Read-only audit 1 284 unikátních historických belgických zápasů a úplnosti týmových map |
+| Git stav | Větev `main`; lokální commit `8d7f4ff` vytvořen; vzdálený push nebyl v tomto pracovním bloku ověřen |
+| První následný krok | Dokončit opakovaný audit A17 a databázový import tohoto NAV; poté spustit READ ONLY audit 1 284 unikátních historických belgických zápasů |
 
 ---
 
 # 2. Účel navázání
 
-Tento dokument předává přesný stav po dokončení belgického pilotu kanonických zápasů.
+Tento dokument předává přesný stav po dokončení belgického pilotu kanonických zápasů a identit poskytovatelů dat (providerových identit).
 
 Nový chat nemá znovu vytvářet `public.match_provider_map`, opakovat sloučení 927 bezpečných překryvů ani znovu rozhodovat tři disciplinární případy. Tyto oblasti jsou dokončeny a potvrzeny závěrečným auditem.
 
 Nový chat má pokračovat jedinou následující etapou:
 
 ```text
-READ ONLY AUDIT
+AUDIT POUZE PRO ČTENÍ (READ ONLY AUDIT)
 1 284 UNIQUE BELGIUM HISTORY MATCHES
 TEAM MAP COVERAGE
 LEAGUE + TEAM CANONICALIZATION PLAN
 ```
+
+---
+
+# Terminologie
+
+Tato sekce sjednocuje odborné a cizojazyčné pojmy používané v dokumentu. Referenčním zdrojem terminologie je `MM-REF-001 – Slovník pojmů MatchMatrix`.
+
+| Pojem | Význam v tomto dokumentu |
+|---|---|
+| Kanonický zápas | Jediný hlavní řádek zápasu v `public.matches`, na který mohou být navázány identity více poskytovatelů dat. |
+| Provider / poskytovatel dat | Externí nebo interní systém, který dodává data. Provider není totéž co zdrojový soubor, organizace, publisher ani technický adaptér. |
+| Providerová identita | Vazba mezi kanonickým zápasem a externím identifikátorem poskytovatele v `public.match_provider_map`. |
+| Primární identita | Jediná aktivní providerová identita určená jako hlavní identita kanonického zápasu. |
+| Sekundární identita | Další aktivní identita téhož kanonického zápasu, která zachovává historickou nebo alternativní provenienci. |
+| Provenience | Dohledatelný původ dat, včetně poskytovatele, původního identifikátoru, způsobu převodu a rozhodnutí o sloučení. |
+| Překryv | Dva řádky různých zdrojů, které reprezentují stejný skutečný zápas. |
+| Sloučení | Řízený převod identit a navázaných dat na jeden kanonický zápas a následné odstranění duplicitního master řádku. |
+| Downstream tabulka / navazující tabulka | Tabulka závislá na zápasu, například `public.match_features` nebo `public.mm_match_ratings`. |
+| Orphan / osiřelý řádek | Řádek, jehož `match_id` neodkazuje na existující kanonický zápas. |
+| READ ONLY | Režim pouze pro čtení, který nesmí trvale změnit data. |
+| VALIDATE ONLY | Zkušební transakční provedení změny ukončené povinným rollbackem. |
+| APPLY | Schválené trvalé provedení změny zakončené commitem. |
+| ROLLBACK | Vrácení transakce do původního stavu bez trvalého zápisu. |
+| PROJECT SNAPSHOT | Stručný přehled stavu projektu, cíle, aktivní etapy a pracovních pravidel. |
+| DATABASE SNAPSHOT | Ověřený přehled relevantních databázových objektů a kontrolních počtů. |
+
+---
+
+# Aktuální stav
+
+## Dokumentační stav
+
+- Denní zápis `MM-DL-20260726` byl v Q3 workflow kanonicky auditován, uložen do Git historie, importován do dokumentační databáze a ověřen kontrolou A7.
+- Dokument `MM-NAV-20260726-01` prošel prvním auditem A17 se skóre 76,67 % a stavem `RESTRUCTURE_REQUIRED`.
+- Připomínky A17 byly v této verzi `1.1` zapracovány doplněním samostatných sekcí `Aktuální stav`, `Otevřené úkoly`, `Přijatá rozhodnutí`, `PROJECT SNAPSHOT`, `DATABASE SNAPSHOT`, `Otevřené otázky`, `NEXT STEP` a `Terminologie`.
+- Po uložení této opravy musí následovat nové spuštění A17. A24 APPLY zůstává do úspěšného výsledku A17 zablokovaný.
+
+## Git stav
+
+```text
+BRANCH              = main
+LOCAL COMMIT        = 8d7f4ff
+COMMIT CONTENT      = 25 SQL auditních/migračních skriptů + MM-NAV-20260726-01
+REMOTE PUSH STATUS  = v tomto pracovním bloku neověřen
+DIRTY POLICY        = nepoužívat --allow-dirty
+```
+
+## Technický stav projektu
+
+- Belgická migrace providerových identit zápasů je dokončena a uzavřena závěrečným READ ONLY auditem.
+- Sloučeno bylo 930 překryvů: 927 bezpečných shod a 3 ručně ověřené disciplinární případy.
+- Zachováno zůstává 1 284 unikátních historických belgických zápasů.
+- Další datová etapa nesmí začít před dokončením publikace tohoto NAV.
+
+---
+
+# PROJECT SNAPSHOT
+
+| Položka | Aktuální hodnota |
+|---|---|
+| Projekt | MatchMatrix-platform |
+| Aktivní sport | Fotbal (`FB`) |
+| Aktivní soutěžní oblast | Belgická Jupiler Pro League |
+| Hlavní cíl dokončené etapy | Zavedení víceproviderové identity zápasů a odstranění potvrzených duplicit bez ztráty provenience |
+| Dokončený milník | 930 belgických překryvů sloučeno a auditně uzavřeno |
+| Zachovaná unikátní historie | 1 284 zápasů |
+| Aktivní dokumentační úkol | Oprava a publikace `MM-NAV-20260726-01` po připomínkách A17 |
+| Následující datová etapa | READ ONLY audit mapovatelnosti 1 284 historických zápasů |
+| Pracovní režim | Jeden jasný krok, audit → VALIDATE ONLY → APPLY |
+| Zakázané zkratky | `--allow-dirty`, neověřené hromadné UPDATE/DELETE, odhadované mapování týmů |
+
+Projektový stav je stabilní: dokončená sloučení se nemají opakovat a další práce se soustředí na bezpečné kanonizování zachované unikátní historie.
+
+---
+
+# DATABASE SNAPSHOT
+
+Snapshot vychází ze závěrečného auditu belgické migrace provedeného dne 2026-07-26.
+
+| Ukazatel | Hodnota |
+|---|---:|
+| `public.matches` | 120 981 |
+| `public.match_provider_map` | 121 908 |
+| Distinct mapped matches | 120 978 |
+| Aktivní primární identity | 120 978 |
+| Osiřelé providerové identity | 0 |
+| Zbývající unikátní belgická historie | 1 284 |
+| Belgické API-Football zápasy | 960 |
+| Uzavřené belgické překryvy | 930 |
+| Správně složené cíle se dvěma identitami | 930 |
+| Převedené `match_features` | 930 |
+| Převedené `mm_match_ratings` | 930 |
+| Rozměrově sjednocené ratingy | 930 |
+| Osiřelé `match_features` | 0 |
+| Globální osiřelé `mm_match_ratings` | 78 794 |
+| Nezmapované ruční testovací zápasy | 3 |
+
+Kontrolní stav:
+
+```text
+BELGIUM_MIGRATION_FINAL_AUDIT_OK
+930 SLOUČENÍ UZAVŘENO
+1284 UNIKÁTNÍCH HISTORICKÝCH ZÁPASŮ ZACHOVÁNO
+```
+
+---
+
+# Přijatá rozhodnutí
+
+1. `public.matches` zůstává jedinou kanonickou tabulkou zápasů.
+2. `public.match_provider_map` je závazná tabulka víceproviderových identit zápasů.
+3. API-Football zůstává u 930 sloučených cílů primární identitou.
+4. `football_data_uk` zůstává sekundární historickou identitou a nesmí být při čištění zahozena.
+5. Zbývajících 1 284 unikátních historických zápasů se nesmí odstranit.
+6. Čtyři historické kluby bez potvrzeného API protějšku se nesmí mapovat odhadem podle názvu.
+7. Ratingové metriky se při změně zápasových dimenzí nepřepočítávají ani nemění.
+8. Globálních 78 794 osiřelých ratingových řádků se bude řešit v samostatné etapě.
+9. Každá budoucí destruktivní změna musí projít pořadím `READ ONLY audit → VALIDATE ONLY → ROLLBACK_OK → APPLY → post-commit audit`.
+10. Dokumentační import se provádí pouze nad čistým Git stromem; `--allow-dirty` se nepoužívá.
+11. Nejprve se dokončí publikace tohoto NAV, teprve potom začne další datová etapa.
+
+---
+
+# Otevřené úkoly
+
+| Priorita | Úkol | Stav | Podmínka dokončení |
+|---:|---|---|---|
+| 1 | Uložit opravenou verzi `MM-NAV-20260726-01` do kanonické složky | OTEVŘENO | Aktivní soubor obsahuje verzi 1.1 |
+| 2 | Spustit A17 nad opraveným NAV | OTEVŘENO | Stav již není `RESTRUCTURE_REQUIRED` a kritické/vysoké strukturální nálezy jsou uzavřeny |
+| 3 | Zajistit čistý Git strom a uložit opravu do Git historie | OTEVŘENO | `git status --short` je prázdný |
+| 4 | Spustit A24 `VALIDATE_ONLY` | BLOKOVÁNO A17 | Výsledek `HISTORY_DOCUMENT_IMPORT_VALIDATED` |
+| 5 | Spustit A24 `APPLY` a ověření A6 + A7 | BLOKOVÁNO VALIDACÍ | Dokument je importován a A7 potvrzuje správnost |
+| 6 | Ověřit push větve `main` na vzdálený repozitář | OTEVŘENO | Git potvrzuje úspěšný push |
+| 7 | Připravit READ ONLY audit 1 284 unikátních belgických zápasů | ČEKÁ | Dokumentační workflow je dokončeno |
+| 8 | Opravit legacy seed `B1` | ČEKÁ | Je schválen samostatný bezpečný postup |
+| 9 | Auditovat 78 794 globálních ratingových orphanů | ODLOŽENO | Belgická soutěžní etapa je plně uzavřena |
+
+---
+
+# Otevřené otázky (OPEN QUESTIONS)
+
+1. Které z 1 284 unikátních historických zápasů mají oba týmy potvrzeně mapované na cílové API identity?
+2. Kolik zápasů obsahuje jeden nebo dva historické týmy bez potvrzeného cíle?
+3. Jak budou evidovány čtyři historické kluby, pro které není potvrzený API protějšek?
+4. Má se první APPLY týkat pouze plně mapovatelné sady, nebo bude potřeba další mezivrstva kanonických týmových identit?
+5. Ve které samostatné etapě bude řešeno 78 794 globálních osiřelých řádků `public.mm_match_ratings`?
+
+Tyto otázky se nesmějí rozhodovat odhadem. Odpovědi musí vzniknout z následného READ ONLY auditu a samostatného uživatelského schválení.
+
+---
+
+# NEXT STEP
+
+## Bezprostřední dokumentační krok
+
+Nahradit aktivní soubor touto opravenou verzí `1.1` a znovu spustit audit A17.
+
+Požadovaný výsledek:
+
+```text
+CONT-CURRENT-STATUS    = SPLNĚNO
+CONT-OPEN-TASKS        = SPLNĚNO
+CONT-DECISIONS         = SPLNĚNO
+CONT-PROJECT-SNAPSHOT  = SPLNĚNO
+CONT-DATABASE-SNAPSHOT = SPLNĚNO
+```
+
+## První technický krok po publikaci dokumentu
+
+Spustit jediný READ ONLY SQL audit nad 1 284 zbývajícími historickými belgickými zápasy a vyhodnotit úplnost týmových map. Do získání výsledku se nemá připravovat žádný APPLY skript.
 
 ---
 
@@ -513,6 +684,7 @@ canonical Jupiler league_id       = 20853
 | Verze | Datum | Stav | Popis |
 |---|---|---|---|
 | 1.0 | 2026-07-26 | APPROVED | První vydání NAV po dokončení 930 belgických sloučení a závěrečném auditu |
+| 1.1 | 2026-07-26 | APPROVED | Doplněny povinné samostatné sekce podle auditu A17: Aktuální stav, Otevřené úkoly, Přijatá rozhodnutí, PROJECT SNAPSHOT, DATABASE SNAPSHOT, OPEN QUESTIONS, NEXT STEP a Terminologie. |
 
 ---
 
