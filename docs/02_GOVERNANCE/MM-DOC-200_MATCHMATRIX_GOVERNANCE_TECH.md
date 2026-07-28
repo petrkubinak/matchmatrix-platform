@@ -1,902 +1,1060 @@
-# MM-DOC-002
+# MM-DOC-200
 
 # MATCHMATRIX GOVERNANCE
+
+## TECH EDITION
 
 ---
 
 ## Informace o dokumentu
 
-| Položka              | Hodnota                                           |
-| :------------------- | :------------------------------------------------ |
-| Název dokumentu      | MATCHMATRIX GOVERNANCE                            |
-| Označení             | MM-DOC-002                                        |
-| Verze                | 0.9 (Pracovní návrh)                              |
-| Stav                 | Rozpracováno                                      |
-| Autor projektu       | Petr                                              |
-| Technická spolupráce | OpenAI ChatGPT                                    |
-| Primární formát      | Markdown (.md)                                    |
-| Umístění             | `docs/02_GOVERNANCE/02_MATCHMATRIX_GOVERNANCE.md` |
+| Položka | Hodnota |
+|---------|----------|
+| Dokument | MM-DOC-200 |
+| Název | MatchMatrix Governance |
+| Edice | MM-DOC TECH |
+| Verze | 1.1 |
+| Stav | REVIEW |
+| Datum aktualizace | 2026-07-27 |
+| Autor projektu | Petr |
+| Technická spolupráce | OpenAI ChatGPT |
+| Primární formát | Markdown (.md) |
+| Stabilní Document ID | MM-DOC-200 |
+| Aktivní soubor | `docs/02_GOVERNANCE/MM-DOC-200_MATCHMATRIX_GOVERNANCE_TECH.md` |
+| Historický pracovní alias | MM-DOC-002 |
+
+## Poznámka k identitě dokumentu
+
+Stabilní a finální identita dokumentu Governance je **MM-DOC-200**.
+
+Označení **MM-DOC-002** bylo použito v původních pracovních verzích a zůstává pouze historickým aliasem. Nesmí být znovu používáno jako aktivní Document ID.
+
+V souladu s dokumentačním rámcem MatchMatrix existuje právě jeden aktivní soubor dokumentu. Číslo verze, stav, datum a historie změn se vedou uvnitř dokumentu. Předchozí řízená verze se při vydání nové verze přesouvá do `docs/99_ARCHIVE`.
+
+## Úvod a účel dokumentu
+MM-DOC-200 definuje systém pravidel, kontrolních mechanismů, odpovědností a rozhodovacích principů, které chrání dlouhodobou kvalitu, důvěryhodnost, bezpečnost a udržitelnost platformy MatchMatrix.
+
+Governance neurčuje pouze to, zda je technická změna funkční. Určuje také:
+
+- zda je změna dohledatelná,
+- zda vychází z ověřených podkladů,
+- zda zachovává původ a identitu dat,
+- zda neporušuje již potvrzené vazby,
+- zda je opakovatelná a auditovatelná,
+- zda je právně a licenčně přijatelná,
+- zda je připravena pro dlouhodobou správu lidmi i systémy AI.
+
+## Rozsah dokumentu
+
+- Governance databáze a datových změn,
+- Governance providerů, zdrojů a licencí,
+- Governance identit, mapování a slučování entit,
+- prevence duplicit a řízení konfliktů,
+- bezpečný režim auditů, validace a aplikace změn,
+- správa skriptů, automatizace a provozního prostředí,
+- dokumentační Governance a workflow Q3,
+- správa terminologie a referenčního slovníku,
+- využití AI Context, Project Snapshot a historie chatů,
+- monitoring, incidenty, rizika a otevřené případy,
+- dlouhodobý rozvoj Governance MatchMatrix.
+
+## Související dokumenty
+
+- MM-DOC-000 – MatchMatrix Documentation Framework
+- MM-DOC-100 – MatchMatrix Master
+- MM-DOC-300 – MatchMatrix Architecture
+- MM-DOC-800 – MatchMatrix Development Handbook
+- MM-DOC-900 – MatchMatrix Denní zápisy
+- MM-DOC-1000 – Index dokumentů MatchMatrix
+- MM-STD-001 až MM-STD-009
+- MM-STD-1000 – Index standardů MatchMatrix
+- MM-REF-001 – Slovník pojmů MatchMatrix
+- MM-PRV-006 – Právní a licenční řízení providerů
+- MM-PRV-007 – navazující providerová a právní dokumentace
+- `docs/14_EXPORT/HISTORIE_CHATU/MM-EXP-20260727-01_EXTRAKCNI_MATICE_HISTORIE_CHATU_V1.xlsx`
+
+## Historie verzí
+
+| Verze | Datum | Popis |
+|--------|-------|-------|
+| 0.9 | 2026 | Původní pracovní verze vedená pod označením MM-DOC-002. |
+| 1.0 | 2026-06-30 | První sjednocená REVIEW verze se základními oblastmi Database, Provider, Entity, Source, Script a Documentation Governance. |
+| 1.1 | 2026-07-27 | Aktualizace podle ověřené historie projektových chatů, skutečného databázového a dokumentačního stavu, bezpečného režimu READ ONLY → VALIDATE ONLY → APPLY, belgického kanonizačního pilotu, pravidla jediné aktivní verze dokumentu a současného workflow Q3. Doplněna formální hierarchie a závěry hlavních kapitol podle výsledku A17 ze dne 2026-07-28. |
 
 ---
 
 # Motto
 
-> **Databázi lze vytvořit za několik měsíců. Dlouhodobě kvalitní systém lze udržet pouze pomocí jasně definovaných pravidel.**
+> **Databázi lze vytvořit za několik měsíců. Dlouhodobě důvěryhodnou platformu lze udržet pouze pomocí jasných pravidel, ověřitelných rozhodnutí a kontrolovaných změn.**
 
 ---
 
 # Obsah
 
-1. Úvod
-2. Proč vznikla Governance
-3. Filozofie Governance
-4. Cíle Governance
-5. Oblasti řízení projektu
-6. Budoucí rozvoj Governance
+1. Smysl Governance
+2. Proč Governance vznikla
+3. Základní filozofie a principy
+4. Hierarchie důvěryhodnosti zdrojů
+5. Database Governance
+6. Governance životního cyklu dat
+7. Provider, Source a Legal Governance
+8. Entity Identity Governance
+9. Duplicate Prevention a Conflict Governance
+10. Governance zápasů a providerových identit
+11. Bezpečný režim databázových změn
+12. Kvalita dat, HOLD a odborné review
+13. Script a Automation Governance
+14. Provozní Governance PC1 a PC2
+15. Documentation Governance
+16. Terminology Governance
+17. AI a Context Governance
+18. Security a Access Governance
+19. OPS, monitoring a provozní dohled
+20. Incident, Change a Audit Governance
+21. Governance jako konkurenční výhoda
+22. Aktuální stav, otevřené otázky a další krok
 
 ---
 
-# 1. Úvod
+# 1. Smysl Governance
 
-Během prvních měsíců vývoje projektu MatchMatrix bylo hlavním cílem vytvořit funkční databázovou architekturu a připravit systém pro získávání sportovních dat z různých poskytovatelů. Postupně vznikaly nové tabulky, nové harvest skripty, merge procesy i první automatizované kontroly.
+Governance v projektu MatchMatrix nevznikla jako administrativní vrstva ani jako soubor formálních pravidel oddělených od praktického vývoje.
 
-S rostoucím rozsahem projektu se však začal objevovat nový problém.
+Jejím hlavním účelem je chránit dlouhodobou hodnotu společnosti MatchMatrix prostřednictvím ochrany:
 
-Nebyl technický.
+- kvality dat,
+- správné identity sportovních entit,
+- dohledatelnosti původu informací,
+- bezpečnosti změn,
+- konzistence databázové architektury,
+- právní a licenční použitelnosti zdrojů,
+- znalostí zachycených v dokumentaci,
+- kontinuity práce mezi lidmi, počítači a systémy AI.
 
-Byl organizační.
+Databáze představuje strategické aktivum společnosti. Governance zajišťuje, aby toto aktivum nebylo pouze rozsáhlé, ale také důvěryhodné, vysvětlitelné, rozšiřitelné a použitelné pro produkty a služby platformy.
 
-Každý nový provider přinášel jinou strukturu dat.
-
-Každý sport používal odlišné identifikátory.
-
-Každý nový modul vyžadoval vlastní pravidla.
-
-Ukázalo se, že samotná databáze již nestačí.
-
-Bylo potřeba vytvořit vrstvu, která nebude ukládat sportovní data, ale bude řídit způsob jejich vzniku, kontroly a dlouhodobé správy.
-
-Tak vznikla Governance.
+Každé pravidlo Governance musí mít praktický důvod. Nemá vznikat pouze proto, aby existovalo. Musí reagovat na skutečné riziko, známý problém nebo potřebu dlouhodobého řízení.
 
 ---
 
-# 2. Proč vznikla Governance
 
-Governance nebyla součástí původního návrhu projektu.
+## 1.99 Závěr kapitoly
 
-Vznikla až ve chvíli, kdy databáze začala obsahovat desetitisíce týmů, stovky tisíc zápasů a stále větší počet poskytovatelů dat.
+Shrnutí kapitoly: Kapitola vymezila oblast „1. Smysl Governance“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „2. Proč Governance vznikla“, která rozvíjí další část řízeného dokumentu.
 
-Právě tehdy se začaly objevovat problémy, které nebylo možné řešit běžnými SQL skripty.
+# 2. Proč Governance vznikla
 
-Například:
+V počáteční fázi vývoje bylo hlavním cílem vytvořit funkční databázovou architekturu a připravit systém pro získávání sportovních dat z různých poskytovatelů.
 
-stejný tým měl u různých providerů odlišné identifikátory,
+S růstem projektu se začaly objevovat problémy, které nebylo možné řešit pouze jednotlivými SQL opravami:
 
-hráči byli zapisováni pod různými jmény,
+- stejný tým měl u různých providerů odlišné identifikátory,
+- stejné osoby byly vedeny pod různými jmény,
+- soutěže měly historické a současné varianty názvů,
+- starší a aktuální zdroje používaly rozdílné struktury,
+- některé zápasy byly staženy vícekrát,
+- historické entity nebylo možné bezpečně sloučit s novodobými následníky,
+- neúplné mapování mohlo vytvořit nesprávné kanonické vazby,
+- ruční změny bez auditní stopy komplikovaly návrat a kontrolu,
+- dokumentace a skutečný technický stav se mohly postupně rozcházet.
 
-jednotlivé soutěže měly několik různých názvů,
-
-některé zápasy byly staženy vícekrát,
-
-historická data měla jinou strukturu než data aktuální.
-
-Každý podobný problém bylo možné jednorázově opravit.
-
-Bylo však zřejmé, že takový přístup není dlouhodobě udržitelný.
-
-Projekt potřeboval systém, který nebude pouze opravovat chyby.
-
-Bude jejich vzniku předcházet.
-
-Právě tímto okamžikem začala vznikat Governance Layer.
+Jednorázová oprava může odstranit konkrétní chybu. Governance má zabránit tomu, aby stejný typ chyby vznikal opakovaně.
 
 ---
 
-# 3. Filozofie Governance
 
-Governance v projektu MatchMatrix nepředstavuje administrativní pravidla.
+## 2.99 Závěr kapitoly
 
-Jejím hlavním úkolem je chránit kvalitu celé platformy.
+Shrnutí kapitoly: Kapitola vymezila oblast „2. Proč Governance vznikla“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „3. Základní filozofie a principy“, která rozvíjí další část řízeného dokumentu.
 
-Každé pravidlo, audit nebo kontrolní mechanismus vznikl jako reakce na konkrétní problém, který se během vývoje skutečně objevil.
+# 3. Základní filozofie a principy
 
-To je důležitý rozdíl oproti běžným projektům.
+## 3.1 Ověřený stav má přednost před předpokladem
 
-Pravidla nevznikají teoreticky.
+Rozhodnutí nesmí být založeno pouze na očekávání, historické paměti nebo podobnosti názvů. Před významnou změnou se ověřuje skutečný stav v databázi, repozitáři, dokumentaci nebo autorizovaném zdroji.
 
-Vznikají na základě praktických zkušeností.
+## 3.2 Jedna entita – jedna kanonická identita
 
-Stejným způsobem budou vznikat i v budoucnu.
+Každá skutečná sportovní entita má mít jednu řízenou kanonickou identitu. Všechny providerové identity se zachovávají jako dohledatelné vazby, nikoli jako konkurující veřejné entity.
 
-Governance proto není uzavřený dokument.
+## 3.3 Původ dat se neztrácí
 
-Je to živý systém pravidel, který se bude vyvíjet společně s celou platformou.
+Normalizace ani merge nesmí odstranit informaci o tom, odkud data pocházejí. Provider, providerové ID, zdrojový payload, importní běh a mapovací rozhodnutí musí být podle významu dohledatelné.
 
----
+## 3.4 Nevratná změna vyžaduje kontrolní body
 
-# 4. Cíle Governance
+Rizikové databázové změny procházejí odděleným auditem, transakční validací, řízeným APPLY a následnou kontrolou.
 
-Governance byla vytvořena s několika dlouhodobými cíli.
+## 3.5 Automatizace nesmí zakrýt rozhodnutí
 
-Prvním cílem je ochrana kvality dat.
+Automatizace je žádoucí tam, kde je pravidlo jednoznačné a měřitelné. Nejasné identity, konflikty, právní otázky nebo zásahy s vysokým dopadem musí zůstat v režimu REVIEW nebo HOLD.
 
-Databáze musí obsahovat správné informace.
+## 3.6 Fyzické umístění neurčuje identitu
 
-Stejně důležité však je, aby byly správně propojeny.
+Document ID, canonical entity ID ani providerová identita se neurčuje pouze podle názvu souboru, složky nebo současného zobrazení. Identita je řízený a stabilní údaj.
 
-Proto Governance kontroluje nejen jednotlivé záznamy, ale také jejich vzájemné vztahy.
+## 3.7 Historie se zachovává
 
-Dalším cílem je dlouhodobá stabilita architektury.
-
-Projekt bude v budoucnu obsahovat desítky providerů, miliony záznamů a stovky automatizačních procesů.
-
-Bez jednotných pravidel by se architektura postupně stávala stále složitější.
-
-Governance proto vytváří společný rámec pro celý projekt.
-
-Třetím cílem je automatizace kontrol.
-
-Ruční kontrola databáze je možná pouze u malých systémů.
-
-MatchMatrix je navržen tak, aby většina kontrol probíhala automaticky prostřednictvím auditů, kontrolních skriptů a monitorovacích nástrojů.
-
-Posledním cílem je uchování dlouhodobé konzistence projektu.
-
-Stejná pravidla musí platit bez ohledu na to, kolik let bude projekt vyvíjen nebo kolik nových modulů vznikne.
+Předchozí verze dokumentů, auditní výsledky, mapovací rozhodnutí a významné databázové změny se archivují. Historie není překážkou; je důkazem vývoje a podkladem pro audit.
 
 ---
 
-# 5. Governance jako základ důvěryhodnosti
 
-Jedním z hlavních principů MatchMatrix je skutečnost, že žádná informace není považována za správnou pouze proto, že ji poskytl některý provider.
+## 3.99 Závěr kapitoly
 
-Každá informace prochází vlastním systémem ověřování.
+Shrnutí kapitoly: Kapitola vymezila oblast „3. Základní filozofie a principy“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „4. Hierarchie důvěryhodnosti zdrojů“, která rozvíjí další část řízeného dokumentu.
 
-Tento přístup se může na první pohled zdát složitější.
+# 4. Hierarchie důvěryhodnosti zdrojů
 
-Ve skutečnosti však představuje jednu z největších výhod celé platformy.
+Při rozporu informací se používá následující orientační hierarchie:
 
-MatchMatrix totiž postupně přestává být databází providerů.
+1. aktuální ověřený stav produkční databáze nebo skutečného repozitáře,
+2. výstup specializovaného READ ONLY auditu,
+3. potvrzený výsledek transakčního `VALIDATE_ONLY`,
+4. výsledek dokončeného `APPLY` a následného post-commit auditu,
+5. aktuální aktivní řízená dokumentace,
+6. novější ověřený Project Snapshot nebo AI Context Package,
+7. denní zápisy, navazovací dokumenty a Git historie,
+8. extrahovaná historie chatů,
+9. starší pracovní dokumenty a archivní kopie,
+10. neověřený předpoklad nebo paměť účastníka.
 
-Stává se vlastní autoritou.
+Tato hierarchie neznamená, že databáze nemůže obsahovat chybu. Znamená, že každé tvrzení musí být posuzováno podle aktuálnosti, původu, auditovatelnosti a vztahu ke skutečnému systému.
 
-Databází, která sama rozhoduje o kvalitě ukládaných informací.
-
-Právě díky Governance bude možné dlouhodobě kombinovat data z mnoha různých zdrojů a přitom zachovat jejich konzistenci.
-
----
-
-# Závěr první části
-
-Governance vznikla jako přirozená reakce na růst projektu MatchMatrix. S rostoucím množstvím dat již nestačilo pouze ukládat informace do databáze. Bylo nutné vytvořit systém pravidel, kontrol a auditů, který bude dlouhodobě chránit kvalitu celé platformy.
-
-V dalších kapitolách budou podrobně popsány jednotlivé oblasti Governance – databázová pravidla, standardy vývoje, řízení providerů, prevence duplicit, auditní mechanismy, pravidla tvorby skriptů i způsob dlouhodobé správy architektury projektu.
-
-# 6. Oblasti Governance
-
-Governance projektu MatchMatrix nepředstavuje jednu samostatnou funkci nebo jediný kontrolní mechanismus. Jedná se o soubor vzájemně propojených pravidel, jejichž společným cílem je zajistit dlouhodobou kvalitu celé platformy.
-
-Každá oblast Governance vznikla na základě konkrétních zkušeností získaných během vývoje projektu. V okamžiku, kdy se některý problém začal opakovat, nebyl řešen pouze jednorázovou opravou. Byl navržen systém, který podobným situacím zabrání i v budoucnu.
-
-Díky tomuto přístupu se Governance postupně stala jedním z nejdůležitějších pilířů celé architektury MatchMatrix.
+Historie chatů je významným důkazním podkladem. Není však automaticky autoritativní. Jednotlivé výroky mohou zachycovat pracovní hypotézu, neúplný stav nebo rozhodnutí, které bylo později změněno.
 
 ---
 
-# 6.1 Database Governance
 
-Databáze představuje základ celé platformy.
+## 4.99 Závěr kapitoly
 
-Jakmile dojde k narušení její konzistence, projeví se problém postupně ve všech dalších vrstvách systému.
+Shrnutí kapitoly: Kapitola vymezila oblast „4. Hierarchie důvěryhodnosti zdrojů“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „5. Database Governance“, která rozvíjí další část řízeného dokumentu.
 
-Proto byla jako první vytvořena Database Governance.
+# 5. Database Governance
 
-Jejím hlavním úkolem je zajistit, aby databáze dlouhodobě zachovávala jednotnou strukturu, konzistentní vztahy mezi jednotlivými entitami a správné mapování všech dat.
+## 5.1 Účel
 
-Database Governance se zaměřuje zejména na:
+Database Governance chrání integritu databázových struktur, dat, vazeb, identit a provozních změn.
 
-* návrh databázových schémat,
-* pravidla vytváření nových tabulek,
-* správu primárních a cizích klíčů,
-* jednotné pojmenování databázových objektů,
-* správu indexů,
-* pravidla migrací,
-* ochranu historických dat.
+Aktuálně řízená databázová oblast zahrnuje zejména schémata:
 
-Každá změna databáze musí být navržena tak, aby nenarušila již existující architekturu systému.
+- `staging`,
+- `public`,
+- `ops`,
+- `documentation`,
+- `work`.
 
----
+Historické odkazy na samostatné aktivní schéma `runtime` se nesmí bez ověření přenášet do současné dokumentace. Provozní funkce mohou existovat v jiných schématech nebo vrstvách a jejich skutečné umístění se určuje podle aktuálního auditu databáze.
 
-# 6.2 Provider Governance
+## 5.2 Zásady databázových objektů
 
-Jedním z největších rizik každé sportovní platformy je závislost na poskytovatelích dat.
+Každý významný databázový objekt musí mít:
 
-Projekt MatchMatrix byl od začátku navržen tak, aby žádný provider nepředstavoval nenahraditelnou součást systému.
+- jednoznačný účel,
+- odpovídající schéma,
+- jasnou odpovědnost,
+- definované klíče a vazby,
+- přiměřené indexy,
+- dohledatelný vznik nebo změnu,
+- návaznou dokumentaci,
+- auditní nebo kontrolní mechanismus podle významu.
 
-Provider Governance proto stanovuje pravidla pro:
+## 5.3 Ruční změny
 
-* zařazování nových providerů,
-* hodnocení jejich kvality,
-* správu licenčních podmínek,
-* sledování změn API,
-* správu verzí providerů,
-* plánování jejich náhrady.
+Významná databázová změna se neprovádí pouze ručně v DBeaveru bez uloženého skriptu. Každá změna, kterou je potřeba vysvětlit, zopakovat nebo auditovat, musí existovat jako verzovaný SQL soubor.
 
-Součástí této oblasti je také pravidelné vyhodnocování dlouhodobé spolehlivosti jednotlivých zdrojů.
+## 5.4 Oddělení datových vrstev
 
-Provider není považován pouze za zdroj dat.
+Providerová data se nemají zapisovat přímo do veřejné vrstvy bez řízené normalizace a mapování.
 
-Je hodnocen jako dlouhodobý partner systému.
+Základní princip:
 
----
+```text
+provider → raw / staging → normalizace → mapování / merge → public → navazující vrstvy
+```
 
-# 6.3 Entity Governance
-
-Během vývoje se ukázalo, že právě entity představují jednu z nejsložitějších oblastí celé databáze.
-
-Stejný tým může být u různých providerů veden pod několika názvy.
-
-Stejný hráč může mít odlišný způsob zápisu jména.
-
-Stejná soutěž může být přejmenována nebo rozdělena podle sezón.
-
-Entity Governance vznikla proto, aby každá reálná entita měla v databázi právě jednu oficiální reprezentaci.
-
-Veškeré ostatní názvy, identifikátory nebo varianty jsou pouze alternativními odkazy na stejnou entitu.
-
-Tento princip výrazně zjednodušuje práci celé databáze a umožňuje bezpečně spojovat data z různých zdrojů.
+Každá vrstva řeší vlastní odpovědnost. Přeskočení vrstvy musí být výjimečné, odůvodněné a zdokumentované.
 
 ---
 
-# 6.4 Duplicate Prevention Governance
 
-Jedním z největších problémů při slučování dat z více providerů jsou duplicity.
+## 5.99 Závěr kapitoly
 
-Nejde pouze o duplicitní týmy.
+Shrnutí kapitoly: Kapitola vymezila oblast „5. Database Governance“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „6. Governance životního cyklu dat“, která rozvíjí další část řízeného dokumentu.
 
-Stejný problém se může týkat:
+# 6. Governance životního cyklu dat
 
-* hráčů,
-* trenérů,
-* stadionů,
-* soutěží,
-* zápasů,
-* fotografií,
-* článků.
+## 6.1 Získání dat
 
-V projektu MatchMatrix proto vznikl samostatný systém prevence duplicit.
+Před aktivací provideru se ověřuje technická dostupnost, rozsah, limity, licence, kvalita a dlouhodobá perspektiva zdroje.
 
-Jeho cílem není pouze duplicitní záznamy odstraňovat.
+## 6.2 Bezpečné uložení
 
-Mnohem důležitější je zabránit jejich vzniku.
+Zdrojová odpověď se ukládá způsobem, který umožňuje zpětně určit původ a případně znovu provést parser nebo mapování.
 
-Každá nová entita prochází kontrolou ještě před svým zařazením do produkční databáze.
+## 6.3 Normalizace
 
-Díky tomu zůstává databáze dlouhodobě konzistentní i při zpracování milionů záznamů.
+Normalizace sjednocuje technický formát, nikoli automaticky skutečnou identitu entity. Normalizovaný název není sám o sobě důkazem, že dvě entity jsou totožné.
 
----
+## 6.4 Mapování
 
-# 6.5 Source Governance
+Mapování propojuje providerovou identitu s kanonickou identitou. Musí vycházet z více relevantních signálů, například:
 
-Jedním z charakteristických znaků MatchMatrix je práce se samotnými zdroji informací.
+- oficiálního ID nebo přímého providerového odkazu,
+- shody soutěže a sezony,
+- historického kontextu,
+- časové návaznosti,
+- zápasových shod,
+- známé změny názvu,
+- sídla nebo stadionu,
+- potvrzeného nástupnictví.
 
-Nestačí pouze evidovat poskytovatele dat.
+## 6.5 Merge
 
-Je nutné znát také:
+Merge může aktualizovat kanonickou entitu pouze podle jasných priorit zdrojů a pravidel konfliktu. Nesmí bez kontroly přepsat ověřený údaj méně důvěryhodným zdrojem.
 
-* jejich původ,
-* důvěryhodnost,
-* rozsah dat,
-* způsob licencování,
-* obchodní model,
-* omezení použití,
-* robots.txt,
-* podmínky využití.
+## 6.6 Publikace
 
-Právě z těchto důvodů vznikla Source Governance.
-
-Ta úzce spolupracuje se Source Intelligence Layer a vytváří centrální evidenci všech datových zdrojů využívaných projektem.
-
-Tato oblast bude v budoucnu patřit mezi nejvýznamnější konkurenční výhody MatchMatrix.
+Do veřejné vrstvy se publikuje výsledek, který je dostatečně identifikovaný, konzistentní a dohledatelný. Nejasné případy zůstávají mimo automatickou publikaci nebo jsou označeny odpovídajícím stavem.
 
 ---
 
-# 6.6 Script Governance
 
-Rozsah projektu postupně vedl ke vzniku stovek skriptů.
+## 6.99 Závěr kapitoly
 
-Bez jednotných pravidel by se jejich údržba stala velmi obtížnou.
+Shrnutí kapitoly: Kapitola vymezila oblast „6. Governance životního cyklu dat“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „7. Provider, Source a Legal Governance“, která rozvíjí další část řízeného dokumentu.
 
-Script Governance proto stanovuje jednotný standard pro všechny skripty projektu.
+# 7. Provider, Source a Legal Governance
 
-Každý nový skript musí obsahovat:
+## 7.1 Žádný univerzální provider
 
-* popis účelu,
-* popis vstupů,
-* popis výstupů,
-* přesnou cestu k uložení,
-* návaznost na další části systému,
-* způsob spuštění.
+MatchMatrix nepředpokládá, že jediný provider pokryje všechny sporty, soutěže, období a typy dat.
 
-Tento standard výrazně usnadňuje orientaci v projektu a umožňuje rychle navázat na práci i po delší době.
+Governance proto řídí kombinaci zdrojů podle jejich skutečné role. U fotbalu například mohou různé zdroje poskytovat aktuální soutěže, novější historii, starší historická data nebo aktuální kurzy. Tyto role se nesmějí zaměňovat.
 
----
+## 7.2 Hodnocení provideru
 
-# 6.7 Documentation Governance
+Každý provider se hodnotí nejméně podle těchto oblastí:
 
-Stejně důležitá jako databáze je také dokumentace.
+- podporované sporty a soutěže,
+- dostupné historické období,
+- kvalita identifikátorů,
+- úplnost týmů, osob a zápasů,
+- stabilita API nebo zdroje,
+- limity a obchodní podmínky,
+- licence a povolený způsob použití,
+- možnost uchování a dalšího publikování dat,
+- riziko závislosti na jednom dodavateli.
 
-Documentation Governance zajišťuje, že všechny dokumenty vznikají podle jednotného standardu definovaného dokumentem **MM-DOC-000**.
+## 7.3 Historické pokrytí
 
-Současně určuje pravidla:
+Prioritní soutěže mají být pokryty od svého vzniku, případně od nejstaršího období, které je možné spolehlivě, legálně a technicky dohledat.
 
-* verzování dokumentace,
-* struktury dokumentů,
-* vzájemného odkazování,
-* práce s přílohami,
-* schvalování změn.
+Nepoužívá se obecně stanovený mezní rok bez vztahu ke konkrétní soutěži.
 
-Dokumentace se tak stává plnohodnotnou součástí architektury projektu.
+## 7.4 Ověřený seznam soutěží
 
----
+Počet prioritních nebo dostupných soutěží se neurčuje podle očekávání. Musí odpovídat skutečné odpovědi provideru a schválenému projektovému rozhodnutí.
 
-# 7. Governance jako konkurenční výhoda
+Pro používaný účet Football-Data byla potvrzena odpověď `/competitions` obsahující 13 soutěží. Úkol uměle dohledat „14. soutěž“ byl odstraněn jako neplatný. FIFA World Cup zůstává prioritní soutěží i přes čtyřletý cyklus.
 
-Většina sportovních databází se soustředí především na získávání nových dat.
+## 7.5 Licence a právní stav
 
-MatchMatrix jde jinou cestou.
+Technická dostupnost neznamená automatické oprávnění data komerčně používat, uchovávat, obohacovat nebo publikovat.
 
-Stejnou pozornost věnuje také kvalitě těchto dat.
-
-Právě Governance představuje rozdíl mezi databází, která pouze ukládá informace, a platformou, která je schopna dlouhodobě garantovat jejich konzistenci.
-
-Čím bude projekt větší, tím větší význam bude Governance mít.
-
-Ve skutečnosti lze očekávat, že její význam poroste rychleji než samotná databáze.
-
-To je jeden z hlavních důvodů, proč byla Governance od určité fáze vývoje povýšena na samostatnou architektonickou vrstvu projektu.
+Provider se nesmí přesunout do produkčního provozu bez přiměřeného právního a licenčního posouzení odpovídajícího jeho roli.
 
 ---
 
-# Závěr druhé části
 
-Governance dnes zasahuje prakticky do všech oblastí projektu MatchMatrix. Chrání databázovou architekturu, řídí práci s poskytovateli dat, spravuje entity, zabraňuje duplicitám, stanovuje pravidla pro vývoj skriptů i pro tvorbu dokumentace.
+## 7.99 Závěr kapitoly
 
-Ve třetí části dokumentu budou popsány konkrétní governance procesy, které již byly během vývoje MatchMatrix vytvořeny. Půjde například o řízení canonical entit, systém auditů, kontrolní mechanismy OPS, řízení kvality harvestu a praktické zkušenosti získané při budování platformy.
+Shrnutí kapitoly: Kapitola vymezila oblast „7. Provider, Source a Legal Governance“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „8. Entity Identity Governance“, která rozvíjí další část řízeného dokumentu.
 
-# 8. Praktická implementace Governance v projektu MatchMatrix
+# 8. Entity Identity Governance
 
-Předchozí kapitoly popsaly filozofii a hlavní oblasti Governance. V této části dokumentu jsou uvedeny konkrétní mechanismy, které byly během vývoje MatchMatrix skutečně vytvořeny a které dnes představují základ řízení kvality celé platformy.
+## 8.1 Kanonická identita
 
-Na rozdíl od obecných metodik se Governance MatchMatrix neopírá o teoretická doporučení. Vznikala postupně jako reakce na reálné problémy objevené při budování databáze, ingest pipeline a víceproviderové architektury.
+Kanonická identita reprezentuje skutečnou sportovní entitu uvnitř MatchMatrix. Providerové identity se k ní připojují pomocí mapovacích tabulek a auditovatelných pravidel.
 
-Každý nový governance mechanismus byl vytvořen proto, že řešil konkrétní problém, který již nebylo možné efektivně řešit ručně.
+## 8.2 Zákaz mapování pouze podle podobnosti názvu
 
----
+Žádná zakázka, tým, osoba, soutěž ani jiná entita se nesmí automaticky určit pouze podle historického vzoru nebo textové podobnosti názvu.
 
-# 8.1 Canonical Entity Governance
+Podobnost může sloužit jako kandidátní signál. Nesmí být jediným důkazem.
 
-Jedním z prvních velkých problémů projektu bylo zjištění, že různí provideři používají pro stejné sportovní entity odlišné identifikátory, názvy i strukturu dat.
+## 8.3 Historické entity a nástupnictví
 
-Například jeden fotbalový klub mohl být u různých providerů veden pod několika různými názvy, přestože šlo stále o stejnou organizaci.
+Historický klub nemusí být totožný se současným klubem podobného názvu. Zánik, sloučení, přesun licence, obnovení nebo vznik nového právního subjektu mohou znamenat samostatnou kanonickou identitu.
 
-Stejný problém se postupně objevil také u:
+Pokud není nástupnictví bezpečně doloženo, případ zůstává samostatný nebo v režimu REVIEW.
 
-* hráčů,
-* trenérů,
-* soutěží,
-* stadionů,
-* rozhodčích,
-* zápasů.
+## 8.4 Příklad belgického pilotu
 
-Jednorázové opravy již nebyly možné.
+V belgickém historickém mapování byly potvrzeny bezpečné identity, například:
 
-Proto vznikl systém Canonical Entity Governance.
+- historická identita RAAL byla propojena přes veřejnou kanonickou identitu s odpovídající identitou API-Football,
+- historická identita Waasland-Beveren byla propojena na SK Beveren a odpovídající providerovou identitu,
+- historické entity Lokeren a Mouscron zůstaly otevřené a nebyly automaticky sloučeny se současnými nebo nástupnickými subjekty.
 
-Jeho hlavním principem je vytvoření jediné interní reprezentace každé skutečné entity.
-
-Provider již neurčuje identitu objektu.
-
-Pouze dodává data.
-
-Identitu vytváří MatchMatrix.
-
-Tím vzniká stabilní základ celé databáze.
+Tento příklad potvrzuje, že některé vazby lze bezpečně automatizovat, zatímco jiné vyžadují samostatné historické entity a odborné rozhodnutí.
 
 ---
 
-# 8.2 Duplicate Prevention
 
-Další významný krok představoval vznik systému prevence duplicit.
+## 8.99 Závěr kapitoly
 
-Zpočátku byly duplicity odstraňovány ručně.
+Shrnutí kapitoly: Kapitola vymezila oblast „8. Entity Identity Governance“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „9. Duplicate Prevention a Conflict Governance“, která rozvíjí další část řízeného dokumentu.
 
-S rostoucím počtem providerů však začal jejich počet rychle narůstat.
+# 9. Duplicate Prevention a Conflict Governance
 
-Bylo proto rozhodnuto vytvořit samostatný governance proces, který bude duplicity odhalovat ještě před jejich zařazením do produkční databáze.
+## 9.1 Prevence před opravou
 
-Postupně vznikly samostatné mechanismy například pro:
+Nejlepší duplicitní záznam je ten, který vůbec nevznikne. Merge proces proto musí kontrolovat dostupné identity a relevantní kombinace atributů ještě před vytvořením nové veřejné entity.
 
-* Team Duplicate Prevention,
-* Player Duplicate Prevention,
-* League Duplicate Prevention,
-* Match Duplicate Prevention.
+## 9.2 Druhy konfliktů
 
-Každý z těchto mechanismů využívá vlastní pravidla porovnávání a vlastní systém hodnocení rizika.
+Systém rozlišuje nejméně:
 
-Výsledkem není pouze odstranění duplicit.
+- bezpečný překryv stejné události,
+- neúplnou identitu,
+- konflikt výsledku nebo skóre,
+- konflikt soutěže nebo sezony,
+- více možných kandidátů,
+- historickou entitu bez bezpečného současného mapování,
+- technickou duplicitu způsobenou opakovaným importem.
 
-Výsledkem je především zabránění jejich dalšímu vzniku.
+## 9.3 HOLD a REVIEW
 
----
+Případy s nejednoznačným výsledkem se nesmějí automaticky spojit. Musí přejít do stavu HOLD, REVIEW nebo jiné odpovídající fronty.
 
-# 8.3 League Governance
+## 9.4 Zachování downstream dat
 
-Jednou z nejsložitějších oblastí se ukázala být správa sportovních soutěží.
-
-Různí provideři často používají:
-
-* odlišné názvy soutěží,
-* různé úrovně členění,
-* rozdílné identifikátory,
-* historické názvy,
-* regionální varianty.
-
-Proto vznikl systém League Governance.
-
-Jeho úkolem je vytvářet jednotnou evidenci všech soutěží bez ohledu na jejich původ.
-
-Součástí této oblasti je také správa:
-
-* canonical league,
-* provider mapping,
-* historických názvů,
-* slučování duplicit,
-* kontrol integrity soutěží.
-
-League Governance dnes představuje jeden z nejdůležitějších pilířů celé Core Layer.
+Při odstranění duplicit nebo přesunu kanonické identity se předem kontrolují všechny cizí klíče a navazující tabulky. Funkce, ratingy, providerové vazby a další downstream data se musí bezpečně převést nebo zachovat.
 
 ---
 
-# 8.4 Provider Health Monitoring
 
-Během vývoje projektu se ukázalo, že jednotliví provideři mají velmi rozdílnou kvalitu služeb.
+## 9.99 Závěr kapitoly
 
-Někteří mění API.
+Shrnutí kapitoly: Kapitola vymezila oblast „9. Duplicate Prevention a Conflict Governance“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „10. Governance zápasů a providerových identit“, která rozvíjí další část řízeného dokumentu.
 
-Jiní mění limity.
+# 10. Governance zápasů a providerových identit
 
-Další přestávají poskytovat určitá data.
+## 10.1 Providerová mapa zápasů
 
-Vznikl proto systém průběžného sledování stavu providerů.
+Tabulka `public.match_provider_map` slouží k oddělení kanonické identity zápasu od jednotlivých providerových identit.
 
-Provider Health Monitoring průběžně vyhodnocuje například:
+Jeden kanonický zápas může mít více providerových identit. To není duplicita, pokud všechny identity prokazatelně reprezentují stejnou událost.
 
-* dostupnost API,
-* rychlost odpovědí,
-* počet chyb,
-* změny endpointů,
-* úspěšnost harvestu,
-* kvalitu získaných dat.
+## 10.2 Belgický kanonizační pilot
 
-Na základě těchto informací lze včas rozhodnout o změně strategie nebo přechodu na jiného poskytovatele.
+Belgický pilot ověřil řízený převod historických zápasů na kanonickou soutěž a současné týmové identity.
 
----
+Potvrzený stav zahrnuje:
 
-# 8.5 Harvest Governance
+- úspěšně aplikovaných 1 053 plně mapovatelných historických zápasů,
+- zachování celkového počtu `public.matches` na 120 981,
+- zachování počtu řádků `public.match_provider_map` na 121 908,
+- zachování providerových identit a payloadů,
+- oddělené zachování globálního problému 78 794 osiřelých řádků `mm_match_ratings`, který nebyl součástí belgické změny.
 
-Harvest představuje jednu z nejkritičtějších částí celé platformy.
+Následující samostatná skupina 110 zápasů úspěšně prošla režimem `VALIDATE_ONLY`. Transakce byla vrácena zpět, a proto tato skupina v okamžiku uzavření validace nebyla trvale aplikována.
 
-Jakmile selže harvest, začnou se postupně zastavovat všechny další procesy.
+Po plánovaném APPLY přesně těchto 110 zápasů se očekává:
 
-Harvest Governance proto neřídí pouze samotné stahování dat.
+- 121 zbývajících legacy zápasů,
+- 119 částečně mapovatelných případů,
+- 2 případy vyžadující mapování obou týmů,
+- 0 plně mapovatelných případů v daném scope.
 
-Řídí celý životní cyklus harvest úloh.
+Tyto skupiny se nesmějí směšovat. Již aplikovaných 1 053 zápasů se znovu nespouští a APPLY 110 zápasů nesmí zasáhnout zbývajících 121 případů.
 
-Součástí této oblasti je například:
+## 10.3 Časové rozdíly
 
-* plánování harvestu,
-* priority sportů,
-* priority providerů,
-* retry mechanismy,
-* kontrola timeoutů,
-* řízení historických harvestů,
-* řízení denních aktualizací,
-* audit úspěšnosti.
+Rozdílný kickoff čas mezi historickým a současným zdrojem nemusí automaticky znamenat jiný zápas. Může vzniknout časovým pásmem, neúplným historickým údajem nebo pozdější opravou provideru.
 
-Výsledkem je systém, který dokáže dlouhodobě pracovat s minimální potřebou manuálních zásahů.
+Časová odchylka se posuzuje společně s týmy, soutěží, sezonou, datem, výsledkem a dalšími dostupnými signály.
 
 ---
 
-# 8.6 OPS Governance
 
-S růstem projektu již nebylo možné sledovat stav systému pouze pomocí SQL dotazů.
+## 10.99 Závěr kapitoly
 
-Vznikla proto samostatná OPS vrstva.
+Shrnutí kapitoly: Kapitola vymezila oblast „10. Governance zápasů a providerových identit“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „11. Bezpečný režim databázových změn“, která rozvíjí další část řízeného dokumentu.
 
-Jejím cílem je poskytovat jednotný pohled na stav celé platformy.
+# 11. Bezpečný režim databázových změn
 
-OPS Governance stanovuje pravidla pro:
+Rizikové změny se provádějí v následujícím pořadí:
 
-* dashboardy,
-* KPI,
-* auditní pohledy,
-* kontrolní reporty,
-* doporučení operátorovi,
-* prioritizaci úloh.
+```text
+READ ONLY audit
+→ přesné vymezení scope
+→ VALIDATE_ONLY v transakci
+→ kontrola výsledků a invariantu
+→ ROLLBACK
+→ samostatný APPLY
+→ COMMIT
+→ post-commit READ ONLY audit
+```
 
-Díky tomu lze během několika minut zjistit aktuální stav celé platformy bez nutnosti ruční analýzy databáze.
+## 11.1 READ ONLY audit
 
----
+Audit musí určit:
 
-# 9. Governance jako živý systém
+- skutečný počet kandidátů,
+- přesné identity a tabulky,
+- konflikty a otevřené případy,
+- dopad na downstream vazby,
+- očekávané počty před a po změně.
 
-Jedním z nejdůležitějších principů MatchMatrix je skutečnost, že Governance není uzavřený seznam pravidel.
+## 11.2 VALIDATE_ONLY
 
-Vyvíjí se společně s projektem.
+Validace používá stejnou logiku jako budoucí APPLY, ale změny se na konci vracejí pomocí `ROLLBACK`.
 
-Každý nový problém představuje příležitost vytvořit nové pravidlo nebo nový kontrolní mechanismus.
+Úspěšný VALIDATE_ONLY dokazuje, že změna je technicky proveditelná v daném okamžiku. Neznamená, že již byla aplikována.
 
-Stejně tak každá nová vrstva systému automaticky přináší nové požadavky na Governance.
+## 11.3 APPLY
 
-Tento přístup umožňuje dlouhodobě udržovat kvalitu celé platformy i při jejím neustálém rozšiřování.
+APPLY musí mít stejné přesné scope jako schválená validace. Pokud se mezitím změní databáze nebo vstupní podmínky, musí se validace zopakovat.
 
-Governance proto nebude nikdy považována za dokončenou.
+U významné změny se používají odpovídající zámky tabulek a kontrola cizích klíčů.
 
-Bude růst společně s MatchMatrix.
+## 11.4 Post-commit audit
 
----
+Po COMMIT se znovu ověřuje:
 
-# Závěr třetí části
-
-Praktická implementace Governance představuje jednu z největších konkurenčních výhod projektu MatchMatrix. Díky ní není platforma pouze databází sportovních dat, ale systémem, který dokáže tato data dlouhodobě spravovat, ověřovat a chránit jejich kvalitu.
-
-V závěrečné části dokumentu budou popsány pravidla dlouhodobé správy Governance, její budoucí rozvoj, vztah k ostatním architektonickým vrstvám a závěrečné shrnutí významu Governance pro celý projekt MatchMatrix.
-
-# 8. Praktická implementace Governance v projektu MatchMatrix
-
-Předchozí kapitoly popsaly filozofii a hlavní oblasti Governance. V této části dokumentu jsou uvedeny konkrétní mechanismy, které byly během vývoje MatchMatrix skutečně vytvořeny a které dnes představují základ řízení kvality celé platformy.
-
-Na rozdíl od obecných metodik se Governance MatchMatrix neopírá o teoretická doporučení. Vznikala postupně jako reakce na reálné problémy objevené při budování databáze, ingest pipeline a víceproviderové architektury.
-
-Každý nový governance mechanismus byl vytvořen proto, že řešil konkrétní problém, který již nebylo možné efektivně řešit ručně.
-
----
-
-# 8.1 Canonical Entity Governance
-
-Jedním z prvních velkých problémů projektu bylo zjištění, že různí provideři používají pro stejné sportovní entity odlišné identifikátory, názvy i strukturu dat.
-
-Například jeden fotbalový klub mohl být u různých providerů veden pod několika různými názvy, přestože šlo stále o stejnou organizaci.
-
-Stejný problém se postupně objevil také u:
-
-* hráčů,
-* trenérů,
-* soutěží,
-* stadionů,
-* rozhodčích,
-* zápasů.
-
-Jednorázové opravy již nebyly možné.
-
-Proto vznikl systém Canonical Entity Governance.
-
-Jeho hlavním principem je vytvoření jediné interní reprezentace každé skutečné entity.
-
-Provider již neurčuje identitu objektu.
-
-Pouze dodává data.
-
-Identitu vytváří MatchMatrix.
-
-Tím vzniká stabilní základ celé databáze.
+- počet změněných řádků,
+- počet zbývajících kandidátů,
+- zachování celkových počtů tam, kde se očekává invariance,
+- stav providerových map,
+- stav downstream dat,
+- vznik nových duplicit nebo osiřelých vazeb.
 
 ---
 
-# 8.2 Duplicate Prevention
 
-Další významný krok představoval vznik systému prevence duplicit.
+## 11.99 Závěr kapitoly
 
-Zpočátku byly duplicity odstraňovány ručně.
+Shrnutí kapitoly: Kapitola vymezila oblast „11. Bezpečný režim databázových změn“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „12. Kvalita dat, HOLD a odborné review“, která rozvíjí další část řízeného dokumentu.
 
-S rostoucím počtem providerů však začal jejich počet rychle narůstat.
+# 12. Kvalita dat, HOLD a odborné review
 
-Bylo proto rozhodnuto vytvořit samostatný governance proces, který bude duplicity odhalovat ještě před jejich zařazením do produkční databáze.
+## 12.1 Stav není pouze OK nebo chyba
 
-Postupně vznikly samostatné mechanismy například pro:
+Governance používá více stavů podle jistoty a dopadu:
 
-* Team Duplicate Prevention,
-* Player Duplicate Prevention,
-* League Duplicate Prevention,
-* Match Duplicate Prevention.
+- potvrzeno,
+- připraveno,
+- čeká na validaci,
+- REVIEW,
+- HOLD,
+- konflikt,
+- data gap,
+- neimplementováno,
+- archivováno.
 
-Každý z těchto mechanismů využívá vlastní pravidla porovnávání a vlastní systém hodnocení rizika.
+## 12.2 Manuální review je řízený krok
 
-Výsledkem není pouze odstranění duplicit.
+Odborné review není selháním automatizace. Je bezpečnostním mechanismem pro situace, kdy automatický systém nemá dostatek důkazů.
 
-Výsledkem je především zabránění jejich dalšímu vzniku.
+## 12.3 Měřitelné kontroly
 
----
+Každá významná oblast má mít kontrolu, která dokáže odpovědět alespoň na otázky:
 
-# 8.3 League Governance
-
-Jednou z nejsložitějších oblastí se ukázala být správa sportovních soutěží.
-
-Různí provideři často používají:
-
-* odlišné názvy soutěží,
-* různé úrovně členění,
-* rozdílné identifikátory,
-* historické názvy,
-* regionální varianty.
-
-Proto vznikl systém League Governance.
-
-Jeho úkolem je vytvářet jednotnou evidenci všech soutěží bez ohledu na jejich původ.
-
-Součástí této oblasti je také správa:
-
-* canonical league,
-* provider mapping,
-* historických názvů,
-* slučování duplicit,
-* kontrol integrity soutěží.
-
-League Governance dnes představuje jeden z nejdůležitějších pilířů celé Core Layer.
+- Kolik záznamů bylo zpracováno?
+- Kolik jich bylo změněno?
+- Kolik zůstalo otevřených?
+- Vznikly nové konflikty nebo duplicity?
+- Zůstaly zachovány očekávané invariance?
 
 ---
 
-# 8.4 Provider Health Monitoring
 
-Během vývoje projektu se ukázalo, že jednotliví provideři mají velmi rozdílnou kvalitu služeb.
+## 12.99 Závěr kapitoly
 
-Někteří mění API.
+Shrnutí kapitoly: Kapitola vymezila oblast „12. Kvalita dat, HOLD a odborné review“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „13. Script a Automation Governance“, která rozvíjí další část řízeného dokumentu.
 
-Jiní mění limity.
+# 13. Script a Automation Governance
 
-Další přestávají poskytovat určitá data.
+## 13.1 Skript jako řízený artefakt
 
-Vznikl proto systém průběžného sledování stavu providerů.
+SQL, Python, PowerShell a další významné skripty jsou součástí dlouhodobého systému. Musí být verzované, dohledatelné a srozumitelné.
 
-Provider Health Monitoring průběžně vyhodnocuje například:
+## 13.2 Povinná hlavička
 
-* dostupnost API,
-* rychlost odpovědí,
-* počet chyb,
-* změny endpointů,
-* úspěšnost harvestu,
-* kvalitu získaných dat.
+Aktivní skripty mají obsahovat jasné části:
 
-Na základě těchto informací lze včas rozhodnout o změně strategie nebo přechodu na jiného poskytovatele.
+- CO skript dělá,
+- K ČEMU slouží,
+- KDE pracuje,
+- JAK se spouští,
+- jaké má vstupy a výstupy,
+- zda je READ ONLY, VALIDATE_ONLY nebo APPLY,
+- jaká rizika nebo omezení se k němu vztahují.
 
----
+## 13.3 Žádné pevné projektové cesty v Pythonu
 
-# 8.5 Harvest Governance
+Python skripty nesmějí běžně používat pevně zapsané absolutní cesty k projektu. Kořen projektu se odvozuje například pomocí `pathlib.Path` nebo řízené konfigurace.
 
-Harvest představuje jednu z nejkritičtějších částí celé platformy.
+## 13.4 Aktivní a historická verze
 
-Jakmile selže harvest, začnou se postupně zastavovat všechny další procesy.
+Uživatel udržuje v aktivní složce pouze dokončený aktivní soubor. Starší verze přesouvá do řízené historické složky. Při předání se proto poskytuje úplný aktivní soubor, nikoli směs aktivních a historických kopií.
 
-Harvest Governance proto neřídí pouze samotné stahování dat.
+## 13.5 Spouštěče
 
-Řídí celý životní cyklus harvest úloh.
-
-Součástí této oblasti je například:
-
-* plánování harvestu,
-* priority sportů,
-* priority providerů,
-* retry mechanismy,
-* kontrola timeoutů,
-* řízení historických harvestů,
-* řízení denních aktualizací,
-* audit úspěšnosti.
-
-Výsledkem je systém, který dokáže dlouhodobě pracovat s minimální potřebou manuálních zásahů.
+Panelové a uživatelské aplikace určené pro Windows mají podle potřeby obsahovat odpovídající `.vbs` spouštěč, aby bylo spuštění jednoduché a konzistentní.
 
 ---
 
-# 8.6 OPS Governance
 
-S růstem projektu již nebylo možné sledovat stav systému pouze pomocí SQL dotazů.
+## 13.99 Závěr kapitoly
 
-Vznikla proto samostatná OPS vrstva.
+Shrnutí kapitoly: Kapitola vymezila oblast „13. Script a Automation Governance“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „14. Provozní Governance PC1 a PC2“, která rozvíjí další část řízeného dokumentu.
 
-Jejím cílem je poskytovat jednotný pohled na stav celé platformy.
+# 14. Provozní Governance PC1 a PC2
 
-OPS Governance stanovuje pravidla pro:
+## 14.1 Rozdělení rolí
 
-* dashboardy,
-* KPI,
-* auditní pohledy,
-* kontrolní reporty,
-* doporučení operátorovi,
-* prioritizaci úloh.
+- **PC1** slouží primárně pro řízení, vývoj, kontrolu, dokumentaci a uživatelskou práci.
+- **PC2** slouží jako hlavní databázový a harvest uzel.
 
-Díky tomu lze během několika minut zjistit aktuální stav celé platformy bez nutnosti ruční analýzy databáze.
+Toto rozdělení snižuje riziko, že dlouhodobé nebo náročné procesy naruší běžnou řídicí práci.
 
----
+## 14.2 Hostitelská nezávislost panelu
 
-# 9. Governance jako živý systém
+Panel Q3 a další řídicí nástroje mají být schopny běžet na PC1 i PC2. Přístup k souborům a databázi se řeší konfigurací, UNC cestami nebo vzdáleným spuštěním, nikoli pevnou závislostí na jednom počítači.
 
-Jedním z nejdůležitějších principů MatchMatrix je skutečnost, že Governance není uzavřený seznam pravidel.
+## 14.3 Databázové připojení
 
-Vyvíjí se společně s projektem.
+Kroky prováděné na PC2 pracují s databází na `localhost` PC2. Řídicí počítač nesmí zaměňovat vlastní `localhost` za databázový server.
 
-Každý nový problém představuje příležitost vytvořit nové pravidlo nebo nový kontrolní mechanismus.
+## 14.4 Zálohy a návrat
 
-Stejně tak každá nová vrstva systému automaticky přináší nové požadavky na Governance.
-
-Tento přístup umožňuje dlouhodobě udržovat kvalitu celé platformy i při jejím neustálém rozšiřování.
-
-Governance proto nebude nikdy považována za dokončenou.
-
-Bude růst společně s MatchMatrix.
+Před rizikovými zásahy musí existovat přiměřená možnost návratu. Může jít o databázovou zálohu, transakční rollback, archivní soubor, Git historii nebo kombinaci více mechanismů.
 
 ---
 
-# Závěr třetí části
 
-Praktická implementace Governance představuje jednu z největších konkurenčních výhod projektu MatchMatrix. Díky ní není platforma pouze databází sportovních dat, ale systémem, který dokáže tato data dlouhodobě spravovat, ověřovat a chránit jejich kvalitu.
+## 14.99 Závěr kapitoly
 
-V závěrečné části dokumentu budou popsány pravidla dlouhodobé správy Governance, její budoucí rozvoj, vztah k ostatním architektonickým vrstvám a závěrečné shrnutí významu Governance pro celý projekt MatchMatrix.
+Shrnutí kapitoly: Kapitola vymezila oblast „14. Provozní Governance PC1 a PC2“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „15. Documentation Governance“, která rozvíjí další část řízeného dokumentu.
 
-# 10. Dlouhodobá správa Governance
+# 15. Documentation Governance
 
-Governance není jednorázový projekt ani sada pravidel, která budou po svém vytvoření neměnná. Naopak představuje dlouhodobý proces, který se bude vyvíjet společně s celou platformou MatchMatrix.
+## 15.1 Jediný aktivní soubor
 
-S každým novým sportem, poskytovatelem dat, databázovou vrstvou nebo funkcí aplikace budou vznikat nové situace, které si vyžádají rozšíření existujících pravidel nebo vytvoření pravidel nových.
+Každý řízený dokument má právě jeden aktivní soubor. Verze a stav se vedou uvnitř dokumentu.
 
-Z tohoto důvodu je Governance navržena jako otevřený systém, který lze průběžně rozšiřovat bez narušení již existující architektury.
+Aktivní název se běžně nemění při každé nové verzi. Předchozí verze se přesouvá do `docs/99_ARCHIVE`.
 
-Každá významná změna bude dokumentována a současně bude vyhodnocen její dopad na ostatní části systému.
+## 15.2 Stabilní hlavní identity
 
----
+Hlavní dokumentační řada používá stabilní identity:
 
-# 10.1 Governance jako součást každého nového modulu
+- MM-DOC-000 – Documentation Framework,
+- MM-DOC-100 – Master,
+- MM-DOC-200 – Governance,
+- MM-DOC-300 – Architecture,
+- MM-DOC-800 – Development Handbook,
+- MM-DOC-900 – Denní zápisy.
 
-Jedním z nejdůležitějších pravidel MatchMatrix je skutečnost, že žádný nový modul nesmí vzniknout bez odpovídající Governance.
+Historická pracovní označení MM-DOC-001, MM-DOC-002, MM-DOC-003, MM-DOC-004 a MM-DOC-005 zůstávají pouze historickými aliasy a nesmí být znovu používána jako aktivní identity těchto dokumentů.
 
-To znamená, že při návrhu nové části systému se neřeší pouze její technická implementace.
+## 15.3 Workflow Q3
 
-Současně se navrhuje také:
+Dokumentační workflow Q3 je rozděleno do čtyř fází:
 
-* způsob kontroly kvality,
-* pravidla správy dat,
-* auditní mechanismy,
-* monitorování provozu,
-* vazby na ostatní vrstvy.
+1. Vybrat a analyzovat,
+2. Opravit a zkontrolovat,
+3. Vytvořit a schválit,
+4. Publikovat.
 
-Díky tomu nevznikají části systému, které by fungovaly izolovaně nebo nebyly dlouhodobě udržitelné.
+Hlavní nástroje:
 
----
+- **A17** – audit souladu se standardem,
+- **A18** – standardizační návrh,
+- **A19** – kontrola mapování,
+- **A20** – builder dokumentu,
+- **A24** – import do dokumentační databáze v režimech `VALIDATE_ONLY` a `APPLY`.
 
-# 10.2 Governance a automatizace
+## 15.4 Dokumentační databáze
 
-Jedním z hlavních dlouhodobých cílů je postupný přechod od ručních kontrol k plně automatizovanému řízení kvality.
+Ověřený projektový snapshot uvádí:
 
-V současné době již značná část auditů probíhá automaticky.
+| Oblast | Počet |
+|--------|------:|
+| Dokumenty | 354 |
+| Verze dokumentů | 360 |
+| Aktuální verze | 354 |
+| Sekce | 7 075 |
+| Vazby | 495 |
+| Importní běhy | 48 |
 
-Do budoucna bude systém schopen samostatně:
+Tyto hodnoty jsou stavovým snapshotem, nikoli trvale neměnnou konstantou. Při nové publikaci se aktualizují podle skutečné databáze.
 
-* vyhodnocovat rizika,
-* upozorňovat na nekonzistence,
-* navrhovat opravy,
-* doporučovat priority,
-* sledovat dlouhodobé trendy,
-* připravovat podklady pro rozhodování.
+## 15.5 Historie chatů
 
-Operátor nebude nahrazován.
+Extrakční matice historie chatů obsahuje 146 projektových konverzací, 719 automaticky nalezených kandidátů na znalosti a 30 ručně kurátorovaných základních tvrzení.
 
-Naopak bude mít k dispozici kvalitnější informace pro strategická rozhodnutí.
+Automaticky nalezený kandidát není automaticky schválená znalost. Musí být:
 
----
-
-# 10.3 Governance jako podklad pro umělou inteligenci
-
-Budoucí AI vrstva nebude pracovat pouze se sportovními daty.
-
-Významnou roli budou hrát také informace vytvářené Governance.
-
-Například:
-
-* kvalita providerů,
-* důvěryhodnost zdrojů,
-* historie změn,
-* úspěšnost harvestů,
-* výsledky auditů,
-* dlouhodobé trendy.
-
-Umělá inteligence tak nebude analyzovat pouze výsledky zápasů.
-
-Bude schopna vyhodnocovat také kvalitu samotné datové základny.
-
-To představuje významný rozdíl oproti běžným sportovním databázím.
+1. vyhodnocen,
+2. porovnán s aktuálním stavem,
+3. přiřazen ke správnému dokumentu,
+4. případně formulován jako pravidlo, stav nebo otevřená otázka,
+5. zkontrolován a publikován řízeným workflow.
 
 ---
 
-# 11. Vztah Governance k ostatním dokumentům
 
-Governance není samostatně stojící dokument.
+## 15.99 Závěr kapitoly
 
-Je úzce propojena s ostatní dokumentací projektu.
+Shrnutí kapitoly: Kapitola vymezila oblast „15. Documentation Governance“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „16. Terminology Governance“, která rozvíjí další část řízeného dokumentu.
 
-Zejména s následujícími dokumenty:
+# 16. Terminology Governance
 
-**MM-DOC-001 – MATCHMATRIX MASTER**
+## 16.1 Jedno referenční místo
 
-Popisuje strategické důvody vzniku Governance a její místo v architektuře celé platformy.
+Každý řízený pojem má mít jedno hlavní referenční místo v aktivním slovníku nebo příslušném odborném dokumentu.
 
-**MM-DOC-003 – MATCHMATRIX ARCHITECTURE**
+## 16.2 Jeden aktivní MM-REF-001
 
-Detailně vysvětluje technickou architekturu databáze, pipeline a jednotlivých vrstev systému, nad kterými Governance vykonává dohled.
+Nesmí současně existovat více verzí slovníku označených jako aktivní. Starší, neúplné nebo pracovní varianty patří do historie.
 
-**MM-DOC-004 – MATCHMATRIX DEVELOPMENT HANDBOOK**
+## 16.3 Technické názvy a české rozhraní
 
-Obsahuje konkrétní pracovní postupy pro vývojáře, kteří musí pravidla Governance při své práci dodržovat.
+Technické identifikátory, názvy tabulek, polí, API parametrů a zdrojových objektů se zachovávají v originální podobě.
 
-**MM-DOC-008 – MATCHMATRIX ARCHITECTURAL DECISIONS**
+Uživatelský panel a vysvětlující rozhraní používají české popisky a překlady, aby byla práce rychlá a srozumitelná. Překlad nesmí měnit technickou identitu objektu.
 
-Zachycuje historické důvody jednotlivých governance rozhodnutí a jejich vývoj v průběhu projektu.
+## 16.4 Nový pojem
 
-Toto rozdělení umožňuje ponechat dokument Governance přehledný a současně zabránit zbytečnému opakování informací.
-
----
-
-# 12. Budoucí rozvoj Governance
-
-Vývoj Governance bude pokračovat společně s vývojem celé platformy.
-
-V dalších etapách projektu se předpokládá zejména rozšíření o:
-
-* AI Governance,
-* Data Quality Score,
-* automatické schvalování merge procesů,
-* inteligentní detekci duplicit,
-* správu licencí providerů,
-* řízení životního cyklu dat,
-* správu historických verzí entit,
-* automatické doporučování nových providerů,
-* komplexní monitoring všech vrstev platformy.
-
-Tyto oblasti budou rozvíjeny postupně podle potřeb projektu a budou navazovat na již existující governance mechanismy.
+Nový odborný pojem se před zavedením kontroluje proti aktivnímu slovníku. Pokud neexistuje, vytvoří se návrh definice, přiřadí se referenční dokument a projde odpovídajícím review.
 
 ---
 
-# 13. Závěr dokumentu
 
-Governance představuje jeden z nejvýznamnějších architektonických prvků projektu MatchMatrix.
+## 16.99 Závěr kapitoly
 
-Nevznikla jako administrativní vrstva ani jako soubor formálních pravidel. Je výsledkem praktických zkušeností získaných během budování rozsáhlé sportovní databáze, která postupně začala pracovat s miliony záznamů, desítkami providerů a stále složitějšími vazbami mezi jednotlivými entitami.
+Shrnutí kapitoly: Kapitola vymezila oblast „16. Terminology Governance“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „17. AI a Context Governance“, která rozvíjí další část řízeného dokumentu.
 
-Dlouhodobým cílem Governance není kontrolovat jednotlivé databázové tabulky.
+# 17. AI a Context Governance
 
-Jejím skutečným posláním je chránit kvalitu celé platformy.
+## 17.1 AI není autorita bez zdroje
 
-Každé pravidlo, audit nebo kontrolní mechanismus představuje investici do budoucnosti projektu. Díky nim bude možné MatchMatrix dále rozšiřovat, aniž by docházelo ke ztrátě konzistence nebo přehlednosti systému.
+AI může analyzovat, navrhovat, porovnávat a připravovat dokumenty nebo skripty. Nemá však automaticky rozhodovat o nejasné identitě, právním stavu nebo nevratné změně bez ověřitelného podkladu.
 
-Governance tak není pouze jednou z vrstev architektury.
+## 17.2 Kontextové vrstvy
 
-Stává se jejím stabilizačním prvkem.
+Pro navázání práce se používají zejména:
 
-Stejně jako databáze představuje základ datové části systému, představuje Governance základ dlouhodobé důvěryhodnosti celé platformy.
+- aktivní řízená dokumentace,
+- AI Context Package,
+- Project Snapshot,
+- Database Snapshot,
+- denní zápisy,
+- navazovací dokumenty,
+- Git stav a historie,
+- extrakční matice chatů.
+
+Novější ověřený snapshot má přednost před starým navazovacím dokumentem, pokud zachycuje skutečně novější stav.
+
+## 17.3 Rozlišení faktu, rozhodnutí a plánu
+
+AI musí odlišovat:
+
+- provedený a ověřený stav,
+- schválené rozhodnutí,
+- úspěšnou validaci bez APPLY,
+- pracovní návrh,
+- budoucí plán,
+- otevřenou otázku.
+
+Zaměnění těchto kategorií může způsobit opakování již provedené změny nebo naopak nesprávné tvrzení, že plánovaná změna již byla dokončena.
+
+## 17.4 Praktický příklad
+
+U skupiny 110 belgických zápasů je ověřeno `VALIDATE_ONLY_ROLLBACK_OK`. To znamená, že logika byla úspěšně otestována, ale změna ještě nebyla trvale aplikována.
+
+AI ani dokumentace nesmí tento stav popsat jako dokončený APPLY.
 
 ---
 
-# Stav dokumentu
 
-**Dokument:** MM-DOC-002 – MATCHMATRIX GOVERNANCE
+## 17.99 Závěr kapitoly
 
-**Verze:** 0.9 – První kompletní pracovní návrh
+Shrnutí kapitoly: Kapitola vymezila oblast „17. AI a Context Governance“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „18. Security a Access Governance“, která rozvíjí další část řízeného dokumentu.
 
-**Stav:** Připraven k první odborné revizi
+# 18. Security a Access Governance
+
+## 18.1 Minimální potřebná oprávnění
+
+Skripty, účty a uživatelé mají používat pouze oprávnění potřebná pro daný úkol.
+
+READ ONLY audit nemá běžet pod účtem nebo v režimu, který zbytečně umožňuje zápis.
+
+## 18.2 Tajné údaje
+
+Hesla, API klíče, tokeny a jiné citlivé hodnoty se neukládají přímo do verzovaných skriptů nebo veřejné dokumentace.
+
+## 18.3 Oddělení validace a produkční změny
+
+Tam, kde je to praktické, se validace a APPLY spouštějí jako oddělené kroky. Tím se snižuje riziko náhodného potvrzení změny při kontrole výsledků.
+
+## 18.4 Přenos mezi počítači
+
+Při vzdáleném spouštění na PC2 se musí jednoznačně určit cílový počítač, projektový kořen, databáze a uživatelský účet. Nejasné nebo implicitní cílení je bezpečnostní i provozní riziko.
 
 ---
 
-## Navazující dokument
 
-Dalším dokumentem dokumentační řady bude:
+## 18.99 Závěr kapitoly
 
-> **MM-DOC-003 – MATCHMATRIX ARCHITECTURE**
+Shrnutí kapitoly: Kapitola vymezila oblast „18. Security a Access Governance“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „19. OPS, monitoring a provozní dohled“, která rozvíjí další část řízeného dokumentu.
 
-Tento dokument bude představovat technické srdce celé dokumentace. Podrobně popíše architekturu databáze, jednotlivé databázové vrstvy (`staging`, `public`, `ops`, `runtime`), datové toky, ingest pipeline, merge procesy, Source Intelligence Layer, Control Panel, PC1/PC2 architekturu, automatizaci harvestu a vazby mezi všemi hlavními moduly systému. Na rozdíl od předchozích dokumentů bude vycházet přímo ze skutečné architektury MatchMatrix, kterou jsme během posledních měsíců vybudovali.
+# 19. OPS, monitoring a provozní dohled
+
+Governance musí být měřitelná. Pravidlo bez kontroly se může postupně přestat dodržovat, aniž by si toho projekt všiml.
+
+OPS vrstva má podle oblasti sledovat například:
+
+- dostupnost providerů,
+- poslední úspěšný harvest,
+- počet chyb a retry,
+- objem nových záznamů,
+- neúplná mapování,
+- HOLD a REVIEW fronty,
+- duplicity,
+- osiřelé vazby,
+- stav dokumentačních auditů,
+- rozdíl mezi očekávaným a skutečným stavem.
+
+Panel nemá pouze ukazovat čísla. Má odpovídat na otázky:
+
+- Co se děje?
+- Je stav v pořádku?
+- Pokud není, proč?
+- Jaký je bezpečný další krok?
+
+---
+
+
+## 19.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „19. OPS, monitoring a provozní dohled“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „20. Incident, Change a Audit Governance“, která rozvíjí další část řízeného dokumentu.
+
+# 20. Incident, Change a Audit Governance
+
+## 20.1 Incident
+
+Incident je stav, kdy dojde nebo hrozí:
+
+- poškození dat,
+- nesprávné mapování,
+- ztráta původu,
+- neoprávněná změna,
+- výpadek důležitého procesu,
+- publikace neověřeného obsahu,
+- porušení právních nebo licenčních podmínek.
+
+## 20.2 Reakce na incident
+
+Doporučený postup:
+
+1. zastavit další šíření dopadu,
+2. zachovat logy a důkazy,
+3. určit přesný scope,
+4. provést READ ONLY audit,
+5. rozhodnout o rollbacku nebo opravě,
+6. ověřit výsledek,
+7. zdokumentovat příčinu a preventivní opatření.
+
+## 20.3 Change Governance
+
+Významná změna musí mít:
+
+- důvod,
+- vlastníka nebo odpovědnou oblast,
+- popis dopadu,
+- způsob ověření,
+- možnost návratu,
+- aktualizaci dokumentace,
+- související Git nebo databázovou stopu.
+
+## 20.4 Audit jako opakovatelný nástroj
+
+Audit nemá být jednorázový dotaz bez historie. Má existovat jako uložený skript nebo nástroj, který lze znovu spustit a porovnat výsledky v čase.
+
+---
+
+
+## 20.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „20. Incident, Change a Audit Governance“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „21. Governance jako konkurenční výhoda“, která rozvíjí další část řízeného dokumentu.
+
+# 21. Governance jako konkurenční výhoda
+
+Kvalitní Governance může působit jako zpomalení, protože před významnou změnou vyžaduje analýzu, validaci a dokumentaci.
+
+Ve skutečnosti však snižuje dlouhodobé náklady projektu:
+
+- brání opakovanému řešení stejných chyb,
+- zrychluje přidávání nových providerů a sportů,
+- umožňuje bezpečnou automatizaci,
+- zvyšuje důvěryhodnost dat,
+- usnadňuje spolupráci lidí a AI,
+- chrání před ztrátou znalostí,
+- zvyšuje připravenost pro komerční produkty a partnery.
+
+Governance proto není pouze kontrolní vrstvou. Je strategickou schopností platformy.
+
+---
+
+
+## 21.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „21. Governance jako konkurenční výhoda“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „22. Aktuální stav, otevřené otázky a další krok“, která rozvíjí další část řízeného dokumentu.
+
+# 22. Aktuální stav, otevřené otázky a další krok
+
+## 22.1 Aktuální stav Governance
+
+| Oblast | Stav | Poznámka |
+|--------|------|----------|
+| Database Governance | ACTIVE | Používán READ ONLY audit, VALIDATE_ONLY, APPLY a post-commit kontrola. |
+| Provider Governance | ACTIVE | Role providerů se posuzují samostatně podle sportu, období a typu dat. |
+| Entity Governance | ACTIVE | Kanonické identity a providerové mapy jsou základním principem. |
+| Match Governance | ACTIVE | `public.match_provider_map` odděluje kanonické a providerové identity. |
+| Duplicate Prevention | ACTIVE / DEVELOPMENT | Základní mechanismy existují, některé konfliktní skupiny zůstávají otevřené. |
+| Source Governance | DEVELOPMENT | Probíhá doplňování právních, licenčních a historických zdrojů. |
+| Documentation Governance | ACTIVE | Q3, A17–A24 a dokumentační databáze jsou používány. |
+| Terminology Governance | ACTIVE / CLEANUP | Je nutné zachovat jediný aktivní MM-REF-001. |
+| AI Context Governance | ACTIVE / DEVELOPMENT | Existuje AI Context Package, Project Snapshot a extrakční matice chatů. |
+| Security Governance | DEVELOPMENT | Pravidla existují částečně, vyžadují samostatné rozpracování. |
+| Billing Governance | PLANNED | Naváže na obchodní model a produkty. |
+
+## 22.2 Otevřené databázové případy
+
+- samostatný APPLY přesně 110 belgických zápasů po úspěšném VALIDATE_ONLY,
+- post-commit READ ONLY audit této změny,
+- oddělené řešení zbývajících 121 legacy zápasů,
+- historická identita a další postup pro Lokeren a Mouscron,
+- samostatné řešení 78 794 globálních osiřelých řádků `mm_match_ratings`,
+- průběžné řízení duplicit, konfliktů výsledků a neúplných mapování.
+
+## 22.3 Otevřené dokumentační případy
+
+- aktualizace MM-DOC-300 podle skutečného databázového auditu,
+- sjednocení MM-STD-003, MM-STD-004 a MM-STD-007,
+- doplnění MM-STD-006 až MM-STD-009 do MM-STD-1000,
+- určení jediného aktivního a úplného MM-REF-001,
+- kontrola duplicitního stromu `docs/docs`,
+- přesun odvozených exportů do odpovídající oblasti `docs/14_EXPORT`.
+
+## 22.4 Další krok
+
+Po nahrazení aktivního souboru touto verzí 1.1 navázat dokumentem:
+
+> **MM-DOC-300 – MatchMatrix Architecture, verze 1.1**
+
+Architecture musí převzít pouze technická pravidla a skutečný stav architektury. Governance má zůstat referenčním místem pro pravidla, kontrolní body, stavy, rozhodovací principy a bezpečnost změn.
+
+---
+
+
+## 22.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „22. Aktuální stav, otevřené otázky a další krok“ v rámci dokumentu MM-DOC-200 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost směřuje k závěru dokumentu a k navazujícím kontextovým, auditním a publikačním krokům.
+
+# Závěr dokumentu
+
+Dokument MM-DOC-200 uzavírá řízený popis oblasti Governance MatchMatrix. Shrnuje pravidla, ověřený stav, odpovědnosti a vazby, které jsou potřebné pro další bezpečnou práci v projektu MatchMatrix. Přínos dokumentu spočívá v jednotném a dohledatelném zachycení této oblasti pro vývoj, audit, rozhodování a dlouhodobou správu. Návaznost pokračuje kontextovými sekcemi AI CONTEXT, PROJECT SNAPSHOT, CURRENT STATUS, OPEN QUESTIONS a NEXT STEP.
+
+# AI CONTEXT
+
+**Role dokumentu:** Hlavní referenční dokument pro řízení kvality, pravidel, bezpečných změn, identit, providerů, zdrojů, dokumentace a provozní důvěryhodnosti platformy MatchMatrix.
+
+**Navazuje na:** MM-DOC-000 a MM-DOC-100.
+
+**Technickou realizaci rozvádí:** MM-DOC-300 a MM-DOC-800.
+
+**Provozní historii poskytuje:** MM-DOC-900, denní zápisy, navazovací dokumenty a Git historie.
+
+**Základní pravidlo pro AI:** Rozlišovat mezi ověřeným stavem, APPLY, VALIDATE_ONLY s rollbackem, pracovním návrhem a budoucím plánem. Neprovádět nejasné identity nebo nevratné změny pouze podle názvu či historického vzoru.
+
+---
+
+# PROJECT SNAPSHOT
+
+- MatchMatrix je multisportovní datová, znalostní a analytická platforma.
+- Datový tok používá oddělené vrstvy provider → raw/staging → normalizace → mapování/merge → public → downstream.
+- Hlavní databázová schémata posledního referenčního auditu jsou `staging`, `public`, `ops`, `documentation` a `work`.
+- `public.match_provider_map` obsahuje 121 908 providerových identit zápasů.
+- `public.matches` obsahuje 120 981 kanonických zápasů.
+- Belgický pilot má dokončený APPLY 1 053 zápasů.
+- Dalších 110 zápasů má úspěšný VALIDATE_ONLY s rollbackem a čeká na samostatný APPLY.
+- Zbývajících 121 případů není součástí tohoto APPLY.
+- Dokumentační workflow Q3 a nástroje A17–A24 jsou implementovány a používány.
+- Dokumentační databáze obsahuje podle posledního ověřeného snapshotu 354 dokumentů a 360 verzí.
+- Historie chatů byla zpracována do extrakční matice a slouží jako ověřovací podklad pro nové verze dokumentace.
+
+---
+
+# DATABASE SNAPSHOT
+
+| Ukazatel | Ověřený stav |
+|----------|--------------:|
+| `public.matches` | 120 981 |
+| `public.match_provider_map` | 121 908 |
+| Belgické zápasy – dokončený APPLY | 1 053 |
+| Belgické zápasy – VALIDATE_ONLY, rollback | 110 |
+| Belgické legacy případy po budoucím APPLY 110 | 121 |
+| Z toho částečně mapovatelné | 119 |
+| Z toho oba týmy nemapované | 2 |
+| Globální osiřelé `mm_match_ratings` | 78 794 |
+| Dokumenty v dokumentační DB | 354 |
+| Verze dokumentů | 360 |
+| Aktuální verze | 354 |
+| Sekce dokumentů | 7 075 |
+| Dokumentační vazby | 495 |
+| Importní běhy | 48 |
+
+*Snapshot zachycuje stav potvrzený při přípravě verze 1.1. Před další databázovou změnou se hodnoty znovu ověřují READ ONLY auditem.*
+
+---
+
+# CURRENT STATUS
+
+| Oblast | Stav |
+|--------|------|
+| Database Governance | ACTIVE |
+| Provider Governance | ACTIVE |
+| Entity Identity Governance | ACTIVE |
+| Match Provider Mapping | ACTIVE |
+| Duplicate Prevention | ACTIVE / DEVELOPMENT |
+| Source a Legal Governance | DEVELOPMENT |
+| Documentation Governance | ACTIVE |
+| Terminology Governance | CLEANUP / ACTIVE |
+| AI Context Governance | ACTIVE / DEVELOPMENT |
+| Security Governance | DEVELOPMENT |
+| Billing Governance | PLANNED |
+
+---
+
+# OPEN QUESTIONS
+
+- Jak bude formálně řízeno historické nástupnictví klubů a jiných sportovních subjektů?
+- Které části providerového a licenčního hodnocení budou blokovat produkční aktivaci automaticky?
+- Jak bude centralizována Security Governance, správa účtů, tajných údajů a vzdáleného spouštění?
+- Jak budou řízeny modelové verze ratingů, predikcí a Ticket Engine?
+- Jak bude probíhat pravidelná revalidace aktivních mapování po příchodu kvalitnějšího zdroje?
+- Jak budou propojeny dokumentační nálezy, databázové audity a OPS incidenty v jednotném panelu?
+
+---
+
+# NEXT STEP
+
+Nahradit aktivní soubor `MM-DOC-200_MATCHMATRIX_GOVERNANCE_TECH.md` touto verzí 1.1.
+
+Poté připravit novou verzi `MM-DOC-300_MATCHMATRIX_ARCHITECTURE_TECH.md`, která popíše skutečnou aktuální technickou architekturu a odstraní historické nebo neověřené odkazy.

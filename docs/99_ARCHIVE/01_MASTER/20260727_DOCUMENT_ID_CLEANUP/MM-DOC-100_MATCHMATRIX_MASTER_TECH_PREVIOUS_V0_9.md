@@ -1,4 +1,4 @@
-# MM-DOC-100
+# MM-DOC-001
 
 # MATCHMATRIX MASTER
 
@@ -9,9 +9,9 @@
 | Položka              | Hodnota                                   |
 | :------------------- | :---------------------------------------- |
 | Název dokumentu      | MATCHMATRIX MASTER                        |
-| Označení             | MM-DOC-100                                |
-| Verze                | 1.0                      |
-| Stav                 | REVIEW                              |
+| Označení             | MM-DOC-001                                |
+| Verze                | 0.9 (Pracovní návrh)                      |
+| Stav                 | Rozpracováno                              |
 | Autor projektu       | Petr                                      |
 | Technická spolupráce | OpenAI ChatGPT                            |
 | Primární formát      | Markdown (.md)                            |
@@ -35,16 +35,6 @@
 6. Filozofie vývoje
 7. Hodnoty projektu
 8. Další směřování
-
----
-
----
-
-# 0. Smysl společnosti MatchMatrix
-
-MatchMatrix vzniká s cílem vybudovat dlouhodobě úspěšnou technologickou společnost zaměřenou na sportovní data, analytiku a digitální služby.
-
-Hlavním cílem projektu není vytvořit databázi ani dokumentaci. Databáze je strategické aktivum společnosti, dokumentace je systém řízení znalostí a produkty (web, API, AI, mobilní aplikace) přinášejí hodnotu uživatelům.
 
 ---
 
@@ -123,30 +113,3 @@ Tím se MatchMatrix stane otevřenou platformou schopnou růst společně se spo
 První kapitoly dokumentu představily základní myšlenku projektu MatchMatrix a vysvětlily důvody jeho vzniku. Bylo definováno poslání projektu i dlouhodobá vize, která přesahuje běžné sportovní databáze a směřuje k vytvoření komplexní datové platformy propojující výsledky, statistiky, média, historické souvislosti i inteligentní analytické nástroje.
 
 V další části dokumentu budou popsány strategické cíle projektu, základní filozofie vývoje, principy návrhu databáze a důvody, které vedly k vytvoření jednotlivých architektonických vrstev systému. Tyto kapitoly vytvoří most mezi vizí projektu a jeho konkrétní technickou realizací.
-
-
----
-# AI CONTEXT
-
-Role dokumentu: Hlavní strategický dokument MatchMatrix.
-
-# PROJECT SNAPSHOT
-
-Připraveno pro automatické generování z Documentation Management System.
-
-# CURRENT STATUS
-
-- Business: DESIGN
-- Platform: ACTIVE DEVELOPMENT
-- Database: ACTIVE
-- Documentation: REVIEW
-
-# OPEN QUESTIONS
-
-- Obchodní model
-- Produkty a služby
-- Billing
-
-# NEXT STEP
-
-Dokončit druhou část MASTER dokumentu.

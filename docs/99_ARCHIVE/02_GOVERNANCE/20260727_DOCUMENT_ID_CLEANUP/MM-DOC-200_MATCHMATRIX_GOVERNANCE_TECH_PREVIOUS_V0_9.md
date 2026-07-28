@@ -1,4 +1,4 @@
-# MM-DOC-200
+# MM-DOC-002
 
 # MATCHMATRIX GOVERNANCE
 
@@ -9,9 +9,9 @@
 | Položka              | Hodnota                                           |
 | :------------------- | :------------------------------------------------ |
 | Název dokumentu      | MATCHMATRIX GOVERNANCE                            |
-| Označení             | MM-DOC-200                                        |
-| Verze                | 1.0                              |
-| Stav                 | REVIEW                                      |
+| Označení             | MM-DOC-002                                        |
+| Verze                | 0.9 (Pracovní návrh)                              |
+| Stav                 | Rozpracováno                                      |
 | Autor projektu       | Petr                                              |
 | Technická spolupráce | OpenAI ChatGPT                                    |
 | Primární formát      | Markdown (.md)                                    |
@@ -33,20 +33,6 @@
 4. Cíle Governance
 5. Oblasti řízení projektu
 6. Budoucí rozvoj Governance
-
----
-
----
-
-# 0. Smysl Governance
-
-Governance v projektu MatchMatrix nevznikla jako administrativní vrstva ani jako soubor formálních pravidel.
-
-Jejím hlavním účelem je chránit dlouhodobou hodnotu společnosti MatchMatrix prostřednictvím ochrany kvality dat, procesů, produktů, služeb a znalostí.
-
-Databáze představuje strategické aktivum společnosti. Governance zajišťuje, aby toto aktivum bylo dlouhodobě konzistentní, důvěryhodné, rozšiřitelné a připravené podporovat všechny produkty a služby platformy.
-
-Každé pravidlo Governance musí v konečném důsledku přispívat ke zvýšení hodnoty platformy pro její uživatele a tím i k dlouhodobému rozvoji společnosti.
 
 ---
 
@@ -566,6 +552,195 @@ Praktická implementace Governance představuje jednu z největších konkurenč
 
 V závěrečné části dokumentu budou popsány pravidla dlouhodobé správy Governance, její budoucí rozvoj, vztah k ostatním architektonickým vrstvám a závěrečné shrnutí významu Governance pro celý projekt MatchMatrix.
 
+# 8. Praktická implementace Governance v projektu MatchMatrix
+
+Předchozí kapitoly popsaly filozofii a hlavní oblasti Governance. V této části dokumentu jsou uvedeny konkrétní mechanismy, které byly během vývoje MatchMatrix skutečně vytvořeny a které dnes představují základ řízení kvality celé platformy.
+
+Na rozdíl od obecných metodik se Governance MatchMatrix neopírá o teoretická doporučení. Vznikala postupně jako reakce na reálné problémy objevené při budování databáze, ingest pipeline a víceproviderové architektury.
+
+Každý nový governance mechanismus byl vytvořen proto, že řešil konkrétní problém, který již nebylo možné efektivně řešit ručně.
+
+---
+
+# 8.1 Canonical Entity Governance
+
+Jedním z prvních velkých problémů projektu bylo zjištění, že různí provideři používají pro stejné sportovní entity odlišné identifikátory, názvy i strukturu dat.
+
+Například jeden fotbalový klub mohl být u různých providerů veden pod několika různými názvy, přestože šlo stále o stejnou organizaci.
+
+Stejný problém se postupně objevil také u:
+
+* hráčů,
+* trenérů,
+* soutěží,
+* stadionů,
+* rozhodčích,
+* zápasů.
+
+Jednorázové opravy již nebyly možné.
+
+Proto vznikl systém Canonical Entity Governance.
+
+Jeho hlavním principem je vytvoření jediné interní reprezentace každé skutečné entity.
+
+Provider již neurčuje identitu objektu.
+
+Pouze dodává data.
+
+Identitu vytváří MatchMatrix.
+
+Tím vzniká stabilní základ celé databáze.
+
+---
+
+# 8.2 Duplicate Prevention
+
+Další významný krok představoval vznik systému prevence duplicit.
+
+Zpočátku byly duplicity odstraňovány ručně.
+
+S rostoucím počtem providerů však začal jejich počet rychle narůstat.
+
+Bylo proto rozhodnuto vytvořit samostatný governance proces, který bude duplicity odhalovat ještě před jejich zařazením do produkční databáze.
+
+Postupně vznikly samostatné mechanismy například pro:
+
+* Team Duplicate Prevention,
+* Player Duplicate Prevention,
+* League Duplicate Prevention,
+* Match Duplicate Prevention.
+
+Každý z těchto mechanismů využívá vlastní pravidla porovnávání a vlastní systém hodnocení rizika.
+
+Výsledkem není pouze odstranění duplicit.
+
+Výsledkem je především zabránění jejich dalšímu vzniku.
+
+---
+
+# 8.3 League Governance
+
+Jednou z nejsložitějších oblastí se ukázala být správa sportovních soutěží.
+
+Různí provideři často používají:
+
+* odlišné názvy soutěží,
+* různé úrovně členění,
+* rozdílné identifikátory,
+* historické názvy,
+* regionální varianty.
+
+Proto vznikl systém League Governance.
+
+Jeho úkolem je vytvářet jednotnou evidenci všech soutěží bez ohledu na jejich původ.
+
+Součástí této oblasti je také správa:
+
+* canonical league,
+* provider mapping,
+* historických názvů,
+* slučování duplicit,
+* kontrol integrity soutěží.
+
+League Governance dnes představuje jeden z nejdůležitějších pilířů celé Core Layer.
+
+---
+
+# 8.4 Provider Health Monitoring
+
+Během vývoje projektu se ukázalo, že jednotliví provideři mají velmi rozdílnou kvalitu služeb.
+
+Někteří mění API.
+
+Jiní mění limity.
+
+Další přestávají poskytovat určitá data.
+
+Vznikl proto systém průběžného sledování stavu providerů.
+
+Provider Health Monitoring průběžně vyhodnocuje například:
+
+* dostupnost API,
+* rychlost odpovědí,
+* počet chyb,
+* změny endpointů,
+* úspěšnost harvestu,
+* kvalitu získaných dat.
+
+Na základě těchto informací lze včas rozhodnout o změně strategie nebo přechodu na jiného poskytovatele.
+
+---
+
+# 8.5 Harvest Governance
+
+Harvest představuje jednu z nejkritičtějších částí celé platformy.
+
+Jakmile selže harvest, začnou se postupně zastavovat všechny další procesy.
+
+Harvest Governance proto neřídí pouze samotné stahování dat.
+
+Řídí celý životní cyklus harvest úloh.
+
+Součástí této oblasti je například:
+
+* plánování harvestu,
+* priority sportů,
+* priority providerů,
+* retry mechanismy,
+* kontrola timeoutů,
+* řízení historických harvestů,
+* řízení denních aktualizací,
+* audit úspěšnosti.
+
+Výsledkem je systém, který dokáže dlouhodobě pracovat s minimální potřebou manuálních zásahů.
+
+---
+
+# 8.6 OPS Governance
+
+S růstem projektu již nebylo možné sledovat stav systému pouze pomocí SQL dotazů.
+
+Vznikla proto samostatná OPS vrstva.
+
+Jejím cílem je poskytovat jednotný pohled na stav celé platformy.
+
+OPS Governance stanovuje pravidla pro:
+
+* dashboardy,
+* KPI,
+* auditní pohledy,
+* kontrolní reporty,
+* doporučení operátorovi,
+* prioritizaci úloh.
+
+Díky tomu lze během několika minut zjistit aktuální stav celé platformy bez nutnosti ruční analýzy databáze.
+
+---
+
+# 9. Governance jako živý systém
+
+Jedním z nejdůležitějších principů MatchMatrix je skutečnost, že Governance není uzavřený seznam pravidel.
+
+Vyvíjí se společně s projektem.
+
+Každý nový problém představuje příležitost vytvořit nové pravidlo nebo nový kontrolní mechanismus.
+
+Stejně tak každá nová vrstva systému automaticky přináší nové požadavky na Governance.
+
+Tento přístup umožňuje dlouhodobě udržovat kvalitu celé platformy i při jejím neustálém rozšiřování.
+
+Governance proto nebude nikdy považována za dokončenou.
+
+Bude růst společně s MatchMatrix.
+
+---
+
+# Závěr třetí části
+
+Praktická implementace Governance představuje jednu z největších konkurenčních výhod projektu MatchMatrix. Díky ní není platforma pouze databází sportovních dat, ale systémem, který dokáže tato data dlouhodobě spravovat, ověřovat a chránit jejich kvalitu.
+
+V závěrečné části dokumentu budou popsány pravidla dlouhodobé správy Governance, její budoucí rozvoj, vztah k ostatním architektonickým vrstvám a závěrečné shrnutí významu Governance pro celý projekt MatchMatrix.
+
 # 10. Dlouhodobá správa Governance
 
 Governance není jednorázový projekt ani sada pravidel, která budou po svém vytvoření neměnná. Naopak představuje dlouhodobý proces, který se bude vyvíjet společně s celou platformou MatchMatrix.
@@ -648,19 +823,19 @@ Je úzce propojena s ostatní dokumentací projektu.
 
 Zejména s následujícími dokumenty:
 
-**MM-DOC-100 – MATCHMATRIX MASTER**
+**MM-DOC-001 – MATCHMATRIX MASTER**
 
 Popisuje strategické důvody vzniku Governance a její místo v architektuře celé platformy.
 
-**MM-DOC-300 – MATCHMATRIX ARCHITECTURE**
+**MM-DOC-003 – MATCHMATRIX ARCHITECTURE**
 
 Detailně vysvětluje technickou architekturu databáze, pipeline a jednotlivých vrstev systému, nad kterými Governance vykonává dohled.
 
-**MM-DOC-800 – MATCHMATRIX DEVELOPMENT HANDBOOK**
+**MM-DOC-004 – MATCHMATRIX DEVELOPMENT HANDBOOK**
 
 Obsahuje konkrétní pracovní postupy pro vývojáře, kteří musí pravidla Governance při své práci dodržovat.
 
-**MM-DOC-903 – MATCHMATRIX ARCHITECTURAL DECISIONS**
+**MM-DOC-008 – MATCHMATRIX ARCHITECTURAL DECISIONS**
 
 Zachycuje historické důvody jednotlivých governance rozhodnutí a jejich vývoj v průběhu projektu.
 
@@ -710,7 +885,7 @@ Stejně jako databáze představuje základ datové části systému, představu
 
 # Stav dokumentu
 
-**Dokument:** MM-DOC-200 – MATCHMATRIX GOVERNANCE
+**Dokument:** MM-DOC-002 – MATCHMATRIX GOVERNANCE
 
 **Verze:** 0.9 – První kompletní pracovní návrh
 
@@ -722,49 +897,6 @@ Stejně jako databáze představuje základ datové části systému, představu
 
 Dalším dokumentem dokumentační řady bude:
 
-> **MM-DOC-300 – MATCHMATRIX ARCHITECTURE**
+> **MM-DOC-003 – MATCHMATRIX ARCHITECTURE**
 
 Tento dokument bude představovat technické srdce celé dokumentace. Podrobně popíše architekturu databáze, jednotlivé databázové vrstvy (`staging`, `public`, `ops`, `runtime`), datové toky, ingest pipeline, merge procesy, Source Intelligence Layer, Control Panel, PC1/PC2 architekturu, automatizaci harvestu a vazby mezi všemi hlavními moduly systému. Na rozdíl od předchozích dokumentů bude vycházet přímo ze skutečné architektury MatchMatrix, kterou jsme během posledních měsíců vybudovali.
-
-
----
-
-# AI CONTEXT
-
-**Role dokumentu:** Definuje systém řízení pravidel, kvality a dlouhodobé udržitelnosti platformy MatchMatrix.
-
-**Navazuje na:** MM-DOC-000, MM-DOC-100, MM-STD-001 až MM-STD-009.
-
----
-
-# PROJECT SNAPSHOT
-
-*Tato sekce je připravena pro automatické generování z Documentation Management System.*
-
----
-
-# CURRENT STATUS
-
-| Oblast | Stav |
-|--------|------|
-| Database Governance | ACTIVE |
-| Provider Governance | ACTIVE |
-| Entity Governance | ACTIVE |
-| Documentation Governance | ACTIVE |
-| Source Governance | DEVELOPMENT |
-| AI Governance | PLANNED |
-
----
-
-# OPEN QUESTIONS
-
-- AI Governance
-- Security Governance
-- Billing Governance
-- Legal Governance
-
----
-
-# NEXT STEP
-
-Navázat dokumentem MM-DOC-300 – MatchMatrix Architecture a rozpracovat technickou architekturu celé platformy.

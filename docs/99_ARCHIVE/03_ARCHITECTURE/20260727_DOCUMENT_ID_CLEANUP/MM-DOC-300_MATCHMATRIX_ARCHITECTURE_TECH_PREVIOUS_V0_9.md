@@ -1,4 +1,4 @@
-# MM-DOC-300
+# MM-DOC-003
 
 # MATCHMATRIX ARCHITECTURE
 
@@ -9,9 +9,9 @@
 | Položka              | Hodnota                                               |
 | :------------------- | :---------------------------------------------------- |
 | Název dokumentu      | MATCHMATRIX ARCHITECTURE                              |
-| Označení             | MM-DOC-300                                            |
-| Verze                | 1.0                                  |
-| Stav                 | REVIEW                                          |
+| Označení             | MM-DOC-003                                            |
+| Verze                | 0.9 (Pracovní návrh)                                  |
+| Stav                 | Rozpracováno                                          |
 | Autor projektu       | Petr                                                  |
 | Technická spolupráce | OpenAI ChatGPT                                        |
 | Primární formát      | Markdown (.md)                                        |
@@ -39,18 +39,6 @@
 10. Automatizace
 11. Architektura PC1 / PC2
 12. Budoucí cloudová architektura
-
----
-
----
-
-# 0. Smysl architektury
-
-Architektura MatchMatrix nevznikla s cílem vytvořit pouze databázi nebo technické řešení.
-
-Jejím hlavním účelem je vytvořit dlouhodobě udržitelnou technologickou platformu společnosti MatchMatrix, která bude schopna poskytovat kvalitní služby uživatelům, rozšiřovat se o nové sporty, nové poskytovatele dat a nové produkty bez nutnosti měnit své základní principy.
-
-Architektura propojuje obchodní cíle společnosti s technickou realizací platformy. Každé architektonické rozhodnutí musí dlouhodobě zvyšovat hodnotu platformy pro uživatele i společnost.
 
 ---
 
@@ -1137,7 +1125,7 @@ Budou představovat stabilní základ, na kterém bude možné budovat další g
 
 # Stav dokumentu
 
-**Dokument:** MM-DOC-300 – MATCHMATRIX ARCHITECTURE
+**Dokument:** MM-DOC-003 – MATCHMATRIX ARCHITECTURE
 
 **Verze:** 0.9 – První kompletní pracovní návrh
 
@@ -1149,7 +1137,7 @@ Budou představovat stabilní základ, na kterém bude možné budovat další g
 
 Dalším dokumentem dokumentační řady bude:
 
-> **MM-DOC-800 – MATCHMATRIX DEVELOPMENT HANDBOOK**
+> **MM-DOC-004 – MATCHMATRIX DEVELOPMENT HANDBOOK**
 
 Na rozdíl od předchozích dokumentů nebude zaměřen na strategii ani architekturu. Bude představovat praktickou příručku pro vývoj MatchMatrix. Bude vycházet přímo z našich skutečných standardů: číslování skriptů, struktury složek, pravidel pro SQL, Python, PowerShell, Docker, DBeaver, Visual Studio, OPS Panel, dokumentaci i každodenní pracovní postupy.
 
@@ -1158,53 +1146,3 @@ Na rozdíl od předchozích dokumentů nebude zaměřen na strategii ani archite
 ### Poznámka autora
 
 Od tohoto dokumentu dál se dokumentace začne ještě více opírat o skutečnou historii projektu. Development Handbook nebude obecná vývojářská příručka – bude popisovat přesně způsob práce, který jsme během vývoje MatchMatrix společně vytvořili a který používáme každý den. Právě zde se začnou promítat konkrétní standardy projektu, které dělají MatchMatrix jedinečným.
-
-
-
-
----
-
-# AI CONTEXT
-
-**Role dokumentu:** Definuje technickou architekturu platformy MatchMatrix.
-
-**Navazuje na:** MM-DOC-000, MM-DOC-100, MM-DOC-200 a standardy MM-STD-001 až MM-STD-009.
-
-**Architektonické principy:** Modularita, vícevrstvá databáze, Canonical Entity Model, Governance First, Automation First, Documentation First.
-
----
-
-# PROJECT SNAPSHOT
-
-*Tato sekce je připravena pro budoucí automatické generování z Documentation Management System.*
-
----
-
-# CURRENT STATUS
-
-| Oblast | Stav |
-|--------|------|
-| Core Layer | ACTIVE |
-| People Layer | ACTIVE |
-| Media Layer | DEVELOPMENT |
-| Odds Layer | DEVELOPMENT |
-| Source Intelligence | ACTIVE DEVELOPMENT |
-| AI Layer | DESIGN |
-| Documentation Platform | DEVELOPMENT |
-
----
-
-# OPEN QUESTIONS
-
-- Distribuovaná architektura.
-- AI orchestrace.
-- Cloud strategie.
-- Dokumentační databáze.
-- Business Services Layer.
-
----
-
-# NEXT STEP
-
-Navázat dokumentem **MM-DOC-800 – MatchMatrix Development Handbook**, který převede architektonické principy do každodenních pravidel vývoje.
-

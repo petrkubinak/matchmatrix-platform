@@ -1,1150 +1,1269 @@
-# MM-DOC-003
+# MM-DOC-300
 
 # MATCHMATRIX ARCHITECTURE
+
+## TECH EDITION
 
 ---
 
 ## Informace o dokumentu
 
-| Položka              | Hodnota                                               |
-| :------------------- | :---------------------------------------------------- |
-| Název dokumentu      | MATCHMATRIX ARCHITECTURE                              |
-| Označení             | MM-DOC-003                                            |
-| Verze                | 0.9 (Pracovní návrh)                                  |
-| Stav                 | Rozpracováno                                          |
-| Autor projektu       | Petr                                                  |
-| Technická spolupráce | OpenAI ChatGPT                                        |
-| Primární formát      | Markdown (.md)                                        |
-| Umístění             | `docs/03_ARCHITECTURE/03_MATCHMATRIX_ARCHITECTURE.md` |
+| Položka | Hodnota |
+|---|---|
+| Dokument | MM-DOC-300 |
+| Název | MatchMatrix Architecture |
+| Edice | MM-DOC TECH |
+| Verze | 1.1 |
+| Stav | REVIEW |
+| Datum aktualizace | 2026-07-27 |
+| Autor projektu | Petr |
+| Technická spolupráce | OpenAI ChatGPT |
+| Primární formát | Markdown (`.md`) |
+| Aktivní soubor | `docs/03_ARCHITECTURE/MM-DOC-300_MATCHMATRIX_ARCHITECTURE_TECH.md` |
+| Historické pracovní označení | MM-DOC-003 |
+
+---
+
+## Historie verzí
+
+| Verze | Datum | Stav | Popis |
+|---:|---|---|---|
+| 0.9 | 2026-06 | Rozpracováno | Původní pracovní verze vedená pod historickým označením MM-DOC-003. |
+| 1.0 | 2026-06-30 | REVIEW | Opravená REVIEW verze se stabilní identitou MM-DOC-300 a doplněným strategickým smyslem architektury. |
+| 1.1 | 2026-07-27 | REVIEW | Aktualizace podle ověřené historie projektové komunikace, databázového auditu A33, skutečné architektury repozitáře, provider mappingu a belgického pilotu historické canonicalizace. Doplněna formální hierarchie a závěry hlavních kapitol podle výsledku A17 ze dne 2026-07-28. |
+
+---
+
+## Úvod a účel dokumentu
+Tento dokument popisuje aktuální technickou architekturu platformy MatchMatrix.
+
+Jeho úkolem je:
+
+- vymezit jednotlivé vrstvy systému a jejich odpovědnosti,
+- popsat životní cyklus sportovních dat od zdroje až po produktové využití,
+- vysvětlit databázovou, aplikační, provozní a dokumentační architekturu,
+- určit hranice mezi vstupními daty, canonical entitami a downstream vrstvami,
+- zachytit principy providerového mapování a historické canonicalizace,
+- vysvětlit rozdělení odpovědností mezi PC1 a PC2,
+- vytvořit referenční základ pro další technický rozvoj platformy.
+
+Tento dokument nepopisuje každý jednotlivý skript nebo tabulku. Detailní implementace patří do specializovaných dokumentů, databázových auditů, skriptové dokumentace a provozních zápisů.
+
+---
+
+## Související dokumenty
+
+- `MM-DOC-000` – MatchMatrix Documentation Framework
+- `MM-DOC-100` – MatchMatrix Master
+- `MM-DOC-200` – MatchMatrix Governance
+- `MM-DOC-800` – MatchMatrix Development Handbook
+- `MM-DOC-900` – MatchMatrix Denní zápisy
+- `MM-STD-003` – Standard životního cyklu dokumentace a verzování
+- `MM-STD-007` – Identifikace a číslování dokumentů
+- `MM-STD-009` – AI Context a Project Snapshot
+- `MM-REF-001` – Slovník pojmů MatchMatrix
 
 ---
 
 # Motto
 
-> **Architektura není způsob, jak systém postavit. Architektura je důvod, proč bude systém správně fungovat i za deset let.**
+> **Architektura není pouze způsob, jak systém postavit. Architektura je soubor pravidel, díky kterým bude možné systém bezpečně rozvíjet i za mnoho let.**
 
 ---
 
 # Obsah
 
-1. Úvod
-2. Architektonická filozofie
+1. Smysl architektury
+2. Architektonické principy
 3. Vývoj architektury MatchMatrix
-4. Základní stavební kameny systému
-5. Životní cyklus dat
-6. Vícevrstvá databázová architektura
-7. Architektura jednotlivých Layer
-8. Architektura providerů
-9. Harvest architektura
-10. Automatizace
-11. Architektura PC1 / PC2
-12. Budoucí cloudová architektura
+4. Celkový životní cyklus dat
+5. Databázová architektura
+6. Schéma `staging`
+7. Schéma `public`
+8. Schéma `ops`
+9. Schéma `documentation`
+10. Schéma `work`
+11. Providerová architektura
+12. Canonical entity a identity mapping
+13. Architektura zápasů a `match_provider_map`
+14. Historická canonicalizace
+15. Downstream vrstvy
+16. Harvest, parser a merge pipeline
+17. Provozní architektura PC1 / PC2
+18. Automatizace, audit a bezpečné změny
+19. Dokumentační a AI kontextová architektura
+20. Produktové a budoucí vrstvy
+21. Aktuální stav architektury
+22. Otevřené otázky a další krok
 
 ---
 
-# 1. Úvod
+# 1. Smysl architektury
 
-Architektura projektu MatchMatrix představuje základní konstrukci celé platformy. Stejně jako architekt navrhuje nosnou konstrukci budovy dříve, než vzniknou jednotlivé místnosti, byla i architektura MatchMatrix navržena ještě před samotným plněním databáze rozsáhlými objemy sportovních dat.
+Architektura MatchMatrix nevznikla s cílem vytvořit pouze databázi sportovních výsledků.
 
-Během vývoje se ukázalo, že největší výzvou není získávání dat. Moderní API dokáží poskytovat miliony záznamů.
+Jejím účelem je vybudovat dlouhodobě udržitelnou technologickou platformu, která dokáže:
 
-Skutečnou výzvou je jejich dlouhodobá správa.
+- kombinovat data z více zdrojů,
+- uchovávat původ a historii každé významné informace,
+- vytvářet jednotné canonical entity,
+- rozlišovat ověřená data od pracovních a neověřených dat,
+- rozšiřovat se o nové sporty, soutěže, providery a produkty,
+- podporovat analytiku, predikce, média, kurzy a další služby,
+- chránit databázi před nekontrolovaným slučováním a přepisem dat,
+- zachovat znalosti projektu v řízené dokumentaci.
 
-Jakmile začne systém kombinovat desítky providerů, miliony historických zápasů, stovky tisíc hráčů, fotografie, články, kurzy a další informace, stává se architektura důležitější než samotná data.
-
-Právě z tohoto důvodu byla většina vývoje věnována návrhu architektury ještě před samotným masivním harvestem.
-
-To je jeden z nejvýznamnějších rozdílů mezi MatchMatrix a běžnými sportovními databázemi.
-
----
-
-# 2. Architektonická filozofie
-
-Architektura MatchMatrix stojí na několika základních principech.
-
-Prvním z nich je oddělení jednotlivých odpovědností.
-
-Každá část systému řeší pouze jednu přesně definovanou oblast.
-
-Provider získává data.
-
-Harvest je plánuje.
-
-Staging je bezpečně ukládá.
-
-Parser je převádí.
-
-Merge vytváří jednotné entity.
-
-Public publikuje výsledky.
-
-OPS kontroluje kvalitu.
-
-Runtime řídí provoz.
-
-Žádná vrstva nepřebírá odpovědnost jiné vrstvy.
-
-Tento princip výrazně zjednodušuje další rozvoj systému.
+Architektura propojuje obchodní cíl společnosti s technickou realizací platformy. Databáze, skripty, dokumentace, panely, audity a infrastruktura jsou prostředky. Výsledným cílem jsou důvěryhodné produkty a služby založené na kvalitních sportovních datech.
 
 ---
 
-## Druhým principem je dlouhodobá stabilita.
 
-Architektura nesmí být navržena pouze pro současný stav projektu.
+## 1.99 Závěr kapitoly
 
-Musí být připravena na situaci, kdy bude databáze obsahovat:
+Shrnutí kapitoly: Kapitola vymezila oblast „1. Smysl architektury“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „2. Architektonické principy“, která rozvíjí další část řízeného dokumentu.
 
-* desítky sportů,
-* stovky providerů,
-* miliony hráčů,
-* stovky milionů zápasů,
-* miliardy statistických údajů.
+# 2. Architektonické principy
 
-Právě proto byla zvolena modulární architektura.
+## 2.1 Jedna odpovědnost pro každou vrstvu
 
-Každá část systému může být rozšiřována samostatně.
+Každá vrstva řeší jednu jasně definovanou oblast:
 
-Aniž by bylo nutné měnit celý projekt.
+- provider poskytuje zdrojová data,
+- harvest zajišťuje jejich získání,
+- vstupní a staging vrstva zachovává zdrojový obsah,
+- parser a normalizace převádějí data do interního modelu,
+- merge a mapping rozhodují o identitě,
+- `public` uchovává canonical entity,
+- downstream vrstvy vytvářejí funkce, ratingy, predikce a produktový obsah,
+- `ops` sleduje kvalitu a provoz,
+- `documentation` uchovává řízené znalosti,
+- `work` slouží pro pracovní a pomocné procesy.
 
----
+Žádná vrstva nesmí bez výslovně definovaného důvodu převzít odpovědnost jiné vrstvy.
 
-## Třetím principem je nezávislost.
+## 2.2 Zdrojová data se nepovažují automaticky za pravdu
 
-MatchMatrix není závislý na jednom API.
+Data přijatá od provideru jsou důkazním vstupem, nikoli okamžitě canonical pravdou.
 
-Není závislý na jednom sportu.
+Mohou obsahovat:
 
-Není závislý na jednom typu dat.
+- odlišné identifikátory,
+- chybné názvy,
+- neúplné vazby,
+- duplicitní zápasy,
+- rozdílné časy výkopu,
+- změněné názvy soutěží,
+- nástupnické nebo historické týmy,
+- rozdílné skóre nebo stav zápasu.
 
-Celá architektura je navržena tak, aby bylo možné kdykoliv přidat nový sport, nového providera nebo úplně novou datovou vrstvu bez zásahu do již existujících částí systému.
+Proto musí projít kontrolovaným životním cyklem.
 
-Právě tato otevřenost představuje jednu z největších hodnot projektu.
+## 2.3 Stabilní interní identity
 
----
+Interní canonical identita nesmí být závislá na jednom providerovi.
 
-# 3. Jak vznikala současná architektura
+Providerové ID je externí identita. Interní ID MatchMatrix je dlouhodobá identita platformy.
 
-Dnešní podoba MatchMatrix nevznikla jedním návrhem.
+Změna provideru proto nesmí znamenat změnu identity:
 
-Vznikala postupně.
+- týmu,
+- hráče,
+- soutěže,
+- sezony,
+- zápasu,
+- stadionu,
+- média nebo jiné entity.
 
-První verze projektu byla zaměřena především na fotbalová data.
+## 2.4 Dohledatelnost
 
-S rozšiřováním databáze se však začaly objevovat problémy, které původní návrh nepředpokládal.
+Každé významné rozhodnutí musí být dohledatelné podle:
 
-Postupně bylo nutné řešit:
+- zdroje,
+- providerové identity,
+- canonical identity,
+- mapovacího záznamu,
+- skriptu,
+- auditu,
+- databázové změny,
+- Git historie,
+- dokumentace.
 
-* různé identifikátory providerů,
-* rozdílné názvy týmů,
-* duplicitní zápasy,
-* historické změny soutěží,
-* správu fotografií,
-* správu článků,
-* různé formáty statistik.
+## 2.5 Bezpečnost před rychlostí
 
-Každý nový problém vedl k vytvoření nové části architektury.
+Rizikové změny se neprovádějí přímo.
 
-Tak vznikly například:
+Standardní pořadí je:
 
-* Governance Layer,
-* Source Intelligence Layer,
-* OPS Layer,
-* jednotné staging tabulky,
-* canonical entity systém,
-* provider mapping.
+1. READ ONLY audit,
+2. přesná klasifikace kandidátů,
+3. `VALIDATE_ONLY` v transakci s rollbackem,
+4. kontrola dopadu,
+5. `APPLY`,
+6. post-commit READ ONLY audit,
+7. aktualizace dokumentace a historie.
 
-Současná architektura proto není výsledkem teorie.
+## 2.6 Modulární multisportovní architektura
 
-Je výsledkem několikaměsíčního praktického vývoje a řešení skutečných problémů.
+Systém není navržen pouze pro fotbal.
 
----
-
-# Závěr první části
-
-Architektura MatchMatrix vznikala společně s projektem samotným. Každá její část představuje odpověď na konkrétní problém, který se během vývoje objevil. Díky tomu není architektura tvořena izolovanými moduly, ale systémem vzájemně propojených vrstev, které společně vytvářejí dlouhodobě udržitelnou sportovní datovou platformu.
-
-V další části dokumentu budou podrobně popsány jednotlivé databázové vrstvy (`staging`, `public`, `ops`, `runtime`), jejich odpovědnosti a důvody, proč byla zvolena právě tato architektura. Tato kapitola bude vycházet přímo z reálné databáze MatchMatrix, nikoliv z obecného návrhu.
-
-# 4. Vícevrstvá databázová architektura
-
-Jedním z nejdůležitějších architektonických rozhodnutí během vývoje MatchMatrix bylo opustit myšlenku jedné centrální databáze, do které by byla ukládána všechna data bez dalšího zpracování.
-
-Na první pohled se může zdát takové řešení jednodušší. V praxi se však ukázalo jako dlouhodobě neudržitelné.
-
-Každý provider používá vlastní datový model.
-
-Každý sport obsahuje jinou strukturu dat.
-
-Historické informace mají často jiný formát než data aktuální.
-
-Některé zdroje poskytují pouze základní výsledky, jiné obsahují detailní statistiky, fotografie nebo články.
-
-Pokud by všechna tato data byla ukládána přímo do jediné produkční databáze, velmi rychle by docházelo ke ztrátě konzistence, vzniku duplicit a komplikovaným migracím.
-
-Proto byla navržena vícevrstvá architektura, ve které každá databázová vrstva plní přesně definovanou úlohu.
-
-Výsledkem není pouze lepší organizace databáze.
-
-Výsledkem je systém, který umožňuje dlouhodobě rozvíjet platformu bez zásadních změn jejího základu.
+Fotbal slouží jako referenční sport, protože obsahuje velký objem historických dat a složité identity. Stejné principy se ale používají pro hokej, basketbal, baseball, tenis, kriket, MMA, házenou, ragby, volejbal, šipky, esport a další sporty.
 
 ---
 
-# 5. Databázové vrstvy MatchMatrix
 
-Současná architektura databáze je rozdělena do několika hlavních schémat.
+## 2.99 Závěr kapitoly
 
-Každé schéma představuje samostatnou část životního cyklu dat.
+Shrnutí kapitoly: Kapitola vymezila oblast „2. Architektonické principy“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „3. Vývoj architektury MatchMatrix“, která rozvíjí další část řízeného dokumentu.
 
-Toto rozdělení patří mezi nejdůležitější architektonická rozhodnutí celého projektu.
+# 3. Vývoj architektury MatchMatrix
 
----
+První fáze projektu byla zaměřena především na získávání sportovních dat a vytváření základních tabulek.
 
-## 5.1 STAGING
+S růstem databáze se ukázalo, že hlavním problémem není samotný harvest, ale:
 
-Schéma **staging** představuje vstupní bránu celé databáze.
+- rozdílná struktura providerů,
+- opakující se entity,
+- chybějící providerové vazby,
+- historické změny týmů a soutěží,
+- nekonzistentní názvy,
+- duplicity zápasů,
+- rozdílné časové údaje,
+- potřeba zpětného auditu,
+- návaznost na downstream data.
 
-Právě zde začíná život každé informace.
+Architektura se proto postupně rozšířila o:
 
-Do této vrstvy přicházejí data získaná od jednotlivých providerů.
+- jednotné staging tabulky,
+- canonical entity systém,
+- provider mapping,
+- Governance Layer,
+- Source Intelligence,
+- OPS audity,
+- dokumentační databázi,
+- řízené `VALIDATE_ONLY` a `APPLY` workflow,
+- Project Snapshot a AI Context,
+- specializované nástroje pro kontrolu a publikaci dokumentace.
 
-Nejsou zde považována za správná ani definitivní.
-
-Jsou pouze bezpečně uložena.
-
-Jejich hlavním účelem je zachovat původní podobu dat tak, aby bylo možné kdykoliv dohledat jejich zdroj, znovu provést zpracování nebo analyzovat případné chyby.
-
-V průběhu vývoje projektu došlo k významné změně této vrstvy.
-
-Původně byly vytvářeny samostatné tabulky pro jednotlivé sporty, například:
-
-* api_football_*
-* api_hockey_*
-* api_basketball_*
-
-S rostoucím počtem sportů se však ukázalo, že tento přístup není dlouhodobě udržitelný.
-
-Bylo proto rozhodnuto přejít na jednotnou architekturu založenou na univerzálních tabulkách **stg_***.
-
-Tato změna výrazně zjednodušila další rozvoj platformy.
-
-Nový provider již nevyžaduje vytváření nové databázové struktury.
-
-Pouze se mapuje do existující architektury.
-
-Toto rozhodnutí dnes představuje jeden z největších technologických posunů projektu MatchMatrix.
+Současná architektura není jednorázovým teoretickým návrhem. Je výsledkem praktických problémů, auditů a bezpečně ověřovaných změn.
 
 ---
 
-## 5.2 PUBLIC
 
-Schéma **public** představuje oficiální databázi celé platformy.
+## 3.99 Závěr kapitoly
 
-Do této vrstvy se dostávají pouze informace, které úspěšně prošly všemi kontrolami.
+Shrnutí kapitoly: Kapitola vymezila oblast „3. Vývoj architektury MatchMatrix“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „4. Celkový životní cyklus dat“, která rozvíjí další část řízeného dokumentu.
 
-Data v této části databáze jsou považována za ověřená a připravená pro využití ostatními částmi systému.
+# 4. Celkový životní cyklus dat
 
-Právě z této vrstvy čerpá:
+Referenční datový tok MatchMatrix je:
 
-* webová aplikace,
-* mobilní aplikace,
-* analytické nástroje,
-* AI Layer,
-* exporty,
-* veřejné API.
+```text
+ZDROJ / PROVIDER
+        ↓
+HARVEST / INGEST
+        ↓
+RAW NEBO PŮVODNÍ PAYLOAD
+        ↓
+STAGING / STG_*
+        ↓
+PARSER A NORMALIZACE
+        ↓
+IDENTITY RESOLUTION A PROVIDER MAPPING
+        ↓
+MERGE / CANONICALIZACE
+        ↓
+PUBLIC CANONICAL ENTITY
+        ↓
+DOWNSTREAM VRSTVY
+        ↓
+PRODUKTY A SLUŽBY
+```
 
-Public představuje jediný oficiální zdroj pravdy celé platformy.
+Downstream vrstvy zahrnují zejména:
 
-Žádná jiná databázová vrstva nesmí být přímo využívána uživatelskými aplikacemi.
+- match features,
+- ratingy,
+- predikce,
+- people data,
+- média,
+- kurzy,
+- historické profily,
+- Ticket Engine,
+- API,
+- webovou a mobilní prezentaci,
+- analytické a AI služby.
 
----
-
-## 5.3 OPS
-
-S postupným růstem databáze vznikla potřeba vytvořit samostatnou provozní vrstvu.
-
-Tak vzniklo schéma **ops**.
-
-Neobsahuje sportovní data.
-
-Obsahuje informace o samotném provozu systému.
-
-Například:
-
-* dashboardy,
-* auditní pohledy,
-* KPI,
-* kontrolní reporty,
-* doporučení operátorovi,
-* monitorovací pohledy,
-* plánování harvestů,
-* přehled stavu jednotlivých vrstev.
-
-OPS představuje řídicí centrum celé platformy.
-
-Díky této vrstvě není nutné analyzovat databázi ručně.
-
-Operátor získává přehled prostřednictvím připravených dashboardů a kontrolních pohledů.
+Každý přechod mezi vrstvami musí mít definované vstupy, výstupy, kontrolní pravidla a auditní stopu.
 
 ---
 
-## 5.4 RUNTIME
 
-Poslední významnou vrstvu představuje **runtime**.
+## 4.99 Závěr kapitoly
 
-Tato část databáze neukládá sportovní informace.
+Shrnutí kapitoly: Kapitola vymezila oblast „4. Celkový životní cyklus dat“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „5. Databázová architektura“, která rozvíjí další část řízeného dokumentu.
 
-Jejím úkolem je řídit běh systému.
+# 5. Databázová architektura
 
-Obsahuje například:
+Podle aktuálního ověřeného auditu A33 pracuje databáze MatchMatrix s pěti hlavními schématy:
 
-* běžící úlohy,
-* fronty,
-* plánovače,
-* stav workerů,
-* informace o spuštěných procesech,
-* dočasné pracovní struktury.
+| Schéma | Hlavní odpovědnost |
+|---|---|
+| `staging` | vstupní, zdrojová a normalizovaná pracovní data |
+| `public` | canonical a produkčně využitelné entity |
+| `ops` | provozní kontroly, audity, monitoring a řízení kvality |
+| `documentation` | dokumenty, verze, sekce, vazby a importní historie |
+| `work` | pracovní, pomocné a přechodné procesy |
 
-Runtime umožňuje řídit automatizované procesy bez zásahu do produkčních dat.
+Historicky se v některých dokumentech objevovalo označení `runtime`. Poslední ověřený databázový audit však jako samostatné aktivní schéma uvádí `work`, nikoli `runtime`. Provozní odpovědnosti mohou být implementovány ve více objektech a nástrojích, ale dokumentace musí rozlišovat logickou provozní vrstvu od skutečného názvu databázového schématu.
 
-Tím je výrazně zvýšena bezpečnost celé platformy.
+## 5.1 Rozsah databáze podle aktuálního A33 baseline
 
----
+Aktuální ověřený baseline uvádí:
 
-# 6. Proč byla zvolena právě tato architektura
+| Ukazatel | Hodnota |
+|---|---:|
+| Schémata | 5 |
+| Objekty | 1 117 |
+| Tabulky | 284 |
+| Pohledy | 596 |
+| Sloupce | 12 274 |
+| Omezení | 615 |
+| Indexy | 862 |
+| Rutiny | 96 |
+| Triggery | 24 |
+| Závislosti | 753 |
+| Celková velikost | 741,67 MB |
 
-Rozdělení databáze do několika vrstev nebylo provedeno z akademických důvodů.
-
-Vzniklo jako přímá reakce na praktické problémy.
-
-Během vývoje se ukázalo, že jednotlivé části systému mají zcela odlišné požadavky.
-
-Harvest potřebuje pracovat s neověřenými daty.
-
-Merge proces potřebuje porovnávat informace z více providerů.
-
-Webová aplikace naopak musí pracovat pouze s kvalitními ověřenými daty.
-
-OPS potřebuje sledovat provoz systému.
-
-Pokud by všechny tyto činnosti probíhaly nad stejnými tabulkami, databáze by se velmi rychle stala nepřehlednou.
-
-Vícevrstvá architektura tento problém elegantně řeší.
-
-Každá vrstva má svou vlastní odpovědnost.
-
-Každá část systému přesně ví, odkud data přebírá a kam je předává.
-
-Tím vzniká jasně definovaný tok informací napříč celou platformou.
+Tyto hodnoty představují snapshot, nikoli trvalou konstantu. Při každém novém A33 auditu musí být tato sekce aktualizována.
 
 ---
 
-# 7. Datový tok mezi vrstvami
 
-Datový tok v MatchMatrix je vždy jednosměrný.
+## 5.99 Závěr kapitoly
 
-Data se pohybují od jejich získání až po publikaci.
+Shrnutí kapitoly: Kapitola vymezila oblast „5. Databázová architektura“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „6. Schéma `staging`“, která rozvíjí další část řízeného dokumentu.
 
-Typický životní cyklus jedné informace vypadá následovně:
+# 6. Schéma `staging`
 
-**Provider**
+## 6.1 Účel
 
-↓
+Schéma `staging` představuje vstupní a pracovní oblast databáze.
 
-**Harvest**
+Jeho úkolem je:
 
-↓
+- zachovat data přijatá od providerů,
+- umožnit opakované zpracování,
+- oddělit zdrojový stav od canonical databáze,
+- připravit data pro parser, normalizaci a merge,
+- uchovat providerové identifikátory a původní hodnoty.
 
-**STAGING**
+## 6.2 Jednotné tabulky `stg_*`
 
-↓
+Původní přístup používal více providerově nebo sportovně specifických tabulek.
 
-**Parser**
+S růstem platformy bylo nutné přejít k jednotnějšímu modelu `stg_*`, který:
 
-↓
+- snižuje počet specializovaných struktur,
+- usnadňuje přidání nového provideru,
+- sjednocuje kontroly,
+- umožňuje společné parsery a audity,
+- zjednodušuje další rozvoj.
 
-**Merge**
+To neznamená, že všechny sporty mají stejná data. Znamená to, že vstupní architektura používá společné principy a společná metadata.
 
-↓
+## 6.3 Povinná metadata vstupních dat
 
-**PUBLIC**
+Vstupní záznam by měl podle typu entity uchovávat zejména:
 
-↓
-
-**OPS Audit**
-
-↓
-
-**Web / API / AI / Panel**
-
-Tento tok je jedním ze základních pravidel architektury.
-
-Jednotlivé vrstvy se navzájem neobcházejí.
-
-Každá změna musí projít všemi příslušnými kroky.
-
-Díky tomu lze kdykoliv dohledat původ každé informace uložené v databázi.
-
----
-
-# Závěr druhé části
-
-Vícevrstvá databázová architektura představuje technologický základ celé platformy MatchMatrix. Rozdělení na schémata **staging**, **public**, **ops** a **runtime** umožnilo oddělit jednotlivé odpovědnosti systému a vytvořit prostředí, které je dlouhodobě stabilní, bezpečné a snadno rozšiřitelné.
-
-Jedním z nejvýznamnějších kroků vývoje bylo sjednocení historických sportovních tabulek do univerzální architektury **stg_***. Toto rozhodnutí výrazně zjednodušilo připojování nových providerů a vytvořilo jednotný základ pro všechny sporty.
-
-V další části dokumentu bude podrobně popsána architektura jednotlivých Layer (Core, People, Media, Odds, Source Intelligence a AI), jejich vzájemné vztahy a způsob, jakým společně vytvářejí kompletní ekosystém platformy MatchMatrix.
-
-
-# 8. Layer Architecture
-
-Jedním z nejvýznamnějších architektonických rozhodnutí projektu MatchMatrix bylo rozdělení celé platformy do samostatných funkčních vrstev označovaných jako **Layer**.
-
-Na první pohled se může zdát, že jednotlivé vrstvy pouze logicky třídí data. Ve skutečnosti však představují mnohem důležitější princip.
-
-Každá Layer řeší přesně jednu oblast systému.
-
-Díky tomu je možné jednotlivé části platformy rozvíjet samostatně, aniž by bylo nutné zasahovat do celé architektury.
-
-Tento přístup významně zvyšuje dlouhodobou udržitelnost projektu.
-
-Každá nová Layer vzniká pouze tehdy, pokud řeší samostatnou oblast s jasně definovanou odpovědností.
+- provider,
+- providerové ID,
+- typ entity,
+- sport,
+- datum získání,
+- původní payload nebo jeho dohledatelnou referenci,
+- stav zpracování,
+- případnou chybu,
+- vazbu na canonical záznam, pokud již existuje.
 
 ---
 
-# 8.1 Core Layer
 
-Core Layer představuje základ celé platformy.
+## 6.99 Závěr kapitoly
 
-Bez této vrstvy nemůže fungovat žádná další část systému.
+Shrnutí kapitoly: Kapitola vymezila oblast „6. Schéma `staging`“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „7. Schéma `public`“, která rozvíjí další část řízeného dokumentu.
 
-Obsahuje všechny základní sportovní entity, které tvoří kostru databáze.
+# 7. Schéma `public`
 
-Patří sem zejména:
+## 7.1 Účel
 
-* sporty,
-* státy,
-* soutěže,
-* sezóny,
-* týmy,
-* zápasy,
-* stadiony,
-* rozhodčí,
-* základní statistiky.
+Schéma `public` je canonical vrstva platformy.
 
-Core Layer je navržena tak, aby byla maximálně stabilní.
+Obsahuje entity, které mohou být využity ostatními částmi systému.
 
-Právě zde vznikají vazby, na které navazují všechny ostatní vrstvy systému.
+Typické oblasti:
 
-Jakákoliv změna této vrstvy má dopad prakticky na celý projekt.
+- sporty,
+- soutěže,
+- sezony,
+- týmy,
+- hráči a další osoby,
+- zápasy,
+- stadiony,
+- providerové mapy,
+- funkce a ratingy,
+- média,
+- další produkční entity.
 
-Proto je její vývoj řízen velmi opatrně.
+## 7.2 Canonical neznamená neměnné
 
----
+Canonical záznam může být aktualizován, ale pouze řízeně.
 
-# 8.2 People Layer
+Aktualizace musí respektovat:
 
-Po stabilizaci základních sportovních dat bylo možné začít budovat druhou nejvýznamnější část platformy.
+- existující provider mapping,
+- kvalitu nového zdroje,
+- historii entity,
+- konflikty,
+- downstream vazby,
+- auditní stopu.
 
-People Layer.
+## 7.3 Oddělení identity a atributů
 
-Jejím cílem není pouze evidence hráčů.
+Interní ID entity určuje její identitu.
 
-Ve skutečnosti představuje kompletní databázi sportovních osobností.
+Název, logo, datum založení, aktuální soutěž nebo jiné atributy se mohou měnit. Tyto změny nesmí automaticky vytvořit novou interní entitu.
 
-Každý člověk v systému může být propojen s:
-
-* týmy,
-* soutěžemi,
-* sezónami,
-* zápasy,
-* fotografiemi,
-* články,
-* statistikami,
-* historickým působením.
-
-Významnou součástí této vrstvy je také správa trenérů.
-
-Projekt MatchMatrix od počátku počítá s tím, že trenéři budou stejně důležitou entitou jako samotní hráči.
-
-People Layer bude v budoucnu jednou z nejrozsáhlejších databází celé platformy.
+Stejně tak shodný nebo podobný název nesmí automaticky znamenat stejnou entitu.
 
 ---
 
-# 8.3 Media Layer
 
-Sportovní statistiky poskytují fakta.
+## 7.99 Závěr kapitoly
 
-Média poskytují kontext.
+Shrnutí kapitoly: Kapitola vymezila oblast „7. Schéma `public`“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „8. Schéma `ops`“, která rozvíjí další část řízeného dokumentu.
 
-Právě proto vznikla Media Layer.
+# 8. Schéma `ops`
 
-Jejím úkolem je propojit jednotlivé sportovní entity s:
+Schéma `ops` podporuje provozní řízení a kvalitu.
 
-* články,
-* fotografiemi,
-* videi,
-* tiskovými zprávami,
-* oficiálními oznámeními.
+Jeho odpovědnosti zahrnují:
 
-Media Layer výrazně rozšiřuje informační hodnotu celé platformy.
+- auditní výsledky,
+- monitoring pipeline,
+- identifikaci chyb a mezer,
+- klasifikaci kandidátů,
+- provozní stav providerů,
+- přehledy kvality,
+- kontroly duplicit,
+- podklady pro dashboardy,
+- informace potřebné pro bezpečné rozhodování.
 
-Uživatel tak nebude vidět pouze výsledek zápasu.
-
-Bude mít k dispozici také související články, fotografie hráčů, klubové zprávy nebo oficiální vyjádření trenérů.
-
-Tím se MatchMatrix přibližuje spíše sportovnímu informačnímu systému než klasické databázi výsledků.
-
----
-
-# 8.4 Odds Layer
-
-Kurzy představují specifický druh sportovních informací.
-
-Nejsou součástí samotného sportu.
-
-Přesto poskytují velmi cenný pohled na očekávání trhu.
-
-Odds Layer proto vznikla jako samostatná architektonická vrstva.
-
-Jejím úkolem není pouze ukládání aktuálních kurzů.
-
-Dlouhodobým cílem je vytvářet historickou databázi kurzů, která umožní:
-
-* analyzovat změny očekávání trhu,
-* porovnávat jednotlivé sázkové kanceláře,
-* vytvářet podklady pro predikční modely,
-* podporovat AI analýzy.
-
-Tato vrstva bude v budoucnu významným zdrojem informací pro analytické nástroje.
+OPS vrstva nemá nahrazovat canonical data. Má vysvětlovat jejich stav, kvalitu a rizika.
 
 ---
 
-# 8.5 Source Intelligence Layer
 
-Jednou z největších zvláštností MatchMatrix je Source Intelligence Layer.
+## 8.99 Závěr kapitoly
 
-Většina sportovních databází eviduje pouze samotná data.
+Shrnutí kapitoly: Kapitola vymezila oblast „8. Schéma `ops`“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „9. Schéma `documentation`“, která rozvíjí další část řízeného dokumentu.
 
-MatchMatrix eviduje také jejich původ.
+# 9. Schéma `documentation`
 
-Source Intelligence Layer spravuje například:
+Dokumentace je samostatnou datovou oblastí platformy.
 
-* registry providerů,
-* oficiální federace,
-* klubové weby,
-* licenční podmínky,
-* robots.txt,
-* obchodní modely,
-* kvalitu jednotlivých zdrojů,
-* historii změn.
+Schéma `documentation` uchovává zejména:
 
-Tato vrstva vznikla na základě zkušeností získaných během hledání nových providerů.
+- dokumenty,
+- verze dokumentů,
+- aktuální verze,
+- sekce,
+- vztahy mezi dokumenty,
+- historii stavů,
+- importní běhy,
+- podklady pro AI Context a Project Snapshot.
 
-Ukázalo se, že správa samotných zdrojů představuje samostatnou disciplínu.
+Aktuální ověřený stav dokumentační databáze:
 
-Proto byla oddělena od ostatních částí systému.
+| Ukazatel | Hodnota |
+|---|---:|
+| Dokumenty | 354 |
+| Verze | 360 |
+| Aktuální verze | 354 |
+| Sekce | 7 075 |
+| Vazby | 495 |
+| Importní běhy | 48 |
 
-V budoucnu bude Source Intelligence Layer jednou z největších konkurenčních výhod MatchMatrix.
-
----
-
-# 8.6 AI Layer
-
-AI Layer představuje vrchol celé architektury.
-
-Nevytváří vlastní data.
-
-Nevykonává harvest.
-
-Neprovádí merge.
-
-Jejím úkolem je využít znalosti vytvořené všemi ostatními vrstvami.
-
-Umělá inteligence bude pracovat například s:
-
-* historickými výsledky,
-* statistikami,
-* fotografiemi,
-* články,
-* kurzy,
-* kvalitou providerů,
-* historií změn,
-* governance daty.
-
-Výsledkem budou:
-
-* predikce,
-* automatické analýzy,
-* inteligentní doporučení,
-* detekce anomálií,
-* automaticky generované reporty.
-
-AI Layer proto není samostatnou databází.
-
-Je inteligentní nadstavbou celé platformy.
+Dokumentační databáze není náhradou aktivních souborů v repozitáři. Je jejich řízenou databázovou reprezentací a musí být synchronizována prostřednictvím dokumentačního workflow.
 
 ---
 
-# 9. Vzájemná spolupráce Layer
 
-Přestože jsou jednotlivé vrstvy navrženy jako samostatné části systému, žádná z nich nefunguje izolovaně.
+## 9.99 Závěr kapitoly
 
-Každá Layer využívá informace vytvořené ostatními vrstvami.
+Shrnutí kapitoly: Kapitola vymezila oblast „9. Schéma `documentation`“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „10. Schéma `work`“, která rozvíjí další část řízeného dokumentu.
 
-Například:
+# 10. Schéma `work`
 
-Core Layer poskytuje základní sportovní data.
+Schéma `work` slouží pro pracovní a pomocné procesy.
 
-People Layer rozšiřuje informace o hráčích.
+Může obsahovat:
 
-Media Layer připojuje články a fotografie.
+- dočasné pracovní tabulky,
+- přípravné výpočty,
+- mezivýsledky,
+- kandidátní mapování,
+- kontrolní podklady,
+- data určená pro následnou validaci.
 
-Odds Layer doplňuje očekávání trhu.
+Data ve `work` nesmí být bez další kontroly považována za canonical.
 
-Source Intelligence Layer hodnotí samotné zdroje.
-
-AI Layer následně využívá informace ze všech těchto vrstev současně.
-
-Výsledkem není několik oddělených databází.
-
-Vzniká jeden propojený znalostní systém.
-
-Právě toto propojení představuje hlavní filozofii architektury MatchMatrix.
+Přechod z pracovní vrstvy do `public` musí být řízený, auditovatelný a v případě rizikových změn nejprve ověřený v režimu `VALIDATE_ONLY`.
 
 ---
 
-# 10. Proč nevznikají další Layer
 
-Během vývoje projektu vznikla řada návrhů na vytvoření dalších vrstev.
+## 10.99 Závěr kapitoly
 
-Například:
+Shrnutí kapitoly: Kapitola vymezila oblast „10. Schéma `work`“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „11. Providerová architektura“, která rozvíjí další část řízeného dokumentu.
 
-* Photo Layer,
-* Statistics Layer,
-* Community Layer,
-* Video Layer.
+# 11. Providerová architektura
 
-Po podrobnější analýze však bylo rozhodnuto tyto oblasti nezařazovat jako samostatné Layer.
+## 11.1 Vícezdrojový model
 
-Důvod je jednoduchý.
+MatchMatrix nepoužívá jeden univerzální provider.
 
-Každá nová vrstva zvyšuje složitost celé architektury.
+Různé zdroje mají různé role:
 
-Nová Layer vznikne pouze tehdy, pokud:
+- aktuální soutěže,
+- novější historie,
+- hluboká historická data,
+- lidé,
+- média,
+- kurzy,
+- oficiální identity,
+- doplňková metadata.
 
-* řeší samostatnou oblast,
-* má vlastní datový model,
-* má vlastní životní cyklus,
-* přináší dlouhodobou hodnotu.
+Například u fotbalu je cílem řízená kombinace zdrojů, nikoli závislost na jednom API.
 
-Tím zůstává architektura přehledná i při dalším rozšiřování projektu.
+## 11.2 Provider jako externí identita
 
----
+Providerová identita musí být uchována odděleně od canonical identity.
 
-# Závěr třetí části
+Jedna canonical entita může mít:
 
-Layer Architecture představuje jeden z nejvýznamnějších architektonických principů projektu MatchMatrix. Rozdělení systému na samostatné funkční vrstvy umožňuje dlouhodobý rozvoj platformy bez zbytečného zvyšování její složitosti.
+- jednu providerovou identitu,
+- více providerových identit,
+- historickou identitu,
+- novější identitu,
+- identity od různých zdrojů.
 
-Každá Layer má jasně definovanou odpovědnost, vlastní datový model i vlastní strategii rozvoje. Přesto všechny společně vytvářejí jeden propojený znalostní systém.
+## 11.3 Source Intelligence
 
-V následující části dokumentu bude popsána architektura providerů, harvest pipeline, automatizační procesy a role druhého serveru (PC2) při dlouhodobém získávání historických sportovních dat.
+Source Intelligence určuje:
 
-# 11. Architektura poskytovatelů dat (Provider Architecture)
+- co provider poskytuje,
+- pro které sporty a soutěže,
+- v jakém období,
+- v jaké kvalitě,
+- za jakých licenčních podmínek,
+- s jakými limity,
+- pro jakou část pipeline je vhodný.
 
-Jednou z největších předností platformy MatchMatrix je skutečnost, že není postavena kolem jednoho poskytovatele sportovních dat. Celá architektura byla od počátku navržena jako víceproviderový systém, ve kterém představuje každý zdroj pouze jednu část rozsáhlého datového ekosystému.
-
-Toto rozhodnutí zásadně ovlivnilo podobu celé databáze.
-
-Ve většině sportovních aplikací je databáze navržena podle struktury konkrétního API. Pokud se následně změní poskytovatel nebo jeho datový model, musí se měnit také samotná databáze.
-
-MatchMatrix používá opačný přístup.
-
-Databáze není navržena podle providerů.
-
-Provideři jsou mapováni do databáze.
-
-Díky tomu může být kterýkoliv poskytovatel kdykoliv přidán, nahrazen nebo dočasně vypnut, aniž by bylo nutné měnit architekturu platformy.
-
-Tato nezávislost představuje jeden z nejvýznamnějších strategických pilířů celého projektu.
+Provider nesmí být hodnocen pouze podle počtu dostupných endpointů. Rozhodující je jeho skutečná role v architektuře.
 
 ---
 
-# 11.1 Životní cyklus providerů
 
-Každý nový provider prochází v projektu MatchMatrix stejným procesem.
+## 11.99 Závěr kapitoly
 
-Nejprve je analyzována jeho dokumentace.
+Shrnutí kapitoly: Kapitola vymezila oblast „11. Providerová architektura“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „12. Canonical entity a identity mapping“, která rozvíjí další část řízeného dokumentu.
 
-Následuje ověření:
+# 12. Canonical entity a identity mapping
 
-* licenčních podmínek,
-* dostupnosti API,
-* kvality dat,
-* historického rozsahu,
-* omezení použití,
-* rychlosti aktualizací.
+## 12.1 Základní pravidlo
 
-Současně jsou prověřovány také veřejně dostupné informace, například obchodní model, stabilita společnosti nebo dlouhodobá perspektiva daného zdroje.
+Mapování entity se nikdy nesmí provádět pouze podle podobnosti názvu.
 
-Teprve poté je provider zařazen do Source Intelligence Layer.
+Musí se kombinovat více důkazů, například:
 
-Následuje vytvoření mapování do interního datového modelu a příprava harvest pipeline.
+- providerová identita,
+- sport,
+- soutěž,
+- země,
+- období,
+- historie názvů,
+- zápasové shody,
+- datum založení,
+- stadion,
+- oficiální zdroj,
+- návaznost na předchůdce nebo nástupce.
 
-Díky tomuto postupu se do produkční architektury dostávají pouze prověření poskytovatelé.
+## 12.2 Historická entita není automaticky současná entita
 
----
+Historický tým může:
 
-# 11.2 Rozdělení providerů podle účelu
+- pokračovat pod novým názvem,
+- být právním předchůdcem,
+- zaniknout,
+- být nahrazen jiným klubem,
+- sdílet město nebo značku bez identity,
+- existovat souběžně s jinou organizací.
 
-V projektu MatchMatrix nejsou provideři rozděleni pouze podle sportů.
+Proto nelze historickou entitu automaticky sloučit s moderním klubem pouze podle názvu nebo lokality.
 
-Stejně důležité je jejich funkční zařazení.
+## 12.3 Otevřené historické případy
 
-Postupně vzniklo několik základních kategorií.
+V belgickém pilotu zůstávají příklady, které vyžadují zvláštní zacházení:
 
-### Core Providers
+- Lokeren,
+- Mouscron.
 
-Poskytují základní sportovní data.
-
-Například:
-
-* soutěže,
-* týmy,
-* zápasy,
-* výsledky,
-* sezóny.
-
----
-
-### People Providers
-
-Dodávají informace o hráčích, trenérech a dalších osobách.
-
-Jejich význam bude v budoucnu dále růst.
+Tyto případy nesmí být automaticky připojeny k potenciálním nástupcům bez dostatečných právních a sportovně-historických důkazů.
 
 ---
 
-### Media Providers
 
-Zajišťují:
+## 12.99 Závěr kapitoly
 
-* články,
-* fotografie,
-* videa,
-* oficiální zprávy.
+Shrnutí kapitoly: Kapitola vymezila oblast „12. Canonical entity a identity mapping“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „13. Architektura zápasů a `match_provider_map`“, která rozvíjí další část řízeného dokumentu.
 
-Právě zde hrají významnou roli oficiální weby federací a klubů.
+# 13. Architektura zápasů a `match_provider_map`
 
----
+## 13.1 Účel mapy
 
-### Odds Providers
+Tabulka `public.match_provider_map` odděluje canonical zápas od providerových identit.
 
-Dodávají kurzy jednotlivých sázkových kanceláří.
+To umožňuje, aby jeden zápas měl:
 
-Tyto informace tvoří základ Odds Layer.
+- interní `match_id`,
+- jednu nebo více providerových identit,
+- identitu historického zdroje,
+- identitu současného API,
+- auditovatelnou vazbu mezi nimi.
 
----
+## 13.2 Ověřený stav mapování
 
-### Knowledge Providers
+Při zavedení mapy bylo ověřeno:
 
-Specifickou skupinu představují zdroje typu:
+| Ukazatel | Hodnota |
+|---|---:|
+| Kandidátní řádky | 121 908 |
+| Cílové řádky | 121 908 |
+| Odlišné mapované zápasy | 121 908 |
+| Chybějící mapování | 0 |
+| Duplicitní mapování | 0 |
 
-* Wikidata,
-* Wikimedia Commons,
-* další veřejné znalostní databáze.
+Aktuální celkový stav:
 
-Jejich úkolem není poskytovat výsledky zápasů.
+| Oblast | Hodnota |
+|---|---:|
+| `public.matches` | 120 981 |
+| `public.match_provider_map` | 121 908 |
 
-Slouží především k obohacování databáze.
+Rozdíl není automaticky chybou. Providerová mapa může obsahovat více identit pro jeden canonical zápas.
 
----
+## 13.3 Význam více identit
 
-# 12. Harvest Architecture
+Pokud je bezpečně prokázáno, že historický a API záznam představují stejný zápas, canonical databáze má obsahovat jeden zápas a providerová mapa obě identity.
 
-Jednou z největších investic během vývoje MatchMatrix bylo vytvoření vlastní harvest architektury.
+Tím se:
 
-Na první pohled by bylo možné stáhnout data jednoduchým skriptem.
-
-Takový přístup však funguje pouze u malých projektů.
-
-MatchMatrix je navržen pro dlouhodobý provoz.
-
-Harvest proto představuje samostatný systém.
-
-Jeho úkolem není pouze stahovat data.
-
-Řídí celý proces jejich získávání.
-
----
-
-# 12.1 Harvest Planner
-
-První část harvest architektury představuje plánovač.
-
-Planner rozhoduje:
-
-* který sport bude zpracován,
-* který provider bude použit,
-* jaká sezóna bude stahována,
-* jaká je priorita úlohy,
-* zda jde o historický nebo běžný harvest.
-
-Planner umožňuje dlouhodobě řídit tisíce harvest úloh bez manuálních zásahů.
+- zachová původ obou zdrojů,
+- odstraní canonical duplicita,
+- ochrání downstream vazby,
+- umožní budoucí zpětný audit.
 
 ---
 
-# 12.2 Harvest Workers
 
-Samotné stahování dat provádějí specializované workery.
+## 13.99 Závěr kapitoly
 
-Každý worker řeší přesně jednu oblast.
+Shrnutí kapitoly: Kapitola vymezila oblast „13. Architektura zápasů a `match_provider_map`“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „14. Historická canonicalizace“, která rozvíjí další část řízeného dokumentu.
 
-Například:
+# 14. Historická canonicalizace
 
-* leagues,
-* teams,
-* fixtures,
-* players,
-* coaches,
-* statistics,
-* media,
-* odds.
+## 14.1 Cíl
 
-Tím je zajištěna vysoká modularita celé harvest architektury.
+Historická canonicalizace neslouží pouze k mazání duplicit.
 
----
+Jejím cílem je:
 
-# 12.3 Parser Pipeline
+- sjednotit totožné zápasy,
+- zachovat všechny providerové identity,
+- přesunout downstream data na canonical záznam,
+- chránit historické a moderní zdroje,
+- oddělit bezpečné shody od konfliktních případů.
 
-Stažená data nejsou ukládána přímo do produkční databáze.
+## 14.2 Belgický pilot
 
-Nejprve procházejí parserem.
+Belgická historie slouží jako referenční pilot pro bezpečnou canonicalizaci historických zápasů.
 
-Parser:
+Ověřené výsledky zahrnují:
 
-* převádí datové typy,
-* sjednocuje názvy,
-* mapuje provider ID,
-* připravuje merge proces,
-* zapisuje výsledky do staging.
+- 930 dříve sloučených překryvů,
+- 1 053 unikátních historických zápasů canonicalizovaných do cílové soutěže `league_id = 20853`,
+- po tomto APPLY zůstalo 231 legacy zápasů pod `league_id = 4`,
+- dalších 110 zápasů prošlo úspěšným `VALIDATE_ONLY`,
+- těchto 110 zápasů zatím nebylo v okamžiku snapshotu trvale aplikováno,
+- po případném přesném APPLY těchto 110 se očekává 121 zbývajících legacy případů,
+- z nich je 119 částečně mapovatelných a 2 vyžadují obě dosud nenamapované týmové identity.
 
-Parser představuje most mezi providerem a interní databází MatchMatrix.
+## 14.3 Ověřené týmové identity
 
----
+Příklady ověřených vazeb:
 
-# 12.4 Merge Engine
+- RAAL historická identita `970` → canonical tým `12427` → API-Football identita `5902`,
+- Waasland-Beveren historická identita `987` → canonical SK Beveren `13137` → API-Football identita `738`.
 
-Po dokončení parseru přichází Merge Engine.
+Tyto vazby byly ověřeny kombinací historických dat, providerových identit a zápasových shod.
 
-Jeho úkolem je rozhodnout:
+## 14.4 Ochrana transakční hranice
 
-* jedná se o novou entitu?
-* existuje již v databázi?
-* jedná se o aktualizaci?
-* vzniká konflikt?
-* je potřeba HOLD?
+Každý APPLY musí pracovat pouze s přesně definovaným počtem kandidátů.
 
-Merge představuje jednu z nejsložitějších částí celé platformy.
+Například APPLY pro 110 zápasů nesmí:
 
-Právě zde vznikají canonical entity.
+- znovu zpracovat již aplikovaných 1 053,
+- zasáhnout zbývajících 121 případů,
+- měnit otevřené týmové identity,
+- vytvářet nové semantic duplicity,
+- měnit celkový počet zápasů bez výslovně očekávaného důvodu.
 
-Právě zde spolupracuje Governance s databází.
+## 14.5 Downstream ochrana
 
----
+Při canonicalizaci se musí kontrolovat zejména:
 
-# 13. Automatizační architektura
+- `match_features`,
+- `mm_match_ratings`,
+- cizí klíče,
+- providerové payloady,
+- identity,
+- počet canonical zápasů,
+- semantic duplicity,
+- orphan záznamy.
 
-Jedním z dlouhodobých cílů MatchMatrix je maximální automatizace.
-
-Během několika let nebude možné systém spravovat ručně.
-
-Proto vzniká samostatná automatizační architektura.
-
-Ta bude postupně řídit:
-
-* plánování harvestů,
-* kontrolu providerů,
-* automatické retry,
-* monitoring workerů,
-* merge procesy,
-* audity,
-* reporty,
-* doporučení operátorovi.
-
-Budoucím cílem je, aby většina běžných operací probíhala bez lidského zásahu.
-
-Operátor bude řešit pouze výjimky a strategická rozhodnutí.
+Globální stav 78 794 orphan řádků v `mm_match_ratings` je samostatný problém. Nesmí být nesprávně přisuzován belgické migraci a musí se řešit odděleným auditem.
 
 ---
 
-# 14. Architektura PC1 a PC2
 
-Jedním z praktických architektonických rozhodnutí projektu bylo oddělení vývojového prostředí od prostředí určeného pro rozsáhlý harvest dat.
+## 14.99 Závěr kapitoly
 
-Vznikla tak dvoupočítačová architektura.
+Shrnutí kapitoly: Kapitola vymezila oblast „14. Historická canonicalizace“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „15. Downstream vrstvy“, která rozvíjí další část řízeného dokumentu.
 
-## PC1
+# 15. Downstream vrstvy
 
-PC1 představuje pracovní stanici vývojáře.
+Canonical data jsou vstupem pro další vrstvy.
 
-Slouží především pro:
+## 15.1 Features
 
-* návrh databáze,
-* SQL,
-* vývoj,
-* správu projektu,
-* dokumentaci,
-* řízení systému.
+`match_features` obsahuje vlastnosti a odvozené charakteristiky zápasů.
 
-Neprovádí dlouhodobý harvest.
+Při změně canonical identity musí být funkce správně přesměrovány nebo zachovány.
 
-Jeho hlavní úlohou je řízení celé platformy.
+## 15.2 Ratingy
 
----
+`mm_match_ratings` a další ratingové struktury podporují analytiku a predikce.
 
-## PC2
+Rating nesmí zůstat navázán na odstraněnou duplicitu.
 
-PC2 představuje výpočetní uzel určený především pro:
+## 15.3 People Layer
 
-* rozsáhlé historické harvesty,
-* dlouhodobé ingest procesy,
-* automatizované workery,
-* budoucí nepřetržitý provoz.
+People Layer obsahuje:
 
-Toto rozdělení významně snižuje zatížení vývojového prostředí.
+- hráče,
+- trenéry,
+- rozhodčí,
+- další osoby,
+- jejich providerové identity,
+- fotografie,
+- týmové a soutěžní vazby.
 
-Současně umožňuje provozovat dlouhé harvesty bez omezení běžné práce na projektu.
+## 15.4 Media Layer
 
-Do budoucna bude možné architekturu dále rozšiřovat o další výpočetní uzly nebo cloudové služby.
+Media Layer propojuje:
 
----
+- články,
+- fotografie,
+- videa,
+- týmy,
+- hráče,
+- soutěže,
+- zápasy.
 
-# Závěr čtvrté části
+Mediální obsah nesmí být považován za izolované soubory. Je součástí znalostního kontextu sportovní entity.
 
-Architektura providerů, harvest pipeline i rozdělení rolí mezi PC1 a PC2 představují praktickou realizaci filozofie MatchMatrix. Platforma není navržena jako sada skriptů pro stahování dat, ale jako řízený ekosystém, ve kterém má každý provider, každý worker i každý server přesně definovanou odpovědnost.
+## 15.5 Odds Layer
 
-V závěrečné části dokumentu bude popsána budoucí architektura platformy, přechod k distribuovanému zpracování, cloudová strategie, dlouhodobá škálovatelnost systému a závěrečné shrnutí celé architektury MatchMatrix.
+Odds Layer uchovává kurzy a jejich historický nebo aktuální kontext.
 
-# 15. Budoucí architektura platformy
+Zdroj aktuálních kurzů nemusí poskytovat historii. Architektura proto musí oddělit:
 
-Architektura MatchMatrix nebyla navržena pouze pro současný stav projektu. Již během prvních návrhů bylo zřejmé, že databáze bude postupně růst o další sporty, nové poskytovatele dat, nové vrstvy systému i nové služby. Proto byla celá platforma od počátku koncipována jako architektura, kterou lze dlouhodobě rozšiřovat bez zásadních zásahů do jejích základních principů.
+- aktuální kurz,
+- historický kurz,
+- zdroj,
+- čas získání,
+- trh,
+- bookmaker identity.
 
-Dlouhodobým cílem není vytvořit co největší databázi.
+## 15.6 Ticket Engine a produktové vrstvy
 
-Cílem je vytvořit platformu, která bude schopna růst společně s množstvím dat, aniž by se stávala složitější nebo obtížněji spravovatelnou.
+Ticket Engine využívá canonical a analytická data pro vytváření doporučení a tiketových scénářů.
 
-Právě schopnost dlouhodobé evoluce patří mezi nejdůležitější vlastnosti celé architektury.
-
----
-
-# 15.1 Přechod od projektu k platformě
-
-V počátečních fázích vývoje byl MatchMatrix především databázovým projektem.
-
-Postupně se však ukázalo, že jednotlivé části systému začínají vytvářet samostatný ekosystém.
-
-Databáze již neslouží pouze jako úložiště.
-
-Harvest již není pouze skript.
-
-OPS již není pouze dashboard.
-
-Source Intelligence již není pouze seznam providerů.
-
-Každá z těchto částí se postupně stává samostatným modulem platformy.
-
-Budoucnost MatchMatrix proto nespočívá v dalším zvětšování jedné databáze.
-
-Budoucnost spočívá ve vytvoření plnohodnotné sportovní datové platformy.
+Produktová vrstva nesmí obcházet canonical databázi ani vytvářet vlastní paralelní identity.
 
 ---
 
-# 15.2 Distribuované zpracování dat
 
-S rostoucím objemem dat bude postupně narůstat také množství výpočetních operací.
+## 15.99 Závěr kapitoly
 
-Historické harvesty, merge procesy, výpočty statistik nebo AI analýzy budou stále náročnější.
+Shrnutí kapitoly: Kapitola vymezila oblast „15. Downstream vrstvy“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „16. Harvest, parser a merge pipeline“, která rozvíjí další část řízeného dokumentu.
 
-Proto byla architektura navržena tak, aby bylo možné jednotlivé části systému postupně rozdělit mezi více výpočetních uzlů.
+# 16. Harvest, parser a merge pipeline
 
-V současné době tuto architekturu představuje dvojice:
+## 16.1 Harvest
 
-* PC1 – řídicí a vývojová stanice,
-* PC2 – harvest server.
+Harvest odpovídá za:
 
-Do budoucna však bude možné přidávat další uzly podle aktuálních potřeb.
+- plánování požadavků,
+- volání providerů,
+- retry,
+- limity,
+- logování,
+- ukládání odpovědi,
+- označení úspěchu nebo chyby.
 
-Například:
+Harvest nemá rozhodovat o canonical identitě.
 
-* samostatný AI server,
-* media processing server,
-* reporting server,
-* cloud workers.
+## 16.2 Parser
 
-Celá architektura je připravena na horizontální rozšiřování.
+Parser převádí providerový formát do interního modelu.
 
----
+Odpovídá za:
 
-# 15.3 Cloud jako rozšíření, nikoliv náhrada
+- typy hodnot,
+- normalizaci data a času,
+- strukturu položek,
+- přípravu providerových identit,
+- standardizaci vstupu pro merge.
 
-Při návrhu architektury bylo rozhodnuto, že cloud nebude představovat základ platformy.
+Parser nesmí nekontrolovaně slučovat entity.
 
-Cloud bude sloužit jako rozšíření lokální infrastruktury.
+## 16.3 Merge
 
-Tento přístup přináší několik významných výhod.
+Merge rozhoduje, zda záznam:
 
-Lokální databáze zůstává plně pod kontrolou projektu.
+- aktualizuje existující canonical entitu,
+- vytvoří novou entitu,
+- vyžaduje mapping,
+- vstupuje do konfliktu,
+- musí být zařazen do HOLD nebo REVIEW.
 
-Historická data nejsou závislá na externích službách.
+## 16.4 Provider map
 
-Vývoj lze provádět i bez internetového připojení.
+Provider map je dlouhodobá paměť identity.
 
-Cloud bude využíván pouze tam, kde přinese skutečný přínos.
-
-Například:
-
-* výpočetně náročné AI modely,
-* veřejné API,
-* webová aplikace,
-* CDN pro fotografie,
-* zálohování,
-* distribuovaný harvest.
-
-Tím zůstává architektura flexibilní a současně ekonomicky efektivní.
+Pokud je identity mapping ověřen, další běhy pipeline jej musí respektovat.
 
 ---
 
-# 16. Architektonické principy, které se nebudou měnit
 
-Během vývoje může dojít ke změně použitých technologií, databázových systémů nebo jednotlivých providerů.
+## 16.99 Závěr kapitoly
 
-Existuje však několik principů, které tvoří samotnou podstatu MatchMatrix a které zůstanou zachovány bez ohledu na další technologický vývoj.
+Shrnutí kapitoly: Kapitola vymezila oblast „16. Harvest, parser a merge pipeline“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „17. Provozní architektura PC1 / PC2“, která rozvíjí další část řízeného dokumentu.
 
-Mezi tyto principy patří zejména:
+# 17. Provozní architektura PC1 / PC2
 
-**Oddělení odpovědností**
+## 17.1 PC1
 
-Každá část systému řeší pouze jednu oblast.
+PC1 je hlavní ovládací a vývojové pracoviště.
 
----
+Je určeno zejména pro:
 
-**Víceproviderová architektura**
+- vývoj,
+- návrh SQL,
+- řízení dokumentace,
+- práci s panelem,
+- správu Git repozitáře,
+- kontrolu výsledků,
+- spouštění ovládacích kroků.
 
-Žádný provider není nenahraditelný.
+## 17.2 PC2
 
----
+PC2 je hlavní databázový a harvest uzel.
 
-**Canonical Entity Model**
+Je určeno zejména pro:
 
-Každá skutečná entita existuje v databázi pouze jednou.
+- PostgreSQL,
+- dlouhodobý harvest,
+- ingest cykly,
+- náročné zpracování,
+- workery,
+- provozní automatizaci.
 
----
+## 17.3 Hostitelsky nezávislý panel
 
-**Vícevrstvá databázová architektura**
+Q3 panel má fungovat na PC1 i PC2.
 
-Data vždy procházejí definovaným životním cyklem.
+Panel:
 
----
+- nesmí být závislý na jedné pevné hostitelské cestě,
+- musí rozpoznat projektový root,
+- při práci z PC1 používá bezpečný přístup k souborům na PC2,
+- databázové kroky na PC2 spouští proti lokální databázi PC2,
+- používá české uživatelské popisky,
+- zachovává technické identifikátory v původním tvaru.
 
-**Governance First**
+## 17.4 Síťová hranice
 
-Každá nová část systému vzniká současně s pravidly její správy.
+Architektura musí rozlišovat:
 
----
+- lokální cestu,
+- UNC cestu,
+- databázové připojení,
+- vzdálené spuštění,
+- hostitelský počítač,
+- cílový počítač.
 
-**Automation First**
-
-Opakující se činnosti mají být automatizovány.
-
----
-
-**Documentation First**
-
-Každé významné rozhodnutí musí být zdokumentováno.
-
----
-
-Právě tyto principy tvoří dlouhodobou identitu projektu.
-
----
-
-# 17. Architektura jako konkurenční výhoda
-
-Ve světě sportovních databází bývá hlavní pozornost věnována množství dat.
-
-MatchMatrix se vydává jinou cestou.
-
-Jeho hlavní konkurenční výhodou nebude pouze rozsah databáze.
-
-Tou největší hodnotou bude architektura.
-
-Díky ní bude možné:
-
-* bezpečně připojovat nové providery,
-* rozšiřovat nové sporty,
-* vytvářet nové analytické vrstvy,
-* přidávat nové AI modely,
-* budovat komunitní funkce,
-* rozšiřovat databázi bez ztráty kvality.
-
-Architektura se tak stává nejdůležitější investicí celého projektu.
-
-Data lze stáhnout znovu.
-
-Dobře navrženou architekturu je možné rozvíjet desítky let.
+Pevně zapsané cesty do jednoho počítače jsou nepřípustné pro nové přenositelné nástroje.
 
 ---
 
-# 18. Závěr dokumentu
 
-Dokument **MATCHMATRIX ARCHITECTURE** popisuje technický základ celé platformy.
+## 17.99 Závěr kapitoly
 
-Ukazuje, že MatchMatrix není pouze databází sportovních výsledků ani souborem harvest skriptů.
+Shrnutí kapitoly: Kapitola vymezila oblast „17. Provozní architektura PC1 / PC2“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „18. Automatizace, audit a bezpečné změny“, která rozvíjí další část řízeného dokumentu.
 
-Jedná se o komplexní datovou platformu, jejíž jednotlivé části byly navrženy jako dlouhodobě spolupracující celek.
+# 18. Automatizace, audit a bezpečné změny
 
-Architektura vznikala postupně.
+## 18.1 Skript jako opakovatelný důkaz
 
-Každé významné rozhodnutí bylo výsledkem praktických zkušeností získaných při budování databáze, vývoji harvest pipeline, řešení duplicit, návrhu governance i postupném rozšiřování jednotlivých vrstev systému.
+Významná databázová změna musí existovat jako skript.
 
-Díky tomu nevznikla teoretická architektura.
+Skript musí obsahovat:
 
-Vznikla architektura ověřená každodenním používáním.
+- účel,
+- rozsah,
+- očekávaný počet,
+- bezpečnostní guard,
+- režim,
+- výstupy,
+- kontrolu výsledku.
 
-Právě tato zkušenost představuje jednu z největších hodnot projektu MatchMatrix.
+## 18.2 Režimy
 
-Budoucí vývoj platformy bude samozřejmě pokračovat.
+Doporučené režimy:
 
-Budou vznikat nové moduly, nové vrstvy i nové technologie.
+- `READ_ONLY`,
+- `VALIDATE_ONLY`,
+- `APPLY`.
 
-Základní architektonické principy však zůstanou zachovány.
+`VALIDATE_ONLY` musí provést skutečnou logiku uvnitř transakce a následně rollback. Není to pouze SELECT bez ověření změny.
 
-Budou představovat stabilní základ, na kterém bude možné budovat další generace systému.
+## 18.3 Lock a cizí klíče
+
+Při rizikové canonicalizaci se podle potřeby používají:
+
+- zámky cílových tabulek,
+- kontrola cizích klíčů,
+- kontrola počtů před a po,
+- kontrola semantic duplicit,
+- kontrola downstream tabulek.
+
+## 18.4 A33
+
+A33 je read-only audit struktury databáze.
+
+Jeho role:
+
+- zdokumentovat skutečná schémata,
+- objekty,
+- sloupce,
+- omezení,
+- indexy,
+- rutiny,
+- triggery,
+- závislosti,
+- velikosti,
+- varování.
+
+A33 nemění databázi.
 
 ---
 
-# Stav dokumentu
 
-**Dokument:** MM-DOC-003 – MATCHMATRIX ARCHITECTURE
+## 18.99 Závěr kapitoly
 
-**Verze:** 0.9 – První kompletní pracovní návrh
+Shrnutí kapitoly: Kapitola vymezila oblast „18. Automatizace, audit a bezpečné změny“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „19. Dokumentační a AI kontextová architektura“, která rozvíjí další část řízeného dokumentu.
 
-**Stav:** Připraven k první odborné revizi
+# 19. Dokumentační a AI kontextová architektura
+
+## 19.1 Dokumentace jako systémová vrstva
+
+Dokumentace není vedlejší textový výstup.
+
+Je to systém řízení znalostí propojený s:
+
+- repozitářem,
+- databází,
+- Git historií,
+- skripty,
+- audity,
+- denními zápisy,
+- AI Context,
+- Project Snapshot.
+
+## 19.2 Q3 workflow
+
+Dokumentační workflow používá čtyři fáze:
+
+1. vybrat a analyzovat,
+2. opravit a zkontrolovat,
+3. vytvořit a schválit,
+4. publikovat.
+
+Hlavní nástroje:
+
+- A17 – audit standardu,
+- A18 – standardizační návrh,
+- A19 – kontrola mapování,
+- A20 – builder,
+- A24 – import do dokumentační databáze.
+
+## 19.3 Jediný aktivní soubor
+
+Pro každý dokument existuje jeden aktivní soubor se stabilním názvem.
+
+Nová verze:
+
+- nepřidává verzi do aktivního názvu,
+- mění číslo verze uvnitř dokumentu,
+- doplňuje historii verzí,
+- archivuje předchozí milestone nebo REVIEW kopii,
+- zachovává stabilní Document ID.
+
+## 19.4 Historie chatů
+
+Historie chatů je důkazním zdrojem a pracovní pamětí.
+
+Informace z chatů se do aktivní dokumentace přenášejí pouze po ověření proti:
+
+- repozitáři,
+- databázi,
+- auditům,
+- aktuálním dokumentům,
+- pozdějším rozhodnutím.
+
+Novější ověřený Project Snapshot má přednost před starším denním zápisem nebo starším dokumentem NAVÁZÁNÍ.
+
+## 19.5 Povinné kontextové sekce
+
+Podle `MM-STD-009` má dokument podporovat:
+
+- AI CONTEXT,
+- PROJECT SNAPSHOT,
+- DATABASE SNAPSHOT,
+- CURRENT STATUS,
+- OPEN QUESTIONS,
+- NEXT STEP.
+
+Tyto sekce musí být stručné, ověřitelné a nesmí nahrazovat vlastní obsah dokumentu.
 
 ---
 
-## Navazující dokument
 
-Dalším dokumentem dokumentační řady bude:
+## 19.99 Závěr kapitoly
 
-> **MM-DOC-004 – MATCHMATRIX DEVELOPMENT HANDBOOK**
+Shrnutí kapitoly: Kapitola vymezila oblast „19. Dokumentační a AI kontextová architektura“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „20. Produktové a budoucí vrstvy“, která rozvíjí další část řízeného dokumentu.
 
-Na rozdíl od předchozích dokumentů nebude zaměřen na strategii ani architekturu. Bude představovat praktickou příručku pro vývoj MatchMatrix. Bude vycházet přímo z našich skutečných standardů: číslování skriptů, struktury složek, pravidel pro SQL, Python, PowerShell, Docker, DBeaver, Visual Studio, OPS Panel, dokumentaci i každodenní pracovní postupy.
+# 20. Produktové a budoucí vrstvy
+
+Budoucí rozvoj architektury zahrnuje:
+
+- webovou platformu,
+- veřejné a partnerské API,
+- mobilní aplikaci,
+- analytické služby,
+- AI asistenty,
+- predikční služby,
+- Ticket Engine,
+- pokročilé mediální propojení,
+- historické profily týmů, hráčů a soutěží,
+- automatizovaný Documentation Management System,
+- škálovatelný harvest a další výpočetní uzly.
+
+Cloud není samostatným cílem.
+
+Přechod do cloudu má smysl pouze tehdy, když:
+
+- zvyšuje spolehlivost,
+- umožňuje škálování,
+- zlepšuje dostupnost,
+- snižuje provozní riziko,
+- odpovídá obchodnímu modelu.
+
+Architektura musí zůstat přenositelná a nesmí být zbytečně uzamčena na jednoho poskytovatele infrastruktury.
 
 ---
 
-### Poznámka autora
 
-Od tohoto dokumentu dál se dokumentace začne ještě více opírat o skutečnou historii projektu. Development Handbook nebude obecná vývojářská příručka – bude popisovat přesně způsob práce, který jsme během vývoje MatchMatrix společně vytvořili a který používáme každý den. Právě zde se začnou promítat konkrétní standardy projektu, které dělají MatchMatrix jedinečným.
+## 20.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „20. Produktové a budoucí vrstvy“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „21. Aktuální stav architektury“, která rozvíjí další část řízeného dokumentu.
+
+# 21. Aktuální stav architektury
+
+## 21.1 Stav hlavních oblastí
+
+| Oblast | Stav |
+|---|---|
+| PostgreSQL databáze | ACTIVE |
+| Staging a ingest | ACTIVE DEVELOPMENT |
+| Canonical public vrstva | ACTIVE |
+| Provider mapping | ACTIVE |
+| `match_provider_map` | IMPLEMENTED |
+| Governance | ACTIVE |
+| OPS a audity | ACTIVE DEVELOPMENT |
+| Dokumentační databáze | ACTIVE |
+| Q3 dokumentační workflow | IMPLEMENTED / rozvíjeno |
+| People Layer | PARTIAL |
+| Media Layer | PARTIAL |
+| Odds Layer | PARTIAL |
+| Ratingy a predikce | PARTIAL |
+| Ticket Engine | DESIGN / DEVELOPMENT |
+| Web a API produkty | DESIGN / DEVELOPMENT |
+
+## 21.2 Aktuální technické priority
+
+1. Dokončit bezpečný APPLY přesně 110 belgických zápasů, pokud bude navázáno na již úspěšný `VALIDATE_ONLY`.
+2. Provést samostatný post-commit READ ONLY audit.
+3. Zachovat 121 zbývajících legacy případů mimo tento APPLY.
+4. Vyřešit otevřené historické identity Lokeren a Mouscron.
+5. Samostatně analyzovat globální rating orphan problém.
+6. Aktualizovat dokumentaci a dokumentační databázi.
+7. Pokračovat systematicky sport po sportu a vrstvu po vrstvě.
+
+---
 
 
+## 21.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „21. Aktuální stav architektury“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „22. Otevřené otázky a další krok“, která rozvíjí další část řízeného dokumentu.
+
+# 22. Otevřené otázky a další krok
+
+## 22.1 Otevřené otázky
+
+- přesný dlouhodobý model historických týmových nástupnictví,
+- pravidla pro právní a sportovní kontinuitu klubů,
+- úplné odstranění starých providerově specifických struktur,
+- standardizace všech sportů na jednotné pipeline,
+- cílová architektura ratingů a odstranění orphan záznamů,
+- budoucí škálování harvestu,
+- přesné produktové rozhraní API a Ticket Engine,
+- automatická synchronizace Project Snapshotu,
+- propojení dokumentace, Git historie a databázových objektů.
+
+## 22.2 Nejbližší další krok
+
+Nejbližším architektonickým krokem je bezpečně dokončit a zdokumentovat přesně vymezenou belgickou migraci 110 zápasů:
+
+```text
+VALIDATE_ONLY již ověřeno
+→ APPLY přesně 110
+→ post-commit READ ONLY audit
+→ aktualizace Project Snapshot
+→ dokumentační import
+```
+
+---
+
+
+## 22.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „22. Otevřené otázky a další krok“ v rámci dokumentu MM-DOC-300 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost směřuje k závěru dokumentu a k navazujícím kontextovým, auditním a publikačním krokům.
+
+# Závěr dokumentu
+
+Dokument MM-DOC-300 uzavírá řízený popis oblasti architektury MatchMatrix. Shrnuje pravidla, ověřený stav, odpovědnosti a vazby, které jsou potřebné pro další bezpečnou práci v projektu MatchMatrix. Přínos dokumentu spočívá v jednotném a dohledatelném zachycení této oblasti pro vývoj, audit, rozhodování a dlouhodobou správu. Návaznost pokračuje kontextovými sekcemi AI CONTEXT, PROJECT SNAPSHOT, CURRENT STATUS, OPEN QUESTIONS a NEXT STEP.
+
+# AI CONTEXT
+
+**Role dokumentu:** Referenční technický popis architektury MatchMatrix.
+
+**Hlavní princip:** Providerová data procházejí řízeným životním cyklem od vstupu přes staging, normalizaci, mapping a canonicalizaci do `public` a downstream vrstev.
+
+**Stabilní identita:** Document ID je `MM-DOC-300`. Historické pracovní označení `MM-DOC-003` se již nepoužívá jako aktivní identita.
+
+**Databázová schémata:** `staging`, `public`, `ops`, `documentation`, `work`.
+
+**Bezpečné změny:** READ ONLY → VALIDATE_ONLY → APPLY → post-commit audit.
+
+**Důležitá hranice:** 1 053 belgických zápasů již bylo aplikováno; dalších 110 bylo pouze validováno a nesmí se zaměnit s dokončeným APPLY.
+
+---
+
+# PROJECT SNAPSHOT
+
+- MatchMatrix je multisportovní sportovní datová a znalostní platforma.
+- PC1 slouží primárně pro vývoj a řízení.
+- PC2 slouží primárně pro databázi a harvest.
+- Q3 panel má být hostitelsky nezávislý.
+- Aktivní dokumentace používá stabilní názvy souborů bez verze v názvu.
+- Historie chatů byla převedena do extrakční matice a slouží jako ověřovaný důkazní zdroj.
+- Fotbal je referenční sport; házená je pilotní sport pro další rozvoj.
+- Historické pokrytí se plánuje od vzniku soutěže nebo od nejstaršího legálně, technicky a spolehlivě dostupného období.
+
+---
+
+# DATABASE SNAPSHOT
+
+| Ukazatel | Hodnota |
+|---|---:|
+| Schémata | 5 |
+| Objekty | 1 117 |
+| Tabulky | 284 |
+| Pohledy | 596 |
+| Sloupce | 12 274 |
+| Omezení | 615 |
+| Indexy | 862 |
+| Rutiny | 96 |
+| Triggery | 24 |
+| Závislosti | 753 |
+| Velikost | 741,67 MB |
+| `public.matches` | 120 981 |
+| `public.match_provider_map` | 121 908 |
+| Dokumenty v dokumentační DB | 354 |
+| Verze dokumentů | 360 |
+| Sekce | 7 075 |
+| Vazby | 495 |
+| Importní běhy | 48 |
+
+---
+
+# CURRENT STATUS
+
+- Architecture: ACTIVE DEVELOPMENT
+- Database Core: ACTIVE
+- Provider Mapping: ACTIVE
+- Belgium Historical Canonicalization: PARTIALLY COMPLETE
+- Documentation Architecture: ACTIVE
+- AI Context and Project Snapshot: ACTIVE / MANUAL WITH FUTURE AUTOMATION
+- Web/API Product Layer: DESIGN / DEVELOPMENT
+- Cloud Architecture: FUTURE
+
+---
+
+# OPEN QUESTIONS
+
+- Jak přesně modelovat historické nástupnictví klubů?
+- Jak odstranit 78 794 orphan rating záznamů bez narušení správných ratingů?
+- Kdy a jak dokončit APPLY 110 validovaných belgických zápasů?
+- Jak sjednotit všechny sportovní pipeline bez ztráty sportovně specifických dat?
+- Jak automatizovat synchronizaci dokumentace, databáze a Git historie?
+
+---
+
+# NEXT STEP
+
+Provést pouze přesně ohraničený APPLY 110 již validovaných belgických historických zápasů, následně samostatný post-commit READ ONLY audit a aktualizaci dokumentace.

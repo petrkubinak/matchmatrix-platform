@@ -1,4 +1,4 @@
-# MM-DOC-900
+# MM-DOC-005
 
 # MATCHMATRIX DENNÍ ZÁPISY (TECH)
 
@@ -9,14 +9,14 @@
 | Položka              | Hodnota                                                    |
 | :------------------- | :--------------------------------------------------------- |
 | Název dokumentu      | MATCHMATRIX DENNÍ ZÁPISY                                   |
-| Označení             | MM-DOC-900                                                 |
+| Označení             | MM-DOC-005                                                 |
 | Edice                | TECH                                                       |
-| Verze                | 1.1                                       |
-| Stav                 | REVIEW                                               |
+| Verze                | 1.0 (Pracovní verze)                                       |
+| Stav                 | Rozpracováno                                               |
 | Autor projektu       | Petr                                                       |
 | Technická spolupráce | OpenAI ChatGPT                                             |
 | Primární formát      | Markdown (.md)                                             |
-| Umístění             | `docs/09_HISTORY/MM-DOC-900_MATCHMATRIX_DENNÍ_ZÁPISY_TECH.md` |
+| Umístění             | `docs/05_DENNI_ZAPISY/05_MATCHMATRIX_DENNI_ZAPISY_TECH.md` |
 
 ---
 
@@ -37,24 +37,6 @@
 7. Využití denních zápisů
 8. Navazující dokumenty
 9. Závěr
-
----
-
----
-
-# 0. Smysl denních zápisů
-
-Denní zápisy nejsou cílem dokumentace.
-
-Jsou pracovním nástrojem, který chrání kontinuitu vývoje MatchMatrix.
-
-Jejich hlavní hodnotou je schopnost přesně zachytit, co bylo skutečně provedeno, proč se tak stalo, jaký byl výsledek a čím má projekt pokračovat.
-
-V projektu MatchMatrix mají denní zápisy zvláštní význam, protože umožňují bezpečné navazování práce mezi jednotlivými dny, pracovními etapami i novými AI chaty.
-
-Denní zápisy tak nejsou pouze archivem.
-
-Jsou živou pracovní pamětí projektu, která podporuje vývoj databáze, webu, aplikací, AI služeb i celé společnosti MatchMatrix.
 
 ---
 
@@ -377,7 +359,7 @@ Představují jednu z částí dokumentačního systému MatchMatrix.
 
 Jsou propojeny zejména s následujícími dokumenty:
 
-**MM-DOC-100 – MATCHMATRIX MASTER**
+**MM-DOC-001 – MATCHMATRIX MASTER**
 
 Obsahuje dlouhodobou strategii projektu.
 
@@ -385,13 +367,13 @@ Denní zápisy zachycují její praktickou realizaci.
 
 ---
 
-**MM-DOC-200 – MATCHMATRIX GOVERNANCE**
+**MM-DOC-002 – MATCHMATRIX GOVERNANCE**
 
 Pokud během dne vznikne nové pravidlo nebo governance rozhodnutí, mělo by být zaznamenáno v denním zápisu a následně promítnuto do dokumentu Governance.
 
 ---
 
-**MM-DOC-300 – MATCHMATRIX ARCHITECTURE**
+**MM-DOC-003 – MATCHMATRIX ARCHITECTURE**
 
 Architektonické změny jsou nejprve popsány v denním zápisu.
 
@@ -399,7 +381,7 @@ Po jejich ověření jsou začleněny do architektonické dokumentace.
 
 ---
 
-**MM-DOC-901 – MATCHMATRIX NAVÁZÁNÍ**
+**MM-DOC-006 – MATCHMATRIX NAVÁZÁNÍ**
 
 Tento dokument představuje souhrn aktuálního stavu projektu.
 
@@ -407,7 +389,7 @@ Vzniká na základě informací z denních zápisů.
 
 ---
 
-**MM-DOC-902 – MATCHMATRIX CHANGELOG**
+**MM-DOC-007 – MATCHMATRIX CHANGELOG**
 
 Obsahuje pouze významné změny.
 
@@ -445,13 +427,13 @@ Díky tomu lze kdykoliv bezpečně navázat na předchozí etapy vývoje.
 
 # Stav dokumentu
 
-**Dokument:** MM-DOC-900 – MATCHMATRIX DENNÍ ZÁPISY
+**Dokument:** MM-DOC-005 – MATCHMATRIX DENNÍ ZÁPISY
 
 **Edice:** TECH
 
-**Verze:** 1.1 – REVIEW
+**Verze:** 1.0 – První pracovní verze
 
-**Stav:** REVIEW
+**Stav:** Připraven k první revizi
 
 ---
 
@@ -459,7 +441,7 @@ Díky tomu lze kdykoliv bezpečně navázat na předchozí etapy vývoje.
 
 Dalším dokumentem dokumentační řady bude:
 
-> **MM-DOC-901 – MATCHMATRIX NAVÁZÁNÍ (TECH)**
+> **MM-DOC-006 – MATCHMATRIX NAVÁZÁNÍ (TECH)**
 
 Tento dokument bude definovat způsob předávání aktuálního stavu projektu mezi jednotlivými pracovními etapami. Popíše strukturu navazovacích dokumentů, pravidla jejich aktualizace a doporučený obsah tak, aby bylo možné kdykoliv plynule pokračovat ve vývoji MatchMatrix bez ztráty kontextu.
 
@@ -467,84 +449,13 @@ Tento dokument bude definovat způsob předávání aktuálního stavu projektu 
 
 ### Poznámka pro TECH V2
 
-Po dokončení první revize celé dokumentační řady (REVIEW) bude dokument ve druhé generaci (TECH V2) rozšířen o praktické nástroje podporující každodenní řízení projektu MatchMatrix.
+Při druhé revizi dokumentace doplníme do tohoto dokumentu:
 
-Budou doplněny zejména:
+* vzorový denní zápis,
+* doporučenou šablonu,
+* systém označování zápisů,
+* vazby na Git commity,
+* vazby na milestone projektu,
+* doporučení pro automatickou archivaci.
 
-* standardní šablona denního zápisu,
-* vzorové denní zápisy z reálného vývoje projektu MatchMatrix,
-* jednotný systém označování denních zápisů,
-* klasifikace zápisů podle oblasti projektu (Database, OPS, AI, Documentation, Web, Mobile, Business apod.),
-* vazby na Git Commity,
-* vazby na SQL skripty, Python workery a PowerShell skripty,
-* vazby na databázové objekty (tabulky, pohledy, funkce, procedury),
-* vazby na milestone projektu a roadmapu,
-* propojení s dokumenty:
-  * **MM-DOC-901 – MATCHMATRIX NAVÁZÁNÍ**,
-  * **MM-DOC-902 – MATCHMATRIX CHANGELOG**,
-  * **MM-DOC-903 – MATCHMATRIX ARCHITECTURAL DECISIONS**,
-* doporučení pro automatickou archivaci denních zápisů,
-* doporučení pro automatické vytváření souhrnů pomocí AI,
-* propojení s Documentation Management System (DMS),
-* automatické generování **Project Snapshot**,
-* automatické generování **AI Context** pro navázání práce v novém chatu,
-* doporučení pro dlouhodobou správu znalostní báze projektu.
-
-Cílem druhé generace dokumentace nebude pouze evidence provedené práce, ale vytvoření jednotného znalostního systému propojujícího dokumentaci, databázi, zdrojové kódy, Git repozitář, AI asistenty a Documentation Management System do jednoho uceleného ekosystému.
-
-> **Poznámka:** Dokument TECH V2 bude vytvářen až po dokončení REVIEW celé dokumentační řady MM-DOC-000 až MM-DOC-903, aby vycházel z jednotných standardů a ověřených zkušeností získaných během vývoje platformy MatchMatrix.
-
-
----
-
-# AI CONTEXT
-
-**Role dokumentu:** Standard pro vedení denních pracovních zápisů projektu MatchMatrix.
-
-**Účel pro AI:** Umožnit rychlé pochopení posledního pracovního stavu projektu, provedených změn, otevřených úkolů a doporučeného dalšího kroku.
-
-**Navazuje na:** MM-DOC-000, MM-DOC-100, MM-DOC-200, MM-DOC-300, MM-DOC-800.
-
-**Související dokumenty:** MM-DOC-901, MM-DOC-902, MM-DOC-903, MM-STD-009.
-
----
-
-# PROJECT SNAPSHOT
-
-*Tato sekce je připravena pro budoucí automatické generování z Documentation Management System.*
-
-Denní zápisy budou v budoucnu propojeny s databází dokumentace, Git historií, databázovými objekty, skripty, pracovními úlohami a stavem jednotlivých částí platformy.
-
----
-
-# CURRENT STATUS
-
-| Oblast | Stav |
-|--------|------|
-| Denní zápisy | REVIEW |
-| Navázání | REVIEW |
-| Changelog | REVIEW |
-| Architectural Decisions | REVIEW |
-| AI Context | DEVELOPMENT |
-| Documentation Management System | PLANNED |
-
----
-
-# OPEN QUESTIONS
-
-* Finální šablona denního zápisu.
-* Systém označování jednotlivých denních zápisů.
-* Vazba denních zápisů na Git Commity.
-* Vazba denních zápisů na SQL skripty a workery.
-* Budoucí automatická archivace.
-* Automatické generování souhrnů pomocí AI.
-
----
-
-# NEXT STEP
-
-Navazujícím dokumentem je:
-
-> **MM-DOC-901 – MATCHMATRIX NAVÁZÁNÍ (TECH)**
-
-Tento dokument definuje způsob předávání aktuálního stavu projektu mezi jednotlivými pracovními etapami a navazuje přímo na denní zápisy.
+Tyto části budou doplněny až po dokončení celé série dokumentů **MM-DOC-000 až MM-DOC-008**, aby bylo možné sjednotit standard napříč celou dokumentací.

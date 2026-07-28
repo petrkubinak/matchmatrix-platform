@@ -11,9 +11,9 @@
 | Dokument | MM-STD-1000 |
 | Název | Index standardů MatchMatrix |
 | Edice | MM-STD |
-| Verze | 1.2 |
+| Verze | 1.1 |
 | Stav | REVIEW |
-| Datum aktualizace | 2026-07-28 |
+| Datum aktualizace | 2026-07-27 |
 | Autor projektu | Petr |
 | Technická spolupráce | OpenAI ChatGPT |
 | Primární formát | Markdown (`.md`) |
@@ -27,11 +27,10 @@
 |---:|---|---|---|
 | 1.0 | 2026 | ACTIVE | První vydání indexu se standardy MM-STD-001 až MM-STD-005. |
 | 1.1 | 2026-07-27 | REVIEW | Doplněny standardy MM-STD-006 až MM-STD-009, aktuální verze, stavy, aktivní soubory, odpovědnosti, vzájemné vazby a pravidla správy indexu. |
-| 1.2 | 2026-07-28 | REVIEW | Uzavřen konflikt referenčních slovníků, potvrzena jediná aktivní verze MM-REF-001 v1.7 a úplná synchronizace MM-REF-002 v1.3 v rozsahu 263 / 263 pojmů; doplněn explicitní úvod a závěry všech hlavních kapitol podle A17. |
 
 ---
 
-## Úvod
+## Účel dokumentu
 
 Tento dokument představuje centrální registr standardů dokumentačního systému MatchMatrix.
 
@@ -107,10 +106,6 @@ Soubor s prefixem `MM-STD`, který není evidován v tomto indexu, musí být p�
 
 ---
 
-## 1.7 Závěr kapitoly
-
-Kapitola stanovila základní pravidla centrálního indexu, zejména stabilní identitu standardu, jediný aktivní soubor a povinnost evidovat skutečný stav. Přínos spočívá v odstranění souběžných aktivních variant a v jednoznačné správě verzí. Návaznost pokračuje přehledem všech evidovaných standardů.
-
 # 2. Přehled standardů
 
 | Dokument | Název | Aktuální verze | Stav | Hlavní odpovědnost |
@@ -124,13 +119,9 @@ Kapitola stanovila základní pravidla centrálního indexu, zejména stabilní 
 | `MM-STD-007` | Identifikace a číslování dokumentů MatchMatrix | 1.1 | REVIEW | Document ID, registry prefixů, číselné bloky, aliasy a kolize. |
 | `MM-STD-008` | Správa terminologie a referenčního slovníku | 1.0 | REVIEW | Životní cyklus termínů a řízená aktualizace MM-REF-001. |
 | `MM-STD-009` | AI Context a Project Snapshot | 1.0 | REVIEW | Povinné kontextové sekce pro předávání stavu lidem a AI. |
-| `MM-STD-1000` | Index standardů MatchMatrix | 1.2 | REVIEW | Centrální registr standardů, jejich verzí, stavů a vztahů. |
+| `MM-STD-1000` | Index standardů MatchMatrix | 1.1 | REVIEW | Centrální registr standardů, jejich verzí, stavů a vztahů. |
 
 ---
-
-## 2.1 Závěr kapitoly
-
-Kapitola soustředila všechny řízené standardy do jednoho přehledu verzí, stavů a odpovědností. Přínos spočívá v rychlém ověření, který standard je aktuální a jakou oblast řídí. Návaznost pokračuje určením jejich kanonických aktivních souborů.
 
 # 3. Kanonické aktivní soubory
 
@@ -148,10 +139,6 @@ Kapitola soustředila všechny řízené standardy do jednoho přehledu verzí, 
 | `MM-STD-1000` | `docs/10_REFERENCE/MM-STD-1000_INDEX_STANDARDŮ_MATCHMATRIX.md` |
 
 ---
-
-## 3.1 Závěr kapitoly
-
-Kapitola určila stabilní aktivní cesty ke všem standardům a oddělila je od archivních kopií. Přínos spočívá v jednoznačném dohledání referenčního zdroje bez závislosti na čísle verze v názvu souboru. Návaznost pokračuje podrobným vymezením odpovědností jednotlivých standardů.
 
 # 4. Odpovědnosti standardů
 
@@ -291,10 +278,6 @@ Eviduje:
 
 ---
 
-## 4.11 Závěr kapitoly
-
-Kapitola vymezila odpovědnost každého standardu a omezila překrývání jejich působnosti. Přínos spočívá v jasném určení, podle kterého dokumentu se má konkrétní otázka řídit. Návaznost pokračuje pravidly hierarchie a řešení případných konfliktů.
-
 # 5. Hierarchie a řešení konfliktů
 
 Standardy nemají obecnou absolutní hierarchii pro všechny otázky.
@@ -369,10 +352,6 @@ Rozpor se nesmí řešit tichým ignorováním jednoho dokumentu.
 
 ---
 
-## 5.8 Závěr kapitoly
-
-Kapitola stanovila pořadí rozhodování při střetu pravidel životního cyklu, názvosloví, identifikace, terminologie, AI kontextu a vizuální úpravy. Přínos spočívá v předvídatelném a dohledatelném řešení rozporů. Návaznost pokračuje mapou vzájemných vztahů mezi standardy.
-
 # 6. Vztahy mezi standardy
 
 ```text
@@ -398,20 +377,16 @@ MM-STD-1000 ─ centrální registr všech standardů
 
 ---
 
-## 6.1 Závěr kapitoly
-
-Kapitola popsala řízené vazby mezi standardy a jejich společné použití v dokumentačním workflow. Přínos spočívá v tom, že změnu jednoho standardu lze posoudit i podle dopadu na ostatní dokumenty. Návaznost pokračuje ověřeným aktuálním stavem standardizace.
-
 # 7. Aktuální stav standardizace
 
 ## 7.1 Aktualizované standardy
 
-K 2026-07-28 byly podle ověřeného dokumentačního workflow aktualizovány:
+K 2026-07-27 byly podle ověřeného dokumentačního workflow aktualizovány:
 
 - `MM-STD-003` na verzi 1.2,
 - `MM-STD-004` na verzi 1.1,
 - `MM-STD-007` na verzi 1.1,
-- `MM-STD-1000` na verzi 1.2.
+- `MM-STD-1000` na verzi 1.1.
 
 ## 7.2 Standardy připravené k budoucímu rozšíření
 
@@ -428,9 +403,11 @@ To neznamená, že jsou neplatné.
 
 Znamená to, že jejich současný rozsah je stručší a má být později porovnán s novými hlavními dokumenty, skutečným Q3 workflow a dokumentační databází.
 
-## 7.3 Stav referenčních slovníků
+## 7.3 Související otevřený konflikt
 
-Dřívější konflikt více aktivně vypadajících variant `MM-REF-001` byl uzavřen dne 2026-07-28 podle pravidel:
+`MM-REF-001` existuje ve více aktivně vypadajících variantách.
+
+Tento konflikt je nutné vyřešit podle:
 
 - `MM-STD-003`,
 - `MM-STD-004`,
@@ -438,29 +415,7 @@ Dřívější konflikt více aktivně vypadajících variant `MM-REF-001` byl uz
 - `MM-STD-007`,
 - `MM-STD-008`.
 
-Aktivní referenční soustava nyní tvoří:
-
-| Dokument | Verze | Stav | Aktivní odpovědnost |
-|---|---:|---|---|
-| `MM-REF-001` | 1.7 | REVIEW | Překladový slovník cizích a technických pojmů. |
-| `MM-REF-002` | 1.3 | REVIEW | Podrobné výklady, zdrojové dokumenty, cílové kapitoly a panelová navigace. |
-
-Ověřený stav synchronizace:
-
-```text
-MM-REF-001 pojmů:   263
-MM-REF-002 výkladů: 263
-Chybí:                0
-Navíc:                0
-```
-
-Předchozí verze byly přesunuty do řízeného archivu. V aktivních složkách zůstává pro každý Document ID jediný stabilní soubor.
-
 ---
-
-## 7.4 Závěr kapitoly
-
-Kapitola zaznamenala aktuální verze standardů a uzavření dřívějšího konfliktu referenčních slovníků. Přínos spočívá v potvrzené synchronizaci MM-REF-001 a MM-REF-002 v rozsahu 263 z 263 pojmů. Návaznost pokračuje postupem pro přidávání nových standardů.
 
 # 8. Přidání nového standardu
 
@@ -500,10 +455,6 @@ Při vzniku nového standardu se v tomto dokumentu doplní:
 
 ---
 
-## 8.3 Závěr kapitoly
-
-Kapitola stanovila bezpečný postup přidělení čísla, vytvoření souboru a zápisu nového standardu do indexu. Přínos spočívá v prevenci kolizí Document ID a neřízených dokumentů mimo centrální registr. Návaznost pokračuje pravidly změny verze již existujícího standardu.
-
 # 9. Změna verze standardu
 
 Při změně standardu se:
@@ -518,10 +469,6 @@ Při změně standardu se:
 8. provede se audit a publikace.
 
 ---
-
-## 9.1 Závěr kapitoly
-
-Kapitola vymezila, jak se mění verze standardu při zachování jeho stabilního Document ID a aktivního názvu souboru. Přínos spočívá v úplné historii změn bez vytváření paralelních identit. Návaznost pokračuje pravidelnou kontrolou úplnosti a správnosti indexu.
 
 # 10. Kontrola indexu
 
@@ -539,10 +486,6 @@ Index je správný, pokud:
 - [ ] index je aktualizován při každé významné změně standardu.
 
 ---
-
-## 10.1 Závěr kapitoly
-
-Kapitola určila kontroly verzí, stavů, cest, vazeb a archivních kopií vedených v indexu. Přínos spočívá ve včasném odhalení neaktuálních údajů a více aktivních variant téhož standardu. Návaznost pokračuje synchronizací řízené dokumentace s dokumentační databází.
 
 # 11. Dokumentační databáze
 
@@ -572,10 +515,6 @@ Import se řídí Q3 workflow a používá zejména:
 
 ---
 
-## 11.1 Závěr kapitoly
-
-Kapitola popsala vztah indexu k dokumentační databázi a k bezpečnému importnímu workflow A17 až A24. Přínos spočívá v propojení souborové dokumentace s databázovou evidencí verzí, sekcí a vazeb. Návaznost pokračuje celkovým závěrem standardu.
-
 # 12. Závěr
 
 Dokumentační standardy MatchMatrix tvoří vzájemně propojený systém.
@@ -592,10 +531,6 @@ Každý standard musí mít:
 `MM-STD-1000` je centrálním rozcestníkem tohoto systému a musí být aktualizován při každé významné změně sady standardů.
 
 ---
-
-## 12.1 Závěr kapitoly
-
-Kapitola uzavřela pravidla centrálního indexu a potvrdila jeho roli jediného přehledu standardů MatchMatrix. Přínos spočívá v dlouhodobě udržitelné správě identit, verzí, stavů a vztahů mezi dokumenty. Návaznost směřuje k AI CONTEXT, PROJECT SNAPSHOT a následnému ověření a databázové publikaci.
 
 # AI CONTEXT
 
@@ -627,9 +562,7 @@ Kapitola uzavřela pravidla centrálního indexu a potvrdila jeho roli jediného
 - MM-STD-007 byl aktualizován na verzi 1.1.
 - Index nyní eviduje MM-STD-001 až MM-STD-009.
 - Standardy 006–009 již nejsou mimo centrální evidenci.
-- Konflikt více aktivně vypadajících variant MM-REF-001 byl uzavřen.
-- MM-REF-001 v1.7 a MM-REF-002 v1.3 jsou synchronní v rozsahu 263 / 263 pojmů.
-- Předchozí významné verze obou referenčních dokumentů jsou zachovány v řízeném archivu.
+- Otevřeným navazujícím úkolem je sjednocení aktivní verze MM-REF-001.
 
 ---
 
@@ -641,7 +574,6 @@ Kapitola uzavřela pravidla centrálního indexu a potvrdila jeho roli jediného
 - Status Tracking: ACTIVE
 - Canonical File Tracking: ACTIVE
 - Automated Index Validation: PARTIAL
-- Reference Glossary Synchronization: VERIFIED 263 / 263
 - Documentation Database Synchronization: PENDING FOR NEW VERSIONS
 
 ---
@@ -653,10 +585,10 @@ Kapitola uzavřela pravidla centrálního indexu a potvrdila jeho roli jediného
 - sjednocení MM-STD-006 a MM-STD-008 bez překryvu odpovědností,
 - rozšíření MM-STD-009 podle skutečného Q3 a NAV workflow,
 - automatické porovnání indexu s repozitářem a dokumentační databází,
-- automatická dlouhodobá kontrola synchronizace MM-REF-001 a MM-REF-002.
+- sjednocení více aktivně vypadajících variant MM-REF-001.
 
 ---
 
 # NEXT STEP
 
-Uložit verzi 1.2 pod stabilním aktivním názvem, archivovat předchozí verzi 1.1 a následně spustit A17 nad aktualizovanými standardy a referenčními dokumenty.
+Uložit tuto aktualizovanou verzi pod stabilním aktivním názvem a následně vyřešit jedinou aktivní verzi `MM-REF-001`.

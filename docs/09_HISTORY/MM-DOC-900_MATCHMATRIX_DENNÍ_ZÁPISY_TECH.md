@@ -1,462 +1,1333 @@
-# MM-DOC-005
+# MM-DOC-900
 
-# MATCHMATRIX DENNÍ ZÁPISY (TECH)
+# MATCHMATRIX DENNÍ ZÁPISY
+
+## TECH EDITION
 
 ---
 
 ## Informace o dokumentu
 
-| Položka              | Hodnota                                                    |
-| :------------------- | :--------------------------------------------------------- |
-| Název dokumentu      | MATCHMATRIX DENNÍ ZÁPISY                                   |
-| Označení             | MM-DOC-005                                                 |
-| Edice                | TECH                                                       |
-| Verze                | 1.0 (Pracovní verze)                                       |
-| Stav                 | Rozpracováno                                               |
-| Autor projektu       | Petr                                                       |
-| Technická spolupráce | OpenAI ChatGPT                                             |
-| Primární formát      | Markdown (.md)                                             |
-| Umístění             | `docs/05_DENNI_ZAPISY/05_MATCHMATRIX_DENNI_ZAPISY_TECH.md` |
+| Položka | Hodnota |
+|---|---|
+| Dokument | MM-DOC-900 |
+| Název | MatchMatrix Denní zápisy |
+| Edice | MM-DOC TECH |
+| Verze | 1.2 |
+| Stav | REVIEW |
+| Datum aktualizace | 2026-07-27 |
+| Autor projektu | Petr |
+| Technická spolupráce | OpenAI ChatGPT |
+| Primární formát | Markdown (`.md`) |
+| Aktivní soubor | `docs/09_HISTORY/MM-DOC-900_MATCHMATRIX_DENNÍ_ZÁPISY_TECH.md` |
+| Historické pracovní označení | MM-DOC-005 |
+
+---
+
+## Historie verzí
+
+| Verze | Datum | Stav | Popis |
+|---:|---|---|---|
+| 1.0 | 2026-06 | Rozpracováno | Původní pracovní verze vedená pod historickým označením MM-DOC-005. |
+| 1.1 | 2026-06-29 | REVIEW | Opravená REVIEW verze se stabilní identitou MM-DOC-900, rozšířenou strukturou a návazností na NAV dokumenty. |
+| 1.2 | 2026-07-27 | REVIEW | Aktualizace podle skutečného Q3 workflow, oficiálních šablon MM-TPL-001 a MM-TPL-002, automatického číslování, blokace duplicit, AI Context workflow a ověřené historie projektové komunikace. Doplněna formální hierarchie a závěry hlavních kapitol podle výsledku A17 ze dne 2026-07-28. |
+
+---
+
+## Úvod a účel dokumentu
+Tento dokument stanovuje závazný způsob vytváření, kontroly, schvalování, archivace a využívání denních zápisů projektu MatchMatrix.
+
+Současně vymezuje jejich vztah k:
+
+- dokumentům NAVÁZÁNÍ do nového chatu,
+- Project Snapshotu,
+- AI Contextu,
+- Git historii,
+- databázovým auditům,
+- dokumentační databázi,
+- oficiálním šablonám,
+- panelu Q3,
+- hlavním dokumentům MatchMatrix.
+
+Dokument neobsahuje jednotlivé denní zápisy. Stanovuje pravidla, podle kterých vznikají.
+
+---
+
+## Související dokumenty a šablony
+
+- `MM-DOC-000` – MatchMatrix Documentation Framework
+- `MM-DOC-100` – MatchMatrix Master
+- `MM-DOC-200` – MatchMatrix Governance
+- `MM-DOC-300` – MatchMatrix Architecture
+- `MM-DOC-800` – MatchMatrix Development Handbook
+- `MM-STD-003` – Standard životního cyklu dokumentace a verzování
+- `MM-STD-007` – Identifikace a číslování dokumentů
+- `MM-STD-009` – AI Context a Project Snapshot
+- `MM-REF-001` – Slovník pojmů MatchMatrix
+- `MM-TPL-001_SABLONA_NAVAZANI_DO_NOVEHO_CHATU.md`
+- `MM-TPL-002_SABLONA_DENNIHO_ZAPISU.md`
 
 ---
 
 # Motto
 
-> **Každý pracovní den končí zápisem. Každý nový den na něj navazuje.**
+> **Každý pracovní den končí ověřeným zápisem. Každý nový pracovní blok na něj bezpečně navazuje.**
 
 ---
 
 # Obsah
 
-1. Úvod
-2. Účel denních zápisů
+0. Smysl denních zápisů
+1. Role pracovní paměti projektu
+2. Typy historických a kontextových dokumentů
 3. Základní principy
-4. Struktura denního zápisu
-5. Pravidla zapisování
-6. Doporučený obsah
-7. Využití denních zápisů
-8. Navazující dokumenty
-9. Závěr
+4. Odpovědnost člověka a AI
+5. Kdy denní zápis vzniká
+6. Identifikace, názvy a umístění
+7. Povinná struktura denního zápisu
+8. Povinná struktura dokumentu NAVÁZÁNÍ
+9. Vytváření z průběhu komunikace
+10. Ověřování informací
+11. Q3 dokumentační workflow
+12. Pravidla obsahu
+13. Rozlišení dokončené, validované a otevřené práce
+14. Git a databázový stav
+15. Project Snapshot, Database Snapshot a AI Context
+16. Schvalování, verze a archivace
+17. Kvalitativní pravidla
+18. Vazby na hlavní dokumentaci
+19. Aktuální provozní stav
+20. Otevřené otázky a další krok
 
 ---
 
-# 1. Úvod
+# 0. Smysl denních zápisů
 
-Denní zápisy představují oficiální pracovní kroniku projektu MatchMatrix.
+Denní zápisy nejsou cílem dokumentace.
 
-Nejde o běžné poznámky ani pracovní seznam úkolů.
+Jsou pracovním nástrojem, který chrání kontinuitu vývoje MatchMatrix a umožňuje bezpečně navázat na práci po několika hodinách, dnech, týdnech nebo v novém AI chatu.
 
-Každý zápis zachycuje skutečný stav projektu v konkrétním okamžiku a umožňuje kdykoliv přesně navázat na předchozí práci.
+Jejich hlavní hodnotou je schopnost přesně zachytit:
 
-Díky tomuto systému není vývoj závislý na paměti jednotlivých účastníků projektu.
+- co bylo skutečně provedeno,
+- proč se daný krok provedl,
+- jaký byl ověřený výsledek,
+- co se nepodařilo nebo zůstalo otevřené,
+- jaká rozhodnutí byla přijata,
+- který krok má následovat,
+- co se nesmí opakovat nebo zaměnit.
 
-Veškeré důležité informace jsou průběžně zaznamenávány.
-
----
-
-# 2. Účel denních zápisů
-
-Hlavním cílem denních zápisů je zachytit vývoj projektu v průběhu času.
-
-Každý zápis by měl odpovědět na několik základních otázek.
-
-* Co bylo dnes provedeno?
-* Jaké problémy byly řešeny?
-* Jaká rozhodnutí byla přijata?
-* Jaký je aktuální stav projektu?
-* Na co bude navazovat další práce?
-
-Díky těmto informacím lze projekt kdykoliv bezpečně obnovit nebo předat jinému vývojáři.
+Denní zápis není volná poznámka. Je to řízený historický dokument.
 
 ---
 
-# 3. Filozofie denních zápisů
 
-Denní zápisy nejsou určeny pouze pro archivaci.
+## 0.99 Závěr kapitoly
 
-Jsou aktivním pracovním nástrojem.
+Shrnutí kapitoly: Kapitola vymezila oblast „0. Smysl denních zápisů“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „1. Role pracovní paměti projektu“, která rozvíjí další část řízeného dokumentu.
 
-Každý nový pracovní den začíná přečtením posledního zápisu.
+# 1. Role pracovní paměti projektu
 
-Každý pracovní den končí vytvořením nového zápisu.
+Projekt MatchMatrix obsahuje rozsáhlou databázi, stovky dokumentů, velké množství skriptů, více sportů, různé providery a dlouhé pracovní etapy.
 
-Tím vzniká nepřerušený řetězec informací, který zachycuje vývoj projektu od jeho začátku až po současnost.
+Bez řízené pracovní paměti by vznikalo riziko:
 
-Denní zápisy tvoří společně s dokumentem NAVÁZÁNÍ hlavní znalostní základnu projektu.
+- opakování již dokončených kroků,
+- zaměnění validace za trvalou změnu,
+- ztráty důvodu rozhodnutí,
+- používání zastaralých počtů,
+- spuštění nesprávného skriptu,
+- navázání na neaktuální dokument,
+- ztráty vazby mezi databází, Git historií a dokumentací.
 
----
+Pracovní paměť projektu tvoří společně:
 
-# 4. Základní principy
+1. denní zápisy,
+2. dokumenty NAVÁZÁNÍ,
+3. Project Snapshot,
+4. Database Snapshot,
+5. AI Context,
+6. aktivní hlavní dokumentace,
+7. Git historie,
+8. databázové a dokumentační audity.
 
-Při vytváření denních zápisů se dodržují následující pravidla.
-
-* Zapisují se pouze skutečně provedené práce.
-* Nevynechávají se důležitá rozhodnutí.
-* Popisují se i problémy a jejich řešení.
-* Uvádí se důvody významných změn.
-* Na konci je vždy popsán další plán práce.
-
-Zápisy mají být stručné, ale současně dostatečně podrobné, aby podle nich bylo možné pokračovat i po delší době.
-
----
-
-# Závěr první části
-
-Denní zápisy představují základní pracovní nástroj pro řízení vývoje MatchMatrix. Umožňují zachytit průběh prací, významná rozhodnutí i aktuální stav projektu a vytvářejí souvislou historii jeho vývoje.
-
-V další části dokumentu budou popsány doporučená struktura zápisu, jednotlivé povinné kapitoly a pravidla pro jejich vyplňování.
-
-# 5. Struktura denního zápisu
-
-Každý denní zápis projektu MatchMatrix používá jednotnou strukturu. Díky tomu lze rychle nalézt potřebné informace a současně je zajištěna dlouhodobá přehlednost celé historie projektu.
-
-Jednotná struktura umožňuje snadné navazování na předchozí práci a výrazně zjednodušuje orientaci i v rozsáhlé historii vývoje.
+Žádný z těchto zdrojů se nemá používat izolovaně, pokud je pro dané rozhodnutí dostupný novější a spolehlivější důkaz.
 
 ---
 
-# 5.1 Hlavička zápisu
 
-Každý zápis začíná základní identifikací.
+## 1.99 Závěr kapitoly
 
-Obsahuje zejména:
+Shrnutí kapitoly: Kapitola vymezila oblast „1. Role pracovní paměti projektu“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „2. Typy historických a kontextových dokumentů“, která rozvíjí další část řízeného dokumentu.
 
-* datum,
-* pořadové označení zápisu,
-* pracovní oblast,
-* autora,
-* verzi projektu.
+# 2. Typy historických a kontextových dokumentů
+
+## 2.1 Denní zápis
+
+Denní zápis zachycuje práci provedenou v konkrétní den.
+
+Odpovídá zejména na otázky:
+
+- Jaký byl výchozí stav?
+- Jaký byl cíl dne?
+- Co se skutečně provedlo?
+- Jaké byly výsledky?
+- Jaká rozhodnutí vznikla?
+- Jaké problémy se řešily?
+- Co zůstalo nedokončeno?
+- Jaký je jediný hlavní další krok?
+
+Denní zápis je podrobným historickým zdrojem.
+
+## 2.2 Dokument NAVÁZÁNÍ
+
+Dokument NAVÁZÁNÍ předává aktuální stav do nového chatu nebo další pracovní etapy.
+
+Není kopií denního zápisu.
+
+Jeho úkolem je vytvořit praktický přenosový balíček obsahující:
+
+- aktuální stav,
+- dokončené kroky,
+- otevřené úkoly,
+- rozhodnutí,
+- rizika,
+- důležité identifikátory,
+- Project Snapshot,
+- Database Snapshot,
+- AI Context,
+- přesný další krok,
+- seznam věcí, které se nemají opakovat.
+
+NAV dokument může vzniknout na konci dne, při uzavření větší etapy nebo před přechodem do nového chatu.
+
+## 2.3 Project Snapshot
+
+Project Snapshot je stručný ověřený obraz aktuálního projektu nebo pracovní oblasti.
+
+Má vyšší provozní hodnotu než starý denní zápis, pokud:
+
+- je novější,
+- vychází z ověřených zdrojů,
+- výslovně aktualizuje starší stav.
+
+## 2.4 Database Snapshot
+
+Database Snapshot obsahuje relevantní databázové objekty a kontrolní počty platné v okamžiku vytvoření dokumentu.
+
+Každý počet musí být chápán jako snapshot, nikoli jako trvalá konstanta.
+
+## 2.5 AI Context
+
+AI Context vysvětluje:
+
+- roli dokumentu,
+- aktivní oblast,
+- závazná pravidla,
+- kritické hranice,
+- význam aktuálního stavu pro další práci.
+
+AI Context nemá nahrazovat celý dokument. Má umožnit rychlou a bezpečnou orientaci.
+
+---
+
+
+## 2.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „2. Typy historických a kontextových dokumentů“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „3. Základní principy“, která rozvíjí další část řízeného dokumentu.
+
+# 3. Základní principy
+
+## 3.1 Zapisuje se skutečnost
+
+Do denního zápisu patří pouze:
+
+- skutečně provedená práce,
+- skutečně zjištěné výsledky,
+- skutečně přijatá rozhodnutí,
+- skutečně otevřené problémy.
+
+Plánovaný krok se nesmí popsat jako dokončený.
+
+## 3.2 Důležitý je výsledek i důvod
+
+Nestačí uvést, že byl vytvořen soubor nebo spuštěn skript.
+
+Zápis má podle významu vysvětlit:
+
+- proč krok vznikl,
+- jaký problém řešil,
+- jak byl ověřen,
+- co změnil,
+- co nezměnil,
+- na co navazuje.
+
+## 3.3 Rozlišují se stavy
+
+Každý významný krok musí být správně označen, například:
+
+- připraveno,
+- analyzováno,
+- ověřeno READ ONLY auditem,
+- úspěšně validováno,
+- rollback potvrzen,
+- trvale aplikováno,
+- auditně uzavřeno,
+- importováno,
+- publikováno,
+- zůstává otevřené.
+
+## 3.4 Jeden hlavní další krok
+
+Zápis může obsahovat více otevřených úkolů, ale na konci určuje jeden hlavní následující krok.
+
+Ten má být:
+
+- konkrétní,
+- proveditelný,
+- bezpečně ohraničený,
+- v souladu s aktuálním stavem.
+
+## 3.5 Nepřepisuje se historie
+
+Schválený denní zápis se svévolně nepřepisuje.
+
+Pokud je před schválením nalezena chyba, opraví se v řízeném workflow.
+
+Pokud je chyba nalezena až později, musí být oprava dohledatelná prostřednictvím nové verze, opravného zápisu nebo následného dokumentu, podle povahy dokumentu a pravidel životního cyklu.
+
+## 3.6 Starší dokument není automaticky pravda
+
+Denní zápis je správný pro okamžik svého vzniku.
+
+Pozdější audit, APPLY nebo Project Snapshot může jeho stav změnit.
+
+Novější ověřený stav má přednost, ale starší zápis zůstává historickým důkazem vývoje.
+
+---
+
+
+## 3.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „3. Základní principy“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „4. Odpovědnost člověka a AI“, která rozvíjí další část řízeného dokumentu.
+
+# 4. Odpovědnost člověka a AI
+
+## 4.1 Role ChatGPT
+
+ChatGPT vytváří návrh denního zápisu a NAV dokumentu přímo z průběhu pracovní komunikace.
+
+Má zejména:
+
+- sledovat provedené kroky,
+- zachytit výstupy příkazů a auditů,
+- rozlišit plán od skutečnosti,
+- správně popsat READ ONLY, VALIDATE ONLY a APPLY,
+- vyhledat přijatá rozhodnutí,
+- zaznamenat problémy a jejich řešení,
+- vytvořit přesný Project Snapshot a Database Snapshot,
+- uvést otevřené úkoly a jediný další krok,
+- použít správnou šablonu, Document ID a umístění.
+
+ChatGPT nemá čekat, že uživatel ručně vyplní desítky technických polí, rekonstruuje Git snapshot nebo přepisuje průběh celého dne do formuláře.
+
+## 4.2 Role uživatele
+
+Uživatel:
+
+- potvrzuje věcnou správnost,
+- upozorňuje na chybějící nebo nesprávnou informaci,
+- schvaluje výsledný dokument,
+- rozhoduje o sporných nebo neověřitelných skutečnostech,
+- provádí lokální uložení, audit, import, commit a další kroky podle workflow.
+
+## 4.3 AI nesmí doplňovat domněnky jako fakta
+
+Pokud není informace ověřena, musí být:
+
+- označena jako otevřená,
+- označena jako předpoklad,
+- vynechána,
+- nebo určena k následnému ověření.
+
+AI nesmí vymyslet:
+
+- výsledek příkazu,
+- stav Git commitu,
+- databázový počet,
+- provedený APPLY,
+- identitu entity,
+- rozhodnutí uživatele.
+
+---
+
+
+## 4.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „4. Odpovědnost člověka a AI“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „5. Kdy denní zápis vzniká“, která rozvíjí další část řízeného dokumentu.
+
+# 5. Kdy denní zápis vzniká
+
+Denní zápis se vytváří:
+
+- na konci pracovního dne,
+- při uzavření významného pracovního bloku,
+- při výslovném požadavku uživatele,
+- před dlouhou přestávkou, pokud je potřeba zachovat stav.
+
+Pro jeden kalendářní den má standardně existovat jeden kanonický denní zápis projektu.
+
+Pokud práce pokračuje v několika chatech během stejného dne, informace se mají sloučit do jednoho zápisu, nikoli vytvářet konkurenční kopie.
+
+Panel Q3 proto blokuje vytvoření duplicitního denního zápisu pro stejné datum, pokud již kanonický dokument existuje.
+
+---
+
+
+## 5.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „5. Kdy denní zápis vzniká“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „6. Identifikace, názvy a umístění“, která rozvíjí další část řízeného dokumentu.
+
+# 6. Identifikace, názvy a umístění
+
+## 6.1 Denní zápis
+
+Formát Document ID:
+
+```text
+MM-DL-YYYYMMDD
+```
 
 Příklad:
 
 ```text
-Datum:
-Název:
-Autor:
-Oblast:
-Verze projektu:
+MM-DL-20260726
 ```
 
----
+Doporučený název souboru:
 
-# 5.2 Výchozí stav
+```text
+MM-DL-20260726_MATCHMATRIX_DENNI_ZAPIS.md
+```
 
-Na začátku každého zápisu je stručně popsán stav projektu před zahájením práce.
+Kanonické umístění:
 
-Tato část odpovídá například na otázky:
+```text
+docs/09_HISTORY/DENNÍ_ZÁPISY/
+```
 
-* Na čem se pracovalo naposledy?
-* Jaký byl výchozí stav?
-* Jaké úkoly byly otevřené?
-* Jaké problémy čekaly na řešení?
+V názvu souboru se podle technických možností může používat varianta bez diakritiky, ale Document ID a datum musí být jednoznačné.
 
-Výchozí stav umožňuje velmi rychle pochopit kontext celého pracovního dne.
+## 6.2 NAV dokument
 
----
+Formát Document ID:
 
-# 5.3 Provedené práce
+```text
+MM-NAV-YYYYMMDD-NN
+```
 
-Nejrozsáhlejší část zápisu.
+Příklad:
 
-Obsahuje chronologický přehled všech významných činností.
+```text
+MM-NAV-20260726-01
+```
 
-Například:
+Doporučený název souboru:
 
-* vytvořené SQL skripty,
-* nové Python workery,
-* změny databáze,
-* změny OPS panelu,
-* nové dokumenty,
-* změny architektury,
-* testování,
-* výsledky auditů.
+```text
+MM-NAV-20260726-01_MATCHMATRIX_NAVAZANI_DO_CHATU.md
+```
 
-Každá významnější změna by měla být stručně vysvětlena.
+Kanonické umístění:
 
-Nejde pouze o seznam souborů.
+```text
+docs/09_HISTORY/NAVÁZÁNÍ_NA_CHAT/
+```
 
-Důležité je uvést také důvod změny.
+Pořadové číslo `NN` umožňuje více NAV dokumentů v jednom dni.
 
----
+Panel Q3 při tvorbě NAV automaticky zjistí existující dokumenty a přidělí další pořadové číslo.
 
-# 5.4 Přijatá rozhodnutí
+## 6.3 Oficiální šablony
 
-Během vývoje často vznikají rozhodnutí, která ovlivňují celý projekt.
+Denní zápis používá:
 
-Například:
+```text
+docs/13_TEMPLATES/MM-TPL-002_SABLONA_DENNIHO_ZAPISU.md
+```
 
-* změna architektury,
-* změna workflow,
-* změna provideru,
-* nové standardy,
-* úprava dokumentace.
+NAV dokument používá:
 
-Tato rozhodnutí se zapisují samostatně.
+```text
+docs/13_TEMPLATES/MM-TPL-001_SABLONA_NAVAZANI_DO_NOVEHO_CHATU.md
+```
 
-Díky tomu je lze později snadno dohledat.
-
----
-
-# 5.5 Problémy
-
-Pokud se během práce objeví problém, měl by být zaznamenán.
-
-Nestačí pouze uvést, že nastala chyba.
-
-Je vhodné popsat:
-
-* příčinu,
-* způsob analýzy,
-* navržené řešení,
-* konečný výsledek.
-
-Takové informace často výrazně usnadní řešení podobných situací v budoucnu.
+Šablona určuje strukturu. Konkrétní obsah se vytváří z ověřeného průběhu práce.
 
 ---
 
-# 5.6 Výsledky dne
 
-Na konci pracovní části následuje stručné shrnutí.
+## 6.99 Závěr kapitoly
 
-Například:
+Shrnutí kapitoly: Kapitola vymezila oblast „6. Identifikace, názvy a umístění“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „7. Povinná struktura denního zápisu“, která rozvíjí další část řízeného dokumentu.
 
-* co bylo dokončeno,
-* co bylo odloženo,
-* co bude pokračovat,
-* jaký je aktuální stav.
+# 7. Povinná struktura denního zápisu
 
-Tato část umožňuje rychle zjistit přínos celého pracovního dne.
+Rozsah kapitol se přizpůsobuje skutečné práci, ale kanonický denní zápis má obsahovat následující oblasti.
 
----
+## 7.1 Informace o dokumentu
 
-# 6. Plán pokračování
+Minimálně:
 
-Každý denní zápis končí plánem další práce.
+- Document ID,
+- název,
+- typ dokumentu,
+- verze,
+- stav,
+- datum,
+- autor,
+- pracovní oblast,
+- primární formát,
+- kanonické umístění,
+- použitá šablona.
 
-Tato část patří mezi nejdůležitější.
+## 7.2 Identifikace denního zápisu
 
 Obsahuje:
 
-* další krok,
-* otevřené úkoly,
-* doporučené pořadí,
-* upozornění na důležité návaznosti.
+- datum pracovního dne,
+- aktivní projekt,
+- aktivní oblast,
+- výchozí dokument nebo NAV,
+- relevantní databázi,
+- relevantní Git větev,
+- hlavní cíl.
 
-Díky tomu lze následující pracovní den začít prakticky okamžitě.
+## 7.3 Výchozí stav
 
----
+Popisuje:
 
-# 6.1 Pravidlo „jeden další krok“
+- poslední ověřený stav,
+- dokončené předchozí kroky,
+- otevřené úkoly,
+- bezpečnostní hranice,
+- kroky, které se nesmějí opakovat.
 
-Během vývoje MatchMatrix se osvědčilo jednoduché pravidlo.
+## 7.4 Cíle pracovního dne
 
-Na konci zápisu se vždy určí jeden hlavní další krok.
+Uvádí skutečně zamýšlené cíle, ale nesmí je předem označit za dokončené.
 
-Ne několik desítek úkolů.
+## 7.5 Provedené práce
 
-Pouze hlavní směr pokračování.
+Je hlavní částí dokumentu.
 
-To výrazně usnadňuje návrat k projektu i po delší přestávce.
+Má být členěna podle významných etap a obsahovat:
 
----
+- použitý nástroj nebo skript,
+- režim,
+- vstupní rozsah,
+- důležitý výstup,
+- ověření,
+- dopad,
+- návaznost.
 
-# 6.2 Vazba na dokument NAVÁZÁNÍ
+## 7.6 Hlavní výsledky dne
 
-Denní zápisy zachycují průběh jednotlivých pracovních dnů.
+Stručně shrnuje:
 
-Dokument NAVÁZÁNÍ představuje jejich shrnutí.
+- dokončené milníky,
+- ověřené počty,
+- vytvořené artefakty,
+- potvrzené stavy.
 
-Proto by měl každý významnější denní zápis obsahovat informaci, zda je potřeba aktualizovat dokument NAVÁZÁNÍ.
+## 7.7 Přijatá rozhodnutí
 
-Tím zůstávají oba dokumenty dlouhodobě synchronizované.
+Každé významné rozhodnutí se uvádí samostatně.
 
----
+Má být zřejmé:
 
-# Závěr druhé části
+- co bylo rozhodnuto,
+- proč,
+- jaký má rozhodnutí dopad,
+- zda je dočasné nebo dlouhodobé.
 
-Jednotná struktura denních zápisů zajišťuje, že každý pracovní den je zaznamenán stejným způsobem. Díky tomu lze kdykoliv zpětně dohledat průběh vývoje projektu, přijatá rozhodnutí i důvody jednotlivých změn.
+## 7.8 Problémy a jejich řešení
 
-V další části dokumentu budou popsány doporučené postupy při vytváření denních zápisů, jejich návaznost na ostatní dokumentaci a způsob jejich využití při dlouhodobém řízení projektu MatchMatrix.
+Uvádí:
 
-# 7. Doporučené postupy při vedení denních zápisů
+- problém,
+- příčinu,
+- diagnostiku,
+- opravu,
+- výsledek,
+- případné zbývající riziko.
 
-Kvalita denních zápisů není dána jejich délkou.
+## 7.9 Databázový, Git a dokumentační stav
 
-Rozhodující je jejich informační hodnota.
+Podle relevantnosti obsahuje:
 
-Cílem není zaznamenat každou drobnou činnost.
+- databázový snapshot,
+- větev a commit,
+- informaci o pushi,
+- stav pracovního stromu,
+- stav dokumentační databáze,
+- výsledky A17, A24, A6 nebo A7.
 
-Cílem je zachytit vše, co bude důležité pro pokračování projektu.
+## 7.10 Rizika a otevřené otázky
 
-Dobře napsaný denní zápis umožňuje navázat na práci i po několika týdnech nebo měsících bez zbytečného hledání informací.
+Uvádí pouze skutečně otevřené problémy.
 
----
+## 7.11 Nedokončené práce
 
-# 7.1 Co zapisovat
+Musí jasně rozlišit:
 
-Do denních zápisů patří zejména:
+- připravené, ale nespouštěné kroky,
+- pouze validované kroky,
+- blokované kroky,
+- odložené úkoly.
 
-* významná architektonická rozhodnutí,
-* nové databázové objekty,
-* vytvořené nebo upravené skripty,
-* změny workflow,
-* výsledky auditů,
-* nové providery,
-* změny dokumentace,
-* důležité testy,
-* problémy a jejich řešení.
+## 7.12 Plán pokračování
 
-Každá informace by měla mít dlouhodobou hodnotu.
+Obsahuje doporučené pořadí dalších kroků.
 
----
+## 7.13 Jediný hlavní další krok
 
-# 7.2 Co nezapisovat
+Je praktickým výstupem zápisu.
 
-Naopak není vhodné zapisovat běžné pracovní činnosti bez dlouhodobého významu.
+## 7.14 Vazba na NAV dokument
 
-Například:
+Uvádí, zda:
 
-* drobné překlepy,
-* kosmetické úpravy,
-* krátké experimenty bez výsledku,
-* opakované testovací spuštění,
-* běžné administrativní úkony.
+- NAV dokument není potřeba,
+- má být vytvořen,
+- byl vytvořen,
+- nebo byl aktualizován.
 
-Tyto informace zbytečně prodlužují dokument a zhoršují jeho přehlednost.
+## 7.15 Související dokumenty, skripty a databázové objekty
 
----
+Uvádí pouze relevantní vazby, ne mechanický seznam všeho v projektu.
 
-# 7.3 Doporučený rozsah
+## 7.16 Terminologická kontrola
 
-Rozsah zápisu závisí na množství odvedené práce.
+Použité odborné termíny mají odpovídat `MM-REF-001`.
 
-Obecně platí:
+## 7.17 Historie verzí a závěr
 
-* běžný pracovní den – přibližně 1 až 3 strany,
-* významné architektonické změny – 5 až 10 stran,
-* dokončení větší etapy – podle potřeby.
-
-Důležitější než počet stran je úplnost informací.
-
----
-
-# 7.4 Jazyk zápisů
-
-Denní zápisy jsou psány srozumitelným technickým jazykem.
-
-Používají se celé věty.
-
-Každá kapitola by měla být čitelná i bez znalosti předchozího kontextu.
-
-Pokud je použit odborný pojem nebo zkratka, měla by být v projektu jednoznačně definována.
-
----
-
-# 8. Vztah denních zápisů k ostatní dokumentaci
-
-Denní zápisy nejsou izolovaným dokumentem.
-
-Představují jednu z částí dokumentačního systému MatchMatrix.
-
-Jsou propojeny zejména s následujícími dokumenty:
-
-**MM-DOC-001 – MATCHMATRIX MASTER**
-
-Obsahuje dlouhodobou strategii projektu.
-
-Denní zápisy zachycují její praktickou realizaci.
+Každý dokument obsahuje svou verzi, stav a stručný závěr.
 
 ---
 
-**MM-DOC-002 – MATCHMATRIX GOVERNANCE**
 
-Pokud během dne vznikne nové pravidlo nebo governance rozhodnutí, mělo by být zaznamenáno v denním zápisu a následně promítnuto do dokumentu Governance.
+## 7.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „7. Povinná struktura denního zápisu“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „8. Povinná struktura dokumentu NAVÁZÁNÍ“, která rozvíjí další část řízeného dokumentu.
+
+# 8. Povinná struktura dokumentu NAVÁZÁNÍ
+
+NAV dokument je určen pro rychlé a bezpečné pokračování práce.
+
+Musí obsahovat zejména:
+
+## 8.1 Informace o dokumentu a identifikaci
+
+- Document ID,
+- datum,
+- pořadí NAV v daném dni,
+- pracovní oblast,
+- zdrojový denní zápis,
+- předchozí NAV,
+- šablonu,
+- kanonické umístění.
+
+## 8.2 Účel navázání
+
+Jednou až několika větami určuje, proč dokument vznikl a na co má nový chat navázat.
+
+## 8.3 Terminologie
+
+Obsahuje vysvětlení kritických technických pojmů používaných v dokumentu.
+
+## 8.4 Aktuální stav
+
+Odděluje podle potřeby:
+
+- dokumentační stav,
+- Git stav,
+- databázový stav,
+- technický stav projektu.
+
+## 8.5 Project Snapshot
+
+Stručně zachycuje aktivní projektovou oblast a dokončený milník.
+
+## 8.6 Database Snapshot
+
+Obsahuje kontrolní počty a relevantní objekty.
+
+## 8.7 Přijatá rozhodnutí
+
+Nový chat je nesmí znovu otevírat bez nového důkazu nebo uživatelského rozhodnutí.
+
+## 8.8 Otevřené úkoly
+
+Mají mít stav, prioritu a podmínku dokončení.
+
+## 8.9 Otevřené otázky
+
+Musí být formulovány tak, aby je bylo možné zodpovědět auditem nebo rozhodnutím.
+
+## 8.10 Next Step
+
+Obsahuje bezprostřední další krok.
+
+## 8.11 Co bylo dokončeno
+
+Chrání projekt před opakováním uzavřené práce.
+
+## 8.12 Co zůstává rozpracováno
+
+Zabraňuje tomu, aby příprava nebo validace byla považována za dokončený stav.
+
+## 8.13 Co se nemá opakovat
+
+Tato sekce je povinná, pokud by opakování mohlo poškodit data nebo ztratit čas.
+
+## 8.14 AI Context
+
+Musí vysvětlit pravidla a hranice potřebné pro nový chat.
+
+## 8.15 Kritické identifikátory a objekty
+
+Podle potřeby obsahuje:
+
+- ID soutěží,
+- ID týmů,
+- ID zápasů,
+- názvy tabulek,
+- názvy skriptů,
+- očekávané počty.
+
+## 8.16 Doporučené pořadí pokračování
+
+Má respektovat governance a bezpečnostní workflow.
 
 ---
 
-**MM-DOC-003 – MATCHMATRIX ARCHITECTURE**
 
-Architektonické změny jsou nejprve popsány v denním zápisu.
+## 8.99 Závěr kapitoly
 
-Po jejich ověření jsou začleněny do architektonické dokumentace.
+Shrnutí kapitoly: Kapitola vymezila oblast „8. Povinná struktura dokumentu NAVÁZÁNÍ“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „9. Vytváření z průběhu komunikace“, která rozvíjí další část řízeného dokumentu.
 
----
+# 9. Vytváření z průběhu komunikace
 
-**MM-DOC-006 – MATCHMATRIX NAVÁZÁNÍ**
+Denní zápis a NAV dokument se nevytvářejí primárně ručním vyplněním formuláře.
 
-Tento dokument představuje souhrn aktuálního stavu projektu.
+ChatGPT při práci průběžně získává podklady z:
 
-Vzniká na základě informací z denních zápisů.
+- uživatelských pokynů,
+- výstupů PowerShellu,
+- výstupů SQL,
+- auditních protokolů,
+- Git stavu,
+- přiložených souborů,
+- schválených rozhodnutí,
+- oprav a připomínek uživatele.
 
----
+Na konci pracovního bloku z těchto podkladů sestaví souvislý dokument.
 
-**MM-DOC-007 – MATCHMATRIX CHANGELOG**
+## 9.1 Co se nemá vyžadovat od uživatele
 
-Obsahuje pouze významné změny.
+Uživatel nemá být nucen ručně doplňovat:
 
-Denní zápisy představují podrobnější zdroj informací.
+- desítky technických polí,
+- všechny názvy skriptů, které již zazněly v chatu,
+- Git snapshot, který lze zjistit z výstupu,
+- databázové počty, které byly ověřeny auditem,
+- znovu informace, které již poskytl,
+- formulářový přepis celého pracovního dne.
 
----
+## 9.2 Kdy je potřeba uživatelská oprava
 
-# 9. Archivace denních zápisů
+Uživatel doplňuje nebo opravuje zejména:
 
-Denní zápisy představují oficiální historii projektu.
-
-Z tohoto důvodu se:
-
-* nemažou,
-* nepřepisují,
-* zachovávají v původní podobě.
-
-Pokud je potřeba některou informaci opravit, provádí se oprava novým zápisem nebo novou verzí dokumentu.
-
-Tím je zachována úplná historie vývoje projektu.
-
----
-
-# 10. Závěr dokumentu
-
-MATCHMATRIX DENNÍ ZÁPISY tvoří společně s dokumentem NAVÁZÁNÍ hlavní pracovní paměť projektu.
-
-Jejich pravidelné vedení umožňuje dlouhodobě řídit vývoj rozsáhlé platformy bez ztráty souvislostí a bez závislosti na osobní paměti jednotlivých vývojářů.
-
-Každý zápis zachycuje nejen provedenou práci, ale také důvody přijatých rozhodnutí a plán dalšího postupu.
-
-Díky tomu lze kdykoliv bezpečně navázat na předchozí etapy vývoje.
+- obchodní nebo strategické rozhodnutí,
+- skutečnost, kterou nelze ověřit technickým výstupem,
+- nesprávně pochopený význam kroku,
+- chybějící důležitou souvislost,
+- požadovaný datum nebo pracovní oblast, pokud nejsou jednoznačné.
 
 ---
 
-# Stav dokumentu
 
-**Dokument:** MM-DOC-005 – MATCHMATRIX DENNÍ ZÁPISY
+## 9.99 Závěr kapitoly
 
-**Edice:** TECH
+Shrnutí kapitoly: Kapitola vymezila oblast „9. Vytváření z průběhu komunikace“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „10. Ověřování informací“, která rozvíjí další část řízeného dokumentu.
 
-**Verze:** 1.0 – První pracovní verze
+# 10. Ověřování informací
 
-**Stav:** Připraven k první revizi
+## 10.1 Hierarchie důvěryhodnosti
+
+Pro technický stav se používá zejména toto pořadí:
+
+1. aktuální databázový audit nebo přímý read-only dotaz,
+2. skutečný stav repozitáře a souborů,
+3. výstup právě provedeného skriptu,
+4. novější ověřený Project Snapshot,
+5. aktivní řízená dokumentace,
+6. denní zápis a NAV dokument odpovídající době svého vzniku,
+7. historie chatu,
+8. neověřená domněnka.
+
+Pořadí se může lišit podle povahy informace, ale novější ověřený důkaz má přednost před starším tvrzením.
+
+## 10.2 Historie chatu jako důkazní zdroj
+
+Historie komunikace obsahuje rozhodnutí, výsledky a souvislosti, které nemusely být okamžitě promítnuty do hlavní dokumentace.
+
+Proto byla vytvořena extrakční matice historie chatů.
+
+Informace z ní se musí:
+
+- posoudit,
+- ověřit,
+- časově zařadit,
+- porovnat s novějšími zdroji,
+- teprve potom přenést do aktivní dokumentace.
+
+## 10.3 Relativní čas
+
+Výrazy jako „dnes“, „včera“ nebo „zítra“ se v dokumentu nahrazují konkrétním datem, pokud by později mohly být nejasné.
 
 ---
 
-## Navazující dokument
 
-Dalším dokumentem dokumentační řady bude:
+## 10.99 Závěr kapitoly
 
-> **MM-DOC-006 – MATCHMATRIX NAVÁZÁNÍ (TECH)**
+Shrnutí kapitoly: Kapitola vymezila oblast „10. Ověřování informací“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „11. Q3 dokumentační workflow“, která rozvíjí další část řízeného dokumentu.
 
-Tento dokument bude definovat způsob předávání aktuálního stavu projektu mezi jednotlivými pracovními etapami. Popíše strukturu navazovacích dokumentů, pravidla jejich aktualizace a doporučený obsah tak, aby bylo možné kdykoliv plynule pokračovat ve vývoji MatchMatrix bez ztráty kontextu.
+# 11. Q3 dokumentační workflow
+
+Denní zápisy a NAV dokumenty procházejí řízeným workflow Q3.
+
+## 11.1 Fáze
+
+1. **VYBRAT A ANALYZOVAT**
+2. **OPRAVIT A ZKONTROLOVAT**
+3. **VYTVOŘIT A SCHVÁLIT**
+4. **PUBLIKOVAT**
+
+## 11.2 Nástroje
+
+- A17 – audit standardu dokumentu,
+- A18 – standardizační návrh,
+- A19 – kontrola mapování,
+- A20 – builder,
+- A24 – import do dokumentační databáze,
+- A6 a A7 – následné kontroly integrity a správnosti.
+
+## 11.3 Tvorba ze šablon
+
+Panel Q3 podporuje vytvoření:
+
+- denního zápisu z `MM-TPL-002`,
+- NAV dokumentu z `MM-TPL-001`.
+
+Šablona poskytuje strukturu. Skutečný obsah musí vycházet z průběhu práce.
+
+## 11.4 Blokace duplicitního denního zápisu
+
+Pokud pro dané datum již existuje kanonický `MM-DL-YYYYMMDD`, panel nesmí bez řízeného důvodu vytvořit druhý konkurenční zápis.
+
+## 11.5 Automatické číslování NAV
+
+Panel určuje další pořadové číslo `NN` podle již existujících NAV dokumentů stejného data.
+
+## 11.6 Blokace A17
+
+A17 se nesmí spustit nad neúplným dokumentem, pokud chybějí povinná pole nebo zásadní sekce.
+
+Cílem není mechanicky projít audit, ale zabránit publikaci dokumentu, který není použitelný pro navázání.
+
+## 11.7 A24
+
+A24 nejprve používá `VALIDATE_ONLY`.
+
+Teprve po úspěšné validaci a splnění podmínek se provádí `APPLY`.
+
+Dokumentační import se standardně provádí nad čistým Git stromem. Výjimka nesmí obcházet governance bez výslovného rozhodnutí.
 
 ---
 
-### Poznámka pro TECH V2
 
-Při druhé revizi dokumentace doplníme do tohoto dokumentu:
+## 11.99 Závěr kapitoly
 
-* vzorový denní zápis,
-* doporučenou šablonu,
-* systém označování zápisů,
-* vazby na Git commity,
-* vazby na milestone projektu,
-* doporučení pro automatickou archivaci.
+Shrnutí kapitoly: Kapitola vymezila oblast „11. Q3 dokumentační workflow“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „13. Rozlišení dokončené, validované a otevřené práce“, která rozvíjí další část řízeného dokumentu.
 
-Tyto části budou doplněny až po dokončení celé série dokumentů **MM-DOC-000 až MM-DOC-008**, aby bylo možné sjednotit standard napříč celou dokumentací.
+# 12. Pravidla obsahu
 
+## 12.1 Co zapisovat
+
+Do denního zápisu patří zejména:
+
+- významné databázové změny,
+- výsledky auditů,
+- nové nebo opravené skripty,
+- změny architektury,
+- providerová rozhodnutí,
+- mapování entit,
+- změny dokumentace,
+- důležité testy,
+- Git milníky,
+- problémy a jejich řešení,
+- bezpečnostní hranice,
+- otevřené úkoly.
+
+## 12.2 Co běžně nezapisovat
+
+Obvykle se nezapisují:
+
+- každé kliknutí,
+- opakované spuštění bez nového výsledku,
+- bezvýznamný překlep,
+- krátký experiment bez dopadu,
+- interní technické mezikroky asistenta,
+- informace, které nemají význam pro pokračování projektu.
+
+Výjimkou je situace, kdy drobný problém odhalil důležité systémové pravidlo nebo riziko.
+
+## 12.3 Přiměřený rozsah
+
+Rozsah závisí na skutečné práci:
+
+- běžný den: přibližně 1 až 3 strany,
+- významná technická etapa: přibližně 5 až 10 stran,
+- mimořádně rozsáhlý den: podle potřeby.
+
+Cílem není uměle dosáhnout určitého počtu stran.
+
+---
+
+# 13. Rozlišení dokončené, validované a otevřené práce
+
+Toto rozlišení je závazné.
+
+## 13.1 READ ONLY
+
+Znamená, že byl ověřen stav bez trvalé změny.
+
+## 13.2 VALIDATE ONLY
+
+Znamená, že změnová logika byla provedena v transakci a následně vrácena rollbackem.
+
+Úspěšný `VALIDATE_ONLY` potvrzuje připravenost, nikoli trvalou změnu dat.
+
+## 13.3 APPLY
+
+Znamená, že schválená změna byla trvale provedena a commitnuta.
+
+## 13.4 Post-commit audit
+
+Teprve samostatný audit po APPLY potvrzuje skutečný stav po změně.
+
+## 13.5 Příklad správného zápisu
+
+```text
+VALIDATE_ONLY pro 110 zápasů úspěšně dokončen.
+Transakce byla vrácena rollbackem.
+Trvalý APPLY zatím nebyl proveden.
+```
+
+## 13.6 Příklad nesprávného zápisu
+
+```text
+110 zápasů bylo migrováno.
+```
+
+Tato věta je nesprávná, pokud proběhl pouze `VALIDATE_ONLY`.
+
+---
+
+
+## 13.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „13. Rozlišení dokončené, validované a otevřené práce“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „14. Git a databázový stav“, která rozvíjí další část řízeného dokumentu.
+
+# 14. Git a databázový stav
+
+## 14.1 Git stav
+
+Zápis má podle významu uvést:
+
+- větev,
+- commit,
+- obsah commitu,
+- stav push,
+- zda je pracovní strom čistý,
+- které změny zůstávají necommitnuté.
+
+Nesmí se tvrdit, že push proběhl, pokud byl potvrzen pouze lokální commit.
+
+## 14.2 Dočasné soubory
+
+Před publikací se kontrolují zejména:
+
+- soubory Wordu `~$...`,
+- náhodné kopie,
+- neřízené exporty,
+- tajné údaje,
+- pracovní soubory mimo určenou složku.
+
+## 14.3 Databázový stav
+
+Uvádějí se pouze relevantní objekty a počty.
+
+Každý počet má obsahovat nebo umožnit odvodit:
+
+- kdy byl ověřen,
+- kterým auditem,
+- před nebo po jaké změně,
+- zda je globální nebo omezený na konkrétní scope.
+
+## 14.4 Dokumentační databáze
+
+Pokud dokument prošel importem, uvádí se:
+
+- režim A24,
+- výsledek validace,
+- výsledek APPLY,
+- výsledek A6 a A7,
+- případné blokace A17.
+
+---
+
+
+## 14.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „14. Git a databázový stav“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „15. Project Snapshot, Database Snapshot a AI Context“, která rozvíjí další část řízeného dokumentu.
+
+# 15. Project Snapshot, Database Snapshot a AI Context
+
+## 15.1 Povinnost
+
+Rozsáhlejší denní zápis nebo NAV dokument má obsahovat odpovídající kontextové sekce, zejména pokud se používá pro nový chat.
+
+## 15.2 Project Snapshot
+
+Má být stručný a zaměřený na:
+
+- aktivní projekt,
+- aktivní oblast,
+- dokončený milník,
+- aktuální prioritu,
+- pracovní pravidla,
+- zakázané zkratky.
+
+## 15.3 Database Snapshot
+
+Má obsahovat pouze počty a objekty potřebné pro pokračování.
+
+Nemá bez důvodu kopírovat celý A33 audit.
+
+## 15.4 AI Context
+
+Má upozornit zejména na:
+
+- rozdíly mezi dokončeným a otevřeným stavem,
+- důležité identity,
+- kroky, které se nesmějí opakovat,
+- očekávaný další postup,
+- zdroje pravdy.
+
+---
+
+
+## 15.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „15. Project Snapshot, Database Snapshot a AI Context“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „16. Schvalování, verze a archivace“, která rozvíjí další část řízeného dokumentu.
+
+# 16. Schvalování, verze a archivace
+
+## 16.1 Návrh
+
+Nově vytvořený dokument vzniká ve stavu odpovídajícím dokumentačnímu workflow, typicky:
+
+```text
+DRAFT – NEEDS_USER_APPROVAL
+```
+
+nebo jiném aktuálně definovaném návrhovém stavu.
+
+## 16.2 Uživatelské schválení
+
+Uživatel potvrzuje, že dokument věcně odpovídá skutečné práci.
+
+## 16.3 Audit
+
+Dokument prochází A17 a případně dalšími kontrolami.
+
+## 16.4 Publikace
+
+Po úspěšné kontrole následuje:
+
+- uložení do kanonické složky,
+- Git historie,
+- A24 VALIDATE_ONLY,
+- A24 APPLY,
+- A6 a A7,
+- případný push.
+
+## 16.5 Verze
+
+Pokud je dokument před publikací opraven, zvyšuje se jeho verze podle rozsahu změny a doplňuje se historie verzí.
+
+## 16.6 Archivace
+
+Denní zápisy a NAV dokumenty se ukládají v historické oblasti projektu a nemažou se jako běžné pracovní soubory.
+
+Duplicitní, chybné nebo nahrazené pracovní varianty se řeší řízeným archivem tak, aby zůstal jednoznačný kanonický dokument.
+
+---
+
+
+## 16.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „16. Schvalování, verze a archivace“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „17. Kvalitativní pravidla“, která rozvíjí další část řízeného dokumentu.
+
+# 17. Kvalitativní pravidla
+
+Kvalitní denní zápis nebo NAV dokument je:
+
+- věcně správný,
+- časově jednoznačný,
+- dostatečně podrobný,
+- čitelný bez znalosti celého chatu,
+- přehledně strukturovaný,
+- bez zbytečného opakování,
+- konzistentní se slovníkem,
+- přesný v režimech a počtech,
+- použitelný pro další práci,
+- propojený s důkazními zdroji.
+
+## 17.1 Zakázané chyby
+
+Dokument nesmí:
+
+- označit plán jako výsledek,
+- zaměnit rollback za APPLY,
+- uvést neověřený commit nebo push,
+- znovu otevřít uzavřené rozhodnutí bez důvodu,
+- použít historické ID jako aktivní identitu,
+- obsahovat nejasné relativní datum,
+- vytvořit druhý aktivní dokument se stejnou identitou,
+- skrýt důležité riziko.
+
+---
+
+
+## 17.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „17. Kvalitativní pravidla“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „18. Vazby na hlavní dokumentaci“, která rozvíjí další část řízeného dokumentu.
+
+# 18. Vazby na hlavní dokumentaci
+
+## MM-DOC-100 – Master
+
+Denní zápisy zachycují praktickou realizaci strategie.
+
+Strategické rozhodnutí s dlouhodobou platností se následně promítne do Master dokumentu.
+
+## MM-DOC-200 – Governance
+
+Nové závazné pravidlo nebo bezpečnostní rozhodnutí se zaznamená v denním zápisu a následně promítne do Governance.
+
+## MM-DOC-300 – Architecture
+
+Ověřená architektonická změna se nejprve objeví v pracovním zápisu a následně v Architecture dokumentu.
+
+## MM-DOC-800 – Development Handbook
+
+Opakovatelný pracovní postup, který se stal standardem, se promítne do Development Handbooku.
+
+## MM-DOC-000 – Documentation Framework
+
+Změna dokumentačního systému, workflow nebo vztahu mezi dokumenty se promítne do Documentation Frameworku.
+
+## MM-REF-001 – Slovník
+
+Nový termín nebo změna významu se předává do řízené terminologické správy.
+
+---
+
+
+## 18.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „18. Vazby na hlavní dokumentaci“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „19. Aktuální provozní stav“, která rozvíjí další část řízeného dokumentu.
+
+# 19. Aktuální provozní stav
+
+## 19.1 Oficiální šablony
+
+V projektu existují dvě oficiální šablony:
+
+- `MM-TPL-001` – NAVÁZÁNÍ DO NOVÉHO CHATU,
+- `MM-TPL-002` – DENNÍ ZÁPIS.
+
+## 19.2 Panel Q3
+
+Panel Q3 podporuje:
+
+- tvorbu denního zápisu,
+- tvorbu NAV dokumentu,
+- blokaci duplicitního denního zápisu,
+- automatické číslování NAV,
+- kontrolu povinných polí před A17,
+- navazující audit a publikaci.
+
+## 19.3 Způsob práce
+
+Obsah dokumentu sestavuje ChatGPT z průběhu každodenní komunikace.
+
+Uživatel nemá ručně vyplňovat rozsáhlý formulář ani technicky předvyplňovat Git a databázový snapshot, pokud jsou tyto údaje již dostupné v průběhu práce.
+
+## 19.4 Dokumentační databáze
+
+Aktuální ověřený snapshot dokumentační databáze:
+
+| Ukazatel | Hodnota |
+|---|---:|
+| Dokumenty | 354 |
+| Verze | 360 |
+| Aktuální verze | 354 |
+| Sekce | 7 075 |
+| Vazby | 495 |
+| Importní běhy | 48 |
+
+Tyto hodnoty se při dalším ověřeném snapshotu aktualizují.
+
+## 19.5 Historie chatů
+
+Extrakční matice historie chatů obsahuje:
+
+| Ukazatel | Hodnota |
+|---|---:|
+| Archivní konverzace | 173 |
+| Projektové konverzace | 146 |
+| Kandidáti důkazů | 719 |
+| Kurátorované základní skutečnosti | 30 |
+| Otevřené základní otázky | 4 |
+
+Matice je podkladem pro aktualizaci hlavních dokumentů. Není samostatným automatickým zdrojem pravdy.
+
+---
+
+
+## 19.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „19. Aktuální provozní stav“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost pokračuje kapitolou „20. Otevřené otázky a další krok“, která rozvíjí další část řízeného dokumentu.
+
+# 20. Otevřené otázky a další krok
+
+## 20.1 Otevřené otázky
+
+- automatické načítání Git snapshotu do denního zápisu,
+- automatické vytváření Database Snapshotu z ověřených auditů,
+- propojení denních zápisů s konkrétními commity,
+- automatické vyhodnocení, zda je potřeba vytvořit NAV,
+- plná synchronizace s Documentation Management System,
+- automatické porovnání starého NAV s novějším Project Snapshotem,
+- dlouhodobá pravidla pro opravné verze již publikovaných historických dokumentů.
+
+## 20.2 Nejbližší další krok
+
+Po aktualizaci hlavních dokumentů `MM-DOC-000`, `100`, `200`, `300`, `800` a `900`:
+
+1. ověřit jejich metadata a stabilní názvy,
+2. provést dokumentační audit,
+3. sjednotit související standardy `MM-STD-003`, `004`, `007` a index `MM-STD-1000`,
+4. vyřešit jednu aktivní verzi `MM-REF-001`,
+5. následně provést řízený import a Git publikaci.
+
+---
+
+
+## 20.99 Závěr kapitoly
+
+Shrnutí kapitoly: Kapitola vymezila oblast „20. Otevřené otázky a další krok“ v rámci dokumentu MM-DOC-900 a stanovila její význam, pravidla nebo ověřený stav. Přínos kapitoly spočívá v tom, že daná oblast je popsána jednoznačně a může sloužit jako řízený podklad pro další práci. Návaznost směřuje k závěru dokumentu a k navazujícím kontextovým, auditním a publikačním krokům.
+
+# Závěr dokumentu
+
+Dokument MM-DOC-900 uzavírá řízený popis oblasti řízení denních zápisů a projektové kontinuity. Shrnuje pravidla, ověřený stav, odpovědnosti a vazby, které jsou potřebné pro další bezpečnou práci v projektu MatchMatrix. Přínos dokumentu spočívá v jednotném a dohledatelném zachycení této oblasti pro vývoj, audit, rozhodování a dlouhodobou správu. Návaznost pokračuje kontextovými sekcemi AI CONTEXT, PROJECT SNAPSHOT, CURRENT STATUS, OPEN QUESTIONS a NEXT STEP.
+
+# AI CONTEXT
+
+**Role dokumentu:** Závazný standard pro denní zápisy, NAV dokumenty a pracovní kontext MatchMatrix.
+
+**Hlavní pravidlo:** ChatGPT sestavuje obsah z průběhu komunikace a ověřených výstupů. Uživatel kontroluje věcnou správnost a schvaluje dokument.
+
+**Denní zápis:** `MM-DL-YYYYMMDD`, standardně jeden kanonický dokument pro den.
+
+**NAV dokument:** `MM-NAV-YYYYMMDD-NN`, automaticky číslovaný podle pořadí v daném dni.
+
+**Šablony:** MM-TPL-002 pro denní zápis, MM-TPL-001 pro NAV.
+
+**Kritická hranice:** VALIDATE ONLY není APPLY. Rollback není trvalá změna.
+
+**Zdroj pravdy:** Novější ověřený audit nebo Project Snapshot má přednost před starším denním zápisem, ale starý zápis zůstává historickým důkazem.
+
+---
+
+# PROJECT SNAPSHOT
+
+- MatchMatrix používá řízené denní zápisy a NAV dokumenty jako pracovní paměť.
+- Q3 panel umí vytvořit oba typy dokumentů z oficiálních šablon.
+- Duplicitní denní zápis pro stejné datum je blokován.
+- NAV dokumenty jsou automaticky číslovány.
+- A17 je blokován, pokud dokument nemá povinná pole.
+- A24 používá VALIDATE_ONLY a následný APPLY.
+- ChatGPT vytváří dokumenty z průběhu práce; uživatel je věcně schvaluje.
+- Historie chatů byla převedena do extrakční matice pro řízenou aktualizaci hlavní dokumentace.
+
+---
+
+# DATABASE SNAPSHOT
+
+| Oblast | Stav |
+|---|---|
+| Dokumentační databáze | ACTIVE |
+| Dokumenty | 354 |
+| Verze | 360 |
+| Aktuální verze | 354 |
+| Sekce | 7 075 |
+| Vazby | 495 |
+| Importní běhy | 48 |
+| Q3 workflow | IMPLEMENTED / ACTIVE DEVELOPMENT |
+| Šablony MM-TPL-001 a MM-TPL-002 | ACTIVE |
+
+---
+
+# CURRENT STATUS
+
+- Daily Log Standard: ACTIVE
+- NAV Standard: ACTIVE
+- Official Templates: ACTIVE
+- Q3 Creation Workflow: IMPLEMENTED
+- Duplicate Daily Log Blocking: IMPLEMENTED
+- Automatic NAV Numbering: IMPLEMENTED
+- A17 Required-Field Guard: IMPLEMENTED
+- AI-Generated Draft from Conversation: ACTIVE
+- Automated Project Snapshot: PARTIAL / FUTURE DEVELOPMENT
+
+---
+
+# OPEN QUESTIONS
+
+- Jak automatizovat Project Snapshot bez ztráty lidské kontroly?
+- Jak přesně verzovat opravu již publikovaného historického zápisu?
+- Jak automaticky propojit denní zápis s relevantními Git commity a databázovými audity?
+- Jak automaticky určit, zda pracovní blok vyžaduje nový NAV dokument?
+
+---
+
+# NEXT STEP
+
+Provést kontrolu nové verze `MM-DOC-900`, uložit ji pod stabilním aktivním názvem a poté zahájit sjednocení standardů `MM-STD-003`, `MM-STD-004`, `MM-STD-007` a indexu `MM-STD-1000`.

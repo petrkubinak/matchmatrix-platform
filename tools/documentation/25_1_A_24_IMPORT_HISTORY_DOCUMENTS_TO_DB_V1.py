@@ -103,7 +103,7 @@ from pathlib import Path, PureWindowsPath
 from typing import Any, Mapping, Sequence
 
 
-ENGINE_VERSION = "A24_CANONICAL_DOCUMENT_DATABASE_IMPORT_V1_3_UNIVERSAL_IDS"
+ENGINE_VERSION = "A24_CANONICAL_DOCUMENT_DATABASE_IMPORT_V1_5_LEGACY_DOCUMENT_ID_ROUTES"
 MANIFEST_VERSION = "1.2"
 
 # Stavové kódy jsou záměrně zachovány kvůli kompatibilitě panelu Q3.
@@ -154,6 +154,19 @@ SPECIAL_PREFIX_DIRS: dict[str, tuple[str, ...]] = {
     "MM-DL": ("docs", "09_HISTORY", "DENNÍ_ZÁPISY"),
     "MM-NAV": ("docs", "09_HISTORY", "NAVÁZÁNÍ_NA_CHAT"),
     "MM-PS": ("docs", "09_HISTORY", "PROJECT_SNAPSHOTS"),
+}
+
+# Přesnější výjimky podle konkrétního Document ID mají
+# přednost před obecným směrováním podle prefixu.
+# MM-STD-1000 je centrální index standardů a patří
+# do referenční oblasti docs/10_REFERENCE.
+DOCUMENT_ID_DIRS: dict[str, tuple[str, ...]] = {
+    "MM-STD-1000": ('docs', '10_REFERENCE'),
+    "MM-DOC-100": ('docs', '01_MASTER'),
+    "MM-DOC-200": ('docs', '02_GOVERNANCE'),
+    "MM-DOC-300": ('docs', '03_ARCHITECTURE'),
+    "MM-DOC-800": ('docs', '08_DEVELOPMENT'),
+    "MM-DOC-900": ('docs', '09_HISTORY'),
 }
 
 DB_DOCUMENT_TYPES = {
@@ -606,9 +619,11 @@ def validate_location(
             f"Dokument musí být uložen pod docs: {relative_path}"
         )
 
+    document_id = str(identity["document_id"]).upper()
     prefix = str(identity["prefix"])
     route_parts = (
-        SPECIAL_PREFIX_DIRS.get(prefix)
+        DOCUMENT_ID_DIRS.get(document_id)
+        or SPECIAL_PREFIX_DIRS.get(prefix)
         or CANONICAL_PREFIX_DIRS.get(prefix)
     )
 
