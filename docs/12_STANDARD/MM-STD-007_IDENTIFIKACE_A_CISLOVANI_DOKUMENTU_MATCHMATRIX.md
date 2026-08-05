@@ -13,7 +13,7 @@
 | Dokument | MM-STD-007 |
 | Název | Identifikace a číslování dokumentů MatchMatrix |
 | Edice | MM-STD |
-| Verze | 1.1 |
+| Verze | 1.2 |
 | Stav | REVIEW |
 | Datum aktualizace | 2026-07-27 |
 | Autor projektu | Petr |
@@ -29,6 +29,7 @@
 |---:|---|---|---|
 | 1.0 | 2026 | REVIEW | První návrh identifikace a číslování. Obsahoval samostatný prefix pro každou složku. |
 | 1.1 | 2026-07-27 | REVIEW | Zachovány již zavedené Document ID, odstraněno automatické odvozování prefixu ze složky, doplněn registr typů, časové identity, číselné bloky, aliasy, rezervace, přidělování a kontroly kolizí. Doplněna formální hierarchie a závěry hlavních kapitol podle výsledku A17 ze dne 2026-07-28. |
+| 1.2 | 2026-07-29 | REVIEW | Doplněny závěry hlavních kapitol a sjednocena struktura dokumentu pro kontrolu A17; obsahová změna je oddělena novou verzí. |
 
 ---
 
