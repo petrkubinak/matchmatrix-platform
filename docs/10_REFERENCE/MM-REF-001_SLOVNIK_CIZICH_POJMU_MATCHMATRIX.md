@@ -12,7 +12,8 @@
 | Název | Slovník cizích pojmů MatchMatrix |
 | Edice | MM-REF |
 | Verze | 1.7 |
-| Stav | REVIEW |
+| Stav | APPROVED |
+| Původní stav zdrojového dokumentu | REVIEW |
 | Datum aktualizace | 2026-07-28 |
 | Autor projektu | Petr Kubinák |
 | Technická spolupráce | OpenAI ChatGPT |
