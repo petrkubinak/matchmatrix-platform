@@ -16,7 +16,8 @@
 | Typ dokumentu | ACTIVE_SYSTEM_RUNTIME_GOVERNANCE_STANDARD |
 | Edice | MM-STD |
 | Verze | 1.0 |
-| Stav | DRAFT |
+| Stav | APPROVED |
+| Původní stav zdrojového dokumentu | DRAFT |
 | Datum založení | 2026-10-01 |
 | Autor projektu | Petr |
 | Technická spolupráce | OpenAI ChatGPT |
