@@ -93,6 +93,159 @@ V20.1.Q3 STEP 11:
 - zdrojový dokument ani databáze se nemění.
 
 - Cíl: připravit, zkontrolovat, potvrdit terminologii, publikovat a ověřit dokument.
+
+V20.1.Q3 STEP 12–17:
+- A20 vytvoří standardizovaný dokument z potvrzeného mapování A19,
+- kandidát lze přímo otevřít a ručně doplnit,
+- finální A17 ověří doplněný kandidát,
+- schválení vytvoří kanonický dokument se stavem APPROVED,
+- kanonický A17 ověří skutečně uložený soubor,
+- Git commit přidá a commitne pouze konkrétní kanonický dokument; nikdy nepoužije git add .
+
+V20.1.Q3 STEP 18:
+- fáze 4 PUBLIKOVAT pokračuje po Git commitu bezpečným A24 VALIDATE_ONLY na PC2,
+- APPLY je povolen pouze po úspěšné validaci stejného SHA-256 dokumentu,
+- A24 APPLY na PC2 spustí A6 a následné inkrementální ověření A7,
+- panel rozlišuje VALIDATED, APPLIED_AND_VERIFIED,
+  APPLIED_VERIFICATION_FAILED a BLOCKED,
+- automatický stash ani automatický push se nepoužívá.
+
+V20.1.Q3 STEP 27:
+- dokumenty zachovávají originální technické a cizojazyčné názvy,
+- dokumentační panel zobrazuje české názvy sloupců a stavů,
+- interní názvy databázových polí se nemění,
+- A23 zobrazuje NOVÝ / EXISTUJE / KE KONTROLE / KONFLIKT česky,
+- neznámé názvy sloupců dostanou bezpečný český uživatelský popisek.
+
+V20.1.Q3 STEP 27 FIX 1:
+- překládá výsledky, závažnosti a kategorie nálezů A17,
+- překládá stav workflow, publikační hostitele a kroky A24,
+- překládá stav a souhrn databázového auditu A33,
+- technické identifikátory pravidel, souborů a databázových polí zůstávají zachovány.
+
+V20.1.Q3 STEP 26 FIX 3:
+- tlačítka návrhů už nejsou závislá na dočasné runtime proměnné,
+- proposal se dohledá přímo v aktuálním workspace,
+- fallback vyhledá nejnovější odpovídající proposal pouze pod panel_workspaces,
+- opravuje stav, kdy byla cesta v tlačítku prázdná i po úspěšném vytvoření návrhů.
+
+V20.1.Q3 STEP 26 FIX 2:
+- převádí proposal cesty z PC2 na UNC cesty použitelné na PC1,
+- po dokončení automaticky otevře skutečný pracovní návrh MM-REF-001,
+- tlačítka A23 otevírají pracovní návrhy, nikoli kanonické slovníky,
+- potvrzovací okno ukazuje přesné cesty obou návrhů.
+
+V20.1.Q3 STEP 26 FIX 1:
+- potlačuje PowerShell progress stream při vzdáleném A23 proposal běhu,
+- při chybějícím vzdáleném exit markeru ověřuje skutečný JSON výstup,
+- úspěch uzná pouze při final_status TERMINOLOGY_GLOSSARY_PROPOSALS_CREATED,
+- zároveň kontroluje, že nebyl změněn kanonický soubor, Git ani databáze.
+
+V20.1.Q3 STEP 26:
+- přidává výběr kandidátů a pracovní návrhy MM-REF-001/MM-REF-002,
+- návrhy se ukládají pouze do a23/proposals a nemění kanonické soubory, Git ani databázi.
+
+V20.1.Q3 STEP 25:
+- STEP 28 mění A23 na automatické doplňování pracovních slovníků:
+  jednoznačné NOVÉ pojmy se bez dialogu zapíší do MM-REF-001 a MM-REF-002,
+  EXISTUJE se přeskočí a pouze REVIEW/KONFLIKT se zobrazí uživateli,
+- interní proposal soubory zůstávají zachovány jako auditní mezivýstup,
+- Git ani dokumentační databáze se automatickým doplněním nemění,
+- přidává bezpečný terminologický krok A23,
+- A23 čte explicitní tabulku kandidátů ve vybraném dokumentu,
+- porovnává kandidáty s MM-REF-001 a MM-REF-002,
+- klasifikuje NOVÝ / EXISTUJE / REVIEW / KONFLIKT,
+- zapisuje pouze JSON a Markdown report do podsložky a23 workspace,
+- nikdy automaticky nepřepisuje referenční slovníky.
+
+V20.1.Q3 STEP 24:
+- zkracuje název auditní kopie předchozího kanonického dokumentu,
+- používá formát <Document ID>_BEFORE_<timestamp>.md,
+- odstraňuje chybu Windows/UNC MAX_PATH u dokumentů s dlouhým kanonickým názvem,
+- zachovává původní obsah v podsložce previous_canonical.
+
+V20.1.Q3 STEP 19:
+- fáze 1 umí vytvořit nový DAILY_LOG nebo CHAT_CONTINUATION z oficiální šablony,
+- používá MM-TPL-001 a MM-TPL-002 z docs/13_TEMPLATES na PC2,
+- šablona se rozbalí přímo do izolovaného workspace a nikdy se nepřepisuje,
+- základní metadata, datum, Document ID a kanonický název se vyplní automaticky,
+- před A17 panel zablokuje audit, dokud v dokumentu zůstávají nevyplněná pole {{...}},
+- stále lze vybrat a zpracovat libovolný existující Markdown dokument.
+
+V20.1.Q3 STEP 20C:
+- poslední databázový snapshot PŘED / NYNÍ / Δ se ukládá trvale mimo dočasný workspace,
+- sekce STAV DOKUMENTAČNÍ DATABÁZE zobrazuje tři řádky: PŘED POSLEDNÍM IMPORTEM, NYNÍ a Δ POSLEDNÍHO IMPORTU,
+- přehled zůstává dostupný i po restartu panelu,
+- panel uvádí také poslední Document ID, verzi a čas importu,
+- živý řádek NYNÍ se vždy načítá přímo z dokumentační databáze.
+
+V20.1.Q3 STEP 21A:
+- opravuje načítání verze dokumentu z metadat Markdown souboru,
+- doplňuje verzi do trvalého JSON snapshotu posledního importu,
+- starší STEP 20C snapshot bez verze automaticky doplní z documentation.documents,
+- řádky PŘED / NYNÍ / Δ i horní souhrn POSLEDNÍ IMPORT zobrazují skutečnou verzi,
+- oprava nevyžaduje opakovaný import již publikovaného dokumentu.
+
+V20.1.Q3 STEP 22:
+- kanonické uložení již není omezené na DAILY_LOG, CHAT_CONTINUATION a PROJECT_SNAPSHOT,
+- směrování používá primárně Document ID a oficiální prefixy MM-STD-007,
+- podporuje všechny současné oblasti MM-DOC, MM-MST, MM-GOV, MM-ARC, MM-DB,
+  MM-PRV, MM-LAY, MM-OPS, MM-DEV, MM-HIS, MM-REF, MM-VIS, MM-STD,
+  MM-TPL, MM-EXP, MM-DRF a MM-ARCV,
+- podporuje také datumové dokumenty MM-DL, MM-NAV a MM-PS,
+- budoucí prefix lze bezpečně směrovat přes metadata Cílové umístění bez dalšího zásahu do panelu,
+- aktualizace další verze stejného Document ID zachová existující kanonický název souboru,
+- panel blokuje dvě aktivní kanonické kopie stejného Document ID,
+- schválení vždy vytvoří samostatné metadata Stav = APPROVED a zachová původní stav,
+- A18 již panelově neomezuje pouze na DL/NAV; předá všechny typy podporované A17.
+
+V20.1.Q3 STEP 30:
+- rozděluje přeplněnou záložku DOKUMENTACE do čtyř samostatných českých stránek,
+- PRACOVNÍ POSTUP obsahuje pouze řízený workflow A17 až A24,
+- AUDITY A AI KONTEXT obsahuje A33 a A34,
+- PŘEKLADY A VÝKLADY obsahuje klikací slovník a A23,
+- DATABÁZOVÝ PŘEHLED obsahuje stav DB, dokumenty, importy, vazby a historii,
+- horní rychlé odkazy zůstávají stále dostupné,
+- jednotlivé stránky využívají celou výšku panelu a nic se již netlačí pod spodní okraj.
+
+V20.1.Q3 STEP 29:
+- přidává samostatný panel AI KONTEXT PRO NOVÝ CHAT – A34,
+- umožňuje ověřit podklady bez vytvoření balíčku,
+- vytváří aktuální AI Context Package na PC2 v režimu READ ONLY,
+- zobrazuje poslední Package ID, počet souborů, sport, varování a čas vytvoření,
+- otevírá poslední Markdown, ZIP a výstupní složku,
+- A34 automaticky spouští A33, čte Git, dokumentační DB a řízené Project Snapshoty,
+- databázi nemění a citlivé hodnoty do balíčku nevkládá.
+
+V20.1.Q3 STEP 23:
+- přidává samostatný blok DATABÁZOVÁ DOKUMENTACE – READ-ONLY AUDIT A33,
+- A33 se spouští na PC2 proti localhost:5432 v transakci READ ONLY / REPEATABLE READ,
+- panel nabízí ověření připojení, úplný audit, otevření posledního reportu a výstupní složky,
+- zobrazuje poslední FINAL STATUS, čas auditu, počty schémat, objektů, tabulek, views a varování,
+- čte pouze reporty z reports/documentation/database_audit a databázi nikdy nemění,
+- A33 je samostatný zdrojový audit pro MM-DB-001 a MM-DB-002, nikoli krok A17–A24 nad vybraným dokumentem.
+
+V20.1.Q3 STEP 20B:
+- před A24 APPLY uloží ověřený snapshot dokumentační databáze,
+- po A24 APPLY a A7 načte nový snapshot a automaticky vypočítá rozdíl,
+- panel zobrazuje PŘED, PO a Δ pro dokumenty, verze, aktuální verze, sekce, vazby, historii stavů, importní běhy a aktivní dokumenty,
+- databázový nárůst se ukládá do JSON a Markdown reportu ve workspace,
+- dialog po importu uvádí přesné počty a rozdíl, nikoli pouze obecný stav importu.
+
+V20.1.Q3 STEP 20A FIX 1:
+- Git snapshot se vždy ověřuje vůči repozitáři na PC2, nikoli podle počítače, na kterém běží panel,
+- při spuštění panelu na PC2 se používá místní repozitář C:\\MatchMatrix-platform,
+- při spuštění panelu na PC1 se Git údaje načtou vzdáleně z PC2 přes PowerShell Remoting,
+- výstup uvádí ověřený host, kořen repozitáře a počet skutečných změn na PC2,
+- při nedostupnosti PC2 se lokální stav PC1 nevydává za stav hlavního repozitáře.
+
+V20.1.Q3 STEP 20A:
+- nové dokumenty automaticky přebírají ověřitelná technická data z Git a dokumentační DB,
+- panel doplní Git větev, commit, stav pracovního stromu a synchronizaci s originem,
+- panel doplní aktuální počty dokumentů, verzí, sekcí, vazeb a importních běhů,
+- panel předvyplní technickou dohledatelnost, aktivní panel, pracovní blok a stav workflow,
+- obsahové kapitoly a projektová rozhodnutí zůstávají k ručnímu nebo řízenému doplnění,
+- vysvětlující pole {{NAZEV_PROMENNE}} se nepočítá jako skutečně nevyplněný údaj.
 """
 
 import os
@@ -101,15 +254,19 @@ import threading
 import subprocess
 import shlex
 import shutil
+import socket
 import json
+import sys
 import base64
+import hashlib
 import re
 import unicodedata
+from pathlib import Path
 from datetime import datetime
 import time
 
 import tkinter as tk
-from tkinter import ttk, messagebox, filedialog
+from tkinter import ttk, messagebox, filedialog, simpledialog
 
 import psycopg2
 import psycopg2.extras
@@ -150,6 +307,93 @@ DOCUMENTATION_WORKSPACE_ROOT = os.path.join(
     "panel_workspaces"
 )
 
+# V20.1.Q3 STEP 20C - TRVALÝ POSLEDNÍ DB SNAPSHOT
+# CO:
+# - Stabilní JSON a Markdown soubor s posledním úspěšným databázovým nárůstem.
+# K ČEMU:
+# - Přehled PŘED / NYNÍ / DELTA zůstane dostupný i po restartu panelu.
+# KDE:
+# - Sdílené reporty na PC2 mimo dočasný workspace konkrétního dokumentu.
+DOCUMENTATION_DB_GROWTH_DIR = os.path.join(
+    DOCUMENTATION_ROOT,
+    "reports",
+    "documentation",
+    "database_growth"
+)
+DOCUMENTATION_DB_GROWTH_LATEST_JSON = os.path.join(
+    DOCUMENTATION_DB_GROWTH_DIR,
+    "documentation_database_growth_latest.json"
+)
+DOCUMENTATION_DB_GROWTH_LATEST_MARKDOWN = os.path.join(
+    DOCUMENTATION_DB_GROWTH_DIR,
+    "documentation_database_growth_latest.md"
+)
+
+# V20.1.Q3 STEP 19 - OFICIÁLNÍ ŠABLONY NOVÝCH DOKUMENTŮ
+# CO:
+# - Centrální cesty k řízeným šablonám DAILY_LOG a CHAT_CONTINUATION.
+# K ČEMU:
+# - Nový dokument vzniká rovnou ve struktuře očekávané A17.
+# KDE:
+# - docs/13_TEMPLATES na sdíleném repozitáři PC2.
+# JAK:
+# - Panel čte pouze obsah mezi MM-TEMPLATE-START a MM-TEMPLATE-END.
+DOCUMENTATION_TEMPLATE_DIR = os.path.join(
+    DOCUMENTATION_ROOT,
+    "docs",
+    "13_TEMPLATES"
+)
+DOCUMENTATION_TEMPLATES = {
+    "CHAT_CONTINUATION": os.path.join(
+        DOCUMENTATION_TEMPLATE_DIR,
+        "MM-TPL-001_SABLONA_NAVAZANI_DO_NOVEHO_CHATU.md"
+    ),
+    "DAILY_LOG": os.path.join(
+        DOCUMENTATION_TEMPLATE_DIR,
+        "MM-TPL-002_SABLONA_DENNIHO_ZAPISU.md"
+    ),
+}
+
+# V20.1.Q3 STEP 22 - UNIVERZÁLNÍ KANONICKÉ SMĚROVÁNÍ
+# CO:
+# - Jediný registr vazby Document ID prefix -> aktivní dokumentační složka.
+# K ČEMU:
+# - Schválení není vázané na textový název typu dokumentu.
+# - Nová verze existujícího dokumentu se uloží ke stejnému Document ID.
+# - Budoucí prefixy lze doplnit jedním řádkem nebo metadatem Cílové umístění.
+# KDE:
+# - docs podle MM-STD-007 a speciální historické řady DL/NAV/PS.
+DOCUMENTATION_CANONICAL_PREFIX_DIRS = {
+    "MM-DOC": ("docs", "00_DOCUMENTATION"),
+    "MM-MST": ("docs", "01_MASTER"),
+    "MM-GOV": ("docs", "02_GOVERNANCE"),
+    "MM-ARC": ("docs", "03_ARCHITECTURE"),
+    "MM-DB": ("docs", "04_DATABASE"),
+    "MM-PRV": ("docs", "05_PROVIDERS"),
+    "MM-LAY": ("docs", "06_LAYERS"),
+    "MM-OPS": ("docs", "07_OPERATOR"),
+    "MM-DEV": ("docs", "08_DEVELOPMENT"),
+    "MM-HIS": ("docs", "09_HISTORY"),
+    "MM-REF": ("docs", "10_REFERENCE"),
+    "MM-VIS": ("docs", "11_VISUAL"),
+    "MM-STD": ("docs", "12_STANDARD"),
+    "MM-TPL": ("docs", "13_TEMPLATES"),
+    "MM-EXP": ("docs", "14_EXPORT"),
+    "MM-DRF": ("docs", "15_DRAFT"),
+    "MM-ARCV": ("docs", "99_ARCHIVE"),
+}
+
+DOCUMENTATION_CANONICAL_SPECIAL_PREFIX_DIRS = {
+    "MM-DL": ("docs", "09_HISTORY", "DENNÍ_ZÁPISY"),
+    "MM-NAV": ("docs", "09_HISTORY", "NAVÁZÁNÍ_NA_CHAT"),
+    "MM-PS": ("docs", "09_HISTORY", "PROJECT_SNAPSHOTS"),
+}
+
+DOCUMENTATION_CANONICAL_ID_RE = re.compile(
+    r"^(?:MM-DL-\d{8}|MM-NAV-\d{8}-\d{2}|MM-PS-\d{8}|MM-[A-Z]{2,10}-\d{3,4}[A-Z]?)$",
+    re.IGNORECASE,
+)
+
 DOCUMENTATION_SCRIPTS = {
     "A17": os.path.join(
         DOCUMENTATION_TOOL_DIR,
@@ -182,6 +426,14 @@ DOCUMENTATION_SCRIPTS = {
     "A24": os.path.join(
         DOCUMENTATION_TOOL_DIR,
         "25_1_A_24_IMPORT_HISTORY_DOCUMENTS_TO_DB_V1.py"
+    ),
+    "A33": os.path.join(
+        DOCUMENTATION_TOOL_DIR,
+        "25_1_A_33_EXPORT_DATABASE_STRUCTURE_AUDIT_V1.py"
+    ),
+    "A34": os.path.join(
+        DOCUMENTATION_TOOL_DIR,
+        "25_1_A_34_EXPORT_AI_CONTEXT_PACKAGE_V1.py"
     ),
     "A6": os.path.join(
         DOCUMENTATION_TOOL_DIR,
@@ -380,6 +632,18 @@ COLUMN_LABELS = {
     "payload_json": "Payload JSON",
     "created_at": "Vytvořeno",
     "updated_at": "Upraveno",
+    "snapshot_state": "Stav snapshotu",
+    "documents": "Dokumenty",
+    "current_versions": "Aktuální verze",
+    "versions_total": "Verze celkem",
+    "sections": "Sekce",
+    "relations": "Vazby",
+    "status_history": "Historie stavů",
+    "import_runs": "Importní běhy",
+    "active_documents": "Aktivní dokumenty",
+    "snapshot_document_id": "Poslední dokument",
+    "snapshot_version": "Verze",
+    "snapshot_time": "Čas snapshotu",
     "fetched_at": "Staženo",
     "last_payload_at": "Poslední payload",
     "generated_at": "Vygenerováno",
@@ -548,6 +812,74 @@ COLUMN_LABELS = {
     "fallback_provider": "Záložní provider",
 }
 
+
+
+
+# =========================================================
+# V20.1.Q3 STEP 27 - ČESKÉ POPISKY DOKUMENTAČNÍHO PANELU
+# =========================================================
+COLUMN_LABELS.update({
+    "document_id": "ID dokumentu",
+    "name": "Název",
+    "document_name": "Název dokumentu",
+    "document_type": "Typ dokumentu",
+    "edition": "Edice",
+    "version": "Verze",
+    "version_label": "Označení verze",
+    "current_version_label": "Aktuální verze",
+    "current_status": "Aktuální stav",
+    "source_of_truth": "Zdroj pravdy",
+    "import_run_pk": "ID importního běhu",
+    "import_status": "Stav importu",
+    "source_root": "Zdrojová cesta",
+    "source_path": "Zdrojová cesta",
+    "source_file": "Zdrojový soubor",
+    "source_document_id": "Zdrojový dokument",
+    "target_document_id": "Cílový dokument",
+    "relation_type": "Typ vazby",
+    "previous_status": "Předchozí stav",
+    "new_status": "Nový stav",
+    "change_reason": "Důvod změny",
+    "changed_at": "Změněno",
+    "approved_at": "Schváleno",
+    "approved_by": "Schválil",
+    "section_count": "Počet sekcí",
+    "relation_count": "Počet vazeb",
+    "version_count": "Počet verzí",
+    "is_current": "Aktuální",
+    "is_active": "Aktivní",
+    "document_count": "Počet dokumentů",
+    "active_document_count": "Aktivní dokumenty",
+    "foreign_term": "Cizí výraz",
+    "czech_translation": "Český překlad",
+    "source_chapter": "Zdrojová kapitola",
+    "target_chapter": "Cílová kapitola",
+    "explanation": "Výklad",
+    "candidate_status": "Stav kandidáta",
+    "selected": "Vybrat",
+})
+
+STATUS_LABELS.update({
+    "APPROVED": "SCHVÁLENO",
+    "DRAFT": "NÁVRH",
+    "NEEDS_USER_APPROVAL": "ČEKÁ NA SCHVÁLENÍ UŽIVATELEM",
+    "DRAFT – NEEDS_USER_APPROVAL": "NÁVRH – ČEKÁ NA SCHVÁLENÍ",
+    "MANUAL_REVIEW_REQUIRED": "VYŽADUJE RUČNÍ KONTROLU",
+    "MANUAL_REVIEW": "RUČNÍ KONTROLA",
+    "VALIDATED": "OVĚŘENO",
+    "VERIFIED": "OVĚŘENO",
+    "APPLIED": "PROVEDENO",
+    "ACTIVE": "AKTIVNÍ",
+    "INACTIVE": "NEAKTIVNÍ",
+    "HYBRID": "KOMBINOVANÝ ZDROJ",
+    "DATABASE": "DATABÁZE",
+    "MARKDOWN": "MARKDOWN DOKUMENT",
+    "CANONICAL_MARKDOWN": "KANONICKÝ MARKDOWN",
+    "NEW": "NOVÝ",
+    "EXISTS": "EXISTUJE",
+    "CONFLICT": "KONFLIKT",
+    "REVIEW": "KE KONTROLE",
+})
 
 
 
@@ -975,8 +1307,119 @@ def cz_status(value):
 
     return STATUS_LABELS.get(key, text)
 
+
+# V20.1.Q3 STEP 27 FIX 1 - sjednocený český převod dokumentačních stavů.
+DOCUMENTATION_VALUE_LABELS = {
+    "PASS": "SPLNĚNO",
+    "FAIL": "NESPLNĚNO",
+    "PARTIAL": "ČÁSTEČNĚ SPLNĚNO",
+    "MANUAL_REVIEW": "RUČNÍ KONTROLA",
+    "MANUAL_REVIEW_REQUIRED": "VYŽADUJE RUČNÍ KONTROLU",
+    "CRITICAL": "KRITICKÁ",
+    "HIGH": "VYSOKÁ",
+    "MEDIUM": "STŘEDNÍ",
+    "LOW": "NÍZKÁ",
+    "INFO": "INFORMAČNÍ",
+    "STRUCTURE": "STRUKTURA",
+    "TERMINOLOGY": "TERMINOLOGIE",
+    "CONTENT": "OBSAH",
+    "METADATA": "METADATA",
+    "LINKS": "VAZBY",
+    "PENDING": "ČEKÁ",
+    "ALL": "VŠE",
+    "RESTRUCTURE_REQUIRED": "VYŽADUJE PŘESTRUKTUROVÁNÍ",
+    "DATABASE_STRUCTURE_AUDIT_EXPORTED": "AUDIT STRUKTURY DATABÁZE VYEXPORTOVÁN",
+    "DATABASE_STRUCTURE_CONNECTION_VERIFIED": "PŘIPOJENÍ K DATABÁZI OVĚŘENO",
+    "AI_CONTEXT_PACKAGE_CREATED": "AI KONTEXTOVÝ BALÍČEK VYTVOŘEN",
+    "AI_CONTEXT_PACKAGE_VALIDATED": "PODKLADY AI KONTEXTU OVĚŘENY",
+    "AI_CONTEXT_PACKAGE_BLOCKED": "VYTVOŘENÍ AI KONTEXTU ZABLOKOVÁNO",
+    "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED": "IMPORT PROVEDEN A OVĚŘEN",
+    "HISTORY_DOCUMENT_IMPORT_VALIDATED": "IMPORT OVĚŘEN",
+    "VERIFIED": "OVĚŘENO",
+    "VALIDATED": "OVĚŘENO",
+    "APPLIED": "PROVEDENO",
+    "BLOCKED": "ZABLOKOVÁNO",
+    "FAILED": "CHYBA",
+}
+
+def cz_documentation_value(value):
+    """Překládá pouze prezentační hodnotu; interní kód zůstává beze změny."""
+    if value is None:
+        return ""
+    raw = str(value)
+    key = raw.strip().upper()
+    if key in DOCUMENTATION_VALUE_LABELS:
+        return DOCUMENTATION_VALUE_LABELS[key]
+    if key in STATUS_LABELS:
+        return STATUS_LABELS[key]
+
+    # Složené technické stavy převádíme po částech, ale identifikátory souborů
+    # a pravidel tímto způsobem neměníme.
+    translated = raw
+    replacements = (
+        ("RESTRUCTURE_REQUIRED", "VYŽADUJE PŘESTRUKTUROVÁNÍ"),
+        ("MANUAL_REVIEW_REQUIRED", "VYŽADUJE RUČNÍ KONTROLU"),
+        ("MANUAL_REVIEW", "RUČNÍ KONTROLA"),
+        ("APPLIED_AND_VERIFIED", "PROVEDENO A OVĚŘENO"),
+        ("VALIDATE_ONLY", "POUZE OVĚŘENÍ"),
+        ("VALIDATED", "OVĚŘENO"),
+        ("VERIFIED", "OVĚŘENO"),
+        ("FAILED", "CHYBA"),
+        ("BLOCKED", "ZABLOKOVÁNO"),
+        ("PENDING", "ČEKÁ"),
+    )
+    for source, target in replacements:
+        translated = re.sub(re.escape(source), target, translated, flags=re.IGNORECASE)
+    return translated
+
 def cz_column(column_name):
-    return COLUMN_LABELS.get(str(column_name), str(column_name))
+    """
+    Zobrazuje v panelu český uživatelský popisek.
+    Databázový název sloupce zůstává interně beze změny.
+    """
+    raw = str(column_name or "")
+    if raw in COLUMN_LABELS:
+        return COLUMN_LABELS[raw]
+
+    token_map = {
+        "id": "ID",
+        "document": "dokument",
+        "documents": "dokumenty",
+        "type": "typ",
+        "name": "název",
+        "status": "stav",
+        "current": "aktuální",
+        "previous": "předchozí",
+        "new": "nový",
+        "source": "zdroj",
+        "target": "cíl",
+        "relation": "vazba",
+        "version": "verze",
+        "label": "označení",
+        "count": "počet",
+        "created": "vytvořeno",
+        "updated": "upraveno",
+        "changed": "změněno",
+        "started": "zahájeno",
+        "finished": "dokončeno",
+        "at": "",
+        "by": "kým",
+        "reason": "důvod",
+        "root": "kořenová cesta",
+        "path": "cesta",
+        "file": "soubor",
+        "run": "běh",
+        "import": "import",
+        "active": "aktivní",
+        "section": "sekce",
+        "edition": "edice",
+        "truth": "pravda",
+        "of": "",
+    }
+    parts = [part for part in raw.lower().split("_") if part]
+    translated = [token_map.get(part, part) for part in parts]
+    label = " ".join(part for part in translated if part).strip()
+    return label[:1].upper() + label[1:] if label else raw
 
 
 # =========================================================
@@ -1131,10 +1574,66 @@ class MatchMatrixAdminPanel(tk.Tk):
         self.documentation_workflow_a18_panel_mapping_json = None
         self.documentation_workflow_a18_panel_mapping_markdown = None
 
+        # V20.1.Q3 STEP 25 - A23 READ-ONLY TERMINOLOGY CANDIDATES
+        self.documentation_workflow_a23_report_json = None
+        self.documentation_workflow_a23_report_markdown = None
+        self.documentation_workflow_a23_candidates = []
+        self.documentation_workflow_a23_selected_keys = set()
+        self.documentation_workflow_a23_translation_proposal = None
+        self.documentation_workflow_a23_explanation_proposal = None
+
+        # V20.1.Q3 STEP 12–17 - cesta od A20 až po Git commit.
+        self.documentation_workflow_a20_candidate = None
+        self.documentation_workflow_a20_build_json = None
+        self.documentation_workflow_final_a17_json = None
+        self.documentation_workflow_final_a17_markdown = None
+        self.documentation_workflow_approved_candidate = None
+        self.documentation_workflow_canonical_document = None
+        self.documentation_workflow_canonical_a17_json = None
+        self.documentation_workflow_canonical_a17_markdown = None
+        self.documentation_workflow_git_commit = None
+
+        # V20.1.Q3 STEP 18 - databázová publikační část A24 -> A6 -> A7.
+        self.documentation_workflow_a24_validation_status = None
+        self.documentation_workflow_a24_validation_report = None
+        self.documentation_workflow_a24_validation_hash = None
+        self.documentation_workflow_a24_apply_status = None
+        self.documentation_workflow_a24_apply_report = None
+        self.documentation_workflow_a7_status = None
+        self.documentation_workflow_import_summary = {}
+
+        # V20.1.Q3 STEP 20B - databázový snapshot PŘED / PO / DELTA.
+        self.documentation_workflow_db_snapshot_before_apply = None
+        self.documentation_workflow_db_snapshot_after_apply = None
+        self.documentation_workflow_db_snapshot_delta = {}
+        self.documentation_workflow_db_growth_report = None
+        self.documentation_workflow_db_growth_markdown = None
+        self.documentation_latest_db_growth_payload = None
+
         self.documentation_workflow_process = None
         self.documentation_workflow_running = False
         self.documentation_workflow_started_at = None
         self.documentation_workflow_finished_at = None
+
+        # V20.1.Q3 STEP 23 - samostatný read-only audit databázové struktury A33.
+        self.documentation_a33_process = None
+        self.documentation_a33_running = False
+        self.documentation_a33_last_status = "AUDIT ZATÍM NEPROBĚHL"
+        self.documentation_a33_last_output = None
+        self.documentation_a33_last_report = None
+        self.documentation_a33_last_payload = None
+        self.documentation_a33_buttons = []
+
+        # V20.1.Q3 STEP 29 - řízený AI Context Package A34.
+        self.documentation_a34_process = None
+        self.documentation_a34_running = False
+        self.documentation_a34_last_status = "BALÍČEK ZATÍM NEVYTVOŘEN"
+        self.documentation_a34_last_output = None
+        self.documentation_a34_last_payload = None
+        self.documentation_a34_last_manifest = None
+        self.documentation_a34_last_markdown = None
+        self.documentation_a34_last_zip = None
+        self.documentation_a34_buttons = []
 
         self.setup_style()
         self.build_ui()
@@ -2340,13 +2839,15 @@ class MatchMatrixAdminPanel(tk.Tk):
         # K ČEMU TO JE:
         # - Operátor vidí stav dokumentů, verzí, sekcí, vazeb a importů bez DBeaveru.
         # - Základ pro budoucí několikaklikový dokumentační workflow.
+        # V20.1.Q3 STEP 30 - DOKUMENTACE JE ROZDĚLENA DO SAMOSTATNÝCH STRÁNEK.
+        # Každá stránka používá celou dostupnou výšku; uživatel již nemusí
+        # hledat workflow, audity, slovník a databázové tabulky v jednom
+        # dlouhém, vertikálně přeplněném pohledu.
         tab_documentation.columnconfigure(0, weight=1)
         tab_documentation.columnconfigure(1, weight=1)
+        tab_documentation.rowconfigure(0, weight=0)
         tab_documentation.rowconfigure(1, weight=0)
-        tab_documentation.rowconfigure(2, weight=2)
-        tab_documentation.rowconfigure(3, weight=1)
-        tab_documentation.rowconfigure(4, weight=1)
-        tab_documentation.rowconfigure(5, weight=1)
+        tab_documentation.rowconfigure(2, weight=1)
 
         documentation_button_bar = tk.Frame(tab_documentation, bg=BG)
         documentation_button_bar.grid(
@@ -2419,6 +2920,93 @@ class MatchMatrixAdminPanel(tk.Tk):
             )
         )
 
+        # ---------------------------------------------------------
+        # V20.1.Q3 STEP 30 - VNITŘNÍ STRÁNKY ZÁLOŽKY DOKUMENTACE
+        # ---------------------------------------------------------
+        documentation_page_bar = tk.Frame(
+            tab_documentation,
+            bg="#100918",
+            highlightbackground=CARD_BORDER,
+            highlightthickness=1
+        )
+        documentation_page_bar.grid(
+            row=1,
+            column=0,
+            columnspan=2,
+            sticky="ew",
+            padx=4,
+            pady=(0, 4)
+        )
+
+        documentation_pages_host = tk.Frame(tab_documentation, bg=BG)
+        documentation_pages_host.grid(
+            row=2,
+            column=0,
+            columnspan=2,
+            sticky="nsew",
+            padx=0,
+            pady=0
+        )
+
+        documentation_page_workflow = tk.Frame(documentation_pages_host, bg=BG)
+        documentation_page_audit_ai = tk.Frame(documentation_pages_host, bg=BG)
+        documentation_page_glossary = tk.Frame(documentation_pages_host, bg=BG)
+        documentation_page_database = tk.Frame(documentation_pages_host, bg=BG)
+
+        self.documentation_pages = {
+            "WORKFLOW": documentation_page_workflow,
+            "AUDIT_AI": documentation_page_audit_ai,
+            "GLOSSARY": documentation_page_glossary,
+            "DATABASE": documentation_page_database,
+        }
+        self.documentation_page_buttons = {}
+        self.documentation_current_page = None
+
+        for page_frame in self.documentation_pages.values():
+            page_frame.place(relx=0, rely=0, relwidth=1, relheight=1)
+
+        documentation_page_workflow.columnconfigure(0, weight=1)
+        documentation_page_workflow.columnconfigure(1, weight=1)
+        documentation_page_workflow.rowconfigure(0, weight=1)
+
+        documentation_page_audit_ai.columnconfigure(0, weight=1)
+        documentation_page_audit_ai.columnconfigure(1, weight=1)
+        documentation_page_audit_ai.rowconfigure(0, weight=1)
+
+        documentation_page_glossary.columnconfigure(0, weight=1)
+        documentation_page_glossary.columnconfigure(1, weight=1)
+        documentation_page_glossary.rowconfigure(0, weight=1)
+
+        documentation_page_database.columnconfigure(0, weight=1)
+        documentation_page_database.columnconfigure(1, weight=1)
+        documentation_page_database.rowconfigure(0, weight=1)
+        documentation_page_database.rowconfigure(1, weight=2)
+        documentation_page_database.rowconfigure(2, weight=2)
+
+        def add_documentation_page_button(page_key, label):
+            button = tk.Button(
+                documentation_page_bar,
+                text=label,
+                bg="#23142f",
+                fg="#cdb7df",
+                activebackground="#6d45b8",
+                activeforeground="white",
+                relief="flat",
+                bd=0,
+                font=("Segoe UI", 9, "bold"),
+                cursor="hand2",
+                command=lambda key=page_key: self.show_documentation_page(key),
+                padx=10,
+                pady=7
+            )
+            button.pack(side="left", fill="x", expand=True, padx=3, pady=3)
+            self.documentation_page_buttons[page_key] = button
+
+        add_documentation_page_button("WORKFLOW", "1  PRACOVNÍ POSTUP")
+        add_documentation_page_button("AUDIT_AI", "2  AUDITY A AI KONTEXT")
+        add_documentation_page_button("GLOSSARY", "3  PŘEKLADY A VÝKLADY")
+        add_documentation_page_button("DATABASE", "4  DATABÁZOVÝ PŘEHLED")
+
         # V20.1.Q3 - ŘÍZENÝ DOKUMENTAČNÍ WORKFLOW
         # CO:
         # - Výběr jednoho zdrojového Markdown dokumentu.
@@ -2429,16 +3017,16 @@ class MatchMatrixAdminPanel(tk.Tk):
         # JAK:
         # - Tlačítko VYBRAT DOKUMENT vytvoří pracovní kopii a manifest.
         documentation_workflow_frame = tk.Frame(
-            tab_documentation,
+            documentation_page_workflow,
             bg="#100918",
             highlightbackground=CARD_BORDER,
             highlightthickness=1
         )
         documentation_workflow_frame.grid(
-            row=1,
+            row=0,
             column=0,
             columnspan=2,
-            sticky="ew",
+            sticky="nsew",
             padx=4,
             pady=4
         )
@@ -2473,41 +3061,62 @@ class MatchMatrixAdminPanel(tk.Tk):
             pady=(0, 5)
         )
 
-        self.make_button(
-            workflow_action_bar,
-            "📄 VYBRAT DOKUMENT",
+        # V20.1.Q3 STEP 14:
+        # Čtyři hlavní fáze místo dvanácti samostatných tlačítek.
+        # Každé tlačítko provede právě následující chybějící krok své fáze.
+        # Pravé tlačítko myši otevře nabídku všech dílčích akcí fáze.
+        phase_buttons = []
+
+        def add_phase_button(label, color, command, menu_builder):
+            button = tk.Button(
+                workflow_action_bar,
+                text=label,
+                bg=color,
+                fg="white",
+                activebackground=color,
+                activeforeground="white",
+                relief="flat",
+                bd=0,
+                font=("Segoe UI", 9, "bold"),
+                cursor="hand2",
+                command=command,
+                padx=10,
+                pady=5
+            )
+            button.pack(side="left", fill="x", expand=True, padx=5)
+            button.bind(
+                "<Button-3>",
+                lambda event, builder=menu_builder: self._documentation_show_phase_menu(
+                    event,
+                    builder()
+                )
+            )
+            phase_buttons.append(button)
+            return button
+
+        add_phase_button(
+            "1  VYBRAT A ANALYZOVAT",
             "#6d45b8",
-            self.documentation_select_source_document
+            self.documentation_phase_1_analyze,
+            self._documentation_phase_1_menu
         )
-        self.make_button(
-            workflow_action_bar,
-            "🔎 A17 AUDIT",
-            "#0f6a42",
-            self.documentation_run_a17
-        )
-        self.make_button(
-            workflow_action_bar,
-            "📋 A17 NÁLEZY",
-            "#7b4ab8",
-            self.documentation_show_a17_findings
-        )
-        self.make_button(
-            workflow_action_bar,
-            "🛠 NÁVRH OPRAVY",
+        add_phase_button(
+            "2  OPRAVIT A ZKONTROLOVAT",
             "#9a5b13",
-            self.documentation_run_a18
+            self.documentation_phase_2_review,
+            self._documentation_phase_2_menu
         )
-        self.make_button(
-            workflow_action_bar,
-            "🧭 KONTROLA MAPOVÁNÍ",
+        add_phase_button(
+            "3  VYTVOŘIT A SCHVÁLIT",
+            "#0f6a42",
+            self.documentation_phase_3_build,
+            self._documentation_phase_3_menu
+        )
+        add_phase_button(
+            "4  PUBLIKOVAT",
             "#0f5f63",
-            self.documentation_run_a19
-        )
-        self.make_button(
-            workflow_action_bar,
-            "📄 OTEVŘÍT REPORT",
-            "#355c8a",
-            self.documentation_open_a17_report
+            self.documentation_phase_4_publish,
+            self._documentation_phase_4_menu
         )
 
         tk.Label(
@@ -2670,17 +3279,404 @@ class MatchMatrixAdminPanel(tk.Tk):
             pady=(2, 7)
         )
 
+        tk.Label(
+            documentation_workflow_frame,
+            text="PUBLIKACE:",
+            bg="#100918",
+            fg=MUTED,
+            font=("Segoe UI", 8, "bold"),
+            anchor="w"
+        ).grid(
+            row=5,
+            column=0,
+            sticky="w",
+            padx=(8, 4),
+            pady=(2, 7)
+        )
+
+        self.documentation_workflow_publish_value = tk.Label(
+            documentation_workflow_frame,
+            text="PC2 | DB localhost/matchmatrix | A24 VALIDATE: ČEKÁ | APPLY: ČEKÁ | A7: ČEKÁ",
+            bg="#100918",
+            fg=MUTED,
+            font=("Segoe UI", 8, "bold"),
+            anchor="w",
+            justify="left",
+            wraplength=1050
+        )
+        self.documentation_workflow_publish_value.grid(
+            row=5,
+            column=1,
+            columnspan=3,
+            sticky="ew",
+            padx=(0, 8),
+            pady=(2, 7)
+        )
+
+        tk.Label(
+            documentation_workflow_frame,
+            text="DB STAV / NÁRŮST:",
+            bg="#100918",
+            fg=MUTED,
+            font=("Segoe UI", 8, "bold"),
+            anchor="w"
+        ).grid(
+            row=6,
+            column=0,
+            sticky="nw",
+            padx=(8, 4),
+            pady=(2, 7)
+        )
+
+        self.documentation_workflow_db_growth_value = tk.Label(
+            documentation_workflow_frame,
+            text="ČEKÁ NA A24 APPLY",
+            bg="#100918",
+            fg=MUTED,
+            font=("Segoe UI", 8, "bold"),
+            anchor="w",
+            justify="left",
+            wraplength=1050
+        )
+        self.documentation_workflow_db_growth_value.grid(
+            row=6,
+            column=1,
+            columnspan=3,
+            sticky="ew",
+            padx=(0, 8),
+            pady=(2, 7)
+        )
+
         self._documentation_update_workflow_ui()
+
+        # V20.1.Q3 STEP 23 - DATABÁZOVÁ DOKUMENTACE / READ-ONLY AUDIT A33
+        # CO:
+        # - Samostatný audit skutečné struktury PostgreSQL na PC2.
+        # K ČEMU:
+        # - Vytváří ověřené JSON/CSV/Markdown podklady pro MM-DB-001 a MM-DB-002.
+        # KDE:
+        # - Mezi řízeným workflow dokumentu a terminologickou částí.
+        # JAK:
+        # - Vždy na PC2, localhost:5432, READ ONLY + REPEATABLE READ.
+        database_audit_frame = tk.Frame(
+            documentation_page_audit_ai,
+            bg="#0d1118",
+            highlightbackground="#31536b",
+            highlightthickness=1
+        )
+        database_audit_frame.grid(
+            row=0,
+            column=0,
+            columnspan=2,
+            sticky="nsew",
+            padx=4,
+            pady=4
+        )
+        database_audit_frame.columnconfigure(1, weight=1)
+        database_audit_frame.columnconfigure(3, weight=1)
+
+        tk.Label(
+            database_audit_frame,
+            text="🗄 DATABÁZOVÁ DOKUMENTACE – AUDIT POUZE PRO ČTENÍ A33",
+            bg="#0d1118",
+            fg="#9bd7ff",
+            font=("Segoe UI", 10, "bold"),
+            anchor="w"
+        ).grid(
+            row=0,
+            column=0,
+            columnspan=4,
+            sticky="ew",
+            padx=8,
+            pady=(6, 3)
+        )
+
+        database_audit_actions = tk.Frame(
+            database_audit_frame,
+            bg="#0d1118"
+        )
+        database_audit_actions.grid(
+            row=1,
+            column=0,
+            columnspan=4,
+            sticky="ew",
+            padx=6,
+            pady=(0, 4)
+        )
+
+        def add_a33_button(label, color, command):
+            button = tk.Button(
+                database_audit_actions,
+                text=label,
+                bg=color,
+                fg="white",
+                activebackground=color,
+                activeforeground="white",
+                relief="flat",
+                bd=0,
+                font=("Segoe UI", 8, "bold"),
+                cursor="hand2",
+                command=command,
+                padx=8,
+                pady=4
+            )
+            button.pack(side="left", fill="x", expand=True, padx=4)
+            self.documentation_a33_buttons.append(button)
+            return button
+
+        add_a33_button(
+            "✓ OVĚŘIT PŘIPOJENÍ",
+            "#3b5870",
+            self.documentation_a33_validate_connection
+        )
+        add_a33_button(
+            "▶ SPUSTIT ÚPLNÝ AUDIT",
+            "#0f6a42",
+            self.documentation_a33_run_full_audit
+        )
+        add_a33_button(
+            "📄 OTEVŘÍT POSLEDNÍ REPORT",
+            "#4c2c83",
+            self.documentation_a33_open_latest_report
+        )
+        add_a33_button(
+            "📂 OTEVŘÍT VÝSTUPY",
+            "#0f5f63",
+            self.documentation_a33_open_output_folder
+        )
+
+        tk.Label(
+            database_audit_frame,
+            text="STAV:",
+            bg="#0d1118",
+            fg=MUTED,
+            font=("Segoe UI", 8, "bold"),
+            anchor="w"
+        ).grid(row=2, column=0, sticky="w", padx=(8, 4), pady=2)
+
+        self.documentation_a33_status_value = tk.Label(
+            database_audit_frame,
+            text="AUDIT ZATÍM NEPROBĚHL",
+            bg="#0d1118",
+            fg=YELLOW,
+            font=("Segoe UI", 8, "bold"),
+            anchor="w"
+        )
+        self.documentation_a33_status_value.grid(
+            row=2, column=1, sticky="ew", padx=(0, 8), pady=2
+        )
+
+        tk.Label(
+            database_audit_frame,
+            text="POSLEDNÍ BĚH:",
+            bg="#0d1118",
+            fg=MUTED,
+            font=("Segoe UI", 8, "bold"),
+            anchor="w"
+        ).grid(row=2, column=2, sticky="w", padx=(8, 4), pady=2)
+
+        self.documentation_a33_time_value = tk.Label(
+            database_audit_frame,
+            text="-",
+            bg="#0d1118",
+            fg="#c5d9e8",
+            font=("Segoe UI", 8),
+            anchor="w"
+        )
+        self.documentation_a33_time_value.grid(
+            row=2, column=3, sticky="ew", padx=(0, 8), pady=2
+        )
+
+        tk.Label(
+            database_audit_frame,
+            text="SOUHRN:",
+            bg="#0d1118",
+            fg=MUTED,
+            font=("Segoe UI", 8, "bold"),
+            anchor="nw"
+        ).grid(row=3, column=0, sticky="nw", padx=(8, 4), pady=(2, 6))
+
+        self.documentation_a33_summary_value = tk.Label(
+            database_audit_frame,
+            text="Schémata - | Objekty - | Tabulky - | Pohledy - | Varování -",
+            bg="#0d1118",
+            fg="#c5d9e8",
+            font=("Segoe UI", 8, "bold"),
+            anchor="w",
+            justify="left",
+            wraplength=1450
+        )
+        self.documentation_a33_summary_value.grid(
+            row=3, column=1, columnspan=3, sticky="ew", padx=(0, 8), pady=(2, 6)
+        )
+
+        self._documentation_update_a33_ui()
+
+        # V20.1.Q3 STEP 29 - AI KONTEXT PRO NOVÝ CHAT / A34
+        tk.Frame(
+            database_audit_frame,
+            bg="#31536b",
+            height=1
+        ).grid(
+            row=4,
+            column=0,
+            columnspan=4,
+            sticky="ew",
+            padx=8,
+            pady=(2, 4)
+        )
+
+        tk.Label(
+            database_audit_frame,
+            text="🤖 AI KONTEXT PRO NOVÝ CHAT – A34",
+            bg="#0d1118",
+            fg="#d8b4fe",
+            font=("Segoe UI", 10, "bold"),
+            anchor="w"
+        ).grid(
+            row=5,
+            column=0,
+            columnspan=4,
+            sticky="ew",
+            padx=8,
+            pady=(2, 3)
+        )
+
+        ai_context_actions = tk.Frame(
+            database_audit_frame,
+            bg="#0d1118"
+        )
+        ai_context_actions.grid(
+            row=6,
+            column=0,
+            columnspan=4,
+            sticky="ew",
+            padx=6,
+            pady=(0, 4)
+        )
+
+        def add_a34_button(label, color, command):
+            button = tk.Button(
+                ai_context_actions,
+                text=label,
+                bg=color,
+                fg="white",
+                activebackground=color,
+                activeforeground="white",
+                relief="flat",
+                bd=0,
+                font=("Segoe UI", 8, "bold"),
+                cursor="hand2",
+                command=command,
+                padx=8,
+                pady=4
+            )
+            button.pack(side="left", fill="x", expand=True, padx=3)
+            self.documentation_a34_buttons.append(button)
+            return button
+
+        add_a34_button(
+            "✓ OVĚŘIT PODKLADY",
+            "#3b5870",
+            self.documentation_a34_validate_inputs
+        )
+        add_a34_button(
+            "▶ VYTVOŘIT BALÍČEK",
+            "#0f6a42",
+            self.documentation_a34_create_package
+        )
+        add_a34_button(
+            "📄 OTEVŘÍT MARKDOWN",
+            "#4c2c83",
+            self.documentation_a34_open_latest_markdown
+        )
+        add_a34_button(
+            "📦 OTEVŘÍT ZIP",
+            "#6d45b8",
+            self.documentation_a34_open_latest_zip
+        )
+        add_a34_button(
+            "📂 OTEVŘÍT VÝSTUPY",
+            "#0f5f63",
+            self.documentation_a34_open_output_folder
+        )
+
+        tk.Label(
+            database_audit_frame,
+            text="STAV A34:",
+            bg="#0d1118",
+            fg=MUTED,
+            font=("Segoe UI", 8, "bold"),
+            anchor="w"
+        ).grid(row=7, column=0, sticky="w", padx=(8, 4), pady=2)
+
+        self.documentation_a34_status_value = tk.Label(
+            database_audit_frame,
+            text="BALÍČEK ZATÍM NEVYTVOŘEN",
+            bg="#0d1118",
+            fg=YELLOW,
+            font=("Segoe UI", 8, "bold"),
+            anchor="w"
+        )
+        self.documentation_a34_status_value.grid(
+            row=7, column=1, sticky="ew", padx=(0, 8), pady=2
+        )
+
+        tk.Label(
+            database_audit_frame,
+            text="POSLEDNÍ BALÍČEK:",
+            bg="#0d1118",
+            fg=MUTED,
+            font=("Segoe UI", 8, "bold"),
+            anchor="w"
+        ).grid(row=7, column=2, sticky="w", padx=(8, 4), pady=2)
+
+        self.documentation_a34_time_value = tk.Label(
+            database_audit_frame,
+            text="-",
+            bg="#0d1118",
+            fg="#c5d9e8",
+            font=("Segoe UI", 8),
+            anchor="w"
+        )
+        self.documentation_a34_time_value.grid(
+            row=7, column=3, sticky="ew", padx=(0, 8), pady=2
+        )
+
+        tk.Label(
+            database_audit_frame,
+            text="SOUHRN A34:",
+            bg="#0d1118",
+            fg=MUTED,
+            font=("Segoe UI", 8, "bold"),
+            anchor="nw"
+        ).grid(row=8, column=0, sticky="nw", padx=(8, 4), pady=(2, 6))
+
+        self.documentation_a34_summary_value = tk.Label(
+            database_audit_frame,
+            text="Package ID - | Soubory - | Varování - | Sport -",
+            bg="#0d1118",
+            fg="#c5d9e8",
+            font=("Segoe UI", 8, "bold"),
+            anchor="w",
+            justify="left",
+            wraplength=1450
+        )
+        self.documentation_a34_summary_value.grid(
+            row=8, column=1, columnspan=3, sticky="ew", padx=(0, 8), pady=(2, 6)
+        )
+
+        self._documentation_update_a34_ui()
 
         # V20.1.Q2 - KLIKACÍ SLOVNÍK A VÝKLADOVÝ REJSTŘÍK
         glossary_frame = tk.Frame(
-            tab_documentation,
+            documentation_page_glossary,
             bg=PANEL_2,
             highlightbackground=CARD_BORDER,
             highlightthickness=1
         )
         glossary_frame.grid(
-            row=2,
+            row=0,
             column=0,
             columnspan=2,
             sticky="nsew",
@@ -2827,46 +3823,61 @@ class MatchMatrixAdminPanel(tk.Tk):
             "#3b2555",
             self.open_selected_glossary_document
         )
+        self.make_button(
+            glossary_actions,
+            "🧪 A23 DOPLNIT SLOVNÍKY",
+            "#9a5b13",
+            self.documentation_run_a23
+        )
+        self.make_button(
+            glossary_actions,
+            "📋 A23 KANDIDÁTI",
+            "#6d45b8",
+            self.documentation_show_a23_candidates
+        )
 
         self.glossary_entries = []
         self.glossary_entry_by_iid = {}
         self.glossary_selected_entry = None
 
         self.documentation_kpi_tree = self.create_section(
-            tab_documentation,
+            documentation_page_database,
             "📚 STAV DOKUMENTAČNÍ DATABÁZE",
-            3,
+            0,
             0,
             2
         )
 
         self.documentation_documents_tree = self.create_section(
-            tab_documentation,
+            documentation_page_database,
             "📄 AKTUÁLNÍ DOKUMENTY",
-            4,
+            1,
             0
         )
 
         self.documentation_import_runs_tree = self.create_section(
-            tab_documentation,
+            documentation_page_database,
             "⏱ POSLEDNÍ IMPORTNÍ BĚHY",
-            4,
+            1,
             1
         )
 
         self.documentation_relations_tree = self.create_section(
-            tab_documentation,
+            documentation_page_database,
             "🔗 VAZBY DOKUMENTŮ",
-            5,
+            2,
             0
         )
 
         self.documentation_history_tree = self.create_section(
-            tab_documentation,
+            documentation_page_database,
             "🧾 HISTORIE STAVŮ",
-            5,
+            2,
             1
         )
+
+        # Výchozí stránka při otevření záložky DOKUMENTACE.
+        self.show_documentation_page("WORKFLOW")
 
         # =========================================================
         # V19.4: DENNÍ PRÁCE / PC2 COMMAND CENTER
@@ -5605,7 +6616,7 @@ Další termín: {h.get('next_target_date') or '-'}"""
                 status_color = YELLOW
 
             self.documentation_workflow_status_value.config(
-                text=status_text,
+                text=cz_documentation_value(status_text),
                 fg=status_color
             )
 
@@ -5650,7 +6661,7 @@ Další termín: {h.get('next_target_date') or '-'}"""
                     )
                     if result_count:
                         result_parts.append(
-                            f"{result_name}: {result_count}"
+                            f"{cz_documentation_value(result_name)}: {result_count}"
                         )
 
                 findings_text = f"K ŘEŠENÍ: {len(problem_findings)}"
@@ -5669,6 +6680,2558 @@ Další termín: {h.get('next_target_date') or '-'}"""
             self.documentation_workflow_findings_value.config(
                 text=findings_text,
                 fg=findings_color
+            )
+
+        if hasattr(self, "documentation_workflow_publish_value"):
+            validate_status = (
+                self.documentation_workflow_a24_validation_status
+                or "ČEKÁ"
+            )
+            apply_status = (
+                self.documentation_workflow_a24_apply_status
+                or "ČEKÁ"
+            )
+            a7_status = self.documentation_workflow_a7_status or "ČEKÁ"
+
+            publication_text = (
+                "HOSTITEL SPUŠTĚNÍ: PC2 "
+                f"({DOCUMENTATION_REMOTE_HOST}) | "
+                "HOSTITEL DB: localhost na PC2 | "
+                f"CÍLOVÁ DB: {DB_CONFIG.get('dbname', 'matchmatrix')} | "
+                f"A24 OVĚŘENÍ: {cz_documentation_value(validate_status)} | "
+                f"PROVEDENÍ: {cz_documentation_value(apply_status)} | "
+                f"A7: {cz_documentation_value(a7_status)}"
+            )
+
+            publication_upper = publication_text.upper()
+            if (
+                "FAILED" in publication_upper
+                or "BLOCKED" in publication_upper
+                or "CHYBA" in publication_upper
+            ):
+                publication_color = RED
+            elif (
+                self.documentation_workflow_a24_apply_status
+                == "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED"
+            ):
+                publication_color = GREEN
+            elif self.documentation_workflow_a24_validation_status:
+                publication_color = YELLOW
+            else:
+                publication_color = MUTED
+
+            self.documentation_workflow_publish_value.config(
+                text=publication_text,
+                fg=publication_color
+            )
+
+        if hasattr(self, "documentation_workflow_db_growth_value"):
+            growth = getattr(
+                self, "documentation_workflow_db_snapshot_delta", {}
+            ) or {}
+            before_snapshot = getattr(
+                self, "documentation_workflow_db_snapshot_before_apply", None
+            )
+
+            if growth.get("metrics"):
+                growth_text = self._documentation_format_database_growth(
+                    growth, multiline=False
+                )
+                growth_color = (
+                    GREEN
+                    if self.documentation_workflow_a7_status == "VERIFIED"
+                    else YELLOW
+                )
+            elif before_snapshot:
+                growth_text = (
+                    "PŘED IMPORTEM | "
+                    + self._documentation_format_database_snapshot(
+                        before_snapshot
+                    )
+                    + " | PO / Δ: ČEKÁ"
+                )
+                growth_color = YELLOW
+            else:
+                latest_payload = self._documentation_load_latest_database_growth()
+                latest_growth = (latest_payload or {}).get("growth", {})
+                if latest_growth.get("metrics"):
+                    latest_document = (latest_payload or {}).get("document_id") or "-"
+                    latest_version = (latest_payload or {}).get("version") or "-"
+                    growth_text = (
+                        f"POSLEDNÍ IMPORT {latest_document} v{latest_version} | "
+                        + self._documentation_format_database_growth(
+                            latest_growth, multiline=False
+                        )
+                    )
+                    growth_color = GREEN
+                else:
+                    growth_text = "ČEKÁ NA A24 APPLY"
+                    growth_color = MUTED
+
+            self.documentation_workflow_db_growth_value.config(
+                text=growth_text,
+                fg=growth_color
+            )
+
+
+
+    def documentation_choose_source_action(self):
+        """
+        V20.1.Q3 STEP 19 - hlavní vstup do fáze 1.
+
+        Nabídne nový denní zápis, nové navázání nebo existující Markdown.
+        Oficiální šablony se nikdy nepřepisují; nový dokument vzniká pouze
+        v podsložce source samostatného workspace.
+        """
+        if self.documentation_workflow_running:
+            messagebox.showwarning(
+                "Dokumentační workflow",
+                "Nelze změnit dokument, dokud běží aktuální krok."
+            )
+            return
+
+        chooser = tk.Toplevel(self)
+        chooser.title("Nový nebo existující dokument")
+        chooser.geometry("620x335")
+        chooser.resizable(False, False)
+        chooser.configure(bg="#100918")
+        chooser.transient(self)
+        chooser.grab_set()
+
+        tk.Label(
+            chooser,
+            text="VYBER ZPŮSOB ZAHÁJENÍ WORKFLOW",
+            bg="#100918",
+            fg="#f0c7ff",
+            font=("Segoe UI", 14, "bold")
+        ).pack(anchor="w", padx=18, pady=(16, 5))
+
+        tk.Label(
+            chooser,
+            text=(
+                "Nové dokumenty vzniknou z oficiálních šablon "
+                "docs/13_TEMPLATES. Existující dokument zůstane beze změny "
+                "a panel vytvoří jeho pracovní kopii."
+            ),
+            bg="#100918",
+            fg="#cdb7df",
+            justify="left",
+            wraplength=580,
+            font=("Segoe UI", 9)
+        ).pack(anchor="w", padx=18, pady=(0, 12))
+
+        button_frame = tk.Frame(chooser, bg="#100918")
+        button_frame.pack(fill="both", expand=True, padx=18, pady=(0, 10))
+        button_frame.columnconfigure(0, weight=1)
+        button_frame.columnconfigure(1, weight=1)
+
+        def run_action(action):
+            try:
+                chooser.grab_release()
+            except Exception:
+                pass
+            chooser.destroy()
+            self.after(80, action)
+
+        tk.Button(
+            button_frame,
+            text="📅  NOVÝ DENNÍ ZÁPIS\nz MM-TPL-002",
+            command=lambda: run_action(
+                self.documentation_create_daily_log_from_template
+            ),
+            bg="#6d45b8",
+            fg="white",
+            activebackground="#7c3aed",
+            activeforeground="white",
+            font=("Segoe UI", 10, "bold"),
+            relief="flat",
+            cursor="hand2",
+            padx=10,
+            pady=14
+        ).grid(row=0, column=0, sticky="nsew", padx=(0, 6), pady=5)
+
+        tk.Button(
+            button_frame,
+            text="🔗  NOVÉ NAVÁZÁNÍ\nz MM-TPL-001",
+            command=lambda: run_action(
+                self.documentation_create_chat_continuation_from_template
+            ),
+            bg="#0f5f63",
+            fg="white",
+            activebackground="#14747a",
+            activeforeground="white",
+            font=("Segoe UI", 10, "bold"),
+            relief="flat",
+            cursor="hand2",
+            padx=10,
+            pady=14
+        ).grid(row=0, column=1, sticky="nsew", padx=(6, 0), pady=5)
+
+        tk.Button(
+            button_frame,
+            text="📄  VYBRAT EXISTUJÍCÍ MARKDOWN DOKUMENT",
+            command=lambda: run_action(
+                self.documentation_select_source_document
+            ),
+            bg="#3b2555",
+            fg="white",
+            activebackground="#4c2c83",
+            activeforeground="white",
+            font=("Segoe UI", 10, "bold"),
+            relief="flat",
+            cursor="hand2",
+            padx=10,
+            pady=10
+        ).grid(
+            row=1,
+            column=0,
+            columnspan=2,
+            sticky="ew",
+            pady=(8, 5)
+        )
+
+        tk.Button(
+            chooser,
+            text="ZRUŠIT",
+            command=chooser.destroy,
+            bg="#2a2034",
+            fg="#d8c9e8",
+            activebackground="#3a2d47",
+            activeforeground="white",
+            font=("Segoe UI", 9, "bold"),
+            relief="flat",
+            cursor="hand2",
+            padx=15,
+            pady=6
+        ).pack(side="bottom", pady=(0, 14))
+
+        chooser.protocol("WM_DELETE_WINDOW", chooser.destroy)
+
+
+    def documentation_create_daily_log_from_template(self):
+        """Vytvoří nový DAILY_LOG z oficiální šablony MM-TPL-002."""
+        self._documentation_create_from_template("DAILY_LOG")
+
+
+    def documentation_create_chat_continuation_from_template(self):
+        """Vytvoří nový CHAT_CONTINUATION z oficiální šablony MM-TPL-001."""
+        self._documentation_create_from_template("CHAT_CONTINUATION")
+
+
+    def _documentation_find_latest_canonical_name(self, directory, pattern):
+        """Vrátí název nejnovějšího kanonického souboru podle názvu."""
+        try:
+            candidates = sorted(
+                Path(directory).glob(pattern),
+                key=lambda item: item.name.upper()
+            )
+        except Exception:
+            candidates = []
+        return candidates[-1].name if candidates else "NENÍ"
+
+
+    def _documentation_next_nav_sequence(self, date_compact):
+        """
+        Určí další pořadové číslo MM-NAV pro daný den.
+        Zohlední kanonické dokumenty i rozpracované source soubory.
+        """
+        pattern = re.compile(
+            rf"^MM-NAV-{re.escape(date_compact)}-(\d{{2}})(?:_|\.|$)",
+            re.IGNORECASE
+        )
+        numbers = []
+
+        canonical_root = os.path.join(
+            DOCUMENTATION_ROOT,
+            "docs",
+            "09_HISTORY",
+            "NAVÁZÁNÍ_NA_CHAT"
+        )
+
+        searches = [
+            (Path(canonical_root), False),
+            (Path(DOCUMENTATION_WORKSPACE_ROOT), True),
+        ]
+
+        for root_path, recursive in searches:
+            try:
+                if not root_path.exists():
+                    continue
+                iterator = (
+                    root_path.rglob(f"MM-NAV-{date_compact}-*.md")
+                    if recursive
+                    else root_path.glob(f"MM-NAV-{date_compact}-*.md")
+                )
+                for item in iterator:
+                    match = pattern.match(item.name)
+                    if match:
+                        numbers.append(int(match.group(1)))
+            except Exception:
+                continue
+
+        next_number = (max(numbers) + 1) if numbers else 1
+        if next_number > 99:
+            raise RuntimeError(
+                f"Pro datum {date_compact} již nelze vytvořit další MM-NAV-XX."
+            )
+        return next_number
+
+
+    def _documentation_extract_template_body(self, template_path):
+        """Načte pouze výstupní část oficiální šablony."""
+        text_value = Path(template_path).read_text(encoding="utf-8-sig")
+        start_marker = "<!-- MM-TEMPLATE-START -->"
+        end_marker = "<!-- MM-TEMPLATE-END -->"
+
+        start_index = text_value.find(start_marker)
+        end_index = text_value.find(end_marker)
+
+        if start_index < 0 or end_index < 0 or end_index <= start_index:
+            raise RuntimeError(
+                "Šablona neobsahuje platné značky "
+                "MM-TEMPLATE-START / MM-TEMPLATE-END."
+            )
+
+        body = text_value[
+            start_index + len(start_marker):end_index
+        ].strip()
+
+        if not body:
+            raise RuntimeError("Výstupní část šablony je prázdná.")
+
+        return body + "\n"
+
+
+    def _documentation_allocate_workspace(self, document_filename):
+        """Vytvoří jedinečný workspace a jeho source podsložku."""
+        os.makedirs(DOCUMENTATION_WORKSPACE_ROOT, exist_ok=True)
+
+        workspace_stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        workspace_slug = self._documentation_workspace_slug(document_filename)
+        base_name = f"{workspace_stamp}_{workspace_slug}"
+        workspace_path = os.path.join(
+            DOCUMENTATION_WORKSPACE_ROOT,
+            base_name
+        )
+
+        suffix = 1
+        while os.path.exists(workspace_path):
+            suffix += 1
+            workspace_path = os.path.join(
+                DOCUMENTATION_WORKSPACE_ROOT,
+                f"{base_name}_{suffix:02d}"
+            )
+
+        source_dir = os.path.join(workspace_path, "source")
+        os.makedirs(source_dir, exist_ok=False)
+        return workspace_path, source_dir
+
+
+    def _documentation_activate_new_workspace(
+        self,
+        *,
+        workspace_path,
+        source_snapshot,
+        manifest_path,
+        source_original,
+        status_text
+    ):
+        """Aktivuje nově vytvořený workspace a vyčistí stav starého běhu."""
+        self._documentation_reset_workflow_state()
+
+        self.documentation_workflow_source_original = source_original
+        self.documentation_workflow_document = source_snapshot
+        self.documentation_workflow_manifest = manifest_path
+        self.documentation_workflow_workspace = workspace_path
+        self.documentation_workflow_step = "NOVÝ DOKUMENT ZE ŠABLONY"
+        self.documentation_workflow_last_status = status_text
+        self.documentation_workflow_last_output = source_snapshot
+        self.documentation_workflow_process = None
+        self.documentation_workflow_running = False
+        self.documentation_workflow_started_at = None
+        self.documentation_workflow_finished_at = None
+
+        self._documentation_update_workflow_ui()
+
+
+    def _documentation_run_git(self, arguments):
+        """Bezpečně spustí read-only Git příkaz nad lokálním repozitářem."""
+        try:
+            completed = subprocess.run(
+                ["git", "-C", BASE_DIR, *list(arguments)],
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=15,
+                shell=False
+            )
+        except Exception as exc:
+            return False, f"{type(exc).__name__}: {exc}"
+
+        output = (completed.stdout or completed.stderr or "").strip()
+        if completed.returncode != 0:
+            return False, output or f"Git return code {completed.returncode}"
+        return True, output
+
+
+    def _documentation_collect_git_snapshot(self):
+        """
+        Vrátí ověřený Git snapshot hlavního repozitáře na PC2.
+
+        Panel může běžet na PC1 i PC2. Lokální repozitář PC1 proto nesmí být
+        použit jako zdroj PROJECT SNAPSHOT. Na hostiteli MATCHMATRIX se Git
+        čte místně; z ostatních počítačů se stejná data načtou vzdáleně z PC2.
+        """
+        result = {
+            "branch": "NEOVĚŘENO",
+            "commit": "NEOVĚŘENO",
+            "subject": "NEOVĚŘENO",
+            "worktree": "NEOVĚŘENO",
+            "push_status": "NEOVĚŘENO",
+            "source_host": f"PC2 ({DOCUMENTATION_REMOTE_HOST})",
+            "repo_root": DOCUMENTATION_REMOTE_PROJECT_ROOT,
+            "summary": "Git stav hlavního repozitáře na PC2 se nepodařilo ověřit.",
+        }
+
+        local_computer = str(
+            os.environ.get("COMPUTERNAME") or ""
+        ).strip().upper()
+
+        payload = None
+        error_text = ""
+
+        if local_computer == "MATCHMATRIX":
+            ok_branch, branch = self._documentation_run_git(
+                ["rev-parse", "--abbrev-ref", "HEAD"]
+            )
+            ok_commit, commit_hash = self._documentation_run_git(
+                ["rev-parse", "--short=12", "HEAD"]
+            )
+            ok_subject, subject = self._documentation_run_git(
+                ["log", "-1", "--pretty=%s"]
+            )
+            ok_status, status_text = self._documentation_run_git(
+                ["status", "--short", "--branch"]
+            )
+            ok_root, repo_root = self._documentation_run_git(
+                ["rev-parse", "--show-toplevel"]
+            )
+
+            if all((ok_branch, ok_commit, ok_subject, ok_status, ok_root)):
+                payload = {
+                    "computer": local_computer,
+                    "repo_root": repo_root,
+                    "branch": branch,
+                    "commit": commit_hash,
+                    "subject": subject,
+                    "status": status_text.splitlines(),
+                }
+            else:
+                error_text = (
+                    branch if not ok_branch else
+                    commit_hash if not ok_commit else
+                    subject if not ok_subject else
+                    status_text if not ok_status else
+                    repo_root
+                )
+        else:
+            try:
+                ps_host = self._documentation_powershell_literal(
+                    DOCUMENTATION_REMOTE_HOST
+                )
+                ps_project = self._documentation_powershell_literal(
+                    DOCUMENTATION_REMOTE_PROJECT_ROOT
+                )
+
+                powershell_script = f"""
+$ErrorActionPreference = "Stop"
+
+try {{
+    $GitJson = Invoke-Command -ComputerName {ps_host} -ScriptBlock {{
+        param($ProjectRoot)
+
+        $ErrorActionPreference = "Stop"
+        Set-Location -LiteralPath $ProjectRoot
+
+        $Branch = (& git rev-parse --abbrev-ref HEAD | Out-String).Trim()
+        if ($LASTEXITCODE -ne 0) {{ throw "git branch selhal" }}
+
+        $Commit = (& git rev-parse --short=12 HEAD | Out-String).Trim()
+        if ($LASTEXITCODE -ne 0) {{ throw "git commit selhal" }}
+
+        $Subject = (& git log -1 --pretty=%s | Out-String).Trim()
+        if ($LASTEXITCODE -ne 0) {{ throw "git log selhal" }}
+
+        $RepoRoot = (& git rev-parse --show-toplevel | Out-String).Trim()
+        if ($LASTEXITCODE -ne 0) {{ throw "git root selhal" }}
+
+        $Status = @(& git status --short --branch)
+        if ($LASTEXITCODE -ne 0) {{ throw "git status selhal" }}
+
+        [ordered]@{{
+            computer = $env:COMPUTERNAME
+            repo_root = $RepoRoot
+            branch = $Branch
+            commit = $Commit
+            subject = $Subject
+            status = $Status
+        }} | ConvertTo-Json -Compress -Depth 5
+    }} -ArgumentList {ps_project}
+
+    $Bytes = [System.Text.Encoding]::UTF8.GetBytes([string]$GitJson)
+    $Encoded = [Convert]::ToBase64String($Bytes)
+    Write-Output "__MM_GIT_JSON_B64__=$Encoded"
+    exit 0
+}}
+catch {{
+    Write-Error $_.Exception.Message
+    exit 1
+}}
+"""
+                encoded_command = base64.b64encode(
+                    powershell_script.encode("utf-16le")
+                ).decode("ascii")
+
+                command = [
+                    "powershell.exe",
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-EncodedCommand",
+                    encoded_command,
+                ]
+
+                completed = subprocess.run(
+                    command,
+                    cwd=BASE_DIR,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    text=False,
+                    timeout=30,
+                    creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+                )
+
+                output_text = self._documentation_decode_process_output(
+                    completed.stdout
+                )
+
+                marker = re.search(
+                    r"__MM_GIT_JSON_B64__=([A-Za-z0-9+/=]+)",
+                    output_text
+                )
+
+                if completed.returncode == 0 and marker:
+                    decoded_json = base64.b64decode(
+                        marker.group(1)
+                    ).decode("utf-8")
+                    payload = json.loads(decoded_json)
+                else:
+                    error_text = output_text.strip() or (
+                        f"PowerShell return code {completed.returncode}"
+                    )
+
+            except Exception as exc:
+                error_text = f"{type(exc).__name__}: {exc}"
+
+        if not payload:
+            result["summary"] = (
+                "NEOVĚŘENO – Git snapshot hlavního repozitáře na PC2 "
+                f"není dostupný: {error_text[:260]}"
+            )
+            return result
+
+        branch = str(payload.get("branch") or "").strip()
+        commit_hash = str(payload.get("commit") or "").strip()
+        subject = str(payload.get("subject") or "").strip()
+        repo_root = str(payload.get("repo_root") or "").strip()
+        source_computer = str(
+            payload.get("computer") or "MATCHMATRIX"
+        ).strip()
+
+        raw_status = payload.get("status") or []
+        if isinstance(raw_status, str):
+            status_lines = raw_status.splitlines()
+        else:
+            status_lines = [
+                str(line).rstrip()
+                for line in raw_status
+                if str(line).strip()
+            ]
+
+        branch_line = status_lines[0] if status_lines else ""
+        changes = [
+            line
+            for line in status_lines[1:]
+            if line.strip()
+        ]
+
+        result["branch"] = branch or "NEOVĚŘENO"
+        result["commit"] = commit_hash or "NEOVĚŘENO"
+        result["subject"] = subject or "NEOVĚŘENO"
+        result["repo_root"] = repo_root or DOCUMENTATION_REMOTE_PROJECT_ROOT
+        result["source_host"] = (
+            f"{source_computer} ({DOCUMENTATION_REMOTE_HOST})"
+        )
+        result["worktree"] = (
+            "ČISTÝ"
+            if not changes
+            else f"ZMĚNY – {len(changes)} položek"
+        )
+
+        if "..." in branch_line:
+            relation = branch_line.removeprefix("## ").strip()
+            if "[ahead " in relation or "[behind " in relation:
+                result["push_status"] = relation
+            else:
+                result["push_status"] = f"Synchronizováno: {relation}"
+        elif branch_line:
+            result["push_status"] = branch_line.removeprefix("## ").strip()
+
+        result["summary"] = (
+            f"PC2 {result['source_host']} | "
+            f"{result['branch']} @ {result['commit']} | "
+            f"{result['worktree']} | {result['push_status']} | "
+            f"repo {result['repo_root']}"
+        )
+        return result
+
+
+    def _documentation_collect_database_snapshot(self, timestamp_iso):
+        """Načte aktuální ověřitelné počty z dokumentační databáze."""
+        snapshot = {
+            "DB_DOCUMENTS": "NEOVĚŘENO",
+            "DB_VERSIONS_TOTAL": "NEOVĚŘENO",
+            "DB_CURRENT_VERSIONS": "NEOVĚŘENO",
+            "DB_SECTIONS": "NEOVĚŘENO",
+            "DB_RELATIONS": "NEOVĚŘENO",
+            "DB_STATUS_HISTORY": "NEOVĚŘENO",
+            "DB_IMPORT_RUNS": "NEOVĚŘENO",
+            "DB_ACTIVE_DOCUMENTS": "NEOVĚŘENO",
+            "DB_SNAPSHOT_CREATED_AT": timestamp_iso,
+            "DB_EXECUTION_HOST": (
+                f"PC2 ({DOCUMENTATION_REMOTE_HOST})"
+            ),
+            "DB_HOST": f"{DB_CONFIG.get('host')}:{DB_CONFIG.get('port')}",
+            "DB_TARGET": str(DB_CONFIG.get("dbname") or "NEOVĚŘENO"),
+            "DB_VERIFICATION_SOURCE": (
+                "documentation.documents, documentation.document_versions, "
+                "documentation.document_sections, documentation.document_relations, "
+                "documentation.document_status_history, documentation.import_runs"
+            ),
+        }
+
+        rows = db_query("""
+            SELECT
+                (SELECT COUNT(*) FROM documentation.documents) AS documents,
+                (SELECT COUNT(*) FROM documentation.document_versions) AS versions_total,
+                (
+                    SELECT COUNT(*)
+                    FROM documentation.document_versions
+                    WHERE is_current = true
+                ) AS current_versions,
+                (SELECT COUNT(*) FROM documentation.document_sections) AS sections,
+                (SELECT COUNT(*) FROM documentation.document_relations) AS relations,
+                (
+                    SELECT COUNT(*)
+                    FROM documentation.document_status_history
+                ) AS status_history,
+                (SELECT COUNT(*) FROM documentation.import_runs) AS import_runs,
+                (
+                    SELECT COUNT(*)
+                    FROM documentation.documents
+                    WHERE COALESCE(is_active, false) = true
+                ) AS active_documents;
+        """)
+
+        if rows and "CHYBA" not in rows[0]:
+            row = rows[0]
+            snapshot.update({
+                "DB_DOCUMENTS": str(row.get("documents", 0)),
+                "DB_VERSIONS_TOTAL": str(row.get("versions_total", 0)),
+                "DB_CURRENT_VERSIONS": str(row.get("current_versions", 0)),
+                "DB_SECTIONS": str(row.get("sections", 0)),
+                "DB_RELATIONS": str(row.get("relations", 0)),
+                "DB_STATUS_HISTORY": str(row.get("status_history", 0)),
+                "DB_IMPORT_RUNS": str(row.get("import_runs", 0)),
+                "DB_ACTIVE_DOCUMENTS": str(row.get("active_documents", 0)),
+            })
+        elif rows and "CHYBA" in rows[0]:
+            snapshot["DB_VERIFICATION_SOURCE"] = (
+                "NEOVĚŘENO – " + str(rows[0].get("CHYBA"))[:300]
+            )
+
+        snapshot["database_summary"] = (
+            f"dokumenty {snapshot['DB_DOCUMENTS']} | "
+            f"verze {snapshot['DB_VERSIONS_TOTAL']} | "
+            f"aktuální {snapshot['DB_CURRENT_VERSIONS']} | "
+            f"sekce {snapshot['DB_SECTIONS']} | "
+            f"vazby {snapshot['DB_RELATIONS']} | "
+            f"historie stavů {snapshot['DB_STATUS_HISTORY']} | "
+            f"importní běhy {snapshot['DB_IMPORT_RUNS']} | "
+            f"aktivní {snapshot['DB_ACTIVE_DOCUMENTS']}"
+        )
+        return snapshot
+
+
+    def _documentation_database_metric_definitions(self):
+        """Vrátí stabilní pořadí a popisky metrik pro STEP 20B."""
+        return (
+            ("documents", "Dokumenty", "DB_DOCUMENTS"),
+            ("versions_total", "Verze celkem", "DB_VERSIONS_TOTAL"),
+            ("current_versions", "Aktuální verze", "DB_CURRENT_VERSIONS"),
+            ("sections", "Sekce", "DB_SECTIONS"),
+            ("relations", "Vazby", "DB_RELATIONS"),
+            ("status_history", "Historie stavů", "DB_STATUS_HISTORY"),
+            ("import_runs", "Importní běhy", "DB_IMPORT_RUNS"),
+            ("active_documents", "Aktivní dokumenty", "DB_ACTIVE_DOCUMENTS"),
+        )
+
+
+    def _documentation_database_count(self, snapshot, key):
+        """Bezpečně převede textovou hodnotu snapshotu na celé číslo."""
+        if not isinstance(snapshot, dict):
+            return None
+        value = snapshot.get(key)
+        try:
+            return int(str(value).replace(" ", "").strip())
+        except (TypeError, ValueError):
+            return None
+
+
+    def _documentation_calculate_database_delta(self, before, after):
+        """Vypočítá přesný PŘED / PO / DELTA snapshot dokumentační DB."""
+        metrics = {}
+        for metric_key, label, snapshot_key in (
+            self._documentation_database_metric_definitions()
+        ):
+            before_value = self._documentation_database_count(
+                before, snapshot_key
+            )
+            after_value = self._documentation_database_count(
+                after, snapshot_key
+            )
+            delta_value = None
+            if before_value is not None and after_value is not None:
+                delta_value = after_value - before_value
+            metrics[metric_key] = {
+                "label": label,
+                "snapshot_key": snapshot_key,
+                "before": before_value,
+                "after": after_value,
+                "delta": delta_value,
+            }
+
+        return {
+            "created_at": datetime.now().astimezone().isoformat(),
+            "before_created_at": (before or {}).get(
+                "DB_SNAPSHOT_CREATED_AT"
+            ),
+            "after_created_at": (after or {}).get(
+                "DB_SNAPSHOT_CREATED_AT"
+            ),
+            "execution_host": (after or before or {}).get(
+                "DB_EXECUTION_HOST"
+            ),
+            "db_host": (after or before or {}).get("DB_HOST"),
+            "db_target": (after or before or {}).get("DB_TARGET"),
+            "metrics": metrics,
+        }
+
+
+    def _documentation_format_database_snapshot(self, snapshot):
+        """Zformátuje jeden databázový snapshot do čitelného řádku."""
+        parts = []
+        for _, label, snapshot_key in (
+            self._documentation_database_metric_definitions()
+        ):
+            value = self._documentation_database_count(snapshot, snapshot_key)
+            parts.append(f"{label}: {value if value is not None else '-'}")
+        return " | ".join(parts)
+
+
+    def _documentation_format_database_growth(self, growth, multiline=False):
+        """Zformátuje databázový nárůst pro panel a výsledný dialog."""
+        if not isinstance(growth, dict) or not growth.get("metrics"):
+            return "ČEKÁ NA A24 APPLY"
+
+        parts = []
+        for metric in growth["metrics"].values():
+            before_value = metric.get("before")
+            after_value = metric.get("after")
+            delta_value = metric.get("delta")
+            if (
+                before_value is None
+                or after_value is None
+                or delta_value is None
+            ):
+                value_text = f"{metric.get('label')}: NEOVĚŘENO"
+            else:
+                delta_text = f"{delta_value:+d}"
+                value_text = (
+                    f"{metric.get('label')}: "
+                    f"{before_value} → {after_value} ({delta_text})"
+                )
+            parts.append(value_text)
+
+        separator = "\n" if multiline else " | "
+        return separator.join(parts)
+
+
+    def _documentation_atomic_write_utf8(self, path, content):
+        """Zapíše UTF-8 soubor přes dočasnou kopii a atomické nahrazení."""
+        target = os.path.abspath(path)
+        os.makedirs(os.path.dirname(target), exist_ok=True)
+        temporary = f"{target}.{os.getpid()}.tmp"
+        try:
+            with open(temporary, "w", encoding="utf-8", newline="\n") as handle:
+                handle.write(content)
+            os.replace(temporary, target)
+        finally:
+            if os.path.exists(temporary):
+                try:
+                    os.remove(temporary)
+                except OSError:
+                    pass
+
+
+    def _documentation_persist_latest_database_growth(
+        self,
+        payload,
+        markdown_text
+    ):
+        """Uloží poslední DB nárůst do stabilního reportu mimo workspace."""
+        json_text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+        self._documentation_atomic_write_utf8(
+            DOCUMENTATION_DB_GROWTH_LATEST_JSON,
+            json_text
+        )
+        self._documentation_atomic_write_utf8(
+            DOCUMENTATION_DB_GROWTH_LATEST_MARKDOWN,
+            markdown_text
+        )
+        self.documentation_latest_db_growth_payload = payload
+
+
+    def _documentation_resolve_document_version(
+        self,
+        document_id,
+        candidate_version=None
+    ):
+        """Vrátí ověřenou verzi dokumentu pro STEP 21A.
+
+        Priorita zdrojů:
+        1. verze uložená v dokumentu nebo snapshotu,
+        2. current_version_label v documentation.documents.
+        """
+        version_text = str(candidate_version or "").strip()
+        if version_text.casefold() not in {
+            "", "-", "none", "null", "neověřeno"
+        }:
+            return version_text
+
+        document_id_text = str(document_id or "").strip()
+        if document_id_text.casefold() in {
+            "", "-", "none", "null", "neověřeno"
+        }:
+            return None
+
+        safe_document_id = document_id_text.replace("'", "''")
+        rows = db_query(f"""
+            SELECT current_version_label
+            FROM documentation.documents
+            WHERE document_id = '{safe_document_id}'
+            LIMIT 1;
+        """)
+        if rows and isinstance(rows[0], dict) and "CHYBA" not in rows[0]:
+            resolved = str(
+                rows[0].get("current_version_label") or ""
+            ).strip()
+            if resolved:
+                return resolved
+        return None
+
+
+    def _documentation_enrich_database_growth_payload(self, payload):
+        """Doplní chybějící verzi do staršího STEP 20C payloadu."""
+        if not isinstance(payload, dict):
+            return payload, False
+
+        current_version = payload.get("version")
+        resolved_version = self._documentation_resolve_document_version(
+            payload.get("document_id"),
+            current_version
+        )
+        if not resolved_version:
+            return payload, False
+
+        current_text = str(current_version or "").strip()
+        if current_text == resolved_version:
+            return payload, False
+
+        enriched = dict(payload)
+        enriched["version"] = resolved_version
+        enriched["version_source"] = (
+            "documentation.documents.current_version_label"
+        )
+        enriched["version_backfilled_at"] = (
+            datetime.now().astimezone().isoformat()
+        )
+        return enriched, True
+
+
+    def _documentation_load_latest_database_growth(self, force=False):
+        """Načte poslední trvalý DB nárůst a doplní chybějící verzi."""
+        cached = getattr(self, "documentation_latest_db_growth_payload", None)
+        if cached is not None and not force:
+            enriched, _ = self._documentation_enrich_database_growth_payload(
+                cached or None
+            )
+            self.documentation_latest_db_growth_payload = enriched or {}
+            return enriched or None
+
+        payload = None
+        try:
+            with open(
+                DOCUMENTATION_DB_GROWTH_LATEST_JSON,
+                "r",
+                encoding="utf-8"
+            ) as handle:
+                candidate = json.load(handle)
+            if (
+                isinstance(candidate, dict)
+                and isinstance(candidate.get("growth"), dict)
+                and isinstance(candidate["growth"].get("metrics"), dict)
+            ):
+                payload = candidate
+        except (OSError, ValueError, TypeError):
+            payload = None
+
+        payload, version_backfilled = (
+            self._documentation_enrich_database_growth_payload(payload)
+        )
+
+        # STEP 21A: jednorázově opraví i již existující latest JSON,
+        # aby verze zůstala dostupná po dalších restartech panelu.
+        if payload and version_backfilled:
+            try:
+                self._documentation_atomic_write_utf8(
+                    DOCUMENTATION_DB_GROWTH_LATEST_JSON,
+                    json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+                )
+            except OSError:
+                # Zobrazení zůstane funkční i při dočasně read-only UNC cestě.
+                pass
+
+        self.documentation_latest_db_growth_payload = payload or {}
+        return payload
+
+
+    def _documentation_live_database_row_to_snapshot(self, row, timestamp_iso):
+        """Převede živý SQL souhrn na formát používaný DB snapshoty."""
+        row = row if isinstance(row, dict) else {}
+        return {
+            "DB_DOCUMENTS": str(row.get("documents", "NEOVĚŘENO")),
+            "DB_VERSIONS_TOTAL": str(
+                row.get("versions_total", "NEOVĚŘENO")
+            ),
+            "DB_CURRENT_VERSIONS": str(
+                row.get("current_versions", "NEOVĚŘENO")
+            ),
+            "DB_SECTIONS": str(row.get("sections", "NEOVĚŘENO")),
+            "DB_RELATIONS": str(row.get("relations", "NEOVĚŘENO")),
+            "DB_STATUS_HISTORY": str(
+                row.get("status_history", "NEOVĚŘENO")
+            ),
+            "DB_IMPORT_RUNS": str(row.get("import_runs", "NEOVĚŘENO")),
+            "DB_ACTIVE_DOCUMENTS": str(
+                row.get("active_documents", "NEOVĚŘENO")
+            ),
+            "DB_SNAPSHOT_CREATED_AT": timestamp_iso,
+        }
+
+
+    def _documentation_database_dashboard_rows(self, live_rows):
+        """Sestaví trvalé řádky PŘED / NYNÍ / DELTA pro DB dashboard."""
+        now_iso = datetime.now().astimezone().isoformat(timespec="seconds")
+        live_row = {}
+        if live_rows and isinstance(live_rows[0], dict):
+            live_row = live_rows[0]
+
+        live_snapshot = self._documentation_live_database_row_to_snapshot(
+            live_row,
+            now_iso
+        )
+        payload = self._documentation_load_latest_database_growth(force=True)
+        growth = payload.get("growth", {}) if payload else {}
+        metrics = growth.get("metrics", {}) if isinstance(growth, dict) else {}
+
+        document_id = str((payload or {}).get("document_id") or "-")
+        version = str((payload or {}).get("version") or "-")
+        imported_at = str(
+            (payload or {}).get("imported_at")
+            or growth.get("created_at")
+            or "-"
+        )
+
+        before_row = {
+            "snapshot_state": "PŘED POSLEDNÍM IMPORTEM",
+            "snapshot_document_id": document_id,
+            "snapshot_version": version,
+            "snapshot_time": str(growth.get("before_created_at") or "-"),
+        }
+        now_row = {
+            "snapshot_state": "NYNÍ",
+            "snapshot_document_id": document_id,
+            "snapshot_version": version,
+            "snapshot_time": now_iso,
+        }
+        delta_row = {
+            "snapshot_state": "Δ POSLEDNÍHO IMPORTU",
+            "snapshot_document_id": document_id,
+            "snapshot_version": version,
+            "snapshot_time": imported_at,
+        }
+
+        for metric_key, _, snapshot_key in (
+            self._documentation_database_metric_definitions()
+        ):
+            metric = metrics.get(metric_key, {}) if metrics else {}
+            before_value = metric.get("before")
+            delta_value = metric.get("delta")
+            live_value = self._documentation_database_count(
+                live_snapshot,
+                snapshot_key
+            )
+
+            before_row[metric_key] = (
+                before_value if before_value is not None else "-"
+            )
+            now_row[metric_key] = (
+                live_value if live_value is not None else "-"
+            )
+            delta_row[metric_key] = (
+                f"{delta_value:+d}"
+                if isinstance(delta_value, int)
+                else "-"
+            )
+
+        if not payload:
+            before_row["snapshot_document_id"] = "ČEKÁ NA PRVNÍ IMPORT STEP 20C"
+            delta_row["snapshot_document_id"] = "ČEKÁ NA PRVNÍ IMPORT STEP 20C"
+
+        return [before_row, now_row, delta_row]
+
+
+    def _documentation_write_database_growth_report(self, output_dir):
+        """Uloží STEP 20C snapshot do workspace i trvalého latest reportu."""
+        if not self.documentation_workflow_db_snapshot_delta:
+            return None, None
+
+        os.makedirs(output_dir, exist_ok=True)
+        document_id = None
+        version = None
+        title = None
+        try:
+            _, metadata = self._documentation_read_metadata(
+                self.documentation_workflow_canonical_document
+            )
+            document_id = metadata.get("document_id")
+            version = metadata.get("version")
+            title = metadata.get("title") or metadata.get("name")
+        except Exception:
+            pass
+
+        version = self._documentation_resolve_document_version(
+            document_id,
+            version
+        )
+
+        payload = {
+            "engine_version": "Q3_STEP21A_DATABASE_GROWTH_V3",
+            "document": self.documentation_workflow_canonical_document,
+            "document_id": document_id,
+            "version": version,
+            "title": title,
+            "imported_at": datetime.now().astimezone().isoformat(),
+            "a24_apply_status": self.documentation_workflow_a24_apply_status,
+            "a7_status": self.documentation_workflow_a7_status,
+            "before": self.documentation_workflow_db_snapshot_before_apply,
+            "after": self.documentation_workflow_db_snapshot_after_apply,
+            "growth": self.documentation_workflow_db_snapshot_delta,
+        }
+
+        json_path = os.path.join(
+            output_dir, "database_growth_snapshot.json"
+        )
+        markdown_path = os.path.join(
+            output_dir, "database_growth_snapshot.md"
+        )
+
+        with open(json_path, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, ensure_ascii=False, indent=2)
+
+        markdown_lines = [
+            "# MatchMatrix – databázový stav a nárůst po A24",
+            "",
+            f"- Vytvořeno: `{self.documentation_workflow_db_snapshot_delta.get('created_at')}`",
+            f"- Dokument: `{self.documentation_workflow_canonical_document or '-'}`",
+            f"- Document ID: `{document_id or '-'}`",
+            f"- Verze: `{version or '-'}`",
+            f"- A24: `{self.documentation_workflow_a24_apply_status or '-'}`",
+            f"- A7: `{self.documentation_workflow_a7_status or '-'}`",
+            f"- DB: `{self.documentation_workflow_db_snapshot_delta.get('db_host')}` / `{self.documentation_workflow_db_snapshot_delta.get('db_target')}`",
+            "",
+            "| Ukazatel | Před | Po | Rozdíl |",
+            "|---|---:|---:|---:|",
+        ]
+        for metric in self.documentation_workflow_db_snapshot_delta[
+            "metrics"
+        ].values():
+            before_value = metric.get("before")
+            after_value = metric.get("after")
+            delta_value = metric.get("delta")
+            delta_text = (
+                f"{delta_value:+d}"
+                if isinstance(delta_value, int)
+                else "NEOVĚŘENO"
+            )
+            markdown_lines.append(
+                f"| {metric.get('label')} | "
+                f"{before_value if before_value is not None else 'NEOVĚŘENO'} | "
+                f"{after_value if after_value is not None else 'NEOVĚŘENO'} | "
+                f"{delta_text} |"
+            )
+
+        markdown_text = "\n".join(markdown_lines) + "\n"
+        with open(markdown_path, "w", encoding="utf-8", newline="\n") as handle:
+            handle.write(markdown_text)
+
+        self._documentation_persist_latest_database_growth(
+            payload,
+            markdown_text
+        )
+
+        self.documentation_workflow_db_growth_report = json_path
+        self.documentation_workflow_db_growth_markdown = markdown_path
+        return json_path, markdown_path
+
+
+    def documentation_open_database_growth_report(self):
+        """Otevře poslední Markdown report databázového nárůstu."""
+        report_path = (
+            self.documentation_workflow_db_growth_markdown
+            or self.documentation_workflow_db_growth_report
+            or (
+                DOCUMENTATION_DB_GROWTH_LATEST_MARKDOWN
+                if os.path.isfile(DOCUMENTATION_DB_GROWTH_LATEST_MARKDOWN)
+                else None
+            )
+            or (
+                DOCUMENTATION_DB_GROWTH_LATEST_JSON
+                if os.path.isfile(DOCUMENTATION_DB_GROWTH_LATEST_JSON)
+                else None
+            )
+        )
+        if not report_path or not os.path.isfile(report_path):
+            messagebox.showwarning(
+                "DB stav / nárůst",
+                "Zatím není dostupný report databázového nárůstu."
+            )
+            return
+        os.startfile(report_path)
+
+
+    def _documentation_build_technical_replacements(
+        self,
+        *,
+        work_area,
+        filename,
+        workspace_path,
+        timestamp_iso
+    ):
+        """Sestaví technická pole, která lze doplnit bez obsahového odhadu."""
+        git_snapshot = self._documentation_collect_git_snapshot()
+        db_snapshot = self._documentation_collect_database_snapshot(
+            timestamp_iso
+        )
+
+        replacements = dict(db_snapshot)
+        replacements.pop("database_summary", None)
+        replacements.update({
+            "GIT_BRANCH": git_snapshot["branch"],
+            "GIT_COMMIT": git_snapshot["commit"],
+            "GIT_WORKTREE_STATUS": git_snapshot["worktree"],
+            "GIT_PUSH_STATUS": git_snapshot["push_status"],
+            "WORKSPACE_PATH": workspace_path,
+            "A17_STATUS": "ČEKÁ – DOSUD NESPUŠTĚNO PRO TENTO DOKUMENT",
+            "A24_STATUS": "ČEKÁ – DOSUD NESPUŠTĚNO PRO TENTO DOKUMENT",
+            "A7_STATUS": "ČEKÁ – DOSUD NESPUŠTĚNO PRO TENTO DOKUMENT",
+            "SNAPSHOT_AKTIVNI_PRACOVNI_BLOK": work_area,
+            "SNAPSHOT_AKTIVNI_PANEL": (
+                "tools/matchmatrix_control_panel_V20_1_Q3_"
+                "DOCUMENTATION_WORKFLOW.py"
+            ),
+            "SNAPSHOT_POSLEDNI_VYSLEDEK": (
+                f"Poslední Git commit {git_snapshot['commit']}: "
+                f"{git_snapshot['subject']}"
+            ),
+            "SNAPSHOT_GIT_STAV": git_snapshot["summary"],
+            "SNAPSHOT_DOKUMENTACNI_WORKFLOW": (
+                "Q3 STEP 20A – nový dokument z oficiální šablony; "
+                "čeká na doplnění obsahu a A17"
+            ),
+            "SNAPSHOT_DATABAZOVY_STAV": db_snapshot["database_summary"],
+            "SNAPSHOT_NEJVETSI_OTEVRENY_UKOL": (
+                "Doplnit zbývající obsahová pole dokumentu a spustit A17."
+            ),
+            "SNAPSHOT_NASLEDUJICI_BLOK": (
+                "Doplnění obsahu → A17 → řízené schválení a publikace."
+            ),
+        })
+        return replacements, git_snapshot, db_snapshot
+
+
+    def _documentation_create_from_template(self, document_type):
+        """
+        Vytvoří nový pracovní dokument z oficiální šablony.
+
+        Automaticky doplní identitu, datum, verzi, stav, kanonický název,
+        základní vazby, pracovní oblast, Git údaje, technickou dohledatelnost
+        a aktuální snapshot dokumentační databáze. Obsahová pole zůstávají
+        k doplnění uživatelem a před A17 jsou technicky kontrolována.
+        """
+        if self.documentation_workflow_running:
+            messagebox.showwarning(
+                "Nový dokument ze šablony",
+                "Nelze vytvořit nový dokument, dokud běží aktuální krok."
+            )
+            return
+
+        document_type = str(document_type or "").strip().upper()
+        template_path = DOCUMENTATION_TEMPLATES.get(document_type)
+
+        if not template_path:
+            messagebox.showerror(
+                "Nový dokument ze šablony",
+                f"Typ dokumentu {document_type!r} nemá registrovanou šablonu."
+            )
+            return
+
+        if not os.path.isfile(template_path):
+            messagebox.showerror(
+                "Nový dokument ze šablony",
+                (
+                    "Oficiální šablona nebyla nalezena:\n\n"
+                    f"{template_path}\n\n"
+                    "Ověř synchronizaci docs/13_TEMPLATES na PC2."
+                )
+            )
+            return
+
+        work_area = simpledialog.askstring(
+            "Pracovní oblast",
+            (
+                "Zadej stručnou pracovní oblast nového dokumentu.\n\n"
+                "Příklad: Dokumentační workflow Q3 a šablony dokumentů"
+            ),
+            parent=self,
+            initialvalue="Dokumentační workflow Q3"
+        )
+        if work_area is None:
+            return
+
+        work_area = " ".join(work_area.strip().split())
+        if not work_area:
+            messagebox.showwarning(
+                "Pracovní oblast",
+                "Pracovní oblast nesmí být prázdná."
+            )
+            return
+
+        now_value = datetime.now().astimezone()
+        default_date = now_value.strftime("%Y-%m-%d")
+
+        date_input = simpledialog.askstring(
+            "Datum dokumentu",
+            (
+                "Zadej datum dokumentu ve formátu YYYY-MM-DD.\n\n"
+                "Identifikátor MM-DL nebo MM-NAV bude vytvořen z tohoto data."
+            ),
+            parent=self,
+            initialvalue=default_date
+        )
+        if date_input is None:
+            return
+
+        date_input = date_input.strip()
+        try:
+            document_date = datetime.strptime(
+                date_input,
+                "%Y-%m-%d"
+            )
+        except ValueError:
+            messagebox.showwarning(
+                "Datum dokumentu",
+                "Datum musí být ve formátu YYYY-MM-DD."
+            )
+            return
+
+        date_iso = document_date.strftime("%Y-%m-%d")
+        date_compact = document_date.strftime("%Y%m%d")
+        timestamp_iso = now_value.isoformat(timespec="seconds")
+
+        daily_dir = os.path.join(
+            DOCUMENTATION_ROOT,
+            "docs",
+            "09_HISTORY",
+            "DENNÍ_ZÁPISY"
+        )
+        nav_dir = os.path.join(
+            DOCUMENTATION_ROOT,
+            "docs",
+            "09_HISTORY",
+            "NAVÁZÁNÍ_NA_CHAT"
+        )
+
+        try:
+            # Workspace musí existovat před sestavením dokumentu, protože jeho
+            # cesta se zapisuje přímo do technické dohledatelnosti šablony.
+            if document_type == "DAILY_LOG":
+                document_id = f"MM-DL-{date_compact}"
+                filename = f"{document_id}_MATCHMATRIX_DENNI_ZAPIS.md"
+                title_value = f"MatchMatrix – denní zápis – {date_iso}"
+                canonical_path = os.path.join(daily_dir, filename)
+
+                if os.path.isfile(canonical_path):
+                    messagebox.showwarning(
+                        "Denní zápis již existuje",
+                        (
+                            "Pro dnešní datum již existuje kanonický denní zápis:\n\n"
+                            f"{canonical_path}\n\n"
+                            "Použij „Vybrat existující Markdown dokument“, "
+                            "pokud jej potřebuješ aktualizovat."
+                        )
+                    )
+                    return
+
+                next_nav_number = self._documentation_next_nav_sequence(
+                    date_compact
+                )
+                expected_nav = (
+                    f"MM-NAV-{date_compact}-{next_nav_number:02d}"
+                    "_MATCHMATRIX_NAVAZANI_DO_CHATU.md"
+                )
+                previous_daily = self._documentation_find_latest_canonical_name(
+                    daily_dir,
+                    "MM-DL-*_MATCHMATRIX_DENNI_ZAPIS.md"
+                )
+
+                replacements = {
+                    "NAZEV_DOKUMENTU": title_value,
+                    "DOCUMENT_ID": document_id,
+                    "VERZE": "1.0",
+                    "STAV": "DRAFT – NEEDS_USER_APPROVAL",
+                    "DATUM_YYYY_MM_DD": date_iso,
+                    "DATUM_CAS_ISO_8601": timestamp_iso,
+                    "PRACOVNI_OBLAST": work_area,
+                    "NAZEV_SOUBORU": filename,
+                    "PREDCHOZI_DENNI_ZAPIS_NEBO_NENI": previous_daily,
+                    "NAVAZUJICI_DOKUMENT_NEBO_BUDE_VYTVOREN": (
+                        f"BUDE VYTVOŘEN: {expected_nav}"
+                    ),
+                }
+
+            elif document_type == "CHAT_CONTINUATION":
+                nav_number = self._documentation_next_nav_sequence(
+                    date_compact
+                )
+                document_id = f"MM-NAV-{date_compact}-{nav_number:02d}"
+                filename = (
+                    f"{document_id}_MATCHMATRIX_NAVAZANI_DO_CHATU.md"
+                )
+                title_value = (
+                    "MatchMatrix – navázání do nového chatu – "
+                    f"{date_iso}"
+                )
+                source_daily = (
+                    f"MM-DL-{date_compact}_MATCHMATRIX_DENNI_ZAPIS.md"
+                )
+                previous_nav = self._documentation_find_latest_canonical_name(
+                    nav_dir,
+                    "MM-NAV-*_MATCHMATRIX_NAVAZANI_DO_CHATU.md"
+                )
+
+                replacements = {
+                    "NAZEV_DOKUMENTU": title_value,
+                    "DOCUMENT_ID": document_id,
+                    "VERZE": "1.0",
+                    "STAV": "DRAFT – NEEDS_USER_APPROVAL",
+                    "DATUM_YYYY_MM_DD": date_iso,
+                    "DATUM_CAS_ISO_8601": timestamp_iso,
+                    "PRACOVNI_OBLAST": work_area,
+                    "NAZEV_SOUBORU": filename,
+                    "ZDROJOVY_DENNI_ZAPIS": source_daily,
+                    "PREDCHOZI_NAVAZANI_NEBO_NENI": previous_nav,
+                }
+
+            else:
+                raise RuntimeError(
+                    f"Nepodporovaný typ dokumentu: {document_type}"
+                )
+
+            workspace_path, source_dir = (
+                self._documentation_allocate_workspace(filename)
+            )
+
+            technical_replacements, git_snapshot, db_snapshot = (
+                self._documentation_build_technical_replacements(
+                    work_area=work_area,
+                    filename=filename,
+                    workspace_path=workspace_path,
+                    timestamp_iso=timestamp_iso
+                )
+            )
+            replacements.update(technical_replacements)
+
+            template_body = self._documentation_extract_template_body(
+                template_path
+            )
+
+            generated_text = template_body
+            for field_name, field_value in replacements.items():
+                generated_text = generated_text.replace(
+                    "{{" + field_name + "}}",
+                    str(field_value)
+                )
+
+            source_snapshot = os.path.join(source_dir, filename)
+            Path(source_snapshot).write_text(
+                generated_text,
+                encoding="utf-8",
+                newline="\n"
+            )
+
+            manifest_path = os.path.join(
+                workspace_path,
+                "documentation_workflow_manifest.json"
+            )
+            manifest_payload = {
+                "contract_version": "1.2",
+                "panel_version": "V20.1.Q3_STEP_20A",
+                "selected_at": now_value.isoformat(),
+                "creation_mode": "OFFICIAL_TEMPLATE",
+                "template_source": template_path,
+                "template_document_type": document_type,
+                "generated_document_id": document_id,
+                "generated_filename": filename,
+                "source_original": template_path,
+                "source_snapshot": source_snapshot,
+                "workspace": workspace_path,
+                "workflow_status": "TEMPLATE_DRAFT_CREATED_WITH_TECHNICAL_PREFILL",
+                "technical_prefill": {
+                    "git": git_snapshot,
+                    "database": db_snapshot,
+                    "filled_fields": sorted(technical_replacements.keys()),
+                },
+            }
+
+            with open(
+                manifest_path,
+                "w",
+                encoding="utf-8"
+            ) as manifest_handle:
+                json.dump(
+                    manifest_payload,
+                    manifest_handle,
+                    ensure_ascii=False,
+                    indent=2
+                )
+
+            self._documentation_activate_new_workspace(
+                workspace_path=workspace_path,
+                source_snapshot=source_snapshot,
+                manifest_path=manifest_path,
+                source_original=template_path,
+                status_text="ŠABLONA PŘEDVYPLNĚNA – DOPLŇ OBSAH"
+            )
+
+            unresolved = self._documentation_unresolved_template_fields(
+                source_snapshot
+            )
+
+            try:
+                os.startfile(source_snapshot)
+                open_note = "Pracovní dokument byl otevřen v editoru."
+            except Exception:
+                open_note = (
+                    "Dokument se nepodařilo automaticky otevřít. "
+                    "Otevři jej ručně."
+                )
+
+            messagebox.showinfo(
+                "Nový dokument ze šablony",
+                (
+                    f"Byl vytvořen nový dokument typu {document_type}.\n\n"
+                    f"Document ID: {document_id}\n"
+                    f"Šablona: {template_path}\n"
+                    f"Pracovní dokument: {source_snapshot}\n"
+                    f"Technicky předvyplněná pole: {len(technical_replacements)}\n"
+                    f"Nevyplněná obsahová pole: {len(unresolved)}\n"
+                    f"Git: {git_snapshot['summary']}\n"
+                    f"DB: {db_snapshot['database_summary']}\n\n"
+                    f"{open_note}\n\n"
+                    "Doplň zbývající pole {{NAZEV_POLE}}. Potom znovu klikni "
+                    "na 1 VYBRAT A ANALYZOVAT a panel spustí A17."
+                )
+            )
+
+        except Exception as exc:
+            self.documentation_workflow_last_status = (
+                "CHYBA PŘI VYTVOŘENÍ DOKUMENTU ZE ŠABLONY"
+            )
+            self._documentation_update_workflow_ui()
+            messagebox.showerror(
+                "Nový dokument ze šablony",
+                f"Dokument se nepodařilo vytvořit:\n\n{exc}"
+            )
+
+
+    def _documentation_unresolved_template_fields(self, path_value):
+        """Vrátí unikátní seznam nevyplněných polí {{POLE}}."""
+        if not path_value or not os.path.isfile(path_value):
+            return []
+
+        try:
+            text_value = Path(path_value).read_text(
+                encoding="utf-8-sig"
+            )
+        except Exception:
+            return []
+
+        fields = set(
+            re.findall(
+                r"\{\{([A-Z0-9_]+)\}\}",
+                text_value
+            )
+        )
+        fields.discard("NAZEV_PROMENNE")
+        return sorted(fields)
+
+
+    def documentation_open_working_document(self):
+        """Otevře aktivní pracovní dokument ve výchozím editoru Windows."""
+        document = self.documentation_workflow_document
+        if not document or not os.path.isfile(document):
+            messagebox.showwarning(
+                "Pracovní dokument",
+                "Aktivní pracovní dokument nebyl nalezen."
+            )
+            return
+
+        try:
+            os.startfile(document)
+        except Exception as exc:
+            messagebox.showerror(
+                "Pracovní dokument",
+                f"Dokument se nepodařilo otevřít:\n\n{exc}"
+            )
+
+
+    def _documentation_show_phase_menu(self, event, items):
+        """Zobrazí kontextovou nabídku dílčích akcí jedné fáze."""
+        menu = tk.Menu(self, tearoff=0)
+        for label, command in items:
+            if label == "---":
+                menu.add_separator()
+            else:
+                menu.add_command(label=label, command=command)
+        try:
+            menu.tk_popup(event.x_root, event.y_root)
+        finally:
+            menu.grab_release()
+
+
+    def _documentation_phase_1_menu(self):
+        return [
+            (
+                "Nový denní zápis z MM-TPL-002",
+                self.documentation_create_daily_log_from_template
+            ),
+            (
+                "Nové navázání z MM-TPL-001",
+                self.documentation_create_chat_continuation_from_template
+            ),
+            ("---", None),
+            (
+                "Vybrat existující dokument",
+                self.documentation_select_source_document
+            ),
+            (
+                "Otevřít pracovní dokument",
+                self.documentation_open_working_document
+            ),
+            ("---", None),
+            ("Spustit A17 audit", self.documentation_run_a17),
+            ("Zobrazit A17 nálezy", self.documentation_show_a17_findings),
+            ("Otevřít A17 report", self.documentation_open_a17_report),
+            ("---", None),
+            ("A23 – zkontrolovat a doplnit slovníky", self.documentation_run_a23),
+            ("A23 – zobrazit kandidáty", self.documentation_show_a23_candidates),
+            ("A23 – otevřít report", self.documentation_open_a23_report),
+        ]
+
+
+    def _documentation_phase_2_menu(self):
+        return [
+            ("Vytvořit návrh opravy A18", self.documentation_run_a18),
+            ("Otevřít kontrolu mapování A19", self.documentation_run_a19),
+        ]
+
+
+    def _documentation_phase_3_menu(self):
+        return [
+            ("Pokračovat podle stavu dokumentu", self.documentation_phase_3_build),
+            ("---", None),
+            ("Vytvořit dokument A20", self.documentation_run_a20),
+            ("Otevřít kandidát", self.documentation_open_a20_candidate),
+            ("Spustit finální A17", self.documentation_run_final_a17),
+            ("Schválit a uložit", self.documentation_approve_and_save_canonical),
+        ]
+
+
+    def _documentation_phase_4_menu(self):
+        return [
+            ("Spustit kanonický A17", self.documentation_run_canonical_a17),
+            ("Vytvořit Git commit", self.documentation_git_commit),
+            ("---", None),
+            ("A24 – pouze validovat na PC2", self.documentation_run_a24_validate),
+            ("A24 – APPLY + A7 na PC2", self.documentation_run_a24_apply),
+            ("Otevřít poslední A24 report", self.documentation_open_a24_report),
+            (
+                "Otevřít DB stav a nárůst",
+                self.documentation_open_database_growth_report
+            ),
+            ("---", None),
+            ("Otevřít poslední A17 report", self.documentation_open_a17_report),
+        ]
+
+
+    def _documentation_reset_workflow_state(self):
+        """
+        Vyčistí stav předchozího dokumentačního workflow před výběrem
+        nového dokumentu. Soubory ve workspace ani kanonické dokumenty nemaže.
+        """
+        self.documentation_workflow_document = None
+        self.documentation_workflow_source_original = None
+        self.documentation_workflow_source_document = None
+        self.documentation_workflow_workspace = None
+        self.documentation_workflow_manifest = None
+
+        self.documentation_workflow_report_json = None
+        self.documentation_workflow_report_markdown = None
+        self.documentation_workflow_findings = []
+
+        self.documentation_workflow_a18_proposal = None
+        self.documentation_workflow_a18_mapping_json = None
+        self.documentation_workflow_a18_panel_mapping_json = None
+
+        self.documentation_workflow_a23_report_json = None
+        self.documentation_workflow_a23_report_markdown = None
+        self.documentation_workflow_a23_candidates = []
+        self.documentation_workflow_a23_selected_keys = set()
+        self.documentation_workflow_a23_translation_proposal = None
+        self.documentation_workflow_a23_explanation_proposal = None
+
+        self.documentation_workflow_a20_candidate = None
+        self.documentation_workflow_a20_diff = None
+        self.documentation_workflow_a20_build_json = None
+
+        self.documentation_workflow_final_a17_json = None
+        self.documentation_workflow_final_a17_markdown = None
+
+        self.documentation_workflow_canonical_document = None
+        self.documentation_workflow_canonical_a17_json = None
+        self.documentation_workflow_canonical_a17_markdown = None
+
+        self.documentation_workflow_git_commit = None
+
+        self.documentation_workflow_a24_validation_status = None
+        self.documentation_workflow_a24_validation_report = None
+        self.documentation_workflow_a24_validation_hash = None
+        self.documentation_workflow_a24_apply_status = None
+        self.documentation_workflow_a24_apply_report = None
+        self.documentation_workflow_a7_status = None
+        self.documentation_workflow_import_summary = {}
+        self.documentation_workflow_db_snapshot_before_apply = None
+        self.documentation_workflow_db_snapshot_after_apply = None
+        self.documentation_workflow_db_snapshot_delta = {}
+        self.documentation_workflow_db_growth_report = None
+        self.documentation_workflow_db_growth_markdown = None
+
+        self.documentation_workflow_step = "ZDROJ"
+        self.documentation_workflow_last_status = "NEVYBRÁN DOKUMENT"
+
+        self._documentation_update_workflow_ui()
+
+
+    def _documentation_initial_a17_is_clean(self):
+        """
+        Vrátí True, pokud aktuální vstupní A17 neobsahuje FAIL ani PARTIAL.
+        MANUAL_REVIEW není technická chyba a nevyžaduje A18/A19/A20.
+        """
+        report_path = self.documentation_workflow_report_json
+
+        if not report_path or not os.path.isfile(report_path):
+            return False
+
+        try:
+            with open(report_path, "r", encoding="utf-8-sig") as handle:
+                report = json.load(handle)
+        except Exception:
+            return False
+
+        findings = report.get("findings") or []
+        return not any(
+            str(item.get("result", "")).strip().upper() in {"FAIL", "PARTIAL"}
+            for item in findings
+        )
+
+
+    def documentation_phase_1_analyze(self):
+        """
+        FÁZE 1:
+        výběr dokumentu -> A17 -> nálezy.
+
+        Po dokončeném Git commitu začne nové kliknutí vždy nový workflow
+        a otevře výběr dalšího dokumentu.
+        """
+        workflow_finished = (
+            self.documentation_workflow_a24_apply_status
+            == "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED"
+        )
+
+        if workflow_finished:
+            start_new = messagebox.askyesno(
+                "Nový dokument",
+                (
+                    "Předchozí dokument je dokončen a commitnut.\n\n"
+                    "Chceš vybrat nový dokument a zahájit nový workflow?"
+                )
+            )
+            if not start_new:
+                return
+
+            self._documentation_reset_workflow_state()
+            self.documentation_choose_source_action()
+            return
+
+        if not self.documentation_workflow_workspace:
+            self.documentation_choose_source_action()
+            return
+
+        report_ready = bool(
+            self.documentation_workflow_report_json
+            or self.documentation_workflow_report_markdown
+        )
+        if not report_ready:
+            self.documentation_run_a17()
+            return
+
+        self.documentation_show_a17_findings()
+
+
+    def documentation_phase_2_review(self):
+        """
+        FÁZE 2:
+        A18 návrh -> A19 ruční kontrola a uzavření mapování.
+        Pokud vstupní A17 nemá FAIL ani PARTIAL, oprava není nutná
+        a fáze 2 se bezpečně přeskočí.
+        """
+        if not self.documentation_workflow_workspace:
+            messagebox.showwarning(
+                "Fáze 2 – opravit a zkontrolovat",
+                "Nejprve dokonči fázi 1."
+            )
+            return
+
+        if self._documentation_initial_a17_is_clean():
+            messagebox.showinfo(
+                "Fáze 2 – není potřeba",
+                (
+                    "Vstupní audit A17 neobsahuje žádný FAIL ani PARTIAL.\n\n"
+                    "Dokument není třeba opravovat. Pokračuj přímo na "
+                    "3  VYTVOŘIT A SCHVÁLIT."
+                )
+            )
+            return
+
+        if not self.documentation_workflow_a18_panel_mapping_json:
+            self.documentation_run_a18()
+            return
+
+        review_path = os.path.join(
+            self.documentation_workflow_workspace,
+            "a19",
+            "document_standardization_panel_review_latest.json"
+        )
+        review_confirmed = False
+        if os.path.isfile(review_path):
+            try:
+                with open(review_path, "r", encoding="utf-8-sig") as handle:
+                    payload = json.load(handle)
+                review_confirmed = (
+                    payload.get("review_status") == "MAPPING_CONFIRMED"
+                    and payload.get("final_status")
+                    == "DOCUMENT_STANDARDIZATION_PANEL_REVIEW_CONFIRMED"
+                )
+            except Exception:
+                review_confirmed = False
+
+        if not review_confirmed:
+            self.documentation_run_a19()
+            return
+
+        messagebox.showinfo(
+            "Fáze 2 – hotovo",
+            "Návrh A18 byl vytvořen a mapování A19 je finálně uzavřeno."
+        )
+
+
+    def documentation_phase_3_build(self):
+        """
+        FÁZE 3:
+        - čistý dokument: použije vstupní pracovní kopii a vstupní A17,
+          bez A18/A19/A20,
+        - dokument vyžadující opravu: A20 -> finální A17 -> schválení.
+        """
+        if not self.documentation_workflow_workspace:
+            messagebox.showwarning(
+                "Fáze 3 – vytvořit a schválit",
+                "Nejprve dokonči fázi 1."
+            )
+            return
+
+        # Rychlá větev pro dokument, který již splňuje standard:
+        # žádný FAIL ani PARTIAL, pouze případný MANUAL_REVIEW terminologie.
+        if (
+            not self.documentation_workflow_a20_candidate
+            and self._documentation_initial_a17_is_clean()
+        ):
+            source_candidate = self.documentation_workflow_document
+            source_report = self.documentation_workflow_report_json
+
+            if not source_candidate or not os.path.isfile(source_candidate):
+                messagebox.showwarning(
+                    "Fáze 3 – vytvořit a schválit",
+                    "Pracovní kopie zdrojového dokumentu nebyla nalezena."
+                )
+                return
+
+            if not source_report or not os.path.isfile(source_report):
+                messagebox.showwarning(
+                    "Fáze 3 – vytvořit a schválit",
+                    "Nejprve spusť vstupní A17 audit."
+                )
+                return
+
+            self.documentation_workflow_a20_candidate = source_candidate
+            self.documentation_workflow_final_a17_json = source_report
+            self.documentation_workflow_final_a17_markdown = (
+                self.documentation_workflow_report_markdown
+            )
+            self.documentation_workflow_step = "PŘÍMÉ SCHVÁLENÍ"
+            self.documentation_workflow_last_status = (
+                "DOKUMENT BEZ OPRAVY – PŘIPRAVEN KE SCHVÁLENÍ"
+            )
+            self._documentation_update_workflow_ui()
+            self.documentation_approve_and_save_canonical()
+            return
+
+        if not self.documentation_workflow_a20_candidate:
+            self.documentation_run_a20()
+            return
+
+        if not self.documentation_workflow_final_a17_json:
+            open_first = messagebox.askyesnocancel(
+                "Fáze 3 – kandidát",
+                (
+                    "Kandidát je vytvořen.\n\n"
+                    "ANO = otevřít kandidát pro ruční kontrolu\n"
+                    "NE = spustit finální A17\n"
+                    "ZRUŠIT = bez akce"
+                )
+            )
+            if open_first is None:
+                return
+            if open_first:
+                self.documentation_open_a20_candidate()
+            else:
+                self.documentation_run_final_a17()
+            return
+
+        if not self.documentation_workflow_canonical_document:
+            self.documentation_approve_and_save_canonical()
+            return
+
+        messagebox.showinfo(
+            "Fáze 3 – hotovo",
+            (
+                "Dokument byl vytvořen, finálně auditován, schválen "
+                "a uložen do kanonické složky."
+            )
+        )
+
+
+    def documentation_phase_4_publish(self):
+        """
+        FÁZE 4:
+        kanonický A17 -> Git commit -> A24 VALIDATE_ONLY ->
+        potvrzený A24 APPLY -> A6 -> inkrementální A7.
+
+        Každé kliknutí provede právě jeden další chybějící krok.
+        """
+        if not self.documentation_workflow_canonical_document:
+            messagebox.showwarning(
+                "Fáze 4 – publikovat",
+                "Nejprve dokonči fázi 3 a ulož kanonický dokument."
+            )
+            return
+
+        if not self.documentation_workflow_canonical_a17_json:
+            self.documentation_run_canonical_a17()
+            return
+
+        if not self.documentation_workflow_git_commit:
+            self.documentation_git_commit()
+            return
+
+        if (
+            self.documentation_workflow_a24_validation_status
+            != "HISTORY_DOCUMENT_IMPORT_VALIDATED"
+        ):
+            self.documentation_run_a24_validate()
+            return
+
+        if (
+            self.documentation_workflow_a24_apply_status
+            != "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED"
+        ):
+            self.documentation_run_a24_apply()
+            return
+
+        messagebox.showinfo(
+            "Fáze 4 – hotovo",
+            (
+                "Dokument byl kanonicky auditován, uložen v Git historii "
+                "a importován do dokumentační databáze na PC2.\n\n"
+                f"Commit: {self.documentation_workflow_git_commit}\n"
+                f"A24: {self.documentation_workflow_a24_apply_status}\n"
+                f"A7: {self.documentation_workflow_a7_status}\n\n"
+                "Push nebyl spuštěn."
+            )
+        )
+
+
+    def _documentation_sha256_file(self, path_value):
+        """Vrátí SHA-256 souboru bez načítání celého dokumentu do paměti."""
+        digest = hashlib.sha256()
+        with open(path_value, "rb") as handle:
+            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(chunk)
+        return digest.hexdigest()
+
+
+    def _documentation_extract_a24_status(self, output_text):
+        """Vybere nejpřesnější finální stav A24 z konzolového výstupu."""
+        output_upper = str(output_text or "").upper()
+        statuses = (
+            "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED",
+            "HISTORY_DOCUMENT_IMPORT_APPLIED_VERIFICATION_FAILED",
+            "HISTORY_DOCUMENT_IMPORT_VALIDATED",
+            "HISTORY_DOCUMENT_IMPORT_BLOCKED",
+        )
+        for status in statuses:
+            if status in output_upper:
+                return status
+        return None
+
+
+    def _documentation_find_latest_a24_report(self, expected_status=None):
+        """
+        Najde poslední A24 JSON report vztahující se k aktuálnímu
+        kanonickému dokumentu. Reporty vznikají na PC2, ale PC1 je čte
+        přes sdílený kořen projektu.
+        """
+        report_dir = os.path.join(
+            DOCUMENTATION_ROOT,
+            "reports",
+            "documentation"
+        )
+        if not os.path.isdir(report_dir):
+            return None
+
+        document = self.documentation_workflow_canonical_document
+        document_name = os.path.basename(document or "")
+        document_id = ""
+        try:
+            _, metadata = self._documentation_read_metadata(document)
+            document_id = str(metadata.get("document_id") or "").strip()
+        except Exception:
+            document_id = ""
+
+        candidates = sorted(
+            Path(report_dir).glob(
+                "history_document_database_pipeline_*.json"
+            ),
+            key=lambda item: item.stat().st_mtime,
+            reverse=True
+        )
+
+        for candidate in candidates[:50]:
+            try:
+                payload = json.loads(
+                    candidate.read_text(encoding="utf-8-sig")
+                )
+            except Exception:
+                continue
+
+            final_status = str(
+                payload.get("final_status") or ""
+            ).strip().upper()
+
+            if (
+                expected_status
+                and final_status
+                and final_status != str(expected_status).strip().upper()
+            ):
+                continue
+
+            serialized = json.dumps(
+                payload,
+                ensure_ascii=False
+            ).lower()
+
+            if (
+                document_name
+                and document_name.lower() in serialized
+            ):
+                return str(candidate)
+
+            if (
+                document_id
+                and document_id.lower() in serialized
+            ):
+                return str(candidate)
+
+        return None
+
+
+    def _documentation_parse_a24_summary(self, output_text, report_path=None):
+        """
+        Připraví stručný souhrn bez závislosti na jediné verzi A24/A6/A7.
+        Pokud je dostupný JSON report, zachová i jeho klíčové příznaky.
+        """
+        summary = {
+            "execution_host": "PC2",
+            "remote_host": DOCUMENTATION_REMOTE_HOST,
+            "db_host": "localhost na PC2",
+            "db_target": DB_CONFIG.get("dbname", "matchmatrix"),
+            "warnings": None,
+            "blockers": None,
+            "a6_apply_succeeded": None,
+            "a7_verified": None,
+        }
+
+        payload = {}
+        if report_path and os.path.isfile(report_path):
+            try:
+                with open(report_path, "r", encoding="utf-8-sig") as handle:
+                    payload = json.load(handle)
+            except Exception:
+                payload = {}
+
+        if isinstance(payload, dict):
+            summary["a6_apply_succeeded"] = payload.get(
+                "a6_apply_succeeded"
+            )
+            summary["a7_verified"] = payload.get("a7_verified")
+            summary["manifest_path"] = payload.get("manifest_path")
+            summary["final_status"] = payload.get("final_status")
+
+        output = str(output_text or "")
+        patterns = {
+            "warnings": (
+                r"(?im)^\s*WARNINGS?\s*[:=]\s*(\d+)\s*$",
+                r"(?im)^\s*VAROVÁNÍ\s*[:=]\s*(\d+)\s*$",
+            ),
+            "blockers": (
+                r"(?im)^\s*BLOCKERS?\s*[:=]\s*(\d+)\s*$",
+                r"(?im)^\s*BLOKÁTORY\s*[:=]\s*(\d+)\s*$",
+            ),
+        }
+        for key, key_patterns in patterns.items():
+            for pattern in key_patterns:
+                match = re.search(pattern, output)
+                if match:
+                    summary[key] = int(match.group(1))
+                    break
+
+        return summary
+
+
+    def documentation_run_a24_validate(self):
+        """
+        STEP 18A - nedestruktivní validace jednoho kanonického dokumentu.
+        Databáze se nemění.
+        """
+        document = self.documentation_workflow_canonical_document
+
+        if (
+            not document
+            or not os.path.isfile(document)
+            or not self.documentation_workflow_git_commit
+        ):
+            messagebox.showwarning(
+                "A24 – validace",
+                (
+                    "Nejprve dokonči kanonický A17 a Git commit "
+                    "konkrétního dokumentu."
+                )
+            )
+            return
+
+        current_hash = self._documentation_sha256_file(document)
+
+        self.documentation_workflow_a24_validation_status = None
+        self.documentation_workflow_a24_validation_report = None
+        self.documentation_workflow_a24_validation_hash = current_hash
+        self.documentation_workflow_a24_apply_status = None
+        self.documentation_workflow_a24_apply_report = None
+        self.documentation_workflow_a7_status = None
+        self.documentation_workflow_import_summary = {}
+        self.documentation_workflow_db_snapshot_before_apply = None
+        self.documentation_workflow_db_snapshot_after_apply = None
+        self.documentation_workflow_db_snapshot_delta = {}
+        self.documentation_workflow_db_growth_report = None
+        self.documentation_workflow_db_growth_markdown = None
+        self._documentation_update_workflow_ui()
+
+        output_dir = os.path.join(
+            self.documentation_workflow_workspace,
+            "a24_validate"
+        )
+
+        self._documentation_start_remote_tool(
+            tool_key="A24",
+            arguments=[
+                "--document",
+                ("PATH", document),
+                "--validate-only",
+            ],
+            step="A24 VALIDATE_ONLY",
+            running_status="A24 VALIDATE_ONLY BĚŽÍ NA PC2",
+            finish_callback=(
+                lambda success, out, local, remote:
+                self._documentation_finish_a24_validate(
+                    success,
+                    out,
+                    local,
+                    remote,
+                    output_dir
+                )
+            )
+        )
+
+
+    def _documentation_finish_a24_validate(
+        self,
+        success,
+        output_text,
+        local_exit_code,
+        remote_exit_code,
+        output_dir
+    ):
+        self._documentation_finish_generic(
+            success=success,
+            step="A24 VALIDATE_ONLY",
+            success_status="A24 VALIDACE DOKONČENA",
+            failure_status="CHYBA A24 VALIDACE",
+            output_text=output_text,
+            output_dir=output_dir
+        )
+
+        status = self._documentation_extract_a24_status(output_text)
+        validated = (
+            success
+            and status == "HISTORY_DOCUMENT_IMPORT_VALIDATED"
+        )
+
+        self.documentation_workflow_a24_validation_status = (
+            status or "HISTORY_DOCUMENT_IMPORT_BLOCKED"
+        )
+        self.documentation_workflow_a24_validation_report = (
+            self._documentation_find_latest_a24_report(
+                expected_status=status
+            )
+        )
+        self.documentation_workflow_import_summary = (
+            self._documentation_parse_a24_summary(
+                output_text,
+                self.documentation_workflow_a24_validation_report
+            )
+        )
+
+        if validated:
+            self.documentation_workflow_last_status = (
+                "A24 VALIDATED – APPLY JE PŘIPRAVEN"
+            )
+            self._documentation_manifest_update(
+                workflow_status="A24_VALIDATED",
+                a24_validation_status=status,
+                a24_validation_report=(
+                    self.documentation_workflow_a24_validation_report
+                ),
+                a24_validation_hash=(
+                    self.documentation_workflow_a24_validation_hash
+                )
+            )
+            self._documentation_update_workflow_ui()
+            messagebox.showinfo(
+                "A24 – VALIDATE_ONLY",
+                (
+                    "Validace na PC2 proběhla úspěšně. Databáze nebyla změněna.\n\n"
+                    f"Execution host: PC2 ({DOCUMENTATION_REMOTE_HOST})\n"
+                    "DB host: localhost na PC2\n"
+                    f"DB target: {DB_CONFIG.get('dbname')}\n"
+                    f"Dokument: {self.documentation_workflow_canonical_document}\n"
+                    f"Stav: {status}\n\n"
+                    "Další kliknutí na 4 PUBLIKOVAT nabídne potvrzený APPLY."
+                )
+            )
+        else:
+            self.documentation_workflow_last_status = (
+                f"A24 VALIDACE BLOKOVÁNA: {status or 'NEZNÁMÝ STAV'}"
+            )
+            self._documentation_manifest_update(
+                workflow_status="A24_VALIDATION_BLOCKED",
+                a24_validation_status=(
+                    status or "HISTORY_DOCUMENT_IMPORT_BLOCKED"
+                )
+            )
+            self._documentation_update_workflow_ui()
+            messagebox.showerror(
+                "A24 – VALIDATE_ONLY",
+                (
+                    "Validace nebyla úspěšná. APPLY zůstává zablokován.\n\n"
+                    f"Lokální kód: {local_exit_code}\n"
+                    f"Vzdálený kód: {remote_exit_code}\n"
+                    f"Stav: {status or 'NEZNÁMÝ'}\n\n"
+                    f"{str(output_text or '')[-3500:]}"
+                )
+            )
+
+
+    def documentation_run_a24_apply(self):
+        """
+        STEP 18B - skutečný import přes A24. A24 uvnitř spustí A6 a A7.
+        APPLY se nespustí bez platné validace stejného obsahu dokumentu.
+        """
+        document = self.documentation_workflow_canonical_document
+
+        if (
+            self.documentation_workflow_a24_validation_status
+            != "HISTORY_DOCUMENT_IMPORT_VALIDATED"
+        ):
+            messagebox.showwarning(
+                "A24 – APPLY",
+                "Nejprve musí úspěšně proběhnout A24 VALIDATE_ONLY."
+            )
+            return
+
+        if not document or not os.path.isfile(document):
+            messagebox.showerror(
+                "A24 – APPLY",
+                "Kanonický dokument nebyl nalezen."
+            )
+            return
+
+        current_hash = self._documentation_sha256_file(document)
+        if (
+            not self.documentation_workflow_a24_validation_hash
+            or current_hash
+            != self.documentation_workflow_a24_validation_hash
+        ):
+            self.documentation_workflow_a24_validation_status = None
+            self.documentation_workflow_a24_apply_status = None
+            self.documentation_workflow_a7_status = None
+            self._documentation_update_workflow_ui()
+            messagebox.showerror(
+                "A24 – APPLY",
+                (
+                    "Dokument se od validace změnil. APPLY byl zablokován.\n\n"
+                    "Spusť znovu A24 VALIDATE_ONLY."
+                )
+            )
+            return
+
+        try:
+            _, metadata = self._documentation_read_metadata(document)
+            document_id = metadata.get("document_id") or Path(document).stem
+        except Exception:
+            document_id = Path(document).stem
+
+        confirmed = messagebox.askyesno(
+            "A24 – potvrdit APPLY",
+            (
+                "Bude proveden skutečný databázový import.\n\n"
+                f"Execution host: PC2 ({DOCUMENTATION_REMOTE_HOST})\n"
+                "DB host: localhost na PC2\n"
+                f"DB target: {DB_CONFIG.get('dbname')}\n"
+                f"Document ID: {document_id}\n"
+                f"Soubor: {document}\n\n"
+                "A24 spustí A6 a následně inkrementální A7.\n"
+                "Automatický stash ani push se neprovede.\n\n"
+                "Pokračovat?"
+            )
+        )
+        if not confirmed:
+            return
+
+        # STEP 20B: zachytit skutečný stav DB těsně před APPLY.
+        try:
+            DB_CACHE.clear()
+            self.documentation_workflow_db_snapshot_before_apply = (
+                self._documentation_collect_database_snapshot(
+                    datetime.now().astimezone().isoformat()
+                )
+            )
+            self.documentation_workflow_db_snapshot_after_apply = None
+            self.documentation_workflow_db_snapshot_delta = {}
+            self.documentation_workflow_db_growth_report = None
+            self.documentation_workflow_db_growth_markdown = None
+            self._documentation_manifest_update(
+                db_snapshot_before=(
+                    self.documentation_workflow_db_snapshot_before_apply
+                )
+            )
+            self._documentation_update_workflow_ui()
+        except Exception as exc:
+            self.documentation_workflow_db_snapshot_before_apply = {
+                "DB_SNAPSHOT_CREATED_AT": (
+                    datetime.now().astimezone().isoformat()
+                ),
+                "DB_VERIFICATION_SOURCE": (
+                    f"NEOVĚŘENO – {type(exc).__name__}: {exc}"
+                ),
+            }
+            self._documentation_update_workflow_ui()
+
+        output_dir = os.path.join(
+            self.documentation_workflow_workspace,
+            "a24_apply"
+        )
+
+        self._documentation_start_remote_tool(
+            tool_key="A24",
+            arguments=[
+                "--document",
+                ("PATH", document),
+                "--apply",
+            ],
+            step="A24 APPLY + A6 + A7",
+            running_status="A24 APPLY BĚŽÍ NA PC2",
+            finish_callback=(
+                lambda success, out, local, remote:
+                self._documentation_finish_a24_apply(
+                    success,
+                    out,
+                    local,
+                    remote,
+                    output_dir
+                )
+            )
+        )
+
+
+    def _documentation_finish_a24_apply(
+        self,
+        success,
+        output_text,
+        local_exit_code,
+        remote_exit_code,
+        output_dir
+    ):
+        self._documentation_finish_generic(
+            success=success,
+            step="A24 APPLY + A6 + A7",
+            success_status="A24 APPLY DOKONČEN",
+            failure_status="CHYBA A24 APPLY",
+            output_text=output_text,
+            output_dir=output_dir
+        )
+
+        status = self._documentation_extract_a24_status(output_text)
+        self.documentation_workflow_a24_apply_status = (
+            status or "HISTORY_DOCUMENT_IMPORT_BLOCKED"
+        )
+        self.documentation_workflow_a24_apply_report = (
+            self._documentation_find_latest_a24_report(
+                expected_status=status
+            )
+        )
+        self.documentation_workflow_import_summary = (
+            self._documentation_parse_a24_summary(
+                output_text,
+                self.documentation_workflow_a24_apply_report
+            )
+        )
+
+        # STEP 20B: po dokončení A24/A7 načíst čerstvý stav DB a rozdíl.
+        try:
+            DB_CACHE.clear()
+            self.documentation_workflow_db_snapshot_after_apply = (
+                self._documentation_collect_database_snapshot(
+                    datetime.now().astimezone().isoformat()
+                )
+            )
+            self.documentation_workflow_db_snapshot_delta = (
+                self._documentation_calculate_database_delta(
+                    self.documentation_workflow_db_snapshot_before_apply,
+                    self.documentation_workflow_db_snapshot_after_apply
+                )
+            )
+            self._documentation_write_database_growth_report(output_dir)
+        except Exception as exc:
+            self.documentation_workflow_db_snapshot_after_apply = {
+                "DB_SNAPSHOT_CREATED_AT": (
+                    datetime.now().astimezone().isoformat()
+                ),
+                "DB_VERIFICATION_SOURCE": (
+                    f"NEOVĚŘENO – {type(exc).__name__}: {exc}"
+                ),
+            }
+            self.documentation_workflow_db_snapshot_delta = {}
+
+        if status == "HISTORY_DOCUMENT_IMPORT_APPLIED_AND_VERIFIED":
+            self.documentation_workflow_a7_status = "VERIFIED"
+            self.documentation_workflow_last_status = (
+                "DATABÁZOVÝ IMPORT A A7 OVĚŘENÍ HOTOVO"
+            )
+            workflow_status = "DATABASE_IMPORTED_AND_VERIFIED"
+            dialog = "info"
+        elif status == "HISTORY_DOCUMENT_IMPORT_APPLIED_VERIFICATION_FAILED":
+            self.documentation_workflow_a7_status = "BLOCKED"
+            self.documentation_workflow_last_status = (
+                "A6 APPLY PROBĚHL, A7 OVĚŘENÍ SELHALO"
+            )
+            workflow_status = "DATABASE_APPLIED_VERIFICATION_FAILED"
+            dialog = "error"
+        else:
+            self.documentation_workflow_a7_status = "BLOCKED"
+            self.documentation_workflow_last_status = (
+                f"DATABÁZOVÝ IMPORT BLOKOVÁN: {status or 'NEZNÁMÝ STAV'}"
+            )
+            workflow_status = "DATABASE_IMPORT_BLOCKED"
+            dialog = "error"
+
+        self._documentation_manifest_update(
+            workflow_status=workflow_status,
+            a24_apply_status=self.documentation_workflow_a24_apply_status,
+            a24_apply_report=self.documentation_workflow_a24_apply_report,
+            a7_status=self.documentation_workflow_a7_status,
+            import_summary=self.documentation_workflow_import_summary,
+            db_snapshot_before=(
+                self.documentation_workflow_db_snapshot_before_apply
+            ),
+            db_snapshot_after=(
+                self.documentation_workflow_db_snapshot_after_apply
+            ),
+            db_snapshot_delta=(
+                self.documentation_workflow_db_snapshot_delta
+            ),
+            db_growth_report=self.documentation_workflow_db_growth_report,
+            db_growth_markdown=(
+                self.documentation_workflow_db_growth_markdown
+            )
+        )
+
+        try:
+            DB_CACHE.clear()
+            self.load_documentation_dashboard()
+        except Exception:
+            pass
+
+        self._documentation_update_workflow_ui()
+
+        summary = self.documentation_workflow_import_summary or {}
+        growth_detail = self._documentation_format_database_growth(
+            self.documentation_workflow_db_snapshot_delta,
+            multiline=True
+        )
+        detail = (
+            f"Execution host: PC2 ({DOCUMENTATION_REMOTE_HOST})\n"
+            "DB host: localhost na PC2\n"
+            f"DB target: {DB_CONFIG.get('dbname')}\n"
+            f"A24 stav: {self.documentation_workflow_a24_apply_status}\n"
+            f"A7 stav: {self.documentation_workflow_a7_status}\n"
+            f"Varování: {summary.get('warnings')}\n"
+            f"Blokátory: {summary.get('blockers')}\n\n"
+            "DB STAV PŘED → PO (ROZDÍL):\n"
+            f"{growth_detail}\n\n"
+            f"A24 report: {self.documentation_workflow_a24_apply_report or '-'}\n"
+            f"DB růst JSON: {self.documentation_workflow_db_growth_report or '-'}\n"
+            f"DB růst MD: {self.documentation_workflow_db_growth_markdown or '-'}"
+        )
+
+        if dialog == "info":
+            messagebox.showinfo(
+                "A24 – APPLY + A7",
+                (
+                    "Dokument byl importován a integrita byla ověřena.\n\n"
+                    + detail
+                )
+            )
+        else:
+            messagebox.showerror(
+                "A24 – APPLY + A7",
+                (
+                    "Publikační databázová část není plně dokončena.\n\n"
+                    + detail
+                    + "\n\nPOSLEDNÍ VÝSTUP:\n"
+                    + str(output_text or "")[-3000:]
+                )
+            )
+
+
+    def documentation_open_a24_report(self):
+        """Otevře poslední validační nebo APPLY report A24."""
+        report_path = (
+            self.documentation_workflow_a24_apply_report
+            or self.documentation_workflow_a24_validation_report
+        )
+
+        if not report_path:
+            messagebox.showwarning(
+                "A24 – report",
+                "Zatím není dostupný žádný report A24."
+            )
+            return
+
+        if not os.path.isfile(report_path):
+            messagebox.showerror(
+                "A24 – report",
+                f"Report nebyl nalezen:\n\n{report_path}"
+            )
+            return
+
+        try:
+            os.startfile(report_path)
+        except Exception as exc:
+            messagebox.showerror(
+                "A24 – report",
+                f"Report se nepodařilo otevřít:\n\n{exc}"
             )
 
 
@@ -5817,6 +9380,15 @@ Další termín: {h.get('next_target_date') or '-'}"""
         self.documentation_workflow_a18_mapping_markdown = None
         self.documentation_workflow_a18_panel_mapping_json = None
         self.documentation_workflow_a18_panel_mapping_markdown = None
+        self.documentation_workflow_a20_candidate = None
+        self.documentation_workflow_a20_build_json = None
+        self.documentation_workflow_final_a17_json = None
+        self.documentation_workflow_final_a17_markdown = None
+        self.documentation_workflow_approved_candidate = None
+        self.documentation_workflow_canonical_document = None
+        self.documentation_workflow_canonical_a17_json = None
+        self.documentation_workflow_canonical_a17_markdown = None
+        self.documentation_workflow_git_commit = None
         self.documentation_workflow_process = None
         self.documentation_workflow_running = False
         self.documentation_workflow_started_at = None
@@ -5832,6 +9404,64 @@ Další termín: {h.get('next_target_date') or '-'}"""
                 f"Pracovní kopie:\n{source_snapshot}"
             )
         )
+
+
+    def _documentation_running_on_pc2(self):
+        """Vrátí True, pokud panel skutečně běží na PC2."""
+        addresses = set()
+        try:
+            for address in socket.gethostbyname_ex(socket.gethostname())[2]:
+                if address:
+                    addresses.add(address)
+        except Exception:
+            pass
+
+        try:
+            probe = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            try:
+                probe.connect((DOCUMENTATION_REMOTE_HOST, 9))
+                local_address = probe.getsockname()[0]
+                if local_address:
+                    addresses.add(local_address)
+            finally:
+                probe.close()
+        except Exception:
+            pass
+
+        return DOCUMENTATION_REMOTE_HOST in addresses
+
+
+    def _documentation_to_pc1_unc_path(self, remote_path):
+        """
+        STEP 30:
+        Vrátí cestu dostupnou na aktuálním hostiteli.
+
+        - Na PC2 ponechá lokální C:\\MatchMatrix-platform cestu, pokud existuje.
+        - Na PC1 převede vzdálenou cestu na UNC share.
+        """
+        if not remote_path:
+            return remote_path
+
+        normalized = os.path.normpath(str(remote_path))
+        if self._documentation_running_on_pc2() and os.path.exists(normalized):
+            return normalized
+
+        remote_root = os.path.normpath(DOCUMENTATION_REMOTE_PROJECT_ROOT)
+        unc_root = os.path.normpath(DOCUMENTATION_ROOT)
+
+        try:
+            normalized_case = os.path.normcase(normalized)
+            remote_case = os.path.normcase(remote_root)
+            if (
+                normalized_case == remote_case
+                or normalized_case.startswith(remote_case + os.sep)
+            ):
+                relative = os.path.relpath(normalized, remote_root)
+                return os.path.normpath(os.path.join(unc_root, relative))
+        except Exception:
+            pass
+
+        return normalized
 
 
     def _documentation_to_remote_pc2_path(self, path_value):
@@ -5946,6 +9576,28 @@ Další termín: {h.get('next_target_date') or '-'}"""
                     f"{self.documentation_workflow_document}"
                 )
             )
+            return
+
+        unresolved_fields = self._documentation_unresolved_template_fields(
+            self.documentation_workflow_document
+        )
+        if unresolved_fields:
+            preview = ", ".join(unresolved_fields[:12])
+            if len(unresolved_fields) > 12:
+                preview += f" … a dalších {len(unresolved_fields) - 12}"
+
+            open_document = messagebox.askyesno(
+                "A17 – nevyplněná šablona",
+                (
+                    "Dokument stále obsahuje nevyplněná pole šablony.\n\n"
+                    f"Počet polí: {len(unresolved_fields)}\n"
+                    f"První pole: {preview}\n\n"
+                    "A17 se nyní nespustí. Otevřít pracovní dokument "
+                    "pro doplnění?"
+                )
+            )
+            if open_document:
+                self.documentation_open_working_document()
             return
 
         self.documentation_workflow_running = True
@@ -6418,17 +10070,22 @@ catch {{
             audit_payload.get("document_type") or ""
         ).strip().upper()
 
+        # STEP 22: panel neblokuje typy, které již rozpoznává A17.
+        # Skutečnou schopnost standardizace ověřuje samotný A18 kontrakt.
         supported_types = {
             "DAILY_LOG",
             "CHAT_CONTINUATION",
+            "PROJECT_SNAPSHOT",
+            "MAIN_DOCUMENT",
+            "REFERENCE_DOCUMENT",
+            "GENERIC_DOCUMENT",
         }
 
         if document_type not in supported_types:
             messagebox.showinfo(
                 "A18 – návrh opravy",
                 (
-                    "A18 nyní podporuje pouze denní zápisy a dokumenty "
-                    "NAVÁZÁNÍ.\n\n"
+                    "Typ dokumentu není mezi typy řízenými A17/A18.\n\n"
                     f"Detekovaný typ: {document_type or '-'}\n\n"
                     "Zdrojový dokument nebyl změněn."
                 )
@@ -7078,6 +10735,1004 @@ catch {{
             )
 
 
+    def _documentation_manifest_update(self, **values):
+        """Bezpečně doplní stav workflow do manifestu aktuálního workspace."""
+        if not self.documentation_workflow_manifest:
+            return
+        payload = {}
+        try:
+            if os.path.isfile(self.documentation_workflow_manifest):
+                with open(self.documentation_workflow_manifest, "r", encoding="utf-8-sig") as handle:
+                    payload = json.load(handle)
+        except Exception:
+            payload = {}
+        payload.update(values)
+        with open(self.documentation_workflow_manifest, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, ensure_ascii=False, indent=2)
+
+    def _documentation_start_remote_tool(self, *, tool_key, arguments, step, running_status, finish_callback):
+        """Spustí dokumentační Python nástroj na PC2 bez blokování GUI."""
+        if self.documentation_workflow_running:
+            messagebox.showwarning("Dokumentační workflow", "Jiný krok dokumentačního workflow právě běží.")
+            return False
+        tool_path = DOCUMENTATION_SCRIPTS.get(tool_key)
+        if not tool_path or not os.path.isfile(tool_path):
+            messagebox.showerror("Dokumentační workflow", f"Skript {tool_key} nebyl nalezen:\n\n{tool_path}")
+            return False
+        self.documentation_workflow_running = True
+        self.documentation_workflow_step = step
+        self.documentation_workflow_last_status = running_status
+        self.documentation_workflow_started_at = datetime.now().astimezone().isoformat()
+        self.documentation_workflow_finished_at = None
+        self._documentation_update_workflow_ui()
+
+        def worker():
+            try:
+                remote_tool = self._documentation_to_remote_pc2_path(tool_path)
+                remote_args = []
+                for value in arguments:
+                    if isinstance(value, tuple) and len(value) == 2 and value[0] == "PATH":
+                        remote_args.append(self._documentation_to_remote_pc2_path(value[1]))
+                    else:
+                        remote_args.append(str(value))
+                ps_host = self._documentation_powershell_literal(DOCUMENTATION_REMOTE_HOST)
+                ps_python = self._documentation_powershell_literal(DOCUMENTATION_PYTHON_EXE)
+                ps_tool = self._documentation_powershell_literal(remote_tool)
+                ps_project = self._documentation_powershell_literal(DOCUMENTATION_REMOTE_PROJECT_ROOT)
+                ps_args = "@(" + ",".join(self._documentation_powershell_literal(x) for x in remote_args) + ")"
+                powershell_script = (
+                    '$ErrorActionPreference = "Stop"\n'
+                    'try {\n'
+                    f'    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{\n'
+                    '        param($PythonExe, $ToolScript, $ProjectRoot, $ToolArgs)\n'
+                    '        $ErrorActionPreference = "Stop"\n'
+                    '        Set-Location -LiteralPath $ProjectRoot\n'
+                    '        & $PythonExe $ToolScript @ToolArgs\n'
+                    '        $ToolExitCode = $LASTEXITCODE\n'
+                    '        Write-Output "__MM_TOOL_EXIT_CODE__=$ToolExitCode"\n'
+                    '        if ($ToolExitCode -ne 0) { throw "Dokumentacni nastroj skoncil kodem $ToolExitCode" }\n'
+                    f'    }} -ArgumentList {ps_python}, {ps_tool}, {ps_project}, {ps_args}\n'
+                    '    exit 0\n'
+                    '}\n'
+                    'catch {\n'
+                    '    Write-Error $_.Exception.Message\n'
+                    '    exit 1\n'
+                    '}\n'
+                )
+                encoded = base64.b64encode(powershell_script.encode("utf-16le")).decode("ascii")
+                command = ["powershell.exe", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-EncodedCommand", encoded]
+                creation_flags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+                process = subprocess.Popen(command, cwd=BASE_DIR, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=False, creationflags=creation_flags)
+                self.documentation_workflow_process = process
+                raw_output, _ = process.communicate()
+                output_text = self._documentation_decode_process_output(raw_output)
+                marker = re.search(r"__MM_TOOL_EXIT_CODE__=(-?\d+)", output_text)
+                remote_code = int(marker.group(1)) if marker else None
+                success = process.returncode == 0 and remote_code == 0
+                self.after(0, lambda: finish_callback(success, output_text, process.returncode, remote_code))
+            except Exception as exc:
+                self.after(0, lambda error=exc: finish_callback(False, str(error), -1, None))
+
+        threading.Thread(target=worker, daemon=True).start()
+        return True
+
+    def _documentation_finish_generic(self, *, success, step, success_status, failure_status, output_text, output_dir):
+        self.documentation_workflow_running = False
+        self.documentation_workflow_process = None
+        self.documentation_workflow_finished_at = datetime.now().astimezone().isoformat()
+        try:
+            os.makedirs(output_dir, exist_ok=True)
+            stdout_path = os.path.join(output_dir, "panel_stdout.txt")
+            with open(stdout_path, "w", encoding="utf-8") as handle:
+                handle.write(output_text or "")
+        except Exception:
+            stdout_path = None
+        self.documentation_workflow_step = step
+        self.documentation_workflow_last_status = success_status if success else failure_status
+        self.documentation_workflow_last_output = stdout_path or output_text
+        self._documentation_update_workflow_ui()
+        return stdout_path
+
+    def documentation_run_a20(self):
+        """STEP 12 - vytvoří standardizovaný dokument z uzavřeného A19."""
+        if not self.documentation_workflow_workspace:
+            messagebox.showwarning("A20 – vytvořit dokument", "Nejprve vyber dokument a dokonči A19.")
+            return
+        review_path = os.path.join(self.documentation_workflow_workspace, "a19", "document_standardization_panel_review_latest.json")
+        if not os.path.isfile(review_path):
+            messagebox.showwarning("A20 – vytvořit dokument", "Uzavřený kontrakt A19 nebyl nalezen.")
+            return
+        try:
+            with open(review_path, "r", encoding="utf-8-sig") as handle:
+                review = json.load(handle)
+            if review.get("review_status") != "MAPPING_CONFIRMED" or review.get("final_status") != "DOCUMENT_STANDARDIZATION_PANEL_REVIEW_CONFIRMED":
+                raise RuntimeError("Mapování A19 ještě není finálně uzavřeno.")
+        except Exception as exc:
+            messagebox.showerror("A20 – vytvořit dokument", str(exc))
+            return
+        output_dir = os.path.join(self.documentation_workflow_workspace, "a20")
+        self._documentation_start_remote_tool(
+            tool_key="A20",
+            arguments=["--review", ("PATH", review_path), "--output-dir", ("PATH", output_dir)],
+            step="A20 VYTVOŘENÍ DOKUMENTU",
+            running_status="A20 BĚŽÍ NA PC2",
+            finish_callback=lambda success, out, local, remote: self._documentation_finish_a20(success, out, output_dir),
+        )
+
+    def _documentation_finish_a20(self, success, output_text, output_dir):
+        self._documentation_finish_generic(success=success, step="A20", success_status="A20 DOKUMENT VYTVOŘEN", failure_status="CHYBA A20", output_text=output_text, output_dir=output_dir)
+        candidate = os.path.join(output_dir, "document_standardized_candidate_latest.md")
+        build_json = os.path.join(output_dir, "document_standardized_candidate_build_latest.json")
+        if success and os.path.isfile(candidate) and os.path.isfile(build_json):
+            self.documentation_workflow_a20_candidate = candidate
+            self.documentation_workflow_a20_build_json = build_json
+            self.documentation_workflow_document = candidate
+            self.documentation_workflow_last_output = candidate
+            self._documentation_manifest_update(workflow_status="A20_COMPLETED", a20_candidate=candidate, a20_build_json=build_json)
+            self._documentation_update_workflow_ui()
+            messagebox.showinfo("A20 – dokument vytvořen", f"Standardizovaný kandidát byl vytvořen.\n\n{candidate}\n\nDoplň případné placeholdery a potom spusť FINÁLNÍ A17.")
+        else:
+            messagebox.showerror("A20 – chyba", (output_text or "")[-3500:])
+
+    def documentation_open_a20_candidate(self):
+        candidate = self.documentation_workflow_a20_candidate
+        if not candidate or not os.path.isfile(candidate):
+            messagebox.showwarning("A20 – kandidát", "Nejprve vytvoř dokument tlačítkem VYTVOŘIT DOKUMENT.")
+            return
+        try:
+            os.startfile(candidate)
+            self.documentation_workflow_step = "RUČNÍ DOPLNĚNÍ KANDIDÁTA"
+            self.documentation_workflow_last_status = "KANDIDÁT OTEVŘEN"
+            self._documentation_update_workflow_ui()
+        except Exception as exc:
+            messagebox.showerror("A20 – kandidát", str(exc))
+
+    def _documentation_run_named_a17(self, document_path, output_dir, step, running_status, finish_callback):
+        if not document_path or not os.path.isfile(document_path):
+            messagebox.showwarning("A17", "Dokument pro audit nebyl nalezen.")
+            return
+        self._documentation_start_remote_tool(
+            tool_key="A17",
+            arguments=["--document", ("PATH", document_path), "--document-type", "AUTO", "--output-dir", ("PATH", output_dir), "--stdout-findings", "20"],
+            step=step,
+            running_status=running_status,
+            finish_callback=finish_callback,
+        )
+
+    def documentation_run_final_a17(self):
+        candidate = self.documentation_workflow_a20_candidate
+        output_dir = os.path.join(self.documentation_workflow_workspace or "", "a17_final_candidate")
+        self._documentation_run_named_a17(candidate, output_dir, "FINÁLNÍ A17 KANDIDÁTA", "FINÁLNÍ A17 BĚŽÍ", lambda success, out, local, remote: self._documentation_finish_named_a17(success, out, output_dir, canonical=False))
+
+    def _documentation_finish_named_a17(self, success, output_text, output_dir, canonical=False):
+        self._documentation_finish_generic(success=success, step="KANONICKÝ A17" if canonical else "FINÁLNÍ A17", success_status="KANONICKÝ A17 HOTOV" if canonical else "FINÁLNÍ A17 HOTOV", failure_status="CHYBA KANONICKÉHO A17" if canonical else "CHYBA FINÁLNÍHO A17", output_text=output_text, output_dir=output_dir)
+        report_json = os.path.join(output_dir, "document_compliance_audit_latest.json")
+        report_md = os.path.join(output_dir, "document_compliance_audit_latest.md")
+        if success and os.path.isfile(report_json):
+            try:
+                with open(report_json, "r", encoding="utf-8-sig") as handle:
+                    report = json.load(handle)
+                findings = report.get("findings") or []
+                fails = sum(1 for item in findings if str(item.get("result", "")).upper() == "FAIL")
+                partial = sum(1 for item in findings if str(item.get("result", "")).upper() == "PARTIAL")
+                if canonical:
+                    self.documentation_workflow_canonical_a17_json = report_json
+                    self.documentation_workflow_canonical_a17_markdown = report_md if os.path.isfile(report_md) else None
+                else:
+                    self.documentation_workflow_final_a17_json = report_json
+                    self.documentation_workflow_final_a17_markdown = report_md if os.path.isfile(report_md) else None
+                self.documentation_workflow_report_json = report_json
+                self.documentation_workflow_report_markdown = report_md if os.path.isfile(report_md) else None
+                self.documentation_workflow_findings = findings
+                self._documentation_update_workflow_ui()
+                messagebox.showinfo("A17 – výsledek", f"Skóre: {report.get('compliance_score_percent')} %\nFAIL: {fails}\nPARTIAL: {partial}\nStav: {report.get('compliance_status')}")
+                return
+            except Exception as exc:
+                messagebox.showerror("A17 – report", str(exc))
+                return
+        messagebox.showerror("A17 – audit selhal", (output_text or "")[-3500:])
+
+    def _documentation_normalize_document_id(self, value):
+        """STEP 22 - ověří a normalizuje primární Document ID."""
+        document_id = str(value or "").strip().strip("`").upper()
+        if not DOCUMENTATION_CANONICAL_ID_RE.fullmatch(document_id):
+            raise RuntimeError(
+                "Document ID nemá podporovaný formát MatchMatrix: "
+                f"{document_id or '-'}"
+            )
+        return document_id
+
+
+    def _documentation_document_prefix(self, document_id):
+        """Vrátí směrovací prefix včetně speciálních řad DL/NAV/PS."""
+        normalized_id = self._documentation_normalize_document_id(document_id)
+        for special_prefix in DOCUMENTATION_CANONICAL_SPECIAL_PREFIX_DIRS:
+            if normalized_id.startswith(special_prefix + "-"):
+                return special_prefix
+        parts = normalized_id.split("-")
+        if len(parts) < 3:
+            raise RuntimeError(f"Nelze určit prefix Document ID: {normalized_id}")
+        return "-".join(parts[:2])
+
+
+    def _documentation_is_path_under(self, child, parent):
+        """Bezpečná kontrola, že cesta leží uvnitř povoleného kořene."""
+        try:
+            child_norm = os.path.normcase(os.path.abspath(os.path.normpath(child)))
+            parent_norm = os.path.normcase(os.path.abspath(os.path.normpath(parent)))
+            return os.path.commonpath([child_norm, parent_norm]) == parent_norm
+        except (ValueError, OSError):
+            return False
+
+
+    def _documentation_target_from_metadata(self, metadata, document_id):
+        """Převede metadata Cílové umístění na bezpečnou složku pod docs."""
+        raw_value = str((metadata or {}).get("target_location") or "").strip().strip("`")
+        if not raw_value:
+            return None, None
+
+        normalized_value = raw_value.replace("/", os.sep).replace("\\", os.sep)
+        candidate = None
+
+        for root_value in (
+            DOCUMENTATION_ROOT,
+            DOCUMENTATION_REMOTE_PROJECT_ROOT,
+            BASE_DIR,
+        ):
+            root_norm = os.path.normpath(root_value)
+            value_norm = os.path.normpath(normalized_value)
+            if os.path.normcase(value_norm).startswith(os.path.normcase(root_norm) + os.sep):
+                relative = value_norm[len(root_norm):].lstrip("\\/")
+                candidate = os.path.join(DOCUMENTATION_ROOT, relative)
+                break
+
+        if candidate is None:
+            lowered = normalized_value.casefold()
+            docs_token = "docs" + os.sep
+            if lowered == "docs":
+                candidate = os.path.join(DOCUMENTATION_ROOT, "docs")
+            elif lowered.startswith(docs_token.casefold()):
+                candidate = os.path.join(DOCUMENTATION_ROOT, normalized_value)
+            else:
+                return None, None
+
+        candidate = os.path.normpath(candidate)
+        filename_hint = None
+        if os.path.splitext(candidate)[1].lower() in {".md", ".markdown", ".txt"}:
+            filename_hint = os.path.basename(candidate)
+            candidate = os.path.dirname(candidate)
+
+        docs_root = os.path.join(DOCUMENTATION_ROOT, "docs")
+        if not self._documentation_is_path_under(candidate, docs_root):
+            raise RuntimeError(
+                "Metadata Cílové umístění míří mimo povolený kořen docs: "
+                f"{raw_value}"
+            )
+
+        if filename_hint and not filename_hint.upper().startswith(document_id.upper()):
+            filename_hint = None
+
+        return candidate, filename_hint
+
+
+    def _documentation_existing_canonical_files(self, target_dir, document_id):
+        """Najde všechny aktivní Markdown soubory stejného Document ID v cíli."""
+        if not os.path.isdir(target_dir):
+            return []
+        result = []
+        wanted = document_id.upper()
+        for item in Path(target_dir).glob("*.md"):
+            upper_name = item.name.upper()
+            if upper_name == f"{wanted}.MD" or upper_name.startswith(wanted + "_"):
+                result.append(str(item))
+        return sorted(set(result), key=lambda value: value.casefold())
+
+
+    def _documentation_canonical_target(self, document_id, metadata):
+        """Určí kanonickou složku pouze z identity nebo bezpečných metadat."""
+        normalized_id = self._documentation_normalize_document_id(document_id)
+        prefix = self._documentation_document_prefix(normalized_id)
+
+        route_parts = DOCUMENTATION_CANONICAL_SPECIAL_PREFIX_DIRS.get(prefix)
+        if route_parts is None:
+            route_parts = DOCUMENTATION_CANONICAL_PREFIX_DIRS.get(prefix)
+
+        if route_parts:
+            return os.path.join(DOCUMENTATION_ROOT, *route_parts), prefix, "PREFIX_REGISTRY", None
+
+        metadata_dir, filename_hint = self._documentation_target_from_metadata(
+            metadata,
+            normalized_id,
+        )
+        if metadata_dir:
+            return metadata_dir, prefix, "DOCUMENT_METADATA", filename_hint
+
+        source_original = getattr(
+            self,
+            "documentation_workflow_source_original",
+            None,
+        )
+        docs_root = os.path.join(DOCUMENTATION_ROOT, "docs")
+        if source_original and self._documentation_is_path_under(source_original, docs_root):
+            return os.path.dirname(source_original), prefix, "EXISTING_SOURCE_LOCATION", os.path.basename(source_original)
+
+        raise RuntimeError(
+            "Pro prefix "
+            f"{prefix!r} není definována kanonická složka. "
+            "Doplň prefix do DOCUMENTATION_CANONICAL_PREFIX_DIRS nebo do metadat "
+            "uveď bezpečné Cílové umístění pod docs."
+        )
+
+
+    def _documentation_title_filename_part(self, title):
+        """Vytvoří bezpečnou velkou část názvu souboru z názvu dokumentu."""
+        value = self._documentation_workspace_slug(title or "DOKUMENT")
+        return value[:140].strip("_") or "DOKUMENT"
+
+
+    def _documentation_canonical_filename(
+        self,
+        document_id,
+        metadata,
+        candidate,
+        target_dir,
+        filename_hint=None,
+    ):
+        """Určí stabilní název a zachová název existující verze stejného ID."""
+        normalized_id = self._documentation_normalize_document_id(document_id)
+        prefix = self._documentation_document_prefix(normalized_id)
+
+        existing_files = self._documentation_existing_canonical_files(
+            target_dir,
+            normalized_id,
+        )
+        if len(existing_files) > 1:
+            raise RuntimeError(
+                "V cílové složce existuje více aktivních souborů stejného "
+                f"Document ID {normalized_id}:\n\n"
+                + "\n".join(existing_files)
+                + "\n\nNejprve odstraň duplicitu do 99_ARCHIVE."
+            )
+        if existing_files:
+            return os.path.basename(existing_files[0]), existing_files[0]
+
+        if prefix == "MM-DL":
+            return f"{normalized_id}_MATCHMATRIX_DENNI_ZAPIS.md", None
+        if prefix == "MM-NAV":
+            return f"{normalized_id}_MATCHMATRIX_NAVAZANI_DO_CHATU.md", None
+
+        path_candidates = [
+            filename_hint,
+            os.path.basename(getattr(self, "documentation_workflow_source_original", "") or ""),
+            os.path.basename(candidate or ""),
+        ]
+        for name in path_candidates:
+            if not name:
+                continue
+            stem, extension = os.path.splitext(name)
+            if (
+                extension.lower() == ".md"
+                and (
+                    stem.upper() == normalized_id
+                    or stem.upper().startswith(normalized_id + "_")
+                )
+            ):
+                return name, None
+
+        if prefix == "MM-PS":
+            return f"{normalized_id}_MATCHMATRIX_PROJECT_SNAPSHOT.md", None
+
+        title_part = self._documentation_title_filename_part(
+            (metadata or {}).get("title")
+        )
+        return f"{normalized_id}_{title_part}.md", None
+
+
+    def _documentation_metadata_table_bounds(self, text_value):
+        """
+        Najde skutečnou tabulku „Informace o dokumentu“.
+
+        Metadata se nesmí hledat v celém dokumentu, protože odborné tabulky
+        mohou legitimně obsahovat řádky nebo hlavičky jako:
+
+            | Stav | Význam |
+
+        Za metadata je považována pouze souvislá Markdown tabulka, která
+        obsahuje identitu dokumentu a více řízených metadat.
+        """
+        lines = text_value.splitlines(keepends=True)
+        offsets = []
+        position = 0
+        for line in lines:
+            offsets.append(position)
+            position += len(line)
+
+        metadata_keys = {
+            "dokument",
+            "označení",
+            "oznaceni",
+            "document id",
+            "název dokumentu",
+            "nazev dokumentu",
+            "název",
+            "nazev",
+            "typ dokumentu",
+            "typ",
+            "dokumentační oblast",
+            "dokumentacni oblast",
+            "edice",
+            "verze",
+            "verze dokumentu",
+            "verze návrhu",
+            "verze navrhu",
+            "aktuální verze",
+            "aktualni verze",
+            "version",
+            "stav",
+            "datum",
+            "autor",
+            "autor projektu",
+            "technická spolupráce",
+            "technicka spoluprace",
+            "primární formát",
+            "primarni format",
+            "cílové umístění",
+            "cilove umisteni",
+            "nahrazuje",
+            "navazuje na",
+            "související dokumenty",
+            "souvisejici dokumenty",
+            "referenční standardy",
+            "referencni standardy",
+            "původní stav zdrojového dokumentu",
+            "puvodni stav zdrojoveho dokumentu",
+        }
+        identity_keys = {
+            "dokument",
+            "označení",
+            "oznaceni",
+            "document id",
+        }
+
+        best = None
+        index = 0
+        while index < len(lines):
+            if not lines[index].lstrip().startswith("|"):
+                index += 1
+                continue
+
+            block_start = index
+            while index < len(lines) and lines[index].lstrip().startswith("|"):
+                index += 1
+            block_end = index
+
+            found_keys = set()
+            for line in lines[block_start:block_end]:
+                match = re.match(
+                    r"^\s*\|\s*([^|]+?)\s*\|\s*([^|]*?)\s*\|\s*$",
+                    line.rstrip("\r\n"),
+                )
+                if not match:
+                    continue
+                key = match.group(1).strip().casefold()
+                if key in metadata_keys:
+                    found_keys.add(key)
+
+            has_identity = bool(found_keys & identity_keys)
+            score = len(found_keys)
+            if has_identity and score >= 4:
+                char_start = offsets[block_start]
+                char_end = (
+                    offsets[block_end]
+                    if block_end < len(offsets)
+                    else len(text_value)
+                )
+                candidate = (score, char_start, char_end)
+                if best is None or candidate[0] > best[0]:
+                    best = candidate
+
+        if best is None:
+            raise RuntimeError(
+                "Nebyla nalezena jednoznačná tabulka metadat dokumentu."
+            )
+
+        return best[1], best[2]
+
+
+    def _documentation_approved_text(self, text_value):
+        """
+        Nastaví jeden aktuální stav APPROVED pouze v tabulce metadat.
+
+        Odborné tabulky s názvem sloupce „Stav“ zůstávají nedotčené.
+        """
+        newline = "\r\n" if "\r\n" in text_value else "\n"
+        metadata_start, metadata_end = (
+            self._documentation_metadata_table_bounds(text_value)
+        )
+        metadata_block = text_value[metadata_start:metadata_end]
+
+        status_pattern = re.compile(
+            r"(?m)^\|\s*Stav\s*\|\s*([^|]+?)\s*\|\s*$"
+        )
+        status_matches = list(status_pattern.finditer(metadata_block))
+        original_pattern = re.compile(
+            r"(?m)^\|\s*Původní stav zdrojového dokumentu\s*\|"
+        )
+
+        if len(status_matches) > 1:
+            raise RuntimeError(
+                "Tabulka metadat obsahuje více aktuálních řádků Stav. "
+                "Před schválením je sjednoť."
+            )
+
+        if status_matches:
+            match = status_matches[0]
+            previous_status = match.group(1).strip()
+            replacement = "| Stav | APPROVED |"
+            if (
+                previous_status.upper() != "APPROVED"
+                and not original_pattern.search(metadata_block)
+            ):
+                replacement += (
+                    newline
+                    + "| Původní stav zdrojového dokumentu | "
+                    + previous_status
+                    + " |"
+                )
+
+            approved_metadata = (
+                metadata_block[:match.start()]
+                + replacement
+                + metadata_block[match.end():]
+            )
+            return (
+                text_value[:metadata_start]
+                + approved_metadata
+                + text_value[metadata_end:]
+            )
+
+        approved_line = "| Stav | APPROVED |"
+        original_match = original_pattern.search(metadata_block)
+        if original_match:
+            approved_metadata = (
+                metadata_block[:original_match.start()]
+                + approved_line
+                + newline
+                + metadata_block[original_match.start():]
+            )
+            return (
+                text_value[:metadata_start]
+                + approved_metadata
+                + text_value[metadata_end:]
+            )
+
+        version_pattern = re.compile(
+            r"(?m)^\|\s*(?:Verze|Verze dokumentu|Verze návrhu|"
+            r"Aktuální verze)\s*\|[^\n]*$"
+        )
+        version_match = version_pattern.search(metadata_block)
+        if version_match:
+            approved_metadata = (
+                metadata_block[:version_match.end()]
+                + newline
+                + approved_line
+                + metadata_block[version_match.end():]
+            )
+            return (
+                text_value[:metadata_start]
+                + approved_metadata
+                + text_value[metadata_end:]
+            )
+
+        raise RuntimeError(
+            "Tabulka metadat neobsahuje Stav ani Verze, za které lze "
+            "bezpečně vložit Stav = APPROVED."
+        )
+
+
+    def _documentation_read_metadata(self, path_value):
+        """
+        Načte základní metadata pouze ze skutečné identifikační tabulky.
+
+        Odborné tabulky v dalších kapitolách nemohou přepsat ani doplnit
+        řízená metadata dokumentu.
+        """
+        text_value = Path(path_value).read_text(encoding="utf-8-sig")
+        metadata_start, metadata_end = (
+            self._documentation_metadata_table_bounds(text_value)
+        )
+        metadata_block = text_value[metadata_start:metadata_end]
+
+        fields = {}
+        aliases = {
+            "document id": "document_id",
+            "dokument": "document_id",
+            "označení": "document_id",
+            "oznaceni": "document_id",
+            "typ dokumentu": "document_type",
+            "typ": "document_type",
+            "název dokumentu": "title",
+            "nazev dokumentu": "title",
+            "název": "title",
+            "nazev": "title",
+            "stav": "status",
+            "verze": "version",
+            "verze dokumentu": "version",
+            "verze návrhu": "version",
+            "verze navrhu": "version",
+            "aktuální verze": "version",
+            "aktualni verze": "version",
+            "version": "version",
+            "cílové umístění": "target_location",
+            "cilove umisteni": "target_location",
+            "doporučené umístění": "target_location",
+            "doporucene umisteni": "target_location",
+            "umístění": "target_location",
+            "umisteni": "target_location",
+            "kanonické umístění": "target_location",
+            "kanonicke umisteni": "target_location",
+        }
+        for line in metadata_block.splitlines():
+            match = re.match(
+                r"^\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|$",
+                line,
+            )
+            if not match:
+                continue
+            key = match.group(1).strip().casefold()
+            value = match.group(2).strip().strip("`")
+            target_key = aliases.get(key)
+            if target_key and target_key not in fields:
+                fields[target_key] = value
+
+        return text_value, fields
+
+
+    def documentation_approve_and_save_canonical(self):
+        """STEP 22 - univerzální schválení a kanonické uložení všech řízených ID."""
+        candidate = self.documentation_workflow_a20_candidate
+        report_path = self.documentation_workflow_final_a17_json
+        if (
+            not candidate
+            or not os.path.isfile(candidate)
+            or not report_path
+            or not os.path.isfile(report_path)
+        ):
+            messagebox.showwarning(
+                "Schválení dokumentu",
+                "Nejprve vytvoř kandidát, doplň jej a spusť FINÁLNÍ A17."
+            )
+            return
+
+        unresolved_fields = self._documentation_unresolved_template_fields(
+            candidate
+        )
+        if unresolved_fields:
+            messagebox.showwarning(
+                "Schválení dokumentu",
+                (
+                    "Dokument stále obsahuje nevyplněná pole šablony.\n\n"
+                    f"Počet polí: {len(unresolved_fields)}\n"
+                    f"Pole: {', '.join(unresolved_fields[:15])}\n\n"
+                    "Dokument nelze schválit."
+                )
+            )
+            return
+
+        try:
+            with open(report_path, "r", encoding="utf-8-sig") as handle:
+                report = json.load(handle)
+            findings = report.get("findings") or []
+
+            candidate_basename = os.path.basename(candidate).lower()
+            allowed_working_filename = (
+                candidate_basename
+                == "document_standardized_candidate_latest.md"
+            )
+
+            blocking_findings = []
+            for item in findings:
+                result = str(item.get("result", "")).strip().upper()
+                rule_id = str(item.get("rule_id", "")).strip().upper()
+
+                if result not in {"FAIL", "PARTIAL"}:
+                    continue
+
+                if (
+                    allowed_working_filename
+                    and result == "FAIL"
+                    and rule_id == "COMMON-FILENAME"
+                ):
+                    continue
+
+                blocking_findings.append(item)
+
+            if blocking_findings:
+                blocking_rules = ", ".join(
+                    str(item.get("rule_id") or "?")
+                    for item in blocking_findings
+                )
+                raise RuntimeError(
+                    "Finální A17 obsahuje blokující FAIL nebo PARTIAL: "
+                    f"{blocking_rules}"
+                )
+
+            text_value, metadata = self._documentation_read_metadata(candidate)
+            if re.search(
+                r"^>\s*\*\*DOPLNIT UŽIVATELEM",
+                text_value,
+                re.MULTILINE,
+            ):
+                raise RuntimeError(
+                    "Kandidát stále obsahuje skutečný placeholder "
+                    "DOPLNIT UŽIVATELEM."
+                )
+
+            document_id = self._documentation_normalize_document_id(
+                metadata.get("document_id")
+            )
+            document_type = " ".join(
+                str(
+                    metadata.get("document_type")
+                    or report.get("document_type")
+                    or "ŘÍZENÝ DOKUMENT"
+                )
+                .strip()
+                .upper()
+                .split()
+            )
+            version = str(metadata.get("version") or "-").strip()
+
+            target_dir, prefix, route_source, filename_hint = (
+                self._documentation_canonical_target(
+                    document_id,
+                    metadata,
+                )
+            )
+            filename, existing_path = self._documentation_canonical_filename(
+                document_id=document_id,
+                metadata=metadata,
+                candidate=candidate,
+                target_dir=target_dir,
+                filename_hint=filename_hint,
+            )
+            canonical_path = existing_path or os.path.join(target_dir, filename)
+
+            confirmation = (
+                f"Potvrzuješ finální obsah a terminologii dokumentu {document_id}?\n\n"
+                f"Typ: {document_type}\n"
+                f"Verze: {version}\n"
+                f"Prefix: {prefix}\n"
+                f"Směrování: {route_source}\n"
+                f"Cíl: {canonical_path}\n\n"
+                "Dokument bude uložen se stavem APPROVED."
+            )
+            if not messagebox.askyesno("Schválení dokumentu", confirmation):
+                return
+
+            approved_text = self._documentation_approved_text(text_value)
+            approved_dir = os.path.join(
+                self.documentation_workflow_workspace,
+                "approved",
+            )
+            os.makedirs(approved_dir, exist_ok=True)
+            approved_path = os.path.join(approved_dir, filename)
+            os.makedirs(target_dir, exist_ok=True)
+            encoded = approved_text.encode("utf-8")
+
+            if os.path.exists(canonical_path):
+                existing_bytes = Path(canonical_path).read_bytes()
+
+                if existing_bytes != encoded:
+                    replace_confirmed = messagebox.askyesno(
+                        "Aktualizace kanonického dokumentu",
+                        (
+                            "Kanonický dokument stejného Document ID již existuje "
+                            "s jiným obsahem.\n\n"
+                            f"Document ID: {document_id}\n"
+                            f"Nová verze: {version}\n"
+                            f"Soubor: {canonical_path}\n\n"
+                            "Předchozí obsah bude uložen jako auditní kopie do "
+                            "aktuálního workspace a aktivní kanonický soubor bude "
+                            "nahrazen schválenou verzí.\n\n"
+                            "Pokračovat?"
+                        )
+                    )
+
+                    if not replace_confirmed:
+                        raise RuntimeError(
+                            "Aktualizace kanonického dokumentu byla zrušena uživatelem."
+                        )
+
+                    previous_dir = os.path.join(
+                        self.documentation_workflow_workspace,
+                        "previous_canonical",
+                    )
+                    os.makedirs(previous_dir, exist_ok=True)
+
+                    backup_stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                    previous_path = os.path.join(
+                        previous_dir,
+                        f"{document_id}_BEFORE_{backup_stamp}.md",
+                    )
+                    Path(previous_path).write_bytes(existing_bytes)
+
+                    self._documentation_manifest_update(
+                        previous_canonical=previous_path,
+                        canonical_replaced=True,
+                    )
+
+            Path(canonical_path).write_bytes(encoded)
+            Path(approved_path).write_bytes(encoded)
+            self.documentation_workflow_approved_candidate = approved_path
+            self.documentation_workflow_canonical_document = canonical_path
+            self.documentation_workflow_document = canonical_path
+            self.documentation_workflow_step = "KANONICKÉ ULOŽENÍ"
+            self.documentation_workflow_last_status = (
+                f"{document_id} V{version} APPROVED A ULOŽEN"
+            )
+            self.documentation_workflow_last_output = canonical_path
+            self._documentation_manifest_update(
+                workflow_status="CANONICAL_SAVED",
+                approved_candidate=approved_path,
+                canonical_document=canonical_path,
+                canonical_document_id=document_id,
+                canonical_document_type=document_type,
+                canonical_version=version,
+                canonical_prefix=prefix,
+                canonical_route_source=route_source,
+                canonical_target_directory=target_dir,
+            )
+            self._documentation_update_workflow_ui()
+            messagebox.showinfo(
+                "Schválení dokumentu",
+                (
+                    "Kanonický dokument byl uložen.\n\n"
+                    f"Document ID: {document_id}\n"
+                    f"Verze: {version}\n"
+                    f"Cesta: {canonical_path}\n\n"
+                    "Nyní spusť KANONICKÝ A17."
+                )
+            )
+        except Exception as exc:
+            messagebox.showerror("Schválení dokumentu", str(exc))
+
+
+    def documentation_run_canonical_a17(self):
+        document = self.documentation_workflow_canonical_document
+        output_dir = os.path.join(self.documentation_workflow_workspace or "", "a17_canonical")
+        self._documentation_run_named_a17(document, output_dir, "KANONICKÝ A17", "KANONICKÝ A17 BĚŽÍ", lambda success, out, local, remote: self._documentation_finish_named_a17(success, out, output_dir, canonical=True))
+
+    def documentation_git_commit(self):
+        """STEP 17 - commitne pouze konkrétní kanonický dokument, nikdy celý strom."""
+        document = self.documentation_workflow_canonical_document
+        report_path = self.documentation_workflow_canonical_a17_json
+        if not document or not os.path.isfile(document) or not report_path or not os.path.isfile(report_path):
+            messagebox.showwarning("Git commit", "Nejprve ulož kanonický dokument a spusť KANONICKÝ A17.")
+            return
+        try:
+            with open(report_path, "r", encoding="utf-8-sig") as handle:
+                report = json.load(handle)
+            findings = report.get("findings") or []
+            if any(str(item.get("result", "")).upper() in {"FAIL", "PARTIAL"} for item in findings):
+                raise RuntimeError("Kanonický A17 obsahuje FAIL nebo PARTIAL. Commit je zablokován.")
+            _, metadata = self._documentation_read_metadata(document)
+            document_id = metadata.get("document_id") or Path(document).stem
+            if not messagebox.askyesno("Git commit", f"Commitnout pouze tento dokument?\n\n{document}\n\nCommit message:\ndocs: add {document_id}"):
+                return
+            remote_document = self._documentation_to_remote_pc2_path(document)
+            remote_root = os.path.normpath(DOCUMENTATION_REMOTE_PROJECT_ROOT)
+            relative = os.path.relpath(remote_document, remote_root).replace("\\", "/")
+            ps_host = self._documentation_powershell_literal(DOCUMENTATION_REMOTE_HOST)
+            ps_project = self._documentation_powershell_literal(DOCUMENTATION_REMOTE_PROJECT_ROOT)
+            ps_relative = self._documentation_powershell_literal(relative)
+            ps_message = self._documentation_powershell_literal(f"docs: add {document_id}")
+            powershell_script = (
+                '$ErrorActionPreference = "Stop"\n'
+                'try {\n'
+                f'    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{\n'
+                '        param($ProjectRoot, $RelativePath, $CommitMessage)\n'
+                '        $ErrorActionPreference = "Stop"\n'
+                '        Set-Location -LiteralPath $ProjectRoot\n'
+                '        git add -- $RelativePath\n'
+                '        if ($LASTEXITCODE -ne 0) { throw "git add selhal" }\n'
+                '        git diff --cached --quiet -- $RelativePath\n'
+                '        if ($LASTEXITCODE -eq 0) {\n'
+                '            $ExistingCommit = git log -1 --format=%H -- $RelativePath\n'
+                '            $ExistingSubject = git log -1 --format=%s -- $RelativePath\n'
+                '            Write-Output "__MM_GIT_NO_CHANGES__=1"\n'
+                '            Write-Output "__MM_GIT_COMMIT__=$ExistingCommit"\n'
+                '            Write-Output "__MM_GIT_SUBJECT__=$ExistingSubject"\n'
+                '            return\n'
+                '        }\n'
+                '        git commit -m $CommitMessage -- $RelativePath\n'
+                '        if ($LASTEXITCODE -ne 0) { throw "git commit selhal" }\n'
+                '        $CommitHash = git rev-parse HEAD\n'
+                '        $CommitSubject = git log -1 --pretty=%s\n'
+                '        Write-Output "__MM_GIT_COMMIT__=$CommitHash"\n'
+                '        Write-Output "__MM_GIT_SUBJECT__=$CommitSubject"\n'
+                f'    }} -ArgumentList {ps_project}, {ps_relative}, {ps_message}\n'
+                '    exit 0\n'
+                '}\n'
+                'catch { Write-Error $_.Exception.Message; exit 1 }\n'
+            )
+            encoded = base64.b64encode(powershell_script.encode("utf-16le")).decode("ascii")
+            self.documentation_workflow_running = True
+            self.documentation_workflow_step = "GIT COMMIT"
+            self.documentation_workflow_last_status = "GIT COMMIT BĚŽÍ NA PC2"
+            self._documentation_update_workflow_ui()
+            def worker():
+                try:
+                    creation_flags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+                    result = subprocess.run(["powershell.exe", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-EncodedCommand", encoded], cwd=BASE_DIR, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=False, creationflags=creation_flags)
+                    output = self._documentation_decode_process_output(result.stdout)
+                    self.after(0, lambda: self._documentation_finish_git_commit(result.returncode == 0, output))
+                except Exception as exc:
+                    self.after(0, lambda error=exc: self._documentation_finish_git_commit(False, str(error)))
+            threading.Thread(target=worker, daemon=True).start()
+        except Exception as exc:
+            messagebox.showerror("Git commit", str(exc))
+
+    def _documentation_finish_git_commit(self, success, output_text):
+        self.documentation_workflow_running = False
+        self.documentation_workflow_process = None
+
+        commit_match = re.search(
+            r"__MM_GIT_COMMIT__=([0-9a-fA-F]+)",
+            output_text or ""
+        )
+        no_changes = "__MM_GIT_NO_CHANGES__=1" in (output_text or "")
+
+        if success and commit_match:
+            commit_hash = commit_match.group(1)
+            self.documentation_workflow_git_commit = commit_hash
+            self.documentation_workflow_step = "GIT COMMIT"
+            self.documentation_workflow_last_output = output_text
+
+            if no_changes:
+                self.documentation_workflow_last_status = (
+                    f"BEZ ZMĚN – JIŽ COMMITNUTO: {commit_hash[:8]}"
+                )
+                self._documentation_manifest_update(
+                    workflow_status="GIT_ALREADY_COMMITTED",
+                    git_commit=commit_hash,
+                    canonical_document=self.documentation_workflow_canonical_document
+                )
+                self._documentation_update_workflow_ui()
+                messagebox.showinfo(
+                    "Git commit",
+                    (
+                        "Vybraný dokument nemá žádné nové změny.\n\n"
+                        "Dokument už je v Git historii.\n\n"
+                        f"Poslední commit: {commit_hash}\n\n"
+                        "Nový commit nebyl potřeba."
+                    )
+                )
+            else:
+                self.documentation_workflow_last_status = (
+                    f"COMMIT HOTOV: {commit_hash[:8]}"
+                )
+                self._documentation_manifest_update(
+                    workflow_status="GIT_COMMITTED",
+                    git_commit=commit_hash,
+                    canonical_document=self.documentation_workflow_canonical_document
+                )
+                self._documentation_update_workflow_ui()
+                messagebox.showinfo(
+                    "Git commit",
+                    (
+                        "Dokument byl commitnut.\n\n"
+                        f"Commit: {commit_hash}\n\n"
+                        "Push nebyl spuštěn."
+                    )
+                )
+        else:
+            self.documentation_workflow_step = "GIT COMMIT"
+            self.documentation_workflow_last_status = "CHYBA GIT COMMIT"
+            self.documentation_workflow_last_output = output_text
+            self._documentation_update_workflow_ui()
+            messagebox.showerror("Git commit", (output_text or "")[-3500:])
+
 
     def _documentation_a17_problem_findings(self):
         # V20.1.Q3 STEP 09 - pouze kontroly vyžadující pozornost.
@@ -7286,9 +11941,9 @@ catch {{
                 iid=str(finding_index),
                 values=(
                     finding.get("rule_id", "-"),
-                    finding.get("result", "-"),
-                    finding.get("severity", "-"),
-                    finding.get("category", "-"),
+                    cz_documentation_value(finding.get("result", "-")),
+                    cz_documentation_value(finding.get("severity", "-")),
+                    cz_documentation_value(finding.get("category", "-")),
                     finding.get("title", "-")
                 )
             )
@@ -7315,9 +11970,9 @@ catch {{
             detail_lines = [
                 f"PRAVIDLO: {finding.get('rule_id', '-')}",
                 f"NÁZEV: {finding.get('title', '-')}",
-                f"VÝSLEDEK: {finding.get('result', '-')}",
-                f"ZÁVAŽNOST: {finding.get('severity', '-')}",
-                f"KATEGORIE: {finding.get('category', '-')}",
+                f"VÝSLEDEK: {cz_documentation_value(finding.get('result', '-'))}",
+                f"ZÁVAŽNOST: {cz_documentation_value(finding.get('severity', '-'))}",
+                f"KATEGORIE: {cz_documentation_value(finding.get('category', '-'))}",
                 f"STANDARD: {finding.get('standard', '-')}",
                 "",
                 "POPIS:",
@@ -7350,8 +12005,8 @@ catch {{
             detail_text.insert(
                 "1.0",
                 (
-                    "Audit neobsahuje žádný nález typu FAIL, "
-                    "PARTIAL nebo MANUAL_REVIEW.\n\n"
+                    "Audit neobsahuje žádný nález typu NESPLNĚNO, "
+                    "ČÁSTEČNĚ SPLNĚNO nebo RUČNÍ KONTROLA.\n\n"
                     "Úplný výsledek je dostupný v reportu A17."
                 )
             )
@@ -7397,6 +12052,859 @@ catch {{
         ).pack(side="right")
 
 
+    # =========================================================
+    # V20.1.Q3 STEP 29 - A34 AI CONTEXT PACKAGE
+    # =========================================================
+
+    def _documentation_a34_output_relative_dir(self):
+        return os.path.join(
+            "reports",
+            "documentation",
+            "ai_context_package"
+        )
+
+    def _documentation_a34_output_dir(self):
+        return os.path.join(
+            DOCUMENTATION_ROOT,
+            self._documentation_a34_output_relative_dir()
+        )
+
+    def _documentation_a34_latest_manifest_path(self):
+        return os.path.join(
+            self._documentation_a34_output_dir(),
+            "MATCHMATRIX_AI_CONTEXT_PACKAGE_LATEST_MANIFEST.json"
+        )
+
+    def _documentation_a34_latest_markdown_path(self):
+        return os.path.join(
+            self._documentation_a34_output_dir(),
+            "MATCHMATRIX_AI_CONTEXT_PACKAGE_LATEST.md"
+        )
+
+    def _documentation_a34_latest_zip_path(self):
+        return os.path.join(
+            self._documentation_a34_output_dir(),
+            "MATCHMATRIX_AI_CONTEXT_PACKAGE_LATEST.zip"
+        )
+
+    def _documentation_update_a34_ui(self):
+        """Aktualizuje kompaktní panel A34 bez přístupu do databáze."""
+        if not hasattr(self, "documentation_a34_status_value"):
+            return
+
+        payload = self.documentation_a34_last_payload or {}
+        status = str(
+            self.documentation_a34_last_status
+            or payload.get("final_status")
+            or "BALÍČEK ZATÍM NEVYTVOŘEN"
+        )
+        created_at = str(payload.get("created_at") or "-")
+        warnings = payload.get("warnings") or []
+
+        if self.documentation_a34_running:
+            status_color = YELLOW
+            button_state = "disabled"
+        elif status in (
+            "AI_CONTEXT_PACKAGE_CREATED",
+            "AI_CONTEXT_PACKAGE_VALIDATED",
+        ):
+            status_color = GREEN
+            button_state = "normal"
+        elif "CHYBA" in status or "BLOCKED" in status or "FAILED" in status:
+            status_color = RED
+            button_state = "normal"
+        else:
+            status_color = YELLOW
+            button_state = "normal"
+
+        self.documentation_a34_status_value.config(
+            text=cz_documentation_value(status),
+            fg=status_color
+        )
+        self.documentation_a34_time_value.config(text=created_at)
+
+        if payload:
+            package_id = payload.get("package_id") or "-"
+            file_count = payload.get("file_count")
+            if file_count is None:
+                file_count = "-"
+            sport_code = payload.get("sport_code") or "-"
+            sport_name = payload.get("sport_name") or "-"
+            self.documentation_a34_summary_value.config(
+                text=(
+                    f"Package ID {package_id} | "
+                    f"Soubory {file_count} | "
+                    f"Varování {len(warnings)} | "
+                    f"Sport {sport_code} – {sport_name}"
+                ),
+                fg=(RED if warnings else "#c5d9e8")
+            )
+        elif status == "AI_CONTEXT_PACKAGE_VALIDATED":
+            self.documentation_a34_summary_value.config(
+                text="Podklady, Git a databázové mapování byly úspěšně ověřeny.",
+                fg=GREEN
+            )
+        else:
+            self.documentation_a34_summary_value.config(
+                text="Package ID - | Soubory - | Varování - | Sport -",
+                fg="#c5d9e8"
+            )
+
+        for button in getattr(self, "documentation_a34_buttons", []):
+            try:
+                button.config(state=button_state)
+            except Exception:
+                pass
+
+    def load_documentation_ai_context_package_status(self):
+        """Načte poslední A34 manifest ze sdíleného PC2 repozitáře."""
+        latest_manifest = self._documentation_a34_latest_manifest_path()
+        latest_md = self._documentation_a34_latest_markdown_path()
+        latest_zip = self._documentation_a34_latest_zip_path()
+
+        if not os.path.isfile(latest_manifest):
+            if not self.documentation_a34_running:
+                self.documentation_a34_last_status = "BALÍČEK ZATÍM NEVYTVOŘEN"
+                self.documentation_a34_last_payload = None
+                self.documentation_a34_last_manifest = None
+                self.documentation_a34_last_markdown = None
+                self.documentation_a34_last_zip = None
+            self._documentation_update_a34_ui()
+            return None
+
+        try:
+            with open(latest_manifest, "r", encoding="utf-8-sig") as handle:
+                payload = json.load(handle)
+            if not isinstance(payload, dict):
+                raise RuntimeError("A34 latest manifest není objekt.")
+
+            self.documentation_a34_last_payload = payload
+            self.documentation_a34_last_status = str(
+                payload.get("final_status")
+                or "A34 MANIFEST BEZ FINAL STATUS"
+            )
+            self.documentation_a34_last_manifest = latest_manifest
+            self.documentation_a34_last_markdown = (
+                latest_md if os.path.isfile(latest_md) else None
+            )
+            self.documentation_a34_last_zip = (
+                latest_zip if os.path.isfile(latest_zip) else None
+            )
+            self.documentation_a34_last_output = latest_manifest
+            self._documentation_update_a34_ui()
+            return payload
+        except Exception as exc:
+            self.documentation_a34_last_status = "CHYBA ČTENÍ A34 MANIFESTU"
+            self.documentation_a34_last_output = str(exc)
+            self._documentation_update_a34_ui()
+            return None
+
+    def documentation_a34_validate_inputs(self):
+        """Ověří A34 podklady bez vytvoření nového balíčku."""
+        self._documentation_start_a34(validate_only=True)
+
+    def documentation_a34_create_package(self):
+        """Vytvoří nový AI Context Package na PC2."""
+        confirmed = messagebox.askyesno(
+            "A34 – vytvořit AI kontextový balíček",
+            (
+                "Vytvořit nový řízený AI Context Package na PC2?\n\n"
+                "A34 nejprve spustí read-only audit A33, ověří Git, "
+                "dokumentační databázi a Project Snapshoty.\n"
+                "Databáze nebude změněna.\n\n"
+                "Výstupem bude Markdown, ZIP a manifest."
+            )
+        )
+        if not confirmed:
+            return
+        self._documentation_start_a34(validate_only=False)
+
+    def documentation_a34_open_latest_markdown(self):
+        """Otevře poslední hlavní Markdown A34."""
+        relative_path = os.path.join(
+            self._documentation_a34_output_relative_dir(),
+            "MATCHMATRIX_AI_CONTEXT_PACKAGE_LATEST.md"
+        )
+        self.open_matchmatrix_path(relative_path)
+
+    def documentation_a34_open_latest_zip(self):
+        """Otevře poslední ZIP balíček A34."""
+        relative_path = os.path.join(
+            self._documentation_a34_output_relative_dir(),
+            "MATCHMATRIX_AI_CONTEXT_PACKAGE_LATEST.zip"
+        )
+        self.open_matchmatrix_path(relative_path)
+
+    def documentation_a34_open_output_folder(self):
+        """Otevře složku všech A34 balíčků a latest souborů."""
+        self.open_matchmatrix_path(
+            self._documentation_a34_output_relative_dir()
+        )
+
+    def _documentation_start_a34(self, *, validate_only):
+        """Spustí A34 na PC2 bez blokování Tkinter GUI."""
+        if self.documentation_a34_running:
+            messagebox.showwarning(
+                "A34 – AI kontextový balíček",
+                "A34 právě běží."
+            )
+            return False
+        if self.documentation_a33_running:
+            messagebox.showwarning(
+                "A34 – AI kontextový balíček",
+                "Nejprve dokonči právě běžící audit A33."
+            )
+            return False
+        if self.documentation_workflow_running:
+            messagebox.showwarning(
+                "A34 – AI kontextový balíček",
+                "Nejprve dokonči právě běžící krok dokumentačního workflow."
+            )
+            return False
+
+        tool_path = DOCUMENTATION_SCRIPTS.get("A34")
+        if not tool_path or not os.path.isfile(tool_path):
+            messagebox.showerror(
+                "A34 – AI kontextový balíček",
+                f"Skript A34 nebyl nalezen:\n\n{tool_path}"
+            )
+            return False
+
+        self.documentation_a34_running = True
+        self.documentation_a34_last_status = (
+            "A34 OVĚŘUJE PODKLADY NA PC2"
+            if validate_only
+            else "A34 VYTVÁŘÍ AI KONTEXTOVÝ BALÍČEK NA PC2"
+        )
+        self.documentation_a34_last_output = None
+        self._documentation_update_a34_ui()
+
+        def worker():
+            try:
+                remote_tool = self._documentation_to_remote_pc2_path(tool_path)
+                remote_args = ["--validate-only"] if validate_only else []
+                ps_host = self._documentation_powershell_literal(
+                    DOCUMENTATION_REMOTE_HOST
+                )
+                ps_python = self._documentation_powershell_literal(
+                    DOCUMENTATION_PYTHON_EXE
+                )
+                ps_tool = self._documentation_powershell_literal(remote_tool)
+                ps_project = self._documentation_powershell_literal(
+                    DOCUMENTATION_REMOTE_PROJECT_ROOT
+                )
+                ps_args = "@(" + ",".join(
+                    self._documentation_powershell_literal(value)
+                    for value in remote_args
+                ) + ")"
+                powershell_script = (
+                    '$ErrorActionPreference = "Stop"\n'
+                    'try {\n'
+                    f'    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{\n'
+                    '        param($PythonExe, $ToolScript, $ProjectRoot, $ToolArgs)\n'
+                    '        $ErrorActionPreference = "Stop"\n'
+                    '        $ProgressPreference = "SilentlyContinue"\n'
+                    '        if ($null -eq $ToolArgs) { $ToolArgs = @() } else { $ToolArgs = @($ToolArgs) }\n'
+                    '        Set-Location -LiteralPath $ProjectRoot\n'
+                    '        & $PythonExe $ToolScript @ToolArgs\n'
+                    '        $ToolExitCode = $LASTEXITCODE\n'
+                    '        Write-Output "__MM_A34_EXIT_CODE__=$ToolExitCode"\n'
+                    '        if ($ToolExitCode -ne 0) { throw "A34 skoncil kodem $ToolExitCode" }\n'
+                    f'    }} -ArgumentList {ps_python}, {ps_tool}, {ps_project}, {ps_args}\n'
+                    '    exit 0\n'
+                    '}\n'
+                    'catch {\n'
+                    '    Write-Error $_.Exception.Message\n'
+                    '    exit 1\n'
+                    '}\n'
+                )
+                encoded = base64.b64encode(
+                    powershell_script.encode("utf-16le")
+                ).decode("ascii")
+                command = [
+                    "powershell.exe",
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-EncodedCommand",
+                    encoded,
+                ]
+                creation_flags = getattr(
+                    subprocess,
+                    "CREATE_NO_WINDOW",
+                    0
+                )
+                process = subprocess.Popen(
+                    command,
+                    cwd=BASE_DIR,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    text=False,
+                    creationflags=creation_flags,
+                )
+                self.documentation_a34_process = process
+                raw_output, _ = process.communicate()
+                output_text = self._documentation_decode_process_output(
+                    raw_output
+                )
+                marker = re.search(
+                    r"__MM_A34_EXIT_CODE__=(-?\d+)",
+                    output_text
+                )
+                remote_code = int(marker.group(1)) if marker else None
+                status_match = re.search(
+                    r"__MM_A34_FINAL_STATUS__=([^\r\n]+)",
+                    output_text
+                )
+                final_status = (
+                    status_match.group(1).strip()
+                    if status_match
+                    else None
+                )
+                success = (
+                    process.returncode == 0
+                    and remote_code == 0
+                    and final_status in (
+                        "AI_CONTEXT_PACKAGE_CREATED",
+                        "AI_CONTEXT_PACKAGE_VALIDATED",
+                    )
+                )
+                self.after(
+                    0,
+                    lambda: self._documentation_finish_a34(
+                        success=success,
+                        output_text=output_text,
+                        local_code=process.returncode,
+                        remote_code=remote_code,
+                        final_status=final_status,
+                        validate_only=validate_only,
+                    )
+                )
+            except Exception as exc:
+                self.after(
+                    0,
+                    lambda error=exc: self._documentation_finish_a34(
+                        success=False,
+                        output_text=str(error),
+                        local_code=-1,
+                        remote_code=None,
+                        final_status=None,
+                        validate_only=validate_only,
+                    )
+                )
+
+        threading.Thread(target=worker, daemon=True).start()
+        return True
+
+    def _documentation_finish_a34(
+        self,
+        *,
+        success,
+        output_text,
+        local_code,
+        remote_code,
+        final_status,
+        validate_only,
+    ):
+        """Dokončí A34 běh, uloží stdout a obnoví panelový stav."""
+        self.documentation_a34_running = False
+        self.documentation_a34_process = None
+
+        output_dir = self._documentation_a34_output_dir()
+        stdout_path = None
+        try:
+            os.makedirs(output_dir, exist_ok=True)
+            stdout_path = os.path.join(
+                output_dir,
+                "a34_panel_stdout_latest.txt"
+            )
+            with open(stdout_path, "w", encoding="utf-8") as handle:
+                handle.write(output_text or "")
+        except Exception:
+            stdout_path = None
+
+        self.documentation_a34_last_output = stdout_path or output_text
+        self.documentation_a34_last_status = (
+            final_status
+            or (
+                "AI_CONTEXT_PACKAGE_BLOCKED"
+                if not success
+                else "AI_CONTEXT_PACKAGE_VALIDATED"
+            )
+        )
+
+        if success and validate_only:
+            self.documentation_a34_last_payload = None
+            self._documentation_update_a34_ui()
+            messagebox.showinfo(
+                "A34 – podklady ověřeny",
+                (
+                    "Podklady pro AI Context Package byly úspěšně ověřeny.\n\n"
+                    "Git, dokumentační databáze, sportovní snapshoty a "
+                    "měsíční Project Snapshoty jsou čitelné.\n"
+                    "Databáze nebyla změněna.\n\n"
+                    f"Stav: {self.documentation_a34_last_status}"
+                )
+            )
+            return
+
+        if success:
+            payload = self.load_documentation_ai_context_package_status()
+            self.load_documentation_database_audit_status()
+            if not payload:
+                success = False
+                output_text = (
+                    (output_text or "")
+                    + "\nA34 skončil bez čitelného latest manifestu."
+                )
+            else:
+                warnings = payload.get("warnings") or []
+                messagebox.showinfo(
+                    "A34 – balíček vytvořen",
+                    (
+                        "AI Context Package byl úspěšně vytvořen.\n\n"
+                        f"Package ID: {payload.get('package_id') or '-'}\n"
+                        f"Soubory: {payload.get('file_count', '-')}\n"
+                        f"Varování: {len(warnings)}\n"
+                        f"Sport: {payload.get('sport_code') or '-'} – "
+                        f"{payload.get('sport_name') or '-'}\n\n"
+                        f"Markdown:\n{self.documentation_a34_last_markdown or '-'}\n\n"
+                        f"ZIP:\n{self.documentation_a34_last_zip or '-'}\n\n"
+                        "Databáze nebyla změněna."
+                    )
+                )
+                return
+
+        self.documentation_a34_last_status = "AI_CONTEXT_PACKAGE_BLOCKED"
+        self._documentation_update_a34_ui()
+        messagebox.showerror(
+            "A34 – vytvoření balíčku selhalo",
+            (
+                f"Lokální kód: {local_code}\n"
+                f"Vzdálený kód: {remote_code}\n"
+                "Stav: AI_CONTEXT_PACKAGE_BLOCKED\n\n"
+                + (output_text or "Bez výstupu")[-8000:]
+            )
+        )
+
+    # =========================================================
+    # V20.1.Q3 STEP 23 - A33 DATABASE STRUCTURE AUDIT
+    # =========================================================
+
+    def _documentation_a33_output_relative_dir(self):
+        return os.path.join(
+            "reports",
+            "documentation",
+            "database_audit"
+        )
+
+    def _documentation_a33_output_dir(self):
+        return os.path.join(
+            DOCUMENTATION_ROOT,
+            self._documentation_a33_output_relative_dir()
+        )
+
+    def _documentation_a33_latest_json_path(self):
+        return os.path.join(
+            self._documentation_a33_output_dir(),
+            "database_structure_audit_latest.json"
+        )
+
+    def _documentation_a33_latest_markdown_path(self):
+        return os.path.join(
+            self._documentation_a33_output_dir(),
+            "database_structure_audit_latest.md"
+        )
+
+    def _documentation_update_a33_ui(self):
+        """Aktualizuje kompaktní A33 panel bez přístupu do databáze."""
+        if not hasattr(self, "documentation_a33_status_value"):
+            return
+
+        payload = self.documentation_a33_last_payload or {}
+        summary = payload.get("summary") or {}
+        warnings = (
+            (payload.get("datasets") or {}).get("warnings")
+            or []
+        )
+        severity_counts = {
+            "HIGH": 0,
+            "MEDIUM": 0,
+            "INFO": 0,
+        }
+        for item in warnings:
+            severity = str((item or {}).get("severity") or "").upper()
+            if severity in severity_counts:
+                severity_counts[severity] += 1
+
+        status = str(
+            self.documentation_a33_last_status
+            or payload.get("final_status")
+            or "AUDIT ZATÍM NEPROBĚHL"
+        )
+        generated_at = str(
+            payload.get("generated_at")
+            or payload.get("finished_at")
+            or "-"
+        )
+
+        if self.documentation_a33_running:
+            status_color = YELLOW
+            button_state = "disabled"
+        elif status == "DATABASE_STRUCTURE_AUDIT_EXPORTED":
+            status_color = GREEN
+            button_state = "normal"
+        elif status == "DATABASE_STRUCTURE_CONNECTION_VERIFIED":
+            status_color = GREEN
+            button_state = "normal"
+        elif "CHYBA" in status or "BLOCKED" in status or "FAILED" in status:
+            status_color = RED
+            button_state = "normal"
+        else:
+            status_color = YELLOW
+            button_state = "normal"
+
+        self.documentation_a33_status_value.config(
+            text=cz_documentation_value(status),
+            fg=status_color
+        )
+        self.documentation_a33_time_value.config(text=generated_at)
+
+        if summary:
+            self.documentation_a33_summary_value.config(
+                text=(
+                    f"Schémata {summary.get('schemas', 0)} | "
+                    f"Objekty {summary.get('objects', 0)} | "
+                    f"Tabulky {summary.get('tables', 0)} | "
+                    f"Pohledy {summary.get('views', 0)} | "
+                    f"Sloupce {summary.get('columns', 0)} | "
+                    f"Omezení {summary.get('constraints', 0)} | "
+                    f"Indexy {summary.get('indexes', 0)} | "
+                    f"Varování {summary.get('warnings', len(warnings))} "
+                    f"(VYSOKÁ {severity_counts['HIGH']} / "
+                    f"STŘEDNÍ {severity_counts['MEDIUM']} / "
+                    f"INFORMAČNÍ {severity_counts['INFO']})"
+                ),
+                fg=(RED if severity_counts["HIGH"] else "#c5d9e8")
+            )
+        else:
+            self.documentation_a33_summary_value.config(
+                text="Schémata - | Objekty - | Tabulky - | Pohledy - | Varování -",
+                fg="#c5d9e8"
+            )
+
+        for button in getattr(self, "documentation_a33_buttons", []):
+            try:
+                button.config(state=button_state)
+            except Exception:
+                pass
+
+    def load_documentation_database_audit_status(self):
+        """Načte poslední A33 JSON report ze sdíleného PC2 repozitáře."""
+        latest_json = self._documentation_a33_latest_json_path()
+        latest_md = self._documentation_a33_latest_markdown_path()
+
+        if not os.path.isfile(latest_json):
+            if not self.documentation_a33_running:
+                self.documentation_a33_last_status = "AUDIT ZATÍM NEPROBĚHL"
+                self.documentation_a33_last_payload = None
+                self.documentation_a33_last_report = None
+            self._documentation_update_a33_ui()
+            return None
+
+        try:
+            with open(latest_json, "r", encoding="utf-8-sig") as handle:
+                payload = json.load(handle)
+            if not isinstance(payload, dict):
+                raise RuntimeError("A33 latest JSON není objekt.")
+
+            self.documentation_a33_last_payload = payload
+            self.documentation_a33_last_status = str(
+                payload.get("final_status")
+                or "A33 REPORT BEZ FINAL STATUS"
+            )
+            self.documentation_a33_last_report = (
+                latest_md if os.path.isfile(latest_md) else None
+            )
+            self.documentation_a33_last_output = latest_json
+            self._documentation_update_a33_ui()
+            return payload
+        except Exception as exc:
+            self.documentation_a33_last_status = "CHYBA ČTENÍ A33 REPORTU"
+            self.documentation_a33_last_output = str(exc)
+            self._documentation_update_a33_ui()
+            return None
+
+    def documentation_a33_validate_connection(self):
+        """Ověří PC2 PostgreSQL připojení a read-only transakci."""
+        self._documentation_start_a33(validate_only=True)
+
+    def documentation_a33_run_full_audit(self):
+        """Spustí úplný A33 audit na PC2 v režimu READ_ONLY."""
+        confirmed = messagebox.askyesno(
+            "A33 – úplný databázový audit",
+            (
+                "Spustit úplný read-only audit databázové struktury na PC2?\n\n"
+                "Databáze: localhost:5432 / matchmatrix\n"
+                "Režim: READ ONLY + REPEATABLE READ\n"
+                "Databáze nebude změněna."
+            )
+        )
+        if not confirmed:
+            return
+        self._documentation_start_a33(validate_only=False)
+
+    def documentation_a33_open_latest_report(self):
+        """Otevře poslední čitelný Markdown report A33."""
+        relative_path = os.path.join(
+            self._documentation_a33_output_relative_dir(),
+            "database_structure_audit_latest.md"
+        )
+        self.open_matchmatrix_path(relative_path)
+
+    def documentation_a33_open_output_folder(self):
+        """Otevře složku všech JSON/CSV/Markdown výstupů A33."""
+        self.open_matchmatrix_path(
+            self._documentation_a33_output_relative_dir()
+        )
+
+    def _documentation_start_a33(self, *, validate_only):
+        """Spustí A33 na PC2 bez blokování Tkinter GUI."""
+        if self.documentation_a33_running:
+            messagebox.showwarning(
+                "A33 – databázový audit",
+                "Audit A33 právě běží."
+            )
+            return False
+        if self.documentation_workflow_running:
+            messagebox.showwarning(
+                "A33 – databázový audit",
+                "Nejprve dokonči právě běžící krok dokumentačního workflow."
+            )
+            return False
+
+        tool_path = DOCUMENTATION_SCRIPTS.get("A33")
+        if not tool_path or not os.path.isfile(tool_path):
+            messagebox.showerror(
+                "A33 – databázový audit",
+                f"Skript A33 nebyl nalezen:\n\n{tool_path}"
+            )
+            return False
+
+        self.documentation_a33_running = True
+        self.documentation_a33_last_status = (
+            "A33 OVĚŘUJE PŘIPOJENÍ NA PC2"
+            if validate_only
+            else "A33 BĚŽÍ NA PC2 – READ ONLY"
+        )
+        self.documentation_a33_last_output = None
+        self._documentation_update_a33_ui()
+
+        def worker():
+            try:
+                remote_tool = self._documentation_to_remote_pc2_path(tool_path)
+                remote_args = (
+                    ["--validate-connection-only"]
+                    if validate_only
+                    else []
+                )
+                ps_host = self._documentation_powershell_literal(
+                    DOCUMENTATION_REMOTE_HOST
+                )
+                ps_python = self._documentation_powershell_literal(
+                    DOCUMENTATION_PYTHON_EXE
+                )
+                ps_tool = self._documentation_powershell_literal(remote_tool)
+                ps_project = self._documentation_powershell_literal(
+                    DOCUMENTATION_REMOTE_PROJECT_ROOT
+                )
+                ps_args = "@(" + ",".join(
+                    self._documentation_powershell_literal(value)
+                    for value in remote_args
+                ) + ")"
+                powershell_script = (
+                    '$ErrorActionPreference = "Stop"\n'
+                    'try {\n'
+                    f'    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{\n'
+                    '        param($PythonExe, $ToolScript, $ProjectRoot, $ToolArgs)\n'
+                    '        $ErrorActionPreference = "Stop"\n'
+                    '        if ($null -eq $ToolArgs) { $ToolArgs = @() } else { $ToolArgs = @($ToolArgs) }\n'
+                    '        Set-Location -LiteralPath $ProjectRoot\n'
+                    '        & $PythonExe $ToolScript @ToolArgs\n'
+                    '        $ToolExitCode = $LASTEXITCODE\n'
+                    '        Write-Output "__MM_A33_EXIT_CODE__=$ToolExitCode"\n'
+                    '        if ($ToolExitCode -ne 0) { throw "A33 skoncil kodem $ToolExitCode" }\n'
+                    f'    }} -ArgumentList {ps_python}, {ps_tool}, {ps_project}, {ps_args}\n'
+                    '    exit 0\n'
+                    '}\n'
+                    'catch {\n'
+                    '    Write-Error $_.Exception.Message\n'
+                    '    exit 1\n'
+                    '}\n'
+                )
+                encoded = base64.b64encode(
+                    powershell_script.encode("utf-16le")
+                ).decode("ascii")
+                command = [
+                    "powershell.exe",
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-EncodedCommand",
+                    encoded,
+                ]
+                creation_flags = getattr(
+                    subprocess,
+                    "CREATE_NO_WINDOW",
+                    0
+                )
+                process = subprocess.Popen(
+                    command,
+                    cwd=BASE_DIR,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
+                    text=False,
+                    creationflags=creation_flags,
+                )
+                self.documentation_a33_process = process
+                raw_output, _ = process.communicate()
+                output_text = self._documentation_decode_process_output(
+                    raw_output
+                )
+                marker = re.search(
+                    r"__MM_A33_EXIT_CODE__=(-?\d+)",
+                    output_text
+                )
+                remote_code = int(marker.group(1)) if marker else None
+                success = (
+                    process.returncode == 0
+                    and remote_code == 0
+                )
+                self.after(
+                    0,
+                    lambda: self._documentation_finish_a33(
+                        success=success,
+                        output_text=output_text,
+                        local_code=process.returncode,
+                        remote_code=remote_code,
+                        validate_only=validate_only,
+                    )
+                )
+            except Exception as exc:
+                self.after(
+                    0,
+                    lambda error=exc: self._documentation_finish_a33(
+                        success=False,
+                        output_text=str(error),
+                        local_code=-1,
+                        remote_code=None,
+                        validate_only=validate_only,
+                    )
+                )
+
+        threading.Thread(target=worker, daemon=True).start()
+        return True
+
+    def _documentation_finish_a33(
+        self,
+        *,
+        success,
+        output_text,
+        local_code,
+        remote_code,
+        validate_only,
+    ):
+        """Dokončí A33 běh, uloží stdout a obnoví panelový stav."""
+        self.documentation_a33_running = False
+        self.documentation_a33_process = None
+
+        output_dir = self._documentation_a33_output_dir()
+        stdout_path = None
+        try:
+            os.makedirs(output_dir, exist_ok=True)
+            stdout_path = os.path.join(
+                output_dir,
+                "a33_panel_stdout_latest.txt"
+            )
+            with open(stdout_path, "w", encoding="utf-8") as handle:
+                handle.write(output_text or "")
+        except Exception:
+            stdout_path = None
+
+        self.documentation_a33_last_output = stdout_path or output_text
+
+        if success and validate_only:
+            status_match = re.search(
+                r"FINAL STATUS\s*:\s*([^\r\n]+)",
+                output_text or ""
+            )
+            self.documentation_a33_last_status = (
+                status_match.group(1).strip()
+                if status_match
+                else "DATABASE_STRUCTURE_CONNECTION_VERIFIED"
+            )
+            self._documentation_update_a33_ui()
+            messagebox.showinfo(
+                "A33 – připojení ověřeno",
+                (
+                    "Připojení k PostgreSQL na PC2 bylo ověřeno.\n\n"
+                    "Databáze: localhost:5432 / matchmatrix\n"
+                    "Transakce: READ ONLY\n"
+                    "Izolace: REPEATABLE READ\n\n"
+                    f"Stav: {self.documentation_a33_last_status}"
+                )
+            )
+            return
+
+        if success:
+            payload = self.load_documentation_database_audit_status()
+            if not payload:
+                success = False
+                output_text = (
+                    (output_text or "")
+                    + "\nA33 skončil bez čitelného latest JSON reportu."
+                )
+            else:
+                summary = payload.get("summary") or {}
+                warnings = (
+                    (payload.get("datasets") or {}).get("warnings")
+                    or []
+                )
+                severity = {"HIGH": 0, "MEDIUM": 0, "INFO": 0}
+                for item in warnings:
+                    key = str((item or {}).get("severity") or "").upper()
+                    if key in severity:
+                        severity[key] += 1
+                messagebox.showinfo(
+                    "A33 – audit dokončen",
+                    (
+                        "Read-only audit databázové struktury byl exportován.\n\n"
+                        f"Schémata: {summary.get('schemas', 0)}\n"
+                        f"Objekty: {summary.get('objects', 0)}\n"
+                        f"Tabulky: {summary.get('tables', 0)}\n"
+                        f"Views: {summary.get('views', 0)}\n"
+                        f"Varování: {summary.get('warnings', len(warnings))}\n"
+                        f"HIGH: {severity['HIGH']} | MEDIUM: {severity['MEDIUM']} | INFO: {severity['INFO']}\n\n"
+                        f"Report:\n{self.documentation_a33_last_report or self._documentation_a33_latest_markdown_path()}\n\n"
+                        "Databáze nebyla změněna."
+                    )
+                )
+                return
+
+        self.documentation_a33_last_status = "DATABASE_STRUCTURE_AUDIT_BLOCKED"
+        self._documentation_update_a33_ui()
+        messagebox.showerror(
+            "A33 – audit selhal",
+            (
+                f"Lokální kód: {local_code}\n"
+                f"Vzdálený kód: {remote_code}\n"
+                "Stav: DATABASE_STRUCTURE_AUDIT_BLOCKED\n\n"
+                + (output_text or "Bez výstupu")[-8000:]
+            )
+        )
+
     def open_matchmatrix_path(self, relative_path):
         """
         V20.1.Q - Otevře soubor nebo složku uvnitř projektu MatchMatrix.
@@ -7433,6 +12941,975 @@ catch {{
             except Exception as exc:
                 last_error = exc
         raise last_error
+
+
+    def documentation_run_a23(self):
+        """
+        V20.1.Q3 STEP 28 - zkontroluje terminologii a automaticky doplní
+        jednoznačné nové pojmy do pracovních verzí MM-REF-001/MM-REF-002.
+        Uživateli se zobrazí pouze položky REVIEW nebo KONFLIKT.
+        """
+        if self.documentation_workflow_running:
+            messagebox.showwarning(
+                "A23 – terminologie",
+                "Jiný krok dokumentačního workflow právě běží."
+            )
+            return
+
+        if (
+            not self.documentation_workflow_document
+            or not self.documentation_workflow_workspace
+        ):
+            messagebox.showwarning(
+                "A23 – terminologie",
+                "Nejprve vyber dokument v řízeném dokumentačním workflow."
+            )
+            return
+
+        required_files = [
+            self.documentation_workflow_document,
+            GLOSSARY_TRANSLATION_PATH,
+            GLOSSARY_EXPLANATION_PATH,
+            DOCUMENTATION_SCRIPTS["A23"],
+        ]
+        missing = [path for path in required_files if not os.path.isfile(path)]
+        if missing:
+            messagebox.showerror(
+                "A23 – chybějící soubor",
+                "A23 nelze spustit. Chybí:\n\n" + "\n".join(missing)
+            )
+            return
+
+        self.documentation_workflow_running = True
+        self.documentation_workflow_step = "A23 TERMINOLOGIE"
+        self.documentation_workflow_last_status = "A23 KONTROLUJE A DOPLŇUJE SLOVNÍKY"
+        self.documentation_workflow_a23_report_json = None
+        self.documentation_workflow_a23_report_markdown = None
+        self.documentation_workflow_a23_candidates = []
+        self.documentation_workflow_started_at = datetime.now().astimezone().isoformat()
+        self.documentation_workflow_finished_at = None
+        self._documentation_update_workflow_ui()
+
+        threading.Thread(
+            target=self._documentation_run_a23_worker,
+            daemon=True
+        ).start()
+
+
+    def _documentation_run_a23_worker(self):
+        try:
+            remote_document = self._documentation_to_remote_pc2_path(
+                self.documentation_workflow_document
+            )
+            remote_workspace = self._documentation_to_remote_pc2_path(
+                self.documentation_workflow_workspace
+            )
+            remote_script = self._documentation_to_remote_pc2_path(
+                DOCUMENTATION_SCRIPTS["A23"]
+            )
+            remote_translation = self._documentation_to_remote_pc2_path(
+                GLOSSARY_TRANSLATION_PATH
+            )
+            remote_explanation = self._documentation_to_remote_pc2_path(
+                GLOSSARY_EXPLANATION_PATH
+            )
+            remote_output = os.path.join(remote_workspace, "a23")
+
+            ps_host = self._documentation_powershell_literal(DOCUMENTATION_REMOTE_HOST)
+            ps_python = self._documentation_powershell_literal(DOCUMENTATION_PYTHON_EXE)
+            ps_script = self._documentation_powershell_literal(remote_script)
+            ps_document = self._documentation_powershell_literal(remote_document)
+            ps_translation = self._documentation_powershell_literal(remote_translation)
+            ps_explanation = self._documentation_powershell_literal(remote_explanation)
+            ps_output = self._documentation_powershell_literal(remote_output)
+            ps_project = self._documentation_powershell_literal(
+                DOCUMENTATION_REMOTE_PROJECT_ROOT
+            )
+
+            powershell_script = f"""
+$ErrorActionPreference = "Stop"
+try {{
+    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{
+        param(
+            $PythonExe,
+            $A23Script,
+            $DocumentPath,
+            $TranslationPath,
+            $ExplanationPath,
+            $OutputDir,
+            $ProjectRoot
+        )
+        $ErrorActionPreference = "Stop"
+        Set-Location -LiteralPath $ProjectRoot
+        New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
+
+        & $PythonExe $A23Script `
+            --document $DocumentPath `
+            --translation-glossary $TranslationPath `
+            --explanation-glossary $ExplanationPath `
+            --output-dir $OutputDir
+
+        $A23ExitCode = $LASTEXITCODE
+        Write-Output "__MM_A23_EXIT_CODE__=$A23ExitCode"
+        if ($A23ExitCode -ne 0) {{
+            throw "A23 skoncil navratovym kodem $A23ExitCode"
+        }}
+    }} -ArgumentList {ps_python}, {ps_script}, {ps_document}, {ps_translation}, {ps_explanation}, {ps_output}, {ps_project}
+    exit 0
+}}
+catch {{
+    Write-Error $_.Exception.Message
+    exit 1
+}}
+"""
+            encoded_command = base64.b64encode(
+                powershell_script.encode("utf-16le")
+            ).decode("ascii")
+
+            process = subprocess.Popen(
+                [
+                    "powershell.exe",
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-EncodedCommand",
+                    encoded_command,
+                ],
+                cwd=BASE_DIR,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=False,
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+            )
+            self.documentation_workflow_process = process
+            raw_output, _ = process.communicate()
+            output_text = self._documentation_decode_process_output(raw_output)
+            marker = re.search(r"__MM_A23_EXIT_CODE__=(-?\d+)", output_text)
+            remote_exit = int(marker.group(1)) if marker else None
+            success = process.returncode == 0 and remote_exit == 0
+
+            self.after(
+                0,
+                lambda: self._documentation_finish_a23(
+                    success,
+                    output_text,
+                    process.returncode,
+                    remote_exit,
+                )
+            )
+        except Exception as exc:
+            self.after(
+                0,
+                lambda error=exc: self._documentation_finish_a23(
+                    False,
+                    str(error),
+                    -1,
+                    None,
+                )
+            )
+
+
+    def _documentation_finish_a23(
+        self,
+        success,
+        output_text,
+        local_exit_code,
+        remote_exit_code,
+    ):
+        self.documentation_workflow_running = False
+        self.documentation_workflow_process = None
+        self.documentation_workflow_finished_at = (
+            datetime.now().astimezone().isoformat()
+        )
+
+        a23_dir = os.path.join(self.documentation_workflow_workspace, "a23")
+        try:
+            os.makedirs(a23_dir, exist_ok=True)
+            with open(
+                os.path.join(a23_dir, "a23_panel_stdout.txt"),
+                "w",
+                encoding="utf-8",
+            ) as handle:
+                handle.write(output_text or "")
+        except Exception:
+            pass
+
+        json_path = os.path.join(a23_dir, "terminology_candidates_latest.json")
+        md_path = os.path.join(a23_dir, "terminology_candidates_latest.md")
+        payload = {}
+
+        if success:
+            try:
+                with open(json_path, "r", encoding="utf-8-sig") as handle:
+                    payload = json.load(handle)
+            except Exception as exc:
+                success = False
+                output_text = (output_text or "") + f"\nREPORT ERROR: {exc}"
+
+        if success:
+            self.documentation_workflow_a23_report_json = json_path
+            self.documentation_workflow_a23_report_markdown = (
+                md_path if os.path.isfile(md_path) else None
+            )
+            self.documentation_workflow_a23_candidates = list(
+                payload.get("candidates") or []
+            )
+            # STEP 30: A23 PC2 PATH + REPORT FIX
+# - report načítán lokálně na PC2 nebo přes UNC na PC1
+# - po doběhu čekání 30 s na viditelnost souboru
+# - payload předán bez druhého čtení reportu
+# - opraven chybný DOCUMENTATION_PROJECT_ROOT
+#
+# STEP 29: A23 REPORT WATCHDOG
+# - návrhový JSON ukončí čekání na visící PowerShell Remoting
+# - pracovní slovníky se následně aplikují bez dialogu
+#
+# STEP 28:
+            # Bez dialogu se automaticky zpracují pouze jednoznačné NOVÉ pojmy.
+            # REVIEW a KONFLIKT musí zůstat k ručnímu rozhodnutí.
+            self.documentation_workflow_a23_selected_keys = {
+                str(item.get("normalized_term") or "").strip()
+                for item in self.documentation_workflow_a23_candidates
+                if str(item.get("status") or "").strip().upper() == "NEW"
+            }
+            summary = payload.get("summary") or {}
+            new_count = int(summary.get("new", 0) or 0)
+            review_count = int(summary.get("review", 0) or 0)
+            conflict_count = int(summary.get("conflict", 0) or 0)
+            exists_count = int(summary.get("exists", 0) or 0)
+
+            self.documentation_workflow_last_status = (
+                "A23 KONTROLA HOTOVA – "
+                f"NOVÝ {new_count} | EXISTUJE {exists_count} | "
+                f"K POSOUZENÍ {review_count + conflict_count}"
+            )
+            self.documentation_workflow_step = "A23 AUTOMATICKÉ DOPLNĚNÍ"
+            self._documentation_update_workflow_ui()
+
+            attention_count = review_count + conflict_count
+            if attention_count > 0:
+                # Bezpečné NOVÉ položky zůstávají předvybrané na pozadí.
+                # Uživatel vidí jen REVIEW/KONFLIKT a jedním uložením se
+                # všechny schválené položky zapíší do stejné verze slovníků.
+                self.documentation_workflow_step = "A23 ČEKÁ NA POSOUZENÍ"
+                self.documentation_workflow_last_status = (
+                    "A23 – "
+                    f"{new_count} JEDNOZNAČNÝCH PŘIPRAVENO | "
+                    f"{attention_count} K POSOUZENÍ"
+                )
+                self._documentation_update_workflow_ui()
+                self.documentation_show_a23_candidates(only_attention=True)
+            elif new_count > 0 and self.documentation_workflow_a23_selected_keys:
+                self.documentation_build_a23_proposals(
+                    automatic=True,
+                    show_attention_after=False,
+                )
+            else:
+                self.documentation_workflow_step = "A23 BEZE ZMĚNY"
+                self.documentation_workflow_last_status = (
+                    f"A23 HOTOVO – VŠECH {exists_count} POJMŮ JIŽ EXISTUJE"
+                )
+                self._documentation_update_workflow_ui()
+        else:
+            self.documentation_workflow_last_status = "A23 CHYBA"
+            self.documentation_workflow_step = "A23 SELHAL"
+            self._documentation_update_workflow_ui()
+            messagebox.showerror(
+                "A23 – terminologie",
+                "A23 se nepodařilo dokončit.\n\n"
+                f"Lokální návratový kód: {local_exit_code}\n"
+                f"Vzdálený návratový kód: {remote_exit_code}\n\n"
+                f"{output_text[-5000:]}"
+            )
+
+
+    def documentation_show_a23_candidates(self, only_attention=False):
+        candidates = list(
+            getattr(self, "documentation_workflow_a23_candidates", []) or []
+        )
+        if only_attention:
+            candidates = [
+                item for item in candidates
+                if str(item.get("status") or "").strip().upper()
+                in {"REVIEW", "CONFLICT"}
+            ]
+        if not candidates:
+            messagebox.showinfo(
+                "A23 – kandidáti",
+                "Nejsou načteni žádní kandidáti. Spusť nejprve A23."
+            )
+            return
+
+        win = tk.Toplevel(self)
+        win.title("A23 – TERMINOLOGIČTÍ KANDIDÁTI")
+        win.geometry("1500x760")
+        win.configure(bg=BG)
+
+        tk.Label(
+            win,
+            text="A23 – POJMY K RUČNÍMU POSOUZENÍ",
+            bg=BG,
+            fg=PINK,
+            font=("Segoe UI", 16, "bold"),
+            anchor="w"
+        ).pack(fill="x", padx=12, pady=(10, 4))
+
+        tk.Label(
+            win,
+            text=(
+                "Jednoznačné nové pojmy se doplňují automaticky. "
+                "Toto okno se zobrazuje pouze u nejasných překladů nebo konfliktů."
+            ),
+            bg=BG,
+            fg="#cdb7df",
+            font=("Segoe UI", 9, "bold"),
+            anchor="w"
+        ).pack(fill="x", padx=12, pady=(0, 8))
+
+        wrap = tk.Frame(win, bg=BG)
+        wrap.pack(fill="both", expand=True, padx=10, pady=(0, 8))
+        wrap.columnconfigure(0, weight=1)
+        wrap.rowconfigure(0, weight=1)
+
+        columns = (
+            "selected",
+            "status",
+            "foreign",
+            "czech",
+            "existing",
+            "mm_ref_002",
+            "target",
+            "reason",
+        )
+        tree = ttk.Treeview(wrap, columns=columns, show="headings")
+        headings = {
+            "selected": "VYBRAT",
+            "status": "STAV",
+            "foreign": "CIZÍ VÝRAZ",
+            "czech": "NAVRŽENÝ PŘEKLAD",
+            "existing": "EXISTUJÍCÍ PŘEKLAD",
+            "mm_ref_002": "MM-REF-002",
+            "target": "CÍL",
+            "reason": "DŮVOD",
+        }
+        widths = {
+            "selected": 75,
+            "status": 95,
+            "foreign": 190,
+            "czech": 220,
+            "existing": 220,
+            "mm_ref_002": 90,
+            "target": 170,
+            "reason": 470,
+        }
+        for column in columns:
+            tree.heading(column, text=headings[column])
+            tree.column(column, width=widths[column], minwidth=70, anchor="w")
+        tree.grid(row=0, column=0, sticky="nsew")
+
+        ybar = ttk.Scrollbar(wrap, orient="vertical", command=tree.yview)
+        ybar.grid(row=0, column=1, sticky="ns")
+        xbar = ttk.Scrollbar(wrap, orient="horizontal", command=tree.xview)
+        xbar.grid(row=1, column=0, sticky="ew")
+        tree.configure(yscrollcommand=ybar.set, xscrollcommand=xbar.set)
+
+        for index, item in enumerate(candidates):
+            tree.insert(
+                "",
+                "end",
+                iid=f"a23_{index}",
+                values=(
+                    "ANO" if str(item.get("normalized_term") or "").strip() in self.documentation_workflow_a23_selected_keys else "NE",
+                    cz_status(item.get("status", "")),
+                    item.get("foreign", ""),
+                    item.get("czech", ""),
+                    item.get("existing_translation", ""),
+                    "ANO" if item.get("exists_in_mm_ref_002") else "NE",
+                    item.get("target_document", ""),
+                    item.get("reason", ""),
+                )
+            )
+
+        candidate_by_iid = {f"a23_{i}": item for i, item in enumerate(candidates)}
+
+        def toggle_selected(event=None):
+            rows = tree.selection()
+            if not rows and event is not None:
+                row_id = tree.identify_row(event.y)
+                if row_id:
+                    tree.selection_set(row_id)
+                    rows = (row_id,)
+            for row_id in rows:
+                item = candidate_by_iid.get(row_id)
+                if not item:
+                    continue
+                key = str(item.get("normalized_term") or "").strip()
+                if key in self.documentation_workflow_a23_selected_keys:
+                    self.documentation_workflow_a23_selected_keys.discard(key)
+                else:
+                    self.documentation_workflow_a23_selected_keys.add(key)
+                values = list(tree.item(row_id, "values"))
+                values[0] = "ANO" if key in self.documentation_workflow_a23_selected_keys else "NE"
+                tree.item(row_id, values=values)
+
+        tree.bind("<Double-1>", toggle_selected)
+
+        actions = tk.Frame(win, bg=BG)
+        actions.pack(fill="x", padx=10, pady=(0, 10))
+        self.make_button(actions, "✓ PŘEPNOUT VÝBĚR", "#3b2555", toggle_selected)
+        self.make_button(actions, "✓ ULOŽIT VYBRANÉ POJMY DO SLOVNÍKŮ", "#9a5b13", lambda: self.documentation_build_a23_proposals(automatic=False))
+        self.make_button(
+            actions,
+            "📄 OTEVŘÍT A23 REPORT",
+            "#4c2c83",
+            self.documentation_open_a23_report
+        )
+        self.make_button(
+            actions,
+            "📝 OTEVŘÍT PRACOVNÍ MM-REF-001",
+            "#0f6a42",
+            self.documentation_open_a23_translation_proposal
+        )
+        self.make_button(
+            actions,
+            "📘 OTEVŘÍT PRACOVNÍ MM-REF-002",
+            "#0f5f63",
+            self.documentation_open_a23_explanation_proposal
+        )
+
+
+    def documentation_build_a23_proposals(
+        self,
+        automatic=False,
+        show_attention_after=False,
+    ):
+        selected_keys = set(
+            getattr(self, "documentation_workflow_a23_selected_keys", set()) or set()
+        )
+        selected = [
+            item
+            for item in (self.documentation_workflow_a23_candidates or [])
+            if str(item.get("normalized_term") or "").strip() in selected_keys
+        ]
+        if automatic:
+            selected = [
+                item for item in selected
+                if str(item.get("status") or "").strip().upper() == "NEW"
+            ]
+        if not selected:
+            if not automatic:
+                messagebox.showwarning(
+                    "A23 – slovníky",
+                    "Není vybrán žádný pojem k uložení.",
+                )
+            return
+
+        self.documentation_workflow_a23_auto_apply = bool(automatic)
+        self.documentation_workflow_a23_show_attention_after = bool(
+            show_attention_after
+        )
+        a23_dir=os.path.join(self.documentation_workflow_workspace,"a23"); os.makedirs(a23_dir,exist_ok=True)
+        selection_path=os.path.join(a23_dir,"terminology_selected_candidates.json")
+        with open(selection_path,"w",encoding="utf-8") as h:
+            json.dump({"generated_at":datetime.now().astimezone().isoformat(),"selected_candidates":selected},h,ensure_ascii=False,indent=2)
+        self.documentation_workflow_running=True
+        self.documentation_workflow_step="A23 DOPLŇUJE SLOVNÍKY"
+        self.documentation_workflow_last_status=f"A23 DOPLŇUJE {len(selected)} POJMŮ DO MM-REF-001/MM-REF-002"
+        self._documentation_update_workflow_ui()
+        threading.Thread(target=self._documentation_build_a23_proposals_worker,args=(selection_path,),daemon=True).start()
+
+    def _documentation_build_a23_proposals_worker(self,selection_path):
+        """
+        STEP 30:
+        A23 je dokončen pouze tehdy, když je načten platný JSON report.
+        Report se hledá přes lokální cestu PC2 i přes UNC cestu a po skončení
+        PowerShellu se ještě čeká na jeho zpřístupnění.
+        """
+        p = None
+        output_text = ""
+        local_exit = -1
+        remote_exit = None
+        report_payload = None
+
+        try:
+            remote_workspace = self._documentation_to_remote_pc2_path(
+                self.documentation_workflow_workspace
+            )
+            remote_summary = os.path.join(
+                remote_workspace,
+                "a23",
+                "proposals",
+                "terminology_proposals_latest.json",
+            )
+            unc_summary = os.path.join(
+                self.documentation_workflow_workspace,
+                "a23",
+                "proposals",
+                "terminology_proposals_latest.json",
+            )
+
+            def load_valid_report():
+                candidates = []
+                source_candidates = (
+                    (remote_summary, unc_summary)
+                    if self._documentation_running_on_pc2()
+                    else (unc_summary,)
+                )
+                for candidate in source_candidates:
+                    normalized_candidate = os.path.normpath(candidate)
+                    if normalized_candidate not in candidates:
+                        candidates.append(normalized_candidate)
+
+                for candidate in candidates:
+                    try:
+                        if not os.path.isfile(candidate):
+                            continue
+                        with open(candidate, "r", encoding="utf-8-sig") as handle:
+                            payload = json.load(handle)
+                        valid = (
+                            payload.get("final_status")
+                            == "TERMINOLOGY_GLOSSARY_PROPOSALS_CREATED"
+                            and payload.get("canonical_files_modified") is False
+                            and payload.get("database_modified") is False
+                            and payload.get("git_modified") is False
+                            and bool(payload.get("translation_candidate"))
+                            and bool(payload.get("explanation_candidate"))
+                        )
+                        if valid:
+                            return payload
+                    except Exception:
+                        continue
+                return None
+
+            # Při opakování stejného workspace nesmí být použit starý report.
+            old_summaries = (
+                (remote_summary, unc_summary)
+                if self._documentation_running_on_pc2()
+                else (unc_summary,)
+            )
+            for old_summary in old_summaries:
+                try:
+                    if os.path.isfile(old_summary):
+                        os.remove(old_summary)
+                except Exception:
+                    pass
+
+            vals = [
+                DOCUMENTATION_REMOTE_HOST,
+                DOCUMENTATION_PYTHON_EXE,
+                self._documentation_to_remote_pc2_path(DOCUMENTATION_SCRIPTS["A23"]),
+                self._documentation_to_remote_pc2_path(self.documentation_workflow_document),
+                self._documentation_to_remote_pc2_path(GLOSSARY_TRANSLATION_PATH),
+                self._documentation_to_remote_pc2_path(GLOSSARY_EXPLANATION_PATH),
+                remote_workspace,
+                self._documentation_to_remote_pc2_path(selection_path),
+                DOCUMENTATION_REMOTE_PROJECT_ROOT,
+            ]
+            q = [self._documentation_powershell_literal(v) for v in vals]
+            ps = f"""$ErrorActionPreference="Stop"
+$ProgressPreference="SilentlyContinue"
+try {{
+    Invoke-Command -ComputerName {q[0]} -ScriptBlock {{
+        param($PythonExe,$Script,$Doc,$Ref1,$Ref2,$Workspace,$Selection,$Root)
+        $ProgressPreference="SilentlyContinue"
+        Set-Location -LiteralPath $Root
+        & $PythonExe $Script --document $Doc --translation-glossary $Ref1 --explanation-glossary $Ref2 --output-dir (Join-Path $Workspace "a23") --mode build-proposals --selection-json $Selection
+        $c=$LASTEXITCODE
+        Write-Output "__MM_A23_PROPOSAL_EXIT_CODE__=$c"
+        if($c -ne 0){{throw "A23 proposal builder selhal: $c"}}
+    }} -ArgumentList {", ".join(q[1:])}
+    exit 0
+}} catch {{
+    Write-Error $_.Exception.Message
+    exit 1
+}}"""
+
+            enc = base64.b64encode(ps.encode("utf-16le")).decode("ascii")
+            p = subprocess.Popen(
+                [
+                    "powershell.exe",
+                    "-NoProfile",
+                    "-NonInteractive",
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-EncodedCommand",
+                    enc,
+                ],
+                cwd=BASE_DIR,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
+                text=False,
+                creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+            )
+            self.documentation_workflow_process = p
+
+            deadline = time.time() + 180.0
+            while time.time() < deadline:
+                report_payload = load_valid_report()
+                if report_payload:
+                    if p.poll() is None:
+                        try:
+                            p.terminate()
+                            p.wait(timeout=3)
+                        except Exception:
+                            try:
+                                p.kill()
+                            except Exception:
+                                pass
+                    break
+
+                if p.poll() is not None:
+                    break
+                time.sleep(0.25)
+
+            if p.poll() is None:
+                try:
+                    p.terminate()
+                    p.wait(timeout=3)
+                except Exception:
+                    try:
+                        p.kill()
+                    except Exception:
+                        pass
+
+            try:
+                raw, _ = p.communicate(timeout=5)
+            except Exception:
+                raw = b""
+
+            output_text = self._documentation_decode_process_output(raw)
+            local_exit = p.returncode if p.returncode is not None else -1
+            marker = re.search(
+                r"__MM_A23_PROPOSAL_EXIT_CODE__=(-?\d+)",
+                output_text,
+            )
+            remote_exit = int(marker.group(1)) if marker else None
+
+            # PowerShell může skončit dříve, než je soubor viditelný přes SMB.
+            if report_payload is None and local_exit == 0 and remote_exit == 0:
+                visibility_deadline = time.time() + 30.0
+                while time.time() < visibility_deadline:
+                    report_payload = load_valid_report()
+                    if report_payload:
+                        break
+                    time.sleep(0.25)
+
+            self.documentation_workflow_a23_report_payload = report_payload
+            success = report_payload is not None
+
+            if not success and local_exit == 0 and remote_exit == 0:
+                output_text = (output_text or "") + (
+                    "\nA23 doběhl bez chyby, ale platný JSON report nebyl "
+                    "nalezen ani přes lokální cestu PC2 ani přes UNC cestu."
+                )
+
+            self.after(
+                0,
+                lambda: self._documentation_finish_a23_proposals(
+                    success,
+                    output_text,
+                    local_exit,
+                    remote_exit,
+                ),
+            )
+
+        except Exception as exc:
+            if p is not None and p.poll() is None:
+                try:
+                    p.kill()
+                except Exception:
+                    pass
+
+            self.documentation_workflow_a23_report_payload = None
+            self.after(
+                0,
+                lambda e=exc: self._documentation_finish_a23_proposals(
+                    False,
+                    str(e),
+                    -1,
+                    None,
+                ),
+            )
+
+    def _sha256_file(self, path):
+        digest = hashlib.sha256()
+        with open(path, "rb") as handle:
+            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(chunk)
+        return digest.hexdigest()
+
+
+    def _documentation_apply_a23_proposals_to_working_glossaries(self, payload):
+        """
+        STEP 30:
+        Ověří návrhy a atomicky nahradí pracovní MM-REF-001 a MM-REF-002.
+        Na PC2 používá lokální projektové cesty; na PC1 použije UNC cesty.
+        """
+        translation_source = self._documentation_to_pc1_unc_path(
+            payload.get("translation_candidate")
+        )
+        explanation_source = self._documentation_to_pc1_unc_path(
+            payload.get("explanation_candidate")
+        )
+
+        translation_target = GLOSSARY_TRANSLATION_PATH
+        explanation_target = GLOSSARY_EXPLANATION_PATH
+
+        pairs = [
+            (
+                translation_source,
+                translation_target,
+                payload.get("translation_candidate_sha256"),
+                "MM-REF-001",
+            ),
+            (
+                explanation_source,
+                explanation_target,
+                payload.get("explanation_candidate_sha256"),
+                "MM-REF-002",
+            ),
+        ]
+
+        backup_dir = os.path.join(
+            os.path.dirname(translation_source),
+            "canonical_before",
+        )
+        os.makedirs(backup_dir, exist_ok=True)
+
+        staged = []
+        for source, target, expected_sha, label in pairs:
+            if not source or not os.path.isfile(source):
+                raise FileNotFoundError(
+                    f"{label}: pracovní soubor nebyl nalezen: {source}"
+                )
+            if not target or not os.path.isfile(target):
+                raise FileNotFoundError(
+                    f"{label}: cílový slovník nebyl nalezen: {target}"
+                )
+
+            actual_source_sha = self._sha256_file(source)
+            if expected_sha and actual_source_sha.upper() != str(expected_sha).upper():
+                raise RuntimeError(
+                    f"{label}: SHA-256 pracovního souboru neodpovídá reportu."
+                )
+
+            shutil.copy2(
+                target,
+                os.path.join(backup_dir, os.path.basename(target)),
+            )
+
+            temp_target = target + ".a23.tmp"
+            shutil.copy2(source, temp_target)
+            copied_sha = self._sha256_file(temp_target)
+            if copied_sha.upper() != actual_source_sha.upper():
+                try:
+                    os.remove(temp_target)
+                except Exception:
+                    pass
+                raise RuntimeError(f"{label}: ověření kopie selhalo.")
+            staged.append((temp_target, target))
+
+        for temp_target, target in staged:
+            os.replace(temp_target, target)
+
+        self.load_glossary_reference()
+
+
+    def _documentation_finish_a23_proposals(self,success,output_text,local_exit,remote_exit):
+        self.documentation_workflow_running = False
+        self.documentation_workflow_process = None
+
+        payload = getattr(
+            self,
+            "documentation_workflow_a23_report_payload",
+            None,
+        ) or {}
+        self.documentation_workflow_a23_report_payload = None
+
+        if success and not payload:
+            success = False
+            output_text = (output_text or "") + (
+                "\nREPORT ERROR: A23 payload nebyl předán dokončovacímu kroku."
+            )
+
+        if success:
+            self.documentation_workflow_a23_translation_proposal = (
+                self._documentation_to_pc1_unc_path(
+                    payload.get("translation_candidate")
+                )
+            )
+            self.documentation_workflow_a23_explanation_proposal = (
+                self._documentation_to_pc1_unc_path(
+                    payload.get("explanation_candidate")
+                )
+            )
+
+            try:
+                self._documentation_apply_a23_proposals_to_working_glossaries(
+                    payload
+                )
+            except Exception as exc:
+                success = False
+                output_text = (output_text or "") + (
+                    f"\nAPPLY TO WORKING GLOSSARIES ERROR: {exc}"
+                )
+
+        if success:
+            added_translation = int(
+                payload.get("translation_added_count", 0) or 0
+            )
+            added_explanation = int(
+                payload.get("explanation_added_count", 0) or 0
+            )
+            self.documentation_workflow_step = "A23 SLOVNÍKY DOPLNĚNY"
+            self.documentation_workflow_last_status = (
+                "A23 AUTOMATICKY DOPLNĚNO – "
+                f"MM-REF-001 +{added_translation} | "
+                f"MM-REF-002 +{added_explanation} | "
+                "GIT/DB ČEKÁ"
+            )
+            self._documentation_update_workflow_ui()
+
+            if getattr(
+                self,
+                "documentation_workflow_a23_show_attention_after",
+                False,
+            ):
+                self.documentation_show_a23_candidates(only_attention=True)
+        else:
+            self.documentation_workflow_step = "A23 DOPLNĚNÍ SELHALO"
+            self.documentation_workflow_last_status = (
+                "A23 DOPLNĚNÍ SLOVNÍKŮ – CHYBA"
+            )
+            self._documentation_update_workflow_ui()
+            messagebox.showerror(
+                "A23 – slovníky",
+                (
+                    "Slovníky se nepodařilo doplnit.\n\n"
+                    f"Lokální kód: {local_exit}\n"
+                    f"Vzdálený kód: {remote_exit}\n\n"
+                    f"{output_text[-5000:]}"
+                ),
+            )
+
+
+    def _documentation_discover_a23_proposal(self, proposal_name):
+        """
+        STEP 26 FIX 3:
+        Dohledá proposal přímo v aktuálním workspace, i když se cesta
+        neuložila do runtime proměnné po dokončení background threadu.
+        """
+        candidates = []
+
+        workspace = getattr(self, "documentation_workflow_workspace", None)
+        if workspace:
+            candidates.append(
+                os.path.join(
+                    workspace,
+                    "a23",
+                    "proposals",
+                    proposal_name,
+                )
+            )
+
+        stored = None
+        if "MM-REF-001" in proposal_name:
+            stored = getattr(
+                self,
+                "documentation_workflow_a23_translation_proposal",
+                None,
+            )
+        elif "MM-REF-002" in proposal_name:
+            stored = getattr(
+                self,
+                "documentation_workflow_a23_explanation_proposal",
+                None,
+            )
+        if stored:
+            candidates.insert(0, stored)
+
+        for candidate in candidates:
+            if candidate and os.path.isfile(candidate):
+                return os.path.normpath(candidate)
+
+        root = DOCUMENTATION_WORKSPACE_ROOT
+        try:
+            matches = []
+            for dirpath, _, filenames in os.walk(root):
+                if proposal_name in filenames:
+                    matches.append(os.path.join(dirpath, proposal_name))
+            if matches:
+                matches.sort(key=lambda path: os.path.getmtime(path), reverse=True)
+                return os.path.normpath(matches[0])
+        except Exception:
+            pass
+
+        return None
+
+
+    def documentation_open_a23_translation_proposal(self):
+        path = self._documentation_discover_a23_proposal(
+            "MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX_PROPOSAL.md"
+        )
+        if path:
+            self.documentation_workflow_a23_translation_proposal = path
+        if not path:
+            messagebox.showwarning(
+                "A23 – návrh MM-REF-001",
+                "Pracovní návrh MM-REF-001 nebyl nalezen ani v aktuálním workspace."
+            )
+            return
+        try:
+            os.startfile(path)
+        except Exception as exc:
+            messagebox.showerror(
+                "A23 – návrh MM-REF-001",
+                f"Soubor se nepodařilo otevřít:\n\n{exc}\n\nCesta:\n{path}"
+            )
+
+
+    def documentation_open_a23_explanation_proposal(self):
+        path = self._documentation_discover_a23_proposal(
+            "MM-REF-002_VYKLADOVY_REJSTRIK_POJMU_MATCHMATRIX_PROPOSAL.md"
+        )
+        if path:
+            self.documentation_workflow_a23_explanation_proposal = path
+        if not path:
+            messagebox.showwarning(
+                "A23 – návrh MM-REF-002",
+                "Pracovní návrh MM-REF-002 nebyl nalezen ani v aktuálním workspace."
+            )
+            return
+        try:
+            os.startfile(path)
+        except Exception as exc:
+            messagebox.showerror(
+                "A23 – návrh MM-REF-002",
+                f"Soubor se nepodařilo otevřít:\n\n{exc}\n\nCesta:\n{path}"
+            )
+
+
+    def documentation_open_a23_report(self):
+        report = getattr(
+            self,
+            "documentation_workflow_a23_report_markdown",
+            None,
+        )
+        if not report or not os.path.isfile(report):
+            messagebox.showwarning(
+                "A23 – report",
+                "A23 Markdown report nebyl nalezen."
+            )
+            return
+        try:
+            os.startfile(report)
+        except Exception as exc:
+            messagebox.showerror(
+                "A23 – report",
+                f"Report se nepodařilo otevřít:\n\n{exc}"
+            )
+
 
     def _parse_translation_glossary(self, text):
         """Načte pouze tabulku Cizí výraz | Český překlad z MM-REF-001."""
@@ -7492,7 +13969,9 @@ catch {{
 
     def load_glossary_reference(self):
         """
-        V20.1.Q2 - spojí překladový slovník MM-REF-001 s výklady MM-REF-002.
+        V20.1.Q3 STEP 30:
+        Spojí překladový slovník MM-REF-001 s výklady MM-REF-002.
+        Kanonickým zdrojem zůstává sdílené úložiště PC2.
         """
         try:
             translation_text = self._read_utf8_text(GLOSSARY_TRANSLATION_PATH)
@@ -7528,6 +14007,7 @@ catch {{
             key=lambda item: item.get("foreign", "").casefold()
         )
         self.filter_glossary_terms()
+
 
     def filter_glossary_terms(self):
         if not hasattr(self, "glossary_tree"):
@@ -7941,9 +14421,10 @@ CÍLOVÁ KAPITOLA / SEKCE:
         LIMIT 100;
         """
 
+        summary_rows = db_query(summary_sql)
         self.populate_tree(
             self.documentation_kpi_tree,
-            db_query(summary_sql)
+            self._documentation_database_dashboard_rows(summary_rows)
         )
         self.populate_tree(
             self.documentation_documents_tree,
@@ -7961,6 +14442,8 @@ CÍLOVÁ KAPITOLA / SEKCE:
             self.documentation_history_tree,
             db_query(history_sql)
         )
+        self.load_documentation_database_audit_status()
+        self.load_documentation_ai_context_package_status()
         self.load_glossary_reference()
 
     def load_project_progress_from_db(self):
@@ -13267,7 +19750,8 @@ CO UDĚLAT:
         if col_low in (
             "run_status", "status", "current_state", "execution_readiness_status",
             "result_status", "kpi_status", "panel_status", "readiness_status",
-            "task_status", "parse_status"
+            "task_status", "parse_status", "current_status",
+            "previous_status", "new_status", "import_status", "source_of_truth"
         ):
             short_map = {
                 "READY_TO_RUN": "PŘIPRAVENO",
@@ -14966,6 +21450,42 @@ Další SQL vrstva bude frontu čistit také podle opakovaných empty/no-data v�
         except Exception:
             pass
 
+    def show_documentation_page(self, page_key):
+        """Přepne vnitřní stránku záložky DOKUMENTACE."""
+
+        pages = getattr(self, "documentation_pages", {})
+        buttons = getattr(self, "documentation_page_buttons", {})
+
+        if page_key not in pages:
+            return
+
+        for frame in pages.values():
+            try:
+                frame.lower()
+            except Exception:
+                pass
+
+        pages[page_key].lift()
+        self.documentation_current_page = page_key
+
+        for key, button in buttons.items():
+            selected = key == page_key
+            try:
+                button.configure(
+                    bg="#6d45b8" if selected else "#23142f",
+                    fg="white" if selected else "#cdb7df",
+                    activebackground="#6d45b8" if selected else "#3b2555"
+                )
+            except Exception:
+                pass
+
+        # Při otevření databázového přehledu načteme čerstvý stav.
+        if page_key == "DATABASE":
+            try:
+                self.load_documentation_dashboard()
+            except Exception:
+                pass
+
     def show_tab(self, name):
 
         # V19: velký horní dashboard se zobrazuje pouze v PŘEHLED.
@@ -15040,6 +21560,9 @@ Další SQL vrstva bude frontu čistit také podle opakovaných empty/no-data v�
 
         if name == "DOCUMENTATION":
             self.load_documentation_dashboard()
+            self.show_documentation_page(
+                getattr(self, "documentation_current_page", None) or "WORKFLOW"
+            )
 
         if name == "PC2 COMMAND":
             # V19.11: načti denní práci až po překreslení UI, aby Windows neoznačil panel jako Neodpovídá.

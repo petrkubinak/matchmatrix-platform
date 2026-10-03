@@ -328,52 +328,6 @@ def claim_next_planner_job(
                     p.next_run IS NULL
                     OR p.next_run <= NOW()
                   )
-
-              -- --------------------------------------------------
-              -- G4D_4 GOVERNANCE GUARD
-              -- Scope: api_handball / HB / fixtures
-              --
-              -- HB fixtures mohou byt claimnuty pouze pokud:
-              --   1) existuje odpovidajici ENABLED ingest target
-              --   2) existuje odpovidajici APPROVED refresh policy
-              --
-              -- Ostatni sporty/provideři zatim zachovavaji puvodni
-              -- claim logiku, dokud pro ne nebude governance kontrakt
-              -- explicitne zaveden a overen.
-              -- --------------------------------------------------
-              AND (
-                    NOT (
-                        p.provider = 'api_handball'
-                        AND p.sport_code = 'HB'
-                        AND p.entity = 'fixtures'
-                    )
-                    OR (
-                        EXISTS (
-                            SELECT 1
-                            FROM ops.ingest_targets t
-                            WHERE t.provider = p.provider
-                              AND t.sport_code = p.sport_code
-                              AND t.provider_league_id::text = p.provider_league_id::text
-                              AND t.season::text = p.season::text
-                              AND t.enabled IS TRUE
-                        )
-                        AND EXISTS (
-                            SELECT 1
-                            FROM ops.ingest_targets t
-                            JOIN ops.harvest_scope_refresh_policy r
-                              ON r.ingest_target_id = t.id
-                            WHERE t.provider = p.provider
-                              AND t.sport_code = p.sport_code
-                              AND t.provider_league_id::text = p.provider_league_id::text
-                              AND t.season::text = p.season::text
-                              AND t.enabled IS TRUE
-                              AND r.entity = p.entity
-                              AND r.source_competition_key::text = t.provider_league_id::text
-                              AND r.source_season_key::text = t.season::text
-                              AND r.policy_status = 'APPROVED'
-                        )
-                    )
-                  )
             ORDER BY
                 COALESCE(p.priority, 999999),
                 p.id

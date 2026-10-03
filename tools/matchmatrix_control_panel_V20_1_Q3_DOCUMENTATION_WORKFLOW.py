@@ -276,7 +276,7 @@ import psycopg2.extras
 # =========================================================
 
 BASE_DIR = r"C:\MatchMatrix-platform"
-DOCUMENTATION_ROOT = r"\\192.168.3.119\matchmatrix"
+DOCUMENTATION_ROOT = r"\\Matchmatrix\matchmatrix"
 REFERENCE_DIR = os.path.join(DOCUMENTATION_ROOT, "docs", "10_REFERENCE")
 GLOSSARY_TRANSLATION_PATH = os.path.join(REFERENCE_DIR, "MM-REF-001_SLOVNIK_CIZICH_POJMU_MATCHMATRIX.md")
 GLOSSARY_EXPLANATION_PATH = os.path.join(REFERENCE_DIR, "MM-REF-002_VYKLADOVY_REJSTRIK_POJMU_MATCHMATRIX.md")
@@ -292,6 +292,9 @@ GLOSSARY_EXPLANATION_PATH = os.path.join(REFERENCE_DIR, "MM-REF-002_VYKLADOVY_RE
 # - Každý dokument dostane vlastní pracovní složku pod panel_workspaces.
 DOCUMENTATION_EXECUTION_MODE = "REMOTE_PC2"
 DOCUMENTATION_REMOTE_HOST = "192.168.3.119"
+DOCUMENTATION_REMOTE_TRANSPORT = "SSH"
+DOCUMENTATION_SSH_HOST = "PC2"
+DOCUMENTATION_PC1_FIX_BUILD = "2026-08-23_SSH_GLOSSARY_FIX_1"
 DOCUMENTATION_REMOTE_PROJECT_ROOT = r"C:\MatchMatrix-Platform"
 DOCUMENTATION_PYTHON_EXE = r"C:\Users\Admin\AppData\Local\Python\pythoncore-3.14-64\python.exe"
 DOCUMENTATION_TOOL_DIR = os.path.join(
@@ -6566,7 +6569,7 @@ Další termín: {h.get('next_target_date') or '-'}"""
             ascii_text
         ).strip("_").upper()
 
-        return slug[:80] or "DOCUMENT"
+        return slug[:32] or "DOCUMENT"
 
 
     def _documentation_update_workflow_ui(self):
@@ -7148,7 +7151,7 @@ Další termín: {h.get('next_target_date') or '-'}"""
 $ErrorActionPreference = "Stop"
 
 try {{
-    $GitJson = Invoke-Command -ComputerName {ps_host} -ScriptBlock {{
+    $GitJson = Invoke-MmSshCommand -ComputerName {ps_host} -ScriptBlock {{
         param($ProjectRoot)
 
         $ErrorActionPreference = "Stop"
@@ -7190,7 +7193,7 @@ catch {{
 }}
 """
                 encoded_command = base64.b64encode(
-                    powershell_script.encode("utf-16le")
+                    self._documentation_prepare_remote_powershell(powershell_script).encode("utf-16le")
                 ).decode("ascii")
 
                 command = [
@@ -9517,6 +9520,102 @@ catch {{
         return "'" + str(value).replace("'", "''") + "'"
 
 
+    def _documentation_prepare_remote_powershell(self, script_text):
+        '''
+        PC1 -> PC2 transport pro dokumentační nástroje.
+
+        - panel běží lokálně na PC1 bez zvýšených práv,
+        - dokumentace se čte přes UNC \\\\Matchmatrix\\matchmatrix,
+        - vzdálené A17-A24/A33/A34 se spouštějí přes SSH alias PC2,
+        - PostgreSQL zůstává na PC2 publikovaný z Dockeru na localhost:5432.
+        '''
+        if "Invoke-MmSshCommand" not in str(script_text):
+            return script_text
+
+        ssh_host_literal = self._documentation_powershell_literal(
+            DOCUMENTATION_SSH_HOST
+        )
+
+        shim = r'''
+function Invoke-MmSshCommand {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$ComputerName,
+
+        [Parameter(Mandatory=$true)]
+        [scriptblock]$ScriptBlock,
+
+        [object[]]$ArgumentList
+    )
+
+    $ErrorActionPreference = "Stop"
+    $ProgressPreference = "SilentlyContinue"
+    $SshHost = __MM_SSH_HOST__
+
+    $Payload = [pscustomobject]@{
+        ScriptText = $ScriptBlock.ToString()
+        ArgumentList = @($ArgumentList)
+    }
+
+    $Serialized = [System.Management.Automation.PSSerializer]::Serialize(
+        $Payload,
+        20
+    )
+    $PayloadB64 = [Convert]::ToBase64String(
+        [System.Text.Encoding]::UTF8.GetBytes($Serialized)
+    )
+
+    $RemoteBootstrap = @"
+`$ErrorActionPreference = "Stop"
+`$ProgressPreference = "SilentlyContinue"
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+`$OutputEncoding = [System.Text.Encoding]::UTF8
+
+`$Serialized = [System.Text.Encoding]::UTF8.GetString(
+    [Convert]::FromBase64String('$PayloadB64')
+)
+`$Payload = [System.Management.Automation.PSSerializer]::Deserialize(
+    `$Serialized
+)
+`$RemoteBlock = [scriptblock]::Create([string]`$Payload.ScriptText)
+`$RemoteArgs = @(`$Payload.ArgumentList)
+
+& `$RemoteBlock @RemoteArgs
+"@
+
+    $RemoteEncoded = [Convert]::ToBase64String(
+        [System.Text.Encoding]::Unicode.GetBytes($RemoteBootstrap)
+    )
+
+    $SshArgs = @(
+        "-T",
+        "-o", "BatchMode=yes",
+        "-o", "ConnectTimeout=15",
+        $SshHost,
+        "powershell.exe",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy", "Bypass",
+        "-EncodedCommand", $RemoteEncoded
+    )
+
+    $RemoteOutput = & ssh.exe @SshArgs 2>&1
+    $SshExitCode = $LASTEXITCODE
+
+    foreach ($Line in @($RemoteOutput)) {
+        Write-Output $Line
+    }
+
+    if ($SshExitCode -ne 0) {
+        throw "SSH spojení na PC2 skončilo návratovým kódem $SshExitCode."
+    }
+}
+'''.replace("__MM_SSH_HOST__", ssh_host_literal)
+
+        return shim + "\\n" + str(script_text)
+
+
     def _documentation_decode_process_output(self, raw_output):
         """
         V20.1.Q3 - dekóduje výstup Windows PowerShellu.
@@ -9681,7 +9780,7 @@ catch {{
 $ErrorActionPreference = "Stop"
 
 try {{
-    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{
+    Invoke-MmSshCommand -ComputerName {ps_host} -ScriptBlock {{
         param(
             $PythonExe,
             $AuditScript,
@@ -9720,7 +9819,7 @@ catch {{
 }}
 """
             encoded_command = base64.b64encode(
-                powershell_script.encode("utf-16le")
+                self._documentation_prepare_remote_powershell(powershell_script).encode("utf-16le")
             ).decode("ascii")
 
             command = [
@@ -10189,7 +10288,7 @@ catch {{
 $ErrorActionPreference = "Stop"
 
 try {{
-    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{
+    Invoke-MmSshCommand -ComputerName {ps_host} -ScriptBlock {{
         param(
             $PythonExe,
             $ProposalScript,
@@ -10227,7 +10326,7 @@ catch {{
 """
 
             encoded_command = base64.b64encode(
-                powershell_script.encode("utf-16le")
+                self._documentation_prepare_remote_powershell(powershell_script).encode("utf-16le")
             ).decode("ascii")
 
             command = [
@@ -10783,7 +10882,7 @@ catch {{
                 powershell_script = (
                     '$ErrorActionPreference = "Stop"\n'
                     'try {\n'
-                    f'    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{\n'
+                    f'    Invoke-MmSshCommand -ComputerName {ps_host} -ScriptBlock {{\n'
                     '        param($PythonExe, $ToolScript, $ProjectRoot, $ToolArgs)\n'
                     '        $ErrorActionPreference = "Stop"\n'
                     '        Set-Location -LiteralPath $ProjectRoot\n'
@@ -10799,7 +10898,7 @@ catch {{
                     '    exit 1\n'
                     '}\n'
                 )
-                encoded = base64.b64encode(powershell_script.encode("utf-16le")).decode("ascii")
+                encoded = base64.b64encode(self._documentation_prepare_remote_powershell(powershell_script).encode("utf-16le")).decode("ascii")
                 command = ["powershell.exe", "-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-EncodedCommand", encoded]
                 creation_flags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
                 process = subprocess.Popen(command, cwd=BASE_DIR, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=False, creationflags=creation_flags)
@@ -11630,7 +11729,7 @@ catch {{
             powershell_script = (
                 '$ErrorActionPreference = "Stop"\n'
                 'try {\n'
-                f'    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{\n'
+                f'    Invoke-MmSshCommand -ComputerName {ps_host} -ScriptBlock {{\n'
                 '        param($ProjectRoot, $RelativePath, $CommitMessage)\n'
                 '        $ErrorActionPreference = "Stop"\n'
                 '        Set-Location -LiteralPath $ProjectRoot\n'
@@ -11656,7 +11755,7 @@ catch {{
                 '}\n'
                 'catch { Write-Error $_.Exception.Message; exit 1 }\n'
             )
-            encoded = base64.b64encode(powershell_script.encode("utf-16le")).decode("ascii")
+            encoded = base64.b64encode(self._documentation_prepare_remote_powershell(powershell_script).encode("utf-16le")).decode("ascii")
             self.documentation_workflow_running = True
             self.documentation_workflow_step = "GIT COMMIT"
             self.documentation_workflow_last_status = "GIT COMMIT BĚŽÍ NA PC2"
@@ -12300,7 +12399,7 @@ catch {{
                 powershell_script = (
                     '$ErrorActionPreference = "Stop"\n'
                     'try {\n'
-                    f'    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{\n'
+                    f'    Invoke-MmSshCommand -ComputerName {ps_host} -ScriptBlock {{\n'
                     '        param($PythonExe, $ToolScript, $ProjectRoot, $ToolArgs)\n'
                     '        $ErrorActionPreference = "Stop"\n'
                     '        $ProgressPreference = "SilentlyContinue"\n'
@@ -12319,7 +12418,7 @@ catch {{
                     '}\n'
                 )
                 encoded = base64.b64encode(
-                    powershell_script.encode("utf-16le")
+                    self._documentation_prepare_remote_powershell(powershell_script).encode("utf-16le")
                 ).decode("ascii")
                 command = [
                     "powershell.exe",
@@ -12726,7 +12825,7 @@ catch {{
                 powershell_script = (
                     '$ErrorActionPreference = "Stop"\n'
                     'try {\n'
-                    f'    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{\n'
+                    f'    Invoke-MmSshCommand -ComputerName {ps_host} -ScriptBlock {{\n'
                     '        param($PythonExe, $ToolScript, $ProjectRoot, $ToolArgs)\n'
                     '        $ErrorActionPreference = "Stop"\n'
                     '        if ($null -eq $ToolArgs) { $ToolArgs = @() } else { $ToolArgs = @($ToolArgs) }\n'
@@ -12744,7 +12843,7 @@ catch {{
                     '}\n'
                 )
                 encoded = base64.b64encode(
-                    powershell_script.encode("utf-16le")
+                    self._documentation_prepare_remote_powershell(powershell_script).encode("utf-16le")
                 ).decode("ascii")
                 command = [
                     "powershell.exe",
@@ -13029,7 +13128,7 @@ catch {{
             powershell_script = f"""
 $ErrorActionPreference = "Stop"
 try {{
-    Invoke-Command -ComputerName {ps_host} -ScriptBlock {{
+    Invoke-MmSshCommand -ComputerName {ps_host} -ScriptBlock {{
         param(
             $PythonExe,
             $A23Script,
@@ -13063,7 +13162,7 @@ catch {{
 }}
 """
             encoded_command = base64.b64encode(
-                powershell_script.encode("utf-16le")
+                self._documentation_prepare_remote_powershell(powershell_script).encode("utf-16le")
             ).decode("ascii")
 
             process = subprocess.Popen(
@@ -13510,7 +13609,7 @@ catch {{
             ps = f"""$ErrorActionPreference="Stop"
 $ProgressPreference="SilentlyContinue"
 try {{
-    Invoke-Command -ComputerName {q[0]} -ScriptBlock {{
+    Invoke-MmSshCommand -ComputerName {q[0]} -ScriptBlock {{
         param($PythonExe,$Script,$Doc,$Ref1,$Ref2,$Workspace,$Selection,$Root)
         $ProgressPreference="SilentlyContinue"
         Set-Location -LiteralPath $Root
@@ -13525,7 +13624,7 @@ try {{
     exit 1
 }}"""
 
-            enc = base64.b64encode(ps.encode("utf-16le")).decode("ascii")
+            enc = base64.b64encode(self._documentation_prepare_remote_powershell(ps).encode("utf-16le")).decode("ascii")
             p = subprocess.Popen(
                 [
                     "powershell.exe",
@@ -13912,31 +14011,80 @@ try {{
 
 
     def _parse_translation_glossary(self, text):
-        """Načte pouze tabulku Cizí výraz | Český překlad z MM-REF-001."""
-        marker = "# 2. Překladový slovník"
-        start = text.find(marker)
-        if start < 0:
-            return []
+        '''
+        Načte kanonickou dvousloupcovou tabulku
+        Cizí výraz | Český překlad z MM-REF-001.
 
-        entries = []
-        table_started = False
-        for raw_line in text[start:].splitlines()[1:]:
+        Parser není závislý na čísle kapitoly.
+        '''
+        lines = str(text or "").splitlines()
+
+        def clean_header(value):
+            value = unicodedata.normalize("NFKC", str(value or ""))
+            value = value.strip().strip("`*_ ")
+            value = re.sub(r"\\s+", " ", value)
+            return value.casefold()
+
+        def is_separator_cell(value):
+            value = str(value or "").strip().replace(":", "")
+            return len(value) >= 3 and set(value) <= {"-"}
+
+        for index, raw_line in enumerate(lines):
             line = raw_line.strip()
-            if line == "---" and table_started:
-                break
             if not line.startswith("|"):
                 continue
-            parts = [part.strip() for part in line.strip("|").split("|")]
-            if len(parts) != 2:
+
+            header = [part.strip() for part in line.strip("|").split("|")]
+            if len(header) != 2:
                 continue
-            if parts[0] in {"Cizí výraz", "---"} or set(parts[0]) <= {"-", ":"}:
-                table_started = True
+
+            if (
+                clean_header(header[0]) != clean_header("Cizí výraz")
+                or clean_header(header[1]) != clean_header("Český překlad")
+            ):
                 continue
-            if not table_started:
+
+            if index + 1 >= len(lines):
                 continue
-            if parts[0] and parts[1]:
-                entries.append({"foreign": parts[0], "czech": parts[1]})
-        return entries
+
+            separator_line = lines[index + 1].strip()
+            if not separator_line.startswith("|"):
+                continue
+
+            separator = [
+                part.strip()
+                for part in separator_line.strip("|").split("|")
+            ]
+            if len(separator) != 2 or not all(
+                is_separator_cell(cell) for cell in separator
+            ):
+                continue
+
+            entries = []
+            for data_line in lines[index + 2:]:
+                stripped = data_line.strip()
+                if not stripped.startswith("|"):
+                    break
+
+                parts = [
+                    part.strip()
+                    for part in stripped.strip("|").split("|")
+                ]
+                if len(parts) != 2:
+                    continue
+
+                foreign, czech = parts
+                if foreign and czech:
+                    entries.append({
+                        "foreign": foreign,
+                        "czech": czech,
+                    })
+
+            if entries:
+                return entries
+
+        return []
+
 
     def _parse_explanation_registry(self, text):
         """Načte výkladové sekce MM-REF-002 do slovníku podle cizího výrazu."""
@@ -14442,9 +14590,9 @@ CÍLOVÁ KAPITOLA / SEKCE:
             self.documentation_history_tree,
             db_query(history_sql)
         )
+        self.load_glossary_reference()
         self.load_documentation_database_audit_status()
         self.load_documentation_ai_context_package_status()
-        self.load_glossary_reference()
 
     def load_project_progress_from_db(self):
         """
@@ -21478,6 +21626,17 @@ Další SQL vrstva bude frontu čistit také podle opakovaných empty/no-data v�
                 )
             except Exception:
                 pass
+
+        # Slovník načítáme přímo při otevření stránky.
+        # Není tak závislý na A33/A34 ani na databázovém přehledu.
+        if page_key == "GLOSSARY":
+            try:
+                self.load_glossary_reference()
+            except Exception as exc:
+                messagebox.showwarning(
+                    "Překladový slovník",
+                    f"Slovník se nepodařilo obnovit:\n\n{exc}"
+                )
 
         # Při otevření databázového přehledu načteme čerstvý stav.
         if page_key == "DATABASE":
