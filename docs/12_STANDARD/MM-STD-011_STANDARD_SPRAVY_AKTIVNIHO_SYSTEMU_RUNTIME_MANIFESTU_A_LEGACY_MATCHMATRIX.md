@@ -2,7 +2,7 @@
 
 # STANDARD SPRÁVY AKTIVNÍHO SYSTÉMU, RUNTIME MANIFESTU A LEGACY MATCHMATRIX
 
-## DRAFT STANDARD
+## APPROVED STANDARD
 
 ---
 
@@ -11,7 +11,7 @@
 | Položka | Hodnota |
 |---|---|
 | Dokument | MM-STD-011 |
-| Document ID | MM-STD-011 – navržené ID, před aktivací podléhá finální kontrole dle MM-STD-007 |
+| Document ID | MM-STD-011 |
 | Název | Standard správy aktivního systému, runtime manifestu a legacy MatchMatrix |
 | Typ dokumentu | ACTIVE_SYSTEM_RUNTIME_GOVERNANCE_STANDARD |
 | Edice | MM-STD |
@@ -23,9 +23,9 @@
 | Technická spolupráce | OpenAI ChatGPT |
 | Primární formát | Markdown (`.md`) |
 | Cílové umístění | `docs/12_STANDARD/` |
-| Navržený aktivní soubor | `docs/12_STANDARD/MM-STD-011_STANDARD_SPRAVY_AKTIVNIHO_SYSTEMU_RUNTIME_MANIFESTU_A_LEGACY_MATCHMATRIX.md` |
+| Aktivní soubor | `docs/12_STANDARD/MM-STD-011_STANDARD_SPRAVY_AKTIVNIHO_SYSTEMU_RUNTIME_MANIFESTU_A_LEGACY_MATCHMATRIX.md` |
 | Cílový runtime kořen | `\\Matchmatrix\matchmatrix\MATCHMATRIX_ACTIVE_SYSTEM\` |
-| Stav registrace | PROPOSAL – před aktivací nutný zápis do `MM-STD-1000` a ověření identity dle `MM-STD-007` |
+| Stav registrace | REGISTERED – zapsáno v `MM-STD-1000`, identita `MM-STD-011` ověřena dle `MM-STD-007` |
 | Navazuje na | MM-STD-003, MM-STD-004, MM-STD-007, MM-STD-009, MM-STD-1000, MM-DOC-300, MM-DOC-800 |
 
 ---
@@ -34,7 +34,7 @@
 
 | Verze | Datum | Stav | Popis |
 |---:|---|---|---|
-| 1.0 | 2026-10-01 | DRAFT | První návrh standardu pro jednu kanonickou ACTIVE runtime strukturu, strojově čitelný runtime manifest, řízenou migraci, klasifikaci ACTIVE / LEGACY / UNKNOWN, verzování nahrazených programových souborů a vazbu na existující dokumentační standardy MatchMatrix. |
+|   1.0 | 2026-10-01 | APPROVED | První schválená verze standardu pro jednu kanonickou ACTIVE runtime strukturu, strojově čitelný runtime manifest, řízenou migraci, klasifikaci ACTIVE / LEGACY / UNKNOWN, verzování nahrazených programových souborů a vazbu na existující dokumentační standardy MatchMatrix. |
 
 ---
 
@@ -865,7 +865,7 @@ Tento standard nezavádí nový dokumentový prefix ani nemění pravidla názv�
 
 ## 14.4 MM-STD-007
 
-`MM-STD-011` je navržené nové ID standardu a před aktivací musí projít předepsanou kontrolou:
+`MM-STD-011` je ověřené a přidělené Document ID tohoto standardu. Před jeho potvrzením byly provedeny předepsané kontroly:
 
 - index standardů,
 - aktivní dokumentace,
@@ -876,7 +876,7 @@ Tento standard nezavádí nový dokumentový prefix ani nemění pravidla názv�
 
 ## 14.5 MM-STD-1000
 
-Nový standard se nesmí považovat za plně zavedený, dokud není zapsán v `MM-STD-1000`.
+Nový standard se nesmí považovat za plně zavedený, dokud není zapsán v `MM-STD-1000`. Pro `MM-STD-011` je podmínka registrace splněna.
 
 ## 14.6 MM-DOC-800
 
@@ -965,26 +965,30 @@ Kapitola umožňuje řízené výjimky, ale zakazuje skryté paralelní runtime 
 
 # 18. Aktivace tohoto standardu
 
-Tento dokument je ve verzi 1.0 pouze DRAFT.
+Verze 1.0 je ve stavu `APPROVED`.
 
-Před změnou na REVIEW / ACTIVE musí být provedeno:
+Stav `APPROVED` znamená, že dokument prošel řízenou kontrolou a uživatelským schválením. Neznamená automaticky, že byla dokončena fyzická migrace runtime, aktivace SYSTEM_MANIFEST kontraktu nebo produkční switchover.
+
+Před potvrzením identity a schválením verze 1.0 byly provedeny zejména:
 
 1. ověření volnosti a správnosti `MM-STD-011` dle `MM-STD-007`,
-2. kontrola dokumentační databáze a Git historie,
-3. zápis standardu do `MM-STD-1000`,
-4. kontrola rozporů s `MM-DOC-800`,
-5. případné doplnění `MM-DOC-300`,
-6. A17 / příslušná dokumentační kontrola podle aktuálního workflow,
-7. uživatelské schválení,
-8. publikace do GitHubu,
-9. teprve potom založení nebo aktivace finálního SYSTEM_MANIFEST kontraktu.
+2. kontrola aktivní dokumentace a `docs/99_ARCHIVE`,
+3. kontrola Git historie,
+4. kontrola dokumentační databáze,
+5. zápis standardu do `MM-STD-1000`,
+6. kontrola rozporů s `MM-DOC-800`,
+7. A17 / dokumentační kontrola podle aktuálního workflow,
+8. uživatelské schválení.
+
+Po obsahových opravách tohoto dokumentu a indexu musí znovu proběhnout příslušná kontrola a publikační workflow. Databázový import smí pokračovat přes `A24 VALIDATE_ONLY` a teprve po úspěšné validaci přes řízený APPLY.
+
+Aktivace prvního finálního SYSTEM_MANIFEST kontraktu následuje až po dokončení dokumentační publikace a před zahájením řízeného switchoveru první runtime větve.
 
 ---
 
 ## 18.99 Závěr kapitoly
 
-Kapitola brání tomu, aby se návrh stal závazným pouze uložením souboru do složky standardů; plná aktivace vyžaduje existující dokumentační workflow MatchMatrix.
-
+Kapitola potvrzuje stav `APPROVED`, odděluje schválení dokumentu od produkčního switchoveru a zachovává povinnost dokončit validační, databázové a publikační kroky před aktivací prvního SYSTEM_MANIFEST kontraktu.
 ---
 
 # 19. Závěr
@@ -1013,7 +1017,7 @@ Zavedení tohoto standardu proto není pouhý přesun souborů. Jde o řízenou 
 
 # AI CONTEXT
 
-Tento dokument zavádí návrh standardu pro správu aktivního runtime systému MatchMatrix.
+Tento dokument stanovuje schválený standard pro správu aktivního runtime systému MatchMatrix.
 
 Klíčové zásady pro AI:
 
@@ -1039,7 +1043,7 @@ K datu 2026-10-01:
 - probíhá audit skutečné runtime orchestrace,
 - potvrzená cesta zahrnuje panel, `run_ingest_cycle_v3.py`, `run_ingest_planner_jobs.py`, `run_unified_ingest_v1.py` a provider registry,
 - fyzický přesun produkčního runtime zatím nebyl proveden,
-- SYSTEM_MANIFEST zatím nemá být považován za aktivní kontrakt před schválením tohoto standardu.
+- standard `MM-STD-011` je schválen a registrován; SYSTEM_MANIFEST kontrakt zatím není aktivován, dokud není dokončena dokumentační publikace a založena jeho první řízená verze.
 
 ---
 
@@ -1071,13 +1075,16 @@ Tento seznam je projektový snapshot, nikoli neměnný limit standardu.
 # CURRENT STATUS
 
 ```text
-STANDARD_STATUS          = DRAFT
-DOCUMENT_ID              = MM-STD-011_PROPOSED
-ACTIVE_SYSTEM_ROOT       = CREATED
-DIRECTORY_SKELETON       = CREATED
-RUNTIME_MIGRATION        = NOT_STARTED
-SYSTEM_MANIFEST_CONTRACT = PROPOSED
-PRODUCTION_SWITCHOVER    = NOT_STARTED
+STANDARD_STATUS           = APPROVED
+DOCUMENT_ID               = MM-STD-011
+REGISTRATION_STATUS       = REGISTERED
+MM_STD_1000_REGISTRATION  = REGISTERED
+ACTIVE_SYSTEM_ROOT        = CREATED
+DIRECTORY_SKELETON        = CREATED
+DOCUMENTATION_DB_IMPORT   = PENDING_A24
+RUNTIME_MIGRATION         = NOT_STARTED
+SYSTEM_MANIFEST_CONTRACT  = APPROVED_PENDING_INITIALIZATION
+PRODUCTION_SWITCHOVER     = NOT_STARTED
 ```
 
 ---
@@ -1094,13 +1101,14 @@ PRODUCTION_SWITCHOVER    = NOT_STARTED
 
 # NEXT STEP
 
-Po uživatelském schválení návrhu:
+Po sjednocení metadat `MM-STD-011` a aktualizaci `MM-STD-1000`:
 
-1. ověřit `MM-STD-011` proti `MM-STD-1000`, Git historii, dokumentační databázi a `docs/99_ARCHIVE`,
-2. připravit aktualizaci `MM-STD-1000`,
-3. provést dokumentační kontrolu podle aktuálního workflow,
-4. následně založit první verzi runtime manifestu,
-5. zahájit řízenou migraci první potvrzené větve:
+1. znovu spustit dokumentační kontrolu / A17 nad opravenými dokumenty,
+2. spustit A24 v režimu `VALIDATE_ONLY`,
+3. po úspěšné validaci provést řízený A24 APPLY,
+4. ověřit synchronizaci dokumentační databáze a Git/GitHub publikace,
+5. založit první řízenou verzi SYSTEM_MANIFEST,
+6. zahájit řízenou migraci první potvrzené runtime větve:
 
 ```text
 PANEL
@@ -1110,3 +1118,5 @@ PANEL
 → PROVIDER REGISTRY
 → PROVIDER
 ```
+
+Bulk harvest ani hromadný přesun UNKNOWN artefaktů se před dokončením příslušných auditů nepovoluje.
